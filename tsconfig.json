@@ -1,0 +1,61 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "outDir": "dist",
+    "target": "es2020",
+    "module": "System",
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "types": [
+      "node",
+      "react"
+    ],
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "experimentalDecorators": false,
+    "emitDecoratorMetadata": false,
+    "downlevelIteration": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "inlineSourceMap": true,
+    "preserveSymlinks": true,
+    "noEmitOnError": false,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "strictNullChecks": true,
+    "composite": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "theme.ts",
+    "example/**/*.ts",
+    "example/**/*.tsx",
+    "tamagui.config.ts"
+  ],
+  "exclude": [
+    "test",
+    "types",
+    "node_modules",
+    "dist",
+    "**/__tests__"
+  ],
+  "typeAcquisition": {
+    "enable": true
+  }
+}
