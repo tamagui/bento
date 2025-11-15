@@ -124,6 +124,12 @@ buck-out/
 web-build/
 dist/
 
+# Tamagui
+.tamagui/
+
+# Turbo
+.turbo/
+
 # @end expo-cli
 /ios
 /android

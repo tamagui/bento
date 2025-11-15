@@ -100,17 +100,9 @@ module.exports = {
   plugins: [
     new TamaguiPlugin({
       config: './tamagui.config.ts',
-      components: ['tamagui', '@tamagui/sandbox-ui'],
+      components: ['tamagui'],
       importsWhitelist: ['constants.js'],
       disableExtraction,
-      themeBuilder: {
-        input: '../core/themes/src/themes-new.ts',
-        output: path.join(
-          require.resolve('@tamagui/themes/src/themes-new.ts'),
-          '..',
-          'generated-new.ts'
-        ),
-      },
     }),
     // new BundleAnalyzerPlugin(),
     new MiniCSSExtractPlugin({
