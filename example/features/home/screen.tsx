@@ -1,11 +1,12 @@
+import { useNavigation } from '@react-navigation/native'
 import { ChevronRight } from '@tamagui/lucide-icons'
 import { ScrollView } from 'react-native'
-import type { UseLinkProps } from 'solito/link'
-import { useLink } from 'solito/link'
 import type { ListItemProps } from 'tamagui'
 import { H1, ListItem, Separator, Text, YGroup, YStack } from 'tamagui'
 
 export function HomeScreen() {
+  const navigation = useNavigation()
+
   return (
     <ScrollView>
       <YStack bg="$color2" p="$3" pt="$6" pb="$8" f={1} space>
@@ -29,9 +30,15 @@ export function HomeScreen() {
                   {group.items.map((item) => {
                     return (
                       <YGroup.Item key={item.id}>
-                        <LinkListItem bg="$color1" href={`/component/${item.id}`} pressTheme size="$4">
+                        <ListItem
+                          bg="$color1"
+                          pressTheme
+                          size="$4"
+                          onPress={() => navigation.navigate('component', { id: item.id })}
+                          iconAfter={<ChevronRight color="$color10" />}
+                        >
                           {item.title}
-                        </LinkListItem>
+                        </ListItem>
                       </YGroup.Item>
                     )
                   })}
@@ -42,26 +49,6 @@ export function HomeScreen() {
         </YStack>
       </YStack>
     </ScrollView>
-  )
-}
-
-export const LinkListItem = ({
-  children,
-  href,
-  as,
-  shallow,
-  ...props
-}: UseLinkProps & ListItemProps) => {
-  const linkProps = useLink({ href, as, shallow })
-
-  return (
-    <ListItem
-      {...linkProps}
-      {...props}
-      iconAfter={<ChevronRight color="$color10" />}
-    >
-      {children}
-    </ListItem>
   )
 }
 

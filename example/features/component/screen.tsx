@@ -1,6 +1,6 @@
 import { useRoute } from '@react-navigation/native'
 import { ScrollView } from 'react-native'
-import { YStack, H2, Separator } from 'tamagui'
+import { YStack, H2, Separator, Text } from 'tamagui'
 import * as Components from '../../../src/components'
 
 type RouteProp = {
@@ -43,8 +43,10 @@ export function ComponentScreen() {
 
   if (!componentGroup) {
     return (
-      <YStack f={1} jc="center" ai="center" p="$4">
+      <YStack f={1} jc="center" ai="center" p="$4" gap="$4">
         <H2>Component not found: {componentId}</H2>
+        <Text>Available components:</Text>
+        <Text>{Object.keys(componentMap).join(', ')}</Text>
       </YStack>
     )
   }

@@ -37,9 +37,7 @@ export function IconTitleSwitch() {
         checked={checked}
         onCheckedChange={setChecked}
         marginLeft="auto"
-        // Note: replace the following code with "$2" only
-        size={finalScale !== 1 ? '$1' : '$2'}
-        scale={finalScale}
+        size="$2"
         backgroundColor={checked ? '$color10' : '$color5'}
       >
         <Switch.Thumb borderColor="$white" animation="200ms" bg="$color1" />

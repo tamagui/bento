@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { HomeScreen } from './features/home/screen'
 import { ComponentScreen } from './features/component/screen'
+import { ColorSchemeToggle } from './features/home/ColorSchemeToggle'
 
 const Stack = createNativeStackNavigator<{
   home: undefined
@@ -17,6 +18,9 @@ export function Navigation() {
         component={HomeScreen}
         options={{
           title: 'Bento Components',
+          headerRight() {
+            return <ColorSchemeToggle />
+          },
         }}
       />
       <Stack.Screen
@@ -24,6 +28,9 @@ export function Navigation() {
         component={ComponentScreen}
         options={{
           title: 'Component',
+          headerRight() {
+            return <ColorSchemeToggle />
+          },
         }}
       />
     </Stack.Navigator>

@@ -13,4 +13,9 @@ config.resolver.nodeModulesPaths = [
   path.resolve(projectRoot, 'node_modules'),
 ]
 
+// Use a different port to avoid conflicts
+config.server = {
+  port: 8091,
+}
+
 module.exports = config
