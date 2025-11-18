@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js 22.x
         uses: actions/setup-node@v4
         with:
-          node-version: 22.4
+          node-version: 22.12
 
       - name: Install yarn
         run: npm i yarn -g
