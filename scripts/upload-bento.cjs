@@ -12,7 +12,9 @@ const supabase = createClient(
 async function uploadFile(relativePath) {
   const localPath = path.join(process.cwd(), 'bento-output', relativePath)
   const fileBuffer = fs.readFileSync(localPath)
-  const { error } = await supabase.storage.from('bento').upload(relativePath, fileBuffer)
+  const { error } = await supabase.storage.from('bento').upload(relativePath, fileBuffer, {
+    upsert: true
+  })
   if (error) {
     throw new Error(error.message)
   }
