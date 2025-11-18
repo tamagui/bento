@@ -1,4 +1,8 @@
-import { AccordionDemo, GroupDemo } from '@tamagui/demos'
+import { Square } from 'tamagui'
+
+// Simple placeholders
+const GroupDemo = () => <Square size={100} bg="$color" />
+const AccordionDemo = () => <Square size={100} bg="$colorPress" />
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { View } from 'react-native'
 import {

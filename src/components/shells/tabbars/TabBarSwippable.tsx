@@ -3,7 +3,7 @@ import type { ViewStyle } from 'react-native'
 import { Animated, PanResponder } from 'react-native'
 import type { TabsContentProps } from 'tamagui'
 import { H5, Separator, Tabs, Text, View, debounce, useEvent, useTheme } from 'tamagui'
-import { usePhoneScale } from '../../general/_Showcase'
+import { usePhoneScale } from '../../hooks/usePhoneScale'
 
 const tabs = ['Tab 1', 'Tab 2', 'Tab 3']
 

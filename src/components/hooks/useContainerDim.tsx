@@ -1,7 +1,7 @@
 import { GroupContext, debounce } from 'tamagui'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { mergeIfNotShallowEqual } from '@tamagui/web'
-import { usePhoneScale } from '../general/_Showcase'
+import { usePhoneScale } from './usePhoneScale'
 
 export type Dim = {
   width: number

@@ -1,16 +1,11 @@
 import { Baby } from '@tamagui/lucide-icons'
 import { useId, useState } from 'react'
 import { Button, Label, Switch, Text, View } from 'tamagui'
-import { usePhoneScale } from '../../general/_Showcase'
 
 /** ------ EXAMPLE ------ */
 export function IconTitleSwitch() {
   const uniqueId = useId()
   const [checked, setChecked] = useState(true)
-
-  // Note: you need don't need to use this in your code, it's only for the showcase
-  const { scale, invertScale } = usePhoneScale()
-  const finalScale = scale === 1 ? 1 : invertScale
 
   return (
     <Button

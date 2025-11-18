@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Button, View, isWeb, Text } from 'tamagui'
-import { usePhoneScale } from '../../general/_Showcase'
+import { usePhoneScale } from '../../hooks/usePhoneScale'
 
 type CustomTabBarProps = {
   state: {
