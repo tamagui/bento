@@ -1,43 +1,20 @@
 {
+  "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "dist",
-    "target": "es2020",
-    "module": "System",
-    "lib": [
-      "dom",
-      "esnext"
-    ],
-    "jsx": "react-jsx",
-    "moduleResolution": "node",
     "types": [
       "node",
       "react"
     ],
     "allowJs": false,
-    "allowSyntheticDefaultImports": true,
-    "importHelpers": true,
-    "isolatedModules": true,
-    "forceConsistentCasingInFileNames": true,
     "declaration": true,
-    "experimentalDecorators": false,
-    "emitDecoratorMetadata": false,
-    "downlevelIteration": true,
     "strict": true,
-    "esModuleInterop": true,
-    "inlineSourceMap": true,
-    "preserveSymlinks": true,
-    "noEmitOnError": false,
     "noImplicitAny": false,
     "noImplicitReturns": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "preserveConstEnums": true,
-    "removeComments": false,
-    "skipLibCheck": true,
-    "sourceMap": false,
-    "strictNullChecks": true,
-    "composite": true
+    "strictNullChecks": true
   },
   "include": [
     "src/**/*.ts",
@@ -53,8 +30,5 @@
     "node_modules",
     "dist",
     "**/__tests__"
-  ],
-  "typeAcquisition": {
-    "enable": true
-  }
+  ]
 }

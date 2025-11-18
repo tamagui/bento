@@ -1,17 +1,18 @@
 import 'react-native-gesture-handler'
 
+import { NavigationContainer } from '@react-navigation/native'
 import { useFonts } from 'expo-font'
-import { useState } from 'react'
 import { LogBox, useColorScheme } from 'react-native'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { enableScreens } from 'react-native-screens'
 import { Provider } from './components'
-import { type ThemeName, YStack } from 'tamagui'
-import { List } from '../src/components'
+import { Navigation } from './Navigation'
 
+enableScreens()
 LogBox.ignoreAllLogs()
 
 export default function App() {
-  const [themeName, setThemeName] = useState<ThemeName>()
-
   const colorScheme = useColorScheme() ?? 'light'
 
   const [loaded] = useFonts({
@@ -24,29 +25,14 @@ export default function App() {
   }
 
   return (
-    <Provider defaultTheme={colorScheme}>
-      <YStack theme={themeName} flex={1}>
-        {/* <Background themeName={themeName} /> */}
-        {/* <View flex={1} justifyContent="center" ai="center" p="$4">
-          <Datepickers.Calendar />
-          <ThemePicker themeColor={colorScheme} setThemeColor={setThemeName} />
-        </View> */}
-
-        <List.Chat />
-
-        {/* <BottomView title="Paywall" /> */}
-      </YStack>
-    </Provider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <Provider defaultTheme={colorScheme}>
+          <NavigationContainer>
+            <Navigation />
+          </NavigationContainer>
+        </Provider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   )
 }
-
-const colors: ThemeName[] = [
-  'neonBlue',
-  'cyan',
-  'forest',
-  'teal',
-  'orangeRed',
-  'burgundy',
-  'royalBlue',
-  'supreme',
-]
