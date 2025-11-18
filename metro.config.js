@@ -1,5 +1,5 @@
 const { getDefaultConfig } = require('expo/metro-config')
-const path = require('path')
+const path = require('node:path')
 
 const projectRoot = __dirname
 
@@ -12,10 +12,5 @@ config.watchFolders = [projectRoot]
 config.resolver.nodeModulesPaths = [
   path.resolve(projectRoot, 'node_modules'),
 ]
-
-// Use a different port to avoid conflicts
-config.server = {
-  port: 8091,
-}
 
 module.exports = config
