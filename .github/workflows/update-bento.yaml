@@ -47,6 +47,9 @@ jobs:
           VERSION=$(node -p "require('./package.json').version")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
+          # Create .npmrc for authentication
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
+
           # Check if version exists in registry
           if npm view @tamagui/bento@$VERSION version --registry=https://npm.pkg.github.com/ 2>/dev/null; then
             echo "Version $VERSION already published, skipping publish"
