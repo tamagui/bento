@@ -130,6 +130,10 @@ dist/
 # Turbo
 .turbo/
 
+# Bento
+bento-output/
+.env.local
+
 # @end expo-cli
 /ios
 /android

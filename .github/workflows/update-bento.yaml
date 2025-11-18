@@ -1,0 +1,49 @@
+name: Bento
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-upload:
+    name: Build & Upload
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.4
+
+      - name: Install yarn
+        run: npm i yarn -g
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Build Bento Components
+        run: yarn build:bento
+
+      - name: Create .env.local
+        run: |
+          echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}" >> .env.local
+          echo "SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" >> .env.local
+
+      - name: Upload To Supabase
+        run: yarn upload:bento
+
+      - name: Build Package
+        run: yarn build
+
+      - name: Publish to GitHub Packages
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
+          npm publish --registry=https://npm.pkg.github.com/
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
