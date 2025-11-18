@@ -39,8 +39,7 @@
       }
     },
     "plugins": [
-      "expo-font",
-      "react-native-screens"
+      "expo-font"
     ]
   }
 }
