@@ -41,7 +41,25 @@ jobs:
       - name: Build Package
         run: yarn build
 
+      - name: Check if version is already published
+        id: check_version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+          # Check if version exists in registry
+          if npm view @tamagui/bento@$VERSION version --registry=https://npm.pkg.github.com/ 2>/dev/null; then
+            echo "Version $VERSION already published, skipping publish"
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+          else
+            echo "Version $VERSION not published yet, will publish"
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Publish to GitHub Packages
+        if: steps.check_version.outputs.should_publish == 'true'
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
           npm publish --registry=https://npm.pkg.github.com/
