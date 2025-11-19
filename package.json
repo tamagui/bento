@@ -82,7 +82,6 @@
     "@hookform/resolvers": "~3.10.0",
     "@ngneat/falso": "~7.4.0",
     "@rehookify/datepicker": "~6.6.8",
-    "@tamagui/cli": "~1.138.0",
     "@tamagui/colors": "~1.138.0",
     "@tamagui/config": "~1.138.0",
     "@tamagui/font-inter": "~1.138.0",
@@ -99,7 +98,6 @@
     "expo-document-picker": "~14.0.7",
     "expo-image-picker": "~17.0.8",
     "expo-linear-gradient": "~15.0.7",
-    "foxact": "~0.2.49",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-dropzone": "~14.3.8",
@@ -115,7 +113,6 @@
     "@react-navigation/native-stack": "~7.6.3",
     "react-native-screens": "~4.16.0",
     "solito": "~4.4.1",
-    "swr": "~2.3.6",
     "tamagui": "~1.138.0",
     "zod": "~3.25.67"
   },
