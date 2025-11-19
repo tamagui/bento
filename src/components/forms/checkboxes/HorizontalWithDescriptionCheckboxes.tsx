@@ -38,20 +38,20 @@ export function HorizontalWithDescriptionCheckboxes() {
   })
 
   return (
-    <View width="100%" ai="center">
+    <View width="100%" items="center">
       <Checkboxes
         values={values}
         onValuesChange={onValuesChange}
-        maxWidth="100%"
-        minWidth="100%"
+        maxW="100%"
+        minW="100%"
         gap="$4"
         $group-window-gtXs={{
-          paddingHorizontal: '$8',
+          px: '$8',
         }}
       >
         <YStack gap="$1">
           <Checkboxes.Title>Payment</Checkboxes.Title>
-          <Text fontSize="$5" fontWeight="300" col="$gray10">
+          <Text fontSize="$5" fontWeight="300" color="$color9">
             Select your payment method
           </Text>
         </YStack>
@@ -66,7 +66,7 @@ export function HorizontalWithDescriptionCheckboxes() {
             <Checkboxes.FocusGroup.Item
               flex={1}
               flexBasis={300}
-              flexShrink={1}
+              shrink={1}
               value={id}
               key={id}
             >
@@ -80,7 +80,7 @@ export function HorizontalWithDescriptionCheckboxes() {
             </Checkboxes.FocusGroup.Item>
           ))}
           {/* a trick to avoid last flex item to be stretch out */}
-          <View flexDirection="row" key="last" flex={1} flexShrink={1} flexBasis={300} />
+          <View flexDirection="row" key="last" flex={1} shrink={1} flexBasis={300} />
         </Checkboxes.FocusGroup>
       </Checkboxes>
     </View>
@@ -103,13 +103,13 @@ function Item({
   return (
     <Checkboxes.Card
       flexDirection="row"
-      alignItems="flex-start"
+      items="flex-start"
       gap="$3"
       $group-window-gtXs={{
         height: '100%',
       }}
-      padding="$3"
-      paddingHorizontal="$3.5"
+      p="$3"
+      px="$3.5"
       cursor="pointer"
     >
       <View flexDirection="row" y={1}>
@@ -120,18 +120,18 @@ function Item({
         </Checkboxes.Checkbox>
       </View>
 
-      <View flexDirection="column" gap="$1" flexShrink={1}>
+      <View flexDirection="column" gap="$1" shrink={1}>
         <Checkboxes.Checkbox.Label
           size="$4"
           lineHeight="$2"
-          alignItems="flex-start"
+          items="flex-start"
           flexDirection="column"
           cursor="pointer"
           htmlFor={id + uniqueId}
         >
           {label}
         </Checkboxes.Checkbox.Label>
-        <Text flexShrink={1} fontWeight="300" fontSize={'$3'} color="$gray9">
+        <Text shrink={1} fontWeight="300" fontSize={'$3'} color="$color9">
           {description}
         </Text>
       </View>

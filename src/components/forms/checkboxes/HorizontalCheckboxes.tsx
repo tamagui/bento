@@ -33,21 +33,21 @@ export function HorizontalCheckboxes() {
   })
 
   return (
-    <View width="100%" ai="center">
+    <View width="100%" items="center">
       <Checkboxes
         values={values}
         onValuesChange={onValuesChange}
         width={600}
-        maxWidth="100%"
+        maxW="100%"
         gap="$4"
         $group-window-sm={{
-          paddingHorizontal: '$4',
-          paddingVertical: '$6',
+          px: '$4',
+          py: '$6',
         }}
       >
         <YStack gap="$1">
           <Checkboxes.Title>Payment</Checkboxes.Title>
-          <Text fontSize="$5" fontWeight="300" col="$gray10">
+          <Text fontSize="$5" fontWeight="300" color="$color9">
             Select your payment method
           </Text>
         </YStack>
@@ -84,16 +84,16 @@ function Item({
   checked: boolean
 }) {
   return (
-    <View width="100%" ai="center">
+    <View width="100%" items="center">
       <Checkboxes.Card
         flexDirection="row"
         hoverStyle={{
           borderColor: '$color7',
         }}
-        alignItems="center"
+        items="center"
         gap="$3"
-        padding={0}
-        paddingHorizontal="$3"
+        p={0}
+        px="$3"
         cursor="pointer"
       >
         <Checkboxes.Checkbox id={id}>
