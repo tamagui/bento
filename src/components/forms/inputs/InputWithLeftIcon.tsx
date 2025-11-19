@@ -11,13 +11,13 @@ export function InputWithLeftIconDemo({ size }: { size?: SizeTokens }) {
   const inputRef = useRef<TextInput>(null)
   const focusTrigger = useForwardFocus(inputRef)
   return (
-    <View flexDirection="column" justifyContent="center" alignItems="center">
-      <Input size={size} minWidth="100%">
+    <View flexDirection="column" justify="center" items="center">
+      <Input size={size} minW="100%">
         <Input.Box>
           <Input.Icon {...focusTrigger}>
             <Antenna />
           </Input.Icon>
-          <Input.Area ref={inputRef} paddingLeft={0} placeholder="Set antena number" />
+          <Input.Area ref={inputRef} pl={0} placeholder="Set antena number" />
         </Input.Box>
       </Input>
     </View>

@@ -15,8 +15,8 @@ export function InputWithLabelDemo({
   onChangeText?: (text: string) => void
 }) {
   return (
-    <View flexDirection="column" justifyContent="center" alignItems="center">
-      <Input size={size} minWidth="100%">
+    <View flexDirection="column" justify="center" items="center">
+      <Input size={size} minW="100%">
         <Input.Label htmlFor="input" mb="$1.5">
           {labelText}
         </Input.Label>

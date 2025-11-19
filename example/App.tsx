@@ -27,15 +27,15 @@ const App = () => {
         }}
       />
 
-      <YStack fullscreen w="100%" ai="center" bg="pink">
-        <View py="$12" w="100%" h="full" maxWidth={1280}>
+      <YStack fullscreen width="100%" items="center">
+        <View py="$12" width="100%" height="100%" maxW={1280}>
           <YStack
             {...(centered && {
-              ai: 'center',
-              jc: 'center',
+              items: 'center',
+              justify: 'center',
             })}
-            f={1}
-            h="100%"
+            flex={1}
+            height="100%"
           ></YStack>
         </View>
       </YStack>

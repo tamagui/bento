@@ -1,17 +1,17 @@
+import { config as configV3 } from '@tamagui/config/v3'
 import { defaultConfig } from '@tamagui/config/v4'
-import { config } from '@tamagui/config/v3'
-import { createTamagui } from '@tamagui/core'
+import { createTamagui } from 'tamagui'
 import { themes } from './theme'
 
 const appConfig = createTamagui({
-  ...config,
-  themes: {
-    ...config.themes,
-    ...themes,
-  },
+  ...defaultConfig,
   media: {
     ...defaultConfig.media,
-    ...config.media,
+    ...configV3.media,
+  },
+  themes: {
+    ...defaultConfig.themes,
+    ...themes,
   },
 })
 

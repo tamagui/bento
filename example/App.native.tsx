@@ -4,7 +4,6 @@ import { NavigationContainer } from '@react-navigation/native'
 import { useFonts } from 'expo-font'
 import React from 'react'
 import { Appearance, LogBox, useColorScheme } from 'react-native'
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { enableScreens } from 'react-native-screens'
 import { Provider } from './components'
@@ -42,16 +41,14 @@ export default function App() {
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <SafeAreaProvider>
-        <ThemeContext.Provider value={themeContext}>
-          <Provider defaultTheme={theme as any}>
-            <NavigationContainer>
-              <Navigation />
-            </NavigationContainer>
-          </Provider>
-        </ThemeContext.Provider>
-      </SafeAreaProvider>
-    </GestureHandlerRootView>
+    <SafeAreaProvider>
+      <ThemeContext.Provider value={themeContext}>
+        <Provider defaultTheme={theme as any}>
+          <NavigationContainer>
+            <Navigation />
+          </NavigationContainer>
+        </Provider>
+      </ThemeContext.Provider>
+    </SafeAreaProvider>
   )
 }

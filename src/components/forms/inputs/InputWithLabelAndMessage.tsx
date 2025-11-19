@@ -8,8 +8,8 @@ export function InputWithLabelAndMessageDemo({ size }: { size?: SizeTokens }) {
   const uniqueId = useId()
 
   return (
-    <View flexDirection="column" justifyContent="center" alignItems="center" gap="$6">
-      <Input size={size} minWidth="100%" $group-window-gtXs={{ minWidth: 150 }}>
+    <View flexDirection="column" justify="center" items="center" gap="$6">
+      <Input size={size} minW="100%" $group-window-gtXs={{ minW: 150 }}>
         <Input.Label htmlFor={uniqueId + 'email'}>Email Address</Input.Label>
         <Input.Box>
           <Input.Area

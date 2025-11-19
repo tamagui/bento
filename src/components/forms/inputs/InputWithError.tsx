@@ -19,13 +19,13 @@ export function InputWithErrorDemo({ size }: { size?: SizeTokens }) {
   const focusTrigger = useForwardFocus(inputRef)
 
   return (
-    <View flexDirection="column" justifyContent="center" alignItems="center">
+    <View flexDirection="column" justify="center" items="center">
       <Input
         {...(error && {
           theme: 'red',
         })}
         size={size}
-        minWidth="100%"
+        minW="100%"
       >
         <Input.Label htmlFor={uniqueId + 'email'}>Label</Input.Label>
         <Input.Box>
@@ -36,7 +36,7 @@ export function InputWithErrorDemo({ size }: { size?: SizeTokens }) {
           )}
           <Input.Area
             ref={inputRef}
-            paddingLeft={0}
+            pl={0}
             id={uniqueId + 'email'}
             placeholder="example@something"
           />
