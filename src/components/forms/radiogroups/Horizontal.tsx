@@ -1,5 +1,5 @@
 import { useId, useState } from 'react'
-import { Avatar, H2, Label, RadioGroup, Text, View } from 'tamagui'
+import { H2, Label, RadioGroup, Text, View } from 'tamagui'
 import { Card } from './components/radioParts'
 
 const items = [
@@ -13,21 +13,21 @@ export function Horizontal() {
   const uniqueId = useId()
   const [value, setValue] = useState('hor-visa')
   return (
-    <View width="100%" alignItems="center">
+    <View width="100%" items="center">
       <View
         flexDirection="column"
-        jc="center"
+        justify="center"
         width="100%"
-        maxWidth={600}
+        maxW={600}
         gap="$4"
         $group-window-sm={{
-          paddingHorizontal: '$4',
-          paddingVertical: '$6',
+          px: '$4',
+          py: '$6',
         }}
       >
         <View flexDirection="column" gap="$2">
           <H2>Payment</H2>
-          <Text fontWeight="300" color="$gray10">
+          <Text fontWeight="300" color="$color9">
             Select your payment method
           </Text>
         </View>
@@ -45,16 +45,16 @@ export function Horizontal() {
               flexDirection="row"
               flex={1}
               flexBasis={150}
-              alignItems="center"
+              items="center"
               gap="$3"
-              padding={0}
-              minWidth="100%"
+              p={0}
+              minW="100%"
               active={value === label}
-              paddingHorizontal="$2.5"
+              px="$2.5"
               cursor="pointer"
               onPress={() => setValue(label)}
               $group-window-gtXs={{
-                minWidth: 'auto',
+                minW: 'auto',
               }}
             >
               <View onPress={(e) => e.stopPropagation()}>
@@ -63,7 +63,7 @@ export function Horizontal() {
                 </RadioGroup.Item>
               </View>
 
-              <View flexDirection="row" alignItems="center" gap="$2">
+              <View flexDirection="row" items="center" gap="$2">
                 <Label cursor="pointer" htmlFor={uniqueId + label}>
                   {label}
                 </Label>

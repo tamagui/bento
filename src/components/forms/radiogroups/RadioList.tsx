@@ -52,22 +52,22 @@ export function RadioList() {
   const items = Object.values(data)
 
   return (
-    <View alignSelf="center" alignItems="center" width="100%">
+    <View self="center" items="center" width="100%">
       <RadioGroup>
-        <View paddingVertical="$3" alignItems="center">
+        <View py="$3" items="center">
           <H3>Drink</H3>
-          <Text alignSelf="center" color="$color9">
+          <Text self="center" color="$color9">
             Select your favorite coffee
           </Text>
         </View>
 
         {sm && (
-          <View width="100%" paddingHorizontal="$2">
+          <View width="100%" px="$2">
             <Separator width="100%" borderColor="$color5" />
           </View>
         )}
 
-        <View width="100%" gap="$2" paddingHorizontal="$2">
+        <View width="100%" gap="$2" px="$2">
           {items.map((item, i) => (
             <Item
               setSelected={(next) => setSelected(next)}
@@ -94,14 +94,14 @@ function Item({
   const { desc, title, key } = item
   return (
     <Card
-      br={'$4'}
+      rounded='$4'
       p="$4"
       flexDirection="row"
       width="100%"
       gap="$3"
       active={selected}
-      alignItems="stretch"
-      justifyContent="space-between"
+      items="stretch"
+      justify="space-between"
       onPress={() => {
         setSelected(key)
       }}
@@ -110,8 +110,8 @@ function Item({
       $group-window-sm={{
         borderWidth: 0,
         borderBottomWidth: 1,
-        borderRadius: 0,
-        paddingVertical: '$4',
+        rounded: 0,
+        py: '$4',
       }}
       animation="100ms"
     >
@@ -120,18 +120,18 @@ function Item({
         <Avatar.Fallback backgroundColor="$background" />
       </Avatar>
 
-      <View flex={10} alignSelf="stretch" gap="$0.5">
+      <View flex={10} self="stretch" gap="$0.5">
         <Label
           // visual offset of font to top
-          marginTop={-2}
-          marginRight="auto"
+          mt={-2}
+          mr="auto"
           size="$5"
           lineHeight="$4"
           htmlFor={key}
         >
           {title}
         </Label>
-        <Text fos="$3" width="100%" color="$color10">
+        <Text fontSize="$3" width="100%" color="$color10">
           {desc}
         </Text>
       </View>

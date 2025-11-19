@@ -15,13 +15,13 @@ const packages = [
     title: 'Books',
     description: 'A package of books',
     itemsCounts: 621,
-    color: 'purple',
+    color: 'teal',
   },
   {
     title: 'Clothes',
     description: 'A package of clothes',
     itemsCounts: 621,
-    color: 'orange',
+    color: 'yellow',
   },
   {
     title: 'Electronics',
@@ -43,8 +43,8 @@ export function RadioCards() {
       gap="$4"
       width="100%"
       $group-window-sm={{
-        paddingHorizontal: '$4',
-        paddingVertical: '$6',
+        px: '$4',
+        py: '$6',
       }}
     >
       <H2>Select your gift</H2>
@@ -90,24 +90,24 @@ function Item({
       }}
       flex={1}
       flexBasis={400}
-      flexShrink={1}
+      shrink={1}
       gap="$6"
       active={selected}
     >
-      <View f={1} flexDirection="column" gap="$3">
-        <View flexDirection="row" justifyContent="space-between">
+      <View flex={1} flexDirection="column" gap="$3">
+        <View flexDirection="row" justify="space-between">
           <View
             flexDirection="row"
-            theme={color}
-            backgroundColor="$color6"
-            borderRadius="$4"
-            alignItems="center"
-            justifyContent="center"
+            theme={color as ThemeName}
+            bg="$color6"
+            rounded="$4"
+            items="center"
+            justify="center"
             gap="$2"
             py="$2"
             px="$3"
           >
-            <View width={10} height={10} backgroundColor="$color10" borderRadius={100} />
+            <View width={10} height={10} bg="$color10" rounded={100} />
             <Text fontSize="$3" color="$color11">
               {title}
             </Text>
@@ -117,14 +117,14 @@ function Item({
             <RadioGroup.Indicator />
           </RadioGroup.Item>
         </View>
-        <Text fontSize="$3" theme="alt1">
+        <Text fontSize="$3" theme="accent">
           {description}
         </Text>
       </View>
 
-      <View flexDirection="row" gap="$2" marginTop="auto" alignItems="center">
+      <View flexDirection="row" gap="$2" mt="auto" items="center">
         <Clock color="$color10" size={14} />
-        <Text o={0.7} fontSize="$3" fontWeight="300" theme="alt2">
+        <Text opacity={0.5} fontSize="$3" fontWeight="300" theme="accent">
           last bought 2 hr ago
         </Text>
       </View>
