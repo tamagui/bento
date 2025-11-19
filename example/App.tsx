@@ -1,10 +1,8 @@
 import '@tamagui/core/reset.css'
 
-import { View, YStack } from 'tamagui'
 import { useSchemeSetting } from '@vxrn/color-scheme'
-
+import { View, YStack } from 'tamagui'
 import { Provider } from '../src/components/provider/Provider'
-import { list as List } from '../src/sections/elements/list'
 
 if (typeof require !== 'undefined') {
   globalThis['React'] = require('react') // webpack

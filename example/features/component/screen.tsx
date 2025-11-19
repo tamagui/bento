@@ -3,14 +3,16 @@ import { ScrollView } from 'react-native'
 import { YStack, H2, Separator, Text } from 'tamagui'
 import * as Components from '../../../src/components'
 
-type RouteProp = {
+type ComponentRouteProp = {
+  key: string
+  name: string
   params: {
     id: string
   }
 }
 
 export function ComponentScreen() {
-  const route = useRoute<RouteProp>()
+  const route = useRoute<ComponentRouteProp>()
   const componentId = route.params?.id
 
   const componentMap: Record<string, any> = {

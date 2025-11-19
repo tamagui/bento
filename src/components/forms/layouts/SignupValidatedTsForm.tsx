@@ -1,24 +1,27 @@
 import type { FormProps } from 'tamagui'
 import { AnimatePresence, Button, Form, H2, isWeb, RadioGroup, Spinner, View } from 'tamagui'
 import { Input, InputContext } from '../inputs/components/inputsParts'
-import type { ComponentProps } from 'react'
 import { useState } from 'react'
 import { Eye, EyeOff, Info } from '@tamagui/lucide-icons'
 import { FormCard } from './components/layoutParts'
 import { z } from 'zod'
-import { createTsForm, useTsController, createUniqueFieldSchema } from '@ts-react/form'
 import { H1 } from 'tamagui'
 import { SafeAreaView } from 'react-native'
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 type TextInputProps = {
   label: string
   labelId: string
   placeholder?: string
+  value: string
+  onChange: (text: string) => void
+  onBlur: () => void
+  error?: string
 }
+
 const TextInput = (props: TextInputProps) => {
-  const { label, labelId, placeholder } = props
-  const { field, error } = useTsController<string>()
-  const { onChange, onBlur, ...filedRest } = field
+  const { label, labelId, placeholder, value, onChange, onBlur, error } = props
   const { size } = InputContext.useStyledContext()
   return (
     <Input
@@ -33,8 +36,8 @@ const TextInput = (props: TextInputProps) => {
         <Input.Area
           id={labelId}
           placeholder={placeholder}
-          onChangeText={field.onChange}
-          {...filedRest}
+          onChangeText={onChange}
+          value={value}
         />
       </Input.Box>
       <AnimatePresence>
@@ -61,7 +64,7 @@ const TextInput = (props: TextInputProps) => {
             <Input.Icon padding={0}>
               <Info />
             </Input.Icon>
-            <Input.Info>{error.errorMessage}</Input.Info>
+            <Input.Info>{error}</Input.Info>
           </View>
         )}
       </AnimatePresence>
@@ -69,25 +72,17 @@ const TextInput = (props: TextInputProps) => {
   )
 }
 
-const passwordSchema = createUniqueFieldSchema(
-  z.string().min(6, {
-    message: 'must be at least 6 characters',
-  }),
-  'password'
-)
-
 type PasswordInputProps = TextInputProps & {}
 const PasswordInput = (props: PasswordInputProps) => {
-  const { label, labelId, placeholder } = props
+  const { label, labelId, placeholder, value, onChange, onBlur, error } = props
   const [showPassword, setShowPassword] = useState(false)
-  const { field, error } = useTsController<string>()
   const { size } = InputContext.useStyledContext()
   return (
     <Input
       {...(error && {
         theme: 'red',
       })}
-      onBlur={field.onBlur}
+      onBlur={onBlur}
       size={size}
     >
       <Input.Label htmlFor={labelId}>{label}</Input.Label>
@@ -96,8 +91,8 @@ const PasswordInput = (props: PasswordInputProps) => {
           id={labelId}
           secureTextEntry={!showPassword}
           placeholder={placeholder}
-          onChangeText={field.onChange}
-          value={field.value}
+          onChangeText={onChange}
+          value={value}
         />
         <Input.Icon cursor="pointer" onPress={() => setShowPassword(!showPassword)}>
           {showPassword ? <Eye color="$gray11" /> : <EyeOff color="$gray11" />}
@@ -127,7 +122,7 @@ const PasswordInput = (props: PasswordInputProps) => {
             <Input.Icon padding={0}>
               <Info />
             </Input.Icon>
-            <Input.Info>{error.errorMessage}</Input.Info>
+            <Input.Info>{error}</Input.Info>
           </View>
         )}
       </AnimatePresence>
@@ -135,8 +130,6 @@ const PasswordInput = (props: PasswordInputProps) => {
   )
 }
 
-// schema is both for validation and mapping to a specific component
-const radioSchema = createUniqueFieldSchema(z.string(), 'radio')
 type MyRadioProps = {
   id: string
   title: string
@@ -145,11 +138,11 @@ type MyRadioProps = {
     label: string
     labelId: string
   }[]
+  value: string
+  onChange: (value: string) => void
 }
 const MyRadio = (props: MyRadioProps) => {
-  const { id, title, values } = props
-  const { field } = useTsController<string>()
-  const { onChange, ...restField } = field
+  const { id, title, values, value, onChange } = props
   const { size } = InputContext.useStyledContext()
   return (
     <View gap="$2">
@@ -161,7 +154,7 @@ const MyRadio = (props: MyRadioProps) => {
         flexDirection="row"
         onValueChange={onChange}
         id={id}
-        {...restField}
+        value={value}
       >
         {values.map(({ value, label, labelId }) => (
           <View key={label} flexDirection="row" alignItems="center" gap="$3">
@@ -195,11 +188,16 @@ type TwoInputProps = {
       placeholder: string
     }
   }
+  value?: { firstInput: string; secondInput: string }
+  onChange: (value: { firstInput: string; secondInput: string }) => void
+  onBlur: () => void
+  error?: {
+    firstInput?: { message?: string }
+    secondInput?: { message?: string }
+  }
 }
 const TwoInput = (props: TwoInputProps) => {
-  const { values } = props
-  const { field, error } = useTsController<z.infer<typeof twoInputSchema>>()
-  const { value, onChange, onBlur } = field
+  const { values, value = { firstInput: '', secondInput: '' }, onChange, onBlur, error } = props
 
   const { size } = InputContext.useStyledContext()
   return (
@@ -261,7 +259,7 @@ const TwoInput = (props: TwoInputProps) => {
               <Input.Icon padding={0}>
                 <Info />
               </Input.Icon>
-              <Input.Info>{error.firstInput.errorMessage}</Input.Info>
+              <Input.Info>{error.firstInput.message}</Input.Info>
             </View>
           )}
         </AnimatePresence>
@@ -315,7 +313,7 @@ const TwoInput = (props: TwoInputProps) => {
               <Input.Icon padding={0}>
                 <Info />
               </Input.Icon>
-              <Input.Info>{error.secondInput.errorMessage}</Input.Info>
+              <Input.Info>{error.secondInput.message}</Input.Info>
             </View>
           )}
         </AnimatePresence>
@@ -324,14 +322,6 @@ const TwoInput = (props: TwoInputProps) => {
   )
 }
 
-// create the mapping, you need this once per project
-const mapping = [
-  [z.string(), TextInput],
-  [radioSchema, MyRadio],
-  [passwordSchema, PasswordInput],
-  [twoInputSchema, TwoInput],
-] as const // 👈 `as const` is necessary
-
 const schema = z
   .object({
     fullName: twoInputSchema,
@@ -339,9 +329,13 @@ const schema = z
       .string()
       .min(4, 'Email is required')
       .email({ message: 'Invalid email format' }),
-    password: passwordSchema,
-    confirmedPassword: passwordSchema,
-    accountType: radioSchema,
+    password: z.string().min(6, {
+      message: 'must be at least 6 characters',
+    }),
+    confirmedPassword: z.string().min(6, {
+      message: 'must be at least 6 characters',
+    }),
+    accountType: z.string(),
     postalCode: z.string().min(4, {
       message: 'Postal code is required',
     }),
@@ -356,48 +350,28 @@ const schema = z
     }
   )
 
-const FormComponent = (props: FormProps) => {
-  const { ...rest } = props
-  return (
-    <Form asChild {...rest}>
-      <FormCard
-        flexDirection="column"
-        gap="$5"
-        tag="form"
-        $group-window-sm={{
-          paddingHorizontal: '$4',
-          paddingVertical: '$6',
-        }}
-      >
-        {props.children}
-      </FormCard>
-    </Form>
-  )
-}
-
-const _SchemaForm = createTsForm(mapping, {
-  FormComponent,
-})
-
-const SchemaForm: typeof _SchemaForm = ({ ...props }) => {
-  const renderAfter: ComponentProps<typeof _SchemaForm>['renderAfter'] = props.renderAfter
-    ? (vars) => props.renderAfter?.(vars)
-    : undefined
-
-  return (
-    <_SchemaForm {...props} renderAfter={renderAfter}>
-      {(fields: Record<string, ReturnType<typeof useTsController>>, context: any) => {
-        //@ts-ignore
-        return props.children ? props.children(fields, context) : Object.values(fields)
-      }}
-    </_SchemaForm>
-  )
-}
+type FormValues = z.infer<typeof schema>
 
 export function SignupValidatedTsForm() {
   const [loading, setLoading] = useState(false)
 
-  const onSubmit = (data: z.infer<typeof schema>) => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      accountType: 'personal',
+      confirmedPassword: '',
+      password: '',
+      email: '',
+      fullName: { firstInput: '', secondInput: '' },
+      postalCode: '',
+    },
+  })
+
+  const onSubmit = (data: FormValues) => {
     console.info('data is ', data)
     setLoading(true)
     setTimeout(() => {
@@ -407,70 +381,16 @@ export function SignupValidatedTsForm() {
 
   return (
     <InputContext.Provider size="$4">
-      <SchemaForm
-        onSubmit={(values) => onSubmit(values)}
-        props={{
-          fullName: {
-            values: {
-              firstInput: {
-                label: 'First Name',
-                labelId: 'firstName-ts2',
-                placeholder: 'First name',
-              },
-              secondInput: {
-                label: 'Last Name',
-                labelId: 'lastName-ts2',
-                placeholder: 'Last name',
-              },
-            },
-          },
-          email: {
-            placeholder: 'Email',
-            label: 'Email',
-            labelId: 'email-ts2',
-          },
-          password: {
-            placeholder: 'Password',
-            label: 'Password',
-            labelId: 'password-ts2',
-          },
-          confirmedPassword: {
-            placeholder: 'Confirm Password',
-            label: 'Confirm Password',
-            labelId: 'confirmPassword-ts2',
-          },
-          postalCode: {
-            placeholder: 'Postal Code',
-            label: 'Postal Code',
-            labelId: 'postalCode-ts2',
-          },
-          accountType: {
-            id: 'accountType-ts2',
-            title: 'Account type',
-            values: [
-              {
-                value: 'personal',
-                label: 'Personal',
-                labelId: 'personal-ts2',
-              },
-              {
-                value: 'business',
-                label: 'Business',
-                labelId: 'business-ts2',
-              },
-            ],
-          },
-        }}
-        defaultValues={{
-          accountType: 'personal',
-          confirmedPassword: '',
-          password: '',
-          email: '',
-          fullName: { firstInput: '', secondInput: '' },
-          postalCode: '',
-        }}
-        schema={schema}
-        renderBefore={() => (
+      <Form asChild onSubmit={handleSubmit(onSubmit)}>
+        <FormCard
+          flexDirection="column"
+          gap="$5"
+          tag="form"
+          $group-window-sm={{
+            paddingHorizontal: '$4',
+            paddingVertical: '$6',
+          }}
+        >
           <H1
             alignSelf="center"
             size="$8"
@@ -480,51 +400,162 @@ export function SignupValidatedTsForm() {
           >
             Create an account
           </H1>
-        )}
-        renderAfter={({ submit }) => (
-          <>
-            <Button
-              themeInverse
-              disabled={loading}
-              onPress={() => submit()}
-              cursor={loading ? 'progress' : 'pointer'}
-              alignSelf="flex-end"
-              width={'100%'}
-              marginVertical="$4"
-              iconAfter={
-                <AnimatePresence>
-                  {loading && (
-                    <Spinner
-                      size="small"
-                      color="$color"
-                      key="loading-spinner"
-                      opacity={1}
-                      position="absolute"
-                      scale={0.5}
-                      left={0}
-                      x={100}
-                      animation="quick"
-                      enterStyle={{
-                        opacity: 0,
-                        scale: 0.5,
-                      }}
-                      exitStyle={{
-                        opacity: 0,
-                        scale: 0.5,
-                      }}
-                    />
-                  )}
-                </AnimatePresence>
-              }
-            >
-              <Button.Text animation="quick" x={loading ? -10 : 0}>
-                Sign Up
-              </Button.Text>
-            </Button>
-            {!isWeb && <SafeAreaView />}
-          </>
-        )}
-      />
+
+          <Controller
+            control={control}
+            name="fullName"
+            render={({ field, fieldState }) => (
+              <TwoInput
+                values={{
+                  firstInput: {
+                    label: 'First Name',
+                    labelId: 'firstName-ts2',
+                    placeholder: 'First name',
+                  },
+                  secondInput: {
+                    label: 'Last Name',
+                    labelId: 'lastName-ts2',
+                    placeholder: 'Last name',
+                  },
+                }}
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                error={fieldState.error as any}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="email"
+            render={({ field, fieldState }) => (
+              <TextInput
+                label="Email"
+                labelId="email-ts2"
+                placeholder="Email"
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                error={fieldState.error?.message}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="password"
+            render={({ field, fieldState }) => (
+              <PasswordInput
+                label="Password"
+                labelId="password-ts2"
+                placeholder="Password"
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                error={fieldState.error?.message}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="confirmedPassword"
+            render={({ field, fieldState }) => (
+              <PasswordInput
+                label="Confirm Password"
+                labelId="confirmPassword-ts2"
+                placeholder="Confirm Password"
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                error={fieldState.error?.message}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="postalCode"
+            render={({ field, fieldState }) => (
+              <TextInput
+                label="Postal Code"
+                labelId="postalCode-ts2"
+                placeholder="Postal Code"
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                error={fieldState.error?.message}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="accountType"
+            render={({ field }) => (
+              <MyRadio
+                id="accountType-ts2"
+                title="Account type"
+                values={[
+                  {
+                    value: 'personal',
+                    label: 'Personal',
+                    labelId: 'personal-ts2',
+                  },
+                  {
+                    value: 'business',
+                    label: 'Business',
+                    labelId: 'business-ts2',
+                  },
+                ]}
+                value={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
+
+          <Button
+            themeInverse
+            disabled={loading}
+            onPress={handleSubmit(onSubmit)}
+            cursor={loading ? 'progress' : 'pointer'}
+            alignSelf="flex-end"
+            width={'100%'}
+            marginVertical="$4"
+            iconAfter={
+              <AnimatePresence>
+                {loading && (
+                  <Spinner
+                    size="small"
+                    color="$color"
+                    key="loading-spinner"
+                    opacity={1}
+                    position="absolute"
+                    scale={0.5}
+                    left={0}
+                    x={100}
+                    animation="quick"
+                    enterStyle={{
+                      opacity: 0,
+                      scale: 0.5,
+                    }}
+                    exitStyle={{
+                      opacity: 0,
+                      scale: 0.5,
+                    }}
+                  />
+                )}
+              </AnimatePresence>
+            }
+          >
+            <Button.Text animation="quick" x={loading ? -10 : 0}>
+              Sign Up
+            </Button.Text>
+          </Button>
+          {!isWeb && <SafeAreaView />}
+        </FormCard>
+      </Form>
     </InputContext.Provider>
   )
 }

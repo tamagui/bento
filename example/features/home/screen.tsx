@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { ChevronRight } from '@tamagui/lucide-icons'
 import { ScrollView } from 'react-native'
-import type { ListItemProps } from 'tamagui'
 import { H1, ListItem, Separator, Text, YGroup, YStack } from 'tamagui'
 
 export function HomeScreen() {
@@ -13,16 +12,14 @@ export function HomeScreen() {
         <H1 fontFamily="$heading" size="$9">
           Bento
         </H1>
-        <Text color="$color11" size="$5">
-          Premium Tamagui components
-        </Text>
+        <Text color="$color11">Premium Tamagui components</Text>
 
         <YStack gap="$4" maw={600} mt="$4">
           {componentGroups.map((group, i) => {
             return (
               <YStack key={i} gap="$2">
                 {group.label && (
-                  <Text color="$color11" size="$3" fontWeight="600" px="$3">
+                  <Text color="$color11" fontWeight="600" px="$3">
                     {group.label}
                   </Text>
                 )}
@@ -34,7 +31,10 @@ export function HomeScreen() {
                           bg="$color1"
                           pressTheme
                           size="$4"
-                          onPress={() => navigation.navigate('component', { id: item.id })}
+                          onPress={() =>
+                            // @ts-expect-error
+                            navigation.navigate('component', { id: item.id })
+                          }
                           iconAfter={<ChevronRight color="$color10" />}
                         >
                           {item.title}
@@ -102,8 +102,6 @@ const componentGroups = [
   },
   {
     label: 'User',
-    items: [
-      { title: 'Preferences', id: 'preferences' },
-    ],
+    items: [{ title: 'Preferences', id: 'preferences' }],
   },
 ]
