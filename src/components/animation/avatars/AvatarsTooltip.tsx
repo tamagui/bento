@@ -10,10 +10,10 @@ export function AvatarsTooltip() {
       <View flexDirection="row">
         {items.map((item, index) => (
           <View
-            marginLeft={index !== 0 ? '$-2' : undefined}
+            ml={index !== 0 ? '$-2' : undefined}
             key={item}
             hoverStyle={{
-              zIndex: 1,
+              z: 1,
               scale: 1.05,
             }}
             animation="bouncy"
@@ -36,10 +36,10 @@ export function AvatarsTooltip() {
       <View flexDirection="row">
         {items.map((item, index) => (
           <View
-            marginLeft={index !== 0 ? '$-4' : undefined}
+            ml={index !== 0 ? '$-4' : undefined}
             key={item}
             hoverStyle={{
-              zIndex: 1,
+              z: 1,
               scale: 1.05,
             }}
             animation="bouncy"

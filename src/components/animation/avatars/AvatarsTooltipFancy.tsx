@@ -38,12 +38,7 @@ function Item(props: { item: string; index: number }) {
   })
 
   return (
-    <View
-      marginLeft={index !== 0 ? '$-4' : undefined}
-      zIndex={index}
-      key={item}
-      cursor="pointer"
-    >
+    <View ml={index !== 0 ? '$-4' : undefined} z={index} key={item} cursor="pointer">
       <AvatarTip offset={5} placement="top" delay={0}>
         <AvatarTip.Trigger>
           <Avatar
@@ -64,7 +59,7 @@ function Item(props: { item: string; index: number }) {
           rotate={position.degree}
           transformOrigin="center bottom"
         >
-          <Paragraph size="$2" lineHeight="$1" paddingHorizontal="$2">
+          <Paragraph size="$2" lineHeight="$1" px="$2">
             {item}
           </Paragraph>
         </AvatarTip.Content>
