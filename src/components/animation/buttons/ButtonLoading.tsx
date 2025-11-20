@@ -8,24 +8,24 @@ export function ButtonLoading() {
       flexDirection="row"
       gap="$4"
       flexWrap="wrap"
-      alignItems="center"
-      justifyContent="center"
-      maxWidth={400}
+      items="center"
+      justify="center"
+      maxW={400}
     >
       <ButtonLoadingExample />
       <Theme name="blue">
         <ButtonLoadingExample />
       </Theme>
-      <Theme name="purple">
+      <Theme name="neon">
         <ButtonLoadingExample />
       </Theme>
-      <Theme name="pink">
+      <Theme name="neonBlue">
         <ButtonLoadingExample />
       </Theme>
       <Theme name="red">
         <ButtonLoadingExample />
       </Theme>
-      <Theme name="orange">
+      <Theme name="orangeRed">
         <ButtonLoadingExample />
       </Theme>
       <Theme name="yellow">
@@ -54,8 +54,8 @@ function ButtonLoadingExample() {
         flexDirection="row"
         x={loading ? 0 : -15}
         gap="$3"
-        alignItems="center"
-        justifyContent="center"
+        items="center"
+        justify="center"
       >
         <Button.Icon>
           <Spinner
