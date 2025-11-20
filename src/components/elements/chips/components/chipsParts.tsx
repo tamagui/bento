@@ -21,7 +21,7 @@ const ChipImpl = styled(View, {
   flexDirection: 'row',
   context: ChipContext,
   variants: {
-    rounded: {
+    circular: {
       true: {
         borderRadius: 1000_000_000,
       },
@@ -39,10 +39,9 @@ const ChipImpl = styled(View, {
       },
     },
     size: {
-      '...size': (val, allTokens) => {
-        const { tokens } = allTokens
+      '...size': (val, { tokens }) => {
         return {
-          paddingHorizontal: tokens.space[val],
+          paddingHorizontal: tokens.space[val].val,
           paddingVertical: tokens.space[val].val * 0.2,
         }
       },

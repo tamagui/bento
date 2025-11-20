@@ -2,16 +2,16 @@ import type { FontSizeTokens, SizeTokens, ThemeName } from 'tamagui'
 import { View } from 'tamagui'
 import { Chip } from './components/chipsParts'
 
-const colors = ['red', 'green', 'blue', 'purple', 'pink', 'orange']
+const colors = ['red', 'green', 'blue', 'neon', 'yellow', 'cyan']
 
 /** ------ EXAMPLE ------ */
-export function ChipsRounded({ size }: { size?: SizeTokens }) {
+export function ChipsRounded({ size = '$4' }: { size?: SizeTokens }) {
   return (
-    <View flexDirection="column" justifyContent="center" alignItems="center" width="100%">
-      <View flexDirection="row" flexWrap="wrap" flexShrink={1} gap="$2" padding="$4">
+    <View flexDirection="column" justify="center" items="center" width="100%">
+      <View flexDirection="row" flexWrap="wrap" shrink={1} gap="$2" p="$4">
         {colors.map((color) => (
           <Chip
-            rounded
+            circular
             theme={color as ThemeName}
             size={size as FontSizeTokens}
             key={color}
