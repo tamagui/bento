@@ -1,60 +1,3 @@
-// import { View, SwitchStyledContext, createSwitch, styled } from 'tamagui'
-
-// const Frame = styled(View, {
-//   context: SwitchStyledContext,
-//   borderRadius: 20,
-//   variants: {
-//     checked: {
-//       true: {
-//         backgroundColor: '$green10',
-//       },
-//       false: {
-//         backgroundColor: '$red10',
-//       },
-//     },
-//     size: {
-//       '...size': (size, { tokens }) => {
-//         return {
-//           width: tokens.size[size],
-//           height: tokens.size[size].val / 2,
-//         }
-//       },
-//     },
-//   } as const,
-
-//   defaultVariants: {
-//     checked: false,
-//     size: '$true',
-//   },
-// })
-// const Thumb = styled(View, {
-//   context: SwitchStyledContext,
-//   borderRadius: 20,
-//   backgroundColor: '#fff',
-//   variants: {
-//     checked: {
-//       true: {},
-//       false: {},
-//     },
-//     size: {
-//       '...size': (size, { tokens }) => {
-//         return {
-//           width: tokens.size[size].val / 2,
-//           height: tokens.size[size].val / 2,
-//         }
-//       },
-//     },
-//   } as const,
-// })
-
-// export const Switch = createSwitch({
-//   Frame,
-//   //@ts-ignore
-//   Thumb,
-// })
-
-// tamagui one
-
 import type { ColorTokens, FontSizeTokens, SizeTokens } from '@tamagui/core'
 import { getSize } from '@tamagui/get-token'
 import {
@@ -159,8 +102,8 @@ const SwitchIconFrame = styled(View, {
   position: 'absolute',
   context: SwitchStyledContext,
   height: '100%',
-  justifyContent: 'center',
-  alignItems: 'center',
+  justify: 'center',
+  items: 'center',
   variants: {
     placement: {
       right: (_, { props, tokens }) => {

@@ -10,18 +10,18 @@ export function IconTitleSwitch() {
   return (
     <Button
       flexDirection="row"
-      maxWidth="100%"
+      maxW="100%"
       borderColor="$borderColor"
       borderWidth={1}
-      paddingHorizontal="$4"
-      paddingVertical="$3"
-      $group-window-sm={{ marginTop: '$6', marginHorizontal: '$5' }}
-      borderRadius="$3"
+      px="$4"
+      py="$3"
+      $group-window-sm={{ mt: '$6', mx: '$5' }}
+      rounded="$3"
       width={400}
       height="auto"
-      alignItems="center"
+      items="center"
       gap="$2.5"
-      theme="surface1"
+      theme="accent"
       animation="medium"
       onPress={() => setChecked(!checked)}
     >
@@ -30,7 +30,7 @@ export function IconTitleSwitch() {
         <Label size="$1.5" htmlFor={uniqueId + 'switch'}>
           Title here
         </Label>
-        <Text theme="alt1">Your description here</Text>
+        <Text theme="accent">Your description here</Text>
       </View>
       <Switch
         id={uniqueId + 'switch'}
@@ -40,7 +40,7 @@ export function IconTitleSwitch() {
         size="$2"
         backgroundColor={checked ? '$color10' : '$color5'}
       >
-        <Switch.Thumb borderColor="$white" animation="200ms" bg="$color1" />
+        <Switch.Thumb borderColor='$borderColor' animation="200ms" bg="$color1" />
       </Switch>
     </Button>
   )
