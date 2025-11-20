@@ -91,11 +91,12 @@ const DatePickerImpl = (props: DatePickerProps) => {
       <Popover ref={popoverRef} keepChildrenMounted size="$4" allowFlip {...rest}>
         <Adapt when="maxMd">
           <Popover.Sheet modal dismissOnSnapToBottom snapPointsMode="fit">
-            <Popover.Sheet.Frame padding="$4" width="100%" alignItems="center">
+            <Popover.Sheet.Frame p="$4" width="100%" items="center">
               <Adapt.Contents />
             </Popover.Sheet.Frame>
             <Popover.Sheet.Overlay
               animation="lazy"
+              opacity={0.8}
               enterStyle={{ opacity: 0 }}
               exitStyle={{ opacity: 0 }}
             />
@@ -146,7 +147,7 @@ export const DatePickerInput = Input.Area.styleable<DatePickerInputProps>(
   (props, ref) => {
     const { value, onButtonPress, size = '$3', onReset, ...rest } = props
     return (
-      <View $platform-native={{ minWidth: '100%' }}>
+      <View $platform-native={{ minW: '100%' }}>
         <Input cursor="pointer" onPress={onButtonPress} size={size}>
           <Input.Box>
             <Input.Section>
@@ -211,9 +212,9 @@ export function MonthPicker({
         flexWrap="wrap"
         gap="$2"
         animation="100ms"
-        flexGrow={0}
+        grow={0}
         $platform-native={{
-          justifyContent: 'space-between',
+          justify: 'space-between',
           width: '100%',
         }}
         $gtMd={{ width: 285 }}
@@ -221,20 +222,20 @@ export function MonthPicker({
         {months.map((month) => (
           <Button
             themeInverse={month.active}
-            borderRadius="$true"
-            flexShrink={0}
+            rounded="$4"
+            shrink={0}
             flexBasis={90}
-            backgroundColor={month.active ? '$background' : 'transparent'}
+            bg={month.active ? '$background' : 'transparent'}
             key={month.$date.toString()}
             chromeless
-            padding={0}
+            p={0}
             {...swapOnClick(
               monthButton(month, {
                 onClick: onChange as any,
               })
             )}
           >
-            <Button.Text color={month.active ? '$gray12' : '$gray11'}>
+            <Button.Text color={month.active ? '$color12' : '$color11'}>
               {month.month}
             </Button.Text>
           </Button>
@@ -269,21 +270,19 @@ export function YearPicker({
         gap="$2"
         width="100%"
         $gtMd={{
-          maxWidth: 280,
+          maxW: 280,
         }}
       >
         {years.map((year) => (
           <Button
             themeInverse={year.year === Number(selectedYear)}
-            borderRadius="$true"
+            rounded="$4"
             flexBasis="30%"
-            flexGrow={1}
-            backgroundColor={
-              year.year === Number(selectedYear) ? '$background' : 'transparent'
-            }
+            grow={1}
+            bg={year.year === Number(selectedYear) ? '$background' : 'transparent'}
             key={year.$date.toString()}
             chromeless
-            padding={0}
+            p={0}
             {...swapOnClick(
               yearButton(year, {
                 onClick: onChange as any,
@@ -291,7 +290,7 @@ export function YearPicker({
             )}
           >
             <Button.Text
-              color={year.year === Number(selectedYear) ? '$gray12' : '$gray11'}
+              color={year.year === Number(selectedYear) ? '$color12' : '$color11'}
             >
               {year.year}
             </Button.Text>
@@ -308,18 +307,13 @@ export function YearRangeSlider() {
   } = useDatePickerContext()
 
   return (
-    <View
-      flexDirection="row"
-      width="100%"
-      alignItems="center"
-      justifyContent="space-between"
-    >
+    <View flexDirection="row" width="100%" items="center" justify="space-between">
       <Button circular size="$4" {...swapOnClick(previousYearsButton())}>
         <Button.Icon scaleIcon={1.5}>
           <ChevronLeft />
         </Button.Icon>
       </Button>
-      <View y={2} flexDirection="column" alignItems="center">
+      <View y={2} flexDirection="column" items="center">
         <SizableText size="$5">
           {`${years[0].year} - ${years[years.length - 1].year}`}
         </SizableText>
@@ -345,8 +339,8 @@ export function YearSlider() {
       flexDirection="row"
       width="100%"
       height={50}
-      alignItems="center"
-      justifyContent="space-between"
+      items="center"
+      justify="space-between"
     >
       <Button circular size="$3" {...swapOnClick(subtractOffset({ months: 12 }))}>
         <Button.Icon scaleIcon={1.5}>
@@ -385,7 +379,7 @@ export const CalendarHeader = ({
   setHeader: (header: 'year' | 'month') => void
 }) => {
   return (
-    <View flexDirection="column" height={50} alignItems="center">
+    <View flexDirection="column" height={50} items="center">
       <SizableText
         onPress={() => setHeader('year')}
         tabIndex={0}
@@ -400,14 +394,14 @@ export const CalendarHeader = ({
       </SizableText>
       <SizableText
         onPress={() => setHeader('month')}
-        userSelect="auto"
+        select="auto"
         tabIndex={0}
         cursor="pointer"
         size="$6"
-        color="$gray12"
+        color="$color12"
         fontWeight="bold"
         hoverStyle={{
-          color: '$gray10',
+          color: '$color10',
         }}
       >
         {month}
@@ -424,9 +418,16 @@ export const WeekView = ({
   props?: ViewProps
 }) => {
   return (
-    <View w="100%" flexDirection="row" gap="$1" {...props}>
+    <View width="100%" flexDirection="row" gap="$1" {...props}>
       {weekDays.map((day) => (
-        <SizableText flex={1} theme="alt1" key={day} ta="center" w="100%" size="$4">
+        <SizableText
+          flex={1}
+          theme="accent"
+          key={day}
+          text="center"
+          width="100%"
+          size="$4"
+        >
           {day}
         </SizableText>
       ))}

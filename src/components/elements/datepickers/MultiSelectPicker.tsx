@@ -56,13 +56,8 @@ function Calendar({
   })
 
   return (
-    <View ai="center" jc="center" flexDirection="column" gap="$4">
-      <View
-        flexDirection="row"
-        minWidth="100%"
-        alignItems="center"
-        justifyContent="space-between"
-      >
+    <View items="center" justify="center" flexDirection="column" gap="$4">
+      <View flexDirection="row" minW="100%" items="center" justify="space-between">
         {order === 'first' || order === 'either' ? (
           <Button circular size="$4" {...swapOnClick(subtractOffset({ months: 1 }))}>
             <Button.Icon scaleIcon={1.5}>
@@ -97,34 +92,40 @@ function Calendar({
 
       <AnimatePresence key={prevNextAnimationKey}>
         <View
-          w="100%"
-          jc="center"
-          ai="center"
+          width="100%"
+          justify="center"
+          items="center"
           animation="medium"
           gap="$4"
           {...prevNextAnimation()}
         >
           <WeekView weekDays={weekDays} />
 
-          <View flexDirection="column" gap="$2" ai="center" jc="center" w="100%">
+          <View
+            flexDirection="column"
+            gap="$2"
+            items="center"
+            justify="center"
+            width="100%"
+          >
             {calendarWeeks.map((days) => {
               return (
                 <View
-                  jc="space-between"
-                  ai="center"
+                  justify="space-between"
+                  items="center"
                   flexDirection="row"
                   key={days[0].$date.toString()}
                   gap="$1"
                   flex={1}
-                  w="100%"
+                  width="100%"
                 >
                   {days.map((d) => (
                     <Button
                       key={d.$date.toString()}
                       circular
-                      padding={0}
+                      p={0}
                       {...swapOnClick(dayButton(d))}
-                      backgroundColor={
+                      bg={
                         !d.inCurrentMonth
                           ? 'transparent'
                           : d.selected
@@ -137,10 +138,10 @@ function Calendar({
                       <Button.Text
                         color={
                           !d.inCurrentMonth
-                            ? '$gray6'
+                            ? '$color6'
                             : d.selected
-                              ? '$gray12'
-                              : '$gray11'
+                              ? '$color12'
+                              : '$color11'
                         }
                       >
                         {d.day}
@@ -191,7 +192,7 @@ function DatePickerBody({ config }: { config: DatePickerProviderProps['config'] 
 
       case 'year':
         return (
-          <View alignItems="center" gap="$3">
+          <View items="center" gap="$3">
             <YearRangeSlider />
             <YearPicker onChange={() => setHeader('day')} />
           </View>
@@ -200,7 +201,7 @@ function DatePickerBody({ config }: { config: DatePickerProviderProps['config'] 
       case 'month':
         return (
           <View gap="$4">
-            <H3 size="$7" alignSelf="center">
+            <H3 size="$7" self="center">
               Select a month
             </H3>
             <MonthPicker onChange={() => setHeader('day')} />

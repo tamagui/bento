@@ -37,13 +37,13 @@ function DateHeader() {
 
   if (header === 'month') {
     return (
-      <H3 size="$7" alignSelf="center">
+      <H3 size="$7" self="center">
         Select a month
       </H3>
     )
   }
   return (
-    <View flexDirection="row" w="100%" alignItems="center" justifyContent="space-between">
+    <View flexDirection="row" width="100%" items="center" justify="space-between">
       <Button circular size="$4" {...swapOnClick(subtractOffset({ months: 1 }))}>
         <Button.Icon scaleIcon={1.5}>
           <ChevronLeft />
@@ -88,29 +88,35 @@ function DayPicker() {
 
   return (
     <AnimatePresence key={prevNextAnimationKey}>
-      <View w="100%" gap="$4" animation="medium" {...prevNextAnimation()}>
+      <View width="100%" gap="$4" animation="medium" {...prevNextAnimation()}>
         <WeekView weekDays={weekDays} />
 
-        <View flexDirection="column" gap="$2" ai="center" jc="center" w="100%">
+        <View
+          flexDirection="column"
+          gap="$2"
+          items="center"
+          justify="center"
+          width="100%"
+        >
           {subDays.map((days) => {
             return (
               <View
-                jc="space-between"
-                ai="center"
+                justify="space-between"
+                items="center"
                 flexDirection="row"
                 key={days[0].$date.toString()}
                 gap="$1"
                 flex={1}
-                w="100%"
+                width="100%"
               >
                 {days.map((d) => (
                   <Button
                     key={d.$date.toString()}
                     chromeless
                     circular
-                    padding={0}
+                    p={0}
                     {...swapOnClick(dayButton(d))}
-                    backgroundColor={d.selected ? '$background' : 'transparent'}
+                    bg={d.selected ? '$background' : 'transparent'}
                     themeInverse={d.selected}
                     disabled={!d.inCurrentMonth}
                   >
@@ -118,7 +124,11 @@ function DayPicker() {
                       fontWeight="500"
                       fontSize="$4"
                       color={
-                        d.selected ? '$gray12' : d.inCurrentMonth ? '$gray11' : '$gray6'
+                        d.selected
+                          ? '$color12'
+                          : d.inCurrentMonth
+                            ? '$color11'
+                            : '$color6'
                       }
                     >
                       {d.day}
@@ -141,9 +151,9 @@ function DatePickerBody({ config }: { config: DatePickerProviderProps['config'] 
     <HeaderTypeProvider config={config} type={header} setHeader={setHeader}>
       <View
         flexDirection="column"
-        alignItems="center"
+        items="center"
         gap="$4"
-        w="100%"
+        width="100%"
         p="$4"
         $gtMd={{ p: '$2' }}
       >
