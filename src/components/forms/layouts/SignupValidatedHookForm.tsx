@@ -3,15 +3,7 @@ import { Eye, EyeOff, Info } from '@tamagui/lucide-icons'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { SafeAreaView } from 'react-native'
-import {
-  AnimatePresence,
-  Button,
-  H1,
-  isWeb,
-  RadioGroup,
-  Spinner,
-  View
-} from 'tamagui'
+import { AnimatePresence, Button, H1, isWeb, RadioGroup, Spinner, View } from 'tamagui'
 import { z } from 'zod'
 import { Input } from '../inputs/components/inputsParts'
 import { FormCard } from './components/layoutParts'
@@ -189,7 +181,7 @@ export function SignupValidatedHookForm() {
                         scaleY: 0.5,
                       }}
                     >
-                      <Input.Icon   p={0}>
+                      <Input.Icon p={0}>
                         <Info />
                       </Input.Icon>
                       <Input.Info>{errors.lastName.message}</Input.Info>
@@ -275,7 +267,7 @@ export function SignupValidatedHookForm() {
                   cursor="pointer"
                   onPress={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? <Eye color='$color11' /> : <EyeOff color='$color11' />}
+                  {showPassword ? <Eye color="$color11" /> : <EyeOff color="$color11" />}
                 </Input.Icon>
               </Input.Box>
               <AnimatePresence>
@@ -335,9 +327,9 @@ export function SignupValidatedHookForm() {
                   onPress={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
                   {showConfirmPassword ? (
-                    <Eye color='$color11' />
+                    <Eye color="$color11" />
                   ) : (
-                    <EyeOff color='$color11' />
+                    <EyeOff color="$color11" />
                   )}
                 </Input.Icon>
               </Input.Box>

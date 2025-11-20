@@ -13,8 +13,6 @@ const SPACE = 4
 export function BottomView({ title }: BottomViewProps) {
   return (
     <>
-     
-
       {/* <LinearGradient
         colors={['background0', '$background', '$background']}
         pos="absolute"

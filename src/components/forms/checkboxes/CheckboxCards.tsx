@@ -85,12 +85,7 @@ export function CheckboxCards() {
                       py="$2"
                       px="$3"
                     >
-                      <View
-                        width={10}
-                        height={10}
-                        bg="$color10"
-                        rounded={100}
-                      />
+                      <View width={10} height={10} bg="$color10" rounded={100} />
                       <Text fontSize="$3" color="$color11">
                         {item.title}
                       </Text>
@@ -109,7 +104,7 @@ export function CheckboxCards() {
 
                 <View flexDirection="row" gap="$2" mt="auto" items="center">
                   <Clock color="$color10" size={14} />
-                  <Text opacity={0.5} fontSize="$3" fontWeight="300" theme='accent'>
+                  <Text opacity={0.5} fontSize="$3" fontWeight="300" theme="accent">
                     last bought 2 hr ago
                   </Text>
                 </View>

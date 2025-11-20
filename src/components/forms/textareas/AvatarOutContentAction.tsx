@@ -15,7 +15,7 @@ export function AvatarOutContentAction() {
       <Button chromeless circular bordered>
         <Avatar flexShrink={1} circular size="$3.5">
           <Avatar.Image aria-label="user photo" src="https://i.pravatar.cc/123" />
-          <Avatar.Fallback background='$color10' />
+          <Avatar.Fallback background="$color10" />
         </Avatar>
       </Button>
       <View flexDirection="column" shrink={1} flexBasis={400} gap="$3">

@@ -53,7 +53,6 @@ export function SignUpTwoSideScreen() {
 
   return (
     <View flexDirection="row" width="100%" minH="100%">
-     
       <View
         flexDirection="column"
         shrink={1}
@@ -165,7 +164,9 @@ export function SignUpTwoSideScreen() {
               mt="$3"
               gap="$2.5"
             >
-              <Input.Label htmlFor={uniqueId + 'single'}>Receive notifications</Input.Label>
+              <Input.Label htmlFor={uniqueId + 'single'}>
+                Receive notifications
+              </Input.Label>
               <Checkboxes.FocusGroup>
                 <Checkboxes.Group>
                   {notifications.map((item) => {
@@ -181,7 +182,7 @@ export function SignUpTwoSideScreen() {
                             pt="$-3"
                             mb={-1}
                             borderBottomWidth={1}
-                            borderBottomColor='$color5'
+                            borderBottomColor="$color5"
                           >
                             <View
                               flexDirection="row"
@@ -197,7 +198,7 @@ export function SignUpTwoSideScreen() {
                                 </Checkboxes.Checkbox.Indicator>
                               </Checkboxes.Checkbox>
                             </View>
-                            <Text fontSize="$4" theme='accent'>
+                            <Text fontSize="$4" theme="accent">
                               {desc}
                             </Text>
                           </Checkboxes.Card>

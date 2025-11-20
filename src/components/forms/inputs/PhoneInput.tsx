@@ -102,7 +102,7 @@ function RegionFilterInput(props: RegionFilterInputProps) {
             }}
             pointerEvents="auto"
             z={10}
-            theme='accent'
+            theme="accent"
           >
             {filter ? <X /> : <Search />}
           </Input.Icon>
@@ -226,13 +226,13 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
         </Input.XGroup.Item>
       </Popover.Trigger>
 
-      <Adapt when='maxMd' platform='touch'>
+      <Adapt when="maxMd" platform="touch">
         <Popover.Sheet modal dismissOnSnapToBottom>
           <Popover.Sheet.Frame p="$4">
             <Adapt.Contents />
           </Popover.Sheet.Frame>
           <Popover.Sheet.Overlay
-            animation='quick'
+            animation="quick"
             opacity={0.8}
             enterStyle={{ opacity: 0 }}
             exitStyle={{ opacity: 0 }}

@@ -2,7 +2,6 @@ import { ArrowRight, Bookmark, ChevronLeft } from '@tamagui/lucide-icons'
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { SafeAreaView, TouchableOpacity } from 'react-native'
 import Animated, {
-  
   interpolate,
   type SharedValue,
   useAnimatedProps,
@@ -97,7 +96,11 @@ export function ScrollProgress() {
         <AnimatedList
           onScroll={scrollHandler}
           renderItem={({ item }) => (
-            <Text fontSize="$6" fontFamily="Times New Roman" lineHeight={isWeb ? 31 : "$7"}>
+            <Text
+              fontSize="$6"
+              fontFamily="Times New Roman"
+              lineHeight={isWeb ? 31 : '$7'}
+            >
               {item}
             </Text>
           )}

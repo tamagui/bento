@@ -116,7 +116,7 @@ function CodeConfirmationInput({
           text="center"
           fontSize="$8"
           rounded="$5"
-          theme='accent'
+          theme="accent"
           aspectRatio={1}
           width="100%"
           height="100%"
@@ -306,7 +306,7 @@ const ResendTimer = ({
         cursor="pointer"
         onPress={handleResendClick}
       >
-        <RefreshCcw size={12} color='$green10' />
+        <RefreshCcw size={12} color="$green10" />
         <Paragraph color="$green10" text="right" fontSize="$1">
           Resend OTP
         </Paragraph>

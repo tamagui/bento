@@ -113,7 +113,13 @@ export const Chat = () => {
   return (
     <ChatContext.Provider value={{ theme, setTheme }}>
       <View theme={theme} h="100%" flex={1}>
-        <View bg={themeName.includes('dark') ? 'white' : 'black'} themeInverse flex={1} position="absolute" inset={0} />
+        <View
+          bg={themeName.includes('dark') ? 'white' : 'black'}
+          themeInverse
+          flex={1}
+          position="absolute"
+          inset={0}
+        />
         <KeyboardAvoidingView
           style={{ flex: 1 }}
           behavior="padding"

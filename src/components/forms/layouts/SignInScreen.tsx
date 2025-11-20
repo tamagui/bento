@@ -65,11 +65,7 @@ export function SignInScreen() {
           </View>
           <View flexDirection="column" gap="$1">
             <Input size="$4">
-              <View
-                flexDirection="row"
-                items="center"
-                justify="space-between"
-              >
+              <View flexDirection="row" items="center" justify="space-between">
                 <Input.Label htmlFor={'password'}>Password</Input.Label>
               </View>
               <Input.Box>
@@ -133,13 +129,13 @@ export function SignInScreen() {
               <View flexDirection="row" flexWrap="wrap" gap="$3">
                 <Button flex={1} minW="100%">
                   <Button.Icon>
-                    <Github color='$color10' size="$1" />
+                    <Github color="$color10" size="$1" />
                   </Button.Icon>
                   <Button.Text>Continue with Github</Button.Text>
                 </Button>
                 <Button flex={1}>
                   <Button.Icon>
-                    <Facebook color='$green10' size="$1" />
+                    <Facebook color="$green10" size="$1" />
                   </Button.Icon>
                   <Button.Text>Continue with Facebook</Button.Text>
                 </Button>
@@ -192,7 +188,7 @@ const ForgotPasswordLink = () => {
   return (
     <Anchor self="flex-end" href={`#`}>
       <Paragraph
-        color='$color11'
+        color="$color11"
         hoverStyle={{
           color: '$color12',
         }}

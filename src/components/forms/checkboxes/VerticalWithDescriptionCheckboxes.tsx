@@ -113,13 +113,7 @@ function Item({
           >
             {label}
           </Checkboxes.Checkbox.Label>
-          <Text
-            shrink={1}
-            fontSize="$3"
-            lineHeight="$3"
-            fontWeight="300"
-            color="$color9"
-          >
+          <Text shrink={1} fontSize="$3" lineHeight="$3" fontWeight="300" color="$color9">
             {description}
           </Text>
         </View>

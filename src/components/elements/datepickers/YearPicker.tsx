@@ -16,7 +16,13 @@ function CalendarHeader() {
 function DatePickerBody({ config }: { config: DatePickerProviderProps['config'] }) {
   return (
     <DatePickerProvider config={config}>
-      <View flexDirection="column" alignItems="center" gap="$4" p="$4" $gtMd={{ p: '$0' }}>
+      <View
+        flexDirection="column"
+        alignItems="center"
+        gap="$4"
+        p="$4"
+        $gtMd={{ p: '$0' }}
+      >
         <CalendarHeader />
         <YearPicker />
       </View>

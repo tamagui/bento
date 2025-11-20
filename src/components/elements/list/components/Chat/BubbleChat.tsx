@@ -33,9 +33,7 @@ export const BubbleChat = (props: BubbleProps) => {
     <Pressable {...props}>
       <View
         theme={
-          theme.includes('alt1') || theme === 'light' || theme === 'dark'
-            ? 'blue'
-            : theme
+          theme.includes('alt1') || theme === 'light' || theme === 'dark' ? 'blue' : theme
         }
         alignSelf={received ? 'flex-start' : 'flex-end'}
         backgroundColor={'$color10'}

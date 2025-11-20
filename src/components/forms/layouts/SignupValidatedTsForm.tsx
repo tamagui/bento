@@ -3,7 +3,17 @@ import { Eye, EyeOff, Info } from '@tamagui/lucide-icons'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { AnimatePresence, Button, Form, H1, H2, isWeb, RadioGroup, Spinner, View } from 'tamagui'
+import {
+  AnimatePresence,
+  Button,
+  Form,
+  H1,
+  H2,
+  isWeb,
+  RadioGroup,
+  Spinner,
+  View,
+} from 'tamagui'
 import { z } from 'zod'
 import { Input, InputContext } from '../inputs/components/inputsParts'
 import { FormCard } from './components/layoutParts'
@@ -93,7 +103,7 @@ const PasswordInput = (props: PasswordInputProps) => {
           value={value}
         />
         <Input.Icon cursor="pointer" onPress={() => setShowPassword(!showPassword)}>
-          {showPassword ? <Eye color='$color11' /> : <EyeOff color='$color11' />}
+          {showPassword ? <Eye color="$color11" /> : <EyeOff color="$color11" />}
         </Input.Icon>
       </Input.Box>
       <AnimatePresence>
@@ -195,7 +205,13 @@ type TwoInputProps = {
   }
 }
 const TwoInput = (props: TwoInputProps) => {
-  const { values, value = { firstInput: '', secondInput: '' }, onChange, onBlur, error } = props
+  const {
+    values,
+    value = { firstInput: '', secondInput: '' },
+    onChange,
+    onBlur,
+    error,
+  } = props
 
   const { size } = InputContext.useStyledContext()
   return (
@@ -308,7 +324,7 @@ const TwoInput = (props: TwoInputProps) => {
                 scaleY: 0.5,
               }}
             >
-              <Input.Icon   p={0}>
+              <Input.Icon p={0}>
                 <Info />
               </Input.Icon>
               <Input.Info>{error.secondInput.message}</Input.Info>
@@ -551,7 +567,7 @@ export function SignupValidatedTsForm() {
               Sign Up
             </Button.Text>
           </Button>
-          {!isWeb && <SafeAreaView/>}
+          {!isWeb && <SafeAreaView />}
         </FormCard>
       </Form>
     </InputContext.Provider>

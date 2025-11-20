@@ -3,10 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "dist",
-    "types": [
-      "node",
-      "react"
-    ],
+    "types": ["node", "react"],
     "allowJs": false,
     "declaration": true,
     "strict": true,
@@ -24,11 +21,5 @@
     "example/**/*.tsx",
     "tamagui.config.ts"
   ],
-  "exclude": [
-    "test",
-    "types",
-    "node_modules",
-    "dist",
-    "**/__tests__"
-  ]
+  "exclude": ["test", "types", "node_modules", "dist", "**/__tests__"]
 }

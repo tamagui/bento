@@ -23,7 +23,7 @@ const ProductItem: FC<{ item: Product }> = ({ item }) => {
         shadowRadius={5}
         overflow="hidden"
         animation="quick"
-        cursor='pointer'
+        cursor="pointer"
       >
         <Image
           source={{ uri: item.image }}

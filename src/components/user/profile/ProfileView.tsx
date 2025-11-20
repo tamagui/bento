@@ -1,7 +1,6 @@
 import { memo, useEffect, useState } from 'react'
 import { type FlatListProps, SafeAreaView } from 'react-native'
 import Animated, {
-  
   interpolate,
   useAnimatedScrollHandler,
   useAnimatedStyle,

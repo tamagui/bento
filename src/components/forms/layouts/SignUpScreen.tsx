@@ -90,7 +90,7 @@ export function SignUpScreen() {
               placeholder="Password"
             />
             <Input.Icon cursor="pointer" onPress={() => setShowPassword(!showPassword)}>
-              {showPassword ? <Eye color='$color11' /> : <EyeOff color='$color11' />}
+              {showPassword ? <Eye color="$color11" /> : <EyeOff color="$color11" />}
             </Input.Icon>
           </Input.Box>
         </Input>
@@ -161,10 +161,10 @@ export function SignUpScreen() {
             height="$8"
             width="$8"
             id={uniqueId + 'add-pic'}
-            theme='accent'
+            theme="accent"
           >
             <Stack
-              theme='accent'
+              theme="accent"
               position="absolute"
               width="100%"
               height="100%"
@@ -181,7 +181,7 @@ export function SignUpScreen() {
         </View>
         <VerticalCheckboxes />
         <View flexDirection="row" items="center">
-          <Label theme='accent' htmlFor={uniqueId + 'notf'}>
+          <Label theme="accent" htmlFor={uniqueId + 'notf'}>
             Receive notifications
           </Label>
           <Switch
@@ -266,7 +266,7 @@ export function VerticalCheckboxes() {
     <View flexDirection="column" gap="$1">
       <Input.Label htmlFor={'customize-content'}>Customize content</Input.Label>
       <View flexDirection="column" gap="$1">
-        <SizableText size="$4" fontWeight="300" color='$color10'>
+        <SizableText size="$4" fontWeight="300" color="$color10">
           Select type of user:
         </SizableText>
         <View flexDirection="column">

@@ -40,7 +40,7 @@ export function IconTitleSwitch() {
         size="$2"
         backgroundColor={checked ? '$color10' : '$color5'}
       >
-        <Switch.Thumb borderColor='$borderColor' animation="200ms" bg="$color1" />
+        <Switch.Thumb borderColor="$borderColor" animation="200ms" bg="$color1" />
       </Switch>
     </Button>
   )

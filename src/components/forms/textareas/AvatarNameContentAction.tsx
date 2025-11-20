@@ -8,7 +8,7 @@ export function AvatarNameContentAction() {
       borderWidth={1}
       borderColor="$color7"
       rounded="$true"
-      background='$background'
+      background="$background"
       p="$true"
       width={500}
       maxW="100%"
@@ -21,7 +21,7 @@ export function AvatarNameContentAction() {
         <Button chromeless circular bordered>
           <Avatar circular size="$3.5">
             <Avatar.Image aria-label="user photo" src="https://i.pravatar.cc/123" />
-            <Avatar.Fallback background='$color10' />
+            <Avatar.Fallback background="$color10" />
           </Avatar>
         </Button>
         <View flexDirection="column">
@@ -47,12 +47,12 @@ export function AvatarNameContentAction() {
         <View gap="$2" flexDirection="row">
           <Button size="$3" themeInverse chromeless>
             <Button.Icon>
-              <Share size="$1" color='$color10' />
+              <Share size="$1" color="$color10" />
             </Button.Icon>
           </Button>
           <Button size="$3" themeInverse chromeless>
             <Button.Icon>
-              <File size="$1" color='$color10' />
+              <File size="$1" color="$color10" />
             </Button.Icon>
           </Button>
         </View>

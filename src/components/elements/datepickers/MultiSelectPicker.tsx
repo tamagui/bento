@@ -214,7 +214,9 @@ function DatePickerBody({ config }: { config: DatePickerProviderProps['config'] 
 
   return (
     <HeaderTypeProvider config={config} type={header} setHeader={setHeader}>
-      <View p="$4" $gtMd={{ p: '$0' }}>{renderView()}</View>
+      <View p="$4" $gtMd={{ p: '$0' }}>
+        {renderView()}
+      </View>
     </HeaderTypeProvider>
   )
 }

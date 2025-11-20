@@ -51,7 +51,6 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
       cursor="pointer"
       borderWidth={2}
       borderColor={'$colorTransparent'}
-  
     >
       {/* switch background */}
       {larger ? <SwitchBackground checked={checked} /> : null}
@@ -69,7 +68,7 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
           rounded="$10"
           items="center"
           justify="center"
-          background='$color11'
+          background="$color11"
           animation="200ms"
         >
           <AnimatePresence exitBeforeEnter custom={{ direction: -1 }}>
@@ -88,7 +87,7 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
                 { translateY: !checked ? 0 : thumbSize },
               ]}
             >
-              <Sun size={iconSize} fill={'white'} color='$color' />
+              <Sun size={iconSize} fill={'white'} color="$color" />
             </YStack>
 
             <YStack

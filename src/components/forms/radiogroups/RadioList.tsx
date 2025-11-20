@@ -94,7 +94,7 @@ function Item({
   const { desc, title, key } = item
   return (
     <Card
-      rounded='$4'
+      rounded="$4"
       p="$4"
       flexDirection="row"
       width="100%"

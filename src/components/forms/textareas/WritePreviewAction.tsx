@@ -78,17 +78,11 @@ export function WritePreviewAction() {
           </Text>
         </Tabs.Content>
         <Separator />
-        <View
-          flexDirection="row"
-          px="$3"
-          py="$2"
-          justify="space-between"
-          items="center"
-        >
+        <View flexDirection="row" px="$3" py="$2" justify="space-between" items="center">
           <View flexDirection="row">
             <Button size="$2" chromeless>
               <Button.Icon>
-                <Paperclip color='$color10' size="$1" />
+                <Paperclip color="$color10" size="$1" />
               </Button.Icon>
             </Button>
           </View>

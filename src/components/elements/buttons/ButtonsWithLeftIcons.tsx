@@ -28,14 +28,14 @@ export function ButtonsWithLeftIcons() {
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme='neon'>
+        <Button theme="neon">
           <Button.Icon>
             <Heart />
           </Button.Icon>
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme='forest'>
+        <Button theme="forest">
           <Button.Icon>
             <Heart />
           </Button.Icon>
@@ -49,7 +49,7 @@ export function ButtonsWithLeftIcons() {
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme='cyan'>
+        <Button theme="cyan">
           <Button.Icon>
             <Heart />
           </Button.Icon>
