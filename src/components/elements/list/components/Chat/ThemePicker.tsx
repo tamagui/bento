@@ -26,7 +26,7 @@ type ThemePicker = {
 const themes: Theme[] = [
   {
     emoji: '🌙',
-    theme: 'alt1',
+    theme: 'accent',
   },
   {
     emoji: '🐝',
@@ -90,16 +90,15 @@ export const ThemePicker = () => {
         <ThemeItem key={theme.theme} {...theme} setTheme={setTheme} />
       ))}
       <AnimatedView
-        w={SELECTED_THEME_WIDTH}
+        width={SELECTED_THEME_WIDTH}
         aspectRatio={ASPECT_RATIO}
         theme={theme}
-        // bg="$background"
-        borderRadius="$6"
+        rounded="$6"
         borderCurve="circular"
         borderColor="$color10"
         gap="$3"
-        left={18 - space}
-        top={-space - 1}
+        l={18 - space}
+        t={-space - 1}
         position="absolute"
         borderWidth={1.5}
         style={style}
@@ -117,31 +116,31 @@ const ThemeItem = ({
     <Pressable onPress={() => setTheme(theme)}>
       <View
         overflow="hidden"
-        w={WIDTH}
+        width={WIDTH}
         aspectRatio={ASPECT_RATIO}
         theme={theme}
         bg="$background"
-        borderRadius="$4"
+        rounded="$4"
         p="$2"
         gap="$2"
       >
-        <View h="$1" borderRadius="$3" borderCurve="circular" bg="$color10" width="80%" />
+        <View height="$1" rounded="$3" borderCurve="circular" bg="$color10" width="80%" />
 
         <View
           bg="$color3"
-          h="$1"
-          borderRadius="$3"
+          height="$1"
+          rounded="$3"
           width="60%"
-          alignSelf="flex-end"
+          self="flex-end"
           borderCurve="circular"
         />
 
         <Text
           position="absolute"
-          left={0}
-          right={0}
-          bottom={'$2'}
-          textAlign="center"
+          l={0}
+          r={0}
+          b={'$2'}
+          text="center"
           fontSize="$8"
           fontWeight="bold"
         >

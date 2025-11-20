@@ -12,7 +12,7 @@ const data = [
 
 export function HList() {
   return (
-    <View f={1} w="100%" h="100%">
+    <View flex={1} width="100%" height="100%">
       <ScrollView
         {...(isWeb && {
           ai: 'center',
@@ -22,7 +22,7 @@ export function HList() {
         pr="$6"
         horizontal
       >
-        <View flexDirection="row" gap="$6" h="100%">
+        <View flexDirection="row" gap="$6" height="100%">
           {data.map(({ uri, title }) => (
             <HListItem key={uri} uri={uri} title={title} />
           ))}
@@ -62,6 +62,8 @@ const animationSlow = [
 ] as AnimationProp
 
 function HListItem({ uri, title }: { uri: string; title: string }) {
+  const imagePrefix = !isWeb ? `https://tamagui.dev` : ''
+
   return (
     <HListFrame
       animation={animationFast}
@@ -72,7 +74,7 @@ function HListItem({ uri, title }: { uri: string; title: string }) {
       <HListInner containerType="normal" group="listitem" animation="bouncy">
         <View
           flexDirection="column"
-          f={1}
+          flex={1}
           scale={1.2}
           animation={animationMedium}
           $group-listitem-hover={{
@@ -83,7 +85,7 @@ function HListItem({ uri, title }: { uri: string; title: string }) {
             width="100%"
             height={200}
             source={{
-              uri: `/bento/images/hlist/${uri}`,
+              uri: `${imagePrefix}/bento/images/hlist/${uri}`,
               width: 200,
               height: 200,
             }}
@@ -93,20 +95,20 @@ function HListItem({ uri, title }: { uri: string; title: string }) {
         <View
           position="absolute"
           animation={animationMedium}
-          bottom={0}
-          left={0}
-          right={0}
-          paddingVertical="$4"
-          backgroundColor="rgba(0,0,0,0.25)"
+          b={0}
+          l={0}
+          r={0}
+          py="$4"
+          bg="rgba(0,0,0,0.25)"
           $group-listitem-hover={{
-            backgroundColor: 'rgba(0,0,0,0.5)',
+            bg: 'rgba(0,0,0,0.5)',
           }}
         >
           <Text
             animation={animationSlow}
             color="#fff"
-            marginVertical="auto"
-            alignSelf="center"
+            my="auto"
+            self="center"
             fontWeight={600}
             y={0}
             textShadowColor="$shadowColor"
@@ -134,14 +136,14 @@ const HListFrame = styled(View, {
   height: 200,
   borderWidth: 1,
   borderColor: '$color3',
-  borderRadius: '$10',
-  backgroundColor: '$background',
+  rounded: '$10',
+  bg: '$background',
   shadowColor: '$shadowColor',
   shadowRadius: 3,
 
   hoverStyle: {
     scale: 1.05,
-    borderRadius: '$11',
+    rounded: '$11',
     shadowColor: '$shadowColor',
     shadowRadius: 20,
   },
@@ -150,10 +152,10 @@ const HListFrame = styled(View, {
 const HListInner = styled(View, {
   width: 200,
   height: 200,
-  ov: 'hidden',
-  borderRadius: '$10',
+  overflow: 'hidden',
+  rounded: '$10',
 
   hoverStyle: {
-    borderRadius: '$11',
+    rounded: '$11',
   },
 })

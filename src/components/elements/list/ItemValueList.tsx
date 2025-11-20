@@ -59,25 +59,25 @@ ItemValueList.fileName = 'ItemValueList'
 const Row = ({ item }: { item: (typeof data)[0] }) => {
   return (
     <View
-      justifyContent="space-between"
-      alignItems="center"
+      justify="space-between"
+      items="center"
       flexDirection="row"
       $group-window-xs={{
         flexDirection: 'column',
-        alignItems: 'flex-start',
+        items: 'flex-start',
       }}
     >
       <SizeableText
         size="$4"
         $group-window-xs={{
-          color: '$gray11',
+          color: '$color11',
         }}
       >
         {item.title}
       </SizeableText>
       <SizeableText
         size="$4"
-        color="$gray11"
+        color="$color11"
         $group-window-xs={{
           color: '$color',
         }}
