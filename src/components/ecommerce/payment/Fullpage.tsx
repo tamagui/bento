@@ -30,7 +30,7 @@ import { useGroupMedia } from '../../hooks/useGroupMedia'
 import { IconCenterButton } from '../../animation/buttons/IconCenterButton'
 import { Input } from '../../forms/inputs/components/inputsParts'
 
-const bagImages = ['bag1.jpg', 'bag2.jpg', 'bag3.webp', 'bag4.webp']
+const bagImages = ['bag1.webp', 'bag2.webp', 'bag3.webp', 'bag4.webp']
 const bagNames = [
   'Leather Bag',
   'Canvas Bag',
@@ -46,7 +46,7 @@ const bagNames = [
 const stockState = ['In stock', 'Out of stock', 'Available soon']
 
 const StyledText = styled(Text, {
-  color: '$gray10',
+  color: '$color10',
   fontSize: '$4',
   lineHeight: '$4',
 })
@@ -87,7 +87,7 @@ const getStockStateColor = (stockState: string) => {
     case 'Out of stock':
       return '$red10'
     default:
-      return '$gray10'
+      return '$color10'
   }
 }
 
@@ -138,12 +138,12 @@ const CartTotal = ({ items }: { items: Items }) => {
   return (
     <View
       flexDirection="column"
-      borderRadius={5}
+      rounded={5}
       width="100%"
-      backgroundColor="$color1"
+      bg="$color1"
       $gtSm={{
-        paddingHorizontal: '$7',
-        paddingBottom: '$7',
+        px: '$7',
+        pb: '$7',
       }}
       gap="$4"
     >
@@ -151,14 +151,14 @@ const CartTotal = ({ items }: { items: Items }) => {
 
       <View flexDirection="column" gap="$4">
         <View flexDirection="column" gap="$4">
-          <Input size="$4" minWidth="100%">
+          <Input size="$4" minW="100%">
             <Input.Box>
               <Input.Section>
                 <Input.Icon>
                   <Ticket />
                 </Input.Icon>
                 <Input.Area
-                  paddingLeft={0}
+                  pl={0}
                   focusStyle={{
                     outlineOffset: 1,
                   }}
@@ -176,7 +176,7 @@ const CartTotal = ({ items }: { items: Items }) => {
 
         <Separator borderStyle="dashed" />
 
-        <View flexDirection="row" justifyContent="space-between">
+        <View flexDirection="row" justify="space-between">
           <StyledText fontSize="$5" lineHeight="$5">
             Subtotal
           </StyledText>
@@ -189,34 +189,34 @@ const CartTotal = ({ items }: { items: Items }) => {
             </StyledText>
           </View>
         </View>
-        <View flexDirection="row" justifyContent="space-between">
-          <View flexDirection="row" alignItems="center" gap="$2">
-            <PiggyBank size="$1" color="$gray10" />
+        <View flexDirection="row" justify="space-between">
+          <View flexDirection="row" items="center" gap="$2">
+            <PiggyBank size="$1" color="$color10" />
             <StyledText>Saving</StyledText>
           </View>
           <StyledText>
             {subtotalSavingsPercentage}% ${subtotalSavings}
           </StyledText>
         </View>
-        <View flexDirection="row" justifyContent="space-between">
-          <View flexDirection="row" alignItems="center" gap="$2">
-            <Truck size="$1" color="$gray10" />
+        <View flexDirection="row" justify="space-between">
+          <View flexDirection="row" items="center" gap="$2">
+            <Truck size="$1" color="$color10" />
             <StyledText>Delivery</StyledText>
           </View>
           <StyledText>Free</StyledText>
         </View>
-        <View flexDirection="row" justifyContent="space-between">
-          <View flexDirection="row" alignItems="center" gap="$2">
-            <Ticket size="$1" color="$gray10" />
+        <View flexDirection="row" justify="space-between">
+          <View flexDirection="row" items="center" gap="$2">
+            <Ticket size="$1" color="$color10" />
             <StyledText>Discount</StyledText>
           </View>
           <StyledText>
             {promoDiscount * 100}% -${savingPriceWithPromoDiscount}
           </StyledText>
         </View>
-        <View flexDirection="row" justifyContent="space-between">
-          <View flexDirection="row" alignItems="center" gap="$2">
-            <Coins size="$1" color="$gray10" />
+        <View flexDirection="row" justify="space-between">
+          <View flexDirection="row" items="center" gap="$2">
+            <Coins size="$1" color="$color10" />
             <StyledText>Taxes</StyledText>
           </View>
           <StyledText>
@@ -227,8 +227,8 @@ const CartTotal = ({ items }: { items: Items }) => {
 
       <Separator borderStyle="dashed" />
 
-      <View flexDirection="row" justifyContent="space-between">
-        <View flexDirection="row" alignItems="center" gap="$2">
+      <View flexDirection="row" justify="space-between">
+        <View flexDirection="row" items="center" gap="$2">
           <Receipt size="$1.5" />
           <StyledText fontSize="$5" lineHeight="$5" color="$color">
             Total
@@ -239,7 +239,7 @@ const CartTotal = ({ items }: { items: Items }) => {
         </StyledText>
       </View>
 
-      <View gap="$3" marginTop="$4">
+      <View gap="$3" mt="$4">
         <Button theme="blue">
           <Button.Text>Proceed to checkout</Button.Text>
         </Button>
@@ -269,19 +269,19 @@ export function Fullpage() {
 
   return (
     <View
-      $gtMd={{ padding: '$6' }}
+      $gtMd={{ p: '$6' }}
       flexDirection="column"
-      maxHeight={910}
+      maxH={910}
       height="100%"
       width="100%"
     >
       <View flexDirection="column" gap="$3">
-        <View flexDirection="row" justifyContent="space-between">
+        <View flexDirection="row" justify="space-between">
           <H3>Cart</H3>
 
           <Dialog modal>
             <Dialog.Trigger asChild>
-              <Button theme="blue_active" size="$3" iconAfter={ShoppingBag}>
+              <Button theme="blue" size="$3" iconAfter={ShoppingBag}>
                 Checkout
               </Button>
             </Dialog.Trigger>
@@ -299,7 +299,7 @@ export function Fullpage() {
                   exitStyle={{ opacity: 0 }}
                 />
                 <Dialog.Sheet.Handle />
-                <Dialog.Sheet.Frame padding="$4" gap="$4">
+                <Dialog.Sheet.Frame p="$4" gap="$4">
                   <Dialog.Adapt.Contents />
                 </Dialog.Sheet.Frame>
               </Dialog.Sheet>
@@ -313,21 +313,17 @@ export function Fullpage() {
                 enterStyle={{ opacity: 0 }}
                 exitStyle={{ opacity: 0 }}
               />
-              <Dialog.Content
-                borderWidth={2}
-                borderColor="$borderColor"
-                borderRadius={15}
-              >
+              <Dialog.Content borderWidth={2} borderColor="$borderColor" rounded={15}>
                 <Dialog.Title>
                   <View
                     $gtMd={{
-                      paddingHorizontal: '$7',
+                      px: '$7',
                     }}
-                    paddingTop="$7"
+                    pt="$7"
                     gap="$4"
                     flexDirection="row"
-                    justifyContent="space-between"
-                    alignItems="center"
+                    justify="space-between"
+                    items="center"
                   >
                     <Text flex={1} fontSize="$6" fontWeight="bold" color="$color">
                       Checkout
@@ -343,8 +339,8 @@ export function Fullpage() {
                   <Dialog.Close asChild>
                     <Button
                       position="absolute"
-                      top="$3"
-                      right="$3"
+                      t="$3"
+                      r="$3"
                       size="$2"
                       circular
                       icon={X}
@@ -361,20 +357,20 @@ export function Fullpage() {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          minWidth: '100%',
+          minW: '100%',
           flexDirection: 'column',
           gap: sm ? '$4' : '$0',
-          paddingBottom: sm ? 300 : 48,
-          paddingTop: '$4',
+          pb: sm ? 300 : 48,
+          pt: '$4',
         }}
         $group-window-gtSm={{
           flex: 3,
         }}
       >
         {items.map((item, index) => (
-          <View key={item.id} marginBottom="$2">
+          <View key={item.id} mb="$2">
             <Item item={item} />
-            {!sm && index !== items.length - 1 && <Separator marginVertical="$4" />}
+            {!sm && index !== items.length - 1 && <Separator my="$4" />}
           </View>
         ))}
       </ScrollView>
@@ -403,35 +399,28 @@ const Item = ({ item }: { item: Items[number] }) => {
       gap="$6"
       $group-window-sm={{
         gap: '$3',
-        paddingBottom: '$4',
+        pb: '$4',
         borderWidth: 1,
         borderColor: '$borderColor',
-        borderRadius: 15,
+        rounded: 15,
       }}
       onLayout={onLayout}
     >
       <View
-        flexGrow={sm ? 1 : 0}
+        grow={sm ? 1 : 0}
         flexBasis={125}
         gap="$4"
         flexDirection="column"
-        borderRadius="$4"
+        rounded="$4"
       >
-        <View
-          flexDirection="row"
-          gap="$2"
-          position="absolute"
-          zIndex={1000}
-          t="$2"
-          r="$2"
-        >
+        <View flexDirection="row" gap="$2" position="absolute" z={1000} t="$2" r="$2">
           <Button
             id="add-wishlist"
             circular
             size="$2"
             icon={<Heart color={wishlist ? '$red10' : undefined} />}
             $group-window-sm={{ size: '$3' }}
-            theme={wishlist ? 'red_active' : 'red_alt1'}
+            theme={wishlist ? 'red' : 'accent'}
             onPress={() => setWishlist(!wishlist)}
           />
 
@@ -442,21 +431,21 @@ const Item = ({ item }: { item: Items[number] }) => {
               size="$3"
               icon={<Trash color="$red10" />}
               scaleIcon={1.1}
-              theme="red_alt1"
+              theme="light_red"
             />
           )}
         </View>
 
         <Image
           borderRadius={10}
-          backgroundColor="$color1"
+          bg="$color1"
           objectFit="cover"
           height={150}
           $platform-native={{
-            minWidth: layoutWidth,
+            minW: layoutWidth,
           }}
           $group-window-gtMd={{
-            minWidth: 'inherit',
+            minW: 'inherit',
           }}
           source={{ uri: item.image }}
         />
@@ -465,24 +454,24 @@ const Item = ({ item }: { item: Items[number] }) => {
       <View
         flex={1}
         flexBasis={250}
-        alignItems="flex-start"
-        justifyContent="center"
+        items="flex-start"
+        justify="center"
         gap="$2"
         $group-window-sm={{
-          paddingHorizontal: '$4',
+          px: '$4',
           gap: '$4',
         }}
         $group-window-xs={{
-          paddingHorizontal: '$4',
+          px: '$4',
           gap: '$2',
         }}
       >
         <View
           flexDirection="row"
-          alignItems="center"
+          items="center"
           gap="$2"
           $group-window-xs={{
-            justifyContent: 'space-between',
+            justify: 'space-between',
             width: '100%',
           }}
         >
@@ -507,7 +496,7 @@ const Item = ({ item }: { item: Items[number] }) => {
             <Text color={getStockStateColor(item.stockState)} fontSize="$3">
               {item.stockState}
             </Text>
-            <Separator vertical marginVertical="$2" borderColor="$gray10" />
+            <Separator vertical my="$2" borderColor="$color10" />
             <Text color="$red10" fontSize="$3" lineHeight="$3">
               Saving {Math.round(item.discount * 100)}%
             </Text>
@@ -516,10 +505,10 @@ const Item = ({ item }: { item: Items[number] }) => {
 
         <View
           flexDirection="row"
-          alignItems="center"
+          items="center"
           gap="$2"
           $group-window-xs={{
-            justifyContent: 'space-between',
+            justify: 'space-between',
             width: '100%',
           }}
         >
@@ -548,30 +537,30 @@ const Item = ({ item }: { item: Items[number] }) => {
         <Button
           id={'remove-product' + item.id}
           size="$3"
-          margin="$4"
+          m="$4"
           circular
-          icon={<Trash color="$gray10" />}
+          icon={<Trash color="$color10" />}
           scaleIcon={1.2}
           theme="red"
-          backgroundColor="transparent"
+          bg="transparent"
         />
       )}
 
       <View
         flexDirection="column"
-        alignItems={sm ? 'center' : 'flex-end'}
-        justifyContent="center"
+        items={sm ? 'center' : 'flex-end'}
+        justify="center"
         gap="$5"
         $group-window-sm={{
           width: '100%',
-          paddingHorizontal: '$4',
+          px: '$4',
         }}
         $group-window-gtSm={{
-          paddingRight: '$4',
+          pr: '$4',
         }}
       >
         {gtSm && (
-          <View flexDirection="column" alignItems="flex-end">
+          <View flexDirection="column" items="flex-end">
             <Text
               textDecorationLine="line-through"
               color="$color10"
@@ -589,8 +578,8 @@ const Item = ({ item }: { item: Items[number] }) => {
 
         <View
           flexDirection="row"
-          alignItems="center"
-          justifyContent="space-between"
+          items="center"
+          justify="space-between"
           gap="$4"
           $group-window-sm={{
             width: '100%',
@@ -618,12 +607,12 @@ const Item = ({ item }: { item: Items[number] }) => {
               id={'remove-product' + item.id}
               size="$3"
               circular
-              icon={<Trash color="$gray10" />}
+              icon={<Trash color="$color10" />}
               scaleIcon={1.2}
               theme="red"
-              backgroundColor="transparent"
+              bg="transparent"
               $group-window-sm={{
-                borderColor: '$gray10',
+                borderColor: '$color10',
               }}
             />
           )}
@@ -640,26 +629,26 @@ interface ItemCounterProps {
 
 const ItemCounter: React.FC<ItemCounterProps> = ({ count, setCount }) => {
   return (
-    <XGroup marginRight="$6">
+    <XGroup mr="$6">
       <Button
-        theme="alt2"
         size="$3"
+        bg="transparent"
         icon={Minus}
         onPress={() => setCount(count > 1 ? count - 1 : 1)}
       />
       <View
         flexBasis={40}
-        alignItems="center"
-        justifyContent="center"
-        borderRadius="$4"
+        items="center"
+        justify="center"
+        rounded="$4"
         borderWidth={1}
         borderColor="$borderColor"
       >
         <StyledText>{count}</StyledText>
       </View>
       <Button
-        theme="alt2"
         size="$3"
+        bg="transparent"
         icon={Plus}
         onPress={() => setCount(count < 10 ? count + 1 : 10)}
       />
