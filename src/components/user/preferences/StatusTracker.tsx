@@ -61,33 +61,33 @@ export function StatusTracker() {
   return (
     <View
       flexDirection="column"
-      borderRadius={20}
-      padding="$3"
+      rounded={20}
+      p="$3"
       $group-window-sm={{
-        paddingHorizontal: '$4',
-        marginVertical: '$6',
+        px: '$4',
+        my: '$6',
       }}
       // minWidth="100%"
       $group-window-gtSm={{
-        minWidth: 400,
+        minW: 400,
       }}
-      maxWidth="100%"
+      maxW="100%"
       gap="$3"
       borderColor="$color5"
       borderWidth={1}
     >
-      <View flexDirection="row" alignItems="center" justifyContent="space-between">
-        <View alignItems="center" flexDirection="row" theme="alt1" gap="$3">
+      <View flexDirection="row" items="center" justify="space-between">
+        <View flexDirection="row" items="center" theme="accent" gap="$3">
           <Laptop2 size={16} />
           <SizableText size="$4">Status Tracker</SizableText>
         </View>
-        <Button chromeless size="$2" bordered borderRadius="$3">
+        <Button chromeless size="$2" bordered rounded="$3">
           <Button.Text>See All</Button.Text>
         </Button>
       </View>
       <Separator />
-      <View flexDirection="column" gap="$2" paddingBottom={'$2'}>
-        <SizableText size="$3" theme="alt1" fontWeight="200">
+      <View flexDirection="column" gap="$2" pb="$2">
+        <SizableText size="$3" theme="accent" fontWeight="200">
           Absent
         </SizableText>
         {data.absent.map((user, index) => (
@@ -96,7 +96,7 @@ export function StatusTracker() {
       </View>
       <Separator />
       <View flexDirection="column" gap="$2">
-        <SizableText size="$3" theme="alt1" fontWeight="200">
+        <SizableText size="$3" theme="accent" fontWeight="200">
           Away
         </SizableText>
         <View flexDirection="column" gap="$3">
@@ -117,9 +117,9 @@ function User({
 }: { type: keyof typeof data; user: (typeof data)['absent'][0] }) {
   const { name, replacedBy, avatar, job, min } = user
   return (
-    <View flexDirection="row" alignItems="center" gap="$3">
+    <View flexDirection="row" items="center" gap="$3">
       <View>
-        <Avatar borderRadius="$2" size="$3" circular>
+        <Avatar rounded="$2" size="$3" circular>
           <Avatar.Image accessibilityLabel="Cam" src={avatar} />
           <Avatar.Fallback backgroundColor="$background" />
         </Avatar>
@@ -127,12 +127,12 @@ function User({
           width={10}
           height={10}
           position="absolute"
-          bottom="$1.5"
-          right="$-1"
+          b="$1.5"
+          r="$-1"
           borderWidth="$1"
           borderColor="$color1"
-          zIndex={10}
-          backgroundColor="$orange8"
+          z={10}
+          bg="$yellow8"
         />
       </View>
       <View flexDirection="column">
@@ -144,19 +144,19 @@ function User({
         </SizableText>
       </View>
       <View
-        backgroundColor="$color5"
-        borderRadius={100}
-        paddingHorizontal="$2"
-        paddingVertical={6}
-        paddingRight={10}
+        bg="$color5"
+        rounded={100}
+        px="$2"
+        py={6}
+        pr={10}
         flexDirection="row"
-        marginLeft="auto"
-        justifyContent="center"
-        alignItems="center"
+        ml="auto"
+        justify="center"
+        items="center"
         gap="$1.5"
-        theme={type === 'absent' ? 'gray' : 'orange'}
+        theme={type === 'absent' ? 'accent' : 'yellow'}
       >
-        <Theme name="alt2">
+        <Theme name="accent">
           {type === 'absent' ? (
             <>
               <MinusCircle size={14} />
