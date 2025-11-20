@@ -64,7 +64,7 @@ function SlideOut({
               overshootClamping: true,
             },
           }}
-          borderRadius="$8"
+          rounded="$8"
           overflow="hidden"
           exitStyle={{ opacity: 0, [axis.axis]: axis.value }}
           borderWidth={2}
@@ -72,42 +72,24 @@ function SlideOut({
         >
           <View width={312} gap="$6">
             <View p="$3.5" position="relative">
-              <XStack alignItems="center" justifyContent="space-between">
-                <Text fontWeight="500" fontSize="$3" fontFamily="$mono" color="$color10">
+              <XStack items="center" justify="space-between">
+                <Text fontWeight="500" fontSize="$3" color="$color10">
                   Tamagui Debit
                 </Text>
 
                 <Image src="/avatar_pro.png" width={32} height={32} />
               </XStack>
 
-              <Text
-                pt="$4"
-                fontWeight="600"
-                fontSize="$8"
-                fontFamily="$mono"
-                color="$color"
-              >
+              <Text pt="$4" fontWeight="600" fontSize="$8" color="$color">
                 ···· ···· ···· 0225
               </Text>
             </View>
 
-            <XStack backgroundColor="$background" p="$3.5" themeInverse>
-              <Text
-                flex={1}
-                fontWeight="500"
-                fontSize="$2"
-                fontFamily="$mono"
-                color="$color11"
-              >
+            <XStack bg="$background" p="$3.5" themeInverse>
+              <Text flex={1} fontWeight="500" fontSize="$2" color="$color11">
                 Nate Wienert
               </Text>
-              <Text
-                textAlign="right"
-                fontWeight="500"
-                fontSize="$2"
-                fontFamily="$mono"
-                color="$color12"
-              >
+              <Text text="right" fontWeight="500" fontSize="$2" color="$color12">
                 03/26
               </Text>
             </XStack>
@@ -122,7 +104,7 @@ function SlideOut({
 export function SlideOutDemo() {
   const [direction, setDirection] = useState<'left' | 'right' | 'top' | 'bottom'>('left')
   return (
-    <View maxWidth="100%" gap="$6">
+    <View maxW="100%" gap="$6">
       <SlideOut key={direction} direction={direction} />
       <DirectionSlide direction={direction} setDirection={setDirection} />
     </View>
