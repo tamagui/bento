@@ -31,7 +31,7 @@ const CustomTabBar = View.styleable<CustomTabBarProps>(
     return (
       <View
         flexDirection="row"
-        maxWidth="100%"
+        maxW="100%"
         onLayout={(e) => {
           const width = e.nativeEvent.layout.width
           // Note: you should remove the following line in your code
@@ -76,9 +76,9 @@ const CustomTabBar = View.styleable<CustomTabBarProps>(
               flex={1}
               width={100}
               height={50}
-              flexShrink={1}
-              justifyContent="center"
-              alignItems="center"
+              shrink={1}
+              justify="center"
+              items="center"
               cursor="pointer"
               key={index}
               onPress={onPress}
@@ -91,13 +91,13 @@ const CustomTabBar = View.styleable<CustomTabBarProps>(
                 },
               })}
             >
-              <Text color={isFocused ? '$color10' : '$gray10Light'}>{label}</Text>
+              <Text color={isFocused ? '$color10' : '$color7'}>{label}</Text>
             </Button>
           )
         })}
         <View
-          bottom={0}
-          left={0}
+          b={0}
+          l={0}
           borderWidth={3}
           width={tabWidth}
           borderColor="$color5"
@@ -106,8 +106,8 @@ const CustomTabBar = View.styleable<CustomTabBarProps>(
           position="absolute"
         />
         <View
-          bottom={0}
-          left={0}
+          b={0}
+          l={0}
           borderWidth={3}
           width={tabWidth}
           borderColor="$color10"
@@ -148,27 +148,15 @@ export function Tabbar() {
   }
 
   return (
-    <View
-      flexDirection="column"
-      width="100%"
-      minHeight={610}
-      height="100%"
-      maxHeight="100%"
-    >
-      <View
-        flexDirection="column"
-        width="100%"
-        flex={9}
-        alignItems="center"
-        justifyContent="center"
-      >
+    <View flexDirection="column" width="100%" minH={610} height="100%" maxH="100%">
+      <View flexDirection="column" width="100%" flex={9} items="center" justify="center">
         <Text fontSize="$8" fontWeight="$8" lineHeight="$8">
           {state.routes[state.index].key}
         </Text>
       </View>
       <CustomTabBar
         theme="red"
-        alignSelf="center"
+        self="center"
         state={state}
         descriptors={descriptors}
         navigation={{
