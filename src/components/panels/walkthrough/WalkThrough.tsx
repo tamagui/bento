@@ -75,10 +75,10 @@ function Tour({
             <Popover.Trigger asChild>
               <Stack
                 key={stepNumber}
-                zIndex={showTour ? 2000 : 1}
+                z={showTour ? 2000 : 1}
                 position="absolute"
-                left={pageX}
-                top={pageY}
+                l={pageX}
+                t={pageY}
                 ref={itemRef}
               >
                 {children}
@@ -146,11 +146,11 @@ function WalkThroughImpl({
               exitStyle={{ opacity: 0 }}
               animation="bouncy"
               width="100%"
-              mih="100%"
+              minH="100%"
               fullscreen
               borderColor="#000"
               opacity={0.5}
-              zIndex={1000}
+              z={1000}
             />
           )}
         </AnimatePresence>
@@ -182,7 +182,7 @@ function Dialog({
   return (
     <ThemeableStack
       borderWidth={2}
-      backgroundColor="#fff"
+      bg="#fff"
       gap="$4"
       flexDirection="column"
       elevate

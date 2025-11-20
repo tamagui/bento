@@ -123,10 +123,10 @@ function WalkThroughComp({
               exitStyle={{ opacity: 0 }}
               animation="quick"
               width="100%"
-              mih="100%"
+              minH="100%"
               fullscreen
               borderColor="#000"
-              zIndex={1000}
+              z={1000}
               opacity={0.5}
             />
           )}
@@ -248,11 +248,11 @@ function Tour({
       <PortalItem hostName={PORTAL_WALKTHROUGH_HOST_NAME}>
         {dim && activeStep <= numberOfSteps && (
           <Stack
-            zIndex={showTour ? 2000 : -1000}
+            z={showTour ? 2000 : -1000}
             position="absolute"
             animation="quick"
-            left={pageX}
-            top={pageY}
+            l={pageX}
+            t={pageY}
             overflow="hidden"
             ref={absoluteItemRef}
             onLayout={measureAbsoluteDim}
@@ -292,10 +292,10 @@ function DialogContent({
   return (
     <ThemeableStack
       borderWidth={2}
-      backgroundColor="#fff"
+      bg="#fff"
       gap="$4"
       flexDirection="column"
-      padding="$4"
+      p="$4"
       elevate
       backgrounded
       radiused
@@ -323,7 +323,7 @@ function DialogContent({
 export function WalkThroughFluidDemo() {
   return (
     <WalkThrough numberOfSteps={2}>
-      <YStack gap="$4" padding={100} flex={1}>
+      <YStack gap="$4" p={100} flex={1}>
         <WalkThrough.Tour
           stepNumber={0}
           renderDialog={({ nextStep, prevStep, numberOfSteps }) => (
