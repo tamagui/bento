@@ -69,11 +69,11 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             backgroundColor="rgba(0,0,0,0.5)"
           />
           <AlertDialog.Content
-            padding="$4"
-            paddingTop="$3"
-            paddingBottom="$2"
-            backgroundColor="$color1"
-            borderRadius="$4"
+            p="$4"
+            pt="$3"
+            pb="$2"
+            bg="$color1"
+            rounded="$4"
             gap="$1"
             key="content"
             animation={[
@@ -94,9 +94,9 @@ const Alert = ({ children, ...rest }: AlertProps) => {
           >
             <View>
               <AlertDialog.Title size="$3">{title}</AlertDialog.Title>
-              <AlertDialog.Description theme="alt1">{message}</AlertDialog.Description>
+              <AlertDialog.Description theme="accent">{message}</AlertDialog.Description>
             </View>
-            <View flexDirection="row" gap="$4" justifyContent="flex-end">
+            <View flexDirection="row" gap="$4" justify="flex-end">
               {buttons.map((button, index) => {
                 const Base =
                   button.style === 'cancel' ? AlertDialog.Cancel : AlertDialog.Action

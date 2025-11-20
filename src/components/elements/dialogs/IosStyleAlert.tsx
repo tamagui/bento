@@ -1,15 +1,6 @@
-import {
-  AlertDialog,
-  AlertDialogContent,
-  Button,
-  Input,
-  Spacer,
-  View,
-  createContext,
-  useEvent,
-} from 'tamagui'
-import type { AlertDialogContentProps } from 'tamagui'
 import { useState } from 'react'
+import type { AlertDialogContentProps } from 'tamagui'
+import { AlertDialog, Button, Input, View, createContext, useEvent } from 'tamagui'
 
 type AlertButton = {
   title: string
@@ -83,11 +74,11 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             backgroundColor="rgba(0,0,0,0.5)"
           />
           <AlertDialog.Content
-            paddingHorizontal="$4"
-            paddingTop="$3"
-            paddingBottom={0}
-            borderRadius="$6"
-            backgroundColor="$gray1"
+            px="$4"
+            pt="$3"
+            pb={0}
+            rounded="$6"
+            bg="$color1"
             overflow="hidden"
             gap="$3"
             key="content"
@@ -109,30 +100,28 @@ const Alert = ({ children, ...rest }: AlertProps) => {
           >
             <View>
               <AlertDialog.Title
-                alignSelf="center"
+                self="center"
                 fontWeight="500"
                 fontSize={20}
                 letterSpacing={1}
               >
                 {title}
               </AlertDialog.Title>
-              <AlertDialog.Description alignSelf="center">
-                {message}
-              </AlertDialog.Description>
+              <AlertDialog.Description self="center">{message}</AlertDialog.Description>
             </View>
             {content}
             <View
               borderTopWidth={1}
               borderTopColor="$borderColor"
               flexDirection={buttons.length === 2 ? 'row' : 'column'}
-              marginHorizontal="$-6"
-              justifyContent="flex-start"
+              mx="$-6"
+              justify="flex-start"
             >
               {buttons.map((button, index) => {
                 const makeItVertical = buttons.length > 2
                 const Base =
                   button.style === 'cancel' ? AlertDialog.Cancel : AlertDialog.Action
-                const color = button.style === 'destructive' ? '$red10' : '$blue10'
+                const color = button.style === 'destructive' ? '$red10' : '$green10'
                 return (
                   <View
                     borderRightWidth={index === 0 && !makeItVertical ? 1 : 0}
@@ -147,17 +136,17 @@ const Alert = ({ children, ...rest }: AlertProps) => {
                     <Base asChild>
                       <Button
                         unstyled
-                        justifyContent="center"
-                        alignItems="center"
-                        padding="$3"
+                        justify="center"
+                        items="center"
+                        p="$3"
                         opacity={0.9}
                         focusStyle={{
                           opacity: 1,
-                          backgroundColor: '$color4',
+                          bg: '$color4',
                         }}
                         hoverStyle={{
                           opacity: 1,
-                          backgroundColor: '$color3',
+                          bg: '$color3',
                         }}
                         onPress={button.action}
                       >

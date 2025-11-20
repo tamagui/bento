@@ -70,10 +70,10 @@ const Alert = ({ children, ...rest }: AlertProps) => {
           />
           <AlertDialog.Content
             theme={theme}
-            padding="$3"
-            paddingHorizontal="$4"
-            backgroundColor="$gray1"
-            borderRadius="$8"
+            p="$3"
+            px="$4"
+            bg="$color1"
+            rounded="$8"
             gap="$3"
             key="content"
             animation={[
@@ -92,32 +92,26 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             }}
             {...rest}
           >
-            <View paddingBottom="$1" flexDirection="row" gap="$3">
+            <View pb="$1" flexDirection="row" gap="$3">
               {icon}
-              <View flexShrink={1}>
+              <View shrink={1}>
                 <AlertDialog.Title fontWeight="500" fontSize={20} letterSpacing={1}>
                   {title}
                 </AlertDialog.Title>
-                <AlertDialog.Description opacity={0.8} flexShrink={1}>
+                <AlertDialog.Description opacity={0.8} shrink={1}>
                   {message}
                 </AlertDialog.Description>
               </View>
             </View>
-            <Separator borderColor="$gray6" />
-            <View
-              flexDirection="row"
-              gap="$5"
-              justifyContent="flex-end"
-              alignItems="center"
-              paddingHorizontal="$2"
-            >
+            <Separator borderColor="$color6" />
+            <View flexDirection="row" gap="$5" justify="flex-end" items="center" px="$2">
               {buttons.map((button, index) => {
                 const Base =
                   button.style === 'cancel' ? AlertDialog.Cancel : AlertDialog.Action
                 const color = button.style === 'active' ? '$color10' : '$color'
                 return (
                   <Base key={index} asChild>
-                    <Button unstyled borderRadius={1000_000} onPress={button.action}>
+                    <Button unstyled rounded={1000_000} onPress={button.action}>
                       <Button.Text
                         opacity={0.8}
                         color={color}
