@@ -1,14 +1,12 @@
-import type { FormProps } from 'tamagui'
-import { AnimatePresence, Button, Form, H2, isWeb, RadioGroup, Spinner, View } from 'tamagui'
-import { Input, InputContext } from '../inputs/components/inputsParts'
-import { useState } from 'react'
-import { Eye, EyeOff, Info } from '@tamagui/lucide-icons'
-import { FormCard } from './components/layoutParts'
-import { z } from 'zod'
-import { H1 } from 'tamagui'
-import { SafeAreaView } from 'react-native'
-import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Eye, EyeOff, Info } from '@tamagui/lucide-icons'
+import { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { AnimatePresence, Button, Form, H1, H2, isWeb, RadioGroup, Spinner, View } from 'tamagui'
+import { z } from 'zod'
+import { Input, InputContext } from '../inputs/components/inputsParts'
+import { FormCard } from './components/layoutParts'
 
 type TextInputProps = {
   label: string
@@ -43,8 +41,8 @@ const TextInput = (props: TextInputProps) => {
       <AnimatePresence>
         {error && (
           <View
-            bottom="$-5"
-            left={0}
+            b="$-5"
+            l={0}
             position="absolute"
             gap="$2"
             flexDirection="row"
@@ -61,7 +59,7 @@ const TextInput = (props: TextInputProps) => {
               scaleY: 0.5,
             }}
           >
-            <Input.Icon padding={0}>
+            <Input.Icon p={0}>
               <Info />
             </Input.Icon>
             <Input.Info>{error}</Input.Info>
@@ -95,14 +93,14 @@ const PasswordInput = (props: PasswordInputProps) => {
           value={value}
         />
         <Input.Icon cursor="pointer" onPress={() => setShowPassword(!showPassword)}>
-          {showPassword ? <Eye color="$gray11" /> : <EyeOff color="$gray11" />}
+          {showPassword ? <Eye color='$color11' /> : <EyeOff color='$color11' />}
         </Input.Icon>
       </Input.Box>
       <AnimatePresence>
         {error && (
           <View
-            bottom="$-5"
-            left={0}
+            b="$-5"
+            l={0}
             position="absolute"
             gap="$2"
             flexDirection="row"
@@ -119,7 +117,7 @@ const PasswordInput = (props: PasswordInputProps) => {
               scaleY: 0.5,
             }}
           >
-            <Input.Icon padding={0}>
+            <Input.Icon p={0}>
               <Info />
             </Input.Icon>
             <Input.Info>{error}</Input.Info>
@@ -157,7 +155,7 @@ const MyRadio = (props: MyRadioProps) => {
         value={value}
       >
         {values.map(({ value, label, labelId }) => (
-          <View key={label} flexDirection="row" alignItems="center" gap="$3">
+          <View key={label} flexDirection="row" items="center" gap="$3">
             <RadioGroup.Item id={labelId} value={value}>
               <RadioGroup.Indicator />
             </RadioGroup.Item>
@@ -204,7 +202,7 @@ const TwoInput = (props: TwoInputProps) => {
     <View
       flexWrap="wrap"
       flexDirection="row"
-      justifyContent="space-between"
+      justify="space-between"
       columnGap="$4"
       rowGap="$5"
     >
@@ -213,9 +211,9 @@ const TwoInput = (props: TwoInputProps) => {
           theme: 'red',
         })}
         onBlur={onBlur}
-        f={1}
-        minWidth="100%"
-        $group-window-gtSm={{ flexBasis: 150, minWidth: 'inherit' }}
+        flex={1}
+        minW="100%"
+        $group-window-gtSm={{ flexBasis: 150, minW: 'inherit' }}
         animation="quickest"
         size={size}
       >
@@ -238,8 +236,8 @@ const TwoInput = (props: TwoInputProps) => {
         <AnimatePresence>
           {error?.firstInput && (
             <View
-              bottom="$-5"
-              left={0}
+              b="$-5"
+              l={0}
               position="absolute"
               gap="$2"
               flexDirection="row"
@@ -256,7 +254,7 @@ const TwoInput = (props: TwoInputProps) => {
                 scaleY: 0.5,
               }}
             >
-              <Input.Icon padding={0}>
+              <Input.Icon p={0}>
                 <Info />
               </Input.Icon>
               <Input.Info>{error.firstInput.message}</Input.Info>
@@ -269,7 +267,7 @@ const TwoInput = (props: TwoInputProps) => {
           theme: 'red',
         })}
         onBlur={onBlur}
-        f={1}
+        flex={1}
         flexBasis={150}
         size={size}
       >
@@ -292,8 +290,8 @@ const TwoInput = (props: TwoInputProps) => {
         <AnimatePresence>
           {error?.secondInput && (
             <View
-              bottom="$-5"
-              left={0}
+              b="$-5"
+              l={0}
               position="absolute"
               gap="$2"
               flexDirection="row"
@@ -310,7 +308,7 @@ const TwoInput = (props: TwoInputProps) => {
                 scaleY: 0.5,
               }}
             >
-              <Input.Icon padding={0}>
+              <Input.Icon   p={0}>
                 <Info />
               </Input.Icon>
               <Input.Info>{error.secondInput.message}</Input.Info>
@@ -387,12 +385,12 @@ export function SignupValidatedTsForm() {
           gap="$5"
           tag="form"
           $group-window-sm={{
-            paddingHorizontal: '$4',
-            paddingVertical: '$6',
+            px: '$4',
+            py: '$6',
           }}
         >
           <H1
-            alignSelf="center"
+            self="center"
             size="$8"
             $group-window-xs={{
               size: '$7',
@@ -520,9 +518,9 @@ export function SignupValidatedTsForm() {
             disabled={loading}
             onPress={handleSubmit(onSubmit)}
             cursor={loading ? 'progress' : 'pointer'}
-            alignSelf="flex-end"
+            self="flex-end"
             width={'100%'}
-            marginVertical="$4"
+            my="$4"
             iconAfter={
               <AnimatePresence>
                 {loading && (
@@ -533,7 +531,7 @@ export function SignupValidatedTsForm() {
                     opacity={1}
                     position="absolute"
                     scale={0.5}
-                    left={0}
+                    l={0}
                     x={100}
                     animation="quick"
                     enterStyle={{
@@ -553,7 +551,7 @@ export function SignupValidatedTsForm() {
               Sign Up
             </Button.Text>
           </Button>
-          {!isWeb && <SafeAreaView />}
+          {!isWeb && <SafeAreaView/>}
         </FormCard>
       </Form>
     </InputContext.Provider>

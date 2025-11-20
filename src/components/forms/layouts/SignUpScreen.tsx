@@ -1,5 +1,6 @@
 import { Camera, Check, Eye, EyeOff } from '@tamagui/lucide-icons'
 import { useId, useState } from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import {
   AnimatePresence,
   Button,
@@ -12,12 +13,11 @@ import {
   Switch,
   Theme,
   View,
+  isWeb,
   useEvent,
 } from 'tamagui'
-import { FormCard } from './components/layoutParts'
 import { Input } from '../inputs/components/inputsParts'
-import { isWeb } from 'tamagui'
-import { SafeAreaView } from 'react-native'
+import { FormCard } from './components/layoutParts'
 
 /** simulate signin */
 function useSignIn() {
@@ -43,16 +43,16 @@ export function SignUpScreen() {
     <FormCard>
       <View
         flexDirection="column"
-        alignItems="stretch"
-        maxWidth="100%"
+        items="stretch"
+        maxW="100%"
         width={450}
         gap="$4"
         $group-window-xs={{
           gap: '$3',
-          paddingVertical: '$6',
-          paddingHorizontal: '$5',
+          py: '$6',
+          px: '$5',
         }}
-        $xs={{ paddingVertical: '$4' }}
+        $xs={{ py: '$4' }}
       >
         <H1 size="$9" fontWeight="bold">
           Sign Up
@@ -62,12 +62,12 @@ export function SignUpScreen() {
             flexDirection="column"
             flex={1}
             gap="$1"
-            minWidth="100%"
-            $group-window-gtXs={{ minWidth: 'inherit' }}
+            minW="100%"
+            $group-window-gtXs={{ minW: 'inherit' }}
           >
             <Input size="$4">
               <Input.Label htmlFor={uniqueId + 'first-name'}>First Name</Input.Label>
-              <Input.Box minWidth="100%">
+              <Input.Box minW="100%">
                 <Input.Area id={uniqueId + 'first-name'} placeholder="First name" />
               </Input.Box>
             </Input>
@@ -90,7 +90,7 @@ export function SignUpScreen() {
               placeholder="Password"
             />
             <Input.Icon cursor="pointer" onPress={() => setShowPassword(!showPassword)}>
-              {showPassword ? <Eye color="$gray11" /> : <EyeOff color="$gray11" />}
+              {showPassword ? <Eye color='$color11' /> : <EyeOff color='$color11' />}
             </Input.Icon>
           </Input.Box>
         </Input>
@@ -137,23 +137,23 @@ export function SignUpScreen() {
           borderColor="$borderColor"
           borderStyle="dotted"
           flexDirection="column"
-          alignItems="center"
+          items="center"
           gap="$2"
-          paddingVertical="$6"
-          borderRadius="$6"
+          py="$6"
+          rounded="$6"
         >
           <View
-            focusable
-            backgroundColor="$background"
+            tabIndex={0}
+            bg="$background"
             borderColor="$borderColor"
             borderWidth={1}
-            borderRadius={10}
+            rounded={10}
             focusStyle={{
-              backgroundColor: '$backgroundFocus',
+              bg: '$backgroundFocus',
               borderColor: '$borderColorFocus',
             }}
             hoverStyle={{
-              backgroundColor: '$backgroundHover',
+              bg: '$backgroundHover',
               borderColor: '$borderColorHover',
             }}
             cursor="pointer"
@@ -161,15 +161,15 @@ export function SignUpScreen() {
             height="$8"
             width="$8"
             id={uniqueId + 'add-pic'}
-            theme="alt1"
+            theme='accent'
           >
             <Stack
-              theme="alt1"
+              theme='accent'
               position="absolute"
               width="100%"
               height="100%"
-              justifyContent="center"
-              alignItems="center"
+              justify="center"
+              items="center"
             >
               <Camera />
             </Stack>
@@ -180,8 +180,8 @@ export function SignUpScreen() {
           </Label>
         </View>
         <VerticalCheckboxes />
-        <View flexDirection="row" alignItems="center">
-          <Label theme="alt1" htmlFor={uniqueId + 'notf'}>
+        <View flexDirection="row" items="center">
+          <Label theme='accent' htmlFor={uniqueId + 'notf'}>
             Receive notifications
           </Label>
           <Switch
@@ -199,11 +199,11 @@ export function SignUpScreen() {
             disabled={status === 'loading'}
             onPress={signUp}
             cursor={status === 'loading' ? 'progress' : 'pointer'}
-            alignSelf="flex-end"
-            minWidth="100%"
+            self="flex-end"
+            minW="100%"
             $gtSm={{
-              maxWidth: '$12',
-              minWidth: '$12',
+              maxW: '$12',
+              minW: '$12',
             }}
             iconAfter={
               <AnimatePresence>
@@ -215,7 +215,7 @@ export function SignUpScreen() {
                     opacity={1}
                     position="absolute"
                     scale={0.5}
-                    left={110}
+                    l={110}
                     animation="quick"
                     enterStyle={{
                       opacity: 0,
@@ -266,7 +266,7 @@ export function VerticalCheckboxes() {
     <View flexDirection="column" gap="$1">
       <Input.Label htmlFor={'customize-content'}>Customize content</Input.Label>
       <View flexDirection="column" gap="$1">
-        <SizableText size="$4" fontWeight="300" col="$gray10">
+        <SizableText size="$4" fontWeight="300" color='$color10'>
           Select type of user:
         </SizableText>
         <View flexDirection="column">
@@ -298,7 +298,7 @@ function Item({
 }) {
   const onCheckedChange = useEvent(() => toggleValue(id))
   return (
-    <View flexDirection="row" width={150} alignItems="center" gap="$3">
+    <View flexDirection="row" width={150} items="center" gap="$3">
       <Checkbox id={id} checked={checked} onCheckedChange={onCheckedChange}>
         <Checkbox.Indicator>
           <Check />
