@@ -127,6 +127,7 @@ export function TopNavBarWithLogo() {
     setTriggerOpen(false)
   })
   const { sm } = useGroupMedia('window')
+
   return (
     <View
       flexDirection="column"
@@ -137,25 +138,19 @@ export function TopNavBarWithLogo() {
       <View
         flexDirection="row"
         themeInverse
-        padding="$2"
-        minWidth="100%"
+        p="$2"
+        minW="100%"
         tag="nav"
-        alignItems="center"
-        justifyContent="space-between"
-        backgroundColor="$background"
+        items="center"
+        justify="space-between"
+        bg="$background"
       >
         {sm ? (
           <SideBar />
         ) : (
-          <View
-            flexDirection="row"
-            padding="$2"
-            alignItems="center"
-            backgroundColor="#fff"
-            borderRadius={1000_000}
-          >
+          <View flexDirection="row" p="$2" items="center" bg="#fff" rounded={1000_000}>
             <Image
-              resizeMode="contain"
+              objectFit="contain"
               width={25}
               height={25}
               $group-window-sm={{ width: 15, height: 15 }}
@@ -170,7 +165,7 @@ export function TopNavBarWithLogo() {
               <AnimatePresence>
                 {intentAt && (
                   <TabsRovingIndicator
-                    borderRadius="$4"
+                    rounded="$4"
                     width={intentAt.width}
                     height={intentAt.height}
                     x={intentAt.x}
@@ -181,8 +176,8 @@ export function TopNavBarWithLogo() {
               <AnimatePresence>
                 {activeAt && (
                   <TabsRovingIndicator
-                    borderRadius="$4"
-                    theme="active"
+                    rounded="$4"
+                    theme="accent"
                     width={activeAt.width}
                     height={activeAt.height}
                     x={activeAt.x}
@@ -218,8 +213,8 @@ export function TopNavBarWithLogo() {
             </View>
           </Tabs>
         )}
-        <View flexDirection="row" alignItems="center" gap="$3">
-          <Button theme="alt1" circular chromeless padding={0} size="$3">
+        <View flexDirection="row" items="center" gap="$3">
+          <Button theme="accent" circular chromeless p={0} size="$3">
             <Button.Icon>
               <Bell size="$1" />
             </Button.Icon>
@@ -231,7 +226,7 @@ export function TopNavBarWithLogo() {
           />
         </View>
       </View>
-      {!sm && <View flexDirection="row" backgroundColor="$background" height="100%" />}
+      {!sm && <View flexDirection="row" bg="$background" height="100%" />}
     </View>
   )
 }
@@ -264,15 +259,15 @@ function ProfileDropdown({
               aria-label="user photo"
               src="https://i.pravatar.cc/123"
             />
-            <Avatar.Fallback backgroundColor="$gray10" />
+            <Avatar.Fallback bg="$color10" />
           </Avatar>
         </Button>
       </PopoverTrigger>
       <Popover.Content
         borderWidth={1}
         borderColor="$borderColor"
-        backgroundColor="$color1"
-        padding={0}
+        bg="$color1"
+        p={0}
         enterStyle={{ y: -10, opacity: 0 }}
         exitStyle={{ y: -10, opacity: 0 }}
         animation={[
@@ -301,22 +296,22 @@ function ProfileDropdown({
 }
 
 const DropDownItem = styled(View, {
-  backgroundColor: '$background',
+  bg: '$background',
   width: '100%',
   hoverStyle: {
-    backgroundColor: '$backgroundHover',
+    bg: '$backgroundHover',
   },
   pressStyle: {
-    backgroundColor: '$backgroundPress',
+    bg: '$backgroundPress',
   },
   cursor: 'pointer',
-  paddingHorizontal: '$4',
-  paddingVertical: '$2',
-  alignItems: 'center',
-  justifyContent: 'center',
+  px: '$4',
+  py: '$2',
+  items: 'center',
+  justify: 'center',
   '$group-window-xs': {
-    paddingHorizontal: '$2',
-    paddingVertical: '$1',
+    px: '$2',
+    py: '$1',
   },
 })
 
@@ -334,14 +329,7 @@ const DropDownText = styled(Text, {
 const NavLink = View.styleable<{ href: string }>(
   ({ children, href = '#', ...rest }, ref) => {
     return (
-      <View
-        ref={ref}
-        borderRadius={5}
-        paddingVertical="$2"
-        alignItems="center"
-        justifyContent="center"
-        {...rest}
-      >
+      <View ref={ref} rounded={5} py="$2" items="center" justify="center" {...rest}>
         <Anchor href={href}>
           <Text
             opacity={0.9}
@@ -394,12 +382,7 @@ function SideBarContent({
   const { height, width } = useContainerDim('window')
 
   return (
-    <View
-      flexDirection="column"
-      position="absolute"
-      marginHorizontal={-12}
-      marginVertical="$-2"
-    >
+    <View flexDirection="column" position="absolute" mx={-12} my="$-2">
       <Drawer open={open} onOpenChange={onOpenChange}>
         <Drawer.Portal>
           <Drawer.Overlay
@@ -411,29 +394,29 @@ function SideBarContent({
           />
           <Drawer.Swipeable>
             <Drawer.Content
-              paddingVertical="$2"
+              py="$2"
               height={height}
               width={240}
-              alignItems="flex-start"
-              justifyContent="flex-start"
-              backgroundColor="$background"
+              items="flex-start"
+              justify="flex-start"
+              bg="$background"
               x={-30}
-              paddingLeft={30}
+              pl={30}
               gap="$4"
               enterStyle={{ x: -240 }}
               exitStyle={{ x: -260 }}
             >
               <View
                 flexDirection="row"
-                padding="$2"
-                marginTop="$2"
-                alignItems="center"
-                backgroundColor="#fff"
-                borderRadius={1000_000}
-                marginLeft="$5"
+                p="$2"
+                mt="$2"
+                items="center"
+                bg="#fff"
+                rounded={1000_000}
+                ml="$5"
               >
                 <Image
-                  resizeMode="contain"
+                  objectFit="contain"
                   width={30}
                   height={30}
                   $group-window-sm={{ width: 15, height: 15 }}
@@ -462,7 +445,7 @@ function SideBarContent({
                     <AnimatePresence>
                       {activeAt && (
                         <TabsRovingIndicator
-                          theme="active"
+                          theme="accent"
                           width={activeAt.width}
                           height={activeAt.height}
                           x={activeAt.x}
@@ -492,9 +475,9 @@ function SideBarContent({
                             key={index}
                             // Note: replace href with /bento/shells/navbars/${link.slug}
                             href={`/bento/shells/navbars/#`}
-                            paddingHorizontal="$5"
-                            marginRight="auto"
-                            justifyContent="flex-start"
+                            px="$5"
+                            mr="auto"
+                            justify="flex-start"
                           >
                             {link.title}
                           </NavLink>
