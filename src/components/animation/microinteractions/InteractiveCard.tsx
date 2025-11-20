@@ -63,15 +63,15 @@ const Container = ({ children, ...rest }: ViewProps) => {
   return (
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <View
-        paddingVertical={20}
-        justifyContent="center"
-        alignItems="center"
+        py={20}
+        justify="center"
+        items="center"
         ref={(ref) => setPerspectiveRef(ref)}
         {...rest}
       >
         <View
-          justifyContent="center"
-          alignItems="center"
+          justify="center"
+          items="center"
           ref={(ref) => setContainerRef(ref)}
           {...(isWeb && {
             onMouseEnter: handleMouseEnter!,
@@ -176,18 +176,18 @@ export const useMouseEnter = () => {
 
 export function InteractiveCard() {
   return (
-    <Card maxWidth="100%" width="100%">
+    <Card maxW="100%" width="100%">
       <Card.Body
         width={400}
-        maxWidth="100%"
+        maxW="100%"
         borderWidth={1}
-        borderColor="$gray6"
-        padding="$3"
-        borderRadius="$4"
+        borderColor="$color6"
+        p="$3"
+        rounded="$4"
         gap="$4"
-        backgroundColor="$background"
+        bg="$background"
       >
-        <Card.Item translateZ={30} borderRadius="$4" overflow="hidden">
+        <Card.Item translateZ={30} rounded="$4" overflow="hidden">
           <View width="100%" height={200}>
             <View width="100%" height="100%">
               <Image
@@ -199,13 +199,7 @@ export function InteractiveCard() {
           </View>
         </Card.Item>
         <Card.Item translateZ={25}>
-          <View
-            paddingHorizontal="$3"
-            paddingVertical="$2"
-            borderRadius={'$5'}
-            backgroundColor="$blue5"
-            alignSelf="flex-start"
-          >
+          <View px="$3" py="$2" rounded={'$5'} bg="$green5" self="flex-start">
             <Text fontSize="$3">Label</Text>
           </View>
         </Card.Item>
