@@ -31,16 +31,16 @@ export function ImagePicker() {
     <View
       flexDirection="column"
       {...getRootProps()}
-      bs="dashed"
-      maxWidth={600}
+      borderStyle="dashed"
+      maxW={600}
       width="100%"
       height={350}
-      justifyContent="center"
-      alignItems="center"
+      justify="center"
+      items="center"
       borderWidth={isDragActive ? 2 : 1}
-      borderColor={isDragActive ? '$gray11' : '$gray9'}
+      borderColor={isDragActive ? '$color11' : '$color9'}
       gap="$2"
-      borderRadius="$true"
+      rounded="$true"
     >
       {/* need an empty input div just have image drop feature in the web */}
       {/* @ts-ignore */}
@@ -50,7 +50,7 @@ export function ImagePicker() {
           Pick Images
         </Button>
 
-        <View width="100%" alignItems="center" justifyContent="center">
+        <View width="100%" items="center" justify="center">
           <Label
             display={images.length ? 'none' : 'flex'}
             $platform-native={{
@@ -60,7 +60,7 @@ export function ImagePicker() {
             htmlFor={id}
             color="$color9"
             t="$1"
-            pos="absolute"
+            position="absolute"
             whiteSpace="nowrap"
           >
             Drag images into this area
@@ -73,18 +73,18 @@ export function ImagePicker() {
         flexDirection="row"
         borderRightWidth={1}
         borderLeftWidth={1}
-        borderColor="$gray4Light"
+        borderColor="$color4"
         width="100%"
         themeInverse
-        paddingBottom="$0"
+        pb="$0"
         horizontal
         overflow="scroll"
         flexWrap="nowrap"
-        maxHeight={110}
+        maxH={110}
       >
-        <XStack gap="$4" flexWrap="nowrap" maxHeight={110} px="$4" pt={10}>
+        <XStack gap="$4" flexWrap="nowrap" maxH={110} px="$4" pt={10}>
           {images?.map((image, i) => (
-            <View flexDirection="column" key={image} maxHeight={110}>
+            <View flexDirection="column" key={image} maxH={110}>
               <Image
                 borderRadius={10}
                 key={image}
@@ -96,7 +96,7 @@ export function ImagePicker() {
                 onPress={() => {
                   setImages(images.filter((_, index) => index !== i))
                 }}
-                right={0}
+                r={0}
                 y={-6}
                 x={6}
                 size="$1"
