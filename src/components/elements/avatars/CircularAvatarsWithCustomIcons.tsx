@@ -9,11 +9,11 @@ export function CircularAvatarsWithCustomIcons() {
   return (
     <View
       flex={1}
-      alignItems="center"
-      justifyContent="center"
+      items="center"
+      justify="center"
       flexDirection="row"
       width="100%"
-      $group-window-gtXs={{ maxWidth: 400 }}
+      $group-window-gtXs={{ maxW: 400 }}
       gap="$4"
     >
       <Item
@@ -34,17 +34,17 @@ export function CircularAvatarsWithCustomIcons() {
       />
       <Item
         Icon={
-          <Avatar.Icon backgroundColor="$red9">
+          <Avatar.Icon bg="$red9">
             <Avatar.Text color="#fff" size="$2">
               9
             </Avatar.Text>
           </Avatar.Icon>
         }
-        size="$6"
+        size="$7"
       />
       <Item
         Icon={
-          <Avatar.Icon backgroundColor="$green8">
+          <Avatar.Icon bg="$green8">
             <Avatar.Text color="#fff" size="$3">
               3
             </Avatar.Text>

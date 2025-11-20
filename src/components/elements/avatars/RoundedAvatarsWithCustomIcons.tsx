@@ -11,11 +11,11 @@ export function RoundedAvatarsWithCustomIcons() {
   return (
     <View
       flex={1}
-      alignItems="center"
+      items="center"
       flexDirection="row"
       width="100%"
-      $group-window-gtXs={{ maxWidth: 400 }}
-      justifyContent="center"
+      $group-window-gtXs={{ maxW: 400 }}
+      justify="center"
       gap="$4"
     >
       <Item
@@ -36,7 +36,7 @@ export function RoundedAvatarsWithCustomIcons() {
       />
       <Item
         Icon={
-          <Avatar.Icon backgroundColor="$blue8" placement="bottom-right" offset={5}>
+          <Avatar.Icon bg="$yellow8" placement="bottom-right" offset={5}>
             <Circle />
           </Avatar.Icon>
         }
@@ -44,9 +44,9 @@ export function RoundedAvatarsWithCustomIcons() {
       />
       <Item
         Icon={
-          <Avatar.Icon backgroundColor="$green8" placement="bottom-right" offset={5}>
+          <Avatar.Icon bg="$green8" placement="bottom-right" offset={5}>
             <Circle>
-              <Avatar.Text color="#fff" size="$3">
+              <Avatar.Text color="#fff" size="$2">
                 7
               </Avatar.Text>
             </Circle>

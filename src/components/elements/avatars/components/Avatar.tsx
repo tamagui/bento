@@ -24,14 +24,14 @@ const AvatarContext = createStyledContext<{
 
 const AvatarIconFrame = styled(View, {
   context: AvatarContext,
-  borderRadius: 1000_000_000,
-  zIndex: 100,
+  rounded: 1000_000_000,
+  z: 100,
   borderWidth: '$1',
   borderColor: '$color1',
   position: 'absolute',
-  backgroundColor: '$color5',
-  alignItems: 'center',
-  justifyContent: 'center',
+  bg: '$color5',
+  items: 'center',
+  justify: 'center',
 
   variants: {
     placement: {
@@ -134,7 +134,7 @@ const AvatarText = styled(Text, {
 const AvatarContent = forwardRef<any, GetProps<typeof TAvatar>>((props, ref) => {
   const { size } = AvatarContext.useStyledContext()
   return (
-    <View borderWidth="$1" borderColor="$color1" borderRadius={1_000_000_000}>
+    <View borderWidth="$1" borderColor="$color1" rounded={1_000_000_000}>
       <TAvatar elevation={5} size={size} ref={ref} {...props} />
     </View>
   )

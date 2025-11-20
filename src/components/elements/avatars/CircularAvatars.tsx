@@ -5,7 +5,7 @@ import { Avatar } from './components/Avatar'
 /** ------ EXAMPLE ------ */
 export function CircularAvatars() {
   return (
-    <View flexDirection="row" maxWidth="100%" flexWrap="wrap" gap="$10">
+    <View flexDirection="row" maxW="100%" flexWrap="wrap" gap="$10">
       <Item size="$4" />
       <Item size="$5" />
       <Item size="$6" />
