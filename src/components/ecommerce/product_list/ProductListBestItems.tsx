@@ -32,42 +32,26 @@ function Item({ item }: { item: Product }) {
         <View
           height={300}
           overflow="hidden"
-          borderRadius={5}
+          rounded={5}
           theme="dark"
-          paddingBottom="$2"
+          pb="$2"
           borderColor="$color5"
           gap="$2"
           tag="article"
-          role="article"
         >
           <Stack overflow="hidden" width="100%" height="100%">
             <Image
               source={{ uri: item.image }}
               height="100%"
               width="100%"
-              resizeMode="cover"
+              objectFit="cover"
             />
           </Stack>
-          <View
-            gap="$2"
-            width="100%"
-            padding="$4"
-            zIndex={1}
-            theme="dark"
-            bottom={0}
-            position="absolute"
-          >
+          <View gap="$2" width="100%" p="$4" z={1} theme="dark" b={0} position="absolute">
             <H2 size="$4">{item.name}</H2>
             <XStack gap="$3">
               <StyledText fontWeight="bold">${item.price}</StyledText>
-              <StyledText
-                color="#fff"
-                theme="red"
-                backgroundColor="$color9"
-                paddingHorizontal="$2"
-                paddingVertical="$1"
-                marginLeft="auto"
-              >
+              <StyledText color="#fff" theme="red" bg="$color9" px="$2" py="$1" ml="auto">
                 {10} %
               </StyledText>
             </XStack>
@@ -77,13 +61,13 @@ function Item({ item }: { item: Product }) {
             colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.5)', 'rgba(0,0,0,0.8)']}
             start={{ x: 0, y: 0 }}
             end={{ x: 0, y: 1 }}
-            left={0}
-            right={0}
-            top={0}
-            bottom={0}
+            l={0}
+            r={0}
+            t={0}
+            b={0}
           />
         </View>
-        <Button borderRadius={0} themeInverse>
+        <Button rounded={0} themeInverse>
           <Button.Text>ORDER NOW</Button.Text>
         </Button>
       </View>
@@ -102,7 +86,7 @@ export function ProductListBestItems() {
       horizontal
       contentContainerStyle={{
         gap: 24,
-        padding: 28,
+        px: 28,
       }}
     >
       {products.map((item, index) => (
