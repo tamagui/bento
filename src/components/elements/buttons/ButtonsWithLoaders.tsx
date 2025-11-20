@@ -48,7 +48,7 @@ export function ButtonsWithLoaders() {
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme="purple">
+        <Button theme="neon">
           <Spinner
             animation="bouncy"
             enterStyle={{
@@ -61,7 +61,7 @@ export function ButtonsWithLoaders() {
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme="pink">
+        <Button theme="forest">
           <Spinner
             animation="bouncy"
             enterStyle={{
@@ -87,7 +87,7 @@ export function ButtonsWithLoaders() {
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme="orange">
+        <Button theme="cyan">
           <Spinner
             animation="bouncy"
             enterStyle={{
@@ -102,7 +102,7 @@ export function ButtonsWithLoaders() {
       </View>
 
       <View gap="$2">
-        <Button theme="active">
+        <Button theme="accent">
           <Spinner
             animation="bouncy"
             enterStyle={{

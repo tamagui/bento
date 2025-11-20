@@ -7,14 +7,14 @@ export function RoundedButtons() {
     'blue',
     'red',
     'green',
-    'purple',
-    'pink',
+    'neon',
+    'forest',
     'yellow',
-    'orange',
+    'cyan',
   ] as const
 
   const variantButtons = [
-    { theme: 'active' },
+    { theme: 'accent' },
     { disabled: true, opacity: 0.5 },
     { themeInverse: true },
     { variant: 'outlined' },
