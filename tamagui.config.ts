@@ -1,30 +1,16 @@
-import { config as configV3 } from '@tamagui/config/v3'
-import { defaultConfig } from '@tamagui/config/v4'
 import { createTamagui } from 'tamagui'
-import { themes } from './theme'
+import { config } from './config/tamagui.dev.config'
 
-const appConfig = createTamagui({
-  ...defaultConfig,
-  media: {
-    ...defaultConfig.media,
-    ...configV3.media,
-  },
-  themes: {
-    ...defaultConfig.themes,
-    ...themes,
-  },
-})
+const tamaConf = createTamagui(config)
 
-export type AppConfig = typeof appConfig
+export type Conf = typeof tamaConf
 
 declare module 'tamagui' {
-  // overrides TamaguiCustomConfig so your custom types
-  // work everywhere you import `tamagui`
-  interface TamaguiCustomConfig extends AppConfig {}
+  interface TamaguiCustomConfig extends Conf {}
 
   interface TypeOverride {
-    groupNames(): 'window' | 'listitem' | 'item'
+    groupNames(): 'card' | 'takeoutBody' | 'content' | 'item'
   }
 }
 
-export default appConfig
+export default tamaConf
