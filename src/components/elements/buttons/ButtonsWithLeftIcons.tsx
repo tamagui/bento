@@ -58,7 +58,7 @@ export function ButtonsWithLeftIcons() {
       </View>
 
       <View gap="$2">
-        <Button theme="active">
+        <Button>
           <Button.Icon>
             <Heart />
           </Button.Icon>

@@ -38,25 +38,25 @@ export function VerticalWithDescriptionCheckboxes() {
   })
 
   return (
-    <View width="100%" ai="center">
+    <View width="100%" items="center">
       <Checkboxes
         values={values}
         onValuesChange={onValuesChange}
-        maxWidth="100%"
+        maxW="100%"
         $group-window-sm={{
-          paddingHorizontal: '$4',
-          paddingVertical: '$6',
+          px: '$4',
+          py: '$6',
         }}
         $group-window-gtXs={{ width: 400 }}
         gap="$4"
       >
         <YStack gap="$1">
           <Checkboxes.Title>Payment</Checkboxes.Title>
-          <Text fontSize="$5" fontWeight="300" col="$gray10">
+          <Text fontSize="$5" fontWeight="300" color="$color9">
             Select your payment method
           </Text>
         </YStack>
-        <Checkboxes.FocusGroup minWidth="100%" flexWrap="wrap" gap="$2">
+        <Checkboxes.FocusGroup minW="100%" flexWrap="wrap" gap="$2">
           {items.map(({ id, label, description }) => (
             <Checkboxes.FocusGroup.Item value={id} key={id}>
               <Item description={description} label={label} uniqueId={id + uniqueId} />
@@ -80,19 +80,19 @@ function Item({
   uniqueId: string
 }) {
   return (
-    <View width="100%" ai="center">
+    <View width="100%" items="center">
       <Checkboxes.Card
         flexDirection="row"
-        flexShrink={1}
-        alignItems="flex-start"
+        shrink={1}
+        items="flex-start"
         gap="$3"
-        padding="$3"
+        p="$3"
         hoverStyle={{
           borderColor: '$color7',
         }}
         cursor="pointer"
-        maxWidth="100%"
-        minWidth="100%"
+        maxW="100%"
+        minW="100%"
       >
         <View flexDirection="row" y={1}>
           <Checkboxes.Checkbox id={uniqueId}>
@@ -102,10 +102,10 @@ function Item({
           </Checkboxes.Checkbox>
         </View>
 
-        <View flexDirection="column" flexShrink={1}>
+        <View flexDirection="column" shrink={1}>
           <Checkboxes.Checkbox.Label
             cursor="pointer"
-            alignItems="flex-start"
+            items="flex-start"
             size="$4"
             lineHeight="$2"
             flexDirection="column"
@@ -113,13 +113,7 @@ function Item({
           >
             {label}
           </Checkboxes.Checkbox.Label>
-          <Text
-            flexShrink={1}
-            fontSize="$3"
-            lineHeight="$3"
-            fontWeight="300"
-            color="$gray9"
-          >
+          <Text shrink={1} fontSize="$3" lineHeight="$3" fontWeight="300" color="$color9">
             {description}
           </Text>
         </View>

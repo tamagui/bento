@@ -19,13 +19,7 @@ import {
 } from '@tamagui/lucide-icons'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import {
-  Dimensions,
-  FlatList,
-  Keyboard,
-  KeyboardAvoidingView,
-  SafeAreaView,
-} from 'react-native'
+import { Dimensions, FlatList, Keyboard, KeyboardAvoidingView } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {
   Extrapolation,
@@ -36,6 +30,7 @@ import Animated, {
   withSpring,
   type SharedValue,
 } from 'react-native-reanimated'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import {
   Avatar,
   Button,
@@ -112,8 +107,14 @@ export const Chat = () => {
 
   return (
     <ChatContext.Provider value={{ theme, setTheme }}>
-      <View theme={theme} h="100%" flex={1}>
-        <View bg={themeName.includes('dark') ? 'white' : 'black'} themeInverse flex={1} position="absolute" inset={0} />
+      <View theme={theme} height="100%" flex={1}>
+        <View
+          bg={themeName.includes('dark') ? 'white' : 'black'}
+          themeInverse
+          flex={1}
+          position="absolute"
+          inset={0}
+        />
         <KeyboardAvoidingView
           style={{ flex: 1 }}
           behavior="padding"
@@ -181,12 +182,12 @@ const BottomBar = ({
             }
 
             return (
-              <XStack alignItems="center" gap="$3" px="$4" py="$4">
+              <XStack items="center" gap="$3" px="$4" py="$4">
                 <Button size="$3" circular>
                   <Plus />
                 </Button>
                 <Input
-                  borderRadius="$10"
+                  rounded="$10"
                   placeholder="Typing..."
                   flex={1}
                   onSubmitEditing={submit}
@@ -260,12 +261,12 @@ const Header = ({ offset }: { offset: SharedValue<number> }) => {
       borderBottomRightRadius="$8"
       borderCurve="circular"
       bg="$background"
-      justifyContent="center"
+      justify="center"
     >
       <SafeAreaView />
 
       <AnimatedView style={profileStyle}>
-        <XStack px="$4" alignItems="center" pt="$4" gap="$3">
+        <XStack px="$4" items="center" pt="$4" gap="$3">
           <Avatar circular size={AVATAR_SIZE} bg="red">
             <Avatar.Image source={{ uri: AVATAR_1_URL }} objectFit="cover" />
             <Avatar.Fallback />
@@ -284,12 +285,12 @@ const Header = ({ offset }: { offset: SharedValue<number> }) => {
               <PhoneCall size={'$1'} />
             </Button>
             <Circle
-              zIndex={1}
+              z={1}
               position="absolute"
-              h={10}
-              w={10}
-              top={0}
-              right={0}
+              height={10}
+              width={10}
+              t={0}
+              r={0}
               bg="green"
             />
           </View>
@@ -320,14 +321,14 @@ const MenuView = ({ offset }: { offset: SharedValue<number> }) => {
         showsVerticalScrollIndicator={false}
       >
         <View gap="$6">
-          <View gap="$3" alignItems="center">
+          <View gap="$3" items="center">
             <View
               theme="green"
-              alignSelf="center"
+              self="center"
               p="$1"
               borderColor="$color10"
               borderWidth={2}
-              borderRadius="$20"
+              rounded={1000}
             >
               <Avatar circular size="$8" bg="red">
                 <Avatar.Image source={{ uri: AVATAR_1_URL }} objectFit="cover" />
@@ -336,20 +337,20 @@ const MenuView = ({ offset }: { offset: SharedValue<number> }) => {
               <Circle
                 position="absolute"
                 bg="$color10"
-                h={16}
-                w={16}
-                right={4}
-                bottom={4}
+                height={16}
+                width={16}
+                r={4}
+                b={4}
                 borderWidth={2}
                 borderColor="$background"
-                zIndex={1}
+                z={1}
               />
             </View>
-            <View gap="$2" alignItems="center">
-              <Text textAlign="center" fontSize="$8" fontWeight="bold">
+            <View gap="$2" items="center">
+              <Text text="center" fontSize="$8" fontWeight="bold">
                 Jony Ive
               </Text>
-              <Chip rounded theme="accent" size="$2">
+              <Chip circular theme="accent" size="$2">
                 <Chip.Text fontFamily="$silkscreen">@jony_ive</Chip.Text>
               </Chip>
             </View>
@@ -375,9 +376,9 @@ const OptionsMenuGroup = () => {
   return (
     <View px="$4" gap="$3">
       <Label>Options</Label>
-      <Group borderRadius="$6" borderCurve="circular">
+      <Group rounded="$6" borderCurve="circular">
         <Group.Item>
-          <Button justifyContent="flex-start">
+          <Button justify="flex-start">
             <Button.Icon scaleIcon={1.5}>
               <Search />
             </Button.Icon>
@@ -386,7 +387,7 @@ const OptionsMenuGroup = () => {
         </Group.Item>
 
         <Group.Item>
-          <Button justifyContent="flex-start">
+          <Button justify="flex-start">
             <Button.Icon scaleIcon={1.5}>
               <Image />
             </Button.Icon>
@@ -395,7 +396,7 @@ const OptionsMenuGroup = () => {
         </Group.Item>
 
         <Group.Item>
-          <Button justifyContent="flex-start">
+          <Button justify="flex-start">
             <Button.Icon scaleIcon={1.5}>
               <CircleUser />
             </Button.Icon>
@@ -404,7 +405,7 @@ const OptionsMenuGroup = () => {
         </Group.Item>
 
         <Group.Item>
-          <Button justifyContent="flex-start">
+          <Button justify="flex-start">
             <Button.Icon scaleIcon={1.5}>
               <Carrot />
             </Button.Icon>
@@ -420,9 +421,9 @@ const SettingMenuGroup = () => {
   return (
     <View px="$4" gap="$3">
       <Label>Settings</Label>
-      <Group borderRadius="$6" borderCurve="circular">
+      <Group rounded="$6" borderCurve="circular">
         <Group.Item>
-          <Button justifyContent="flex-start">
+          <Button justify="flex-start">
             <Button.Icon scaleIcon={1.5}>
               <ShieldCheck />
             </Button.Icon>
@@ -431,7 +432,7 @@ const SettingMenuGroup = () => {
         </Group.Item>
 
         <Group.Item>
-          <Button justifyContent="flex-start">
+          <Button justify="flex-start">
             <Button.Icon scaleIcon={1.5}>
               <Flag />
             </Button.Icon>
@@ -440,7 +441,7 @@ const SettingMenuGroup = () => {
         </Group.Item>
 
         <Group.Item>
-          <Button justifyContent="flex-start">
+          <Button justify="flex-start">
             <Button.Icon scaleIcon={1.5}>
               <Ban />
             </Button.Icon>
@@ -449,7 +450,7 @@ const SettingMenuGroup = () => {
         </Group.Item>
 
         <Group.Item>
-          <Button justifyContent="flex-start">
+          <Button justify="flex-start">
             <Button.Icon scaleIcon={1.5}>
               <Trash color="red" />
             </Button.Icon>
@@ -463,7 +464,7 @@ const SettingMenuGroup = () => {
 
 const ButtonGroup = () => {
   return (
-    <XStack alignItems="center" gap="$4" justifyContent="center">
+    <XStack items="center" gap="$4" justify="center">
       <Theme name="green">
         <Button aspectRatio={1} circular>
           <Phone />
@@ -559,7 +560,7 @@ const GestureView = ({ offset }: { offset: SharedValue<number> }) => {
 
   const Handler = () => (
     <View>
-      <View alignSelf="center" m="$2" h={6} w="$4" borderRadius="$4" bg="$background" />
+      <View self="center" m="$2" height={6} width="$4" rounded="$4" bg="$background" />
     </View>
   )
 

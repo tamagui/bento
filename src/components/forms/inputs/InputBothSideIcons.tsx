@@ -16,17 +16,13 @@ export function InputBothSideIconsExample({ size }: { size?: SizeTokens }) {
   const focusTrigger = useForwardFocus(inputRef)
 
   return (
-    <View justifyContent="center" alignItems="center">
-      <Input gapScale={0.7} size={size} minWidth="100%">
+    <View justify="center" items="center">
+      <Input gapScale={0.7} size={size} minW="100%">
         <Input.Box>
           <Input.Icon {...focusTrigger}>
             <User />
           </Input.Icon>
-          <Input.Area
-            ref={inputRef}
-            paddingHorizontal={0}
-            placeholder="Search username"
-          />
+          <Input.Area ref={inputRef} px={0} placeholder="Search username" />
           <Input.Icon {...focusTrigger}>
             <Cable />
           </Input.Icon>

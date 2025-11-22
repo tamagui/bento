@@ -22,16 +22,16 @@ const Link = styled(Text, {
   textTransform: 'none',
   display: 'flex',
   textDecorationLine: 'none',
-  alignItems: 'center',
-  paddingVertical: '$3',
+  items: 'center',
+  py: '$3',
   hoverStyle: {
-    backgroundColor: '$backgroundHover',
+    bg: '$backgroundHover',
   },
   focusStyle: {
-    backgroundColor: '$backgroundPress',
+    bg: '$backgroundPress',
   },
   pressStyle: {
-    backgroundColor: '$backgroundPress',
+    bg: '$backgroundPress',
   },
   variants: {
     active: {
@@ -41,7 +41,7 @@ const Link = styled(Text, {
     },
   },
   '$group-window-xs': {
-    paddingVertical: '$2.5',
+    py: '$2.5',
   },
 })
 
@@ -54,16 +54,16 @@ export function FullSideBar() {
   const [openDrawer, setOpenDrawer] = useState(false)
   const { sm } = useGroupMedia('window')
   return (
-    <View flexDirection="column" height={610} width="100%" marginTop="$2">
+    <View flexDirection="column" height={610} width="100%" mt="$2">
       <View flexDirection="row" height="100%" width="100%">
         {!sm && <Sidebar />}
         <View
           flexDirection="row"
-          paddingHorizontal={12}
-          paddingVertical="$2"
+          px={12}
+          py="$2"
           tag="nav"
-          alignItems="center"
-          backgroundColor="$background"
+          items="center"
+          bg="$background"
           shadowColor="$color5"
           shadowOffset={{
             width: 0,
@@ -72,7 +72,7 @@ export function FullSideBar() {
           shadowOpacity={0.18}
           shadowRadius={1.0}
           elevationAndroid={1}
-          $group-window-sm={{ paddingHorizontal: 8 }}
+          $group-window-sm={{ px: 8 }}
           flex={1}
           height={'$5'}
         >
@@ -94,8 +94,8 @@ export function FullSideBar() {
               </Button>
             </View>
           )}
-          <View flexDirection="row" marginLeft="auto" alignItems="center" gap="$2">
-            <Button theme="alt1" circular chromeless padding={0} size="$3">
+          <View flexDirection="row" ml="auto" items="center" gap="$2">
+            <Button theme="accent" circular chromeless p={0} size="$3">
               <Button.Icon>
                 <Bell color="$color" size="$1" />
               </Button.Icon>
@@ -141,16 +141,16 @@ function ProfileDropdown({
               aria-label="user photo"
               src="https://i.pravatar.cc/123"
             />
-            <Avatar.Fallback backgroundColor="$gray10" />
+            <Avatar.Fallback bg="$color10" />
           </Avatar>
         </Button>
       </PopoverTrigger>
       <Popover.Content
         borderWidth={1}
         borderColor="$borderColor"
-        backgroundColor="$color1"
-        paddingVertical="$1.5"
-        paddingHorizontal="$3.5"
+        bg="$color1"
+        py="$1.5"
+        px="$3.5"
         enterStyle={{ y: -10, opacity: 0 }}
         exitStyle={{ y: -10, opacity: 0 }}
         animation={[
@@ -166,7 +166,7 @@ function ProfileDropdown({
       >
         <DropDownItem
           hoverStyle={{
-            backgroundColor: '$backgroundFocus',
+            bg: '$backgroundFocus',
           }}
           onPress={closeTrigger}
         >
@@ -174,7 +174,7 @@ function ProfileDropdown({
         </DropDownItem>
         <DropDownItem
           hoverStyle={{
-            backgroundColor: '$backgroundFocus',
+            bg: '$backgroundFocus',
           }}
           onPress={closeTrigger}
         >
@@ -182,7 +182,7 @@ function ProfileDropdown({
         </DropDownItem>
         <DropDownItem
           hoverStyle={{
-            backgroundColor: '$backgroundFocus',
+            bg: '$backgroundFocus',
           }}
           onPress={closeTrigger}
         >
@@ -194,22 +194,22 @@ function ProfileDropdown({
 }
 
 const DropDownItem = styled(View, {
-  backgroundColor: '$background',
+  bg: '$background',
   width: '100%',
   hoverStyle: {
-    backgroundColor: '$backgroundHover',
+    bg: '$backgroundHover',
   },
   pressStyle: {
-    backgroundColor: '$backgroundPress',
+    bg: '$backgroundPress',
   },
   cursor: 'pointer',
-  paddingHorizontal: '$4',
-  paddingVertical: '$2',
-  alignItems: 'flex-start',
-  justifyContent: 'center',
+  px: '$4',
+  py: '$2',
+  items: 'flex-start',
+  justify: 'center',
   '$group-window-xs': {
-    paddingHorizontal: '$2',
-    paddingVertical: '$1',
+    px: '$2',
+    py: '$1',
   },
 })
 
@@ -255,8 +255,8 @@ function FloatingSideBar({
           }
         },
       })}
-      marginHorizontal={-12}
-      marginVertical="$-2"
+      mx={-12}
+      my="$-2"
       position="absolute"
     >
       <Drawer open={open} onOpenChange={setOpen}>
@@ -266,12 +266,12 @@ function FloatingSideBar({
           animation="lazy"
           enterStyle={{ opacity: 0 }}
           exitStyle={{ opacity: 0 }}
-          zIndex={1000000}
+          z={1000000}
         />
         <Drawer.Swipeable>
           <Drawer.Content
             x={-30}
-            paddingLeft={30}
+            pl={30}
             width={220}
             height={height + 20}
             enterStyle={{ x: -240 }}
@@ -289,7 +289,7 @@ const SideBarContent = View.styleable((props, ref) => {
   return (
     <View
       flexDirection="column"
-      backgroundColor="$background"
+      bg="$background"
       ref={ref}
       height="100%"
       width="100%"
@@ -297,34 +297,34 @@ const SideBarContent = View.styleable((props, ref) => {
     >
       <View
         flexDirection="column"
-        paddingLeft="$4"
-        paddingVertical="$1.5"
-        justifyContent="center"
+        pl="$4"
+        py="$1.5"
+        justify="center"
         width="100%"
         $group-window-sm={{
-          paddingVertical: '$4',
+          py: '$4',
         }}
       >
-        <View flexDirection="row" alignItems="center" gap="$2.5">
+        <View flexDirection="row" items="center" gap="$2.5">
           <Avatar borderRadius="$true" size="$4" padding="$4">
             <Avatar.Image scale={0.6} src="/favicon.svg" />
             <Avatar.Fallback backgroundColor="$color11" borderColor="$color11" />
           </Avatar>
-          <H4 fontSize="$6" col="$color12">
+          <H4 fontSize="$6" color="$color12">
             Hi User!
           </H4>
         </View>
       </View>
-      <View flexDirection="column" flexGrow={1} backgroundColor="$background">
+      <View flexDirection="column" grow={1} bg="$background">
         <View
-          backgroundColor="$backgroundFocus"
-          padding="$2.5"
-          paddingLeft="$5"
+          bg="$backgroundFocus"
+          p="$2.5"
+          pl="$5"
           $group-window-gtXs={{
-            paddingLeft: '$5',
+            pl: '$5',
           }}
         >
-          <Text fontSize="$5" lineHeight="$5" fontWeight="400" col="$color12">
+          <Text fontSize="$5" lineHeight="$5" fontWeight="400" color="$color12">
             Auth
           </Text>
         </View>
@@ -333,7 +333,7 @@ const SideBarContent = View.styleable((props, ref) => {
             {['Sign In', 'Sign Up', 'Forgot Password', 'Reset Password'].map(
               (item, index) => (
                 <RovingFocusGroup.Item key={index} focusable>
-                  <NavLink paddingLeft="$5" href="#">
+                  <NavLink pl="$5" href="#">
                     {item}
                   </NavLink>
                 </RovingFocusGroup.Item>
@@ -341,8 +341,8 @@ const SideBarContent = View.styleable((props, ref) => {
             )}
           </RovingFocusGroup>
         </View>
-        <View backgroundColor="$backgroundFocus" padding="$2.5" paddingLeft="$5">
-          <Text fontSize="$5" lineHeight="$5" fontWeight="400" col="$color12">
+        <View bg="$backgroundFocus" p="$2.5" pl="$5">
+          <Text fontSize="$5" lineHeight="$5" fontWeight="400" color="$color12">
             User
           </Text>
         </View>
@@ -350,7 +350,7 @@ const SideBarContent = View.styleable((props, ref) => {
           <RovingFocusGroup loop>
             {['Profile', 'Settings', 'Feed'].map((item, index) => (
               <RovingFocusGroup.Item key={index} focusable>
-                <NavLink userSelect="none" paddingLeft="$5" href="#">
+                <NavLink select="none" pl="$5" href="#">
                   {item}
                 </NavLink>
               </RovingFocusGroup.Item>

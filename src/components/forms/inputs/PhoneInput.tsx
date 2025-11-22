@@ -78,19 +78,19 @@ function RegionFilterInput(props: RegionFilterInputProps) {
     <RovingFocusGroup
       flexDirection="column"
       gap="$3"
-      paddingTop="$4"
+      pt="$4"
       height="100%"
       width="100%"
-      backgroundColor="$gray1"
+      bg="$color1"
     >
-      <Input marginHorizontal="$3" size="$2">
+      <Input mx="$3" size="$2">
         <Input.Box>
           <Input.Area
             // Note: when key changes, the input remounts and the value will be reset
             // we can achive better performance using this approach instead binding the value to state
             key={reset}
             width="100%"
-            borderRadius={0}
+            rounded={0}
             placeholder="Search"
             defaultValue={filter}
             onChangeText={setFilter}
@@ -101,7 +101,7 @@ function RegionFilterInput(props: RegionFilterInputProps) {
               setReset(reset === 0 ? 1 : 0)
             }}
             pointerEvents="auto"
-            zIndex={10}
+            z={10}
             theme="alt1"
           >
             {filter ? <X /> : <Search />}
@@ -133,26 +133,26 @@ function RegionFilterInput(props: RegionFilterInputProps) {
                     <View
                       group="item"
                       flexDirection="row"
-                      alignItems="center"
+                      items="center"
                       gap="$3"
-                      paddingHorizontal="$4"
-                      paddingVertical="$2"
+                      px="$4"
+                      py="$2"
                       borderWidth={0}
                       borderBottomWidth={1}
                       borderColor="$borderColor"
                       cursor="pointer"
                       hoverStyle={{
-                        backgroundColor: '$gray2',
+                        bg: '$color2',
                       }}
                       focusStyle={{
-                        backgroundColor: '$gray2',
+                        bg: '$color2',
                       }}
                       onPress={() => {
                         setRegionCode(item.name)
                         setOpen(false)
                       }}
                     >
-                      <Avatar size="$1.5" br={5}>
+                      <Avatar size="$1.5" rounded={5}>
                         <Avatar.Image
                           accessibilityLabel="Profile image"
                           src={item.flag}
@@ -160,11 +160,11 @@ function RegionFilterInput(props: RegionFilterInputProps) {
                         <Avatar.Fallback backgroundColor="$color5" />
                       </Avatar>
                       <Text
-                        color="$gray10"
+                        color="$color10"
                         $group-item-hover={{
-                          color: '$gray12',
+                          color: '$color12',
                         }}
-                        marginRight="auto"
+                        mr="auto"
                       >
                         {item.name}
                       </Text>
@@ -212,14 +212,14 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
     >
       <Popover.Trigger>
         <Input.XGroup.Item>
-          <Input.Button paddingHorizontal="$2" onPress={() => setOpen(true)}>
+          <Input.Button px="$2" onPress={() => setOpen(true)}>
             {regionCode ? (
               <>
                 <Image source={{ uri: selectedItem.flag }} width={20} height={20} />
               </>
             ) : (
               <>
-                <Globe2 color="$gray10" width={20} height={20} />
+                <Globe2 color="$color10" width={20} height={20} />
               </>
             )}
           </Input.Button>
@@ -228,11 +228,12 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
 
       <Adapt when="maxMd" platform="touch">
         <Popover.Sheet modal dismissOnSnapToBottom>
-          <Popover.Sheet.Frame padding="$4">
+          <Popover.Sheet.Frame p="$4">
             <Adapt.Contents />
           </Popover.Sheet.Frame>
           <Popover.Sheet.Overlay
-            animation="lazy"
+            animation="quick"
+            opacity={0.8}
             enterStyle={{ opacity: 0 }}
             exitStyle={{ opacity: 0 }}
           />
@@ -255,7 +256,7 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
             },
           },
         ]}
-        padding={0}
+        p={0}
       >
         <RegionFilterInput open={open} setOpen={setOpen} setRegionCode={setRegionCode} />
       </Popover.Content>
@@ -295,7 +296,7 @@ export function PhoneInputExample({ size }: { size?: SizeTokens }) {
           onLayout={(e) => {
             setContainerWidth(e.nativeEvent.layout.width)
           }}
-          alignSelf="center"
+          self="center"
           theme={isValid ? 'green' : undefined}
         >
           <Input.Section>

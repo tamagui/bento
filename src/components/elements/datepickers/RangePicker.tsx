@@ -66,10 +66,10 @@ function Calendar({
     <View flexDirection="column" gap="$4">
       <View
         flexDirection="row"
-        minWidth="100%"
+        minW="100%"
         height={50}
-        alignItems="center"
-        justifyContent="space-between"
+        items="center"
+        justify="space-between"
       >
         {order === 'first' || order === 'either' ? (
           <Button circular size="$4" {...swapOnClick(subtractOffset({ months: 1 }))}>
@@ -104,15 +104,21 @@ function Calendar({
       </View>
       <AnimatePresence key={prevNextAnimationKey}>
         <View
-          w="100%"
-          jc="center"
-          ai="center"
+          width="100%"
+          justify="center"
+          items="center"
           animation="medium"
           gap="$4"
           {...prevNextAnimation()}
         >
           <WeekView weekDays={weekDays} />
-          <View flexDirection="column" gap="$2" ai="center" jc="center" w="100%">
+          <View
+            flexDirection="column"
+            gap="$2"
+            items="center"
+            justify="center"
+            width="100%"
+          >
             {calendarWeeks.map((days) => {
               const isWeekInCalendarMonth = days.some((day) => day.inCurrentMonth)
               if (!isWeekInCalendarMonth) {
@@ -121,12 +127,12 @@ function Calendar({
 
               return (
                 <View
-                  jc="space-between"
-                  ai="center"
+                  justify="space-between"
+                  items="center"
                   flexDirection="row"
                   key={days[0].$date.toString()}
                   flex={1}
-                  w="100%"
+                  width="100%"
                 >
                   {days.map((day) => {
                     const dayIsFirstOrLastOfMonth =
@@ -142,35 +148,33 @@ function Calendar({
                       dayIsFirstOrLastOfMonth && day.range && day.range === 'in-range'
 
                     if (!day.inCurrentMonth) {
-                      return <Stack flex={1} w="100%" />
+                      return <Stack flex={1} width="100%" />
                     }
 
                     const BG_RANGE_STYLE: {
                       [key: string]: GetProps<typeof View>
                     } = {
                       'in-range': {
-                        backgroundColor: dayIsFirstOrLastOfMonth
-                          ? 'transprent'
-                          : '$color5',
+                        bg: dayIsFirstOrLastOfMonth ? 'transparent' : '$color5',
                       },
                       'range-start': {
-                        backgroundColor: '$color5',
+                        bg: '$color5',
                         width: '50%',
-                        right: 0,
+                        r: 0,
                       },
                       'range-end': {
-                        backgroundColor: '$color5',
+                        bg: '$color5',
                         width: '50%',
-                        left: 0,
+                        l: 0,
                       },
                       'will-be-in-range': {
-                        backgroundColor: '$gray2',
+                        bg: '$color2',
                       },
                       'will-be-range-start': {
-                        backgroundColor: '$gray1',
+                        bg: '$color1',
                       },
                       'will-be-range-end': {
-                        backgroundColor: '$color1',
+                        bg: '$color1',
                       },
                       '': {},
                     }
@@ -196,10 +200,10 @@ function Calendar({
                         <Button.Text
                           color={
                             day.selected
-                              ? '$gray12'
+                              ? '$color12'
                               : day.inCurrentMonth
-                                ? '$gray11'
-                                : '$gray6'
+                                ? '$color11'
+                                : '$color6'
                           }
                         >
                           {day.day}
@@ -227,16 +231,16 @@ function Calendar({
 
                     return (
                       <View
-                        jc="center"
-                        ai="center"
+                        justify="center"
+                        items="center"
                         key={day.$date.toString()}
-                        w="100%"
+                        width="100%"
                         flex={1}
                       >
                         <View
-                          pos="absolute"
-                          w="100%"
-                          h="100%"
+                          position="absolute"
+                          width="100%"
+                          height="100%"
                           {...BG_RANGE_STYLE[day.range]}
                         />
                         {buttonElement}
@@ -271,14 +275,14 @@ function DatePickerBody({ config }: { config: DatePickerProviderProps['config'] 
           </>
         )}
         {header === 'year' && (
-          <View alignItems="center" gap="$2">
+          <View items="center" gap="$2">
             <YearRangeSlider />
             <YearPicker onChange={() => setHeader('day')} />
           </View>
         )}
         {header === 'month' && (
           <View gap="$4">
-            <H3 size="$7" alignSelf="center">
+            <H3 size="$7" self="center">
               Select a month
             </H3>
             <MonthPicker

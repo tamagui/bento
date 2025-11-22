@@ -74,7 +74,7 @@ export function List() {
   )
 
   return (
-    <View width="100%" flex={1} $gtMd={{ maxHeight: 800, paddingHorizontal: '$4' }}>
+    <View width="100%" flex={1} $gtMd={{ maxH: 800, px: '$4' }}>
       <FlatList
         data={personsList}
         renderItem={renderItem}
@@ -94,14 +94,14 @@ function Item({ person }: { person: PersonList[number] }) {
   return (
     <View
       flexDirection="row"
-      paddingVertical="$2"
+      py="$2"
       gap="$4"
       $group-window-gtXs={{
-        padding: '$4',
+        p: '$4',
         gap: '$4',
       }}
-      backgroundColor="$color1"
-      alignItems="center"
+      bg="$color1"
+      items="center"
     >
       <View>
         <Avatar circular size="$4">
@@ -111,15 +111,15 @@ function Item({ person }: { person: PersonList[number] }) {
         <Circle
           borderWidth={1}
           borderColor="$borderColor"
-          right="3%"
-          bottom="3%"
-          zIndex={1}
+          r="3%"
+          b="3%"
+          z={1}
           size={12}
           position="absolute"
-          backgroundColor={`$${person.status.color}10` as ColorTokens}
+          bg={`$${person.status.color}10` as ColorTokens}
         />
       </View>
-      <View f={1} flexDirection="column" flexShrink={1} justifyContent="center">
+      <View flex={1} flexDirection="column" shrink={1} justify="center">
         <H5>{person.name}</H5>
         <Text fontWeight="$2" theme="alt1">
           {person.status.status}

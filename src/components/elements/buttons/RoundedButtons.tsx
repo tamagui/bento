@@ -14,7 +14,7 @@ export function RoundedButtons() {
   ] as const
 
   const variantButtons = [
-    { theme: 'active' },
+    { theme: undefined },
     { disabled: true, opacity: 0.5 },
     { themeInverse: true },
     { variant: 'outlined' },

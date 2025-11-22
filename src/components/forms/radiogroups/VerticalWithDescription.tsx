@@ -24,21 +24,21 @@ export function VerticalWithDescription() {
   const [value, setValue] = useState('vd-visa')
   const uniqueId = useId()
   return (
-    <View width="100%" ai="center">
+    <View width="100%" items="center">
       <View
         flexDirection="column"
-        minWidth="100%"
-        $group-window-gtSm={{ maxWidth: 400, minWidth: 400 }}
+        minW="100%"
+        $group-window-gtSm={{ maxW: 400, minW: 400 }}
         gap="$4"
       >
         <View flexDirection="column" gap="$2">
           <H2>Payment</H2>
-          <Text fontWeight="300" color="$gray10">
+          <Text fontWeight="300" color="$color9">
             Select your payment method
           </Text>
         </View>
-        <RadioGroup flexShrink={1} value={value} onValueChange={setValue}>
-          <View flexDirection="column" flexShrink={1} flexWrap="wrap" gap="$2">
+        <RadioGroup shrink={1} value={value} onValueChange={setValue}>
+          <View flexDirection="column" shrink={1} flexWrap="wrap" gap="$2">
             {data.map(({ id, label, description }) => (
               <Item
                 key={id}
@@ -69,10 +69,10 @@ const Item = ({ id, label, description, setValue, uniqueId, selected }: ItemProp
   return (
     <Card
       flexDirection="row"
-      flexShrink={1}
-      alignItems="flex-start"
+      shrink={1}
+      items="flex-start"
       gap="$3"
-      padding="$3"
+      p="$3"
       active={selected}
       onPress={() => setValue(id)}
       cursor="pointer"
@@ -82,18 +82,18 @@ const Item = ({ id, label, description, setValue, uniqueId, selected }: ItemProp
           <RadioGroup.Indicator />
         </RadioGroup.Item>
       </View>
-      <View flexDirection="column" flexShrink={1}>
+      <View flexDirection="column" shrink={1}>
         <Label
           size="$4"
           lineHeight="$2"
-          alignItems="flex-start"
+          items="flex-start"
           flexDirection="column"
           htmlFor={uniqueId + id}
           cursor="pointer"
         >
           {label}
         </Label>
-        <SizableText flexShrink={1} size="$3" fontWeight="300" color="$gray9">
+        <SizableText shrink={1} size="$3" fontWeight="300" color="$color9">
           {description}
         </SizableText>
       </View>

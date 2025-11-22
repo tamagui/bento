@@ -15,13 +15,7 @@ function Item({ item, index }: { item: Product; index: number }) {
   const showLabel = isPremium || isBestSeller
   const labelText = isPremium ? 'Premium' : isBestSeller ? 'Best Seller' : ''
   return (
-    <Link
-      flexGrow={1}
-      flexShrink={1}
-      flexBasis={300}
-      href="#"
-      textDecorationColor="transparent"
-    >
+    <Link grow={1} shrink={1} flexBasis={300} href="#" textDecorationColor="transparent">
       <YStack gap="$2" tag="article">
         {showLabel && (
           <Square
@@ -29,15 +23,15 @@ function Item({ item, index }: { item: Product; index: number }) {
             rotate="45deg"
             width={20}
             height={20}
-            backgroundColor="$color5"
-            left={-3}
-            top={34}
+            bg="$color5"
+            l={-3}
+            t={34}
             borderWidth={0.4}
             position="absolute"
-            zIndex={1}
+            z={1}
           />
         )}
-        <Stack zIndex={2} borderRadius={10} overflow="hidden">
+        <Stack z={2} rounded={10} overflow="hidden">
           <Stack
             animation="quick"
             transformOrigin="center center"
@@ -49,26 +43,25 @@ function Item({ item, index }: { item: Product; index: number }) {
             height={300}
           >
             <Image
-              backgroundColor="gray"
+              bg="gray"
               source={{ uri: item.image }}
               height="100%"
               width="100%"
-              resizeMode="cover"
+              objectFit="cover"
             />
           </Stack>
         </Stack>
         {showLabel && (
           <YStack
-            backgroundColor="$color9"
+            bg="$color9"
             borderWidth={0.5}
             theme={isBestSeller ? 'purple' : 'orange'}
-            borderTopRightRadius={10}
-            borderBottomRightRadius={10}
+            rounded="$2"
             position="absolute"
-            left={-7}
-            top={18}
-            paddingHorizontal="$3"
-            zIndex={2}
+            l={-7}
+            t={18}
+            px="$3"
+            z={2}
             elevation={10}
           >
             <SizableText color="#fff">{labelText}</SizableText>
@@ -90,7 +83,7 @@ function Item({ item, index }: { item: Product; index: number }) {
 
 // spacers are a method to avoid streteched items at the end
 const someSpacers = Array.from({ length: 5 }).map((_c, index) => (
-  <YStack key={index + 'sp'} flexBasis={300} flexGrow={1} flexShrink={1} />
+  <YStack key={index + 'sp'} flexBasis={300} grow={1} shrink={1} />
 ))
 
 /** ------ EXAMPLE ------ */
@@ -104,12 +97,12 @@ export function ProductListWithLabel() {
       flexWrap="wrap"
       rowGap="$8"
       columnGap="$5"
-      padding="$3"
-      paddingHorizontal="$6"
-      maxWidth="100%"
-      maxHeight={700}
+      p="$3"
+      px="$6"
+      maxW="100%"
+      maxH={700}
       $group-window-xs={{
-        paddingHorizontal: '$3',
+        px: '$3',
       }}
     >
       {products.map((item, index) => (

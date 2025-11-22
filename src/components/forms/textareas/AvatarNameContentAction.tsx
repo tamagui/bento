@@ -7,21 +7,21 @@ export function AvatarNameContentAction() {
     <View
       borderWidth={1}
       borderColor="$color7"
-      borderRadius="$true"
-      backgroundColor="$background"
-      padding="$true"
+      rounded="$true"
+      background="$background"
+      p="$true"
       width={500}
-      maxWidth="100%"
+      maxW="100%"
       gap="$3.5"
       $group-window-sm={{
-        marginVertical: '$6',
+        my: '$6',
       }}
     >
-      <View flexDirection="row" alignItems="center" justifyContent="flex-start" gap="$2">
+      <View flexDirection="row" items="center" justify="flex-start" gap="$2">
         <Button chromeless circular bordered>
           <Avatar circular size="$3.5">
             <Avatar.Image aria-label="user photo" src="https://i.pravatar.cc/123" />
-            <Avatar.Fallback backgroundColor="$gray10" />
+            <Avatar.Fallback background="$color10" />
           </Avatar>
         </Button>
         <View flexDirection="column">
@@ -37,22 +37,22 @@ export function AvatarNameContentAction() {
         unstyled
         size="$4"
         fontWeight="300"
-        paddingHorizontal={0}
+        px={0}
         height={100}
-        borderRadius={0}
+        rounded={0}
         placeholder="Write your comment"
       />
-      <Separator theme="alt1" marginHorizontal="$-3" />
-      <View flexDirection="row" themeInverse justifyContent="space-between">
+      <Separator theme="alt1" mx="$-3" />
+      <View flexDirection="row" themeInverse justify="space-between">
         <View gap="$2" flexDirection="row">
           <Button size="$3" themeInverse chromeless>
             <Button.Icon>
-              <Share size="$1" color="$gray10" />
+              <Share size="$1" color="$color10" />
             </Button.Icon>
           </Button>
           <Button size="$3" themeInverse chromeless>
             <Button.Icon>
-              <File size="$1" color="$gray10" />
+              <File size="$1" color="$color10" />
             </Button.Icon>
           </Button>
         </View>

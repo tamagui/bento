@@ -55,26 +55,26 @@ export function CheckboxList() {
   })
 
   return (
-    <View width="100%" ai="center">
+    <View width="100%" items="center">
       <Checkboxes
         values={values}
         onValuesChange={onValuesChange}
-        bs="solid"
-        maxWidth="100%"
+        borderStyle="solid"
+        maxW="100%"
         overflow="hidden"
         $group-window-gtXs={{
           width: 400,
           elevation: '$3',
           borderWidth: 1,
-          borderRadius: 20,
-          backgroundColor: '$color2',
+          rounded: 20,
+          bg: '$color2',
           borderColor: '$borderColor',
           p: '$4',
         }}
       >
         <Checkboxes.FocusGroup gap="$4">
-          <View flexDirection="column" alignSelf="center" alignItems="center" gap="$2">
-            <Checkboxes.Title alignSelf="center">Coffee</Checkboxes.Title>
+          <View flexDirection="column" self="center" items="center" gap="$2">
+            <Checkboxes.Title self="center">Coffee</Checkboxes.Title>
             <Text fontWeight="$3" theme="alt1">
               Make your choice.
             </Text>
@@ -114,16 +114,16 @@ function CheckboxItem({
   return (
     <Checkboxes.Card
       flexDirection="row"
-      backgroundColor="transparent"
-      paddingHorizontal="$4"
-      borderRadius={0}
+      bg="transparent"
+      px="$4"
+      rounded={0}
       cursor="pointer"
       gap="$4"
-      paddingVertical="$3"
+      py="$3"
       borderWidth={0}
-      alignItems="center"
+      items="center"
       $group-window-xxs={{
-        paddingHorizontal: '$3',
+        px: '$3',
         gap: '$3',
         borderLeftWidth: 0,
         borderRightWidth: 0,
@@ -140,17 +140,17 @@ function CheckboxItem({
         <Avatar.Fallback borderColor="$background" />
       </Avatar>
       <View flexDirection="column" flex={1}>
-        <View flexDirection="row" alignItems="center" gap="$4">
-          <View flexDirection="column" f={1}>
+        <View flexDirection="row" items="center" gap="$4">
+          <View flexDirection="column" flex={1}>
             <Checkboxes.Checkbox.Label size="$4" lineHeight="$2" htmlFor={key + uniqueId}>
               {title}
             </Checkboxes.Checkbox.Label>
-            <Text fontWeight="$2" fontSize={10} theme="alt1">
+            <Text fontWeight="$2" fontSize={10} theme="alt2">
               {desc}
             </Text>
           </View>
 
-          <Checkboxes.Checkbox marginLeft="auto" id={key + uniqueId}>
+          <Checkboxes.Checkbox ml="auto" id={key + uniqueId}>
             <Checkboxes.Checkbox.Indicator>
               <Check />
             </Checkboxes.Checkbox.Indicator>

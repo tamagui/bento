@@ -44,14 +44,7 @@ const data = [
 /** ------ EXAMPLE ------ */
 export function Meeting() {
   return (
-    <View
-      flexDirection="row"
-      gap="$3"
-      flexWrap="wrap"
-      maxWidth="100%"
-      paddingHorizontal="$4"
-      paddingVertical="$6"
-    >
+    <View flexDirection="row" gap="$3" flexWrap="wrap" maxW="100%" px="$4" py="$6">
       {data.map((item, index) => (
         <MeetingItem key={item.title} item={item} />
       ))}
@@ -65,14 +58,14 @@ function MeetingItem({ item }: { item: (typeof data)[0] }) {
   return (
     <View
       flexDirection="column"
-      flexShrink={1}
+      shrink={1}
       theme={item.theme}
       gap="$3"
-      padding="$3"
-      justifyContent="center"
-      alignSelf="stretch"
+      p="$3"
+      justify="center"
+      self="stretch"
       width="100%"
-      borderRadius={10}
+      rounded={10}
       overflow="hidden"
     >
       <LinearGradient
@@ -82,7 +75,7 @@ function MeetingItem({ item }: { item: (typeof data)[0] }) {
         fullscreen
       />
       <View flexDirection="column">
-        <View flexDirection="row" justifyContent="space-between" alignItems="center">
+        <View flexDirection="row" justify="space-between" items="center">
           <SizableText>{item.title}</SizableText>
           <Button circular size="$2">
             <Button.Icon>
@@ -97,14 +90,14 @@ function MeetingItem({ item }: { item: (typeof data)[0] }) {
       {item.type === 'in-person' ? (
         <Users />
       ) : (
-        <View flexDirection="row" gap="$2" alignItems="center">
-          <Circle size="$2" backgroundColor="$background02">
+        <View flexDirection="row" gap="$2" items="center">
+          <Circle size="$2" bg="$background02">
             <MapPin size={14} />
           </Circle>
           <SizableText>{item.whereIs}</SizableText>
         </View>
       )}
-      <View flexDirection="row" justifyContent="space-between" alignItems="center">
+      <View flexDirection="row" justify="space-between" items="center">
         <SizableText color="$color11" size="$1">
           {item.label}
         </SizableText>
@@ -117,8 +110,8 @@ function MeetingItem({ item }: { item: (typeof data)[0] }) {
           </View>
         ) : (
           <SizableText
-            paddingHorizontal="$2"
-            borderRadius={1000}
+            px="$2"
+            rounded={1000}
             borderWidth={1}
             borderColor="$color10"
             size="$1"
@@ -137,20 +130,20 @@ export function Users() {
   return (
     <View
       flexDirection="row"
-      borderRadius={1000}
+      rounded={1000}
       borderColor="$color1"
-      flexShrink={1}
-      alignSelf="center"
-      marginRight="auto"
-      justifyContent="center"
-      alignItems="center"
+      shrink={1}
+      self="center"
+      mr="auto"
+      justify="center"
+      items="center"
     >
       {users.map((item, index) => (
-        <View zIndex={index} marginLeft={index !== 0 ? '$-2' : undefined} key={item}>
+        <View z={index} ml={index !== 0 ? '$-2' : undefined} key={item}>
           <User size="$2" imageUrl={`/avatars/300 (1).jpeg`} />
         </View>
       ))}
-      <SizableText size="$2" fontWeight="200" marginHorizontal="$1" marginRight="$2.5">
+      <SizableText size="$2" fontWeight="200" mx="$1" mr="$2.5">
         +2
       </SizableText>
     </View>

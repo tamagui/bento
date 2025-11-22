@@ -24,21 +24,21 @@ export function Vertical() {
   const uniqueId = useId()
   const [value, setValue] = useState('hor-visa')
   return (
-    <View width="100%" ai="center">
+    <View width="100%" items="center">
       <View
         flexDirection="column"
-        minWidth="100%"
-        $group-window-gtSm={{ maxWidth: 400, minWidth: 400 }}
+        minW="100%"
+        $group-window-gtSm={{ maxW: 400, minW: 400 }}
         gap="$4"
       >
         <View flexDirection="column" gap="$2">
           <H2>Payment</H2>
-          <Text fontWeight="300" color="$gray10">
+          <Text fontWeight="300" color="$color9">
             Select your payment method
           </Text>
         </View>
         <RadioGroup
-          $group-window-gtSm={{ maxWidth: 400 }}
+          $group-window-gtSm={{ maxW: 400 }}
           flexWrap="wrap"
           gap="$2"
           flexDirection="column"
@@ -47,12 +47,12 @@ export function Vertical() {
         >
           {data.map(({ id, label, icon }) => (
             <Card
-              padding={0}
+              p={0}
               key={id}
               flexDirection="row"
-              alignItems="center"
+              items="center"
               gap="$3"
-              paddingHorizontal="$2.5"
+              px="$2.5"
               active={value === id}
               onPress={() => setValue(id)}
             >

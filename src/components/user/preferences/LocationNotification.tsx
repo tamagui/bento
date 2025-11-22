@@ -78,11 +78,11 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
             key={item.name}
             gap="$3"
             value={`${i}`}
-            justifyContent="center"
-            alignItems="center"
+            justify="center"
+            items="center"
           >
             <Image source={{ uri: item.flag }} width={20} height={20} />
-            <SizableText marginRight="auto">{`${item.name} ${
+            <SizableText mr="auto">{`${item.name} ${
               item.shortcut ? `(${item.shortcut})` : ''
             }`}</SizableText>
             <Select.ItemIndicator marginLeft="auto">
@@ -103,9 +103,9 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
       {...rest}
     >
       <Select.Trigger width="100%" iconAfter={ChevronDown}>
-        <View flexDirection="row" gap="$3" justifyContent="center" alignItems="center">
+        <View flexDirection="row" gap="$3" justify="center" items="center">
           <Image source={{ uri: selectedItem.flag }} width={20} height={20} />
-          <SizableText marginRight="auto">{`${selectedItem.name} ${
+          <SizableText mr="auto">{`${selectedItem.name} ${
             selectedItem.shortcut ? `(${selectedItem.shortcut})` : ''
           }`}</SizableText>
         </View>
@@ -137,13 +137,13 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
 
       <Select.Content zIndex={200000}>
         <Select.ScrollUpButton
-          alignItems="center"
-          justifyContent="center"
+          items="center"
+          justify="center"
           position="relative"
           width="100%"
           height="$3"
         >
-          <View flexDirection="column" zIndex={10}>
+          <View flexDirection="column" z={10}>
             <ChevronUp size={20} />
           </View>
           <LinearGradient
@@ -151,7 +151,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
             end={[0, 1]}
             fullscreen
             colors={['$background', 'transparent']}
-            borderRadius="$4"
+            rounded="$4"
           />
         </Select.ScrollUpButton>
 
@@ -161,19 +161,19 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
           // animateOnly={['transform', 'opacity']}
           // enterStyle={{ opacity: 0, y: -10 }}
           // exitStyle={{ opacity: 0, y: 10 }}
-          miw={200}
+          minW={200}
         >
           <Select.Group>{selectList}</Select.Group>
         </Select.Viewport>
 
         <Select.ScrollDownButton
-          alignItems="center"
-          justifyContent="center"
+          items="center"
+          justify="center"
           position="relative"
           width="100%"
           height="$3"
         >
-          <View flexDirection="column" zIndex={10}>
+          <View flexDirection="column" z={10}>
             <ChevronDown size={20} />
           </View>
           <LinearGradient
@@ -181,7 +181,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
             end={[0, 1]}
             fullscreen
             colors={['transparent', '$background']}
-            borderRadius="$4"
+            rounded="$4"
           />
         </Select.ScrollDownButton>
       </Select.Content>
@@ -195,11 +195,11 @@ export function LocationNotification() {
     <View
       flexDirection="column"
       gap="$4"
-      padding="$4"
-      borderRadius={10}
-      backgroundColor="$background"
+      p="$4"
+      rounded={10}
+      bg="$background"
       width={520}
-      maxWidth="100%"
+      maxW="100%"
       borderWidth={1.5}
       borderColor="$borderColor"
       shadowColor="$shadowColor"
@@ -218,7 +218,7 @@ export function LocationNotification() {
         }}
       >
         <Button icon={Mail} circular variant="outlined" />
-        <View flexDirection="column" flexShrink={1}>
+        <View flexDirection="column" shrink={1}>
           <SizableText size="$5">Update your Email Preferences</SizableText>
           <Theme name="alt1">
             <SizableText size="$3">
@@ -228,7 +228,7 @@ export function LocationNotification() {
         </View>
       </View>
       {/* minus margin will cancel padding */}
-      <Separator marginHorizontal="$-4" />
+      <Separator mx="$-4" />
       <View flexDirection="column" gap="$4">
         <View flexDirection="column" gap="$1">
           <Label size="$4" lineHeight="$1" htmlFor="select-language" fontWeight="600">
@@ -248,14 +248,14 @@ export function LocationNotification() {
           </Theme>
         </View>
       </View>
-      <Separator marginHorizontal="$-4" />
+      <Separator mx="$-4" />
       <View flexDirection="column" gap="$4">
         <RadioList />
         <Theme name="green">
           <Banner>Change your email preferences at any time</Banner>
         </Theme>
       </View>
-      <Separator marginHorizontal="$-4" />
+      <Separator mx="$-4" />
       <View flexDirection="row" gap="$3">
         <Button flex={1}>
           <Button.Text>Cancel</Button.Text>
@@ -277,11 +277,11 @@ const Banner = ({
   return (
     <View
       flexDirection="row"
-      alignItems="center"
-      backgroundColor="$color7"
-      padding={size}
+      items="center"
+      bg="$color7"
+      p={size}
       gap={size}
-      borderRadius={'$4'}
+      rounded="$4"
     >
       <Info size={getTokenValue(size as any, 'size') * 0.5} />
       <SizableText size={size}>{children}</SizableText>
@@ -331,18 +331,18 @@ function RadioList() {
             borderWidth="$0.5"
             borderColor={title === value ? '$color7' : '$color4'}
             cursor="pointer"
-            borderRadius={'$7'}
-            padding="$4"
+            rounded="$7"
+            p="$4"
           >
             <View flexDirection="column">
-              <View flexDirection="row" justifyContent="space-between">
-                <SizableText fos="$5">{title}</SizableText>
+              <View flexDirection="row" justify="space-between">
+                <SizableText size="$5">{title}</SizableText>
                 <RadioGroup.Item id={title} value={title}>
                   <RadioGroup.Indicator />
                 </RadioGroup.Item>
               </View>
             </View>
-            <SizableText fontWeight="300" col="$gray10" fos="$4">
+            <SizableText fontWeight="300" color="$color9" size="$4">
               {desc}
             </SizableText>
           </View>

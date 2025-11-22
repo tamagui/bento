@@ -18,12 +18,12 @@ const ProductItem: FC<{ item: Product }> = ({ item }) => {
     <View flexDirection="column" key={item.id} mb="$6" flex={1} gap="$2.5">
       <View
         flexDirection="column"
-        borderRadius="$8"
+        rounded="$8"
         shadowColor="$shadowColor"
         shadowRadius={5}
         overflow="hidden"
         animation="quick"
-        cursor='pointer'
+        cursor="pointer"
       >
         <Image
           source={{ uri: item.image }}
@@ -34,17 +34,17 @@ const ProductItem: FC<{ item: Product }> = ({ item }) => {
         <View
           flex={1}
           height="100%"
-          alignItems="center"
-          justifyContent="center"
+          items="center"
+          justify="center"
           position="absolute"
-          borderRadius="$8"
+          rounded="$8"
           hoverStyle={{
             backdropFilter: 'blur(15px)',
-            backgroundColor: '$background04',
+            bg: '$background04',
           }}
           pressStyle={{
             backdropFilter: 'blur(15px)',
-            backgroundColor: '$background04',
+            bg: '$background04',
           }}
           animation="medium"
         >
@@ -75,13 +75,8 @@ const ProductItem: FC<{ item: Product }> = ({ item }) => {
           {item.name}
         </Text>
 
-        <View
-          flexDirection="row"
-          alignItems="center"
-          justifyContent="space-between"
-          gap="$2"
-        >
-          <View f={1} flexDirection="row" alignItems="center" gap="$2" theme="alt1">
+        <View flexDirection="row" items="center" justify="space-between" gap="$2">
+          <View flex={1} flexDirection="row" items="center" gap="$2" theme="alt1">
             <MapPin size="$1" color="$color10" />
             <Text numberOfLines={2} color="$color10" fontSize="$3">
               {item.city}
@@ -102,16 +97,16 @@ const ProductItem: FC<{ item: Product }> = ({ item }) => {
         <View
           flexDirection="row"
           flexWrap="wrap"
-          alignItems="center"
-          justifyContent="space-between"
+          items="center"
+          justify="space-between"
           gap="$2"
         >
           <Chip
-            rounded
+            circular
             width="auto"
-            maxWidth="50%"
+            maxW="50%"
             size="$2"
-            backgroundColor="$color4"
+            bg="$color4"
             theme={`${colors[Math.floor(Math.random() * colors.length)]}` as ThemeName}
           >
             <Chip.Icon color="$color9">
@@ -147,7 +142,7 @@ export const MasonryListExample = () => {
   }
 
   return (
-    <View flex={1} $gtMd={{ maxHeight: 800 }}>
+    <View flex={1} $gtMd={{ maxH: 800 }}>
       <MasonryList
         flex={1}
         keyExtractor={(item): string => item.id}

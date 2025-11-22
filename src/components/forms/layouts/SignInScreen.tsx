@@ -36,17 +36,17 @@ export function SignInScreen() {
     <FormCard>
       <View
         flexDirection="column"
-        alignItems="stretch"
-        minWidth="100%"
-        maxWidth="100%"
+        items="stretch"
+        minW="100%"
+        maxW="100%"
         gap="$4"
         $group-window-gtSm={{
-          paddingVertical: '$4',
+          py: '$4',
           width: 400,
         }}
       >
         <H1
-          alignSelf="center"
+          self="center"
           size="$8"
           $group-window-xs={{
             size: '$7',
@@ -65,11 +65,7 @@ export function SignInScreen() {
           </View>
           <View flexDirection="column" gap="$1">
             <Input size="$4">
-              <View
-                flexDirection="row"
-                alignItems="center"
-                justifyContent="space-between"
-              >
+              <View flexDirection="row" items="center" justify="space-between">
                 <Input.Label htmlFor={'password'}>Password</Input.Label>
               </View>
               <Input.Box>
@@ -99,7 +95,7 @@ export function SignInScreen() {
                     scale={1}
                     animation="quick"
                     position="absolute"
-                    left="60%"
+                    l="60%"
                     enterStyle={{
                       opacity: 0,
                       scale: 0.5,
@@ -116,24 +112,24 @@ export function SignInScreen() {
             <Button.Text>Sign In</Button.Text>
           </Button>
         </Theme>
-        <View flexDirection="column" gap="$3" width="100%" alignItems="center">
+        <View flexDirection="column" gap="$3" width="100%" items="center">
           <Theme>
             <View
               flexDirection="column"
               gap="$3"
               width="100%"
-              alignSelf="center"
-              alignItems="center"
+              self="center"
+              items="center"
             >
-              <View flexDirection="row" width="100%" alignItems="center" gap="$4">
+              <View flexDirection="row" width="100%" items="center" gap="$4">
                 <Separator />
                 <Paragraph>Or</Paragraph>
                 <Separator />
               </View>
               <View flexDirection="row" flexWrap="wrap" gap="$3">
-                <Button flex={1} minWidth="100%">
+                <Button flex={1} minW="100%">
                   <Button.Icon>
-                    <Github color="$gray10" size="$1" />
+                    <Github color="$color10" size="$1" />
                   </Button.Icon>
                   <Button.Text>Continue with Github</Button.Text>
                 </Button>
@@ -173,7 +169,7 @@ const Link = ({
 const SignUpLink = () => {
   return (
     <Link href={`#`}>
-      <Paragraph textDecorationStyle="unset" ta="center">
+      <Paragraph textDecorationStyle="unset" text="center">
         Don&apos;t have an account?{' '}
         <SizableText
           hoverStyle={{
@@ -190,14 +186,14 @@ const SignUpLink = () => {
 
 const ForgotPasswordLink = () => {
   return (
-    <Anchor alignSelf="flex-end" href={`#`}>
+    <Anchor self="flex-end" href={`#`}>
       <Paragraph
-        color="$gray11"
+        color="$color11"
         hoverStyle={{
-          color: '$gray12',
+          color: '$color12',
         }}
         size="$1"
-        marginTop="$1"
+        mt="$1"
       >
         Forgot your password?
       </Paragraph>

@@ -12,8 +12,8 @@ export const AnimatedNumbers = () => {
   const NUM_WIDTH = WIDTH / 3
 
   return (
-    <View justifyContent="center" alignItems="center" maxWidth="100%" gap="$5">
-      <XGroup justifyContent="flex-start" gap="$1">
+    <View justify="center" items="center" maxW="100%" gap="$5">
+      <XGroup justify="flex-start" gap="$1">
         <XGroup.Item>
           <Button
             onPress={() => {
@@ -45,8 +45,8 @@ export const AnimatedNumbers = () => {
 
       <View
         flexDirection="row"
-        justifyContent="center"
-        alignItems="center"
+        justify="center"
+        items="center"
         height={100}
         width={WIDTH}
       >

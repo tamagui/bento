@@ -4,9 +4,9 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { useGroupMedia } from '../../hooks/useGroupMedia'
 import * as React from 'react'
-import { Avatar, Progress, Separator, Text, View, YStack, getTokenValue } from 'tamagui'
+import { Avatar, Separator, Text, View, YStack, getTokenValue } from 'tamagui'
+import { useGroupMedia } from '../../hooks/useGroupMedia'
 import { Table } from './common/tableParts'
 
 type Person = {
@@ -56,7 +56,7 @@ const columns = [
     cell: (info) => (
       <Avatar circular size="$3">
         <Avatar.Image accessibilityLabel="Profile image" src={info.getValue()} />
-        <Avatar.Fallback backgroundColor="$gray6" />
+        <Avatar.Fallback bg="$color6" />
       </Avatar>
     ),
     header: () => 'Avatar',
@@ -120,18 +120,18 @@ export function BasicTable() {
           return (
             <View
               key={i}
-              borderRadius="$4"
+              rounded="$4"
               borderWidth="$1"
               borderColor="$borderColor"
               flex={1}
-              alignSelf="stretch"
+              self="stretch"
               gap="$3"
             >
               <View gap="$3" mx="$3" my="$3">
                 {Object.entries(row).map(([name, value], i) => {
                   return (
                     <View key={i}>
-                      <View fd="row" alignItems="center" justifyContent="space-between">
+                      <View flexDirection="row" items="center" justify="space-between">
                         <Text>{name.charAt(0).toUpperCase() + name.slice(1)}</Text>
                         {name === 'avatar' ? (
                           <Avatar circular size="$3">
@@ -139,10 +139,10 @@ export function BasicTable() {
                               accessibilityLabel="Profile image"
                               src={value as string}
                             />
-                            <Avatar.Fallback backgroundColor="$gray6" />
+                            <Avatar.Fallback backgroundColor="$color6" />
                           </Avatar>
                         ) : (
-                          <Text color="$gray10">{value}</Text>
+                          <Text color="$color10">{value}</Text>
                         )}
                       </View>
                       {i !== Object.entries(row).length - 1 && <Separator mt="$3" />}
@@ -164,8 +164,8 @@ export function BasicTable() {
       cellWidth={CELL_WIDTH}
       cellHeight="$5"
       borderWidth={0.5}
-      maxWidth={getTokenValue(CELL_WIDTH) * columns.length}
-      marginVertical="$15"
+      maxW={getTokenValue(CELL_WIDTH) * columns.length}
+      my="$15"
     >
       <Table.Head>
         {headerGroups.map((headerGroup) => {
@@ -173,7 +173,7 @@ export function BasicTable() {
           return (
             <Table.Row
               backgrounded
-              backgroundColor="$color2"
+              bg="$color2"
               rowLocation={
                 rowCounter.current === 0
                   ? 'first'
@@ -233,7 +233,7 @@ export function BasicTable() {
                   {cell.column.id === 'avatar' ? (
                     <>{flexRender(cell.column.columnDef.cell, cell.getContext())}</>
                   ) : (
-                    <Text fontSize="$4" color="$gray11">
+                    <Text fontSize="$4" color="$color11">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </Text>
                   )}

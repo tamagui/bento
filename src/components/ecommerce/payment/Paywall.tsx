@@ -49,9 +49,8 @@ const AnimatedView = Animated.createAnimatedComponent(View)
 const AnimatedHStack = Animated.createAnimatedComponent(
   styled(Animated.View, {
     flexDirection: 'row',
-    alignItems: 'center',
+    items: 'center',
     gap: '$4',
-    // bg: '$background',
   })
 )
 
@@ -68,30 +67,27 @@ export function Paywall() {
 
   return (
     <View flex={1} gap="$4" bg="$color2">
-      <LinearGradient colors={['$color0', 'color2']} pos="absolute" inset={0} />
+      <LinearGradient colors={['$color0', 'color2']} position="absolute" inset={0} />
 
       <ReviewListCarousel />
 
       <LinearGradient
         colors={['$background0', '$background', '$background']}
         height={'100%'}
-        pos="absolute"
-        // inset={0}
-        left={0}
-        right={0}
-        bottom={0}
+        position="absolute"
+        l={0}
+        r={0}
+        b={0}
       />
-
-      {/* <View flex={1} /> */}
 
       {isWeb ? (
         <XStack
           overflow="scroll"
           scrollbarWidth="none"
-          justifyContent="flex-start"
-          alignItems="flex-end"
+          justify="flex-start"
+          items="flex-end"
           gap={SPACING}
-          paddingHorizontal={SPACING}
+          px={SPACING}
         >
           {plans.map((plan, index) => (
             <PlanView
@@ -106,7 +102,7 @@ export function Paywall() {
         <PlanList />
       )}
 
-      <XStack gap="$4" jc="center" ai="center" pb={SPACING * 2}>
+      <XStack gap="$4" justify="center" items="center" pb={SPACING * 2}>
         <Text onPress={goToTermsOfService} fontSize="$4" color="$color8">
           Terms of Service
         </Text>
@@ -173,10 +169,10 @@ const PlanList = () => {
     <GestureDetector gesture={gesture} touchAction="pan-x">
       <AnimatedHStack
         style={animatedStyle}
-        justifyContent="flex-start"
-        alignItems="flex-end"
+        justify="flex-start"
+        items="flex-end"
         gap={SPACING}
-        paddingHorizontal={SPACING}
+        px={SPACING}
       >
         {plans.map((plan, index) => (
           <PlanView key={plan.id} scrollX={scrollX} plan={plan} index={index} />
@@ -247,12 +243,11 @@ const PlanView = ({
         colors={['$background', '$background0']}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
-        pos="absolute"
-        // inset={0}
-        h={12}
-        right={0}
-        left={0}
-        top={0}
+        position="absolute"
+        height={12}
+        r={0}
+        l={0}
+        t={0}
       />
     )
   }
@@ -263,25 +258,25 @@ const PlanView = ({
       {...(isWeb
         ? {
             $gtMd: {
-              w: 500,
+              width: 500,
             },
 
-            w: '100%',
+            width: '100%',
           }
         : {
-            w: PLAN_ITEM_WIDTH,
+            width: PLAN_ITEM_WIDTH,
           })}
       layout={CurvedTransition.duration(325).reduceMotion(ReduceMotion.System).build()}
       bg="$background"
       borderWidth={1}
       borderColor="$borderColor"
-      borderRadius="$8"
+      rounded="$8"
       shadowColor="$shadowColor"
       shadowOffset={{ width: 0, height: 0 }}
       shadowOpacity={0.15}
       shadowRadius={'$6'}
-      h={nextStep ? 'fit' : '100%'}
-      flexGrow={1}
+      height={nextStep ? 'auto' : '100%'}
+      grow={1}
     >
       <View overflow="hidden">
         <View
@@ -312,13 +307,12 @@ const PlanView = ({
             gap="$3.5"
             borderWidth={1}
             borderColor="$borderColor"
-            borderRadius="$6"
-            // bg="$backgroundPress"
+            rounded="$6"
             py="$3.5"
           >
             {features.map(({ name, Icon }, index) => (
               <>
-                <XStack px="$3.5" ai="center" gap="$3" key={name}>
+                <XStack px="$3.5" items="center" gap="$3" key={name}>
                   <Icon color="$color" />
                   <Text>{name}</Text>
                 </XStack>
@@ -337,8 +331,8 @@ const PlanView = ({
             gap={0}
             space={0}
             themeInverse
-            h={'auto'}
-            borderRadius="$10"
+            height="auto"
+            rounded="$10"
             onPress={() => setNextStep(true)}
           >
             <Button.Text py="$3.5" fontSize="$5" fontWeight="bold">
@@ -348,7 +342,7 @@ const PlanView = ({
         </View>
 
         {nextStep && (
-          <View pos="absolute" justifyContent="center" inset={0}>
+          <View position="absolute" justify="center" inset={0}>
             <View
               key="paywall-checkout"
               animation="quicker"
@@ -357,16 +351,16 @@ const PlanView = ({
               enterStyle={{ opacity: 0, transform: [{ translateY: -100 }] }}
               exitStyle={{ opacity: 0, transform: [{ translateY: -100 }] }}
               gap="$6"
-              theme={annual ? 'green' : 'active'}
+              theme={annual ? 'green' : undefined}
               p="$6"
               flex={1}
             >
-              <View flex={1} justifyContent="center" gap="$4" py="$4">
+              <View flex={1} justify="center" gap="$4" py="$4">
                 <XStack
                   gap="$4"
-                  alignItems="center"
-                  alignSelf="center"
-                  justifyContent="space-between"
+                  items="center"
+                  self="center"
+                  justify="space-between"
                   key="switch"
                   animation="quicker"
                   rotate={annual ? '-3deg' : '0deg'}
@@ -385,9 +379,9 @@ const PlanView = ({
                       setAnnual(checked)
                     }}
                     size={'$3'}
-                    backgroundColor={annual ? '$color' : '$color8'}
-                    jc="center"
-                    ai="center"
+                    bg={annual ? '$color' : '$color8'}
+                    justify="center"
+                    items="center"
                     cursor="pointer"
                     borderWidth={2}
                     borderColor={'$colorTransparent'}
@@ -404,9 +398,9 @@ const PlanView = ({
                         m={'$1'}
                         flex={1}
                         overflow="hidden"
-                        br="$10"
-                        ai="center"
-                        jc="center"
+                        rounded="$10"
+                        items="center"
+                        justify="center"
                         animation="200ms"
                         bg={'$color'}
                       />
@@ -424,12 +418,12 @@ const PlanView = ({
                 </XStack>
 
                 <View py="$2">
-                  <View alignItems="center" alignSelf="center" position="relative">
-                    <View h={64} jc="center" ai="center" overflow="hidden">
+                  <View items="center" self="center" position="relative">
+                    <View height={64} justify="center" items="center" overflow="hidden">
                       <Text
                         key="monthly-price"
                         animation="quicker"
-                        textAlign="center"
+                        text="center"
                         fontSize="$10"
                         fontWeight="bold"
                         px="$2"
@@ -442,7 +436,7 @@ const PlanView = ({
                       <Text
                         key="annual-price"
                         animation="quicker"
-                        textAlign="center"
+                        text="center"
                         fontSize="$10"
                         fontWeight="bold"
                         transform={[{ translateY: !annual ? 56 : 0 }]}
@@ -455,28 +449,28 @@ const PlanView = ({
                       {PriceGradient()}
                       <View
                         position="absolute"
-                        right={0}
-                        bottom={0}
+                        r={0}
+                        b={0}
                         rotate={'-180deg'}
-                        h={12}
-                        left={0}
+                        height={12}
+                        l={0}
                       >
                         {PriceGradient()}
                       </View>
                     </View>
 
-                    <Text color="$color8" textAlign="center" fontSize="$4">
+                    <Text color="$color8" text="center" fontSize="$4">
                       Monthly
                     </Text>
 
                     {annual && (
                       <Chip
                         size="$3"
-                        rounded
+                        circular
                         position="absolute"
-                        right={'$-6'}
-                        top={'$-2'}
-                        rotate={'25deg'}
+                        r="$-6"
+                        t="$-2"
+                        rotate="25deg"
                         animation="quicker"
                         opacity={1}
                         transform={[{ translateY: 0 }, { translateX: 0 }]}
@@ -498,7 +492,7 @@ const PlanView = ({
                   </View>
                 </View>
 
-                <Text textAlign="center" fontSize="$6">
+                <Text text="center" fontSize="$6">
                   {description}
                 </Text>
               </View>
@@ -508,8 +502,8 @@ const PlanView = ({
                 gap={0}
                 space={0}
                 themeInverse
-                h={'auto'}
-                borderRadius="$10"
+                height="auto"
+                rounded="$10"
               >
                 <Button.Text py="$3.5" fontSize="$5" fontWeight="bold">
                   Checkout
@@ -517,13 +511,13 @@ const PlanView = ({
               </Button>
             </View>
             <Button
-              alignSelf="flex-end"
+              self="flex-end"
               circular
               bg="$colorTransparent"
               onPress={() => setNextStep(false)}
               position="absolute"
-              top={'$4'}
-              right={'$4'}
+              t="$4"
+              r="$4"
             >
               <Button.Icon>
                 <X size={24} />
@@ -588,13 +582,13 @@ const ReviewListCarousel = () => {
         ))}
       </AnimatedHStack>
 
-      <AnimatedHStack right={REVIEW_RANGE} style={animatedSlideRight}>
+      <AnimatedHStack r={REVIEW_RANGE} style={animatedSlideRight}>
         {reviewers.map((reviewer) => (
           <RatingView key={reviewer.id} reviewer={reviewer} />
         ))}
       </AnimatedHStack>
 
-      <AnimatedHStack left={'-10%'} style={animatedSlideLeft}>
+      <AnimatedHStack l="-10%" style={animatedSlideLeft}>
         {reviewers.map((reviewer) => (
           <RatingView key={reviewer.id} reviewer={reviewer} />
         ))}
@@ -607,27 +601,27 @@ const RatingView = ({ reviewer }: { reviewer: Reviewer }) => {
   const { color4 } = useTheme()
   return (
     <View
-      borderRadius={'$4'}
+      rounded="$4"
       gap="$2"
       overflow="hidden"
-      w={'70%'}
-      maxWidth={REVIEW_WIDTH}
-      h={'100%'}
+      width="70%"
+      maxW={REVIEW_WIDTH}
+      height="100%"
       p="$3.5"
       bg="$color1"
     >
-      <XStack ai="center" gap="$md">
+      <XStack items="center" gap="$2">
         <Text fontSize="$5" fontWeight="bold" numberOfLines={1} flex={1}>
           {reviewer.name}
         </Text>
-        <XStack ai="center" gap="$1">
+        <XStack items="center" gap="$1">
           {Array.from({ length: 5 }).map((_, index) => {
             const active = index < reviewer.rating
             return (
               <Star
                 size="$1"
                 key={index}
-                color="none"
+                color="transparent"
                 fill={active ? '#FFCF50' : color4.val}
               />
             )

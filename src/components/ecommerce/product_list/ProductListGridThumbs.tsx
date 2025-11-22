@@ -16,25 +16,25 @@ function Item({ item }: { item: Product }) {
   return (
     // Note: you can also use `Link` from solito/link
     <Link
-      flexGrow={1}
-      flexShrink={0}
+      grow={1}
+      shrink={0}
       borderBottomWidth={1}
       borderRightWidth={1}
       borderColor="$color5"
-      backgroundColor="$background"
+      bg="$background"
       height={250}
       flexBasis={150}
-      padding={'$4'}
+      p="$4"
       href="#"
       textDecorationColor="transparent"
     >
-      <View paddingBottom="$2" gap="$2" tag="article" role="article">
+      <View pb="$2" gap="$2" tag="article">
         <Stack overflow="hidden" width="100%" height={100}>
           <Image
             source={{ uri: item.image }}
             height="100%"
             width="100%"
-            resizeMode="cover"
+            objectFit="cover"
           />
         </Stack>
         <View>
@@ -52,7 +52,7 @@ function Item({ item }: { item: Product }) {
 
 // spacers are a method to avoid streteched items at the end
 const someSpacers = Array.from({ length: 5 }).map((_c, index) => (
-  <View key={index + 'sp'} flexBasis={300} flexGrow={1} flexShrink={1} />
+  <View key={index + 'sp'} flexBasis={300} grow={1} shrink={1} />
 ))
 /**
  *  Note: if you have a lot of items, you can use a FlatList instead, Flatlist are more performant
@@ -67,7 +67,7 @@ export function ProductListGridThumbs() {
     setProducts(getProducts())
   }, [])
   return (
-    <XStack maxWidth="100%" backgroundColor="$color1" flexWrap="wrap">
+    <XStack maxW="100%" bg="$color1" flexWrap="wrap">
       {products.map((item, index) => (
         <Item key={item.id} item={item} />
       ))}

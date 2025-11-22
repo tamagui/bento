@@ -1,9 +1,11 @@
-import { useState } from 'react'
 import { FlatList } from 'react-native'
 import { Avatar, Button, Image, Paragraph, Separator, Text, View, styled } from 'tamagui'
 import { useContainerDim } from '../../hooks/useContainerDim'
 
 const items = Array.from({ length: 100 }).map((_, index) => index)
+
+const padding = 20
+const baseWidth = 300
 
 const List = styled(FlatList<number>, {})
 
@@ -17,10 +19,7 @@ const renderItem = ({
   return <Item data={{ index }} key={item} />
 }
 export function FlatGrid() {
-  const [baseWidth, setBaseWidth] = useState(300)
-  const [padding, setPadding] = useState(20)
-
-  const { width: deviceWidth, height: deviceHeight } = useContainerDim('window')
+  const { width: deviceWidth } = useContainerDim('window')
 
   const numberOfColumns = Math.round((deviceWidth - padding) / baseWidth)
 
@@ -32,7 +31,7 @@ export function FlatGrid() {
         },
       })}
       $group-window-gtXs={{
-        padding,
+        p: padding,
         height: 500,
       }}
       contentContainerStyle={{
@@ -55,16 +54,15 @@ function Item({ data }: { data: { index: number } }) {
   return (
     <View
       flexDirection="column"
-      backgroundColor="$background"
+      bg="$background"
       overflow="hidden"
-      borderRadius="$9"
+      rounded="$9"
       borderWidth={1}
       borderColor="$borderColor"
-      padding={PADDING}
+      p={PADDING}
       gap="$3"
-      flexShrink={1}
-      flexGrow={1}
-      elevation={1}
+      shrink={1}
+      grow={1}
       hoverStyle={{
         shadowColor: '$shadowColor',
         shadowOffset: {
@@ -73,31 +71,32 @@ function Item({ data }: { data: { index: number } }) {
         },
         shadowOpacity: 0.3,
         shadowRadius: '$4',
-        //@ts-ignore
-        elevationAndroid: 8,
       }}
-      // marginBottom={12}
     >
       {/* minus margin can cancel padding */}
-      <View height="$14" marginHorizontal={-PADDING} marginTop={-PADDING}>
+      <View height="$14" mx={-PADDING} mt={-PADDING}>
         <Image
           width="100%"
           height="100%"
-          backgroundColor="$backgroundPress"
+          bg="$backgroundPress"
           source={{ uri: `https://picsum.photos/250/${150 + index}` }}
         />
       </View>
-      <Paragraph size="$2" lh="$1" theme="alt1">
+      <Paragraph size="$2" lineHeight="$1" theme="alt1">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla nesciunt
         asperiores corrupti! Optio soluta excepturi aut sint nam vero, libero at
         repellendus
       </Paragraph>
-      <Separator marginHorizontal={-PADDING} />
-      <View flexDirection="row" alignItems="center" gap="$4" padding="$2">
+      <Separator mx={-PADDING} />
+      <View flexDirection="row" items="center" gap="$4" p="$2">
         <Button size="$3" circular chromeless>
           <Avatar circular>
-            <Avatar.Image accessibilityLabel="Cam" src={`/avatars/300 (1).jpeg`} />
-            <Avatar.Fallback backgroundColor="$blue10" />
+            <Avatar.Image
+              accessibilityLabel="Cam"
+              src="https://images.unsplash.com/photo-1588798204072-e5f8e649d269?&w=100"
+              objectFit="cover"
+            />
+            <Avatar.Fallback bg="$blue10" />
           </Avatar>
         </Button>
         <View gap="$1" flexDirection="column">

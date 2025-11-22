@@ -128,26 +128,26 @@ const SlidingPopoverContent = () => {
       animation="quicker"
       bg="$background"
       elevation="$8"
-      padding={0}
+      p={0}
       enterStyle={{
         y: -10,
-        o: 0,
+        opacity: 0,
       }}
       exitStyle={{
         y: -10,
-        o: 0,
+        opacity: 0,
       }}
     >
       <Popover.Arrow size="$4" />
       <YStack
         fullscreen
-        br="$4"
+        rounded="$4"
         style={{
           background: `linear-gradient(transparent, rgba(255,255,255,0.15))`,
           mixBlendMode: 'color-dodge',
         }}
       />
-      <YStack w={280} h={240} br="$4" ov="hidden">
+      <YStack width={280} height={240} rounded="$4" overflow="hidden">
         <AnimatePresence custom={{ going }} initial={false}>
           {context.id === 'takeout' && (
             <Frame key="takeout">
@@ -185,7 +185,7 @@ const SlidingPopoverContent = () => {
 const Frame = styled(YStack, {
   animation: '200ms',
   fullscreen: true,
-  zIndex: 1,
+  z: 1,
   x: 0,
   opacity: 1,
 
@@ -213,16 +213,16 @@ const TooltipLabelLarge = ({
   icon,
 }: { icon: any; title: string; subtitle: string }) => {
   return (
-    <YStack f={1} ai="center" p="$7" br="$4" ov="hidden">
-      <H2 f={1} fow="600" size="$8">
+    <YStack flex={1} items="center" p="$7" rounded="$4" overflow="hidden">
+      <H2 flex={1} fontWeight="600" size="$8">
         {title}
       </H2>
 
-      <Paragraph theme="alt1" f={1} size="$5">
+      <Paragraph theme="alt1" flex={1} fontSize="$5">
         {subtitle}
       </Paragraph>
 
-      <YStack pos="absolute" b={15} r={17} scale={2.25} rotate="-10deg">
+      <YStack position="absolute" b={15} r={17} scale={2.25} rotate="-10deg">
         {icon}
       </YStack>
     </YStack>
@@ -230,7 +230,7 @@ const TooltipLabelLarge = ({
 }
 
 const TouchableArea = styled(View, {
-  padding: '$3',
+  p: '$3',
 })
 
 /** ---------- EXAMPLE --------- */

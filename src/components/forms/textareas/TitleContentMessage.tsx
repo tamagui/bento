@@ -7,10 +7,10 @@ export function TitleContentMessage() {
     <View
       flexDirection="column"
       width={400}
-      maxWidth="100%"
+      maxW="100%"
       gap="$1"
       $group-window-sm={{
-        paddingVertical: '$6',
+        py: '$6',
       }}
     >
       <Label htmlFor="title-content" size="$3">
@@ -23,20 +23,14 @@ export function TitleContentMessage() {
         height={180}
         placeholder="Your text here"
       />
-      <View
-        flexDirection="row"
-        theme="alt1"
-        marginTop="$2.5"
-        alignItems="center"
-        gap="$2"
-      >
+      <View flexDirection="row" theme="alt1" mt="$2.5" items="center" gap="$2">
         <Info size={15} />
         <Text fontWeight="300" theme="alt2" fontSize="$2">
           some hints or info about text area
         </Text>
       </View>
 
-      <Button themeInverse marginTop="$3">
+      <Button themeInverse mt="$3">
         <Button.Text>Submit</Button.Text>
       </Button>
     </View>

@@ -20,8 +20,7 @@ export type UseFilePickerControl = {
 
 type NativeFiles<MT extends MediaTypeOptions[]> = MT[number] extends 'Images'
   ? ImagePicker.ImagePickerResult['assets']
-  : //@ts-ignore
-    DocumentPicker.DocumentResult[]
+  : DocumentPicker.DocumentPickerResult[]
 export type OnPickType<MT extends MediaTypeOptions[]> = (param: {
   webFiles: File[] | null
   nativeFiles: NativeFiles<MT> | null
@@ -38,23 +37,6 @@ export function useFilePicker<MT extends MediaTypeOptions>(
   props?: UseFilePickerProps<MT>
 ) {
   const { mediaTypes, onPick, typeOfPicker, ...rest } = props || {}
-
-  // const _onDrop = useEvent((webFiles) => {
-  //   if (onPick) {
-  //     onPick({ webFiles, nativeFiles: null })
-  //   }
-  // })
-
-  // const _onOpenDocumentNative = useEvent(async () => {
-  //   let result = await DocumentPicker.getDocumentAsync({
-  //     type: 'application/pdf',
-  //     multiple: false,
-  //   })
-
-  //   if (result.type === 'success') {
-  //     onPick({ webFiles: null, nativeFiles: result.uri })
-  //   }
-  // })
 
   const _onOpenNative = useEvent((nativeFiles) => {
     if (onPick) {

@@ -45,10 +45,10 @@ export function ButtonPulse() {
       flexDirection="row"
       gap="$4"
       flexWrap="wrap"
-      alignItems="center"
-      justifyContent="center"
-      maxWidth={850}
-      $group-window-sm={{ padding: '$6' }}
+      items="center"
+      justify="center"
+      maxW={850}
+      $group-window-sm={{ p: '$6' }}
     >
       {variants.map((v) => (
         <React.Fragment key={v.variant}>
@@ -97,7 +97,6 @@ const CustomButton = styled(Button, {
         },
       },
       lazy: {
-        theme: 'active',
         elevation: 15,
         pressStyle: {
           elevation: 7,

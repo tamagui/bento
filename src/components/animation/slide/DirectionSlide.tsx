@@ -42,8 +42,8 @@ export function DirectionSlide({
               key={dir}
             >
               <Text
-                color={'$color12'}
                 fontFamily="$mono"
+                color="$color12"
                 fontWeight="600"
                 textTransform="capitalize"
               >

@@ -28,8 +28,8 @@ export const Background = ({ themeName }: { themeName?: ThemeName }) => {
               opacity={0.5}
               borderColor="$borderColor"
               key={index}
-              ai="center"
-              jc="center"
+              items="center"
+              justify="center"
             />
           )
         })}

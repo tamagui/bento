@@ -8,13 +8,13 @@ export function HomeScreen() {
 
   return (
     <ScrollView>
-      <YStack bg="$color2" p="$3" pt="$6" pb="$8" f={1} space>
+      <YStack bg="$color2" p="$3" pt="$6" pb="$8" flex={1} gap="$4">
         <H1 fontFamily="$heading" size="$9">
           Bento
         </H1>
         <Text color="$color11">Premium Tamagui components</Text>
 
-        <YStack gap="$4" maw={600} mt="$4">
+        <YStack gap="$4" maxW={600} mt="$4">
           {componentGroups.map((group, i) => {
             return (
               <YStack key={i} gap="$2">

@@ -63,8 +63,8 @@ const Cell = styled(ThemeableStack, {
   tag: 'td',
   flexDirection: 'row',
   context: TableContext,
-  flexGrow: 0,
-  flexShrink: 1,
+  grow: 0,
+  shrink: 1,
   variants: {
     cellWidth: {
       '...size': (name, { tokens }) => {
@@ -108,9 +108,9 @@ const HeaderCell = styled(ThemeableStack, {
   tag: 'th',
   flexDirection: 'row',
   context: TableContext,
-  flexGrow: 0,
-  flexShrink: 1,
-  paddingVertical: '$3',
+  grow: 0,
+  shrink: 1,
+  py: '$3',
 
   variants: {
     cellWidth: {
@@ -150,21 +150,21 @@ const TableBody = styled(ThemeableStack, {
   tag: 'tbody',
   flexDirection: 'column',
   context: TableContext,
-  flexShrink: 1,
+  shrink: 1,
 })
 
 const TableHead = styled(ThemeableStack, {
   tag: 'thead',
   flexDirection: 'column',
   context: TableContext,
-  flexShrink: 1,
+  shrink: 1,
 })
 
 const TableFoot = styled(ThemeableStack, {
   tag: 'tfoot',
   flexDirection: 'column',
   context: TableContext,
-  flexShrink: 1,
+  shrink: 1,
 })
 
 const TableComp = styled(ThemeableStack, {

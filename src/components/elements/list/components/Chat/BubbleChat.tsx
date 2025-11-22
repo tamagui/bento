@@ -26,28 +26,24 @@ export const BubbleChat = (props: BubbleProps) => {
   const { item } = props
 
   const received = !!item.user
-  const isSticker = !!item.sticker
   const theme = useThemeName()
 
   return (
     <Pressable {...props}>
       <View
         theme={
-          theme.includes('alt1') || theme === 'light' || theme === 'dark'
-            ? 'blue'
-            : theme
+          theme.includes('alt1') || theme === 'light' || theme === 'dark' ? 'blue' : theme
         }
-        alignSelf={received ? 'flex-start' : 'flex-end'}
+        self={received ? 'flex-start' : 'flex-end'}
         backgroundColor={'$color10'}
         {...(!received && {
-          // theme: 'accent',
           backgroundColor: '$color3',
-          alignSelf: 'flex-end',
+          self: 'flex-end',
         })}
-        borderRadius={'$7'}
+        rounded="$7"
         borderCurve="continuous"
-        padding={'$3'}
-        maxWidth="80%"
+        p="$3"
+        maxW="80%"
       >
         {item.sticker ? (
           <Image source={{ uri: item.sticker }} />

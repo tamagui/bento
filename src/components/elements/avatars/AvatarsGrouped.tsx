@@ -8,7 +8,7 @@ const items = [1, 2, 3, 4, 5]
 /** ------ EXAMPLE ------ */
 export function AvatarsGrouped() {
   return (
-    <View flex={1} alignItems="center" justifyContent="center" gap="$6" p="$4">
+    <View flex={1} items="center" justify="center" gap="$6" p="$4">
       <AvatarGroup
         size="$3"
         items={items.map((index) => (
@@ -47,8 +47,8 @@ function AvatarGroup({ size, items }: { size: SizeTokens; items: React.ReactNode
       {items.map((item, index) => (
         <View
           key={index}
-          zIndex={index}
-          marginLeft={index !== 0 ? -(getTokenValue(size as any) ?? 20) * 1.5 : undefined}
+          z={index}
+          ml={index !== 0 ? -(getTokenValue(size as any) ?? 20) * 1.5 : undefined}
           animation="bouncy"
           x={0}
           {...(hovered && {

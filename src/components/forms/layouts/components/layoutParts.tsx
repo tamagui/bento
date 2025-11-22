@@ -5,10 +5,10 @@ import type { MediaQueryKey } from '@tamagui/web'
 export const FormCard = styled(View, {
   tag: 'form',
   flexDirection: 'row',
-  maxWidth: '100%',
-  borderRadius: 30,
-  '$group-window-gtSm': {
-    padding: '$6',
+  maxW: '100%',
+  rounded: 30,
+  $gtSm: {
+    p: '$6',
     shadowColor: '$shadowColor',
     shadowOffset: {
       width: 0,
@@ -17,10 +17,10 @@ export const FormCard = styled(View, {
     shadowOpacity: 0.5,
     shadowRadius: 12.35,
   },
-  '$group-window-xs': {
+  $xs: {
     borderWidth: 0,
-    borderRadius: 0,
-    paddingHorizontal: '$1',
+    rounded: 0,
+    px: '$1',
   },
 })
 

@@ -1,10 +1,9 @@
 import { FocusScope } from '@tamagui/focus-scope'
-import { Portal } from '@tamagui/portal'
 import type { Dispatch, SetStateAction } from 'react'
 import React, { forwardRef, useRef, useState } from 'react'
-import { Modal, PanResponder, Platform } from 'react-native'
 import type { Animated } from 'react-native'
-import type { PortalProps, StackProps, TamaguiElement } from 'tamagui'
+import { PanResponder } from 'react-native'
+import type { StackProps, TamaguiElement } from 'tamagui'
 import {
   AnimatePresence,
   Stack,
@@ -171,7 +170,7 @@ const DrawerSwipeable = forwardRef<
   return (
     <SwipeDismissableComponent
       onDismiss={() => setOpen(false)}
-      zIndex={1000_000_000}
+      z={1000_000_000}
       position="absolute"
       {...props}
       ref={ref}
@@ -187,8 +186,8 @@ const DrawerContent = DrawerFrame.styleable((props, ref) => {
       <DrawerFrame
         ref={ref}
         animation="medium"
-        enterStyle={{ x: -(rest.width || rest.w || 210) }}
-        exitStyle={{ x: -(rest.width || rest.w || 210) }}
+        enterStyle={{ x: -(rest.width || rest.width || 210) }}
+        exitStyle={{ x: -(rest.width || rest.width || 210) }}
         {...rest}
       >
         {children}
@@ -209,24 +208,13 @@ const DrawerImpl = ({
     defaultProp: false,
     onChange: onOpenChange,
   })
-  // biome-ignore lint/complexity/noUselessFragments: necessary for AnimatedPresence
+
   const content = open && <>{children}</>
   return (
     <DrawerContext.Provider open={_open} setOpen={setOpen}>
       <AnimatePresence>{open && content}</AnimatePresence>
     </DrawerContext.Provider>
   )
-}
-
-const DrawerPortal = (props: PortalProps) => {
-  return Platform.select({
-    web: <Portal zIndex={1000000000} {...props} />,
-    native: (
-      <Modal animationType="none" transparent={true}>
-        {props.children}
-      </Modal>
-    ),
-  })
 }
 
 export const Drawer = withStaticProperties(DrawerImpl, {

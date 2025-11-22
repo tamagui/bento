@@ -1,21 +1,12 @@
-import {
-  AnimatePresence,
-  Button,
-  H1,
-  isWeb,
-  Label,
-  RadioGroup,
-  Spinner,
-  View,
-} from 'tamagui'
-import { Input } from '../inputs/components/inputsParts'
-import { useState } from 'react'
-import { Eye, EyeOff, Info } from '@tamagui/lucide-icons'
-import { FormCard } from './components/layoutParts'
-import { useForm, Controller } from 'react-hook-form'
-import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Eye, EyeOff, Info } from '@tamagui/lucide-icons'
+import { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 import { SafeAreaView } from 'react-native'
+import { AnimatePresence, Button, H1, isWeb, RadioGroup, Spinner, View } from 'tamagui'
+import { z } from 'zod'
+import { Input } from '../inputs/components/inputsParts'
+import { FormCard } from './components/layoutParts'
 
 const schema = z
   .object({
@@ -70,12 +61,12 @@ export function SignupValidatedHookForm() {
       gap="$5"
       tag="form"
       $group-window-sm={{
-        paddingHorizontal: '$4',
-        paddingVertical: '$6',
+        px: '$4',
+        py: '$6',
       }}
     >
       <H1
-        alignSelf="center"
+        self="center"
         size="$8"
         $group-window-xs={{
           size: '$7',
@@ -88,7 +79,7 @@ export function SignupValidatedHookForm() {
         <View
           flexWrap="wrap"
           flexDirection="row"
-          justifyContent="space-between"
+          justify="space-between"
           columnGap="$4"
           rowGap="$5"
         >
@@ -101,9 +92,9 @@ export function SignupValidatedHookForm() {
                   theme: 'red',
                 })}
                 onBlur={onBlur}
-                f={1}
-                minWidth="100%"
-                $group-window-gtSm={{ flexBasis: 150, minWidth: 'inherit' }}
+                flex={1}
+                minW="100%"
+                $group-window-gtSm={{ flexBasis: 150, minW: 'inherit' }}
                 animation="quickest"
                 size="$4"
               >
@@ -118,8 +109,8 @@ export function SignupValidatedHookForm() {
                 <AnimatePresence>
                   {errors.firstName && (
                     <View
-                      bottom="$-5"
-                      left={0}
+                      b="$-5"
+                      l={0}
                       position="absolute"
                       gap="$2"
                       flexDirection="row"
@@ -136,7 +127,7 @@ export function SignupValidatedHookForm() {
                         scaleY: 0.5,
                       }}
                     >
-                      <Input.Icon padding={0}>
+                      <Input.Icon p={0}>
                         <Info />
                       </Input.Icon>
                       <Input.Info>{errors.firstName.message}</Input.Info>
@@ -155,9 +146,9 @@ export function SignupValidatedHookForm() {
                   theme: 'red',
                 })}
                 onBlur={onBlur}
-                f={1}
-                minWidth="100%"
-                $group-window-gtSm={{ flexBasis: 150, minWidth: 'inherit' }}
+                flex={1}
+                minW="100%"
+                $group-window-gtSm={{ flexBasis: 150, minW: 'inherit' }}
                 animation="quickest"
                 size="$4"
               >
@@ -172,8 +163,8 @@ export function SignupValidatedHookForm() {
                 <AnimatePresence>
                   {errors.lastName && (
                     <View
-                      bottom="$-5"
-                      left={0}
+                      b="$5"
+                      l={0}
                       position="absolute"
                       gap="$2"
                       flexDirection="row"
@@ -190,7 +181,7 @@ export function SignupValidatedHookForm() {
                         scaleY: 0.5,
                       }}
                     >
-                      <Input.Icon padding={0}>
+                      <Input.Icon p={0}>
                         <Info />
                       </Input.Icon>
                       <Input.Info>{errors.lastName.message}</Input.Info>
@@ -223,8 +214,8 @@ export function SignupValidatedHookForm() {
               <AnimatePresence>
                 {errors.email && (
                   <View
-                    bottom="$-5"
-                    left={0}
+                    b="$5"
+                    l={0}
                     position="absolute"
                     gap="$2"
                     flexDirection="row"
@@ -241,7 +232,7 @@ export function SignupValidatedHookForm() {
                       scaleY: 0.5,
                     }}
                   >
-                    <Input.Icon padding={0}>
+                    <Input.Icon p={0}>
                       <Info />
                     </Input.Icon>
                     <Input.Info>{errors.email.message}</Input.Info>
@@ -276,14 +267,14 @@ export function SignupValidatedHookForm() {
                   cursor="pointer"
                   onPress={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? <Eye color="$gray11" /> : <EyeOff color="$gray11" />}
+                  {showPassword ? <Eye color="$color11" /> : <EyeOff color="$color11" />}
                 </Input.Icon>
               </Input.Box>
               <AnimatePresence>
                 {errors.password && (
                   <View
-                    bottom="$-5"
-                    left={0}
+                    b="$5"
+                    l={0}
                     position="absolute"
                     gap="$2"
                     flexDirection="row"
@@ -300,7 +291,7 @@ export function SignupValidatedHookForm() {
                       scaleY: 0.5,
                     }}
                   >
-                    <Input.Icon padding={0}>
+                    <Input.Icon p={0}>
                       <Info />
                     </Input.Icon>
                     <Input.Info>{errors.password.message}</Input.Info>
@@ -336,17 +327,17 @@ export function SignupValidatedHookForm() {
                   onPress={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
                   {showConfirmPassword ? (
-                    <Eye color="$gray11" />
+                    <Eye color="$color11" />
                   ) : (
-                    <EyeOff color="$gray11" />
+                    <EyeOff color="$color11" />
                   )}
                 </Input.Icon>
               </Input.Box>
               <AnimatePresence>
                 {errors.confirmedPassword && (
                   <View
-                    bottom="$-5"
-                    left={0}
+                    b="$-5"
+                    l={0}
                     position="absolute"
                     gap="$2"
                     flexDirection="row"
@@ -363,7 +354,7 @@ export function SignupValidatedHookForm() {
                       scaleY: 0.5,
                     }}
                   >
-                    <Input.Icon padding={0}>
+                    <Input.Icon p={0}>
                       <Info />
                     </Input.Icon>
                     <Input.Info>{errors.confirmedPassword.message}</Input.Info>
@@ -386,14 +377,14 @@ export function SignupValidatedHookForm() {
                 onValueChange={onChange}
                 id={'account-type-t1'}
               >
-                <View flexDirection="row" alignItems="center" gap="$3">
+                <View flexDirection="row" items="center" gap="$3">
                   <RadioGroup.Item id={'personal-t1'} value="personal">
                     <RadioGroup.Indicator />
                   </RadioGroup.Item>
 
                   <Input.Label htmlFor={'personal-t1'}>Personal</Input.Label>
                 </View>
-                <View flexDirection="row" alignItems="center" gap="$3">
+                <View flexDirection="row" items="center" gap="$3">
                   <RadioGroup.Item id={'business-t1'} value="business">
                     <RadioGroup.Indicator />
                   </RadioGroup.Item>
@@ -428,8 +419,8 @@ export function SignupValidatedHookForm() {
               <AnimatePresence>
                 {errors.postalCode && (
                   <View
-                    bottom="$-5"
-                    left={0}
+                    b="$-5"
+                    l={0}
                     position="absolute"
                     gap="$2"
                     flexDirection="row"
@@ -446,7 +437,7 @@ export function SignupValidatedHookForm() {
                       scaleY: 0.5,
                     }}
                   >
-                    <Input.Icon padding={0}>
+                    <Input.Icon p={0}>
                       <Info />
                     </Input.Icon>
                     <Input.Info>{errors.postalCode.message}</Input.Info>
@@ -461,8 +452,8 @@ export function SignupValidatedHookForm() {
           disabled={loading}
           onPress={handleSubmit(onSubmit)}
           cursor={loading ? 'progress' : 'pointer'}
-          alignSelf="flex-end"
-          w="100%"
+          self="flex-end"
+          width="100%"
           iconAfter={
             <AnimatePresence>
               {loading && (
@@ -473,7 +464,7 @@ export function SignupValidatedHookForm() {
                   opacity={1}
                   position="absolute"
                   scale={0.5}
-                  left={110}
+                  l={110}
                   animation="quick"
                   enterStyle={{
                     opacity: 0,

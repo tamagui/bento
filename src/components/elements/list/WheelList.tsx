@@ -9,7 +9,16 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated'
-import { Image, isWeb, styled, Text, type ThemeName, View, YStack } from 'tamagui'
+import {
+  type ColorTokens,
+  Image,
+  isWeb,
+  styled,
+  Text,
+  type ThemeName,
+  View,
+  YStack,
+} from 'tamagui'
 
 const AnimatedView = Animated.createAnimatedComponent(View)
 const AnimatedList = styled(Animated.FlatList<CardData>, {
@@ -65,15 +74,15 @@ export function WheelList({
 
   return (
     <View
-      f={1}
-      pos="relative"
-      h={isWeb ? '80vh' : '100%'}
-      $gtLg={{ maxHeight: 600 }}
-      w="100%"
-      jc="center"
+      flex={1}
+      position="relative"
+      height={isWeb ? '80vh' : '100%'}
+      $gtLg={{ maxH: 600 }}
+      width="100%"
+      justify="center"
       theme={data[index]?.theme}
     >
-      <View pos="absolute" inset={0}>
+      <View position="absolute" inset={0}>
         {data.map((item, index) => (
           <BackgroundView key={item.id} index={index} scrollY={scrollY} />
         ))}
@@ -101,11 +110,11 @@ export function WheelList({
         }}
       />
 
-      <View pos="absolute" gap="$2" top={0} left={0} right={0} p="$4">
-        <Text zIndex={1} fontWeight="800" ff="$heading" fontSize="$10">
+      <View position="absolute" z={1} gap="$2" t={0} l={0} r={0} p="$4">
+        <Text fontWeight="800" fontFamily="$heading" fontSize="$10">
           Influencer
         </Text>
-        <Text zIndex={1} fontWeight="500" ff="$mono" color="$color10" fontSize="$8">
+        <Text fontWeight="500" fontFamily="$mono" color="$color10" fontSize="$8">
           {data.length} Contacts
         </Text>
       </View>
@@ -149,46 +158,38 @@ const CardItem = ({
       Extrapolation.CLAMP
     )
 
-    // const opacity = interpolate(scrollY.value, inputRange, [0.5, 1, 0.5])
     return {
-      transform: [
-        { rotate: `${rotate}deg` },
-        { translateY },
-        { translateX },
-        // { scale },
-        // { opacity },
-      ],
+      transform: [{ rotate: `${rotate}deg` }, { translateY }, { translateX }],
     }
   })
 
   return (
     <AnimatedView
       theme={cardItem.theme}
-      w="95%"
-      $gtSm={{ w: 300 }}
-      h={ITEM_SIZE}
-      bg={cardItem.backgroundColor}
+      width="95%"
+      $gtSm={{ width: 300 }}
+      height={ITEM_SIZE}
+      bg={cardItem.backgroundColor as ColorTokens}
       p="$2"
-      br="$8"
+      rounded="$8"
       style={animatedStyle}
       flexDirection="row"
-      // jc="center"
-      ai="center"
+      items="center"
       gap="$4"
       shadowColor="$shadow3"
       shadowOffset={{ width: 0, height: 0 }}
       shadowOpacity={0.3}
-      shadowRadius={'$6'}
+      shadowRadius="$6"
       borderWidth={2}
       borderColor="$color3"
     >
-      <View h="100%" overflow="hidden" aspectRatio={1} br="$6" bg="$color1">
+      <View height="100%" overflow="hidden" aspectRatio={1} rounded="$6" bg="$color1">
         <Image
-          h="100%"
-          w="100%"
+          height="100%"
+          width="100%"
           source={cardItem.image}
           objectFit="cover"
-          pos="absolute"
+          position="absolute"
           inset={0}
         />
       </View>
@@ -196,13 +197,13 @@ const CardItem = ({
         <Text
           color="white"
           textTransform="capitalize"
-          ff="$heading"
+          fontFamily="$heading"
           fontWeight="bold"
-          fontSize={'$8'}
+          fontSize="$8"
         >
           {cardItem.title}
         </Text>
-        <Text fontSize="$3" ff="$mono" color="white" opacity={0.8}>
+        <Text fontSize="$3" fontFamily="$mono" color="white" opacity={0.8}>
           {cardItem.description}
         </Text>
       </YStack>
@@ -219,23 +220,17 @@ const BackgroundView = ({
   const animatedStyle = useAnimatedStyle(() => {
     return {
       opacity: interpolate(scrollY.value, inputRange, [0, 0, 0.2, 1, 0.2, 0, 0]),
-      // opacity: 1,
-      // backgroundColor: interpolateColor(
-      //   scrollY.value,
-      //   inputRange,
-      //   data.map((item) => item.backgroundColor)
-      // ),
     }
   })
 
   return (
     <AnimatedView
       theme={data[index].theme}
-      bg={'$color3'}
-      pos="absolute"
+      bg="$color3"
+      position="absolute"
       inset={0}
       style={animatedStyle}
-      justifyContent="space-between"
+      justify="space-between"
     />
   )
 }
@@ -243,14 +238,14 @@ const BackgroundView = ({
 const Slider = ({ scrollY }: { scrollY: SharedValue<number> }) => {
   return (
     <YStack
-      top={0}
-      pos="absolute"
-      bottom={0}
-      left={0}
-      jc="center"
-      ai="flex-end"
-      alignSelf="center"
-      right={'$4'}
+      t={0}
+      position="absolute"
+      b={0}
+      l={0}
+      justify="center"
+      items="flex-end"
+      self="center"
+      r="$4"
       gap="$2"
     >
       {data.map((item, index) => (
@@ -280,7 +275,7 @@ const SliderItem = ({
     }
   })
 
-  return <AnimatedView br="$6" h={4} bg="$color10" style={animatedStyle} />
+  return <AnimatedView rounded="$6" height={4} bg="$color10" style={animatedStyle} />
 }
 
 type CardData = {
@@ -302,7 +297,7 @@ const data: CardData[] = [
 
     description: '100M Subscribers',
     backgroundColor: '#205781',
-    theme: 'neonBlue',
+    theme: 'blue',
   },
   {
     id: 2,

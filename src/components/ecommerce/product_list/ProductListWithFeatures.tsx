@@ -25,58 +25,33 @@ const StyledText = styled(Text, {
 
 function Item({ item }: { item: Product }) {
   return (
-    <Link
-      flexGrow={1}
-      flexShrink={1}
-      flexBasis={300}
-      href="#"
-      textDecorationColor="transparent"
-    >
-      <YStack
-        paddingBottom="$4"
-        borderBottomWidth={1}
-        borderColor="$color5"
-        gap="$2"
-        tag="article"
-        role="article"
-      >
+    <Link grow={1} shrink={1} flexBasis={300} href="#" textDecorationColor="transparent">
+      <YStack pb="$4" borderBottomWidth={1} borderColor="$color5" gap="$2" tag="article">
         <Stack overflow="hidden" width="100%" height={300}>
           <Image
             source={{ uri: item.image }}
             height="100%"
             width="100%"
-            resizeMode="cover"
+            objectFit="cover"
           />
         </Stack>
         <YStack>
           <H2 size="$4">{item.name}</H2>
           <XStack gap="$3">
             <StyledText fontWeight="bold">${item.price}</StyledText>
-            <StyledText
-              color="#fff"
-              theme="red"
-              backgroundColor="$color9"
-              paddingHorizontal="$2"
-              paddingVertical="$1"
-              marginLeft="auto"
-            >
+            <StyledText color="#fff" theme="red" bg="$color9" px="$2" py="$1" ml="auto">
               {item.discount}%
             </StyledText>
           </XStack>
         </YStack>
-        <YStack alignSelf="flex-start" theme="alt1" gap="$2">
+        <YStack self="flex-start" theme="alt1" gap="$2">
           <StyledText>XS | L | XL</StyledText>
           <XStack gap="$1">
-            <Circle backgroundColor="$green9" size={20} />
-            <Circle backgroundColor="$red9" size={20} />
-            <Circle backgroundColor="$orange9" size={20} />
-            <Circle backgroundColor="$purple9" size={20} />
-            <View
-              borderRadius={1000_000_000}
-              backgroundColor="$yellow9"
-              width={20}
-              height={20}
-            />
+            <Circle bg="$green9" size={20} />
+            <Circle bg="$red9" size={20} />
+            <Circle bg="$yellow9" size={20} />
+            <Circle bg="violet" size={20} />
+            <View rounded={1000_000_000} bg="$yellow9" width={20} height={20} />
           </XStack>
         </YStack>
       </YStack>
@@ -86,7 +61,7 @@ function Item({ item }: { item: Product }) {
 
 // spacers are a method to avoid streteched items at the end
 const someSpacers = Array.from({ length: 5 }).map((_c, index) => (
-  <YStack key={index + 'sp'} flexBasis={300} flexGrow={1} flexShrink={1} />
+  <YStack key={index + 'sp'} flexBasis={300} grow={1} shrink={1} />
 ))
 
 /** ------ EXAMPLE ------ */
@@ -97,15 +72,15 @@ export function ProductListWithFeatures() {
   }, [])
   return (
     <XStack
-      maxWidth="100%"
+      maxW="100%"
       flexWrap="wrap"
       rowGap="$8"
       columnGap="$5"
-      padding="$3"
-      paddingHorizontal="$6"
-      maxHeight={700}
+      p="$3"
+      px="$6"
+      maxH={700}
       $group-window-xs={{
-        paddingHorizontal: '$3',
+        px: '$3',
       }}
     >
       {products.map((item, index) => (

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { AnimatePresence, Button, Spinner, Theme, View } from 'tamagui'
+import { Button, Spinner, Theme, View } from 'tamagui'
 
 /** ------ EXAMPLE ------ */
 export function ButtonLoading() {
@@ -8,9 +8,9 @@ export function ButtonLoading() {
       flexDirection="row"
       gap="$4"
       flexWrap="wrap"
-      alignItems="center"
-      justifyContent="center"
-      maxWidth={400}
+      items="center"
+      justify="center"
+      maxW={400}
     >
       <ButtonLoadingExample />
       <Theme name="blue">
@@ -54,8 +54,8 @@ function ButtonLoadingExample() {
         flexDirection="row"
         x={loading ? 0 : -15}
         gap="$3"
-        alignItems="center"
-        justifyContent="center"
+        items="center"
+        justify="center"
       >
         <Button.Icon>
           <Spinner

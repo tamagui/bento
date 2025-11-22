@@ -45,18 +45,18 @@ export function GroupedCheckbox() {
   })
 
   return (
-    <View width="100%" ai="center">
+    <View width="100%" items="center">
       <Checkboxes values={values} onValuesChange={onValuesChange}>
         <Checkboxes.FocusGroup
-          minWidth="100%"
+          minW="100%"
           loop
           $group-window-gtXs={{
-            alignSelf: 'center',
-            minWidth: 'unset',
-            maxWidth: 400,
+            self: 'center',
+            minW: 'unset',
+            maxW: 400,
           }}
         >
-          <Checkboxes.Group orientation="vertical" flexShrink={1} minWidth="100%">
+          <Checkboxes.Group orientation="vertical" shrink={1} minW="100%">
             {items.map((item) => (
               <Checkboxes.FocusGroup.Item value={item.id} key={item.id}>
                 <Item checked={values[item.id]} key={item.id} item={item} />
@@ -84,14 +84,14 @@ function Item({
     <YGroup.Item>
       <Checkboxes.Card
         flexDirection="row"
-        backgroundColor={checked ? '$backgroundPress' : '$background'}
+        bg={checked ? '$backgroundPress' : '$background'}
         borderColor={checked ? '$borderColorPress' : '$borderColor'}
         borderWidth={1}
-        alignItems="center"
+        items="center"
         gap="$3"
         width="100%"
-        padding="$3.5"
-        minHeight={90}
+        p="$3.5"
+        minH={90}
         cursor="pointer"
         $group-window-sm={{
           gap: '$2',
@@ -103,7 +103,7 @@ function Item({
         </Avatar>
         <View flexDirection="column" flex={1} gap="$2">
           <View flexDirection="row" gap="$2">
-            <Checkboxes.Checkbox.Label size="$5" lh="$2" htmlFor={id}>
+            <Checkboxes.Checkbox.Label size="$5" lineHeight="$2" htmlFor={id}>
               Label
             </Checkboxes.Checkbox.Label>
 
@@ -118,7 +118,7 @@ function Item({
             fontSize="$3"
             lineHeight="$3"
             fontWeight="300"
-            col="$gray9"
+            color="$color9"
           >
             Laborum velit velit occaecat eiusmod laboris tempor. Lorem qui quis deserunt
             culpa. Ad eiusmod magna ad proident exercitation laborum qui quis

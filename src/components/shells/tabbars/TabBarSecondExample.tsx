@@ -31,7 +31,7 @@ const CustomTabBar = View.styleable<CustomTabBarProps>(
     return (
       <View
         flexDirection="row"
-        maxWidth="100%"
+        maxW="100%"
         onLayout={(e) => {
           const width = e.nativeEvent.layout.width
           // Note: you should remove the following line in your code
@@ -74,7 +74,7 @@ const CustomTabBar = View.styleable<CustomTabBarProps>(
             <View
               group="item"
               flex={1}
-              flexShrink={1}
+              shrink={1}
               width={100}
               height={50}
               cursor="pointer"
@@ -92,12 +92,12 @@ const CustomTabBar = View.styleable<CustomTabBarProps>(
                 unstyled
                 height="100%"
                 width="100%"
-                justifyContent="center"
-                alignItems="center"
+                justify="center"
+                items="center"
                 onPress={onPress}
               >
                 <Text
-                  color={isFocused ? '$color10' : '$gray10'}
+                  color={isFocused ? '$color10' : '$color7'}
                   $group-item-hover={{
                     color: isFocused ? '$color10' : '$color7',
                   }}
@@ -109,7 +109,7 @@ const CustomTabBar = View.styleable<CustomTabBarProps>(
           )
         })}
         <View
-          bottom={0}
+          b={0}
           height={2}
           borderWidth={1}
           width={tabWidth}
@@ -120,7 +120,7 @@ const CustomTabBar = View.styleable<CustomTabBarProps>(
           position="absolute"
         />
         <View
-          bottom={0}
+          b={0}
           height={2}
           borderWidth={3}
           width={tabWidth}
@@ -165,7 +165,7 @@ export function TabBarSecondExample() {
   return (
     <View flexDirection="column" width="100%" height={610}>
       <CustomTabBar
-        alignSelf="center"
+        self="center"
         theme="green"
         state={state}
         descriptors={descriptors}
@@ -182,13 +182,7 @@ export function TabBarSecondExample() {
           },
         }}
       />
-      <View
-        flexDirection="column"
-        width="100%"
-        flex={9}
-        alignItems="center"
-        justifyContent="center"
-      >
+      <View flexDirection="column" width="100%" flex={9} items="center" justify="center">
         <Text fontSize="$8" fontWeight="$8" lineHeight="$8">
           {state.routes[state.index].key}
         </Text>

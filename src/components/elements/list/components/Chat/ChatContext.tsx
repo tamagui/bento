@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import type { ThemeName } from 'tamagui'
 
 export const ChatContext = createContext<{

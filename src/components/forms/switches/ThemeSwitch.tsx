@@ -1,15 +1,7 @@
 import { MoonStar, Sun } from '@tamagui/lucide-icons'
 import { useEffect, useId, useState } from 'react'
-import {
-  AnimatePresence,
-  getVariableValue,
-  Switch,
-  useTheme,
-  View,
-  YStack,
-  isWeb,
-} from 'tamagui'
 import type { SizeTokens } from 'tamagui'
+import { AnimatePresence, getVariableValue, isWeb, Switch, View, YStack } from 'tamagui'
 
 import { getSize } from '@tamagui/get-token'
 import { useSchemeSetting } from '@vxrn/color-scheme'
@@ -30,8 +22,6 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
 
   const larger = thumbSize >= 64
 
-  const { color11 } = useTheme()
-
   const iconSize = thumbSize * 0.4
 
   return (
@@ -47,19 +37,12 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
         }
       }}
       size={size}
-      backgroundColor={'$background'}
-      jc="center"
-      ai="center"
+      backgroundColor="$background"
+      justify="center"
+      items="center"
       cursor="pointer"
       borderWidth={2}
-      borderColor={'$colorTransparent'}
-      // shadowColor="$shadowColor"
-      // shadowOffset={{
-      //   width: 12,
-      //   height: 12,
-      // }}
-      // shadowOpacity={0.2}
-      // shadowRadius="$6"
+      borderColor="$colorTransparent"
     >
       {/* switch background */}
       {larger ? <SwitchBackground checked={checked} /> : null}
@@ -74,40 +57,36 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
           m={thumbSize >= 64 ? '$1.5' : '$1'}
           flex={1}
           overflow="hidden"
-          br="$10"
-          ai="center"
-          jc="center"
-          backgroundColor={color11.val}
+          rounded="$10"
+          items="center"
+          justify="center"
+          bg="$color4"
           animation="200ms"
         >
           <AnimatePresence exitBeforeEnter custom={{ direction: -1 }}>
             <YStack
-              pos="absolute"
+              position="absolute"
               key="Sun"
               animation="medium"
               fullscreen
-              w="full"
-              h="full"
-              ai="center"
-              jc="center"
-              o={checked ? 0 : 1}
+              items="center"
+              justify="center"
+              opacity={checked ? 0 : 1}
               transform={[
                 { scale: !checked ? 1 : 0 },
                 { translateY: !checked ? 0 : thumbSize },
               ]}
             >
-              <Sun size={iconSize} fill={'white'} color={'$white'} />
+              <Sun size={iconSize} fill={'white'} color="white" />
             </YStack>
 
             <YStack
-              pos="absolute"
+              position="absolute"
               animation="medium"
               key="moon"
               fullscreen
-              ai="center"
-              w="full"
-              h="full"
-              jc="center"
+              items="center"
+              justify="center"
               transform={[
                 { scale: checked ? 1 : 0 },
                 { translateY: checked ? 0 : -thumbSize },
@@ -127,45 +106,45 @@ const SwitchBackground = ({ checked }: { checked: boolean }) => {
   return (
     <View
       key="background"
-      w="50%"
+      width="50%"
       r={checked ? '50%' : 0}
-      h="full"
-      jc="center"
-      ai="center"
+      height="100%"
+      justify="center"
+      items="center"
       animation="200ms"
-      pos="absolute"
-      top={0}
-      bottom={0}
+      position="absolute"
+      t={0}
+      b={0}
     >
       <View
         t={'20%'}
         animation="200ms"
         l={checked ? '55%' : 0}
-        pos="absolute"
+        position="absolute"
         bg="$color7"
-        w={checked ? 4 : 30}
-        h={checked ? 4 : 5}
-        borderRadius="$10"
+        width={checked ? 4 : 30}
+        height={checked ? 4 : 5}
+        rounded="$10"
       />
       <View
         t={checked ? '33%' : '45%'}
         l="28%"
         animation="200ms"
-        pos="absolute"
+        position="absolute"
         bg="$color7"
-        w={checked ? 3 : 22}
-        h={checked ? 3 : 5}
-        borderRadius="$10"
+        width={checked ? 3 : 22}
+        height={checked ? 3 : 5}
+        rounded="$10"
       />
       <View
         t={'70%'}
         l={checked ? '30%' : 0}
         animation="200ms"
-        pos="absolute"
+        position="absolute"
         bg="$color7"
-        w={checked ? 4 : 15}
-        h={checked ? 4 : 5}
-        borderRadius="$10"
+        width={checked ? 4 : 15}
+        height={checked ? 4 : 5}
+        rounded="$10"
       />
 
       {checked ? (
@@ -173,21 +152,21 @@ const SwitchBackground = ({ checked }: { checked: boolean }) => {
           <View
             b={'35%'}
             r="35%"
-            pos="absolute"
+            position="absolute"
             bg="$color7"
-            w={4}
-            h={4}
-            borderRadius="$10"
+            width={4}
+            height={4}
+            rounded="$10"
             animation="200ms"
           />
           <View
             t={'50%'}
             r="10%"
-            pos="absolute"
+            position="absolute"
             bg="$color7"
-            w={3}
-            h={3}
-            borderRadius="$10"
+            width={3}
+            height={3}
+            rounded="$10"
             animation="200ms"
           />
         </>

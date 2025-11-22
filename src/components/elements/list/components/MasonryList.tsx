@@ -13,7 +13,7 @@ import { RefreshControl, ScrollView, View } from 'react-native'
 import { YStack, styled } from 'tamagui'
 
 interface Props<T> extends Omit<ScrollViewProps, 'refreshControl'> {
-  innerRef?: MutableRefObject<ScrollView | undefined>
+  innerRef?: React.RefObject<ScrollView | undefined>
   loading?: boolean
   refreshing?: RefreshControlProps['refreshing']
   onRefresh?: RefreshControlProps['onRefresh']

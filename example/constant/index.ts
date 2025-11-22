@@ -17,25 +17,22 @@ export type Colors = {
 export const colors: Colors[] = [
   {
     emoji: '🦋',
-    theme: 'neonBlue',
+    theme: 'blue',
   },
   {
     emoji: '🦄',
-    theme: 'neon',
+    theme: 'green',
   },
   {
     emoji: '🐝',
-    // @ts-expect-error
-    theme: 'bee',
+    theme: 'yellow',
   },
   {
     emoji: '🥑',
-    // @ts-expect-error
-    theme: 'avocado',
+    theme: 'teal',
   },
   {
     emoji: '🌋',
-    // @ts-expect-error
-    theme: 'volcanic',
+    theme: 'red',
   },
 ]

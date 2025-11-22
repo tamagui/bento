@@ -52,7 +52,7 @@ const columns = [
     cell: (info) => (
       <Avatar circular size="$3">
         <Avatar.Image accessibilityLabel="Profile image" src={info.getValue()} />
-        <Avatar.Fallback backgroundColor="$gray6" />
+        <Avatar.Fallback backgroundColor="$color6" />
       </Avatar>
     ),
     header: () => 'Avatar',
@@ -82,11 +82,6 @@ const columns = [
     footer: (info) => info.column.id,
   }),
   columnHelper.accessor('progress', {
-    // cell: (info) => (
-    //   <Progress value={info.renderValue()} w="$6">
-    //     <Progress.Indicator animation="bouncy" />
-    //   </Progress>
-    // ),
     header: 'Progress',
     footer: (info) => info.column.id,
   }),
@@ -112,23 +107,24 @@ const Footer = ({
   screenWidth,
   tableWidth: TABLE_WIDTH,
 }: { table: any; screenWidth: number; tableWidth: number }) => {
+  const minW = (screenWidth - 64) / 4
   return (
     <View
-      bottom="$3"
+      b="$3"
       flexDirection="column-reverse"
-      alignItems="center"
+      items="center"
       $group-window-gtXs={{
         position: 'relative',
         flexDirection: 'row',
-        maxWidth: TABLE_WIDTH,
+        maxW: TABLE_WIDTH,
       }}
       px="$4"
-      justifyContent="space-between"
+      justify="space-between"
     >
       <XGroup>
         <XGroup.Item>
           <Button
-            $platform-native={{ minWidth: screenWidth / 4 }}
+            $platform-native={{ minW }}
             onPress={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
           >
@@ -139,7 +135,7 @@ const Footer = ({
         </XGroup.Item>
         <XGroup.Item>
           <Button
-            $platform-native={{ minWidth: screenWidth / 4 }}
+            $platform-native={{ minW }}
             onPress={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
@@ -150,7 +146,7 @@ const Footer = ({
         </XGroup.Item>
         <XGroup.Item>
           <Button
-            $platform-native={{ minWidth: screenWidth / 4 }}
+            $platform-native={{ minW }}
             onPress={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
@@ -161,7 +157,7 @@ const Footer = ({
         </XGroup.Item>
         <XGroup.Item>
           <Button
-            $platform-native={{ minWidth: screenWidth / 4 }}
+            $platform-native={{ minW }}
             onPress={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
           >
@@ -173,11 +169,11 @@ const Footer = ({
       </XGroup>
       <View
         flexDirection="row"
-        borderRadius={1000_000_000}
-        padding="$2"
-        paddingHorizontal="$6"
+        rounded={1000_000_000}
+        p="$2"
+        px="$6"
         themeInverse
-        backgroundColor="$background"
+        bg="$background"
         gap="$3"
         $platform-native={{ display: 'none' }}
       >
@@ -192,7 +188,7 @@ const Footer = ({
         $platform-native={{ display: 'none' }}
         flexDirection="row"
         gap="$4"
-        alignItems="center"
+        items="center"
         className="flex items-center gap-1"
       >
         <Text fontSize="$5" fontWeight="$5" lineHeight="$5">
@@ -208,10 +204,10 @@ const Footer = ({
             const page = text ? Number(text) - 1 : 0
             table.setPageIndex(page)
           }}
-          padding={0}
-          ta="center"
-          maxWidth={45}
-          minWidth={45}
+          p={0}
+          text="center"
+          maxW={45}
+          minW={45}
           className="border p-1 rounded"
         />
       </View>
@@ -261,7 +257,6 @@ export function SortableTable() {
   const TABLE_WIDTH = getTokenValue(CELL_WIDTH) * columns.length
 
   const { sm } = isWeb ? useGroupMedia('window') : { sm: true }
-  // const { sm } = { sm: true }
 
   const screenWidth = windowWidth - 15
 
@@ -271,15 +266,15 @@ export function SortableTable() {
         <Footer screenWidth={screenWidth} tableWidth={TABLE_WIDTH} table={table} />
       )}
     >
-      <ScrollView horizontal maxWidth="100%">
+      <ScrollView horizontal maxW="100%">
         <View
           flex={1}
           flexDirection="column"
           gap="$6"
-          minWidth={TABLE_WIDTH}
-          w="100%"
-          paddingHorizontal="$4"
-          paddingVertical="$6"
+          minW={TABLE_WIDTH}
+          width="100%"
+          px="$4"
+          py="$6"
         >
           <Table
             alignCells={{ x: 'center', y: 'center' }}
@@ -287,7 +282,7 @@ export function SortableTable() {
             cellWidth={CELL_WIDTH}
             cellHeight="$5"
             borderWidth={0.5}
-            maxWidth={TABLE_WIDTH}
+            maxW={TABLE_WIDTH}
             borderTopRightRadius="$4"
             borderTopLeftRadius="$4"
             borderBottomLeftRadius="$2"
@@ -297,13 +292,13 @@ export function SortableTable() {
               mb: 'inherit',
             }}
           >
-            <Table.Head position="absolute" zIndex="$1" maxWidth={TABLE_WIDTH}>
+            <Table.Head position="absolute" z="$1" maxW={TABLE_WIDTH}>
               {headerGroups.map((headerGroup) => {
                 rowCounter.current++
                 return (
                   <Table.Row
                     backgrounded
-                    backgroundColor="$color2"
+                    bg="$color2"
                     rowLocation={
                       rowCounter.current === 0
                         ? 'first'
@@ -340,7 +335,7 @@ export function SortableTable() {
                                 : undefined
                             }
                             gap="$2"
-                            alignItems="center"
+                            items="center"
                           >
                             <Text fontSize="$4" selectable={false}>
                               {header.isPlaceholder
@@ -351,10 +346,10 @@ export function SortableTable() {
                                   )}
                             </Text>
                             {{
-                              asc: <ChevronUp size="$1" color="$gray10" />,
-                              desc: <ChevronDown size="$1" color="$gray10" />,
+                              asc: <ChevronUp size="$1" color="$color10" />,
+                              desc: <ChevronDown size="$1" color="$color10" />,
                               noSort: isSortableHeader ? (
-                                <ChevronsUpDown size="$1" color="$gray10" />
+                                <ChevronsUpDown size="$1" color="$color10" />
                               ) : null,
                             }[header.column.getIsSorted() || 'noSort'] ?? null}
                           </View>
@@ -370,9 +365,9 @@ export function SortableTable() {
                 rowCounter.current++
                 return (
                   <Table.Row
-                    minWidth={TABLE_WIDTH}
+                    minW={TABLE_WIDTH}
                     hoverStyle={{
-                      backgroundColor: '$color2',
+                      bg: '$color2',
                     }}
                     rowLocation={
                       rowCounter.current === 0
@@ -397,7 +392,7 @@ export function SortableTable() {
                         {cell.column.id === 'avatar' ? (
                           <>{flexRender(cell.column.columnDef.cell, cell.getContext())}</>
                         ) : (
-                          <Text fontSize="$4" color="$gray11">
+                          <Text fontSize="$4" color="$color11">
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           </Text>
                         )}

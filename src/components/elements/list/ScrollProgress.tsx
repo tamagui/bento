@@ -1,8 +1,7 @@
 import { ArrowRight, Bookmark, ChevronLeft } from '@tamagui/lucide-icons'
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
-import { SafeAreaView, TouchableOpacity } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import Animated, {
-  
   interpolate,
   type SharedValue,
   useAnimatedProps,
@@ -11,12 +10,12 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import Svg, { Circle } from 'react-native-svg'
 import {
   AnimatePresence,
   getToken,
   isWeb,
-  Paragraph,
   styled,
   Text,
   useTheme,
@@ -63,12 +62,13 @@ export function ScrollProgress() {
   const ListHeaderComponent = useCallback(() => {
     return (
       <>
-        <View pt="$20" gap="$2" alignItems="center">
-          <Text ff="$mono" color="$color8" textAlign="center" fontSize="$4">
+        <View pt="$20" gap="$2" items="center">
+          <Text color="$color8" text="center" fontSize="$4" fontFamily="$mono">
             {subTitle}
           </Text>
 
           <Text
+            // @ts-expect-error
             fontFamily="Times New Roman"
             fontWeight="bold"
             fontSize={24}
@@ -77,7 +77,7 @@ export function ScrollProgress() {
             THE FAMOUS GENTLEMAN DON QUIXOTE OF LA MANCHA
           </Text>
         </View>
-        <View h={1} w="40%" bg="$color8" my="$6" alignSelf="center" />
+        <View height={1} width="40%" bg="$color8" my="$6" self="center" />
       </>
     )
   }, [])
@@ -85,19 +85,24 @@ export function ScrollProgress() {
   return (
     <ScreenContext.Provider value={{ progress, bookmarked, setBookmarked }}>
       <View
-        f={1}
-        pos="relative"
-        h={isWeb ? '80vh' : '100%'}
-        $gtLg={{ maxHeight: 600 }}
-        maxWidth={600}
-        w="100%"
-        justifyContent="flex-end"
-        alignSelf="center"
+        flex={1}
+        position="relative"
+        height={isWeb ? '80vh' : '100%'}
+        $gtLg={{ maxH: 600 }}
+        maxW={600}
+        width="100%"
+        justify="flex-end"
+        self="center"
       >
         <AnimatedList
           onScroll={scrollHandler}
           renderItem={({ item }) => (
-            <Text fontSize="$6" fontFamily="Times New Roman" lineHeight={isWeb ? 31 : "$7"}>
+            <Text
+              fontSize="$6"
+              // @ts-expect-error
+              fontFamily="Times New Roman"
+              lineHeight={isWeb ? 31 : '$7'}
+            >
               {item}
             </Text>
           )}
@@ -122,26 +127,25 @@ export function ScrollProgress() {
 
 const HeaderView = () => {
   const { progress, bookmarked, setBookmarked } = useScreenContext()
-  const { color8 } = useTheme({ name: 'blue' })
 
   const opacityStyle = useAnimatedStyle(() => ({
     opacity: interpolate(progress.value, [0.05, 0.1], [0, 1]),
   }))
 
   return (
-    <View py="$4" px="$4" pos="absolute" top={-1} left={0} right={0}>
+    <View py="$4" px="$4" position="absolute" t={-1} l={0} r={0}>
       <SafeAreaView />
 
       <AnimatedLinearGradient
         colors={['$background', '$background08', '$background0']}
         locations={[0.8, 0.9, 1]}
-        pos="absolute"
+        position="absolute"
         inset={0}
         pb={isWeb ? '$12' : '$16'}
         style={opacityStyle}
       />
 
-      <XStack alignItems="center" gap="$4">
+      <XStack items="center" gap="$4">
         <ChevronLeft
           onPress={() => {
             //
@@ -149,10 +153,11 @@ const HeaderView = () => {
         />
 
         <AnimatedView gap="$1" style={opacityStyle} flex={1}>
-          <AnimatedText theme="blue" ff="$mono" color="$color8" fontSize="$2">
+          <AnimatedText theme="blue" color="$color8" fontSize="$2" fontFamily="$mono">
             {subTitle}
           </AnimatedText>
           <AnimatedText
+            // @ts-expect-error
             fontFamily="Times New Roman"
             numberOfLines={1}
             fontSize="$5"
@@ -163,10 +168,10 @@ const HeaderView = () => {
         </AnimatedView>
         <TouchableOpacity onPress={() => setBookmarked(!bookmarked)}>
           <Bookmark
-            fill={bookmarked ? color8.val : 'none'}
-            color={bookmarked ? color8.val : '$color'}
+            fill={bookmarked ? '$color8' : 'none'}
+            color={bookmarked ? '$color8' : '$color'}
             onPress={() => setBookmarked(!bookmarked)}
-            zIndex={99}
+            z={99}
           />
         </TouchableOpacity>
       </XStack>
@@ -237,12 +242,12 @@ const BottomView = () => {
       borderColor="$color5"
       style={animatedStyle}
       overflow="hidden"
-      pos="absolute"
-      bottom={isWeb ? '$4' : getToken('$space.4') * 2}
-      alignSelf="center"
+      position="absolute"
+      b={isWeb ? '$4' : getToken('$space.4') * 2}
+      self="center"
       shadowColor="$color5"
-      alignItems="center"
-      justifyContent="flex-end"
+      items="center"
+      justify="flex-end"
       themeInverse
     >
       <AnimatedView
@@ -255,25 +260,25 @@ const BottomView = () => {
           scale: 1.1,
         }}
         flexDirection="row"
-        alignItems="center"
-        alignSelf="center"
+        items="center"
+        self="center"
       >
         <View>
           <AnimatedView px="$4" style={currentAnimated}>
             <Text fontWeight="bold" fontSize="$2">
               {title}
             </Text>
-            <Text ff="$mono" color="$color11" fontWeight="500" fontSize="$1">
+            <Text color="$color11" fontWeight="500" fontSize="$1" fontFamily="$mono">
               {subTitle}
             </Text>
           </AnimatedView>
         </View>
 
         <AnimatedView
-          justifyContent="center"
-          alignItems="flex-start"
+          justify="center"
+          items="flex-start"
           bg="$background"
-          pos="absolute"
+          position="absolute"
           px="$4"
           gap={0}
           inset={0}
@@ -282,7 +287,7 @@ const BottomView = () => {
           <Text fontWeight="bold" fontSize="$2">
             {showBookmark ? 'Bookmarked' : 'Next'}
           </Text>
-          <Text ff="$mono" color="$color11" fontWeight="500" fontSize="$1">
+          <Text color="$color11" fontWeight="500" fontSize="$1" fontFamily="$mono">
             Chapter II
           </Text>
         </AnimatedView>
@@ -348,12 +353,12 @@ const CircleProgress = ({
       <AnimatedView
         width={size}
         height={size}
-        justifyContent="center"
-        alignItems="center"
+        justify="center"
+        items="center"
         style={nextAnimated}
-        borderRadius="$10"
+        rounded="$10"
         bg="$green11"
-        pos="absolute"
+        position="absolute"
       >
         <ArrowRight color="$background" />
       </AnimatedView>
@@ -363,11 +368,11 @@ const CircleProgress = ({
           <AnimatedView
             width={size}
             height={size}
-            justifyContent="center"
-            alignItems="center"
-            borderRadius="$10"
-            bg="$blue8Light"
-            pos="absolute"
+            justify="center"
+            items="center"
+            rounded="$10"
+            bg="$green8"
+            position="absolute"
             animation="quicker"
             enterStyle={{
               scale: 0,
@@ -380,10 +385,10 @@ const CircleProgress = ({
             scale={1}
           >
             <Bookmark
-              justifyContent="center"
-              alignItems="center"
-              borderRadius="$10"
-              pos="absolute"
+              justify="center"
+              items="center"
+              rounded="$10"
+              position="absolute"
               color="$color"
               fill={color.val}
             />

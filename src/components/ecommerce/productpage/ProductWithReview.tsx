@@ -95,28 +95,27 @@ export function ProductWithReview() {
     <ScrollView width="100%">
       <View
         width="100%"
-        backgroundColor="$background"
-        padding="$8"
+        bg="$background"
+        p="$8"
         gap="$8"
-        //xs
         $xs={{
-          padding: '$4',
+          p: '$4',
           gap: '$4',
         }}
       >
         <View
           flexDirection="row"
-          backgroundColor="$background"
+          bg="$background"
           width="100%"
           flexWrap="wrap"
           gap="$10"
-          alignItems="stretch"
+          items="stretch"
           $group-window-xs={{
             gap: '$6',
           }}
         >
           <View
-            w="100%"
+            width="100%"
             $group-window-sm={{
               flexBasis: '100%',
             }}
@@ -138,7 +137,7 @@ export function ProductWithReview() {
                     borderRadius="$2"
                     aspectRatio={1 / 1}
                     objectFit="cover"
-                    backgroundColor="$color2"
+                    bg="$color2"
                     source={{ uri: tempPicture || selectedPicture }}
                     $group-window-sm={{
                       height: 300,
@@ -150,7 +149,7 @@ export function ProductWithReview() {
                 flexDirection="row"
                 width="100%"
                 $group-window-xs={{
-                  paddingHorizontal: '$3',
+                  px: '$3',
                 }}
               >
                 <RovingFocusGroup
@@ -162,12 +161,12 @@ export function ProductWithReview() {
                   <ScrollView
                     horizontal
                     width="100%"
-                    alignSelf="center"
+                    self="center"
                     showsHorizontalScrollIndicator={false}
                     contentContainerStyle={{
                       gap: '$3',
-                      paddingVertical: '$4',
-                      paddingHorizontal: '$2',
+                      py: '$4',
+                      px: '$2',
                     }}
                   >
                     {product.pictures.map(({ picture, meta: { colorName } }, index) => (
@@ -178,8 +177,8 @@ export function ProductWithReview() {
                         active={picture === selectedPicture}
                       >
                         <View
-                          flexGrow={1}
-                          borderRadius="$2"
+                          grow={1}
+                          rounded="$2"
                           onFocus={() => setDebounceTempPicture(picture)}
                           onHoverIn={() => setDebounceTempPicture(picture)}
                           onHoverOut={() => setDebounceTempPicture(null)}
@@ -196,14 +195,14 @@ export function ProductWithReview() {
                           outlineOffset={3}
                           outlineWidth={2}
                           hoverStyle={{
-                            outlineColor: '$gray9',
+                            outlineColor: '$color9',
                           }}
                           pressStyle={{
                             outlineOffset: 4,
                           }}
                           outlineColor={
                             picture === selectedPicture
-                              ? '$gray10'
+                              ? '$color10'
                               : ('transparent' as any)
                           }
                           overflow="hidden"
@@ -227,7 +226,7 @@ export function ProductWithReview() {
                               height={'100%'}
                               aspectRatio={1}
                               resizeMode="center"
-                              backgroundColor="$color2"
+                              bg="$color2"
                               borderRadius="$2"
                             />
                           </View>
@@ -236,12 +235,12 @@ export function ProductWithReview() {
                               width="100%"
                               animation="bouncy"
                               position="absolute"
-                              justifyContent="center"
-                              alignItems="center"
-                              paddingTop="$2.5"
-                              paddingBottom="$4"
-                              backgroundColor="rgba(0,0,0,0.7)"
-                              bottom={0}
+                              justify="center"
+                              items="center"
+                              pt="$2.5"
+                              pb="$4"
+                              bg="rgba(0,0,0,0.7)"
+                              b={0}
                               y={15}
                               opacity={0.7}
                               {...((selectedPicture === picture ||
@@ -267,25 +266,25 @@ export function ProductWithReview() {
             flexDirection="column"
             flex={7}
             flexBasis={550}
-            maxWidth="100%"
+            maxW="100%"
             gap="$5"
-            alignItems="flex-start"
+            items="flex-start"
             $group-window-xs={{
-              paddingHorizontal: '$3',
+              px: '$3',
             }}
           >
-            <View flexDirection="column" width="100%" alignItems="flex-start">
+            <View flexDirection="column" width="100%" items="flex-start">
               <View
                 flexDirection="row"
                 flexWrap="wrap"
-                alignItems="center"
+                items="center"
                 width="100%"
-                justifyContent="space-between"
+                justify="space-between"
                 $group-window-xs={{
                   gap: '$3',
                 }}
               >
-                <View gap="$3" alignItems="flex-start" flexDirection="column">
+                <View gap="$3" items="flex-start" flexDirection="column">
                   <H1
                     size="$9"
                     $xs={{
@@ -294,7 +293,7 @@ export function ProductWithReview() {
                   >
                     {product.title}
                   </H1>
-                  <XStack flexDirection="row" gap="$2" jc="center" ai="center">
+                  <XStack flexDirection="row" gap="$2" justify="center" items="center">
                     <View flexDirection="row" gap="$1">
                       {Array.from({ length: 5 })
                         .fill(0)
@@ -304,8 +303,8 @@ export function ProductWithReview() {
                             size={16}
                             color={
                               index < Math.floor(product.stars.rate)
-                                ? '$yellow9'
-                                : '$gray9'
+                                ? 'yellow'
+                                : '$color9'
                             }
                           />
                         ))}
@@ -316,7 +315,7 @@ export function ProductWithReview() {
                   </XStack>
                 </View>
 
-                <View gap="$1" alignItems="flex-end">
+                <View gap="$1" items="flex-end">
                   <Text
                     fontSize="$9"
                     fontWeight="600"
@@ -343,7 +342,7 @@ export function ProductWithReview() {
 
             <Separator width="100%" />
 
-            <View gap="$4" w="100%">
+            <View gap="$4" width="100%">
               <XStack gap="$6">
                 <View flexDirection="column" gap="$2">
                   <SizableText size="$5">Colors</SizableText>
@@ -356,7 +355,7 @@ export function ProductWithReview() {
                 </View>
               </XStack>
 
-              <XStack alignItems="center" gap="$4">
+              <XStack items="center" gap="$4">
                 <ItemCounter />
                 <Spacer />
                 <Button
@@ -370,26 +369,26 @@ export function ProductWithReview() {
               </XStack>
             </View>
             <Separator width="100%" />
-            <View flexDirection="column" maxWidth="100%" flexShrink={1} gap="$3">
+            <View flexDirection="column" maxW="100%" shrink={1} gap="$3">
               <SizableText size="$6">Description</SizableText>
-              <SizableText theme="alt1" flexShrink={1} size="$4">
+              <SizableText theme="alt1" shrink={1} size="$4">
                 {product.description}
               </SizableText>
             </View>
             <Separator width="100%" />
             <View flexDirection="column" gap="$3">
               <SizableText size="$6">Details</SizableText>
-              <View flexDirection="column" alignItems="flex-start" paddingLeft="$2">
+              <View flexDirection="column" items="flex-start" pl="$2">
                 {product.features.map((feature) => (
                   <View
                     key={feature}
                     flexDirection="row"
                     gap="$1"
-                    justifyContent="center"
-                    alignItems="center"
+                    justify="center"
+                    items="center"
                   >
                     <Dot />
-                    <SizableText theme="alt1" flexShrink={1} size="$4">
+                    <SizableText theme="alt1" shrink={1} size="$4">
                       {feature}
                     </SizableText>
                   </View>
@@ -401,12 +400,12 @@ export function ProductWithReview() {
         <Separator />
         <View flexDirection="column" gap="$3">
           <H2
-            marginLeft="$-1.5"
+            ml="$-1.5"
             $group-window-sm={{
-              marginHorizontal: '$0.5',
+              mx: '$0.5',
             }}
             $group-window-xs={{
-              paddingHorizontal: '$3.5',
+              px: '$3.5',
             }}
           >
             Reviews
@@ -439,8 +438,8 @@ function ColorSelector() {
           cursor="pointer"
           width={30}
           height={30}
-          backgroundColor={color.code as ColorTokens}
-          borderRadius="$2"
+          bg={color.code as ColorTokens}
+          rounded="$2"
           key={color.code}
           outlineWidth={2}
           outlineOffset={2}
@@ -467,13 +466,13 @@ function SizeSelector() {
           cursor="pointer"
           width={30}
           height={30}
-          backgroundColor="$color2"
-          borderRadius="$2"
+          bg="$color2"
+          rounded="$2"
           key={size}
           borderWidth={2}
           borderColor={(selectedSize === size ? '$borderPress' : '$borderColor') as any}
-          justifyContent="center"
-          alignItems="center"
+          justify="center"
+          items="center"
         >
           <SizableText
             size="$3"
@@ -506,11 +505,11 @@ const ItemCounter = XGroup.styleable((props, ref) => {
       <XGroup.Item>
         <View
           flexBasis={40}
-          justifyContent="center"
-          alignItems="center"
+          justify="center"
+          items="center"
           borderColor="$borderColor"
           borderWidth={1}
-          borderRadius={100}
+          rounded={100}
         >
           <SizableText>{count}</SizableText>
         </View>
@@ -565,8 +564,8 @@ function Reviews() {
           <Fragment key={index}>
             <Review
               width={sm ? '100%' : undefined}
-              maxWidth={sm ? '100%' : 400}
-              backgroundColor={'$backgroundFocus'}
+              maxW={sm ? '100%' : 400}
+              bg="$backgroundFocus"
               key={review.id}
               review={review}
             />
@@ -581,7 +580,7 @@ function Reviews() {
           width="15%"
           colors={['$background', '#00000000']}
           pointerEvents="none"
-          zIndex={100}
+          z={100}
           opacity={0.3}
         />
       )}
@@ -598,15 +597,15 @@ const Review = View.styleable<ReviewProps>(({ review, ...rest }, forwardRef) => 
     <View
       flexDirection="column"
       gap="$4"
-      borderRadius="$4"
-      padding="$4"
-      backgroundColor="$color1"
+      rounded="$4"
+      p="$4"
+      bg="$color1"
       {...rest}
       ref={forwardRef}
     >
-      <View flexDirection="row" alignItems="center" gap="$3">
+      <View flexDirection="row" items="center" gap="$3">
         <Avatar circular size="$3">
-          <Avatar.Image resizeMode="contain" source={{ uri: review.avatar }} />
+          <Avatar.Image objectFit="contain" source={{ uri: review.avatar }} />
           <Avatar.Fallback />
         </Avatar>
         <View flexDirection="column" gap="$1">
@@ -618,7 +617,7 @@ const Review = View.styleable<ReviewProps>(({ review, ...rest }, forwardRef) => 
                 <Star
                   key={index}
                   size={12}
-                  color={index < Math.floor(review.rate) ? '$yellow9' : '$gray9'}
+                  color={index < Math.floor(review.rate) ? 'yellow' : '$color9'}
                 />
               ))}
           </View>

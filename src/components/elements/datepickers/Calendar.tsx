@@ -66,10 +66,10 @@ function CalendarView({
     <View flexDirection="column" gap="$4">
       <View
         flexDirection="row"
-        minWidth="100%"
+        minW="100%"
         height={50}
-        alignItems="center"
-        justifyContent="space-between"
+        items="center"
+        justify="space-between"
       >
         {order === 'first' || order === 'either' ? (
           <Button circular size="$4" {...swapOnClick(subtractOffset({ months: 1 }))}>
@@ -104,15 +104,21 @@ function CalendarView({
       </View>
       <AnimatePresence key={prevNextAnimationKey}>
         <View
-          w="100%"
-          jc="center"
-          ai="center"
+          width="100%"
+          justify="center"
+          items="center"
           animation="medium"
           gap="$4"
           {...prevNextAnimation()}
         >
           <WeekView weekDays={weekDays} />
-          <View flexDirection="column" gap="$2" ai="center" jc="center" w="100%">
+          <View
+            flexDirection="column"
+            gap="$2"
+            items="center"
+            justify="center"
+            width="100%"
+          >
             {calendarWeeks.map((days) => {
               const isWeekInCalendarMonth = days.some((day) => day.inCurrentMonth)
               if (!isWeekInCalendarMonth) {
@@ -121,12 +127,11 @@ function CalendarView({
 
               return (
                 <View
-                  jc="space-between"
-                  ai="center"
+                  justify="space-between"
+                  items="center"
                   flexDirection="row"
                   key={days[0].$date.toString()}
-                  //   flex={1}
-                  w="100%"
+                  width="100%"
                 >
                   {days.map((day) => {
                     const dayIsFirstOrLastOfMonth =
@@ -142,35 +147,33 @@ function CalendarView({
                       dayIsFirstOrLastOfMonth && day.range && day.range === 'in-range'
 
                     if (!day.inCurrentMonth) {
-                      return <Stack key={day.$date.toString()} flex={1} w="100%" />
+                      return <Stack key={day.$date.toString()} flex={1} width="100%" />
                     }
 
                     const BG_RANGE_STYLE: {
                       [key: string]: GetProps<typeof View>
                     } = {
                       'in-range': {
-                        backgroundColor: dayIsFirstOrLastOfMonth
-                          ? 'transprent'
-                          : '$color5',
+                        background: dayIsFirstOrLastOfMonth ? 'transprent' : '$color5',
                       },
                       'range-start': {
-                        backgroundColor: '$color5',
+                        bg: '$color5',
                         width: '50%',
-                        right: 0,
+                        r: 0,
                       },
                       'range-end': {
-                        backgroundColor: '$color5',
+                        bg: '$color5',
                         width: '50%',
-                        left: 0,
+                        l: 0,
                       },
                       'will-be-in-range': {
-                        backgroundColor: '$gray2',
+                        bg: '$color2',
                       },
                       'will-be-range-start': {
-                        backgroundColor: '$gray1',
+                        bg: '$color1',
                       },
                       'will-be-range-end': {
-                        backgroundColor: '$color1',
+                        bg: '$color1',
                       },
                       '': {},
                     }
@@ -224,7 +227,7 @@ function CalendarView({
                         <LinearGradient
                           key={day.$date.toString()}
                           flex={1}
-                          w="100%"
+                          width="100%"
                           colors={['$color5', '$background06']}
                           start={direction === 'leftToRight' ? [0, 1] : [1, 1]}
                           end={direction === 'leftToRight' ? [1, 1] : [0, 1]}
@@ -237,10 +240,10 @@ function CalendarView({
 
                     return (
                       <View
-                        jc="center"
-                        ai="center"
+                        justify="center"
+                        items="center"
                         key={day.$date.toString()}
-                        w="100%"
+                        width="100%"
                         flex={1}
                       >
                         {(day.range === 'in-range' ||
@@ -248,9 +251,9 @@ function CalendarView({
                           day.range === 'range-end') && (
                           <View
                             animation="quick"
-                            pos="absolute"
-                            w="100%"
-                            h="100%"
+                            position="absolute"
+                            width="100%"
+                            height="100%"
                             {...BG_RANGE_STYLE[day.range]}
                             enterStyle={{
                               opacity: 0,
@@ -306,14 +309,13 @@ export function Calendar({ showTabs = true }: { showTabs?: boolean }) {
           defaultValue="range"
           flexDirection="row"
           orientation="horizontal"
-          borderRadius="$4"
+          rounded="$4"
           borderWidth="$0.25"
           overflow="hidden"
-          w="fit"
-          alignSelf="center"
+          self="center"
           $gtMd={{
-            ai: 'center',
-            jc: 'center',
+            items: 'center',
+            justify: 'center',
           }}
           bg="$color1"
           borderColor="$borderColor"
@@ -332,7 +334,6 @@ export function Calendar({ showTabs = true }: { showTabs?: boolean }) {
                 focusStyle={{
                   backgroundColor: '$color3',
                 }}
-                w="full"
                 value="range"
               >
                 <SizableText>Range</SizableText>
@@ -365,9 +366,9 @@ export function Calendar({ showTabs = true }: { showTabs?: boolean }) {
           flexDirection="row"
           gap="$4"
           p="$4"
-          bw={1}
+          borderWidth={1}
           borderColor="$borderColor"
-          borderRadius="$8"
+          rounded="$8"
           shadowColor="$color10"
           shadowOffset={{ width: 0, height: '$6' }}
           shadowOpacity={0.2}
@@ -384,14 +385,14 @@ export function Calendar({ showTabs = true }: { showTabs?: boolean }) {
             </>
           )}
           {header === 'year' && (
-            <View alignItems="center" gap="$2">
+            <View items="center" gap="$2">
               <YearRangeSlider />
               <YearPicker onChange={() => setHeader('day')} />
             </View>
           )}
           {header === 'month' && (
             <View gap="$4">
-              <H3 size="$7" alignSelf="center">
+              <H3 size="$7" self="center">
                 Select a month
               </H3>
               <MonthPicker

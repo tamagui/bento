@@ -15,10 +15,10 @@ export function InputWithRightIconDemo({ size }: { size?: SizeTokens }) {
   const inputRef = useRef<TextInput>(null)
   const focusTrigger = useForwardFocus(inputRef)
   return (
-    <View justifyContent="center" alignItems="center">
-      <Input size={size} minWidth="100%">
+    <View justify="center" items="center">
+      <Input size={size} minW="100%">
         <Input.Box>
-          <Input.Area ref={inputRef} paddingRight={0} placeholder="Set alarm" />
+          <Input.Area ref={inputRef} pr={0} placeholder="Set alarm" />
           <Input.Icon {...focusTrigger}>
             <AlarmClock />
           </Input.Icon>

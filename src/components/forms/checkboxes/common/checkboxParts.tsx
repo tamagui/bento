@@ -30,7 +30,7 @@ const FocusGroup = forwardRef<React.ElementRef<typeof View>, RovingFocusGroupPro
         focusable
         outlineOffset={1}
         focusStyle={{
-          zIndex: 1000,
+          z: 1000,
         }}
         {...props}
         ref={ref}
@@ -53,7 +53,7 @@ const FocusGroupItem = forwardRef<any, RovingFocusItemProps & { value: string }>
       outlineOffset: 1,
       flexShrink: 1,
       focusStyle: {
-        zIndex: 1,
+        z: 1,
       },
       ...(isWeb && {
         onKeyDown: (e: KeyboardEvent) => {
@@ -129,23 +129,23 @@ type CardProps = {
 const CardFrame = styled(View, {
   cursor: 'pointer',
   width: '100%',
-  borderRadius: '$4',
-  padding: '$3',
-  backgroundColor: '$background',
+  rounded: '$4',
+  p: '$3',
+  bg: '$background',
   borderColor: '$borderColor',
   borderWidth: 1,
   focusStyle: {
-    backgroundColor: '$backgroundFocus',
+    bg: '$backgroundFocus',
     borderColor: '$borderColorFocus',
   },
   hoverStyle: {
-    backgroundColor: '$backgroundHover',
+    bg: '$backgroundHover',
     borderColor: '$borderColorHover',
   },
 
   ...(process.env.TAMAGUI_TARGET === 'web' && {
     pressStyle: {
-      backgroundColor: '$backgroundPress',
+      bg: '$backgroundPress',
       borderColor: '$borderColorPress',
     },
   }),

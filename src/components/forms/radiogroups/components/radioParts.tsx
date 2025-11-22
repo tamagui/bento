@@ -3,23 +3,23 @@ import { View, styled } from 'tamagui'
 export const Card = styled(View, {
   cursor: 'pointer',
   width: '100%',
-  borderRadius: '$4',
-  padding: '$3',
-  backgroundColor: '$background',
+  rounded: '$4',
+  p: '$3',
+  bg: '$background',
   borderColor: '$borderColor',
   borderWidth: 1,
   focusStyle: {
-    backgroundColor: '$backgroundFocus',
+    bg: '$backgroundFocus',
     borderColor: '$borderColorFocus',
   },
   hoverStyle: {
-    backgroundColor: '$backgroundHover',
+    bg: '$backgroundHover',
     borderColor: '$borderColorHover',
   },
 
   ...(process.env.TAMAGUI_TARGET === 'web' && {
     pressStyle: {
-      backgroundColor: '$backgroundPress',
+      bg: '$backgroundPress',
       borderColor: '$borderColorPress',
     },
   }),
@@ -27,7 +27,7 @@ export const Card = styled(View, {
   variants: {
     active: {
       true: {
-        backgroundColor: '$backgroundFocus',
+        bg: '$backgroundFocus',
         borderColor: '$borderColorFocus',
       },
     },

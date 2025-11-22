@@ -146,10 +146,10 @@ const columns = [
       cell: (info) => {
         const { fullName, userName, image } = info.getValue()
         return (
-          <View flexDirection="row" alignItems="center" gap="$3" ml="$2">
+          <View flexDirection="row" items="center" gap="$3" ml="$2">
             <Avatar circular size="$4">
               <Avatar.Image accessibilityLabel="Profile image" src={image} />
-              <Avatar.Fallback backgroundColor="$gray6" />
+              <Avatar.Fallback bg="$color6" />
             </Avatar>
             <View flexDirection="column">
               <Text>{fullName}</Text>
@@ -187,15 +187,15 @@ const StatusButton = ({ status }: { status: string }) => {
   return (
     <View
       flexDirection="row"
-      alignItems="center"
+      items="center"
       gap="$2"
       theme={status?.toLocaleLowerCase() === 'active' ? 'green' : 'orange'}
-      backgroundColor="$color6"
-      borderRadius={1000_000_000}
+      bg="$color6"
+      rounded={1000_000_000}
       px="$2"
       py="$1"
     >
-      <Circle size={10} backgroundColor="$color10" />
+      <Circle size={10} bg="$color10" />
       <Text color="$color10" fontWeight="$2">
         {status}
       </Text>
@@ -224,43 +224,37 @@ export function UsersTable() {
 
   if (sm) {
     return (
-      <View
-        width="100%"
-        flexDirection="column"
-        justifyContent="center"
-        gap="$5"
-        paddingVertical="$6"
-      >
+      <View width="100%" flexDirection="column" justify="center" gap="$5" py="$6">
         {defaultData.map((row, i) => {
           return (
             <View
               key={i}
-              borderRadius="$4"
+              rounded="$4"
               borderWidth="$1"
               borderColor="$borderColor"
               flex={1}
-              alignSelf="stretch"
+              self="stretch"
               width="100%"
               gap="$2"
-              paddingTop="$2"
+              pt="$2"
             >
-              <XStack alignItems="center" paddingVertical="$1" marginLeft="$3" gap="$2">
+              <XStack items="center" py="$1" ml="$3" gap="$2">
                 <Avatar circular size="$3">
                   <Avatar.Image accessibilityLabel="Profile image" src={row.avatar} />
-                  <Avatar.Fallback backgroundColor="$gray6" />
+                  <Avatar.Fallback bg="$color6" />
                 </Avatar>
-                <View justifyContent="space-between">
+                <View justify="space-between">
                   <Text>{row.fullName}</Text>
-                  <Text fontSize="$3" color="$gray10">
+                  <Text fontSize="$3" color="$color10">
                     {row.username}
                   </Text>
                 </View>
-                <View marginLeft="auto" paddingRight="$3">
+                <View ml="auto" pr="$3">
                   <StatusButton status={row.status} />
                 </View>
               </XStack>
 
-              <View height={2} backgroundColor="$borderColor" />
+              <View height={2} bg="$borderColor" />
 
               <View gap="$2">
                 {Object.entries(row)
@@ -271,14 +265,9 @@ export function UsersTable() {
                   .map(([name, value], i) => {
                     return (
                       <View key={i}>
-                        <View
-                          flexDirection="row"
-                          justifyContent="space-between"
-                          marginHorizontal="$3"
-                          paddingBottom="$2"
-                        >
+                        <View flexDirection="row" justify="space-between" mx="$3" pb="$2">
                           <Text>{name.charAt(0).toUpperCase() + name.slice(1)}</Text>
-                          <Text color="$gray10">{value}</Text>
+                          <Text color="$color10">{value}</Text>
                         </View>
                         {i !==
                           Object.entries(row).filter(
@@ -304,9 +293,9 @@ export function UsersTable() {
       cellWidth="$18"
       cellHeight="$7"
       borderWidth={0}
-      padding="$4"
-      maxWidth="100%"
-      maxHeight={600}
+      p="$4"
+      maxW="100%"
+      maxH={600}
       gap="$5"
     >
       <Table.Head>
@@ -322,7 +311,7 @@ export function UsersTable() {
                     : 'middle'
               }
               key={headerGroup.id}
-              justifyContent="flex-start"
+              justify="flex-start"
             >
               {headerGroup.headers.map((header) => (
                 <Table.HeaderCell
@@ -335,7 +324,7 @@ export function UsersTable() {
                   }
                   key={header.id}
                   borderWidth={0}
-                  justifyContent="flex-start"
+                  justify="flex-start"
                   {...(header.column.id === 'user_base'
                     ? {
                         flexShrink: 1,
@@ -361,7 +350,7 @@ export function UsersTable() {
           return (
             <Table.Row
               hoverStyle={{
-                backgroundColor: '$color2',
+                bg: '$color2',
               }}
               rowLocation={
                 rowCounter.current === 0
@@ -383,7 +372,7 @@ export function UsersTable() {
                   }
                   key={cell.id}
                   borderWidth={0}
-                  justifyContent="flex-start"
+                  justify="flex-start"
                   {...(cell.column.id === 'user_base'
                     ? {
                         flexShrink: 1,

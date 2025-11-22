@@ -96,25 +96,25 @@ export const TabbarSwippable = () => {
   return (
     <Tabs
       flexDirection="column"
-      backgroundColor="$background"
+      bg="$background"
       borderBottomWidth={1}
       borderBottomColor="$color1"
       defaultValue={tabs[0]}
       flex={1}
       value={tabs[activeTabIndex]}
-      justifyContent="center"
-      alignItems="center"
-      alignSelf="center"
+      justify="center"
+      items="center"
+      self="center"
       width="90%"
-      marginTop="$4"
+      mt="$4"
     >
       <View
         flexDirection="row"
-        borderRadius={1000_000}
-        backgroundColor="$color2"
-        justifyContent="center"
+        rounded={1000_000}
+        bg="$color2"
+        justify="center"
         width="100%"
-        paddingHorizontal="$2"
+        px="$2"
       >
         <Tabs.List
           width="100%"
@@ -141,14 +141,14 @@ export const TabbarSwippable = () => {
               flex={1}
               flexBasis={0}
               flexShrink={1}
-              pe={activeTabIndex === index ? 'none' : 'auto'}
+              pointerEvents={activeTabIndex === index ? 'none' : 'auto'}
               onPress={(type) => {
                 chagenActiveTab(index)
               }}
             >
               <Text
-                theme={index !== activeTabIndex ? 'alt1' : undefined}
-                selectable={false}
+                theme={index !== activeTabIndex ? 'accent' : null}
+                select="none"
                 cursor="pointer"
               >
                 {tab}
@@ -178,15 +178,15 @@ TabbarSwippable.fileName = 'TabBarSwippable'
 const TabsContent = (props: TabsContentProps) => {
   return (
     <Tabs.Content
-      backgroundColor="$background"
+      bg="$background"
       key="tab3"
-      padding="$2"
-      alignItems="center"
-      justifyContent="center"
+      p="$2"
+      items="center"
+      justify="center"
       flex={1}
       borderColor="$background"
-      borderRadius="$2"
-      btlr={0}
+      rounded="$2"
+      borderTopLeftRadius={0}
       borderTopRightRadius={0}
       borderWidth="$2"
       height={600}

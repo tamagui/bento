@@ -17,13 +17,7 @@ export const PaginationControl = () => {
     (2 * getTokenValue('$2') + (pageNum - 1) * getTokenValue('$0.75')) * 10
 
   return (
-    <View
-      flex={1}
-      flexDirection="row"
-      alignItems="center"
-      justifyContent="center"
-      gap="$3"
-    >
+    <View flex={1} flexDirection="row" items="center" justify="center" gap="$3">
       <Button
         size="$4"
         circular
@@ -33,22 +27,22 @@ export const PaginationControl = () => {
       />
       <View
         flexDirection="row"
-        alignItems="center"
-        justifyContent="center"
+        items="center"
+        justify="center"
         gap="$3"
-        backgroundColor="$color5"
+        bg="$color5"
         width={paginationWidth}
         height="$4"
-        paddingHorizontal="$4"
-        borderRadius="$8"
+        px="$4"
+        rounded="$8"
       >
         {Array.from({ length: pageNum }).map((_, index) => (
           <View
             key={index}
             width={activeIndex === index ? '$2' : '$0.75'}
             height="$0.75"
-            borderRadius="$5"
-            backgroundColor={activeIndex === index ? '$color12' : '$color10'}
+            rounded="$5"
+            bg={activeIndex === index ? '$color12' : '$color10'}
             animation="200ms"
           />
         ))}

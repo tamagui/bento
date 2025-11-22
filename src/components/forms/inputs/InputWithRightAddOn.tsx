@@ -6,8 +6,8 @@ import { Input } from './components/inputsParts'
 /** ------ EXAMPLE ------ */
 export function InputWithRightAddOnDemo({ size }: { size?: SizeTokens }) {
   return (
-    <View flexDirection="column" justifyContent="center" alignItems="center" height={100}>
-      <Input size={size} minWidth="100%">
+    <View flexDirection="column" justify="center" items="center" height={100}>
+      <Input size={size} minW="100%">
         <Input.Box>
           <Input.Section>
             <Input.Area

@@ -29,19 +29,19 @@ export function UploadFile() {
     <View
       flexDirection="column"
       {...getRootProps()}
-      bs="dashed"
+      borderStyle="dashed"
       width={400}
-      maxWidth="100%"
+      maxW="100%"
       height={250}
-      justifyContent="center"
-      alignItems="center"
+      justify="center"
+      items="center"
       borderWidth={isDragActive ? 2 : 1}
-      borderColor={isDragActive ? '$gray11' : '$gray9'}
+      borderColor={isDragActive ? '$color11' : '$color9'}
       gap="$6"
-      borderRadius="$3"
+      rounded="$3"
       overflow="hidden"
     >
-      <View gap="$3" p="$4" flex={1} ai="center" justifyContent="center">
+      <View gap="$3" p="$4" flex={1} items="center" justify="center">
         <Button onPress={open} size="$3">
           <Button.Icon>
             <Upload y={-1} />
@@ -51,15 +51,15 @@ export function UploadFile() {
         {!file && (
           <View
             width="100%"
-            alignItems="center"
-            justifyContent="center"
+            items="center"
+            justify="center"
             $platform-native={{
               display: 'none',
             }}
           >
             <Label
               t="$1"
-              pos="absolute"
+              position="absolute"
               size="$3"
               htmlFor={id}
               color="$color9"
@@ -82,8 +82,14 @@ export function UploadFile() {
           borderTopColor="$borderColor"
         >
           <View flex={1}>
-            <View flexDirection="row" theme="alt1" gap="$2" ai={'center'} pos="absolute">
-              <View flexShrink={0}>
+            <View
+              flexDirection="row"
+              theme="alt1"
+              gap="$2"
+              items={'center'}
+              position="absolute"
+            >
+              <View shrink={0}>
                 <File color="$color" size={'$1'} />
               </View>
               <View gap="$1" flex={1}>

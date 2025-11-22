@@ -32,10 +32,10 @@ const data = [
 export function HorizontalWithDescription() {
   const [value, setValue] = useState('vd-visa')
   return (
-    <View flexDirection="column" maxWidth="100%" gap="$4">
+    <View flexDirection="column" maxW="100%" gap="$4">
       <View flexDirection="column" gap="$2">
         <H2>Payment</H2>
-        <Text fontWeight="300" color="$gray10">
+        <Text fontWeight="300" color="$color10">
           Select your payment method
         </Text>
       </View>
@@ -60,7 +60,7 @@ export function HorizontalWithDescription() {
           />
         ))}
         {/* a trick to avoid last flex item to be stretch out */}
-        <View flexDirection="row" key="last" flex={1} flexShrink={1} flexBasis={300} />
+        <View flexDirection="row" key="last" flex={1} shrink={1} flexBasis={300} />
       </RadioGroup>
     </View>
   )
@@ -78,13 +78,13 @@ type ItemProps = {
 const Item = ({ id, label, description, icon, setValue, selected }: ItemProps) => {
   return (
     <Card
-      borderRadius="$5"
+      rounded="$5"
       flexDirection="row"
       flex={1}
       flexBasis={500}
-      flexShrink={1}
+      shrink={1}
       gap="$3"
-      padding="$3"
+      p="$3"
       active={selected}
       onPress={() => setValue(id)}
     >
@@ -99,14 +99,14 @@ const Item = ({ id, label, description, icon, setValue, selected }: ItemProps) =
           size="$4"
           lineHeight="$2"
           cursor="pointer"
-          alignItems="flex-start"
+          items="flex-start"
           flexDirection="column"
           htmlFor={id}
         >
           {label}
         </Label>
 
-        <Text color="$gray9">{description}</Text>
+        <Text color="$color9">{description}</Text>
       </View>
     </Card>
   )

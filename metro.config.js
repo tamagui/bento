@@ -9,8 +9,6 @@ config.resolver.unstable_enablePackageExports = true
 
 // Standalone bento - watch only this repo
 config.watchFolders = [projectRoot]
-config.resolver.nodeModulesPaths = [
-  path.resolve(projectRoot, 'node_modules'),
-]
+config.resolver.nodeModulesPaths = [path.resolve(projectRoot, 'node_modules')]
 
 module.exports = config
