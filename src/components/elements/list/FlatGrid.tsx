@@ -1,9 +1,11 @@
-import { useState } from 'react'
 import { FlatList } from 'react-native'
 import { Avatar, Button, Image, Paragraph, Separator, Text, View, styled } from 'tamagui'
 import { useContainerDim } from '../../hooks/useContainerDim'
 
 const items = Array.from({ length: 100 }).map((_, index) => index)
+
+const padding = 20
+const baseWidth = 300
 
 const List = styled(FlatList<number>, {})
 
@@ -17,10 +19,7 @@ const renderItem = ({
   return <Item data={{ index }} key={item} />
 }
 export function FlatGrid() {
-  const [baseWidth, setBaseWidth] = useState(300)
-  const [padding, setPadding] = useState(20)
-
-  const { width: deviceWidth, height: deviceHeight } = useContainerDim('window')
+  const { width: deviceWidth } = useContainerDim('window')
 
   const numberOfColumns = Math.round((deviceWidth - padding) / baseWidth)
 
@@ -34,9 +33,6 @@ export function FlatGrid() {
       $group-window-gtXs={{
         p: padding,
         height: 500,
-      }}
-      $platform-native={{
-        height: 600,
       }}
       contentContainerStyle={{
         gap: 16,
@@ -78,7 +74,7 @@ function Item({ data }: { data: { index: number } }) {
       }}
     >
       {/* minus margin can cancel padding */}
-      <View height="$14" m={-PADDING} mt={-PADDING}>
+      <View height="$14" mx={-PADDING} mt={-PADDING}>
         <Image
           width="100%"
           height="100%"

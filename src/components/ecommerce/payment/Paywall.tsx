@@ -55,6 +55,8 @@ const AnimatedHStack = Animated.createAnimatedComponent(
 )
 
 export function Paywall() {
+  const themeName = useThemeName()
+
   const goToTermsOfService = () => {
     //
   }
@@ -77,8 +79,6 @@ export function Paywall() {
         r={0}
         b={0}
       />
-
-      {/* <View flex={1} /> */}
 
       {isWeb ? (
         <XStack
@@ -264,7 +264,7 @@ const PlanView = ({
             width: '100%',
           }
         : {
-            w: PLAN_ITEM_WIDTH,
+            width: PLAN_ITEM_WIDTH,
           })}
       layout={CurvedTransition.duration(325).reduceMotion(ReduceMotion.System).build()}
       bg="$background"
@@ -274,8 +274,8 @@ const PlanView = ({
       shadowColor="$shadowColor"
       shadowOffset={{ width: 0, height: 0 }}
       shadowOpacity={0.15}
-      shadowRadius="$6"
-      height={nextStep ? undefined : 100}
+      shadowRadius={'$6'}
+      height={nextStep ? 'auto' : '100%'}
       grow={1}
     >
       <View overflow="hidden">
@@ -329,6 +329,7 @@ const PlanView = ({
           <Button
             flexDirection="column"
             gap={0}
+            space={0}
             themeInverse
             height="auto"
             rounded="$10"
@@ -368,7 +369,7 @@ const PlanView = ({
                     fontSize="$5"
                     {...(!annual
                       ? { color: '$color', fontWeight: '600' }
-                      : { color: 'black' })}
+                      : { color: '$black10' })}
                   >
                     Monthly
                   </Text>
@@ -378,7 +379,7 @@ const PlanView = ({
                       setAnnual(checked)
                     }}
                     size={'$3'}
-                    backgroundColor={annual ? '$color' : '$color8'}
+                    bg={annual ? '$color' : '$color8'}
                     justify="center"
                     items="center"
                     cursor="pointer"
@@ -410,7 +411,7 @@ const PlanView = ({
                     fontSize="$5"
                     {...(annual
                       ? { color: '$color', fontWeight: '600' }
-                      : { color: 'black' })}
+                      : { color: '$black10' })}
                   >
                     Annual
                   </Text>
@@ -469,7 +470,7 @@ const PlanView = ({
                         position="absolute"
                         r="$-6"
                         t="$-2"
-                        rotate={'25deg'}
+                        rotate="25deg"
                         animation="quicker"
                         opacity={1}
                         transform={[{ translateY: 0 }, { translateX: 0 }]}
@@ -499,6 +500,7 @@ const PlanView = ({
               <Button
                 flexDirection="column"
                 gap={0}
+                space={0}
                 themeInverse
                 height="auto"
                 rounded="$10"
@@ -602,9 +604,9 @@ const RatingView = ({ reviewer }: { reviewer: Reviewer }) => {
       rounded="$4"
       gap="$2"
       overflow="hidden"
-      width={'70%'}
+      width="70%"
       maxW={REVIEW_WIDTH}
-      height={'100%'}
+      height="100%"
       p="$3.5"
       bg="$color1"
     >
@@ -619,7 +621,7 @@ const RatingView = ({ reviewer }: { reviewer: Reviewer }) => {
               <Star
                 size="$1"
                 key={index}
-                color={undefined}
+                color="transparent"
                 fill={active ? '#FFCF50' : color4.val}
               />
             )

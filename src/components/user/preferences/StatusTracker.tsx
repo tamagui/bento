@@ -132,7 +132,7 @@ function User({
           borderWidth="$1"
           borderColor="$color1"
           z={10}
-          bg="$yellow8"
+          bg="$orange8"
         />
       </View>
       <View flexDirection="column">
@@ -154,7 +154,7 @@ function User({
         justify="center"
         items="center"
         gap="$1.5"
-        theme={type === 'absent' ? 'accent' : 'yellow'}
+        theme={type === 'absent' ? 'gray' : 'orange'}
       >
         <Theme name="accent">
           {type === 'absent' ? (

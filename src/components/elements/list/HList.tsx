@@ -15,7 +15,7 @@ export function HList() {
     <View flex={1} width="100%" height="100%">
       <ScrollView
         {...(isWeb && {
-          ai: 'center',
+          items: 'center',
         })}
         showsHorizontalScrollIndicator={false}
         pl="50%"

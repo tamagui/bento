@@ -179,7 +179,7 @@ const CardItem = ({
       shadowColor="$shadow3"
       shadowOffset={{ width: 0, height: 0 }}
       shadowOpacity={0.3}
-      shadowRadius={'$6'}
+      shadowRadius="$6"
       borderWidth={2}
       borderColor="$color3"
     >
@@ -199,11 +199,11 @@ const CardItem = ({
           textTransform="capitalize"
           fontFamily="$heading"
           fontWeight="bold"
-          fontSize={'$8'}
+          fontSize="$8"
         >
           {cardItem.title}
         </Text>
-        <Text fontSize="$3" color="white" opacity={0.8} fontFamily="$mono">
+        <Text fontSize="$3" fontFamily="$mono" color="white" opacity={0.8}>
           {cardItem.description}
         </Text>
       </YStack>
@@ -226,7 +226,7 @@ const BackgroundView = ({
   return (
     <AnimatedView
       theme={data[index].theme}
-      bg={'$color3'}
+      bg="$color3"
       position="absolute"
       inset={0}
       style={animatedStyle}

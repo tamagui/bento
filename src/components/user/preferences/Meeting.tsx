@@ -27,7 +27,7 @@ const data = [
     label: 'On Google Meet',
     department: 'Marketing',
     participants: null,
-    theme: 'neon' as ThemeName,
+    theme: 'purple' as ThemeName,
   },
   {
     title: 'Tamagui 4th year conference',
