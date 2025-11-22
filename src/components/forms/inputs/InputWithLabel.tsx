@@ -5,7 +5,7 @@ import { Input } from './components/inputsParts'
 /** ------ EXAMPLE ------ */
 export function InputWithLabelDemo({
   labelText = 'Label',
-  size,
+  size = '$4',
   focusOnMount = false,
   onChangeText,
 }: {

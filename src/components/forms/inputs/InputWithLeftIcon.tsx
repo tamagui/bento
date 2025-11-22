@@ -7,7 +7,7 @@ import { useForwardFocus } from './hooks/useForwardFocus'
 import type { TextInput } from 'react-native'
 
 /** ------ EXAMPLE ------ */
-export function InputWithLeftIconDemo({ size }: { size?: SizeTokens }) {
+export function InputWithLeftIconDemo({ size = '$4' }: { size?: SizeTokens }) {
   const inputRef = useRef<TextInput>(null)
   const focusTrigger = useForwardFocus(inputRef)
   return (

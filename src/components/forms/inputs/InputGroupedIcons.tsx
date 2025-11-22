@@ -9,7 +9,7 @@ import { View } from 'tamagui'
 import { Input } from './components/inputsParts'
 
 /** ------ EXAMPLE ------ */
-export function InputGroupedIconsExample({ size }: { size?: SizeTokens }) {
+export function InputGroupedIconsExample({ size = '$4' }: { size?: SizeTokens }) {
   return (
     <View flexDirection="column" justify="center" items="center">
       <Input size={size} minW="100%">

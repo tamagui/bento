@@ -11,7 +11,7 @@ import type { TextInput } from 'react-native'
  */
 
 /** ------ EXAMPLE ------ */
-export function InputBothSideIconsExample({ size }: { size?: SizeTokens }) {
+export function InputBothSideIconsExample({ size = '$4' }: { size?: SizeTokens }) {
   const inputRef = useRef<TextInput>(null)
   const focusTrigger = useForwardFocus(inputRef)
 

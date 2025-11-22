@@ -11,7 +11,7 @@ import { useForwardFocus } from './hooks/useForwardFocus'
  */
 
 /** ------ EXAMPLE ------ */
-export function InputWithRightIconDemo({ size }: { size?: SizeTokens }) {
+export function InputWithRightIconDemo({ size = '$4' }: { size?: SizeTokens }) {
   const inputRef = useRef<TextInput>(null)
   const focusTrigger = useForwardFocus(inputRef)
   return (

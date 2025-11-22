@@ -4,7 +4,7 @@ import type { SizeTokens } from 'tamagui'
 import { View } from 'tamagui'
 
 /** ------ EXAMPLE ------ */
-export function InputWithLabelAndMessageDemo({ size }: { size?: SizeTokens }) {
+export function InputWithLabelAndMessageDemo({ size = '$4' }: { size?: SizeTokens }) {
   const uniqueId = useId()
 
   return (

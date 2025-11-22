@@ -265,7 +265,7 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
 }
 
 /** ------ EXAMPLE ------ **/
-export function PhoneInputExample({ size }: { size?: SizeTokens }) {
+export function PhoneInputExample({ size = '$4' }: { size?: SizeTokens }) {
   const [regionCode, setRegionCode] = useState('US')
   const [phoneNumber, setPhoneNumber] = useState('+1')
   const [isValid, setIsValid] = useState(false)

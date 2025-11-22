@@ -11,7 +11,7 @@ import { useForwardFocus } from './hooks/useForwardFocus'
  */
 
 /** ------ EXAMPLE ------ */
-export function InputWithErrorDemo({ size }: { size?: SizeTokens }) {
+export function InputWithErrorDemo({ size = '$4' }: { size?: SizeTokens }) {
   const uniqueId = useId()
   const [error, setError] = React.useState(true)
 
