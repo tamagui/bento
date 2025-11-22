@@ -1,11 +1,13 @@
 import 'react-native-gesture-handler'
 
 import { NavigationContainer } from '@react-navigation/native'
+import { SchemeProvider, type SchemeSetting, setSchemeSetting } from '@vxrn/color-scheme'
 import { useFonts } from 'expo-font'
 import React from 'react'
 import { Appearance, LogBox, useColorScheme } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { enableScreens } from 'react-native-screens'
+import { isWeb } from 'tamagui'
 import { Provider } from './components'
 import { Navigation } from './Navigation'
 import { ThemeContext } from './useThemeControl'
@@ -30,8 +32,14 @@ export default function App() {
     return {
       value: theme,
       set: (next) => {
-        Appearance.setColorScheme(next)
         setTheme(next)
+        if (!isWeb) {
+          setTimeout(() => {
+            Appearance?.setColorScheme?.(next)
+          }, 350)
+        } else {
+          setSchemeSetting(next as SchemeSetting)
+        }
       },
     }
   }, [theme])
@@ -41,14 +49,16 @@ export default function App() {
   }
 
   return (
-    <SafeAreaProvider>
-      <ThemeContext.Provider value={themeContext}>
-        <Provider defaultTheme={theme as any}>
-          <NavigationContainer>
-            <Navigation />
-          </NavigationContainer>
-        </Provider>
-      </ThemeContext.Provider>
-    </SafeAreaProvider>
+    <SchemeProvider>
+      <SafeAreaProvider>
+        <ThemeContext.Provider value={themeContext}>
+          <Provider defaultTheme={theme as any}>
+            <NavigationContainer>
+              <Navigation />
+            </NavigationContainer>
+          </Provider>
+        </ThemeContext.Provider>
+      </SafeAreaProvider>
+    </SchemeProvider>
   )
 }

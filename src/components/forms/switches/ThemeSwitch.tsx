@@ -60,7 +60,7 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
           rounded="$10"
           items="center"
           justify="center"
-          bg="$color11"
+          bg="$color4"
           animation="200ms"
         >
           <AnimatePresence exitBeforeEnter custom={{ direction: -1 }}>
