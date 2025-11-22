@@ -19,7 +19,7 @@ function Item({ item, index }: { item: Product; index: number }) {
       <YStack gap="$2" tag="article">
         {showLabel && (
           <Square
-            theme={isBestSeller ? 'neon' : 'yellow'}
+            theme={isBestSeller ? 'purple' : 'orange'}
             rotate="45deg"
             width={20}
             height={20}
@@ -55,7 +55,7 @@ function Item({ item, index }: { item: Product; index: number }) {
           <YStack
             bg="$color9"
             borderWidth={0.5}
-            theme={isBestSeller ? 'neon' : 'yellow'}
+            theme={isBestSeller ? 'purple' : 'orange'}
             rounded="$2"
             position="absolute"
             l={-7}
@@ -71,7 +71,7 @@ function Item({ item, index }: { item: Product; index: number }) {
           <H2 size="$4">{item.name}</H2>
           <XStack gap="$3">
             <SizableText fontWeight="bold">${item.price}</SizableText>
-            <SizableText theme="accent" textDecorationLine="line-through">
+            <SizableText theme="alt1" textDecorationLine="line-through">
               ${item.price}
             </SizableText>
           </XStack>

@@ -1,15 +1,15 @@
 import { MoonStar, Sun } from '@tamagui/lucide-icons'
 import { useEffect, useId, useState } from 'react'
+import type { ColorTokens, SizeTokens } from 'tamagui'
 import {
   AnimatePresence,
   getVariableValue,
+  isWeb,
   Switch,
   useTheme,
   View,
   YStack,
-  isWeb,
 } from 'tamagui'
-import type { SizeTokens } from 'tamagui'
 
 import { getSize } from '@tamagui/get-token'
 import { useSchemeSetting } from '@vxrn/color-scheme'
@@ -29,6 +29,8 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
   const thumbSize = getVariableValue(getSize(size))
 
   const larger = thumbSize >= 64
+
+  const { color11 } = useTheme()
 
   const iconSize = thumbSize * 0.4
 
@@ -68,7 +70,7 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
           rounded="$10"
           items="center"
           justify="center"
-          background="$color11"
+          bg={color11.val as ColorTokens}
           animation="200ms"
         >
           <AnimatePresence exitBeforeEnter custom={{ direction: -1 }}>
@@ -87,7 +89,7 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
                 { translateY: !checked ? 0 : thumbSize },
               ]}
             >
-              <Sun size={iconSize} fill={'white'} color="$color" />
+              <Sun size={iconSize} fill="white" color="white" />
             </YStack>
 
             <YStack

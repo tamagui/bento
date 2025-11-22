@@ -420,14 +420,7 @@ export const WeekView = ({
   return (
     <View width="100%" flexDirection="row" gap="$1" {...props}>
       {weekDays.map((day) => (
-        <SizableText
-          flex={1}
-          theme="accent"
-          key={day}
-          text="center"
-          width="100%"
-          size="$4"
-        >
+        <SizableText flex={1} theme="alt1" key={day} text="center" width="100%" size="$4">
           {day}
         </SizableText>
       ))}

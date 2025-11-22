@@ -75,7 +75,7 @@ export function CheckboxList() {
         <Checkboxes.FocusGroup gap="$4">
           <View flexDirection="column" self="center" items="center" gap="$2">
             <Checkboxes.Title self="center">Coffee</Checkboxes.Title>
-            <Text fontWeight="$3" theme="accent">
+            <Text fontWeight="$3" theme="alt1">
               Make your choice.
             </Text>
           </View>
@@ -145,7 +145,7 @@ function CheckboxItem({
             <Checkboxes.Checkbox.Label size="$4" lineHeight="$2" htmlFor={key + uniqueId}>
               {title}
             </Checkboxes.Checkbox.Label>
-            <Text fontWeight="$2" fontSize={10} theme="accent">
+            <Text fontWeight="$2" fontSize={10} theme="alt2">
               {desc}
             </Text>
           </View>

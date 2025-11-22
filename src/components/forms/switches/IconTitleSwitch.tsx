@@ -21,7 +21,7 @@ export function IconTitleSwitch() {
       height="auto"
       items="center"
       gap="$2.5"
-      theme="accent"
+      theme="surface1"
       animation="medium"
       onPress={() => setChecked(!checked)}
     >
@@ -30,7 +30,7 @@ export function IconTitleSwitch() {
         <Label size="$1.5" htmlFor={uniqueId + 'switch'}>
           Title here
         </Label>
-        <Text theme="accent">Your description here</Text>
+        <Text theme="alt1">Your description here</Text>
       </View>
       <Switch
         id={uniqueId + 'switch'}

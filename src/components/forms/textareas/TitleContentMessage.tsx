@@ -23,14 +23,14 @@ export function TitleContentMessage() {
         height={180}
         placeholder="Your text here"
       />
-      <View flexDirection="row" theme="accent" mt="$2.5" items="center" gap="$2">
+      <View flexDirection="row" theme="alt1" mt="$2.5" items="center" gap="$2">
         <Info size={15} />
-        <Text fontWeight="300" theme="accent" fontSize="$2">
+        <Text fontWeight="300" theme="alt2" fontSize="$2">
           some hints or info about text area
         </Text>
       </View>
 
-      <Button theme="accent" mt="$3">
+      <Button themeInverse mt="$3">
         <Button.Text>Submit</Button.Text>
       </Button>
     </View>

@@ -41,7 +41,12 @@ export function DirectionSlide({
               aria-label={dir}
               key={dir}
             >
-              <Text color={'$color12'} fontWeight="600" textTransform="capitalize">
+              <Text
+                fontFamily="$mono"
+                color="$color12"
+                fontWeight="600"
+                textTransform="capitalize"
+              >
                 {dir}
               </Text>
             </Item>

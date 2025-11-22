@@ -28,14 +28,14 @@ export function ButtonsWithLeftIcons() {
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme="neon">
+        <Button theme="purple">
           <Button.Icon>
             <Heart />
           </Button.Icon>
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme="forest">
+        <Button theme="pink">
           <Button.Icon>
             <Heart />
           </Button.Icon>
@@ -49,7 +49,7 @@ export function ButtonsWithLeftIcons() {
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme="cyan">
+        <Button theme="orange">
           <Button.Icon>
             <Heart />
           </Button.Icon>
@@ -58,7 +58,7 @@ export function ButtonsWithLeftIcons() {
       </View>
 
       <View gap="$2">
-        <Button theme="accent">
+        <Button>
           <Button.Icon>
             <Heart />
           </Button.Icon>

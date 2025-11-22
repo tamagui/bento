@@ -102,7 +102,7 @@ function RegionFilterInput(props: RegionFilterInputProps) {
             }}
             pointerEvents="auto"
             z={10}
-            theme="accent"
+            theme="alt1"
           >
             {filter ? <X /> : <Search />}
           </Input.Icon>

@@ -123,7 +123,7 @@ const SlidingPopoverContent = () => {
 
   return (
     <Popover.Content
-      theme="accent"
+      theme="surface3"
       enableAnimationForPositionChange
       animation="quicker"
       bg="$background"
@@ -218,7 +218,7 @@ const TooltipLabelLarge = ({
         {title}
       </H2>
 
-      <Paragraph theme="accent" flex={1} fontSize="$5">
+      <Paragraph theme="alt1" flex={1} fontSize="$5">
         {subtitle}
       </Paragraph>
 

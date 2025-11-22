@@ -114,7 +114,7 @@ export function WheelList({
         <Text z={1} fontWeight="800" fontFamily="$heading" fontSize="$10">
           Influencer
         </Text>
-        <Text z={1} fontWeight="500" color="$color10" fontSize="$8">
+        <Text z={1} fontWeight="500" color="$color10" fontSize="$8" fontFamily="$mono">
           {data.length} Contacts
         </Text>
       </View>
@@ -203,7 +203,7 @@ const CardItem = ({
         >
           {cardItem.title}
         </Text>
-        <Text fontSize="$3" color="white" opacity={0.8}>
+        <Text fontSize="$3" color="white" opacity={0.8} fontFamily="$mono">
           {cardItem.description}
         </Text>
       </YStack>
@@ -297,7 +297,7 @@ const data: CardData[] = [
 
     description: '100M Subscribers',
     backgroundColor: '#205781',
-    theme: 'neonBlue',
+    theme: 'blue',
   },
   {
     id: 2,

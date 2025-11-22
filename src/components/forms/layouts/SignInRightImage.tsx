@@ -144,7 +144,7 @@ export function SignInRightImage() {
                   </Button>
                   <Button minW="100%">
                     <Button.Icon>
-                      <Facebook color="$green10" size="$1" />
+                      <Facebook color="$blue10" size="$1" />
                     </Button.Icon>
                     <Button.Text>Continue with Facebook</Button.Text>
                   </Button>

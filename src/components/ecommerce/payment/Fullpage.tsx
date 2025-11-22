@@ -420,7 +420,7 @@ const Item = ({ item }: { item: Items[number] }) => {
             size="$2"
             icon={<Heart color={wishlist ? '$red10' : undefined} />}
             $group-window-sm={{ size: '$3' }}
-            theme={wishlist ? 'red' : 'accent'}
+            theme={wishlist ? 'red' : 'red_alt1'}
             onPress={() => setWishlist(!wishlist)}
           />
 
@@ -431,7 +431,7 @@ const Item = ({ item }: { item: Items[number] }) => {
               size="$3"
               icon={<Trash color="$red10" />}
               scaleIcon={1.1}
-              theme="light_red"
+              theme="red_alt1"
             />
           )}
         </View>
@@ -631,6 +631,7 @@ const ItemCounter: React.FC<ItemCounterProps> = ({ count, setCount }) => {
   return (
     <XGroup mr="$6">
       <Button
+        theme="alt2"
         size="$3"
         bg="transparent"
         icon={Minus}
@@ -647,6 +648,7 @@ const ItemCounter: React.FC<ItemCounterProps> = ({ count, setCount }) => {
         <StyledText>{count}</StyledText>
       </View>
       <Button
+        theme="alt2"
         size="$3"
         bg="transparent"
         icon={Plus}

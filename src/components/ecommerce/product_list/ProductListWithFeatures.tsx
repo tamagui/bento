@@ -32,7 +32,7 @@ function Item({ item }: { item: Product }) {
             source={{ uri: item.image }}
             height="100%"
             width="100%"
-            resizeMode="cover"
+            objectFit="cover"
           />
         </Stack>
         <YStack>
@@ -44,7 +44,7 @@ function Item({ item }: { item: Product }) {
             </StyledText>
           </XStack>
         </YStack>
-        <YStack self="flex-start" theme="accent" gap="$2">
+        <YStack self="flex-start" theme="alt1" gap="$2">
           <StyledText>XS | L | XL</StyledText>
           <XStack gap="$1">
             <Circle bg="$green9" size={20} />

@@ -55,12 +55,12 @@ export const ProfileView = () => {
   const renderItem = ({ item, index }: { item: Blog; index: number }) => {
     return (
       <XStack gap="$4" px="$6" py="$4">
-        <Image borderRadius="$8" w={78} h={78} source={{ uri: item.image }} />
-        <YStack f={1} gap="$2">
+        <Image borderRadius="$8" width={78} height={78} source={{ uri: item.image }} />
+        <YStack flex={1} gap="$2">
           <Text fontSize="$6" fontWeight="600" color="$color12">
             {item.title}
           </Text>
-          <Text ff="$mono" fontSize="$4" fontWeight="400" color="$color10">
+          <Text fontFamily="$mono" fontSize="$4" fontWeight="400" color="$color10">
             {item.minutesToRead} minutes
           </Text>
         </YStack>
@@ -69,30 +69,37 @@ export const ProfileView = () => {
   }
 
   return (
-    <YStack w="100%" h="100%" $gtMd={{ maxWidth: 400 }} bg="$color6">
+    <YStack width="100%" height="100%" $gtMd={{ maxW: 400 }} bg="$color6">
       <SafeAreaView />
       <YStack
         key="fake-stack"
         borderTopLeftRadius="$10"
         borderTopRightRadius="$10"
-        w="100%"
-        h={56}
+        width="100%"
+        height={56}
         mb={-32}
         bg="$color4"
       />
 
-      <YStack overflow="hidden" borderRadius="$10" w="100%" h="100%" bg="$color2" f={1}>
+      <YStack
+        overflow="hidden"
+        rounded="$10"
+        width="100%"
+        height="100%"
+        bg="$color2"
+        flex={1}
+      >
         <AnimatedFlatList
           onScroll={scrollHandler}
           ListHeaderComponent={() => (
-            <YStack w="100%" p="$6" gap="$4">
+            <YStack width="100%" p="$6" gap="$4">
               <AvatarView followed={followed} />
 
               <YStack pt="$2">
-                <Text fontWeight="900" ff="$mono" fontSize="$10">
+                <Text fontWeight="900" fontFamily="$mono" fontSize="$10">
                   John Doe
                 </Text>
-                <Text color="$color10" fontSize="$5" ff="$silkscreen">
+                <Text color="$color10" fontSize="$5" fontFamily="$silkscreen">
                   @john_doe
                 </Text>
               </YStack>
@@ -132,8 +139,8 @@ const ButtonGroup = ({
         fontWeight="bold"
         fontSize="$6"
         flex={1}
-        h="$6"
-        borderRadius="$10"
+        height="$6"
+        rounded="$10"
         color="$color12"
         onPress={() => setFollowed(!followed)}
       >
@@ -180,7 +187,7 @@ const ButtonGroup = ({
         )}
       </Button>
 
-      <Button theme="active" h="$6" w="$6" borderRadius="$10">
+      <Button height="$6" width="$6" rounded="$10">
         <Share />
       </Button>
     </XStack>
@@ -222,7 +229,7 @@ const AvatarView = memo(
     return (
       <GestureDetector gesture={gesture}>
         <View
-          w="fit"
+          self="flex-start"
           shadowColor="$color6"
           shadowOffset={{ width: 0, height: '$-3' }}
           shadowOpacity={1}
@@ -230,9 +237,9 @@ const AvatarView = memo(
         >
           <AnimatedView
             key={'avatar'}
-            w="$12"
-            h="$12"
-            br="$8"
+            width="$12"
+            height="$12"
+            rounded="$8"
             overflow="hidden"
             bg="$color1"
             borderWidth={3}
@@ -246,8 +253,8 @@ const AvatarView = memo(
               key="avatar"
               position="absolute"
               backfaceVisibility="hidden"
-              h="100%"
-              w="100%"
+              height="100%"
+              width="100%"
               animatePresence
               source={{ uri: 'https://tamagui.dev/bento/images/avatar_1.png' }}
             />
@@ -276,14 +283,14 @@ const Follower = ({ followed }: { followed: boolean }) => {
   }, [followed])
 
   return (
-    <XStack ai="center" gap="$2">
+    <XStack items="center" gap="$2">
       {followerData.map((follower, index) => (
         <Image
           borderRadius={'$10'}
           key={follower.avatar}
-          w={'$4'}
-          h={'$4'}
-          marginLeft={index !== 0 ? -(getTokenValue('$5') ?? 20) * 1.5 : undefined}
+          width="$4"
+          height="$4"
+          ml={index !== 0 ? -(getTokenValue('$5') ?? 20) * 1.5 : undefined}
           source={{ uri: follower.avatar }}
         />
       ))}
@@ -291,14 +298,14 @@ const Follower = ({ followed }: { followed: boolean }) => {
         <Text
           animatePresence
           animation="quick"
-          ff="$silkscreen"
+          fontFamily="$silkscreen"
           fontSize="$8"
           fontWeight="bold"
           color="$color12"
         >
           {follower}
         </Text>
-        <Text ff="$mono" fontSize="$4" fontWeight="500" color="$color12">
+        <Text fontFamily="$mono" fontSize="$4" fontWeight="500" color="$color12">
           Followers
         </Text>
       </YStack>
@@ -317,26 +324,26 @@ const Header = ({ scrollY }: { scrollY: SharedValue<number> }) => {
     <AnimatedView
       position="absolute"
       bg="$color1"
-      top={0}
-      left={0}
-      right={0}
+      t={0}
+      l={0}
+      r={0}
       style={header}
       p="$4"
-      ai="center"
-      jc="center"
+      items="center"
+      justify="center"
       shadowColor="$color5"
       shadowOffset={{ width: 0, height: 0 }}
       shadowOpacity={1}
       shadowRadius="$8"
     >
-      <XStack gap="$2" ai="center">
+      <XStack gap="$2" items="center">
         <Image
-          w={24}
+          width={24}
           aspectRatio={1}
           borderRadius={'$2'}
           source={{ uri: 'https://tamagui.dev/bento/images/avatar_1.png' }}
         />
-        <Text ff="$mono" fontSize="$4" fontWeight="600" color="$color12">
+        <Text fontFamily="$mono" fontSize="$4" fontWeight="600" color="$color12">
           John Doe
         </Text>
       </XStack>
@@ -351,7 +358,7 @@ const HashText = ({ children, ...props }: { children: string } & TextProps) => {
     <Text {...props}>
       {mainText}
       {hashtags.map((hashtag) => (
-        <Text ff="$mono" fontWeight="600" key={hashtag}>
+        <Text fontFamily="$mono" fontWeight="600" key={hashtag}>
           {' '}
           {hashtag}
         </Text>

@@ -161,10 +161,10 @@ export function SignUpScreen() {
             height="$8"
             width="$8"
             id={uniqueId + 'add-pic'}
-            theme="accent"
+            theme="alt1"
           >
             <Stack
-              theme="accent"
+              theme="alt1"
               position="absolute"
               width="100%"
               height="100%"
@@ -181,7 +181,7 @@ export function SignUpScreen() {
         </View>
         <VerticalCheckboxes />
         <View flexDirection="row" items="center">
-          <Label theme="accent" htmlFor={uniqueId + 'notf'}>
+          <Label theme="alt1" htmlFor={uniqueId + 'notf'}>
             Receive notifications
           </Label>
           <Switch

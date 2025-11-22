@@ -8,15 +8,7 @@ type variants = {
   variant: 'bouncy' | 'lazy' | 'pulse' | 'inverse' | 'bump'
   animation: AnimationProp
 }
-const themes: ThemeName[] = [
-  'blue',
-  'neon',
-  'teal',
-  'red',
-  'orangeRed',
-  'yellow',
-  'green',
-]
+const themes: ThemeName[] = ['blue', 'purple', 'pink', 'red', 'orange', 'yellow', 'green']
 
 const variants: variants[] = [
   {
@@ -97,6 +89,7 @@ const CustomButton = styled(Button, {
         },
       },
       bouncy: {
+        theme: 'alt1',
         elevation: 15,
         pressStyle: {
           elevation: 7,
@@ -111,6 +104,7 @@ const CustomButton = styled(Button, {
         },
       },
       bump: {
+        theme: 'surface1',
         elevation: 15,
         pressStyle: {
           elevation: 7,

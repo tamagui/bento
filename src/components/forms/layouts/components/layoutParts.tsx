@@ -7,7 +7,7 @@ export const FormCard = styled(View, {
   flexDirection: 'row',
   maxW: '100%',
   rounded: 30,
-  '$group-window-gtSm': {
+  $gtSm: {
     p: '$6',
     shadowColor: '$shadowColor',
     shadowOffset: {
@@ -17,7 +17,7 @@ export const FormCard = styled(View, {
     shadowOpacity: 0.5,
     shadowRadius: 12.35,
   },
-  '$group-window-xs': {
+  $xs: {
     borderWidth: 0,
     rounded: 0,
     px: '$1',

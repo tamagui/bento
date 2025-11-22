@@ -371,7 +371,7 @@ export function ProductWithReview() {
             <Separator width="100%" />
             <View flexDirection="column" maxW="100%" shrink={1} gap="$3">
               <SizableText size="$6">Description</SizableText>
-              <SizableText theme="accent" shrink={1} size="$4">
+              <SizableText theme="alt1" shrink={1} size="$4">
                 {product.description}
               </SizableText>
             </View>
@@ -388,7 +388,7 @@ export function ProductWithReview() {
                     items="center"
                   >
                     <Dot />
-                    <SizableText theme="accent" shrink={1} size="$4">
+                    <SizableText theme="alt1" shrink={1} size="$4">
                       {feature}
                     </SizableText>
                   </View>
@@ -493,7 +493,7 @@ const ItemCounter = XGroup.styleable((props, ref) => {
     <XGroup ref={ref} {...props}>
       <XGroup.Item>
         <Button
-          theme="accent"
+          theme="alt2"
           size="$3"
           onPress={() => setCount(count > 1 ? count - 1 : 1)}
         >
@@ -516,7 +516,7 @@ const ItemCounter = XGroup.styleable((props, ref) => {
       </XGroup.Item>
       <XGroup.Item>
         <Button
-          theme="accent"
+          theme="alt2"
           size="$3"
           onPress={() => setCount(count < 10 ? count + 1 : 10)}
         >
@@ -623,7 +623,7 @@ const Review = View.styleable<ReviewProps>(({ review, ...rest }, forwardRef) => 
           </View>
         </View>
       </View>
-      <SizableText size="$4" theme="accent" opacity={0.7}>
+      <SizableText size="$4" theme="alt1" opacity={0.7}>
         {review.review}
       </SizableText>
     </View>

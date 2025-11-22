@@ -3,7 +3,7 @@ import type { SizeTokens, ThemeName } from 'tamagui'
 import { View } from 'tamagui'
 import { Chip } from './components/chipsParts'
 
-const colors = ['red', 'green', 'blue', 'neon', 'yellow', 'cyan']
+const colors = ['red', 'green', 'blue', 'purple', 'pink', 'orange']
 /** ------ EXAMPLE ------ */
 export function ChipsWithCloseIcon({ size = '$4' }: { size?: SizeTokens }) {
   return (

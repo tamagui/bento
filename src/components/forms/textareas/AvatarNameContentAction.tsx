@@ -28,7 +28,7 @@ export function AvatarNameContentAction() {
           <Text fontSize="$4" fontWeight="$2">
             Kimberly Doe
           </Text>
-          <Text fontSize="$3" fontWeight="$1" theme="accent">
+          <Text fontSize="$3" fontWeight="$1" theme="alt1">
             @doe
           </Text>
         </View>
@@ -42,8 +42,8 @@ export function AvatarNameContentAction() {
         rounded={0}
         placeholder="Write your comment"
       />
-      <Separator theme="accent" mx="$-3" />
-      <View flexDirection="row" theme="accent" justify="space-between">
+      <Separator theme="alt1" mx="$-3" />
+      <View flexDirection="row" themeInverse justify="space-between">
         <View gap="$2" flexDirection="row">
           <Button size="$3" themeInverse chromeless>
             <Button.Icon>

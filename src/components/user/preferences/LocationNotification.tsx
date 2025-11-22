@@ -220,7 +220,7 @@ export function LocationNotification() {
         <Button icon={Mail} circular variant="outlined" />
         <View flexDirection="column" shrink={1}>
           <SizableText size="$5">Update your Email Preferences</SizableText>
-          <Theme name="accent">
+          <Theme name="alt1">
             <SizableText size="$3">
               Set your language and delivery preferences below.
             </SizableText>
@@ -241,7 +241,7 @@ export function LocationNotification() {
             Location:
           </Label>
           <GeneralSelect id="select-location" data={locationsArray} />
-          <Theme name="accent">
+          <Theme name="alt1">
             <SizableText size="$3">
               Please choose a location for relevant information.
             </SizableText>

@@ -94,7 +94,7 @@ const Alert = ({ children, ...rest }: AlertProps) => {
           >
             <View>
               <AlertDialog.Title size="$3">{title}</AlertDialog.Title>
-              <AlertDialog.Description theme="accent">{message}</AlertDialog.Description>
+              <AlertDialog.Description theme="alt1">{message}</AlertDialog.Description>
             </View>
             <View flexDirection="row" gap="$4" justify="flex-end">
               {buttons.map((button, index) => {

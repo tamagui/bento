@@ -55,8 +55,6 @@ const AnimatedHStack = Animated.createAnimatedComponent(
 )
 
 export function Paywall() {
-  const themeName = useThemeName()
-
   const goToTermsOfService = () => {
     //
   }
@@ -352,7 +350,7 @@ const PlanView = ({
               enterStyle={{ opacity: 0, transform: [{ translateY: -100 }] }}
               exitStyle={{ opacity: 0, transform: [{ translateY: -100 }] }}
               gap="$6"
-              theme={annual ? 'green' : 'accent'}
+              theme={annual ? 'green' : undefined}
               p="$6"
               flex={1}
             >

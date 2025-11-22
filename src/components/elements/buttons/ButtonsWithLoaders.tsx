@@ -1,8 +1,4 @@
-import { useState } from 'react'
-import type { SizeTokens } from 'tamagui'
-import { AnimatePresence, Button, Spinner, View, YStack } from 'tamagui'
-
-const sizes = ['$4', '$5', '$6'] as const
+import { Button, Spinner, View, YStack } from 'tamagui'
 
 /** ------ EXAMPLE ------ */
 export function ButtonsWithLoaders() {
@@ -48,7 +44,7 @@ export function ButtonsWithLoaders() {
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme="neon">
+        <Button theme="purple">
           <Spinner
             animation="bouncy"
             enterStyle={{
@@ -61,7 +57,7 @@ export function ButtonsWithLoaders() {
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme="forest">
+        <Button theme="pink">
           <Spinner
             animation="bouncy"
             enterStyle={{
@@ -87,7 +83,7 @@ export function ButtonsWithLoaders() {
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme="cyan">
+        <Button theme="orange">
           <Spinner
             animation="bouncy"
             enterStyle={{
@@ -102,7 +98,7 @@ export function ButtonsWithLoaders() {
       </View>
 
       <View gap="$2">
-        <Button theme="accent">
+        <Button>
           <Spinner
             animation="bouncy"
             enterStyle={{
@@ -213,27 +209,3 @@ export function ButtonsWithLoaders() {
 }
 
 ButtonsWithLoaders.fileName = 'ButtonsWithLoaders'
-
-function EachButton({ size }: { size: SizeTokens }) {
-  const [loading, setLoading] = useState(true)
-  return (
-    <Button space={loading ? '$2' : 0} onPress={() => setLoading(!loading)} size={size}>
-      <AnimatePresence>
-        {loading && (
-          <Button.Icon>
-            <Spinner
-              animation="bouncy"
-              enterStyle={{
-                scale: 0,
-              }}
-              exitStyle={{
-                scale: 0,
-              }}
-            />
-          </Button.Icon>
-        )}
-      </AnimatePresence>
-      <Button.Text>Click</Button.Text>
-    </Button>
-  )
-}

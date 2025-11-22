@@ -84,7 +84,7 @@ export function UploadFile() {
           <View flex={1}>
             <View
               flexDirection="row"
-              theme="accent"
+              theme="alt1"
               gap="$2"
               items={'center'}
               position="absolute"

@@ -29,7 +29,7 @@ function Item({ item }: { item: Product }) {
           <H2 size="$4">{item.name}</H2>
           <XStack gap="$3">
             <StyledText fontWeight="bold">${item.price}</StyledText>
-            <StyledText theme="accent" textDecorationLine="line-through">
+            <StyledText theme="alt1" textDecorationLine="line-through">
               ${item.price}
             </StyledText>
           </XStack>

@@ -76,7 +76,7 @@ const ProductItem: FC<{ item: Product }> = ({ item }) => {
         </Text>
 
         <View flexDirection="row" items="center" justify="space-between" gap="$2">
-          <View flex={1} flexDirection="row" items="center" gap="$2" theme="accent">
+          <View flex={1} flexDirection="row" items="center" gap="$2" theme="alt1">
             <MapPin size="$1" color="$color10" />
             <Text numberOfLines={2} color="$color10" fontSize="$3">
               {item.city}

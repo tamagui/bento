@@ -63,7 +63,7 @@ export function ScrollProgress() {
     return (
       <>
         <View pt="$20" gap="$2" items="center">
-          <Text color="$color8" text="center" fontSize="$4">
+          <Text color="$color8" text="center" fontSize="$4" fontFamily="$mono">
             {subTitle}
           </Text>
 
@@ -153,7 +153,7 @@ const HeaderView = () => {
         />
 
         <AnimatedView gap="$1" style={opacityStyle} flex={1}>
-          <AnimatedText theme="blue" color="$color8" fontSize="$2">
+          <AnimatedText theme="blue" color="$color8" fontSize="$2" fontFamily="$mono">
             {subTitle}
           </AnimatedText>
           <AnimatedText
@@ -268,7 +268,7 @@ const BottomView = () => {
             <Text fontWeight="bold" fontSize="$2">
               {title}
             </Text>
-            <Text color="$color11" fontWeight="500" fontSize="$1">
+            <Text color="$color11" fontWeight="500" fontSize="$1" fontFamily="$mono">
               {subTitle}
             </Text>
           </AnimatedView>
@@ -287,7 +287,7 @@ const BottomView = () => {
           <Text fontWeight="bold" fontSize="$2">
             {showBookmark ? 'Bookmarked' : 'Next'}
           </Text>
-          <Text color="$color11" fontWeight="500" fontSize="$1">
+          <Text color="$color11" fontWeight="500" fontSize="$1" fontFamily="$mono">
             Chapter II
           </Text>
         </AnimatedView>

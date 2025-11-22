@@ -2,7 +2,7 @@ import type { FontSizeTokens, SizeTokens, ThemeName } from 'tamagui'
 import { View } from 'tamagui'
 import { Chip } from './components/chipsParts'
 
-const colors = ['red', 'green', 'blue', 'neon', 'yellow', 'cyan']
+const colors = ['red', 'green', 'blue', 'purple', 'pink', 'orange']
 
 /** ------ EXAMPLE ------ */
 export function ChipsNoTextColor({ size = '$4' }: { size?: SizeTokens }) {

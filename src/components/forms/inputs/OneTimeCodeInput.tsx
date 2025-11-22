@@ -116,7 +116,6 @@ function CodeConfirmationInput({
           text="center"
           fontSize="$8"
           rounded="$5"
-          theme="accent"
           aspectRatio={1}
           width="100%"
           height="100%"
@@ -306,8 +305,8 @@ const ResendTimer = ({
         cursor="pointer"
         onPress={handleResendClick}
       >
-        <RefreshCcw size={12} color="$green10" />
-        <Paragraph color="$green10" text="right" fontSize="$1">
+        <RefreshCcw size={12} color="$blue10" />
+        <Paragraph color="$blue10" text="right" fontSize="$1">
           Resend OTP
         </Paragraph>
       </XStack>
@@ -323,8 +322,8 @@ const ResendTimer = ({
       className="flex"
       cursor="default"
     >
-      <RefreshCcw size={12} color="$green10" />
-      <Paragraph color="$green10" text="right" fontSize="$1">
+      <RefreshCcw size={12} color="$color10" />
+      <Paragraph color="$color10" text="right" fontSize="$1">
         Resend in {seconds} {seconds > 1 ? 'seconds' : 'second'}
       </Paragraph>
     </XStack>

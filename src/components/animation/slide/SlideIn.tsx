@@ -52,23 +52,35 @@ function SlideIn({
       <View width={312} gap="$6">
         <View p="$3.5" position="relative">
           <XStack items="center" justify="space-between">
-            <Text fontWeight="500" fontSize="$3" color="$color10">
+            <Text fontWeight="500" fontSize="$3" fontFamily="$mono" color="$color10">
               Tamagui Debit
             </Text>
 
             <Image src="/avatar_pro.png" width={32} height={32} />
           </XStack>
 
-          <Text pt="$4" fontWeight="600" fontSize="$8" color="$color">
+          <Text pt="$4" fontWeight="600" fontSize="$8" fontFamily="$mono" color="$color">
             ···· ···· ···· 0225
           </Text>
         </View>
 
         <XStack bg="$background" p="$3.5" themeInverse>
-          <Text flex={1} fontWeight="500" fontSize="$2" color="$color11">
+          <Text
+            flex={1}
+            fontWeight="500"
+            fontSize="$2"
+            fontFamily="$mono"
+            color="$color11"
+          >
             Nate Wienert
           </Text>
-          <Text self="flex-end" fontWeight="500" fontSize="$2" color="$color12">
+          <Text
+            self="flex-end"
+            fontWeight="500"
+            fontSize="$2"
+            fontFamily="$mono"
+            color="$color12"
+          >
             03/26
           </Text>
         </XStack>

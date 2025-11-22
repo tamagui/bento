@@ -121,7 +121,7 @@ function Item({ person }: { person: PersonList[number] }) {
       </View>
       <View flex={1} flexDirection="column" shrink={1} justify="center">
         <H5>{person.name}</H5>
-        <Text fontWeight="$2" theme="accent">
+        <Text fontWeight="$2" theme="alt1">
           {person.status.status}
         </Text>
       </View>

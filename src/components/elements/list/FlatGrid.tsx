@@ -86,7 +86,7 @@ function Item({ data }: { data: { index: number } }) {
           source={{ uri: `https://picsum.photos/250/${150 + index}` }}
         />
       </View>
-      <Paragraph size="$2" lineHeight="$1" theme="accent">
+      <Paragraph size="$2" lineHeight="$1" theme="alt1">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla nesciunt
         asperiores corrupti! Optio soluta excepturi aut sint nam vero, libero at
         repellendus
@@ -100,7 +100,7 @@ function Item({ data }: { data: { index: number } }) {
               src="https://images.unsplash.com/photo-1588798204072-e5f8e649d269?&w=100"
               objectFit="cover"
             />
-            <Avatar.Fallback bg="$green10" />
+            <Avatar.Fallback bg="$blue10" />
           </Avatar>
         </Button>
         <View gap="$1" flexDirection="column">

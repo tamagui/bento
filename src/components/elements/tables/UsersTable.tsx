@@ -153,7 +153,7 @@ const columns = [
             </Avatar>
             <View flexDirection="column">
               <Text>{fullName}</Text>
-              <Text fontSize="$2" lineHeight="$2" fontWeight="$2" theme="accent">
+              <Text fontSize="$2" lineHeight="$2" fontWeight="$2" theme="alt2">
                 {userName}
               </Text>
             </View>
@@ -189,7 +189,7 @@ const StatusButton = ({ status }: { status: string }) => {
       flexDirection="row"
       items="center"
       gap="$2"
-      theme={status?.toLocaleLowerCase() === 'active' ? 'green' : 'red'}
+      theme={status?.toLocaleLowerCase() === 'active' ? 'green' : 'orange'}
       bg="$color6"
       rounded={1000_000_000}
       px="$2"
@@ -384,7 +384,7 @@ export function UsersTable() {
                   {cell.column.id === 'user_base' ? (
                     flexRender(cell.column.columnDef.cell, cell.getContext())
                   ) : (
-                    <Text theme="accent">
+                    <Text theme="alt1">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </Text>
                   )}

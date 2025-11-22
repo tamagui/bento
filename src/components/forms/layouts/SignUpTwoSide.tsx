@@ -198,7 +198,7 @@ export function SignUpTwoSideScreen() {
                                 </Checkboxes.Checkbox.Indicator>
                               </Checkboxes.Checkbox>
                             </View>
-                            <Text fontSize="$4" theme="accent">
+                            <Text fontSize="$4" theme="alt1">
                               {desc}
                             </Text>
                           </Checkboxes.Card>

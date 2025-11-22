@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { AnimatePresence, Button, Spinner, Theme, View } from 'tamagui'
+import { Button, Spinner, Theme, View } from 'tamagui'
 
 /** ------ EXAMPLE ------ */
 export function ButtonLoading() {
@@ -16,16 +16,16 @@ export function ButtonLoading() {
       <Theme name="blue">
         <ButtonLoadingExample />
       </Theme>
-      <Theme name="neon">
+      <Theme name="purple">
         <ButtonLoadingExample />
       </Theme>
-      <Theme name="neonBlue">
+      <Theme name="pink">
         <ButtonLoadingExample />
       </Theme>
       <Theme name="red">
         <ButtonLoadingExample />
       </Theme>
-      <Theme name="orangeRed">
+      <Theme name="orange">
         <ButtonLoadingExample />
       </Theme>
       <Theme name="yellow">

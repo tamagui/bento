@@ -117,14 +117,14 @@ function Item({
             <RadioGroup.Indicator />
           </RadioGroup.Item>
         </View>
-        <Text fontSize="$3" theme="accent">
+        <Text fontSize="$3" theme="alt1">
           {description}
         </Text>
       </View>
 
       <View flexDirection="row" gap="$2" mt="auto" items="center">
         <Clock color="$color10" size={14} />
-        <Text opacity={0.5} fontSize="$3" fontWeight="300" theme="accent">
+        <Text opacity={0.5} fontSize="$3" fontWeight="300" theme="alt2">
           last bought 2 hr ago
         </Text>
       </View>
