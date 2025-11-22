@@ -30,6 +30,7 @@ import Animated, {
   withSpring,
   type SharedValue,
 } from 'react-native-reanimated'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import {
   Avatar,
   Button,
@@ -51,7 +52,6 @@ import { Chip } from '../chips/components/chipsParts'
 import { BubbleChat, type MessageItem } from './components/Chat/BubbleChat'
 import { ChatContext } from './components/Chat/ChatContext'
 import { ThemePicker } from './components/Chat/ThemePicker'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 const AnimatedView = Animated.createAnimatedComponent(View)
 const { height: mobileHeight } = Dimensions.get('window')
@@ -261,7 +261,7 @@ const Header = ({ offset }: { offset: SharedValue<number> }) => {
       borderBottomRightRadius="$8"
       borderCurve="circular"
       bg="$background"
-      self="center"
+      justify="center"
     >
       <SafeAreaView />
 
@@ -328,7 +328,7 @@ const MenuView = ({ offset }: { offset: SharedValue<number> }) => {
               p="$1"
               borderColor="$color10"
               borderWidth={2}
-              rounded={100}
+              rounded={1000}
             >
               <Avatar circular size="$8" bg="red">
                 <Avatar.Image source={{ uri: AVATAR_1_URL }} objectFit="cover" />

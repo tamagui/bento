@@ -37,19 +37,19 @@ export function ThemePicker({ themeColor, setThemeColor }: ThemePicker) {
 
   return (
     <YStack p="$4" pb={insets.paddingBottom}>
-      <XStack alignSelf="center">
+      <XStack self="center">
         <GestureDetector gesture={pan}>
           <XStack
             gap={SPACE}
             data-tauri-drag-region
             position="relative"
-            jc="center"
-            ai="center"
+            justify="center"
+            items="center"
             mx={SPACE}
             px={SPACE}
             py={8}
             bg="$background"
-            br="$10"
+            rounded="$10"
           >
             {colors.map(({ emoji }, index) => (
               <Emoji key={`path-${index}-${emoji}`} position={position} index={index}>

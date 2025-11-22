@@ -110,11 +110,11 @@ export function WheelList({
         }}
       />
 
-      <View position="absolute" gap="$2" t={0} l={0} r={0} p="$4">
-        <Text z={1} fontWeight="800" fontFamily="$heading" fontSize="$10">
+      <View position="absolute" z={1} gap="$2" t={0} l={0} r={0} p="$4">
+        <Text fontWeight="800" fontFamily="$heading" fontSize="$10">
           Influencer
         </Text>
-        <Text z={1} fontWeight="500" color="$color10" fontSize="$8" fontFamily="$mono">
+        <Text fontWeight="500" fontFamily="$mono" color="$color10" fontSize="$8">
           {data.length} Contacts
         </Text>
       </View>

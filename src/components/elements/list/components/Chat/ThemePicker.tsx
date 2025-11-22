@@ -26,7 +26,7 @@ type ThemePicker = {
 const themes: Theme[] = [
   {
     emoji: '🌙',
-    theme: 'accent',
+    theme: 'alt1',
   },
   {
     emoji: '🐝',
@@ -139,7 +139,7 @@ const ThemeItem = ({
           position="absolute"
           l={0}
           r={0}
-          b={'$2'}
+          b="$2"
           text="center"
           fontSize="$8"
           fontWeight="bold"

@@ -1,11 +1,7 @@
-import { createCherryBombFont } from '@tamagui/font-cherry-bomb'
 import { createInterFont } from '@tamagui/font-inter'
 import { createSilkscreenFont } from '@tamagui/font-silkscreen'
 import { createGenericFont } from './createGenericFont'
 
-export const cherryBombFont = createCherryBombFont({
-  family: '"Cherry Bomb", Arial, sans-serif',
-})
 export const silkscreenFont = createSilkscreenFont()
 export const headingFont = createInterFont(
   {

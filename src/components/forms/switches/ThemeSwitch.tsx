@@ -1,15 +1,7 @@
 import { MoonStar, Sun } from '@tamagui/lucide-icons'
 import { useEffect, useId, useState } from 'react'
-import type { ColorTokens, SizeTokens } from 'tamagui'
-import {
-  AnimatePresence,
-  getVariableValue,
-  isWeb,
-  Switch,
-  useTheme,
-  View,
-  YStack,
-} from 'tamagui'
+import type { SizeTokens } from 'tamagui'
+import { AnimatePresence, getVariableValue, isWeb, Switch, View, YStack } from 'tamagui'
 
 import { getSize } from '@tamagui/get-token'
 import { useSchemeSetting } from '@vxrn/color-scheme'
@@ -30,8 +22,6 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
 
   const larger = thumbSize >= 64
 
-  const { color11 } = useTheme()
-
   const iconSize = thumbSize * 0.4
 
   return (
@@ -47,12 +37,12 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
         }
       }}
       size={size}
-      backgroundColor={'$background'}
+      backgroundColor="$background"
       justify="center"
       items="center"
       cursor="pointer"
       borderWidth={2}
-      borderColor={'$colorTransparent'}
+      borderColor="$colorTransparent"
     >
       {/* switch background */}
       {larger ? <SwitchBackground checked={checked} /> : null}
@@ -70,7 +60,7 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
           rounded="$10"
           items="center"
           justify="center"
-          bg={color11.val as ColorTokens}
+          bg="$color11"
           animation="200ms"
         >
           <AnimatePresence exitBeforeEnter custom={{ direction: -1 }}>
@@ -79,8 +69,6 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
               key="Sun"
               animation="medium"
               fullscreen
-              width="100%"
-              height="100%"
               items="center"
               justify="center"
               opacity={checked ? 0 : 1}
@@ -89,7 +77,7 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
                 { translateY: !checked ? 0 : thumbSize },
               ]}
             >
-              <Sun size={iconSize} fill="white" color="white" />
+              <Sun size={iconSize} fill={'white'} color="white" />
             </YStack>
 
             <YStack
@@ -98,8 +86,6 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
               key="moon"
               fullscreen
               items="center"
-              width="100%"
-              height="100%"
               justify="center"
               transform={[
                 { scale: checked ? 1 : 0 },

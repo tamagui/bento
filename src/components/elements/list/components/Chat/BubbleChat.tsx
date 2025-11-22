@@ -26,7 +26,6 @@ export const BubbleChat = (props: BubbleProps) => {
   const { item } = props
 
   const received = !!item.user
-  const isSticker = !!item.sticker
   const theme = useThemeName()
 
   return (
@@ -35,16 +34,16 @@ export const BubbleChat = (props: BubbleProps) => {
         theme={
           theme.includes('alt1') || theme === 'light' || theme === 'dark' ? 'blue' : theme
         }
-        alignSelf={received ? 'flex-start' : 'flex-end'}
+        self={received ? 'flex-start' : 'flex-end'}
         backgroundColor={'$color10'}
         {...(!received && {
           backgroundColor: '$color3',
-          alignSelf: 'flex-end',
+          self: 'flex-end',
         })}
         rounded="$7"
         borderCurve="continuous"
         p="$3"
-        maxW={80}
+        maxW="80%"
       >
         {item.sticker ? (
           <Image source={{ uri: item.sticker }} />

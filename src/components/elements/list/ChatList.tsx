@@ -127,7 +127,7 @@ function ChatItem({ item, index }: { item: Message; index: number }) {
             justify="center"
             shrink={1}
           >
-            <Theme name={itsMe ? 'green' : 'accent'}>
+            <Theme name={itsMe ? 'green' : undefined}>
               <View bg="$color2" p="$4" py="$3" rounded="$6" shrink={1}>
                 <Text
                   fontSize="$3"
