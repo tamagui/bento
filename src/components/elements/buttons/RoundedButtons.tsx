@@ -14,11 +14,11 @@ export function RoundedButtons() {
   ] as const
 
   const variantButtons = [
-    { theme: undefined },
-    { disabled: true, opacity: 0.5 },
-    { themeInverse: true },
-    { variant: 'outlined' },
-    { chromeless: true },
+    { theme: undefined, inverse: false },
+    { disabled: true, opacity: 0.5, inverse: false },
+    { inverse: true },
+    { variant: 'outlined', inverse: false },
+    { chromeless: true, inverse: false },
   ] as const
 
   const sizeButtons = [
@@ -52,8 +52,8 @@ export function RoundedButtons() {
         }}
         gap="$4"
       >
-        {variantButtons.map((props, index) => (
-          <Button key={index} {...props} circular>
+        {variantButtons.map(({ inverse, ...props }, index) => (
+          <Button key={index} theme={inverse ? 'accent' : undefined} {...props} circular>
             <Button.Icon>
               <Folder />
             </Button.Icon>

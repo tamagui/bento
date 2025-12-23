@@ -134,11 +134,11 @@ export function ProductWithReview() {
                   <Image
                     flex={1}
                     width="100%"
-                    borderRadius="$2"
+                    rounded="$2"
                     aspectRatio={1 / 1}
                     objectFit="cover"
                     bg="$color2"
-                    source={{ uri: tempPicture || selectedPicture }}
+                    src={tempPicture || selectedPicture}
                     $group-window-sm={{
                       height: 300,
                     }}
@@ -169,7 +169,7 @@ export function ProductWithReview() {
                       px: '$2',
                     }}
                   >
-                    {product.pictures.map(({ picture, meta: { colorName } }, index) => (
+                    {product.pictures.map(({ picture, meta: { colorName } }) => (
                       <RovingFocusGroup.Item
                         key={picture}
                         asChild="except-style"
@@ -221,13 +221,12 @@ export function ProductWithReview() {
                             <Image
                               key={picture}
                               src={picture}
-                              source={{ uri: `https://picsum.photos/250/${150}` }}
                               width="100%"
                               height={'100%'}
                               aspectRatio={1}
-                              resizeMode="center"
+                              objectFit="cover"
                               bg="$color2"
-                              borderRadius="$2"
+                              rounded="$2"
                             />
                           </View>
                           {!xs && (
@@ -358,11 +357,12 @@ export function ProductWithReview() {
               <XStack items="center" gap="$4">
                 <ItemCounter />
                 <Spacer />
+
                 <Button
+                  theme="accent"
                   $xs={{
                     flex: 1,
                   }}
-                  themeInverse
                 >
                   <Button.Text>Add to Cart</Button.Text>
                 </Button>

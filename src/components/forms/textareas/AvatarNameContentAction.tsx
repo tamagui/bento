@@ -1,5 +1,5 @@
-import { Avatar, Button, Separator, Text, TextArea, View } from 'tamagui'
 import { File, Share } from '@tamagui/lucide-icons'
+import { Avatar, Button, Separator, Text, TextArea, View } from 'tamagui'
 
 /** ------ EXAMPLE ------ */
 export function AvatarNameContentAction() {
@@ -43,14 +43,14 @@ export function AvatarNameContentAction() {
         placeholder="Write your comment"
       />
       <Separator theme="alt1" mx="$-3" />
-      <View flexDirection="row" themeInverse justify="space-between">
+      <View flexDirection="row" theme="accent" justify="space-between">
         <View gap="$2" flexDirection="row">
-          <Button size="$3" themeInverse chromeless>
+          <Button size="$3" chromeless>
             <Button.Icon>
               <Share size="$1" color="$color10" />
             </Button.Icon>
           </Button>
-          <Button size="$3" themeInverse chromeless>
+          <Button size="$3" chromeless>
             <Button.Icon>
               <File size="$1" color="$color10" />
             </Button.Icon>

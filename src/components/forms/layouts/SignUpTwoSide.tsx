@@ -1,7 +1,6 @@
-import { Check, ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
 import { LinearGradient } from '@tamagui/linear-gradient'
+import { Check, ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
 import { useId, useMemo, useState } from 'react'
-import { Input } from '../inputs/components/inputsParts'
 import {
   Adapt,
   Button,
@@ -13,11 +12,11 @@ import {
   Separator,
   Sheet,
   Text,
-  Spacer,
   View,
   debounce,
 } from 'tamagui'
 import { Checkboxes } from '../checkboxes/common/checkboxParts'
+import { Input } from '../inputs/components/inputsParts'
 
 const notifications = [
   {
@@ -209,8 +208,9 @@ export function SignUpTwoSideScreen() {
                 </Checkboxes.Group>
               </Checkboxes.FocusGroup>
             </Checkboxes>
+
             <Button
-              themeInverse
+              theme="accent"
               self="flex-end"
               width="$12"
               mt="$2.5"
@@ -259,7 +259,7 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
     <Select id={id} value={val} onValueChange={setVal} disablePreventBodyScroll>
       <Select.Trigger width="100%" iconAfter={ChevronDown}>
         <View flexDirection="row" gap="$3" justify="center" items="center">
-          <Image source={{ uri: selectedItem.flag }} width={20} height={20} />
+          <Image src={selectedItem.flag} width={20} height={20} />
           <Text mr="auto">{`${selectedItem.name} ${
             selectedItem.shortName ? `(${selectedItem.shortName})` : ''
           }`}</Text>
@@ -330,7 +330,7 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
                       justify="center"
                       items="center"
                     >
-                      <Image source={{ uri: item.flag }} width={20} height={20} />
+                      <Image src={item.flag} width={20} height={20} />
                       <Text mr="auto">{`${item.name} ${
                         item.shortName ? `(${item.shortName})` : ''
                       }`}</Text>

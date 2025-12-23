@@ -1,6 +1,6 @@
 import { Plug, Home, Settings, Heart } from '@tamagui/lucide-icons'
 import React from 'react'
-import { YStack, Button, View, XGroup } from 'tamagui'
+import { YStack, Button, View, XGroup, Theme } from 'tamagui'
 
 /** ------ EXAMPLE ------ */
 export function ButtonsWithLeftIcons() {
@@ -79,7 +79,7 @@ export function ButtonsWithLeftIcons() {
           <Button.Text>Accent</Button.Text>
         </Button>
 
-        <Button themeInverse>
+        <Button theme="accent">
           <Button.Icon>
             <Heart />
           </Button.Icon>
@@ -152,32 +152,34 @@ export function ButtonsWithLeftIcons() {
           </XGroup.Item>
         </XGroup>
 
-        <XGroup themeInverse>
-          <XGroup.Item>
-            <Button>
-              <Button.Icon>
-                <Home />
-              </Button.Icon>
-              <Button.Text>Home</Button.Text>
-            </Button>
-          </XGroup.Item>
-          <XGroup.Item>
-            <Button>
-              <Button.Icon>
-                <Plug />
-              </Button.Icon>
-              <Button.Text>Connect</Button.Text>
-            </Button>
-          </XGroup.Item>
-          <XGroup.Item>
-            <Button>
-              <Button.Icon>
-                <Settings />
-              </Button.Icon>
-              <Button.Text>Settings</Button.Text>
-            </Button>
-          </XGroup.Item>
-        </XGroup>
+        <Theme inverse>
+          <XGroup>
+            <XGroup.Item>
+              <Button>
+                <Button.Icon>
+                  <Home />
+                </Button.Icon>
+                <Button.Text>Home</Button.Text>
+              </Button>
+            </XGroup.Item>
+            <XGroup.Item>
+              <Button>
+                <Button.Icon>
+                  <Plug />
+                </Button.Icon>
+                <Button.Text>Connect</Button.Text>
+              </Button>
+            </XGroup.Item>
+            <XGroup.Item>
+              <Button>
+                <Button.Icon>
+                  <Settings />
+                </Button.Icon>
+                <Button.Text>Settings</Button.Text>
+              </Button>
+            </XGroup.Item>
+          </XGroup>
+        </Theme>
 
         <XGroup theme="red">
           <XGroup.Item>

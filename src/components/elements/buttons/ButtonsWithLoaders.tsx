@@ -124,7 +124,7 @@ export function ButtonsWithLoaders() {
           <Button.Text>Disabled</Button.Text>
         </Button>
 
-        <Button themeInverse>
+        <Button theme="accent">
           <Spinner
             animation="bouncy"
             enterStyle={{

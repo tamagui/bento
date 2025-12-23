@@ -44,7 +44,7 @@ function Item({ item, index }: { item: Product; index: number }) {
           >
             <Image
               bg="gray"
-              source={{ uri: item.image }}
+              src={item.image}
               height="100%"
               width="100%"
               objectFit="cover"

@@ -5,7 +5,7 @@ import { Button, Theme, View, styled } from 'tamagui'
 
 type variants = {
   theme: ThemeName[]
-  variant: 'bouncy' | 'lazy' | 'pulse' | 'inverse' | 'bump'
+  variant: 'bouncy' | 'lazy' | 'pulse' | 'accent' | 'bump'
   animation: AnimationProp
 }
 const themes: ThemeName[] = ['blue', 'purple', 'pink', 'red', 'orange', 'yellow', 'green']
@@ -18,7 +18,7 @@ const variants: variants[] = [
   },
   {
     theme: themes,
-    variant: 'inverse',
+    variant: 'accent',
     animation: '100ms',
   },
   {
@@ -56,13 +56,11 @@ export function ButtonPulse() {
             .sort(() => Math.random() - 0.5)
             .map((theme) => (
               <Theme key={theme} name={theme}>
-                <CustomButton
-                  animVariant={v.variant}
-                  themeInverse={v.variant === 'inverse'}
-                  animation={v.animation}
-                >
-                  <Button.Text>Press me</Button.Text>
-                </CustomButton>
+                <Theme name={v.variant === 'accent' ? 'accent' : undefined}>
+                  <CustomButton animVariant={v.variant} animation={v.animation}>
+                    <Button.Text>Press me</Button.Text>
+                  </CustomButton>
+                </Theme>
               </Theme>
             ))}
         </React.Fragment>
@@ -81,7 +79,7 @@ const CustomButton = styled(Button, {
           scale: 0.95,
         },
       },
-      inverse: {
+      accent: {
         elevation: 15,
         pressStyle: {
           elevation: 2,

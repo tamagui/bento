@@ -1,13 +1,13 @@
 import type { FC, ReactElement } from 'react'
-import { Image, View, Text, Button, type ThemeName } from 'tamagui'
 import { useMemo } from 'react'
+import { Button, Image, Text, View, type ThemeName } from 'tamagui'
 
+import { Hash, MapPin, ShoppingBag } from '@tamagui/lucide-icons'
+import { useContainerDim } from '../../hooks/useContainerDim'
+import { Chip } from '../chips/components/chipsParts'
 import { MasonryList } from './components/MasonryList'
 import type { Product } from './data/products'
 import { useData } from './data/products'
-import { useContainerDim } from '../../hooks/useContainerDim'
-import { Hash, MapPin, ShoppingBag } from '@tamagui/lucide-icons'
-import { Chip } from '../chips/components/chipsParts'
 
 const colors = ['red', 'green', 'blue', 'purple', 'pink', 'orange']
 
@@ -26,7 +26,7 @@ const ProductItem: FC<{ item: Product }> = ({ item }) => {
         cursor="pointer"
       >
         <Image
-          source={{ uri: item.image }}
+          src={item.image}
           height={heightFactor ? 200 : 350}
           objectFit="cover"
           bg="$backgroundPress"
@@ -117,7 +117,7 @@ const ProductItem: FC<{ item: Product }> = ({ item }) => {
             </Chip.Text>
           </Chip>
 
-          <Button themeInverse size="$2.5" icon={ShoppingBag}>
+          <Button theme="accent" size="$2.5" icon={ShoppingBag}>
             Add
           </Button>
         </View>
@@ -133,7 +133,6 @@ export const MasonryListExample = () => {
 
   const renderItem = ({
     item,
-    i,
   }: {
     item: (typeof data)[0]
     i: number

@@ -1,6 +1,6 @@
 import { Paperclip, Send } from '@tamagui/lucide-icons'
 import { useState } from 'react'
-import { Button, Separator, Text, Tabs, TextArea, View, styled } from 'tamagui'
+import { Button, Separator, Tabs, Text, TextArea, View, styled } from 'tamagui'
 
 /** ------ EXAMPLE ------ */
 export function WritePreviewAction() {
@@ -26,7 +26,7 @@ export function WritePreviewAction() {
         rounded="$4"
       >
         <View flexDirection="row">
-          <Tabs.List width="100%" backgroundColor="$color5" borderRadius={0}>
+          <Tabs.List width="100%" backgroundColor="$color5" rounded={0}>
             <StyledTab
               borderBottomLeftRadius={0}
               borderBottomRightRadius={0}
@@ -86,7 +86,7 @@ export function WritePreviewAction() {
               </Button.Icon>
             </Button>
           </View>
-          <Button themeInverse self="flex-end" size="$4" rounded="$10">
+          <Button theme="accent" self="flex-end" size="$4" rounded="$10">
             <Button.Icon>
               <Send />
             </Button.Icon>

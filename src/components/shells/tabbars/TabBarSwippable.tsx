@@ -115,6 +115,7 @@ export const TabbarSwippable = () => {
         justify="center"
         width="100%"
         px="$2"
+        position="relative"
       >
         <Tabs.List
           width="100%"
@@ -142,7 +143,7 @@ export const TabbarSwippable = () => {
               flexBasis={0}
               flexShrink={1}
               pointerEvents={activeTabIndex === index ? 'none' : 'auto'}
-              onPress={(type) => {
+              onPress={() => {
                 chagenActiveTab(index)
               }}
             >

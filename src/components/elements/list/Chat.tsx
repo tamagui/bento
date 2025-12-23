@@ -109,8 +109,8 @@ export const Chat = () => {
     <ChatContext.Provider value={{ theme, setTheme }}>
       <View theme={theme} height="100%" flex={1}>
         <View
+          theme="accent"
           bg={themeName.includes('dark') ? 'white' : 'black'}
-          themeInverse
           flex={1}
           position="absolute"
           inset={0}
@@ -196,19 +196,18 @@ const BottomBar = ({
                   onFocus={() => (offset.value = 0)}
                 />
                 {value.trim().length > 0 ? (
-                  <Theme name={theme.includes('accent') ? 'blue' : theme}>
-                    <Button
-                      animation="200ms"
-                      enterStyle={{ scale: 0.2 }}
-                      exitStyle={{ scale: 0.2 }}
-                      scale={1}
-                      size="$3"
-                      onPress={submit}
-                      circular
-                    >
-                      <Send />
-                    </Button>
-                  </Theme>
+                  <Button
+                    theme={theme.includes('accent') ? 'blue' : theme}
+                    animation="200ms"
+                    enterStyle={{ scale: 0.2 }}
+                    exitStyle={{ scale: 0.2 }}
+                    scale={1}
+                    size="$3"
+                    onPress={submit}
+                    circular
+                  >
+                    <Send />
+                  </Button>
                 ) : (
                   <Button
                     animation="200ms"

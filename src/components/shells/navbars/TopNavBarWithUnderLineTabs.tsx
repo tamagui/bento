@@ -133,7 +133,7 @@ export function TopNavBarWithUnderLineTabs() {
     <View flexDirection="column" height={610} width="100%">
       <View
         flexDirection="row"
-        themeInverse
+        theme="accent"
         p="$2"
         width="100%"
         tag="nav"
@@ -151,14 +151,14 @@ export function TopNavBarWithUnderLineTabs() {
               width={25}
               height={25}
               $group-window-sm={{ width: 15, height: 15 }}
-              source={{ uri: '/bento/tamagui-icon.png' }}
+              src="/bento/tamagui-icon.png"
               alt="Bento logo"
             />
           </View>
         )}
         {!sm && (
           <Tabs value={currentTab} onValueChange={setCurrentTab} orientation="horizontal">
-            <View flexDirection="column">
+            <View position="relative" flexDirection="column">
               <AnimatePresence>
                 {intentAt && (
                   <TabsRovingIndicator
@@ -172,7 +172,6 @@ export function TopNavBarWithUnderLineTabs() {
               <AnimatePresence>
                 {activeAt && (
                   <TabsRovingIndicator
-                    theme="accent"
                     active
                     width={activeAt.width}
                     height="$0.5"
@@ -210,7 +209,7 @@ export function TopNavBarWithUnderLineTabs() {
           </Tabs>
         )}
         <View flexDirection="row" items="center" gap="$3">
-          <Button theme="accent" circular chromeless p={0} size="$3">
+          <Button circular chromeless p={0} size="$3">
             <Button.Icon>
               <Bell size="$1" />
             </Button.Icon>
@@ -351,6 +350,7 @@ function SideBar() {
   const toggle = useEvent(() => setOpen(!open))
   return (
     <View
+      position="relative"
       flexDirection="row"
       {...(isWeb && {
         onKeyDown: (e: KeyboardEvent) => {
@@ -423,7 +423,7 @@ function SideBarContent({
                   width={30}
                   height={30}
                   $group-window-sm={{ width: 15, height: 15 }}
-                  source={{ uri: '/bento/tamagui-icon.png' }}
+                  src="/bento/tamagui-icon.png"
                   alt="Bento logo"
                 />
               </View>
@@ -434,7 +434,7 @@ function SideBarContent({
                   onValueChange={setCurrentTab}
                   orientation="vertical"
                 >
-                  <View flexDirection="column" width="100%">
+                  <View position="relative" flexDirection="column" width="100%">
                     <AnimatePresence>
                       {intentAt && (
                         <TabsRovingIndicator

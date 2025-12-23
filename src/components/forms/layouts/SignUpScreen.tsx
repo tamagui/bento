@@ -11,7 +11,6 @@ import {
   Spinner,
   Stack,
   Switch,
-  Theme,
   View,
   isWeb,
   useEvent,
@@ -194,46 +193,46 @@ export function SignUpScreen() {
             <Switch.Thumb animation="bouncy" />
           </Switch>
         </View>
-        <Theme inverse>
-          <Button
-            disabled={status === 'loading'}
-            onPress={signUp}
-            cursor={status === 'loading' ? 'progress' : 'pointer'}
-            self="flex-end"
-            minW="100%"
-            $gtSm={{
-              maxW: '$12',
-              minW: '$12',
-            }}
-            iconAfter={
-              <AnimatePresence>
-                {status === 'loading' && (
-                  <Spinner
-                    size="small"
-                    color="$color"
-                    key="loading-spinner"
-                    opacity={1}
-                    position="absolute"
-                    scale={0.5}
-                    l={110}
-                    animation="quick"
-                    enterStyle={{
-                      opacity: 0,
-                      scale: 0.5,
-                    }}
-                    exitStyle={{
-                      opacity: 0,
-                      scale: 0.5,
-                    }}
-                  />
-                )}
-              </AnimatePresence>
-            }
-          >
-            Sign Up
-          </Button>
-          {!isWeb && <SafeAreaView />}
-        </Theme>
+
+        <Button
+          theme="accent"
+          disabled={status === 'loading'}
+          onPress={signUp}
+          cursor={status === 'loading' ? 'progress' : 'pointer'}
+          self="flex-end"
+          minW="100%"
+          $gtSm={{
+            maxW: '$12',
+            minW: '$12',
+          }}
+          iconAfter={
+            <AnimatePresence>
+              {status === 'loading' && (
+                <Spinner
+                  size="small"
+                  color="$color"
+                  key="loading-spinner"
+                  opacity={1}
+                  position="absolute"
+                  scale={0.5}
+                  l={110}
+                  animation="quick"
+                  enterStyle={{
+                    opacity: 0,
+                    scale: 0.5,
+                  }}
+                  exitStyle={{
+                    opacity: 0,
+                    scale: 0.5,
+                  }}
+                />
+              )}
+            </AnimatePresence>
+          }
+        >
+          Sign Up
+        </Button>
+        {!isWeb && <SafeAreaView />}
       </View>
     </FormCard>
   )

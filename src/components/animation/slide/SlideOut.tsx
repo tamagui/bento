@@ -91,7 +91,7 @@ function SlideOut({
               </Text>
             </View>
 
-            <XStack bg="$background" p="$3.5" themeInverse>
+            <XStack theme="accent" bg="$background" p="$3.5">
               <Text
                 flex={1}
                 fontWeight="500"

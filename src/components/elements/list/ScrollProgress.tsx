@@ -236,6 +236,7 @@ const BottomView = () => {
 
   return (
     <AnimatedView
+      theme="accent"
       bg="$background"
       p="$2"
       borderWidth={1}
@@ -248,7 +249,6 @@ const BottomView = () => {
       shadowColor="$color5"
       items="center"
       justify="flex-end"
-      themeInverse
     >
       <AnimatedView
         animation="quicker"

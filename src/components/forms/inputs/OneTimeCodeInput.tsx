@@ -1,19 +1,19 @@
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Control, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 import { Controller, useForm } from 'react-hook-form'
 import type { SizeTokens } from 'tamagui'
 import {
   AnimatePresence,
+  Button,
   Form,
   Input,
+  Label,
   Paragraph,
   Spinner,
+  Text,
   View,
-  Button,
   XStack,
   YStack,
-  Label,
-  Text,
 } from 'tamagui'
 
 import {
@@ -386,6 +386,7 @@ export function OneTimeCodeInputExample({
   return (
     <View items="center" justify="center" gap="$4">
       <View
+        position="relative"
         minW={300}
         items="center"
         justify="center"
@@ -395,7 +396,6 @@ export function OneTimeCodeInputExample({
         borderWidth={1}
         borderColor="$borderColor"
         bg="$background"
-        //
         $gtSm={{
           shadowColor: '$shadowColor',
           shadowOffset: {
@@ -573,6 +573,7 @@ export function OneTimeCodeInputExample({
                     items="center"
                     gap="$4"
                     pt="$6"
+                    bg="red"
                   >
                     <YStack
                       flex={1}
@@ -590,7 +591,7 @@ export function OneTimeCodeInputExample({
                       </Paragraph>
                     </YStack>
 
-                    <Button width="100%" themeInverse>
+                    <Button theme="accent" width="100%">
                       Continue
                     </Button>
                   </View>
@@ -658,7 +659,7 @@ const EmailInput = ({
           </XStack>
         </YStack>
 
-        <Button themeInverse onPress={onSubmit}>
+        <Button theme="accent" onPress={onSubmit}>
           Send
         </Button>
       </YStack>

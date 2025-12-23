@@ -1,28 +1,4 @@
-import Animated, {
-  CurvedTransition,
-  Easing,
-  Extrapolation,
-  interpolate,
-  ReduceMotion,
-  type SharedValue,
-  useAnimatedStyle,
-  useSharedValue,
-  withRepeat,
-  withSpring,
-  withTiming,
-} from 'react-native-reanimated'
-import {
-  Button,
-  isWeb,
-  styled,
-  Switch,
-  Text,
-  useTheme,
-  useThemeName,
-  View,
-  XStack,
-} from 'tamagui'
-import { LinearGradient } from 'tamagui/linear-gradient'
+import type { IconProps } from '@tamagui/helpers-icon'
 import {
   Calendar,
   ChartArea,
@@ -36,11 +12,35 @@ import {
   User,
   X,
 } from '@tamagui/lucide-icons'
+import { useEffect, useState, type FunctionComponent } from 'react'
 import { Dimensions } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
-import { useEffect, useState, type FunctionComponent } from 'react'
+import Animated, {
+  CurvedTransition,
+  Easing,
+  Extrapolation,
+  interpolate,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSpring,
+  withTiming,
+  type SharedValue,
+} from 'react-native-reanimated'
+import {
+  Button,
+  isWeb,
+  styled,
+  Switch,
+  Text,
+  Theme,
+  useTheme,
+  View,
+  XStack,
+} from 'tamagui'
+import { LinearGradient } from 'tamagui/linear-gradient'
 import { Chip } from '../../elements/chips/components/chipsParts'
-import type { IconProps } from '@tamagui/helpers-icon'
 
 const { width } = Dimensions.get('window')
 
@@ -55,8 +55,6 @@ const AnimatedHStack = Animated.createAnimatedComponent(
 )
 
 export function Paywall() {
-  const themeName = useThemeName()
-
   const goToTermsOfService = () => {
     //
   }
@@ -326,11 +324,11 @@ const PlanView = ({
               </>
             ))}
           </View>
+
           <Button
+            theme="accent"
             flexDirection="column"
             gap={0}
-            space={0}
-            themeInverse
             height="auto"
             rounded="$10"
             onPress={() => setNextStep(true)}
@@ -497,18 +495,19 @@ const PlanView = ({
                 </Text>
               </View>
 
-              <Button
-                flexDirection="column"
-                gap={0}
-                space={0}
-                themeInverse
-                height="auto"
-                rounded="$10"
-              >
-                <Button.Text py="$3.5" fontSize="$5" fontWeight="bold">
-                  Checkout
-                </Button.Text>
-              </Button>
+              <Theme inverse>
+                <Button
+                  flexDirection="column"
+                  gap={0}
+                  space={0}
+                  height="auto"
+                  rounded="$10"
+                >
+                  <Button.Text py="$3.5" fontSize="$5" fontWeight="bold">
+                    Checkout
+                  </Button.Text>
+                </Button>
+              </Theme>
             </View>
             <Button
               self="flex-end"

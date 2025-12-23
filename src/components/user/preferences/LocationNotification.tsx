@@ -81,7 +81,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
             justify="center"
             items="center"
           >
-            <Image source={{ uri: item.flag }} width={20} height={20} />
+            <Image src={item.flag} width={20} height={20} />
             <SizableText mr="auto">{`${item.name} ${
               item.shortcut ? `(${item.shortcut})` : ''
             }`}</SizableText>
@@ -104,7 +104,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
     >
       <Select.Trigger width="100%" iconAfter={ChevronDown}>
         <View flexDirection="row" gap="$3" justify="center" items="center">
-          <Image source={{ uri: selectedItem.flag }} width={20} height={20} />
+          <Image src={selectedItem.flag} width={20} height={20} />
           <SizableText mr="auto">{`${selectedItem.name} ${
             selectedItem.shortcut ? `(${selectedItem.shortcut})` : ''
           }`}</SizableText>
@@ -260,7 +260,8 @@ export function LocationNotification() {
         <Button flex={1}>
           <Button.Text>Cancel</Button.Text>
         </Button>
-        <Button themeInverse flex={1}>
+
+        <Button theme="accent" flex={1}>
           <Button.Text>Save</Button.Text>
         </Button>
       </View>

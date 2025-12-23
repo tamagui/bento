@@ -17,9 +17,9 @@ import {
   withStaticProperties,
 } from 'tamagui'
 
+import { type ReactNode, useEffect, useRef } from 'react'
 import { Input } from '../../../forms/inputs/components/inputsParts'
 import { useDateAnimation } from './useDateAnimation'
-import { type ReactNode, type ProviderExoticComponent, useEffect, useRef } from 'react'
 
 type DatePickerProps = PopoverProps & {
   config: DatePickerProviderProps['config']
@@ -221,7 +221,7 @@ export function MonthPicker({
       >
         {months.map((month) => (
           <Button
-            themeInverse={month.active}
+            theme={month.active ? 'accent' : undefined}
             rounded="$4"
             shrink={0}
             flexBasis={90}
@@ -275,7 +275,7 @@ export function YearPicker({
       >
         {years.map((year) => (
           <Button
-            themeInverse={year.year === Number(selectedYear)}
+            theme={year.year === Number(selectedYear) ? 'accent' : undefined}
             rounded="$4"
             flexBasis="30%"
             grow={1}

@@ -13,6 +13,7 @@ import {
   getTokenValue,
   Image,
   Text,
+  Theme,
   View,
   XStack,
   YStack,
@@ -52,10 +53,10 @@ export const ProfileView = () => {
     scrollY.value = event.contentOffset.y
   })
 
-  const renderItem = ({ item, index }: { item: Blog; index: number }) => {
+  const renderItem = ({ item }: { item: Blog }) => {
     return (
       <XStack gap="$4" px="$6" py="$4">
-        <Image borderRadius="$8" width={78} height={78} source={{ uri: item.image }} />
+        <Image rounded="$8" width={78} height={78} src={item.image} />
         <YStack flex={1} gap="$2">
           <Text fontSize="$6" fontWeight="600" color="$color12">
             {item.title}
@@ -132,60 +133,61 @@ const ButtonGroup = ({
 }: { followed: boolean; setFollowed: (followed: boolean) => void }) => {
   return (
     <XStack pt="$4" gap="$4">
-      <Button
-        themeInverse={!followed}
-        theme={followed ? 'accent' : 'red'}
-        animation="200ms"
-        fontWeight="bold"
-        fontSize="$6"
-        flex={1}
-        height="$6"
-        rounded="$10"
-        color="$color12"
-        onPress={() => setFollowed(!followed)}
-      >
-        {followed ? (
-          <Text
-            key={'Following'}
-            animatePresence
-            enterStyle={{
-              opacity: 0,
-              y: 10,
-            }}
-            exitStyle={{
-              opacity: 0,
-              y: 10,
-            }}
-            opacity={1}
-            animation="bouncy"
-            fontFamily="$mono"
-            fontWeight="bold"
-            fontSize="$5"
-          >
-            Following
-          </Text>
-        ) : (
-          <Text
-            key={'Follow'}
-            animatePresence
-            fontFamily="$mono"
-            fontWeight="bold"
-            fontSize="$5"
-            enterStyle={{
-              opacity: 0,
-              y: -10,
-            }}
-            exitStyle={{
-              opacity: 0,
-              y: -10,
-            }}
-            opacity={1}
-            animation="bouncy"
-          >
-            Follow
-          </Text>
-        )}
-      </Button>
+      <Theme inverse={!followed}>
+        <Button
+          theme={followed ? 'accent' : 'red'}
+          animation="200ms"
+          fontWeight="bold"
+          fontSize="$6"
+          flex={1}
+          height="$6"
+          rounded="$10"
+          color="$color12"
+          onPress={() => setFollowed(!followed)}
+        >
+          {followed ? (
+            <Text
+              key={'Following'}
+              animatePresence
+              enterStyle={{
+                opacity: 0,
+                y: 10,
+              }}
+              exitStyle={{
+                opacity: 0,
+                y: 10,
+              }}
+              opacity={1}
+              animation="bouncy"
+              fontFamily="$mono"
+              fontWeight="bold"
+              fontSize="$5"
+            >
+              Following
+            </Text>
+          ) : (
+            <Text
+              key={'Follow'}
+              animatePresence
+              fontFamily="$mono"
+              fontWeight="bold"
+              fontSize="$5"
+              enterStyle={{
+                opacity: 0,
+                y: -10,
+              }}
+              exitStyle={{
+                opacity: 0,
+                y: -10,
+              }}
+              opacity={1}
+              animation="bouncy"
+            >
+              Follow
+            </Text>
+          )}
+        </Button>
+      </Theme>
 
       <Button height="$6" width="$6" rounded="$10">
         <Share />
@@ -256,7 +258,7 @@ const AvatarView = memo(
               height="100%"
               width="100%"
               animatePresence
-              source={{ uri: 'https://tamagui.dev/bento/images/avatar_1.png' }}
+              src="https://tamagui.dev/bento/images/avatar_1.png"
             />
           </AnimatedView>
         </View>
@@ -286,12 +288,12 @@ const Follower = ({ followed }: { followed: boolean }) => {
     <XStack items="center" gap="$2">
       {followerData.map((follower, index) => (
         <Image
-          borderRadius={'$10'}
+          rounded="$10"
           key={follower.avatar}
           width="$4"
           height="$4"
           ml={index !== 0 ? -(getTokenValue('$5') ?? 20) * 1.5 : undefined}
-          source={{ uri: follower.avatar }}
+          src={follower.avatar}
         />
       ))}
       <YStack gap="$1">
@@ -340,8 +342,8 @@ const Header = ({ scrollY }: { scrollY: SharedValue<number> }) => {
         <Image
           width={24}
           aspectRatio={1}
-          borderRadius={'$2'}
-          source={{ uri: 'https://tamagui.dev/bento/images/avatar_1.png' }}
+          rounded="$2"
+          src="https://tamagui.dev/bento/images/avatar_1.png"
         />
         <Text fontFamily="$mono" fontSize="$4" fontWeight="600" color="$color12">
           John Doe

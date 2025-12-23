@@ -215,7 +215,7 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
           <Input.Button px="$2" onPress={() => setOpen(true)}>
             {regionCode ? (
               <>
-                <Image source={{ uri: selectedItem.flag }} width={20} height={20} />
+                <Image src={selectedItem.flag} width={20} height={20} />
               </>
             ) : (
               <>

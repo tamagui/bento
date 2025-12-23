@@ -30,6 +30,7 @@ const CustomTabBar = View.styleable<CustomTabBarProps>(
     const { scale } = usePhoneScale()
     return (
       <View
+        position="relative"
         flexDirection="row"
         maxW="100%"
         onLayout={(e) => {

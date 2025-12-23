@@ -447,8 +447,9 @@ export function SignupValidatedHookForm() {
             </Input>
           )}
         />
+
         <Button
-          themeInverse
+          theme="accent"
           disabled={loading}
           onPress={handleSubmit(onSubmit)}
           cursor={loading ? 'progress' : 'pointer'}

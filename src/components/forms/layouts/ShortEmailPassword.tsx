@@ -1,5 +1,5 @@
-import { Button, Theme, View } from 'tamagui'
-import { Mail, Lock } from '@tamagui/lucide-icons'
+import { Lock, Mail } from '@tamagui/lucide-icons'
+import { Button, View } from 'tamagui'
 import { Input } from '../inputs/components/inputsParts'
 import { FormCard } from './components/layoutParts'
 
@@ -45,11 +45,10 @@ export function ShortEmailPassword() {
           <Button flex={1} flexBasis={0}>
             <Button.Text>Back</Button.Text>
           </Button>
-          <Theme inverse>
-            <Button flex={1} flexBasis={0}>
-              <Button.Text>Continue</Button.Text>
-            </Button>
-          </Theme>
+
+          <Button theme="accent" flex={1} flexBasis={0}>
+            <Button.Text>Continue</Button.Text>
+          </Button>
         </View>
       </View>
     </FormCard>

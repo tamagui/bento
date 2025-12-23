@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Anchor, H2, Image, Stack, Text, XStack, View, styled } from 'tamagui'
+import { Anchor, H2, Image, Stack, Text, View, XStack, styled } from 'tamagui'
 import { getProducts } from './data/products'
 
 const Link = Anchor
@@ -30,12 +30,7 @@ function Item({ item }: { item: Product }) {
     >
       <View pb="$2" gap="$2" tag="article">
         <Stack overflow="hidden" width="100%" height={100}>
-          <Image
-            source={{ uri: item.image }}
-            height="100%"
-            width="100%"
-            objectFit="cover"
-          />
+          <Image src={item.image} height="100%" width="100%" objectFit="cover" />
         </Stack>
         <View>
           <H2 size="$1">{item.name}</H2>
@@ -68,7 +63,7 @@ export function ProductListGridThumbs() {
   }, [])
   return (
     <XStack maxW="100%" bg="$color1" flexWrap="wrap">
-      {products.map((item, index) => (
+      {products.map((item) => (
         <Item key={item.id} item={item} />
       ))}
       {someSpacers}

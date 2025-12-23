@@ -103,7 +103,6 @@ const DrawerFrame = styled(YStack, {
   variants: {
     unstyled: {
       false: {
-        themeInverse: true,
         paddingVertical: '$2',
         tag: 'nav',
         width: 210,
@@ -186,8 +185,9 @@ const DrawerContent = DrawerFrame.styleable((props, ref) => {
       <DrawerFrame
         ref={ref}
         animation="medium"
-        enterStyle={{ x: -(rest.width || rest.width || 210) }}
-        exitStyle={{ x: -(rest.width || rest.width || 210) }}
+        theme="accent"
+        enterStyle={{ x: -(rest.width || 210) }}
+        exitStyle={{ x: -(rest.width || 210) }}
         {...rest}
       >
         {children}
@@ -200,8 +200,6 @@ const DrawerImpl = ({
   open = false,
   onOpenChange,
   children,
-  portalToRoot,
-  ...rest
 }: DrawerProps & { children?: React.ReactNode }) => {
   const [_open, setOpen] = useControllableState({
     prop: open,

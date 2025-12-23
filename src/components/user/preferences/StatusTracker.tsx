@@ -90,7 +90,7 @@ export function StatusTracker() {
         <SizableText size="$3" theme="accent" fontWeight="200">
           Absent
         </SizableText>
-        {data.absent.map((user, index) => (
+        {data.absent.map((user) => (
           <User type="absent" user={user} key={user.id} />
         ))}
       </View>
@@ -100,7 +100,7 @@ export function StatusTracker() {
           Away
         </SizableText>
         <View flexDirection="column" gap="$3">
-          {data.away.map((user, index) => (
+          {data.away.map((user) => (
             <User type="away" user={user} key={user.id} />
           ))}
         </View>
@@ -118,7 +118,7 @@ function User({
   const { name, replacedBy, avatar, job, min } = user
   return (
     <View flexDirection="row" items="center" gap="$3">
-      <View>
+      <View position="relative">
         <Avatar rounded="$2" size="$3" circular>
           <Avatar.Image accessibilityLabel="Cam" src={avatar} />
           <Avatar.Fallback backgroundColor="$background" />

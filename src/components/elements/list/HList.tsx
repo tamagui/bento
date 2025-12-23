@@ -71,7 +71,7 @@ function HListItem({ uri, title }: { uri: string; title: string }) {
         scale: 0.98,
       }}
     >
-      <HListInner containerType="normal" group="listitem" animation="bouncy">
+      <HListInner containerType="normal" group="item" animation="bouncy">
         <View
           flexDirection="column"
           flex={1}
@@ -84,11 +84,8 @@ function HListItem({ uri, title }: { uri: string; title: string }) {
           <Image
             width="100%"
             height={200}
-            source={{
-              uri: `${imagePrefix}/bento/images/hlist/${uri}`,
-              width: 200,
-              height: 200,
-            }}
+            objectFit="cover"
+            src={`${imagePrefix}/bento/images/hlist/${uri}`}
             scale={1}
           />
         </View>

@@ -1,9 +1,9 @@
 import { randAvatar, randFullName, randUuid } from '@ngneat/falso'
 import { Phone } from '@tamagui/lucide-icons'
 import { useEffect, useState } from 'react'
-import type { ColorTokens } from 'tamagui'
-import { Avatar, Button, Circle, H5, Separator, Text, View, YGroup } from 'tamagui'
 import { FlatList } from 'react-native'
+import type { ColorTokens } from 'tamagui'
+import { Avatar, Button, Circle, H5, Separator, Text, View } from 'tamagui'
 
 // Define more descriptive status options
 const statusOptions = [
@@ -103,7 +103,7 @@ function Item({ person }: { person: PersonList[number] }) {
       bg="$color1"
       items="center"
     >
-      <View>
+      <View position="relative">
         <Avatar circular size="$4">
           <Avatar.Image objectFit="cover" src={person.image} />
           <Avatar.Fallback backgroundColor="$background" />

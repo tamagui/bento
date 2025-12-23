@@ -181,6 +181,7 @@ function CalendarView({
                     const buttonElement = (
                       <Button
                         key={day.$date.toString()}
+                        theme={day.selected ? 'accent' : undefined}
                         chromeless
                         circular
                         group="item"
@@ -240,6 +241,7 @@ function CalendarView({
 
                     return (
                       <View
+                        position="relative"
                         justify="center"
                         items="center"
                         key={day.$date.toString()}
@@ -254,6 +256,7 @@ function CalendarView({
                             position="absolute"
                             width="100%"
                             height="100%"
+                            z={100}
                             {...BG_RANGE_STYLE[day.range]}
                             enterStyle={{
                               opacity: 0,

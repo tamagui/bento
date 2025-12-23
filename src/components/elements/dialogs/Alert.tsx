@@ -129,7 +129,7 @@ const Alert = ({ children, ...rest }: AlertProps) => {
   )
 }
 
-const AlertDialogTest = (props: any) => {
+const AlertDialogTest = () => {
   const { alert } = useAlert('AlertTest')
 
   const buttons: AlertButton[] = [

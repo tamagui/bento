@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import type { ImageSourcePropType } from 'react-native'
 import Animated, {
   Extrapolation,
   interpolate,
@@ -183,12 +182,19 @@ const CardItem = ({
       borderWidth={2}
       borderColor="$color3"
     >
-      <View height="100%" overflow="hidden" aspectRatio={1} rounded="$6" bg="$color1">
+      <View
+        position="relative"
+        height="100%"
+        overflow="hidden"
+        aspectRatio={1}
+        rounded="$6"
+        bg="$color1"
+      >
         <Image
           height="100%"
           width="100%"
-          source={cardItem.image}
-          objectFit="cover"
+          src={cardItem.image.uri}
+          objectFit="contain"
           position="absolute"
           inset={0}
         />
@@ -281,7 +287,9 @@ const SliderItem = ({
 type CardData = {
   id: number
   title: string
-  image: ImageSourcePropType
+  image: {
+    uri: string
+  }
   backgroundColor: string
   theme?: ThemeName
   description: string

@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import type { SizeTokens, TamaguiElement } from 'tamagui'
+import { useEffect, useState } from 'react'
+import type { TamaguiElement } from 'tamagui'
 import {
   Avatar,
   Paragraph,

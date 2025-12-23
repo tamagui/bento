@@ -54,7 +54,7 @@ export function FullSideBar() {
   const [openDrawer, setOpenDrawer] = useState(false)
   const { sm } = useGroupMedia('window')
   return (
-    <View flexDirection="column" height={610} width="100%" mt="$2">
+    <View position="relative" flexDirection="column" height={610} width="100%" mt="$2">
       <View flexDirection="row" height="100%" width="100%">
         {!sm && <Sidebar />}
         <View
@@ -306,7 +306,7 @@ const SideBarContent = View.styleable((props, ref) => {
         }}
       >
         <View flexDirection="row" items="center" gap="$2.5">
-          <Avatar borderRadius="$true" size="$4" padding="$4">
+          <Avatar rounded="$true" size="$4" padding="$4">
             <Avatar.Image scale={0.6} src="/favicon.svg" />
             <Avatar.Fallback backgroundColor="$color11" borderColor="$color11" />
           </Avatar>
@@ -381,7 +381,7 @@ const NavLink = Link.styleable(({ children, href = '#', onPress, ...rest }, ref:
       }}
       href={href}
       active={isActive}
-      borderRadius={5}
+      rounded={5}
       /** uncomment this line in your app */
       // active={isActive}
       //@ts-ignore

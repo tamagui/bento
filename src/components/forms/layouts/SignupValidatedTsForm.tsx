@@ -369,11 +369,7 @@ type FormValues = z.infer<typeof schema>
 export function SignupValidatedTsForm() {
   const [loading, setLoading] = useState(false)
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({
+  const { control, handleSubmit } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
       accountType: 'personal',
@@ -530,7 +526,7 @@ export function SignupValidatedTsForm() {
           />
 
           <Button
-            themeInverse
+            theme="accent"
             disabled={loading}
             onPress={handleSubmit(onSubmit)}
             cursor={loading ? 'progress' : 'pointer'}

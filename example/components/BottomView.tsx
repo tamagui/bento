@@ -1,7 +1,5 @@
-import { Image, Text, type ThemeName, XStack, YStack } from 'tamagui'
+import { Image, Text, XStack, YStack } from 'tamagui'
 import { insets } from '../constant'
-import { LinearGradient } from 'tamagui/linear-gradient'
-import { SafeAreaView } from 'react-native'
 
 type BottomViewProps = {
   title: string
@@ -29,7 +27,7 @@ export function BottomView({ title }: BottomViewProps) {
               mx={SPACE}
             >
               {logoWords.map((image, index) => (
-                <ImageWord key={`path-${index}`} image={image} index={index} />
+                <ImageWord key={`path-${index}`} image={image} />
               ))}
             </XStack>
           </XStack>
@@ -39,7 +37,7 @@ export function BottomView({ title }: BottomViewProps) {
   )
 }
 
-const ImageWord = ({ image, index }: { image: string; index: number }) => {
+const ImageWord = ({ image }: { image: string }) => {
   return <Image objectFit="contain" src={image} width={SIZE} height={SIZE} />
 }
 

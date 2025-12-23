@@ -167,12 +167,13 @@ const Footer = ({
           </Button>
         </XGroup.Item>
       </XGroup>
+
       <View
         flexDirection="row"
         rounded={1000_000_000}
         p="$2"
         px="$6"
-        themeInverse
+        theme="accent"
         bg="$background"
         gap="$3"
         $platform-native={{ display: 'none' }}
@@ -184,6 +185,7 @@ const Footer = ({
           {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
         </Text>
       </View>
+
       <View
         $platform-native={{ display: 'none' }}
         flexDirection="row"

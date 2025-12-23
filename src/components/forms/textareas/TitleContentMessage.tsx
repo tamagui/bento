@@ -30,7 +30,7 @@ export function TitleContentMessage() {
         </Text>
       </View>
 
-      <Button themeInverse mt="$3">
+      <Button theme="accent" mt="$3">
         <Button.Text>Submit</Button.Text>
       </Button>
     </View>

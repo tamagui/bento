@@ -1,7 +1,7 @@
-import { AlertDialog, Button, Separator, View, createContext, useEvent } from 'tamagui'
-import type { AlertDialogContentProps, ThemeName, ThemeTokens } from 'tamagui'
-import { isValidElement, useState } from 'react'
 import { Info } from '@tamagui/lucide-icons'
+import { isValidElement, useState } from 'react'
+import type { AlertDialogContentProps, ThemeName } from 'tamagui'
+import { AlertDialog, Button, Separator, View, createContext, useEvent } from 'tamagui'
 
 type AlertButton = {
   title: string
@@ -135,7 +135,7 @@ const Alert = ({ children, ...rest }: AlertProps) => {
   )
 }
 
-const AlertDialogTest = (props: any) => {
+const AlertDialogTest = () => {
   const { alert } = useAlert('AlertTest')
 
   const buttons: AlertButton[] = [

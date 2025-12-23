@@ -25,7 +25,7 @@ export function AvatarOutContentAction() {
           height={180}
           placeholder="Write your comment"
         />
-        <Button themeInverse>
+        <Button theme="accent">
           <Button.Text>Post</Button.Text>
         </Button>
       </View>
