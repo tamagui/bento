@@ -256,7 +256,7 @@ function CalendarView({
                             position="absolute"
                             width="100%"
                             height="100%"
-                            z={100}
+                            z={-1}
                             {...BG_RANGE_STYLE[day.range]}
                             enterStyle={{
                               opacity: 0,
@@ -328,11 +328,7 @@ export function Calendar({ showTabs = true }: { showTabs?: boolean }) {
           }}
         >
           <AnimatePresence>
-            <Tabs.List
-              disablePassBorderRadius="end"
-              aria-label="Calendar Mode"
-              separator={<Separator />}
-            >
+            <Tabs.List disablePassBorderRadius="end" aria-label="Calendar Mode">
               <Tabs.Tab
                 focusStyle={{
                   backgroundColor: '$color3',

@@ -21,7 +21,6 @@ import {
   DatePickerInput,
   HeaderTypeProvider,
   MonthPicker,
-  SizableText,
   WeekView,
   YearPicker,
   YearRangeSlider,
@@ -170,12 +169,6 @@ function Calendar({
                       'will-be-in-range': {
                         bg: '$color2',
                       },
-                      'will-be-range-start': {
-                        bg: '$color1',
-                      },
-                      'will-be-range-end': {
-                        bg: '$color1',
-                      },
                       '': {},
                     }
 
@@ -186,7 +179,7 @@ function Calendar({
                         circular
                         group="item"
                         {...swapOnClick(dayButton(day))}
-                        themeInverse={day.selected}
+                        theme={day.selected ? 'accent' : undefined}
                         borderWidth={1}
                         borderColor={day.selected ? '$color1' : 'transparent'}
                         data-range={day.range}
@@ -236,11 +229,13 @@ function Calendar({
                         key={day.$date.toString()}
                         width="100%"
                         flex={1}
+                        position="relative"
                       >
                         <View
                           position="absolute"
                           width="100%"
                           height="100%"
+                          z={-1}
                           {...BG_RANGE_STYLE[day.range]}
                         />
                         {buttonElement}
