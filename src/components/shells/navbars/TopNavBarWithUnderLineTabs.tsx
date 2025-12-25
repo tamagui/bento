@@ -145,13 +145,13 @@ export function TopNavBarWithUnderLineTabs() {
         {sm ? (
           <SideBar />
         ) : (
-          <View flexDirection="row" p="$2" items="center" bg="#fff" rounded={1000_000}>
+          <View flexDirection="row" p="$2" items="center" bg="#FFFF00" rounded={1000_000}>
             <Image
               objectFit="contain"
               width={25}
               height={25}
               $group-window-sm={{ width: 15, height: 15 }}
-              src="/bento/tamagui-icon.png"
+              src="/tamagui-icon.svg"
               alt="Bento logo"
             />
           </View>
@@ -413,7 +413,7 @@ function SideBarContent({
                 flexDirection="row"
                 p="$2"
                 items="center"
-                bg="#fff"
+                bg="#FFFF00"
                 rounded={1000_000}
                 ml="$4"
                 mt="$2"
@@ -423,7 +423,7 @@ function SideBarContent({
                   width={30}
                   height={30}
                   $group-window-sm={{ width: 15, height: 15 }}
-                  src="/bento/tamagui-icon.png"
+                  src="/tamagui-icon.svg"
                   alt="Bento logo"
                 />
               </View>
