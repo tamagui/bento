@@ -13,10 +13,10 @@ export function SwitchCustomIcons({ size }: { size?: SizeTokens }) {
     <View flexDirection="column" justify="center" items="center" p="$8">
       <Switch size={size} checked={checked} onCheckedChange={setChecked}>
         <Switch.Icon placement="left">
-          <X color="#fff" />
+          <Check color="#fff" />
         </Switch.Icon>
         <Switch.Icon placement="right">
-          <Check color="#fff" />
+          <X color="#fff" />
         </Switch.Icon>
         <Switch.Thumb animation="quick" />
       </Switch>
