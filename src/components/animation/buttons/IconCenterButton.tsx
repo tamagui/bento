@@ -25,7 +25,7 @@ export function IconCenterButton() {
     >
       <Stack
         animation="quick"
-        x={move ? buttonWidth / 2 - iconDim!.width * iconScale : 0}
+        x={move ? buttonWidth / 2 - (iconDim!.width * iconScale) / 2 : 0}
         scale={move ? iconScale : 1}
         onLayout={(e) => setIconDim(e.nativeEvent.layout)}
       >
