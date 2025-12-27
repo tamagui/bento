@@ -307,7 +307,15 @@ export function Fullpage() {
                 enterStyle={{ opacity: 0 }}
                 exitStyle={{ opacity: 0 }}
               />
-              <Dialog.Content borderWidth={2} borderColor="$borderColor" rounded={15}>
+              <Dialog.Content
+                key="content"
+                animation="quick"
+                exitStyle={{ opacity: 0 }}
+                enterStyle={{ x: 0, y: -20, opacity: 0, scale: 0.9 }}
+                borderWidth={2}
+                borderColor="$borderColor"
+                rounded={15}
+              >
                 <Dialog.Title>
                   <View
                     $gtMd={{
