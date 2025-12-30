@@ -74,6 +74,7 @@ export function WheelList({
   return (
     <View
       flex={1}
+      flexBasis="auto"
       position="relative"
       height={isWeb ? '80vh' : '100%'}
       $gtLg={{ maxH: 600 }}

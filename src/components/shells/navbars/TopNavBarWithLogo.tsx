@@ -161,30 +161,30 @@ export function TopNavBarWithLogo() {
         )}
         {!sm && (
           <Tabs value={currentTab} onValueChange={setCurrentTab} orientation="horizontal">
-            <View position="relative" flexDirection="column">
-              <AnimatePresence>
-                {intentAt && (
-                  <TabsRovingIndicator
-                    rounded="$4"
-                    width={intentAt.width}
-                    height={intentAt.height}
-                    x={intentAt.x}
-                    y={intentAt.y}
-                  />
-                )}
-              </AnimatePresence>
-              <AnimatePresence>
-                {activeAt && (
-                  <TabsRovingIndicator
-                    theme="accent"
-                    rounded="$4"
-                    width={activeAt.width}
-                    height={activeAt.height}
-                    x={activeAt.x}
-                    y={activeAt.y}
-                  />
-                )}
-              </AnimatePresence>
+            <AnimatePresence>
+              {intentAt && (
+                <TabsRovingIndicator
+                  rounded="$4"
+                  width={intentAt.width}
+                  height={intentAt.height}
+                  x={intentAt.x}
+                  y={intentAt.y}
+                />
+              )}
+            </AnimatePresence>
+            <AnimatePresence>
+              {activeAt && (
+                <TabsRovingIndicator
+                  theme="accent"
+                  rounded="$4"
+                  width={activeAt.width}
+                  height={activeAt.height}
+                  x={activeAt.x}
+                  y={activeAt.y}
+                />
+              )}
+            </AnimatePresence>
+            <View flexDirection="column" position="relative">
               <Tabs.List
                 disablePassBorderRadius
                 loop={false}

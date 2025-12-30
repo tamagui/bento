@@ -152,7 +152,7 @@ export function ButtonsWithLeftIcons() {
           </XGroup.Item>
         </XGroup>
 
-        <Theme inverse>
+        <Theme name="accent">
           <XGroup>
             <XGroup.Item>
               <Button>

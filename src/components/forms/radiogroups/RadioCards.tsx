@@ -94,7 +94,7 @@ function Item({
       gap="$6"
       active={selected}
     >
-      <View flex={1} flexDirection="column" gap="$3">
+      <View flex={1} flexBasis="auto" flexDirection="column" gap="$3">
         <View flexDirection="row" justify="space-between">
           <View
             flexDirection="row"

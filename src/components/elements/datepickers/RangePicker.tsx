@@ -131,6 +131,7 @@ function Calendar({
                   flexDirection="row"
                   key={days[0].$date.toString()}
                   flex={1}
+                  flexBasis="auto"
                   width="100%"
                 >
                   {days.map((day) => {

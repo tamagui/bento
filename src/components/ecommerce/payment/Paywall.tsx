@@ -64,7 +64,7 @@ export function Paywall() {
   }
 
   return (
-    <View flex={1} gap="$4" bg="$color2">
+    <View flex={1} flexBasis="auto" gap="$4" bg="$color2">
       <LinearGradient colors={['$color0', 'color2']} position="absolute" inset={0} />
 
       <ReviewListCarousel />
@@ -571,6 +571,7 @@ const ReviewListCarousel = () => {
         transform: [{ translateY: 50 }],
       }}
       flex={1}
+      flexBasis="auto"
       rotate="-10deg"
       gap="$4"
       key="review-list"

@@ -162,6 +162,9 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
           // enterStyle={{ opacity: 0, y: -10 }}
           // exitStyle={{ opacity: 0, y: 10 }}
           minW={200}
+          borderWidth={1}
+          borderColor="$borderColor"
+          rounded="$4"
         >
           <Select.Group>{selectList}</Select.Group>
         </Select.Viewport>

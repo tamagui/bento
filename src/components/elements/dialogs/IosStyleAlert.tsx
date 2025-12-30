@@ -124,14 +124,12 @@ const Alert = ({ children, ...rest }: AlertProps) => {
                 const color = button.style === 'destructive' ? '$red10' : '$green10'
                 return (
                   <View
+                    flex={1}
+                    flexBasis="auto"
                     borderRightWidth={index === 0 && !makeItVertical ? 1 : 0}
                     borderBottomWidth={makeItVertical && index < buttons.length ? 1 : 0}
                     borderColor="$borderColor"
                     key={index}
-                    {...(!makeItVertical && {
-                      flex: 1,
-                      flexBasis: 0,
-                    })}
                   >
                     <Base asChild>
                       <Button

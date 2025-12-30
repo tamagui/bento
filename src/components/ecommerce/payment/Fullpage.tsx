@@ -364,9 +364,11 @@ export function Fullpage() {
           gap: sm ? '$4' : '$0',
           pb: sm ? 300 : 48,
           pt: '$4',
+          flexBasis: 'auto',
         }}
         $group-window-gtSm={{
           flex: 3,
+          flexBasis: 'auto',
         }}
       >
         {items.map((item, index) => (

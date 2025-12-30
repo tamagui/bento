@@ -350,7 +350,7 @@ export function YearSlider() {
       </Button>
       <SizableText
         onPress={() => setHeader('year')}
-        selectable
+        select="text"
         tabIndex={0}
         size="$6"
         cursor="pointer"

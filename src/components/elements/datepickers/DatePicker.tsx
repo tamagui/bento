@@ -107,6 +107,7 @@ function DayPicker() {
                 key={days[0].$date.toString()}
                 gap="$1"
                 flex={1}
+                flexBasis="auto"
                 width="100%"
               >
                 {days.map((d) => (

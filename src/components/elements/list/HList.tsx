@@ -71,7 +71,12 @@ function HListItem({ uri, title }: { uri: string; title: string }) {
         scale: 0.98,
       }}
     >
-      <HListInner containerType="normal" group="item" animation="bouncy">
+      <HListInner
+        containerType="normal"
+        group="item"
+        animation="bouncy"
+        position="relative"
+      >
         <View
           flexDirection="column"
           flex={1}

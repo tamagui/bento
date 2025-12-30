@@ -121,7 +121,7 @@ export function ProductWithReview() {
             }}
           >
             <View flexDirection="column" width="100%">
-              <View flexDirection="row" flex={1} overflow="hidden">
+              <View flexDirection="row" flex={1} flexBasis="auto" overflow="hidden">
                 <View
                   flexDirection="row"
                   cursor="pointer"
@@ -178,6 +178,7 @@ export function ProductWithReview() {
                       >
                         <View
                           grow={1}
+                          position="relative"
                           rounded="$2"
                           onFocus={() => setDebounceTempPicture(picture)}
                           onHoverIn={() => setDebounceTempPicture(picture)}
@@ -302,7 +303,7 @@ export function ProductWithReview() {
                             size={16}
                             color={
                               index < Math.floor(product.stars.rate)
-                                ? 'yellow'
+                                ? '$orange9'
                                 : '$color9'
                             }
                           />
@@ -617,7 +618,7 @@ const Review = View.styleable<ReviewProps>(({ review, ...rest }, forwardRef) => 
                 <Star
                   key={index}
                   size={12}
-                  color={index < Math.floor(review.rate) ? 'yellow' : '$color9'}
+                  color={index < Math.floor(review.rate) ? '$orange9' : '$color9'}
                 />
               ))}
           </View>

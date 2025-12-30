@@ -77,6 +77,7 @@ export const TabbarSwippable = () => {
         position: 'absolute',
         height: '70%',
         flexShrink: 0,
+        zIndex: 1000000,
         backgroundColor: theme.color1.val,
         width: pointerWidth,
         borderRadius: 1000_000,
@@ -119,7 +120,7 @@ export const TabbarSwippable = () => {
       >
         <Tabs.List
           width="100%"
-          userSelect="none"
+          select="none"
           flexDirection="row"
           alignItems="center"
           paddingVertical={'$4'}
@@ -146,6 +147,7 @@ export const TabbarSwippable = () => {
               onPress={() => {
                 chagenActiveTab(index)
               }}
+              zIndex={1000000}
             >
               <Text
                 theme={index !== activeTabIndex ? 'accent' : null}
