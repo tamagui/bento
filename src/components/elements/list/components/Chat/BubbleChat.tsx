@@ -48,7 +48,7 @@ export const BubbleChat = (props: BubbleProps) => {
         {item.sticker ? (
           <Image src={item.sticker} />
         ) : (
-          <Text color="$accent1">{item.message}</Text>
+          <Text theme={received ? 'accent' : null}>{item.message}</Text>
         )}
       </View>
     </Pressable>

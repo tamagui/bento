@@ -107,7 +107,7 @@ export const Chat = () => {
 
   return (
     <ChatContext.Provider value={{ theme, setTheme }}>
-      <View theme={theme} height="100%" flex={1}>
+      <View theme={theme} height="100%" flex={1} flexBasis="auto">
         <View
           theme="accent"
           bg={themeName.includes('dark') ? 'white' : 'black'}
@@ -116,7 +116,7 @@ export const Chat = () => {
           inset={0}
         />
         <KeyboardAvoidingView
-          style={{ flex: 1 }}
+          style={{ flex: 1, flexBasis: 'auto' }}
           behavior="padding"
           keyboardVerticalOffset={0}
         >
@@ -130,6 +130,7 @@ export const Chat = () => {
             borderTopLeftRadius="$8"
             borderTopRightRadius="$8"
             flex={1}
+            flexBasis="auto"
             borderCurve="circular"
           >
             <AnimatedView style={animatedListViewStyle}>
@@ -279,7 +280,7 @@ const Header = ({ offset }: { offset: SharedValue<number> }) => {
             </Text>
           </View>
 
-          <View>
+          <View position="relative">
             <Button size="$3" circular>
               <PhoneCall size={'$1'} />
             </Button>
@@ -328,6 +329,7 @@ const MenuView = ({ offset }: { offset: SharedValue<number> }) => {
               borderColor="$color10"
               borderWidth={2}
               rounded={1000}
+              position="relative"
             >
               <Avatar circular size="$8" bg="red">
                 <Avatar.Image source={{ uri: AVATAR_1_URL }} objectFit="cover" />
