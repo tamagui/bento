@@ -102,7 +102,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
       disablePreventBodyScroll
       {...rest}
     >
-      <Select.Trigger width="100%" iconAfter={ChevronDown}>
+      <Select.Trigger width="100%" iconAfter={ChevronDown} rounded="$4">
         <View flexDirection="row" gap="$3" justify="center" items="center">
           <Image src={selectedItem.flag} width={20} height={20} />
           <SizableText mr="auto">{`${selectedItem.name} ${

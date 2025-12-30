@@ -70,8 +70,7 @@ export function SignInScreen() {
               </View>
               <Input.Box>
                 <Input.Area
-                  textContentType="password"
-                  secureTextEntry
+                  type="password"
                   id={'password'}
                   placeholder="Enter password"
                 />

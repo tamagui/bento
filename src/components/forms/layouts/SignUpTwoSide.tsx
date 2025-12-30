@@ -257,7 +257,7 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
 
   return (
     <Select id={id} value={val} onValueChange={setVal} disablePreventBodyScroll>
-      <Select.Trigger width="100%" iconAfter={ChevronDown}>
+      <Select.Trigger width="100%" iconAfter={ChevronDown} rounded="$4">
         <View flexDirection="row" gap="$3" justify="center" items="center">
           <Image src={selectedItem.flag} width={20} height={20} />
           <Text mr="auto">{`${selectedItem.name} ${
@@ -315,6 +315,9 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
           // enterStyle={{ opacity: 0, y: -10 }}
           // exitStyle={{ opacity: 0, y: 10 }}
           minW={200}
+          borderWidth={1}
+          borderColor="$borderColor"
+          rounded="$4"
         >
           <Select.Group>
             {/* for longer lists memoizing these is useful */}
