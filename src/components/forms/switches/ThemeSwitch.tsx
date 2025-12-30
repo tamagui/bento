@@ -1,39 +1,46 @@
-import { MoonStar, Sun } from '@tamagui/lucide-icons'
-import { useEffect, useId, useState } from 'react'
-import type { SizeTokens } from 'tamagui'
-import { AnimatePresence, getVariableValue, isWeb, Switch, View, YStack } from 'tamagui'
+import { MoonStar, Sun } from "@tamagui/lucide-icons";
+import { useEffect, useId, useState } from "react";
+import type { SizeTokens } from "tamagui";
+import {
+  AnimatePresence,
+  getVariableValue,
+  isWeb,
+  Switch,
+  View,
+  YStack,
+} from "tamagui";
 
-import { getSize } from '@tamagui/get-token'
-import { useSchemeSetting } from '@vxrn/color-scheme'
-import { Appearance } from 'react-native'
+import { getSize } from "@tamagui/get-token";
+import { useColorScheme } from "@vxrn/color-scheme";
+import { Appearance } from "react-native";
 
-export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
-  const uniqueId = useId()
-  const [checked, setChecked] = useState(false)
+export function ThemeSwitch({ size = "$8" }: { size?: SizeTokens }) {
+  const uniqueId = useId();
+  const [checked, setChecked] = useState(false);
 
   // do not use this code. only use in showcase
-  const [{ scheme }, setSchemeSetting] = useSchemeSetting()
+  const [scheme, setScheme] = useColorScheme();
 
   useEffect(() => {
-    setChecked(scheme === 'dark')
-  }, [scheme])
+    setChecked(scheme === "dark");
+  }, [scheme]);
 
-  const thumbSize = getVariableValue(getSize(size))
+  const thumbSize = getVariableValue(getSize(size));
 
-  const larger = thumbSize >= 64
+  const larger = thumbSize >= 64;
 
-  const iconSize = thumbSize * 0.4
+  const iconSize = thumbSize * 0.4;
 
   return (
     <Switch
-      id={uniqueId + 'switch'}
+      id={uniqueId + "switch"}
       checked={checked}
       onCheckedChange={(checked) => {
-        setSchemeSetting(checked ? 'dark' : 'light')
+        setScheme(checked ? "dark" : "light");
         if (!isWeb) {
           setTimeout(() => {
-            Appearance?.setColorScheme?.(checked ? 'dark' : 'light')
-          }, 350)
+            Appearance?.setColorScheme?.(checked ? "dark" : "light");
+          }, 350);
         }
       }}
       size={size}
@@ -51,10 +58,10 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
           shadowOpacity={0.5}
           shadowRadius="$4"
           shadowOffset={{
-            width: '$4',
+            width: "$4",
             height: 0,
           }}
-          m={thumbSize >= 64 ? '$1.5' : '$1'}
+          m={thumbSize >= 64 ? "$1.5" : "$1"}
           flex={1}
           overflow="hidden"
           rounded="$10"
@@ -77,7 +84,7 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
                 { translateY: !checked ? 0 : thumbSize },
               ]}
             >
-              <Sun size={iconSize} fill={'white'} color="white" />
+              <Sun size={iconSize} fill={"white"} color="white" />
             </YStack>
 
             <YStack
@@ -90,16 +97,16 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
               transform={[
                 { scale: checked ? 1 : 0 },
                 { translateY: checked ? 0 : -thumbSize },
-                { rotate: checked ? '0deg' : '-90deg' },
+                { rotate: checked ? "0deg" : "-90deg" },
               ]}
             >
-              <MoonStar color={'white'} fill={'white'} size={iconSize} />
+              <MoonStar color={"white"} fill={"white"} size={iconSize} />
             </YStack>
           </AnimatePresence>
         </View>
       </Switch.Thumb>
     </Switch>
-  )
+  );
 }
 
 const SwitchBackground = ({ checked }: { checked: boolean }) => {
@@ -107,7 +114,7 @@ const SwitchBackground = ({ checked }: { checked: boolean }) => {
     <View
       key="background"
       width="50%"
-      r={checked ? '50%' : 0}
+      r={checked ? "50%" : 0}
       height="100%"
       justify="center"
       items="center"
@@ -117,9 +124,9 @@ const SwitchBackground = ({ checked }: { checked: boolean }) => {
       b={0}
     >
       <View
-        t={'20%'}
+        t={"20%"}
         animation="200ms"
-        l={checked ? '55%' : 0}
+        l={checked ? "55%" : 0}
         position="absolute"
         bg="$color7"
         width={checked ? 4 : 30}
@@ -127,7 +134,7 @@ const SwitchBackground = ({ checked }: { checked: boolean }) => {
         rounded="$10"
       />
       <View
-        t={checked ? '33%' : '45%'}
+        t={checked ? "33%" : "45%"}
         l="28%"
         animation="200ms"
         position="absolute"
@@ -137,8 +144,8 @@ const SwitchBackground = ({ checked }: { checked: boolean }) => {
         rounded="$10"
       />
       <View
-        t={'70%'}
-        l={checked ? '30%' : 0}
+        t={"70%"}
+        l={checked ? "30%" : 0}
         animation="200ms"
         position="absolute"
         bg="$color7"
@@ -150,7 +157,7 @@ const SwitchBackground = ({ checked }: { checked: boolean }) => {
       {checked ? (
         <>
           <View
-            b={'35%'}
+            b={"35%"}
             r="35%"
             position="absolute"
             bg="$color7"
@@ -160,7 +167,7 @@ const SwitchBackground = ({ checked }: { checked: boolean }) => {
             animation="200ms"
           />
           <View
-            t={'50%'}
+            t={"50%"}
             r="10%"
             position="absolute"
             bg="$color7"
@@ -172,9 +179,9 @@ const SwitchBackground = ({ checked }: { checked: boolean }) => {
         </>
       ) : null}
     </View>
-  )
-}
+  );
+};
 
-ThemeSwitch.fileName = 'ThemeSwitch'
+ThemeSwitch.fileName = "ThemeSwitch";
 
-ThemeSwitch.title = 'Theme Switch'
+ThemeSwitch.title = "Theme Switch";
