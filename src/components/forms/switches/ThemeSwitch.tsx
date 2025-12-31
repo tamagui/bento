@@ -4,7 +4,7 @@ import type { SizeTokens } from 'tamagui'
 import { AnimatePresence, getVariableValue, isWeb, Switch, View, YStack } from 'tamagui'
 
 import { getSize } from '@tamagui/get-token'
-import { useColorScheme } from '@vxrn/color-scheme'
+import { useUserScheme } from '@vxrn/color-scheme'
 import { Appearance } from 'react-native'
 
 export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
@@ -12,7 +12,7 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
   const [checked, setChecked] = useState(false)
 
   // do not use this code. only use in showcase
-  const [scheme, setScheme] = useColorScheme()
+  const { value: scheme, set: setScheme } = useUserScheme()
 
   useEffect(() => {
     setChecked(scheme === 'dark')
@@ -28,11 +28,11 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
     <Switch
       id={uniqueId + 'switch'}
       checked={checked}
-      onCheckedChange={(checked) => {
-        setScheme(checked ? 'dark' : 'light')
+      onCheckedChange={(newChecked) => {
+        setScheme(newChecked ? 'dark' : 'light')
         if (!isWeb) {
           setTimeout(() => {
-            Appearance?.setColorScheme?.(checked ? 'dark' : 'light')
+            Appearance?.setColorScheme?.(newChecked ? 'dark' : 'light')
           }, 350)
         }
       }}

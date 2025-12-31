@@ -3803,25 +3803,16 @@
     wonka "^6.3.2"
 
 "@vxrn/color-scheme@*":
-  version "1.2.18"
-  resolved "https://registry.npmjs.org/@vxrn/color-scheme/-/color-scheme-1.2.18.tgz#07fab99b0b96f03f193ef616459a021dec4d2750"
-  integrity sha512-wZsDx7Oag8ON7dbYZzFKGdF0fDt7A68gcvGj0f7sJNcnGMVAQNcObYFrxkw2cine2BGV9ni6aLdTz+vi8IKKBA==
+  version "1.2.42"
+  resolved "https://registry.yarnpkg.com/@vxrn/color-scheme/-/color-scheme-1.2.42.tgz#5e29dde614493acf5502884942024ee37fc6fec1"
+  integrity sha512-AHbhBczPXFAAv+70pzrBA1e+gtANB8CKmvG882SsnKpOEvvlAWbElgNZMkCw/QLC/WxBdX92Jt2At2mL7uSMGw==
   dependencies:
-    "@vxrn/universal-color-scheme" "1.2.18"
-    "@vxrn/use-isomorphic-layout-effect" "1.2.18"
+    "@vxrn/use-isomorphic-layout-effect" "1.2.42"
 
-"@vxrn/universal-color-scheme@1.2.18":
-  version "1.2.18"
-  resolved "https://registry.npmjs.org/@vxrn/universal-color-scheme/-/universal-color-scheme-1.2.18.tgz#5f401ceea1f15ae9c53400e9f02710831d787378"
-  integrity sha512-LxjAZ8m9I519+tnIbMdUlZZbtNjfzE6vv3SJQyHAdZ/kp41HpmgfLVTGp5ysjytrJHEq0Epr8MXwGu4idOwGCQ==
-  dependencies:
-    "@vxrn/use-isomorphic-layout-effect" "1.2.18"
-    react "19.1.0"
-
-"@vxrn/use-isomorphic-layout-effect@1.2.18":
-  version "1.2.18"
-  resolved "https://registry.npmjs.org/@vxrn/use-isomorphic-layout-effect/-/use-isomorphic-layout-effect-1.2.18.tgz#593d7c05a83b71cd924055d0b5cd9fa08f7799be"
-  integrity sha512-G0/fW6cakfmC5fkhOAdcP3TUXFUy2xEJVmRG8+jik1kLBflztdt9CiYb5qnjVdKfJKmDnh69s2RXp5C3gP755w==
+"@vxrn/use-isomorphic-layout-effect@1.2.42":
+  version "1.2.42"
+  resolved "https://registry.yarnpkg.com/@vxrn/use-isomorphic-layout-effect/-/use-isomorphic-layout-effect-1.2.42.tgz#dd7feead5e30ba7557a21eb0c23d4bcb19f98e57"
+  integrity sha512-Omx2vO6m7yvqfzO6fVyGov0rzvcC1UxRhE2lWnix8JpY5CY30B7y5fcyQ4gttrneXp6tjNpfpVULzPd//RQOQA==
   dependencies:
     react "19.1.0"
 
