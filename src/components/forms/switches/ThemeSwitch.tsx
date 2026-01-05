@@ -4,7 +4,6 @@ import type { SizeTokens } from "tamagui";
 import {
   AnimatePresence,
   getVariableValue,
-  isWeb,
   Switch,
   View,
   YStack,
@@ -12,7 +11,6 @@ import {
 
 import { getSize } from "@tamagui/get-token";
 import { useUserScheme } from "@vxrn/color-scheme";
-import { Appearance } from "react-native";
 
 export function ThemeSwitch({ size = "$8" }: { size?: SizeTokens }) {
   const uniqueId = useId();
@@ -37,11 +35,6 @@ export function ThemeSwitch({ size = "$8" }: { size?: SizeTokens }) {
       checked={checked}
       onCheckedChange={(checked) => {
         userScheme.set(checked ? "dark" : "light");
-        if (!isWeb) {
-          setTimeout(() => {
-            Appearance?.setColorScheme?.(checked ? "dark" : "light");
-          }, 350);
-        }
       }}
       size={size}
       backgroundColor="$background"
