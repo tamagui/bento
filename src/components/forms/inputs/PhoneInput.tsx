@@ -1,16 +1,6 @@
 import { Globe2, Search, X } from '@tamagui/lucide-icons'
 import type { SizeTokens } from 'tamagui'
-import {
-  Adapt,
-  Avatar,
-  Image,
-  Popover,
-  ScrollView,
-  Spinner,
-  Text,
-  View,
-  isWeb,
-} from 'tamagui'
+import { Adapt, Popover, ScrollView, Spinner, Text, View, isWeb } from 'tamagui'
 import { Input } from './components/inputsParts'
 import { useState, useMemo, useEffect } from 'react'
 import {
