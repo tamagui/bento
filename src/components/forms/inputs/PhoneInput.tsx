@@ -34,10 +34,19 @@ interface PhoneCode {
   flag: string
 }
 
+// Convert country code to flag emoji (e.g., "US" -> "🇺🇸")
+function countryCodeToFlag(countryCode: string): string {
+  const codePoints = countryCode
+    .toUpperCase()
+    .split('')
+    .map((char) => 127397 + char.charCodeAt(0))
+  return String.fromCodePoint(...codePoints)
+}
+
 const phoneCodes: PhoneCode[] = getSupportedRegionCodes().map((code) => {
   return {
     name: code,
-    flag: `https://flagsapi.com/${code}/flat/64.png`,
+    flag: countryCodeToFlag(code),
   }
 })
 
@@ -152,13 +161,7 @@ function RegionFilterInput(props: RegionFilterInputProps) {
                         setOpen(false)
                       }}
                     >
-                      <Avatar size="$1.5" rounded={5}>
-                        <Avatar.Image
-                          accessibilityLabel="Profile image"
-                          src={item.flag}
-                        />
-                        <Avatar.Fallback backgroundColor="$color5" />
-                      </Avatar>
+                      <Text fontSize="$5">{item.flag}</Text>
                       <Text
                         color="$color10"
                         $group-item-hover={{
@@ -214,9 +217,7 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
         <Input.XGroup.Item>
           <Input.Button px="$2" onPress={() => setOpen(true)}>
             {regionCode ? (
-              <>
-                <Image src={selectedItem.flag} width={20} height={20} />
-              </>
+              <Text fontSize="$5">{selectedItem.flag}</Text>
             ) : (
               <>
                 <Globe2 color="$color10" width={20} height={20} />
