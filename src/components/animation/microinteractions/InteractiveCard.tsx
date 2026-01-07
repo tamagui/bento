@@ -169,6 +169,10 @@ const Card = withStaticProperties(Container, {
 export const useMouseEnter = () => {
   const context = useContext(MouseEnterContext)
   if (context === undefined) {
+    if (!isWeb) {
+      // Return safe fallback for native platforms where mouse events don't exist
+      return [false, () => {}] as [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+    }
     throw new Error('useMouseEnter must be used within a MouseEnterProvider')
   }
   return context

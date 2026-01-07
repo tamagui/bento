@@ -1,3 +1,3 @@
 export * from './NumberSlider'
-export * from './InteractiveCard'
+export { InteractiveCard } from './InteractiveCard'
 export * from './PaginationControl'
