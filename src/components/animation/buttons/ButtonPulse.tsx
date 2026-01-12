@@ -1,12 +1,12 @@
 import React from 'react'
 import type { ThemeName } from 'tamagui'
-import type { AnimationProp } from '@tamagui/web'
+import type { TransitionProp } from '@tamagui/web'
 import { Button, Theme, View, styled } from 'tamagui'
 
 type variants = {
   theme: ThemeName[]
   variant: 'bouncy' | 'lazy' | 'pulse' | 'accent' | 'bump'
-  animation: AnimationProp
+  transition: TransitionProp
 }
 const themes: ThemeName[] = ['blue', 'purple', 'pink', 'red', 'orange', 'yellow', 'green']
 
@@ -14,27 +14,27 @@ const variants: variants[] = [
   {
     theme: themes,
     variant: 'pulse',
-    animation: '100ms',
+    transition: '100ms',
   },
   {
     theme: themes,
     variant: 'accent',
-    animation: '100ms',
+    transition: '100ms',
   },
   {
     theme: themes,
     variant: 'bouncy',
-    animation: 'bouncy',
+    transition: 'bouncy',
   },
   {
     theme: themes,
     variant: 'lazy',
-    animation: 'medium',
+    transition: 'medium',
   },
   {
     theme: themes,
     variant: 'bump',
-    animation: 'bouncy',
+    transition: 'bouncy',
   },
 ]
 
@@ -57,7 +57,7 @@ export function ButtonPulse() {
             .map((theme) => (
               <Theme key={theme} name={theme}>
                 <Theme name={v.variant === 'accent' ? 'accent' : undefined}>
-                  <CustomButton animVariant={v.variant} animation={v.animation}>
+                  <CustomButton animVariant={v.variant} transition={v.transition}>
                     <Button.Text>Press me</Button.Text>
                   </CustomButton>
                 </Theme>

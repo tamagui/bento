@@ -105,7 +105,7 @@ export function SignInRightImage() {
                     $group-window-gtXs={{
                       l: '60%',
                     }}
-                    animation="quick"
+                    transition="quick"
                     enterStyle={{
                       opacity: 0,
                       scale: 0.5,

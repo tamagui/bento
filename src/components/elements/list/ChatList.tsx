@@ -103,7 +103,7 @@ function ChatItem({ item, index }: { item: Message; index: number }) {
           minW="100%"
         >
           <Button
-            animation="quick"
+            transition="quick"
             enterStyle={{
               opacity: 0,
               scale: 0,
@@ -115,7 +115,7 @@ function ChatItem({ item, index }: { item: Message; index: number }) {
             <View flexDirection="row">
               <Avatar circular size="$5">
                 <Avatar.Image objectFit="cover" source={{ uri: avatar }} />
-                <Avatar.Fallback backgroundColor="$background" />
+                <Avatar.Fallback bg="$background" />
               </Avatar>
             </View>
           </Button>

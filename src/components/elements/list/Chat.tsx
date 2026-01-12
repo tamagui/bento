@@ -199,7 +199,7 @@ const BottomBar = ({
                 {value.trim().length > 0 ? (
                   <Button
                     theme={theme.includes('accent') ? 'blue' : theme}
-                    animation="200ms"
+                    transition="200ms"
                     enterStyle={{ scale: 0.2 }}
                     exitStyle={{ scale: 0.2 }}
                     scale={1}
@@ -211,7 +211,7 @@ const BottomBar = ({
                   </Button>
                 ) : (
                   <Button
-                    animation="200ms"
+                    transition="200ms"
                     enterStyle={{ scale: 0.2 }}
                     exitStyle={{ scale: 0.2 }}
                     scale={1}

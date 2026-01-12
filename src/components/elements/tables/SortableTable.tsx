@@ -52,7 +52,7 @@ const columns = [
     cell: (info) => (
       <Avatar circular size="$3">
         <Avatar.Image accessibilityLabel="Profile image" src={info.getValue()} />
-        <Avatar.Fallback backgroundColor="$color6" />
+        <Avatar.Fallback bg="$color6" />
       </Avatar>
     ),
     header: () => 'Avatar',

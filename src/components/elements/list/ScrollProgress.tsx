@@ -253,7 +253,7 @@ const BottomView = () => {
       justify="flex-end"
     >
       <AnimatedView
-        animation="quicker"
+        transition="quicker"
         scale={1}
         exitStyle={{
           scale: 1.1,
@@ -375,7 +375,7 @@ const CircleProgress = ({
             rounded="$10"
             bg="$green8"
             position="absolute"
-            animation="quicker"
+            transition="quicker"
             enterStyle={{
               scale: 0,
               opacity: 0,

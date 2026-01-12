@@ -153,7 +153,7 @@ function ProfileDropdown({
         px="$3.5"
         enterStyle={{ y: -10, opacity: 0 }}
         exitStyle={{ y: -10, opacity: 0 }}
-        animation={[
+        transition={[
           'quick',
           {
             opacity: {
@@ -263,7 +263,7 @@ function FloatingSideBar({
         <Drawer.Overlay
           height={height + 12}
           width={width + 12}
-          animation="lazy"
+          transition="lazy"
           enterStyle={{ opacity: 0 }}
           exitStyle={{ opacity: 0 }}
           z={1000000}
@@ -308,7 +308,7 @@ const SideBarContent = View.styleable((props, ref) => {
         <View flexDirection="row" items="center" gap="$2.5">
           <Avatar rounded="$true" size="$4" padding="$4">
             <Avatar.Image scale={0.6} src="/favicon.svg" />
-            <Avatar.Fallback backgroundColor="$color11" borderColor="$color11" />
+            <Avatar.Fallback bg="$color11" borderColor="$color11" />
           </Avatar>
           <H4 fontSize="$6" color="$color12">
             Hi User!

@@ -15,7 +15,7 @@ import {
 
 export const SwitchThumb = styled(View, {
   name: 'SwitchThumb',
-  animation: 'quick',
+  transition: 'quick',
 
   variants: {
     unstyled: {

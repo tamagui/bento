@@ -61,7 +61,7 @@ export const AnimatedNumbers = () => {
             return (
               <AnimatedNumber
                 key={key}
-                animation="medium"
+                transition="medium"
                 animateOnly={['transform', 'opacity']}
                 enterStyle={{
                   y: -50,

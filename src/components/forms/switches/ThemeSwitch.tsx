@@ -40,7 +40,7 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
     >
       {/* switch background */}
       {larger ? <SwitchBackground checked={checked} /> : null}
-      <Switch.Thumb animation="medium" bg="$colorTransparent">
+      <Switch.Thumb transition="medium" bg="$colorTransparent">
         <View
           shadowOpacity={0.5}
           shadowRadius="$4"
@@ -55,13 +55,13 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
           items="center"
           justify="center"
           bg="$color4"
-          animation="200ms"
+          transition="200ms"
         >
           <AnimatePresence exitBeforeEnter custom={{ direction: -1 }}>
             <YStack
               position="absolute"
               key="Sun"
-              animation="medium"
+              transition="medium"
               fullscreen
               items="center"
               justify="center"
@@ -76,7 +76,7 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
 
             <YStack
               position="absolute"
-              animation="medium"
+              transition="medium"
               key="moon"
               fullscreen
               items="center"
@@ -105,14 +105,14 @@ const SwitchBackground = ({ checked }: { checked: boolean }) => {
       height="100%"
       justify="center"
       items="center"
-      animation="200ms"
+      transition="200ms"
       position="absolute"
       t={0}
       b={0}
     >
       <View
         t={'20%'}
-        animation="200ms"
+        transition="200ms"
         l={checked ? '55%' : 0}
         position="absolute"
         bg="$color7"
@@ -123,7 +123,7 @@ const SwitchBackground = ({ checked }: { checked: boolean }) => {
       <View
         t={checked ? '33%' : '45%'}
         l="28%"
-        animation="200ms"
+        transition="200ms"
         position="absolute"
         bg="$color7"
         width={checked ? 3 : 22}
@@ -133,7 +133,7 @@ const SwitchBackground = ({ checked }: { checked: boolean }) => {
       <View
         t={'70%'}
         l={checked ? '30%' : 0}
-        animation="200ms"
+        transition="200ms"
         position="absolute"
         bg="$color7"
         width={checked ? 4 : 15}
@@ -151,7 +151,7 @@ const SwitchBackground = ({ checked }: { checked: boolean }) => {
             width={4}
             height={4}
             rounded="$10"
-            animation="200ms"
+            transition="200ms"
           />
           <View
             t={'50%'}
@@ -161,7 +161,7 @@ const SwitchBackground = ({ checked }: { checked: boolean }) => {
             width={3}
             height={3}
             rounded="$10"
-            animation="200ms"
+            transition="200ms"
           />
         </>
       ) : null}

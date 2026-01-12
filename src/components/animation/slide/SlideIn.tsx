@@ -37,7 +37,7 @@ function SlideIn({
       }}
       shadowRadius={'$5'}
       shadowOpacity={0.1}
-      animation={{
+      transition={{
         opacity: {
           type: 'bouncy',
           overshootClamping: true,

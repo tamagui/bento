@@ -49,7 +49,7 @@ function AvatarGroup({ size, items }: { size: SizeTokens; items: React.ReactNode
           key={index}
           z={index}
           ml={index !== 0 ? -(getTokenValue(size as any) ?? 20) * 1.5 : undefined}
-          animation="bouncy"
+          transition="bouncy"
           x={0}
           {...(hovered && {
             x: index * 8,
@@ -69,7 +69,7 @@ function Item({ imageUrl, size }: { imageUrl: string; size: SizeTokens }) {
     <Avatar size={size}>
       <Avatar.Content circular>
         <Avatar.Image objectFit="cover" src={imageUrl} />
-        <Avatar.Fallback backgroundColor="$background" />
+        <Avatar.Fallback bg="$background" />
       </Avatar.Content>
     </Avatar>
   )

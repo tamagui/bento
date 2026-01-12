@@ -93,7 +93,7 @@ export function SignInScreen() {
                   key="loading-spinner"
                   opacity={1}
                   scale={1}
-                  animation="quick"
+                  transition="quick"
                   position="absolute"
                   l="60%"
                   enterStyle={{

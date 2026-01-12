@@ -161,7 +161,7 @@ function User({ size, imageUrl }: { size: SizeTokens; imageUrl?: string }) {
   return (
     <Avatar borderWidth="$1" borderColor="$color1" circular size={size}>
       <Avatar.Image accessibilityLabel="Cam" src={imageUrl} />
-      <Avatar.Fallback backgroundColor="$background" />
+      <Avatar.Fallback bg="$background" />
     </Avatar>
   )
 }

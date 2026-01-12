@@ -33,7 +33,7 @@ function Item({ item, index }: { item: Product; index: number }) {
         )}
         <Stack z={2} rounded={10} overflow="hidden">
           <Stack
-            animation="quick"
+            transition="quick"
             transformOrigin="center center"
             hoverStyle={{
               scale: 1,

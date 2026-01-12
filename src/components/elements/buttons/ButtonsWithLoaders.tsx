@@ -7,7 +7,7 @@ export function ButtonsWithLoaders() {
       <View gap="$2">
         <Button theme="blue" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -20,7 +20,7 @@ export function ButtonsWithLoaders() {
 
         <Button theme="red" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -33,7 +33,7 @@ export function ButtonsWithLoaders() {
 
         <Button theme="green" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -46,7 +46,7 @@ export function ButtonsWithLoaders() {
 
         <Button theme="purple" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -59,7 +59,7 @@ export function ButtonsWithLoaders() {
 
         <Button theme="pink" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -72,7 +72,7 @@ export function ButtonsWithLoaders() {
 
         <Button theme="yellow" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -85,7 +85,7 @@ export function ButtonsWithLoaders() {
 
         <Button theme="orange" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -100,7 +100,7 @@ export function ButtonsWithLoaders() {
       <View gap="$2">
         <Button gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -113,7 +113,7 @@ export function ButtonsWithLoaders() {
 
         <Button disabled opacity={0.5} gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -126,7 +126,7 @@ export function ButtonsWithLoaders() {
 
         <Button theme="accent" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -139,7 +139,7 @@ export function ButtonsWithLoaders() {
 
         <Button variant="outlined" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -152,7 +152,7 @@ export function ButtonsWithLoaders() {
 
         <Button chromeless gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -167,7 +167,7 @@ export function ButtonsWithLoaders() {
       <View gap="$2">
         <Button size="$3" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -180,7 +180,7 @@ export function ButtonsWithLoaders() {
 
         <Button gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -193,7 +193,7 @@ export function ButtonsWithLoaders() {
 
         <Button size="$6" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}

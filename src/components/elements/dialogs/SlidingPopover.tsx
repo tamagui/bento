@@ -125,7 +125,7 @@ const SlidingPopoverContent = () => {
     <Popover.Content
       theme="surface3"
       enableAnimationForPositionChange
-      animation="quicker"
+      transition="quicker"
       bg="$background"
       elevation="$8"
       p={0}
@@ -183,7 +183,7 @@ const SlidingPopoverContent = () => {
 }
 
 const Frame = styled(YStack, {
-  animation: '200ms',
+  transition: '200ms',
   fullscreen: true,
   z: 1,
   x: 0,

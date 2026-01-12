@@ -121,7 +121,7 @@ function WalkThroughComp({
             <XStack
               enterStyle={{ opacity: 0 }}
               exitStyle={{ opacity: 0 }}
-              animation="quick"
+              transition="quick"
               width="100%"
               minH="100%"
               fullscreen
@@ -149,7 +149,7 @@ function WalkThroughComp({
               y={0}
               opacity={1}
               fullscreen
-              animation="quick"
+              transition="quick"
               enableAnimationForPositionChange
             >
               <Popover.Arrow size="$4" borderColor="$borderColor" />
@@ -250,7 +250,7 @@ function Tour({
           <Stack
             z={showTour ? 2000 : -1000}
             position="absolute"
-            animation="quick"
+            transition="quick"
             l={pageX}
             t={pageY}
             overflow="hidden"

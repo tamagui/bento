@@ -211,7 +211,7 @@ function CodeConfirmation({
       minW="100%"
       justify="center"
       x={translateX}
-      animation="bouncy"
+      transition="bouncy"
       width="100%"
       mt="$2"
       flexDirection="row"
@@ -408,7 +408,7 @@ export function OneTimeCodeInputExample({
       >
         <View position="absolute" t="$4" r="$4">
           {codeEntered ? (
-            <View animation="bouncy" key="success" flexDirection="row" gap="$2">
+            <View transition="bouncy" key="success" flexDirection="row" gap="$2">
               <AnimatePresence>
                 {verified && (
                   <Paragraph
@@ -416,18 +416,18 @@ export function OneTimeCodeInputExample({
                     color="$green10"
                     enterStyle={{ opacity: 0, x: 15 }}
                     exitStyle={{ opacity: 0, x: 15, scale: 0.5 }}
-                    animation="200ms"
+                    transition="200ms"
                   >
                     Success
                   </Paragraph>
                 )}
               </AnimatePresence>
-              <View enterStyle={{ opacity: 0.5, scale: 1.5 }} animation="bouncy">
+              <View enterStyle={{ opacity: 0.5, scale: 1.5 }} transition="bouncy">
                 <CheckCircle2 color="$green10" />
               </View>
             </View>
           ) : (
-            <View key="email" enterStyle={{ opacity: 0.5, scale: 1.5 }} animation="100ms">
+            <View key="email" enterStyle={{ opacity: 0.5, scale: 1.5 }} transition="100ms">
               {activeInterface === 'email' ? (
                 <Mail size={16} opacity={0.25} />
               ) : (
@@ -439,7 +439,7 @@ export function OneTimeCodeInputExample({
 
         <View
           key="code"
-          animation="200ms"
+          transition="200ms"
           width="100%"
           opacity={showCode ? 0 : 1}
           pointerEvents={showCode ? 'none' : 'auto'}
@@ -447,7 +447,7 @@ export function OneTimeCodeInputExample({
         >
           <YStack
             key="code"
-            animation="200ms"
+            transition="200ms"
             exitStyle={{ opacity: 0 }}
             justify="space-between"
             gap="$4"
@@ -551,7 +551,7 @@ export function OneTimeCodeInputExample({
           width="100%"
           height="100%"
           $gtMd={{ width: '100%', p: '$5' }}
-          animation={'200ms'}
+          transition={'200ms'}
           opacity={!showCode ? 0 : 1}
           pointerEvents={!showCode ? 'none' : 'auto'}
           transform={[{ translateX: !showCode ? 150 : 0 }]}
@@ -631,7 +631,7 @@ const EmailInput = ({
       <XStack
         items="center"
         hoverStyle={{ cursor: 'pointer' }}
-        animation="200ms"
+        transition="200ms"
         onPress={() => setActiveInterface('code')}
         self="flex-start"
         gap="$1"

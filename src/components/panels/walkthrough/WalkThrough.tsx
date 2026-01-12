@@ -92,7 +92,7 @@ function Tour({
               y={0}
               opacity={1}
               fullscreen
-              animation={[
+              transition={[
                 'quick',
                 {
                   opacity: {
@@ -144,7 +144,7 @@ function WalkThroughImpl({
             <XStack
               enterStyle={{ opacity: 0 }}
               exitStyle={{ opacity: 0 }}
-              animation="bouncy"
+              transition="bouncy"
               width="100%"
               minH="100%"
               fullscreen

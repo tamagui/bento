@@ -18,7 +18,7 @@ export function SwitchCustomIcons({ size }: { size?: SizeTokens }) {
         <Switch.Icon placement="right">
           <X color="#fff" />
         </Switch.Icon>
-        <Switch.Thumb animation="quick" />
+        <Switch.Thumb transition="quick" />
       </Switch>
     </View>
   )

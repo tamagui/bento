@@ -106,7 +106,7 @@ function Calendar({
           width="100%"
           justify="center"
           items="center"
-          animation="medium"
+          transition="medium"
           gap="$4"
           {...prevNextAnimation()}
         >

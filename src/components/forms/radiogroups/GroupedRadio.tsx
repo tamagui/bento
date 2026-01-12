@@ -85,7 +85,7 @@ function Item({
       >
         <Avatar circular size="$5" $group-window-xs={{ size: '$4' }}>
           <Avatar.Image accessibilityLabel="Cam" src={image} />
-          <Avatar.Fallback backgroundColor="$background" />
+          <Avatar.Fallback bg="$background" />
         </Avatar>
         <View flex={1} gap="$2">
           <View flexDirection="row" gap="$2">

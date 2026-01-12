@@ -184,7 +184,7 @@ const DrawerContent = DrawerFrame.styleable((props, ref) => {
     <FocusScope trapped enabled={true} loop>
       <DrawerFrame
         ref={ref}
-        animation="medium"
+        transition="medium"
         theme="accent"
         enterStyle={{ x: -(rest.width || 210) }}
         exitStyle={{ x: -(rest.width || 210) }}

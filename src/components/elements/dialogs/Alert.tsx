@@ -63,7 +63,7 @@ const Alert = ({ children, ...rest }: AlertProps) => {
           <AlertDialog.Overlay
             onPress={closeDialog}
             key="overlay"
-            animation="quick"
+            transition="quick"
             enterStyle={{ opacity: 0 }}
             exitStyle={{ opacity: 0 }}
             backgroundColor="rgba(0,0,0,0.5)"
@@ -76,7 +76,7 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             rounded="$4"
             gap="$1"
             key="content"
-            animation={[
+            transition={[
               'quick',
               {
                 opacity: {

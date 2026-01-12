@@ -279,7 +279,7 @@ const PlanView = ({
       <View overflow="hidden">
         <View
           key="paywall-plan"
-          animation="quicker"
+          transition="quicker"
           opacity={nextStep ? 0 : 1}
           transform={[{ translateY: nextStep ? 100 : 0 }]}
           gap="$6"
@@ -343,7 +343,7 @@ const PlanView = ({
           <View position="absolute" justify="center" inset={0}>
             <View
               key="paywall-checkout"
-              animation="quicker"
+              transition="quicker"
               opacity={1}
               transform={[{ translateY: 0 }]}
               enterStyle={{ opacity: 0, transform: [{ translateY: -100 }] }}
@@ -360,7 +360,7 @@ const PlanView = ({
                   self="center"
                   justify="space-between"
                   key="switch"
-                  animation="quicker"
+                  transition="quicker"
                   rotate={annual ? '-3deg' : '0deg'}
                 >
                   <Text
@@ -385,7 +385,7 @@ const PlanView = ({
                     borderColor={'$colorTransparent'}
                   >
                     {/* switch background */}
-                    <Switch.Thumb animation="medium" bg="$colorTransparent">
+                    <Switch.Thumb transition="medium" bg="$colorTransparent">
                       <View
                         shadowOpacity={0.5}
                         shadowRadius="$4"
@@ -399,7 +399,7 @@ const PlanView = ({
                         rounded="$10"
                         items="center"
                         justify="center"
-                        animation="200ms"
+                        transition="200ms"
                         bg={'$color'}
                       />
                     </Switch.Thumb>
@@ -420,7 +420,7 @@ const PlanView = ({
                     <View height={64} justify="center" items="center" overflow="hidden">
                       <Text
                         key="monthly-price"
-                        animation="quicker"
+                        transition="quicker"
                         text="center"
                         fontSize="$10"
                         fontWeight="bold"
@@ -433,7 +433,7 @@ const PlanView = ({
 
                       <Text
                         key="annual-price"
-                        animation="quicker"
+                        transition="quicker"
                         text="center"
                         fontSize="$10"
                         fontWeight="bold"
@@ -469,7 +469,7 @@ const PlanView = ({
                         r="$-6"
                         t="$-2"
                         rotate="25deg"
-                        animation="quicker"
+                        transition="quicker"
                         opacity={1}
                         transform={[{ translateY: 0 }, { translateX: 0 }]}
                         enterStyle={{
@@ -559,7 +559,7 @@ const ReviewListCarousel = () => {
 
   return (
     <View
-      animation="slow"
+      transition="slow"
       opacity={1}
       transform={[{ translateY: 0 }]}
       enterStyle={{

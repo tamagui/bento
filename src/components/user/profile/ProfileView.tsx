@@ -136,7 +136,7 @@ const ButtonGroup = ({
       <Theme inverse={!followed}>
         <Button
           theme={followed ? 'accent' : 'red'}
-          animation="200ms"
+          transition="200ms"
           fontWeight="bold"
           fontSize="$6"
           flex={1}
@@ -158,7 +158,7 @@ const ButtonGroup = ({
                 y: 10,
               }}
               opacity={1}
-              animation="bouncy"
+              transition="bouncy"
               fontFamily="$mono"
               fontWeight="bold"
               fontSize="$5"
@@ -181,7 +181,7 @@ const ButtonGroup = ({
                 y: -10,
               }}
               opacity={1}
-              animation="bouncy"
+              transition="bouncy"
             >
               Follow
             </Text>
@@ -299,7 +299,7 @@ const Follower = ({ followed }: { followed: boolean }) => {
       <YStack gap="$1">
         <Text
           animatePresence
-          animation="quick"
+          transition="quick"
           fontFamily="$silkscreen"
           fontSize="$8"
           fontWeight="bold"

@@ -270,7 +270,7 @@ function ProfileDropdown({
         p={0}
         enterStyle={{ y: -10, opacity: 0 }}
         exitStyle={{ y: -10, opacity: 0 }}
-        animation={[
+        transition={[
           'quick',
           {
             opacity: {
@@ -389,7 +389,7 @@ function SideBarContent({
           <Drawer.Overlay
             height={height}
             width={width + 100}
-            animation="lazy"
+            transition="lazy"
             enterStyle={{ opacity: 0 }}
             exitStyle={{ opacity: 0 }}
           />
@@ -502,7 +502,7 @@ const TabsRovingIndicator = ({ active, ...props }: { active?: boolean } & StackP
       position="absolute"
       backgroundColor="$color8"
       opacity={0.7}
-      animation="100ms"
+      transition="100ms"
       enterStyle={{
         opacity: 0,
       }}

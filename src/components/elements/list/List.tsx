@@ -106,7 +106,7 @@ function Item({ person }: { person: PersonList[number] }) {
       <View position="relative">
         <Avatar circular size="$4">
           <Avatar.Image objectFit="cover" src={person.image} />
-          <Avatar.Fallback backgroundColor="$background" />
+          <Avatar.Fallback bg="$background" />
         </Avatar>
         <Circle
           borderWidth={1}

@@ -9,6 +9,7 @@ import {
   AnimatePresence,
   Button,
   Popover,
+  Sheet,
   Text,
   View,
   createStyledContext,
@@ -90,17 +91,17 @@ const DatePickerImpl = (props: DatePickerProps) => {
     <DatePickerProvider config={config}>
       <Popover ref={popoverRef} keepChildrenMounted size="$4" allowFlip {...rest}>
         <Adapt when="maxMd">
-          <Popover.Sheet modal dismissOnSnapToBottom snapPointsMode="fit">
-            <Popover.Sheet.Frame p="$4" width="100%" items="center">
+          <Sheet modal dismissOnSnapToBottom snapPointsMode="fit">
+            <Sheet.Frame p="$4" width="100%" items="center">
               <Adapt.Contents />
-            </Popover.Sheet.Frame>
-            <Popover.Sheet.Overlay
-              animation="lazy"
+            </Sheet.Frame>
+            <Sheet.Overlay
+              transition="lazy"
               opacity={0.8}
               enterStyle={{ opacity: 0 }}
               exitStyle={{ opacity: 0 }}
             />
-          </Popover.Sheet>
+          </Sheet>
         </Adapt>
         {children}
       </Popover>
@@ -109,7 +110,7 @@ const DatePickerImpl = (props: DatePickerProps) => {
 }
 
 const DatePickerContent = styled(Popover.Content, {
-  animation: 'quick',
+  transition: 'quick',
   variants: {
     unstyled: {
       false: {
@@ -212,7 +213,7 @@ export function MonthPicker({
         flexDirection="row"
         flexWrap="wrap"
         gap="$2"
-        animation="100ms"
+        transition="100ms"
         grow={0}
         $platform-native={{
           justify: 'space-between',
@@ -265,7 +266,7 @@ export function YearPicker({
     <AnimatePresence key={prevNextAnimationKey}>
       <View
         {...prevNextAnimation()}
-        animation={'quick'}
+        transition={'quick'}
         flexDirection="row"
         flexWrap="wrap"
         gap="$2"

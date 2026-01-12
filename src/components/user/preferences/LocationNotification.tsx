@@ -128,7 +128,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
             </Sheet.ScrollView>
           </Sheet.Frame>
           <Sheet.Overlay
-            animation="lazy"
+            transition="lazy"
             enterStyle={{ opacity: 0 }}
             exitStyle={{ opacity: 0 }}
           />
@@ -157,7 +157,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
 
         <Select.Viewport
           // to do animations:
-          // animation="quick"
+          // transition="quick"
           // animateOnly={['transform', 'opacity']}
           // enterStyle={{ opacity: 0, y: -10 }}
           // exitStyle={{ opacity: 0, y: 10 }}

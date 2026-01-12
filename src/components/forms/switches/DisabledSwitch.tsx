@@ -25,7 +25,7 @@
 //         disabled={disabled}
 //         onCheckedChange={toggleChecked}
 //       >
-//         <Switch.Thumb animation="bouncy" />
+//         <Switch.Thumb transition="bouncy" />
 //       </Switch>
 //     </View>
 //   )

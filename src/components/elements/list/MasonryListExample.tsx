@@ -22,7 +22,7 @@ const ProductItem: FC<{ item: Product }> = ({ item }) => {
         shadowColor="$shadowColor"
         shadowRadius={5}
         overflow="hidden"
-        animation="quick"
+        transition="quick"
         cursor="pointer"
       >
         <Image
@@ -46,7 +46,7 @@ const ProductItem: FC<{ item: Product }> = ({ item }) => {
             backdropFilter: 'blur(15px)',
             bg: '$background04',
           }}
-          animation="medium"
+          transition="medium"
         >
           <Text
             flex={1}
@@ -54,7 +54,7 @@ const ProductItem: FC<{ item: Product }> = ({ item }) => {
             opacity={0}
             hoverStyle={{ opacity: 1 }}
             pressStyle={{ opacity: 1 }}
-            animation="medium"
+            transition="medium"
             p={'$4'}
           >
             {item.desc}

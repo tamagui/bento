@@ -191,7 +191,7 @@ export function SignUpScreen() {
             marginLeft="auto"
             size="$2"
           >
-            <Switch.Thumb animation="bouncy" />
+            <Switch.Thumb transition="bouncy" />
           </Switch>
         </View>
 
@@ -217,7 +217,7 @@ export function SignUpScreen() {
                   position="absolute"
                   scale={0.5}
                   l={110}
-                  animation="quick"
+                  transition="quick"
                   enterStyle={{
                     opacity: 0,
                     scale: 0.5,

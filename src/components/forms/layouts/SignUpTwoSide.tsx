@@ -281,7 +281,7 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
             </Sheet.ScrollView>
           </Sheet.Frame>
           <Sheet.Overlay
-            animation="lazy"
+            transition="lazy"
             enterStyle={{ opacity: 0 }}
             exitStyle={{ opacity: 0 }}
           />
@@ -310,7 +310,7 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
 
         <Select.Viewport
           // to do animations:
-          // animation="quick"
+          // transition="quick"
           // animateOnly={['transform', 'opacity']}
           // enterStyle={{ opacity: 0, y: -10 }}
           // exitStyle={{ opacity: 0, y: 10 }}

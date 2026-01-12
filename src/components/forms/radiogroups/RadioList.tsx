@@ -113,11 +113,11 @@ function Item({
         rounded: 0,
         py: '$4',
       }}
-      animation="100ms"
+      transition="100ms"
     >
       <Avatar circular size="$4">
         <Avatar.Image accessibilityLabel="Cam" src={item.avatar} />
-        <Avatar.Fallback backgroundColor="$background" />
+        <Avatar.Fallback bg="$background" />
       </Avatar>
 
       <View flex={10} self="stretch" gap="$0.5">

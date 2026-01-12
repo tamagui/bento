@@ -1,6 +1,6 @@
 import { Globe2, Search, X } from '@tamagui/lucide-icons'
 import type { SizeTokens } from 'tamagui'
-import { Adapt, Popover, ScrollView, Spinner, Text, View, isWeb } from 'tamagui'
+import { Adapt, Popover, ScrollView, Sheet, Spinner, Text, View, isWeb } from 'tamagui'
 import { Input } from './components/inputsParts'
 import { useState, useMemo, useEffect } from 'react'
 import {
@@ -218,17 +218,17 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
       </Popover.Trigger>
 
       <Adapt when="maxMd" platform="touch">
-        <Popover.Sheet modal dismissOnSnapToBottom>
-          <Popover.Sheet.Frame p="$4">
+        <Sheet modal dismissOnSnapToBottom>
+          <Sheet.Frame p="$4">
             <Adapt.Contents />
-          </Popover.Sheet.Frame>
-          <Popover.Sheet.Overlay
-            animation="quick"
+          </Sheet.Frame>
+          <Sheet.Overlay
+            transition="quick"
             opacity={0.8}
             enterStyle={{ opacity: 0 }}
             exitStyle={{ opacity: 0 }}
           />
-        </Popover.Sheet>
+        </Sheet>
       </Adapt>
 
       <Popover.Content
@@ -239,7 +239,7 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
         enterStyle={{ y: -10, opacity: 0 }}
         exitStyle={{ y: -10, opacity: 0 }}
         elevate
-        animation={[
+        transition={[
           'quick',
           {
             opacity: {

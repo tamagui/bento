@@ -121,7 +121,7 @@ function User({
       <View position="relative">
         <Avatar rounded="$2" size="$3" circular>
           <Avatar.Image accessibilityLabel="Cam" src={avatar} />
-          <Avatar.Fallback backgroundColor="$background" />
+          <Avatar.Fallback bg="$background" />
         </Avatar>
         <Circle
           width={10}

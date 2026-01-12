@@ -24,7 +24,7 @@ export function IconCenterButton() {
       onLayout={(e) => setWidth(e.nativeEvent.layout.width)}
     >
       <Stack
-        animation="quick"
+        transition="quick"
         x={
           move
             ? buttonWidth / 2 -
@@ -39,7 +39,7 @@ export function IconCenterButton() {
           <Check />
         </Button.Icon>
       </Stack>
-      <Button.Text animation="medium" x={move ? buttonWidth : 0} opacity={move ? 0 : 1}>
+      <Button.Text transition="medium" x={move ? buttonWidth : 0} opacity={move ? 0 : 1}>
         Accept Terms
       </Button.Text>
     </Button>

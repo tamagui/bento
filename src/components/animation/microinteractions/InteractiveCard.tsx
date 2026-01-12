@@ -217,7 +217,7 @@ export function InteractiveCard() {
         <Card.Item translateZ={50} translateY={5}>
           <Button
             theme="accent"
-            animation="quick"
+            transition="quick"
             pressStyle={{
               scale: 0.98,
             }}
