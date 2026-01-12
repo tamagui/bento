@@ -13,7 +13,6 @@ import {
   getTokenValue,
   Image,
   Text,
-  Theme,
   View,
   XStack,
   YStack,
@@ -133,9 +132,8 @@ const ButtonGroup = ({
 }: { followed: boolean; setFollowed: (followed: boolean) => void }) => {
   return (
     <XStack pt="$4" gap="$4">
-      <Theme inverse={!followed}>
-        <Button
-          theme={followed ? 'accent' : 'red'}
+      <Button
+        theme={followed ? 'accent' : 'red'}
           transition="200ms"
           fontWeight="bold"
           fontSize="$6"
@@ -187,7 +185,6 @@ const ButtonGroup = ({
             </Text>
           )}
         </Button>
-      </Theme>
 
       <Button height="$6" width="$6" rounded="$10">
         <Share />

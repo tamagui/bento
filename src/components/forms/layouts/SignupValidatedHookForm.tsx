@@ -258,7 +258,7 @@ export function SignupValidatedHookForm() {
               <Input.Box>
                 <Input.Area
                   id={'password-t1'}
-                  type={showPassword ? 'text' : 'password'}
+                  secureTextEntry={!showPassword}
                   placeholder="Enter password"
                   onChangeText={onChange}
                   value={value}
@@ -317,7 +317,7 @@ export function SignupValidatedHookForm() {
               <Input.Box>
                 <Input.Area
                   id={'confirmed password'}
-                  type={showConfirmPassword ? 'text' : 'password'}
+                  secureTextEntry={!showConfirmPassword}
                   placeholder="Confirm password"
                   onChangeText={onChange}
                   value={value}

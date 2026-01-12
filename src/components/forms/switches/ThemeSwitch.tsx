@@ -4,18 +4,18 @@ import type { SizeTokens } from 'tamagui'
 import { AnimatePresence, getVariableValue, Switch, View, YStack } from 'tamagui'
 
 import { getSize } from '@tamagui/get-token'
-import { useUserScheme } from '@vxrn/color-scheme'
+import { useSchemeSetting } from '@vxrn/color-scheme'
 
 export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
   const uniqueId = useId()
   const [checked, setChecked] = useState(false)
 
   // do not use this code. only use in showcase
-  const userScheme = useUserScheme()
+  const [{ scheme }, setScheme] = useSchemeSetting()
 
   useEffect(() => {
-    setChecked(userScheme.value === 'dark')
-  }, [userScheme.value])
+    setChecked(scheme === 'dark')
+  }, [scheme])
 
   const thumbSize = getVariableValue(getSize(size))
 
@@ -28,7 +28,7 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
       id={uniqueId + 'switch'}
       checked={checked}
       onCheckedChange={(checked) => {
-        userScheme.set(checked ? 'dark' : 'light')
+        setScheme(checked ? 'dark' : 'light')
       }}
       size={size}
       backgroundColor="$background"

@@ -85,7 +85,7 @@ export function SignUpScreen() {
           <Input.Box>
             <Input.Area
               id={uniqueId + 'password'}
-              type={showPassword ? 'text' : 'password'}
+              secureTextEntry={!showPassword}
               placeholder="Password"
             />
             <Input.Icon cursor="pointer" onPress={() => setShowPassword(!showPassword)}>
@@ -99,7 +99,7 @@ export function SignUpScreen() {
           </Input.Label>
           <Input.Box>
             <Input.Area
-              type="password"
+              secureTextEntry
               id={uniqueId + 'repeat-password'}
               placeholder="Repeat password"
             />

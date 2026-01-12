@@ -1,11 +1,9 @@
 import { Text, ToggleGroup, View, styled } from 'tamagui'
 
 const Item = styled(ToggleGroup.Item, {
-  color: '$color10',
   flex: 1,
   width: '100%',
   focusStyle: {
-    color: '$color1',
     backgroundColor: '$color12',
   },
 })

@@ -97,7 +97,7 @@ const PasswordInput = (props: PasswordInputProps) => {
       <Input.Box>
         <Input.Area
           id={labelId}
-          type={showPassword ? 'text' : 'password'}
+          secureTextEntry={!showPassword}
           placeholder={placeholder}
           onChangeText={onChange}
           value={value}

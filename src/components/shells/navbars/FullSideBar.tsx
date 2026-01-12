@@ -2,6 +2,7 @@ import { Bell, Menu } from '@tamagui/lucide-icons'
 import { RovingFocusGroup } from '@tamagui/roving-focus'
 import { useState } from 'react'
 import {
+  Anchor,
   Avatar,
   Button,
   H4,
@@ -17,8 +18,7 @@ import { useContainerDim } from '../../hooks/useContainerDim'
 import { useGroupMedia } from '../../hooks/useGroupMedia'
 import { Drawer } from '../common/Drawer'
 
-const Link = styled(Text, {
-  tag: 'a',
+const Link = styled(Anchor, {
   textTransform: 'none',
   display: 'flex',
   textDecorationLine: 'none',

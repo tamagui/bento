@@ -77,7 +77,7 @@ export function SignInRightImage() {
               </View>
               <Input.Box>
                 <Input.Area
-                  type="password"
+                  secureTextEntry
                   id={uniqueId + 'password'}
                   placeholder="Enter password"
                 />

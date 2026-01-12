@@ -29,7 +29,6 @@ export function HomeScreen() {
                       <YGroup.Item key={item.id}>
                         <ListItem
                           bg="$color1"
-                          pressTheme
                           size="$4"
                           onPress={() =>
                             // @ts-expect-error

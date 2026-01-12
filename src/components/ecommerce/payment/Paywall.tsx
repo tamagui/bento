@@ -34,7 +34,6 @@ import {
   styled,
   Switch,
   Text,
-  Theme,
   useTheme,
   View,
   XStack,
@@ -81,7 +80,6 @@ export function Paywall() {
       {isWeb ? (
         <XStack
           overflow="scroll"
-          scrollbarWidth="none"
           justify="flex-start"
           items="flex-end"
           gap={SPACING}
@@ -495,19 +493,16 @@ const PlanView = ({
                 </Text>
               </View>
 
-              <Theme inverse>
-                <Button
-                  flexDirection="column"
-                  gap={0}
-                  space={0}
-                  height="auto"
-                  rounded="$10"
-                >
-                  <Button.Text py="$3.5" fontSize="$5" fontWeight="bold">
-                    Checkout
-                  </Button.Text>
-                </Button>
-              </Theme>
+              <Button
+                flexDirection="column"
+                gap={0}
+                height="auto"
+                rounded="$10"
+              >
+                <Button.Text py="$3.5" fontSize="$5" fontWeight="bold">
+                  Checkout
+                </Button.Text>
+              </Button>
             </View>
             <Button
               self="flex-end"

@@ -10,7 +10,7 @@ const SizableText = styled(Text, {
 
   variants: {
     size: {
-      '...fontSize': getFontSized,
+      '...fontSize': getFontSized as any, // TODO: revisit after v2 migration
     },
   } as const,
 

@@ -31,7 +31,7 @@ export function ShortEmailPassword() {
               <Input.Icon>
                 <Lock />
               </Input.Icon>
-              <Input.Area type="password" pl={0} placeholder="Password" />
+              <Input.Area secureTextEntry pl={0} placeholder="Password" />
             </Input.Box>
           </Input>
         </View>

@@ -186,7 +186,6 @@ function CalendarView({
                         circular
                         group="item"
                         {...swapOnClick(dayButton(day))}
-                        themeInverse={day.selected}
                         borderWidth={1}
                         borderColor={day.selected ? '$color1' : 'transparent'}
                         data-range={day.range}

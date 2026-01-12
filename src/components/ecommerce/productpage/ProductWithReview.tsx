@@ -76,12 +76,14 @@ export const SizableText = styled(Text, {
 
   variants: {
     size: {
-      '...fontSize': getFontSized,
+      // TODO: revisit getFontSized type after v2 migration - was this working before?
+      '...fontSize': getFontSized as any,
     },
   } as const,
 
   defaultVariants: {
-    size: '$true',
+    // TODO: revisit size: '$true' type after v2 migration
+    size: '$true' as any,
   },
 })
 
@@ -181,8 +183,8 @@ export function ProductWithReview() {
                           position="relative"
                           rounded="$2"
                           onFocus={() => setDebounceTempPicture(picture)}
-                          onHoverIn={() => setDebounceTempPicture(picture)}
-                          onHoverOut={() => setDebounceTempPicture(null)}
+                          onMouseEnter={() => setDebounceTempPicture(picture)}
+                          onMouseLeave={() => setDebounceTempPicture(null)}
                           onBlur={() => setDebounceTempPicture(null)}
                           onPress={() => setSelectedPicture(picture)}
                           //@ts-ignore

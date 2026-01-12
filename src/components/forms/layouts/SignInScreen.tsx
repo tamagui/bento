@@ -70,7 +70,7 @@ export function SignInScreen() {
               </View>
               <Input.Box>
                 <Input.Area
-                  type="password"
+                  secureTextEntry
                   id={'password'}
                   placeholder="Enter password"
                 />
@@ -159,9 +159,9 @@ const Link = ({
   children: React.ReactNode
 }) => {
   return (
-    <View href={href} tag="a">
+    <Anchor href={href}>
       {children}
-    </View>
+    </Anchor>
   )
 }
 
