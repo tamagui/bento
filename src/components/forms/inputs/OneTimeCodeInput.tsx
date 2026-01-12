@@ -427,7 +427,11 @@ export function OneTimeCodeInputExample({
               </View>
             </View>
           ) : (
-            <View key="email" enterStyle={{ opacity: 0.5, scale: 1.5 }} transition="100ms">
+            <View
+              key="email"
+              enterStyle={{ opacity: 0.5, scale: 1.5 }}
+              transition="100ms"
+            >
               {activeInterface === 'email' ? (
                 <Mail size={16} opacity={0.25} />
               ) : (

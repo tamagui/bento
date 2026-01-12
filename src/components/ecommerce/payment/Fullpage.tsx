@@ -282,12 +282,7 @@ export function Fullpage() {
             </Dialog.Trigger>
 
             <Dialog.Adapt when="maxMd">
-              <Sheet
-                transition="medium"
-                zIndex={200000}
-                modal
-                dismissOnSnapToBottom
-              >
+              <Sheet transition="medium" zIndex={200000} modal dismissOnSnapToBottom>
                 <Sheet.Overlay
                   transition="quick"
                   enterStyle={{ opacity: 0 }}

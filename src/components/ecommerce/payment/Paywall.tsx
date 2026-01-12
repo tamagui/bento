@@ -28,16 +28,7 @@ import Animated, {
   withTiming,
   type SharedValue,
 } from 'react-native-reanimated'
-import {
-  Button,
-  isWeb,
-  styled,
-  Switch,
-  Text,
-  useTheme,
-  View,
-  XStack,
-} from 'tamagui'
+import { Button, isWeb, styled, Switch, Text, useTheme, View, XStack } from 'tamagui'
 import { LinearGradient } from 'tamagui/linear-gradient'
 import { Chip } from '../../elements/chips/components/chipsParts'
 
@@ -493,12 +484,7 @@ const PlanView = ({
                 </Text>
               </View>
 
-              <Button
-                flexDirection="column"
-                gap={0}
-                height="auto"
-                rounded="$10"
-              >
+              <Button flexDirection="column" gap={0} height="auto" rounded="$10">
                 <Button.Text py="$3.5" fontSize="$5" fontWeight="bold">
                   Checkout
                 </Button.Text>

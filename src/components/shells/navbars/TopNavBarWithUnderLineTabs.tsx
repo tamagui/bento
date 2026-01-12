@@ -1,6 +1,7 @@
 import { Bell, Menu } from '@tamagui/lucide-icons'
 import type { StackProps, TabLayout, TabsTabProps } from 'tamagui'
 
+import type React from 'react'
 import { useState } from 'react'
 import {
   Anchor,
@@ -353,7 +354,7 @@ function SideBar() {
       position="relative"
       flexDirection="row"
       {...(isWeb && {
-        onKeyDown: (e: KeyboardEvent) => {
+        onKeyDown: (e: React.KeyboardEvent) => {
           if (e.key === 'Escape') {
             setOpen(false)
           }

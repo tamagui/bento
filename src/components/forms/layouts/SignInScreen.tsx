@@ -158,11 +158,7 @@ const Link = ({
   href: string
   children: React.ReactNode
 }) => {
-  return (
-    <Anchor href={href}>
-      {children}
-    </Anchor>
-  )
+  return <Anchor href={href}>{children}</Anchor>
 }
 
 const SignUpLink = () => {

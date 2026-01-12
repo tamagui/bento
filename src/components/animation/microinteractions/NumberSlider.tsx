@@ -62,6 +62,7 @@ export const AnimatedNumbers = () => {
               <AnimatedNumber
                 key={key}
                 transition="medium"
+                // @ts-expect-error animateOnly still valid in v2, types not updated
                 animateOnly={['transform', 'opacity']}
                 enterStyle={{
                   y: -50,

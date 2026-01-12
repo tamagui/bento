@@ -80,7 +80,7 @@ export function FullSideBar() {
             <View
               flexDirection="row"
               {...(isWeb && {
-                onKeyDown: (e: KeyboardEvent) => {
+                onKeyDown: (e: React.KeyboardEvent) => {
                   if (e.key === 'Escape') {
                     setOpenDrawer(false)
                   }
@@ -249,7 +249,7 @@ function FloatingSideBar({
     <View
       flexDirection="column"
       {...(isWeb && {
-        onKeyDown: (e: KeyboardEvent) => {
+        onKeyDown: (e: React.KeyboardEvent) => {
           if (e.key === 'Escape') {
             setOpen(false)
           }

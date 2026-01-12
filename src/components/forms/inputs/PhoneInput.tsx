@@ -2,6 +2,7 @@ import { Globe2, Search, X } from '@tamagui/lucide-icons'
 import type { SizeTokens } from 'tamagui'
 import { Adapt, Popover, ScrollView, Sheet, Spinner, Text, View, isWeb } from 'tamagui'
 import { Input } from './components/inputsParts'
+import type React from 'react'
 import { useState, useMemo, useEffect } from 'react'
 import {
   getSupportedRegionCodes,
@@ -117,7 +118,7 @@ function RegionFilterInput(props: RegionFilterInputProps) {
                   <RovingFocusGroup.Item
                     key={item.name}
                     {...(isWeb && {
-                      onKeyDown: (e: KeyboardEvent) => {
+                      onKeyDown: (e: React.KeyboardEvent) => {
                         if (e.key === 'Enter') {
                           setRegionCode(item.name)
                           setOpen(false)

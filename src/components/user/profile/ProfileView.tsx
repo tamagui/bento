@@ -9,6 +9,7 @@ import Animated, {
   type SharedValue,
 } from 'react-native-reanimated'
 import {
+  AnimatePresence,
   Button,
   getTokenValue,
   Image,
@@ -134,19 +135,16 @@ const ButtonGroup = ({
     <XStack pt="$4" gap="$4">
       <Button
         theme={followed ? 'accent' : 'red'}
-          transition="200ms"
-          fontWeight="bold"
-          fontSize="$6"
-          flex={1}
-          height="$6"
-          rounded="$10"
-          color="$color12"
-          onPress={() => setFollowed(!followed)}
-        >
+        transition="200ms"
+        flex={1}
+        height="$6"
+        rounded="$10"
+        onPress={() => setFollowed(!followed)}
+      >
+        <AnimatePresence exitBeforeEnter>
           {followed ? (
-            <Text
+            <Button.Text
               key={'Following'}
-              animatePresence
               enterStyle={{
                 opacity: 0,
                 y: 10,
@@ -162,11 +160,10 @@ const ButtonGroup = ({
               fontSize="$5"
             >
               Following
-            </Text>
+            </Button.Text>
           ) : (
-            <Text
+            <Button.Text
               key={'Follow'}
-              animatePresence
               fontFamily="$mono"
               fontWeight="bold"
               fontSize="$5"
@@ -182,9 +179,10 @@ const ButtonGroup = ({
               transition="bouncy"
             >
               Follow
-            </Text>
+            </Button.Text>
           )}
-        </Button>
+        </AnimatePresence>
+      </Button>
 
       <Button height="$6" width="$6" rounded="$10">
         <Share />
@@ -254,7 +252,6 @@ const AvatarView = memo(
               backfaceVisibility="hidden"
               height="100%"
               width="100%"
-              animatePresence
               src="https://tamagui.dev/bento/images/avatar_1.png"
             />
           </AnimatedView>
@@ -295,7 +292,6 @@ const Follower = ({ followed }: { followed: boolean }) => {
       ))}
       <YStack gap="$1">
         <Text
-          animatePresence
           transition="quick"
           fontFamily="$silkscreen"
           fontSize="$8"
