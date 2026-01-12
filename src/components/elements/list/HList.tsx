@@ -134,7 +134,6 @@ function HListItem({ uri, title }: { uri: string; title: string }) {
 
 const HListFrame = styled(View, {
   width: 200,
-  // @ts-expect-error animateOnly still valid in v2, types not updated
   animateOnly: ['borderRadius', 'transform'],
   height: 200,
   borderWidth: 1,
