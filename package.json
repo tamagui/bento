@@ -3,7 +3,6 @@
   "version": "1.138.0",
   "description": "Premium Tamagui components library",
   "license": "MIT",
-  "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/tamagui/bento.git"
@@ -96,7 +95,6 @@
     "@tamagui/use-store": "^2.0.0-1768202210244",
     "@tanstack/react-table": "~8.21.3",
     "@vxrn/color-scheme": "*",
-    "awesome-phonenumber": "~6.12.0",
     "expo": "~54.0.23",
     "expo-document-picker": "~14.0.7",
     "expo-image-picker": "~17.0.8",

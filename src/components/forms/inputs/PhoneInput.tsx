@@ -4,18 +4,14 @@ import { Adapt, Popover, ScrollView, Sheet, Spinner, Text, View, isWeb } from 't
 import { Input } from './components/inputsParts'
 import type React from 'react'
 import { useState, useMemo, useEffect } from 'react'
-import {
-  getSupportedRegionCodes,
-  parsePhoneNumber,
-  getCountryCodeForRegionCode,
-} from 'awesome-phonenumber'
 import { RovingFocusGroup } from '@tamagui/roving-focus'
+import { DIAL_CODES, REGION_CODES } from './dialCodes'
 
 /**
- * in case you want to integrate it with zod validation, following snippet can be used
+ * for phone number validation, we recommend using libphonenumber-js:
  *
- *   const isPhoneNumber = (ph: string) => parsePhoneNumber(ph)?.valid;
- *   const phoneNumberSchema = z.string().refine(isPhoneNumber, (val) => ({message: `${val} is not a valid phone number`}));
+ *   import { isValidPhoneNumber } from 'libphonenumber-js'
+ *   const phoneNumberSchema = z.string().refine(isValidPhoneNumber, (val) => ({message: `${val} is not a valid phone number`}));
  *   const MySchema = z.object({ phone_number: phoneNumberSchema })
  *
  **/
@@ -25,7 +21,7 @@ interface PhoneCode {
   flag: string
 }
 
-// Convert country code to flag emoji (e.g., "US" -> "🇺🇸")
+// convert country code to flag emoji (e.g., "US" -> "🇺🇸")
 function countryCodeToFlag(countryCode: string): string {
   const codePoints = countryCode
     .toUpperCase()
@@ -34,12 +30,10 @@ function countryCodeToFlag(countryCode: string): string {
   return String.fromCodePoint(...codePoints)
 }
 
-const phoneCodes: PhoneCode[] = getSupportedRegionCodes().map((code) => {
-  return {
-    name: code,
-    flag: countryCodeToFlag(code),
-  }
-})
+const phoneCodes: PhoneCode[] = REGION_CODES.map((code) => ({
+  name: code,
+  flag: countryCodeToFlag(code),
+}))
 
 type RegionFilterInputProps = {
   setRegionCode: (regionCode: string) => void
@@ -55,7 +49,7 @@ function RegionFilterInput(props: RegionFilterInputProps) {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    let timeoutId
+    let timeoutId: ReturnType<typeof setTimeout> | undefined
     if (open) {
       timeoutId = setTimeout(() => {
         setLoaded(true)
@@ -259,28 +253,15 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
 /** ------ EXAMPLE ------ **/
 export function PhoneInputExample({ size = '$4' }: { size?: SizeTokens }) {
   const [regionCode, setRegionCode] = useState('US')
-  const [phoneNumber, setPhoneNumber] = useState('+1')
-  const [isValid, setIsValid] = useState(false)
+  const [phoneNumber, setPhoneNumber] = useState('+1 ')
   const [containerWidth, setContainerWidth] = useState<number>()
 
   useEffect(() => {
     if (regionCode) {
-      setPhoneNumber('+' + getCountryCodeForRegionCode(regionCode) + ' ')
+      setPhoneNumber('+' + DIAL_CODES[regionCode] + ' ')
     }
   }, [regionCode])
 
-  const handlePhoneNumberChange = (text: string) => {
-    text = !phoneNumber && text !== '+' ? `+${text}` : text
-    const parsed = parsePhoneNumber(text)
-    // Note: parsed object has a lot of info about the number
-    if (parsed.regionCode) {
-      setRegionCode(parsed.regionCode)
-    } else {
-      setRegionCode('')
-    }
-    setPhoneNumber(parsed.number?.international || text)
-    setIsValid(parsed.valid)
-  }
   return (
     <View flexDirection="column" height={100}>
       <Input size={size} gapScale={0.5}>
@@ -289,7 +270,6 @@ export function PhoneInputExample({ size = '$4' }: { size?: SizeTokens }) {
             setContainerWidth(e.nativeEvent.layout.width)
           }}
           self="center"
-          theme={isValid ? 'green' : undefined}
         >
           <Input.Section>
             <RegionSelectBox
@@ -302,8 +282,8 @@ export function PhoneInputExample({ size = '$4' }: { size?: SizeTokens }) {
             <Input.Area
               keyboardType="numeric"
               value={phoneNumber}
-              onChangeText={handlePhoneNumberChange}
-              placeholder="Copy this text"
+              onChangeText={setPhoneNumber}
+              placeholder="Phone number"
             />
           </Input.Section>
         </Input.Box>
