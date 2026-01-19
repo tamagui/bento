@@ -1,6 +1,7 @@
 {
   "name": "@tamagui/bento",
   "version": "1.138.0",
+  "packageManager": "yarn@4.5.0",
   "description": "Premium Tamagui components library",
   "license": "MIT",
   "repository": {
