@@ -82,6 +82,9 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             overflow="hidden"
             gap="$3"
             key="content"
+            left={0}
+            right={0}
+            marginHorizontal="auto"
             transition={[
               'quick',
               {

@@ -30,30 +30,35 @@ const SlidingPopover = (props: PopoverProps) => {
   const popoverRef = React.useRef<Popover>(null)
   const [active, setActive] = React.useState('')
 
+  const debouncedClose = useDebounce((id: string) => {
+    setActive((cur) => {
+      if (!cur || cur === id) {
+        return ''
+      }
+      return cur
+    })
+  }, 150)
+
   const val = React.useMemo(() => {
     return {
       id: active,
       setActive(id: string, layout: LayoutRectangle) {
+        debouncedClose.cancel()
         setActive(id)
         popoverRef.current?.anchorTo(layout)
       },
       close: () => {
+        debouncedClose.cancel()
         setActive('')
       },
       setInactive(id: string) {
-        setActive((cur) => {
-          if (!cur || cur === id) {
-            return ''
-          }
-          return id
-        })
+        debouncedClose(id)
       },
     }
-  }, [active])
+  }, [active, debouncedClose])
 
   return (
     <Popover open={!!active} ref={popoverRef} {...props}>
-      <Popover.Trigger />
       <SlidingPopoverContext.Provider value={val}>
         {props.children}
       </SlidingPopoverContext.Provider>
@@ -67,22 +72,37 @@ const SlidingPopoverTrigger = YStack.styleable<{ id: string }>(
     const [layout, setLayout] = React.useState<LayoutRectangle>()
     const getLayout = useGet(layout)
 
-    const setActive = useDebounce(() => {
+    const setActiveDelayed = useDebounce(() => {
       const layout = getLayout()
       if (layout) {
         context.setActive(id, layout)
       }
-    }, 250)
+    }, 100)
+
+    const setActiveImmediate = () => {
+      const layout = getLayout()
+      if (layout) {
+        context.setActive(id, layout)
+      }
+    }
 
     return (
       <YStack
-        onMouseEnter={setActive}
+        onMouseEnter={() => {
+          if (context.id) {
+            // Popover is already open, switch immediately
+            setActiveImmediate()
+          } else {
+            // Popover is closed, use debounced activation
+            setActiveDelayed()
+          }
+        }}
         onMouseLeave={() => {
-          setActive.cancel()
+          setActiveDelayed.cancel()
           context.setInactive(id)
         }}
         onPress={() => {
-          setActive.cancel()
+          setActiveDelayed.cancel()
           if (!isWeb) {
             if (layout) {
               context.setActive(id, layout)
@@ -125,7 +145,7 @@ const SlidingPopoverContent = () => {
     <Popover.Content
       theme="surface3"
       enableAnimationForPositionChange
-      transition="quicker"
+      transition="200ms"
       bg="$background"
       elevation="$8"
       p={0}
@@ -211,7 +231,11 @@ const TooltipLabelLarge = ({
   title,
   subtitle,
   icon,
-}: { icon: any; title: string; subtitle: string }) => {
+}: {
+  icon: any
+  title: string
+  subtitle: string
+}) => {
   return (
     <YStack flex={1} items="center" p="$7" rounded="$4" overflow="hidden">
       <H2 flex={1} fontWeight="600" size="$8">
@@ -239,25 +263,19 @@ export const SlidingPopoverDemo = () => {
     <SlidingPopover>
       <SlidingPopoverContent />
 
-      <XStack>
-        <SlidingPopoverTrigger id="takeout">
-          <TouchableArea>
+      <Popover.Trigger asChild>
+        <View flexDirection="row">
+          <SlidingPopoverTrigger id="takeout" px="$4" py="$3">
             <Crown />
-          </TouchableArea>
-        </SlidingPopoverTrigger>
-
-        <SlidingPopoverTrigger id="bento">
-          <TouchableArea>
+          </SlidingPopoverTrigger>
+          <SlidingPopoverTrigger id="bento" px="$4" py="$3" mx="$-2">
             <Waves />
-          </TouchableArea>
-        </SlidingPopoverTrigger>
-
-        <SlidingPopoverTrigger id="studio">
-          <TouchableArea>
+          </SlidingPopoverTrigger>
+          <SlidingPopoverTrigger id="studio" px="$4" py="$3" mx="$-2">
             <Moon />
-          </TouchableArea>
-        </SlidingPopoverTrigger>
-      </XStack>
+          </SlidingPopoverTrigger>
+        </View>
+      </Popover.Trigger>
     </SlidingPopover>
   )
 }

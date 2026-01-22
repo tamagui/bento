@@ -11,18 +11,27 @@ import {
   useGetThemedIcon,
   withStaticProperties,
   SwitchStyledContext,
+  type SwitchProps,
 } from 'tamagui'
 
 export const SwitchThumb = styled(View, {
   name: 'SwitchThumb',
+  theme: 'accent',
   transition: 'quick',
 
   variants: {
     unstyled: {
       false: {
         size: '$true',
-        backgroundColor: '$color10',
+        backgroundColor: '#fff',
         borderRadius: 1000,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.15,
+        shadowRadius: 2,
+        elevation: 2,
+        justify: 'center',
+        items: 'center',
       },
     },
 
@@ -58,6 +67,7 @@ export const SwitchFrame = styled(View, {
   variants: {
     unstyled: {
       false: {
+        position: 'relative',
         borderRadius: 1000,
         backgroundColor: '$background',
         borderWidth: 2,
@@ -146,7 +156,10 @@ export const SwitchIcon = SwitchIconFrame.styleable<{
   )
   const iconSize = getIconSize(size as FontSizeTokens, scaleIcon)
 
-  const getThemedIcon = useGetThemedIcon({ size: iconSize, color: color as any })
+  const getThemedIcon = useGetThemedIcon({
+    size: iconSize,
+    color: color as any,
+  })
   return (
     <SwitchIconFrame ref={ref} {...rest}>
       {getThemedIcon(children)}
@@ -162,3 +175,5 @@ const SwitchComp = createSwitch({
 export const Switch = withStaticProperties(SwitchComp, {
   Icon: SwitchIcon,
 })
+
+export type { SwitchProps }

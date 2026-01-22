@@ -50,11 +50,11 @@ export function WritePreviewAction() {
             </StyledTab>
           </Tabs.List>
         </View>
-        <Tabs.Content value="write" bg="$color1">
+        <Tabs.Content value="write" bg="$color1" minHeight={200}>
           <StyledTextArea
             size="$4"
             p="$4"
-            height={200}
+            flex={1}
             fontWeight="300"
             numberOfLines={5}
             placeholder="Your comment here..."
@@ -65,14 +65,14 @@ export function WritePreviewAction() {
             onChangeText={(text) => setComment(text)}
           />
         </Tabs.Content>
-        <Tabs.Content bg="$color1" value="preview">
+        <Tabs.Content bg="$color1" value="preview" minHeight={200}>
           <Text
             fontSize="$3"
             lineHeight="$3"
             fontWeight="300"
             borderColor="$color1"
             p="$3"
-            height={200}
+            flex={1}
           >
             {comment ?? 'Your text preview'}
           </Text>
