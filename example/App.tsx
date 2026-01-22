@@ -1,6 +1,6 @@
 import '@tamagui/core/reset.css'
 
-import { useSchemeSetting } from '@vxrn/color-scheme'
+import { useUserScheme } from '@vxrn/color-scheme'
 import { View, YStack } from 'tamagui'
 import { Provider } from '../src/components/provider/Provider'
 
@@ -10,7 +10,7 @@ if (typeof require !== 'undefined') {
 
 const App = () => {
   const params = new URLSearchParams(window.location.search)
-  const [{ scheme: theme }] = useSchemeSetting()
+  const { value: theme } = useUserScheme()
 
   const centered = params.has('centered')
 

@@ -56,13 +56,13 @@ export function WritePreviewAction() {
             p="$4"
             height={200}
             fontWeight="300"
-            numberOfLines={5}
+            rows={5}
             placeholder="Your comment here..."
             placeholderTextColor="$placeholderColor"
             color="$color12"
             bg="$color1"
             defaultValue={comment}
-            onChangeText={(text) => setComment(text)}
+            onChange={(e: any) => setComment(e.target?.value ?? e.nativeEvent?.text ?? '')}
           />
         </Tabs.Content>
         <Tabs.Content bg="$color1" value="preview">

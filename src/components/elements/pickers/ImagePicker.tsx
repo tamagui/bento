@@ -44,7 +44,7 @@ export function ImagePicker() {
     >
       {/* need an empty input div just have image drop feature in the web */}
       {/* @ts-ignore */}
-      <View id={id} tag="input" width={0} height={0} {...getInputProps()} />
+      <View id={id} render="input" width={0} height={0} {...getInputProps()} />
       <View>
         <Button size="$3" onPress={open}>
           Pick Images

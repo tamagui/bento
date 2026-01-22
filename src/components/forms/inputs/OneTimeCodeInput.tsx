@@ -62,14 +62,14 @@ function CodeConfirmationInput({
           maxLength={codeSize}
           // uncomment this for autofocus
           // autoFocus={id === 0}
-          selectTextOnFocus
-          onChangeText={(code: string) => {
+          onChange={(e: any) => {
+            const code = e.target?.value ?? e.nativeEvent?.text ?? ''
             // Max length is disabled to enable multiple digit paste
             if (code.length === codeSize) {
               // Paste logic
 
               const digits = code.split('')
-              digits.forEach((digit, index) => {
+              digits.forEach((digit: string, index: number) => {
                 // Set each digit to the corresponding input
                 setValue(`code${index}`, digit)
               })
@@ -89,9 +89,8 @@ function CodeConfirmationInput({
               }
             }
           }}
-          onKeyPress={(e) => {
-            const event = e.nativeEvent
-            if (event.key === 'Backspace') {
+          onKeyDown={(e: any) => {
+            if (e.key === 'Backspace') {
               // Prevent the backspace key from navigating back
               e.preventDefault()
 
@@ -103,18 +102,16 @@ function CodeConfirmationInput({
                 switchInputPlace(id, value)
               }
             }
-            if (event.key === 'Enter') {
+            if (e.key === 'Enter') {
               onSubmit()
             }
           }}
           inputMode="numeric"
-          keyboardType="number-pad"
-          textContentType="oneTimeCode"
           autoComplete="one-time-code"
-          secureTextEntry={secureTextEntry}
+          type={secureTextEntry ? 'password' : 'text'}
           enterKeyHint={id === codeSize - 1 ? 'done' : 'next'}
-          text="center"
-          fontSize="$8"
+          textAlign="center"
+          size="$8"
           rounded="$5"
           aspectRatio={1}
           width="100%"
@@ -654,10 +651,10 @@ const EmailInput = ({
           <XStack width="100%" gap="$4" justify="flex-start" items="flex-end">
             <Input
               size="$4"
-              keyboardType="email-address"
+              inputMode="email"
               placeholder="Enter your email"
-              textContentType="emailAddress"
-              onChangeText={setEmail}
+              autoComplete="email"
+              onChange={(e: any) => setEmail(e.target?.value ?? e.nativeEvent?.text ?? '')}
               width="100%"
             />
           </XStack>

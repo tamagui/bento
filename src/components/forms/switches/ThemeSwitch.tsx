@@ -4,14 +4,14 @@ import type { SizeTokens } from 'tamagui'
 import { AnimatePresence, getVariableValue, Switch, View, YStack } from 'tamagui'
 
 import { getSize } from '@tamagui/get-token'
-import { useSchemeSetting } from '@vxrn/color-scheme'
+import { useUserScheme } from '@vxrn/color-scheme'
 
 export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
   const uniqueId = useId()
   const [checked, setChecked] = useState(false)
 
   // do not use this code. only use in showcase
-  const [{ scheme }, setScheme] = useSchemeSetting()
+  const { value: scheme, set: setScheme } = useUserScheme()
 
   useEffect(() => {
     setChecked(scheme === 'dark')

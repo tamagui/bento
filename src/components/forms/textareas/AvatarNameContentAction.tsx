@@ -18,7 +18,7 @@ export function AvatarNameContentAction() {
       }}
     >
       <View flexDirection="row" items="center" justify="flex-start" gap="$2">
-        <Button chromeless circular bordered>
+        <Button chromeless circular>
           <Avatar circular size="$3.5">
             <Avatar.Image aria-label="user photo" src="https://i.pravatar.cc/123" />
             <Avatar.Fallback background="$color10" />

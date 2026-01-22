@@ -25,7 +25,7 @@ const StyledText = styled(Text, {
 function Item({ item }: { item: Product }) {
   return (
     <Link grow={1} shrink={1} flexBasis={300} href="#" textDecorationColor="transparent">
-      <YStack pb="$4" borderBottomWidth={1} borderColor="$color5" gap="$2" tag="article">
+      <YStack pb="$4" borderBottomWidth={1} borderColor="$color5" gap="$2" render="article">
         <View overflow="hidden" width="100%" height={300}>
           <Image src={item.image} height="100%" width="100%" objectFit="cover" />
         </View>

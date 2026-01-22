@@ -49,7 +49,7 @@ function SlideOut({
       {show && (
         <View
           gap="$2"
-          tag="article"
+          render="article"
           role="banner"
           shadowColor="$shadowColor"
           shadowOffset={{

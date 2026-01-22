@@ -16,7 +16,7 @@ function Item({ item, index }: { item: Product; index: number }) {
   const labelText = isPremium ? 'Premium' : isBestSeller ? 'Best Seller' : ''
   return (
     <Link grow={1} shrink={1} flexBasis={300} href="#" textDecorationColor="transparent">
-      <YStack gap="$2" tag="article">
+      <YStack gap="$2" render="article">
         {showLabel && (
           <Square
             theme={isBestSeller ? 'purple' : 'orange'}

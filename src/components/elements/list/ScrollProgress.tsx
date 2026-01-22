@@ -332,7 +332,7 @@ const CircleProgress = ({
           cx="0"
           cy="0"
           r={size}
-          stroke={color6.val}
+          stroke={color6?.val}
           strokeWidth={strokeWidth}
           fill="none"
         />
@@ -342,7 +342,7 @@ const CircleProgress = ({
           cx="0"
           cy="0"
           r={size}
-          stroke={color.val}
+          stroke={color?.val}
           strokeWidth={strokeWidth}
           fill="none"
           strokeDasharray={circum}
@@ -392,7 +392,7 @@ const CircleProgress = ({
               rounded="$10"
               position="absolute"
               color="$color"
-              fill={color.val}
+              fill={color?.val}
             />
           </AnimatedView>
         )}

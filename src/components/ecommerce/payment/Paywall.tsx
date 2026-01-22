@@ -603,7 +603,7 @@ const RatingView = ({ reviewer }: { reviewer: Reviewer }) => {
                 size="$1"
                 key={index}
                 color="transparent"
-                fill={active ? '#FFCF50' : color4.val}
+                fill={active ? '#FFCF50' : color4?.val}
               />
             )
           })}

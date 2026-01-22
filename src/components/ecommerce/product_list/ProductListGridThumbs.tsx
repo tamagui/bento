@@ -28,7 +28,7 @@ function Item({ item }: { item: Product }) {
       href="#"
       textDecorationColor="transparent"
     >
-      <View pb="$2" gap="$2" tag="article">
+      <View pb="$2" gap="$2" render="article">
         <View overflow="hidden" width="100%" height={100}>
           <Image src={item.image} height="100%" width="100%" objectFit="cover" />
         </View>

@@ -395,7 +395,7 @@ export function SignupValidatedTsForm() {
         <FormCard
           flexDirection="column"
           gap="$5"
-          tag="form"
+          render="form"
           $group-window-sm={{
             px: '$4',
             py: '$6',

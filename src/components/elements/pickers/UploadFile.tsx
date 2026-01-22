@@ -71,7 +71,7 @@ export function UploadFile() {
           </View>
         )}
         {/* @ts-ignore */}
-        <View id={id} tag="input" width={0} height={0} {...getInputProps()} />
+        <View id={id} render="input" width={0} height={0} {...getInputProps()} />
       </View>
 
       {file && (

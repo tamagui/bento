@@ -16,7 +16,7 @@ function Item({ item }: { item: Product }) {
   return (
     // Note: you can also use `Link` from solito/link
     <Link grow={1} flexBasis={300} href="#" textDecorationColor="transparent">
-      <YStack pb="$2" borderWidth={1} borderColor="$color5" gap="$2" tag="article">
+      <YStack pb="$2" borderWidth={1} borderColor="$color5" gap="$2" render="article">
         <View overflow="hidden" width="100%" height={300}>
           <Image src={item.image} height="100%" width="100%" objectFit="cover" />
         </View>

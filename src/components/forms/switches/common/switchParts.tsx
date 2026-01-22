@@ -53,7 +53,7 @@ const getSwitchWidth = (val: SizeTokens) => getSwitchHeight(val) * 2
 
 export const SwitchFrame = styled(View, {
   name: 'Switch',
-  tag: 'button',
+  render: 'button',
 
   variants: {
     unstyled: {
