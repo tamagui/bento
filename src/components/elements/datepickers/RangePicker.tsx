@@ -8,7 +8,6 @@ import {
   Button,
   H3,
   Separator,
-  Stack,
   View,
   isWeb,
   useMedia,
@@ -148,7 +147,7 @@ function Calendar({
                       dayIsFirstOrLastOfMonth && day.range && day.range === 'in-range'
 
                     if (!day.inCurrentMonth) {
-                      return <Stack flex={1} width="100%" />
+                      return <View flex={1} width="100%" />
                     }
 
                     const BG_RANGE_STYLE: {

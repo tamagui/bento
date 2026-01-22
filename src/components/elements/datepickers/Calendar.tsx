@@ -9,7 +9,6 @@ import {
   H3,
   Separator,
   SizableText,
-  Stack,
   Tabs,
   View,
   YStack,
@@ -147,7 +146,7 @@ function CalendarView({
                       dayIsFirstOrLastOfMonth && day.range && day.range === 'in-range'
 
                     if (!day.inCurrentMonth) {
-                      return <Stack key={day.$date.toString()} flex={1} width="100%" />
+                      return <View key={day.$date.toString()} flex={1} width="100%" />
                     }
 
                     const BG_RANGE_STYLE: {

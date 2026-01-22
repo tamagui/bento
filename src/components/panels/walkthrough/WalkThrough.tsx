@@ -4,7 +4,7 @@ import { Square } from 'tamagui'
 const GroupDemo = () => <Square size={100} bg="$color" />
 const AccordionDemo = () => <Square size={100} bg="$colorPress" />
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { View, useWindowDimensions } from 'react-native'
+import { View as RNView, useWindowDimensions } from 'react-native'
 import {
   AnimatePresence,
   Button,
@@ -12,7 +12,7 @@ import {
   Popover,
   PortalItem,
   PortalProvider,
-  Stack,
+  View,
   ThemeableStack,
   XStack,
   YStack,
@@ -44,7 +44,7 @@ function Tour({
 }) {
   const { activeStep, numberOfSteps, nextStep, prevStep } = useWalkThrough()
   const showTour = activeStep === stepNumber
-  const itemRef = useRef<View | null>(null)
+  const itemRef = useRef<RNView | null>(null)
   const [dim, setDim] = useState<{
     width: number
     height: number
@@ -73,7 +73,7 @@ function Tour({
         <PortalItem hostName="walkthrough">
           <Popover stayInFrame allowFlip placement="bottom" size="$0.5" open={showTour}>
             <Popover.Trigger asChild>
-              <Stack
+              <View
                 key={stepNumber}
                 z={showTour ? 2000 : 1}
                 position="absolute"
@@ -82,7 +82,7 @@ function Tour({
                 ref={itemRef}
               >
                 {children}
-              </Stack>
+              </View>
             </Popover.Trigger>
             <Popover.Content
               enterStyle={{ opacity: 0, scale: 0.9 }}

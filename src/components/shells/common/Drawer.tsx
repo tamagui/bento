@@ -3,10 +3,10 @@ import type { Dispatch, SetStateAction } from 'react'
 import React, { forwardRef, useRef, useState } from 'react'
 import type { Animated } from 'react-native'
 import { PanResponder } from 'react-native'
-import type { StackProps, TamaguiElement } from 'tamagui'
+import type { ViewProps, TamaguiElement } from 'tamagui'
 import {
   AnimatePresence,
-  Stack,
+  View,
   YStack,
   createStyledContext,
   styled,
@@ -26,7 +26,7 @@ export const DrawerContext = createStyledContext<{
 
 const SwipeDismissableComponent = React.forwardRef<
   TamaguiElement,
-  StackProps & { onDismiss: () => void; children: any; dismissAfter?: number }
+  ViewProps & { onDismiss: () => void; children: any; dismissAfter?: number }
 >(({ onDismiss, children, dismissAfter = 80, ...rest }, ref) => {
   const { animationDriver } = useConfiguration()
 
@@ -35,7 +35,7 @@ const SwipeDismissableComponent = React.forwardRef<
   }
 
   const { useAnimatedNumber, useAnimatedNumberStyle } = animationDriver
-  const AnimatedView = (animationDriver.View ?? Stack) as typeof Animated.View
+  const AnimatedView = (animationDriver.View ?? View) as typeof Animated.View
   const pan = useAnimatedNumber(0)
   const [props, style] = usePropsAndStyle(rest)
   const [dragStarted, setDragStarted] = useState(false)

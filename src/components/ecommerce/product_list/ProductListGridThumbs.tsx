@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Anchor, H2, Image, Stack, Text, View, XStack, styled } from 'tamagui'
+import { Anchor, H2, Image, Text, View, XStack, styled } from 'tamagui'
 import { getProducts } from './data/products'
 
 const Link = Anchor
@@ -29,9 +29,9 @@ function Item({ item }: { item: Product }) {
       textDecorationColor="transparent"
     >
       <View pb="$2" gap="$2" tag="article">
-        <Stack overflow="hidden" width="100%" height={100}>
+        <View overflow="hidden" width="100%" height={100}>
           <Image src={item.image} height="100%" width="100%" objectFit="cover" />
-        </Stack>
+        </View>
         <View>
           <H2 size="$1">{item.name}</H2>
           <XStack gap="$3">

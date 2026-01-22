@@ -4,7 +4,7 @@ import { Square } from 'tamagui'
 const GroupDemo = () => <Square size={100} bg="$color" />
 const AccordionDemo = () => <Square size={100} bg="$colorPress" />
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { View } from 'react-native'
+import { View as RNView } from 'react-native'
 import {
   AnimatePresence,
   Button,
@@ -13,7 +13,7 @@ import {
   PortalHost,
   PortalItem,
   PortalProvider,
-  Stack,
+  View,
   ThemeableStack,
   XStack,
   YStack,
@@ -181,8 +181,8 @@ function Tour({
   const { activeStep, numberOfSteps, nextStep, prevStep, upsertItemDim } =
     useWalkThrough()
   const showTour = activeStep === stepNumber
-  const itemRef = useRef<View | null>(null)
-  const absoluteItemRef = useRef<View | null>(null)
+  const itemRef = useRef<RNView | null>(null)
+  const absoluteItemRef = useRef<RNView | null>(null)
   const [dim, setDim] = useState<{
     width: number
     height: number
@@ -247,7 +247,7 @@ function Tour({
       </View>
       <PortalItem hostName={PORTAL_WALKTHROUGH_HOST_NAME}>
         {dim && activeStep <= numberOfSteps && (
-          <Stack
+          <View
             z={showTour ? 2000 : -1000}
             position="absolute"
             transition="quick"
@@ -258,7 +258,7 @@ function Tour({
             onLayout={measureAbsoluteDim}
           >
             {children}
-          </Stack>
+          </View>
         )}
       </PortalItem>
       <PortalItem hostName={PORTAL_WALKTHROUGH_DIALOG_HOST_NAME}>

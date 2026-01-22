@@ -1,7 +1,7 @@
 import { Check } from '@tamagui/lucide-icons'
 import { useState } from 'react'
 import type { LayoutRectangle } from 'react-native'
-import { Button, Stack, isWeb } from 'tamagui'
+import { Button, View, isWeb } from 'tamagui'
 
 /** ------ EXAMPLE ------ */
 export function IconCenterButton() {
@@ -23,7 +23,7 @@ export function IconCenterButton() {
       })}
       onLayout={(e) => setWidth(e.nativeEvent.layout.width)}
     >
-      <Stack
+      <View
         transition="quick"
         x={
           move
@@ -38,7 +38,7 @@ export function IconCenterButton() {
         <Button.Icon>
           <Check />
         </Button.Icon>
-      </Stack>
+      </View>
       <Button.Text transition="medium" x={move ? buttonWidth : 0} opacity={move ? 0 : 1}>
         Accept Terms
       </Button.Text>

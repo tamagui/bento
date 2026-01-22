@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Anchor, H2, Image, Stack, Text, XStack, YStack, styled } from 'tamagui'
+import { Anchor, H2, Image, Text, View, XStack, YStack, styled } from 'tamagui'
 import { getProducts } from './data/products'
 
 const Link = Anchor
@@ -17,9 +17,9 @@ function Item({ item }: { item: Product }) {
     // Note: you can also use `Link` from solito/link
     <Link grow={1} flexBasis={300} href="#" textDecorationColor="transparent">
       <YStack pb="$2" borderWidth={1} borderColor="$color5" gap="$2" tag="article">
-        <Stack overflow="hidden" width="100%" height={300}>
+        <View overflow="hidden" width="100%" height={300}>
           <Image src={item.image} height="100%" width="100%" objectFit="cover" />
-        </Stack>
+        </View>
         <YStack>
           <H2 size="$4">{item.name}</H2>
           <XStack gap="$3">

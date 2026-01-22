@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Anchor, H2, Image, SizableText, Square, Stack, XStack, YStack } from 'tamagui'
+import { Anchor, H2, Image, SizableText, Square, View, XStack, YStack } from 'tamagui'
 import { getProducts } from './data/products'
 
 const Link = Anchor
@@ -31,8 +31,8 @@ function Item({ item, index }: { item: Product; index: number }) {
             z={1}
           />
         )}
-        <Stack z={2} rounded={10} overflow="hidden">
-          <Stack
+        <View z={2} rounded={10} overflow="hidden">
+          <View
             transition="quick"
             transformOrigin="center center"
             hoverStyle={{
@@ -49,8 +49,8 @@ function Item({ item, index }: { item: Product; index: number }) {
               width="100%"
               objectFit="cover"
             />
-          </Stack>
-        </Stack>
+          </View>
+        </View>
         {showLabel && (
           <YStack
             bg="$color9"

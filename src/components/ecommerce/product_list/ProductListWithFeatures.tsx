@@ -4,7 +4,6 @@ import {
   Circle,
   H2,
   Image,
-  Stack,
   Text,
   View,
   XStack,
@@ -27,9 +26,9 @@ function Item({ item }: { item: Product }) {
   return (
     <Link grow={1} shrink={1} flexBasis={300} href="#" textDecorationColor="transparent">
       <YStack pb="$4" borderBottomWidth={1} borderColor="$color5" gap="$2" tag="article">
-        <Stack overflow="hidden" width="100%" height={300}>
+        <View overflow="hidden" width="100%" height={300}>
           <Image src={item.image} height="100%" width="100%" objectFit="cover" />
-        </Stack>
+        </View>
         <YStack>
           <H2 size="$4">{item.name}</H2>
           <XStack gap="$3">

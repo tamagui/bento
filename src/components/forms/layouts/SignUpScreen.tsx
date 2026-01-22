@@ -9,7 +9,6 @@ import {
   Label,
   SizableText,
   Spinner,
-  Stack,
   Switch,
   View,
   isWeb,
@@ -163,7 +162,7 @@ export function SignUpScreen() {
             theme="alt1"
             position="relative"
           >
-            <Stack
+            <View
               theme="alt1"
               position="absolute"
               width="100%"
@@ -172,7 +171,7 @@ export function SignUpScreen() {
               items="center"
             >
               <Camera />
-            </Stack>
+            </View>
           </View>
 
           <Label fontWeight="bold" htmlFor={uniqueId + 'add-pic'} size="$3">
