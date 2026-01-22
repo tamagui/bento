@@ -2,7 +2,7 @@ import { Bell, Menu } from '@tamagui/lucide-icons'
 import type { StackProps, TabLayout, TabsTabProps } from 'tamagui'
 
 import type React from 'react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   Anchor,
   AnimatePresence,
@@ -129,6 +129,32 @@ export function TopNavBarWithLogo() {
   })
   const { sm } = useGroupMedia('window')
 
+  // Debounced position to prevent flickering when moving between tabs
+  const [targetPos, setTargetPos] = useState<TabLayout | null>(null)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    if (intentAt) {
+      // Hover position - use immediately, cancel any pending fallback
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+        timeoutRef.current = null
+      }
+      setTargetPos(intentAt)
+    } else if (activeAt) {
+      // No hover - delay before falling back to activeAt
+      timeoutRef.current = setTimeout(() => {
+        setTargetPos(activeAt)
+      }, 100)
+    }
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+    }
+  }, [intentAt, activeAt])
+
   return (
     <View
       flexDirection="column"
@@ -162,30 +188,15 @@ export function TopNavBarWithLogo() {
         )}
         {!sm && (
           <Tabs value={currentTab} onValueChange={setCurrentTab} orientation="horizontal">
-            <AnimatePresence>
-              {intentAt && (
-                <TabsRovingIndicator
-                  rounded="$4"
-                  width={intentAt.width}
-                  height={intentAt.height}
-                  x={intentAt.x}
-                  y={intentAt.y}
-                />
-              )}
-            </AnimatePresence>
-            <AnimatePresence>
-              {activeAt && (
-                <TabsRovingIndicator
-                  theme="accent"
-                  rounded="$4"
-                  width={activeAt.width}
-                  height={activeAt.height}
-                  x={activeAt.x}
-                  y={activeAt.y}
-                />
-              )}
-            </AnimatePresence>
             <View flexDirection="column" position="relative">
+              <TabsRovingIndicator
+                rounded="$4"
+                opacity={targetPos ? 1 : 0}
+                width={targetPos?.width}
+                height={targetPos?.height}
+                x={targetPos?.x}
+                y={targetPos?.y}
+              />
               <Tabs.List
                 disablePassBorderRadius
                 loop={false}
@@ -200,6 +211,8 @@ export function TopNavBarWithLogo() {
                     value={link.slug}
                     onInteraction={handleOnInteraction}
                     paddingHorizontal="$4"
+                    hoverStyle={{ bg: 'transparent' }}
+                    pressStyle={{ bg: 'transparent' }}
                   >
                     <NavLink
                       key={index}
@@ -379,7 +392,10 @@ function SideBar() {
 function SideBarContent({
   onOpenChange,
   open,
-}: { onOpenChange: () => void; open: boolean }) {
+}: {
+  onOpenChange: () => void
+  open: boolean
+}) {
   const { activeAt, currentTab, handleOnInteraction, intentAt, setCurrentTab } = useTabs()
   const { height, width } = useContainerDim('window')
 
@@ -501,18 +517,10 @@ const TabsRovingIndicator = ({ active, ...props }: { active?: boolean } & StackP
     <View
       flexDirection="column"
       position="absolute"
-      backgroundColor="$color8"
-      opacity={0.7}
-      transition="100ms"
-      enterStyle={{
-        opacity: 0,
-      }}
-      exitStyle={{
-        opacity: 0,
-      }}
+      backgroundColor="$color5"
+      transition="150ms"
       {...(active && {
-        backgroundColor: '$color8',
-        opacity: 0.6,
+        backgroundColor: '$color5',
       })}
       {...props}
     />
