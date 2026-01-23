@@ -2,7 +2,7 @@ import { Bell, Menu } from '@tamagui/lucide-icons'
 import type { StackProps, TabLayout, TabsTabProps } from 'tamagui'
 
 import type React from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import {
   Anchor,
   AnimatePresence,
@@ -129,31 +129,21 @@ export function TopNavBarWithLogo() {
   })
   const { sm } = useGroupMedia('window')
 
-  // Debounced position to prevent flickering when moving between tabs
-  const [targetPos, setTargetPos] = useState<TabLayout | null>(null)
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  useEffect(() => {
-    if (intentAt) {
-      // Hover position - use immediately, cancel any pending fallback
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
-        timeoutRef.current = null
-      }
-      setTargetPos(intentAt)
-    } else if (activeAt) {
-      // No hover - delay before falling back to activeAt
-      timeoutRef.current = setTimeout(() => {
-        setTargetPos(activeAt)
-      }, 100)
+  // Track last known position to enable smooth gliding (no jumping to 0,0)
+  const lastPosition = useRef({ x: 0, y: 0, width: 0, height: 0 })
+  const hasInteracted = useRef(false)
+  const currentPos = intentAt || activeAt
+  if (currentPos) {
+    hasInteracted.current = true
+    lastPosition.current = {
+      x: currentPos.x,
+      y: currentPos.y,
+      width: currentPos.width,
+      height: currentPos.height,
     }
-
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
-      }
-    }
-  }, [intentAt, activeAt])
+  }
+  // Once shown, keep visible - only hide before first interaction
+  const showIndicator = hasInteracted.current
 
   return (
     <View
@@ -191,11 +181,11 @@ export function TopNavBarWithLogo() {
             <View flexDirection="column" position="relative">
               <TabsRovingIndicator
                 rounded="$4"
-                opacity={targetPos ? 1 : 0}
-                width={targetPos?.width}
-                height={targetPos?.height}
-                x={targetPos?.x}
-                y={targetPos?.y}
+                opacity={showIndicator ? 1 : 0}
+                width={currentPos?.width ?? lastPosition.current.width}
+                height={currentPos?.height ?? lastPosition.current.height}
+                x={currentPos?.x ?? lastPosition.current.x}
+                y={currentPos?.y ?? lastPosition.current.y}
               />
               <Tabs.List
                 disablePassBorderRadius
@@ -512,16 +502,13 @@ function SideBarContent({
   )
 }
 
-const TabsRovingIndicator = ({ active, ...props }: { active?: boolean } & StackProps) => {
+const TabsRovingIndicator = (props: StackProps) => {
   return (
     <View
       flexDirection="column"
       position="absolute"
       backgroundColor="$color5"
-      transition="150ms"
-      {...(active && {
-        backgroundColor: '$color5',
-      })}
+      transition="100ms"
       {...props}
     />
   )
