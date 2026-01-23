@@ -3,7 +3,6 @@ import type { ViewStyle } from 'react-native'
 import { Animated, PanResponder } from 'react-native'
 import type { TabsContentProps } from 'tamagui'
 import { H5, Separator, Tabs, Text, View, debounce, useEvent, useTheme } from 'tamagui'
-import { usePhoneScale } from '../../hooks/usePhoneScale'
 
 const tabs = ['Tab 1', 'Tab 2', 'Tab 3']
 
@@ -16,10 +15,7 @@ export const TabbarSwippable = () => {
   activeTabRef.current = activeTabIndex
   const dragging = useRef(false)
   const theme = useTheme()
-  const [pointerWidth, setPointerWidth] = React.useState(100)
-
-  // Note: you should remove the following line in your code
-  const { scale } = usePhoneScale()
+  const [pointerWidth, setPointerWidth] = React.useState(0)
 
   const pointerWidthRef = useRef(pointerWidth)
   pointerWidthRef.current = pointerWidth
@@ -82,7 +78,7 @@ export const TabbarSwippable = () => {
         width: pointerWidth,
         borderRadius: 1000_000,
         transform: [{ translateX: boxHPosition }],
-        shadowColor: theme.color11?.val,
+        shadowColor: theme.shadowColor.val,
         shadowOffset: {
           width: 0,
           height: 1,
@@ -91,7 +87,7 @@ export const TabbarSwippable = () => {
         shadowRadius: 2.22,
         elevation: 3,
       }) as ViewStyle,
-    [theme.color2?.val, theme.color11?.val, pointerWidth]
+    [theme.color2.val, theme.shadowColor.val, pointerWidth]
   )
 
   return (
@@ -125,12 +121,10 @@ export const TabbarSwippable = () => {
           alignItems="center"
           paddingVertical={'$4'}
           height="$6"
+          backgroundColor="transparent"
           onLayout={(e) => {
             const width = e.nativeEvent.layout.width
-            // Note: you should remove the following line in your code
-            const scaledWidth = width + width * (1 - scale)
-            // Note: use width instead of scaledWidth in your code
-            setPointerWidth(scaledWidth / 3)
+            setPointerWidth(width / tabs.length)
           }}
         >
           <Animated.View style={animatedStyle} {...panResponder.panHandlers} />
@@ -143,6 +137,9 @@ export const TabbarSwippable = () => {
               flex={1}
               flexBasis={0}
               flexShrink={1}
+              bg="transparent"
+              hoverStyle={{ bg: 'transparent' }}
+              pressStyle={{ bg: 'transparent' }}
               pointerEvents={activeTabIndex === index ? 'none' : 'auto'}
               onPress={() => {
                 chagenActiveTab(index)
@@ -150,7 +147,7 @@ export const TabbarSwippable = () => {
               zIndex={1000000}
             >
               <Text
-                theme={index !== activeTabIndex ? 'accent' : null}
+                color={index === activeTabIndex ? '$color' : '$color10'}
                 select="none"
                 cursor="pointer"
               >

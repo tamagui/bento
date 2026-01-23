@@ -47,12 +47,12 @@ export function AvatarNameContentAction() {
         <View gap="$2" flexDirection="row">
           <Button size="$3" chromeless>
             <Button.Icon>
-              <Share size="$1" color="$color10" />
+              <Share size="$1" color="$color4" />
             </Button.Icon>
           </Button>
           <Button size="$3" chromeless>
             <Button.Icon>
-              <File size="$1" color="$color10" />
+              <File size="$1" color="$color4" />
             </Button.Icon>
           </Button>
         </View>

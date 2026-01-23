@@ -69,13 +69,14 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             backgroundColor="rgba(0,0,0,0.5)"
           />
           <AlertDialog.Content
-            p="$4"
-            pt="$3"
-            pb="$2"
-            bg="$color1"
-            rounded="$4"
-            gap="$1"
+            p="$5"
+            bg="$color2"
+            rounded="$6"
+            gap="$4"
             key="content"
+            left={0}
+            right={0}
+            marginHorizontal="auto"
             transition={[
               'quick',
               {
@@ -86,36 +87,43 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             ]}
             enterStyle={{ x: 0, y: -10, opacity: 0, scale: 0.95 }}
             exitStyle={{ x: 0, y: 10, opacity: 0, scale: 0.95 }}
-            $theme-dark={{
-              borderColor: '$color6',
-              borderWidth: 1,
-            }}
+            borderColor="$color6"
+            borderWidth={1}
             {...rest}
           >
-            <View>
-              <AlertDialog.Title size="$3">{title}</AlertDialog.Title>
-              <AlertDialog.Description theme="alt1">{message}</AlertDialog.Description>
+            <View gap="$2">
+              <AlertDialog.Title fontSize="$7" fontWeight="500">
+                {title}
+              </AlertDialog.Title>
+              <AlertDialog.Description theme="alt1" fontSize="$4">
+                {message}
+              </AlertDialog.Description>
             </View>
-            <View flexDirection="row" gap="$4" justify="flex-end">
+            <View flexDirection="row" gap="$3" justify="flex-end" pt="$2">
               {buttons.map((button, index) => {
                 const Base =
                   button.style === 'cancel' ? AlertDialog.Cancel : AlertDialog.Action
-                const color = button.style === 'destructive' ? '$red10' : '$color'
+                const color = button.style === 'destructive' ? '$red10' : '$color12'
                 return (
                   <Base key={index} asChild>
                     <Button
-                      chromeless
+                      size="$3"
+                      borderWidth={1}
+                      borderColor="$color8"
+                      bg="transparent"
+                      rounded="$4"
+                      px="$4"
                       onPress={button.action}
-                      ref={(b) => {
-                        if (!b) return
-                        if (button.style === 'destructive') {
-                          if (b instanceof HTMLElement) {
-                            b.focus()
-                          }
-                        }
+                      hoverStyle={{
+                        bg: '$color3',
+                      }}
+                      focusStyle={{
+                        bg: '$color4',
                       }}
                     >
-                      <Button.Text color={color}>{button.title}</Button.Text>
+                      <Button.Text color={color} fontWeight="500">
+                        {button.title}
+                      </Button.Text>
                     </Button>
                   </Base>
                 )

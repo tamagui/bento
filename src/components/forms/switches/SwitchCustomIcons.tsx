@@ -11,14 +11,21 @@ export function SwitchCustomIcons({ size }: { size?: SizeTokens }) {
 
   return (
     <View flexDirection="column" justify="center" items="center" p="$8">
-      <Switch size={size} checked={checked} onCheckedChange={setChecked}>
+      <Switch
+        size={size}
+        checked={checked}
+        onCheckedChange={setChecked}
+        backgroundColor="$red10"
+        // @ts-expect-error
+        activeStyle={{ backgroundColor: '$green10' }}
+      >
         <Switch.Icon placement="left">
           <Check color="#fff" />
         </Switch.Icon>
         <Switch.Icon placement="right">
           <X color="#fff" />
         </Switch.Icon>
-        <Switch.Thumb transition="quick" />
+        <Switch.Thumb transition="200ms" />
       </Switch>
     </View>
   )

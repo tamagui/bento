@@ -57,8 +57,8 @@ const FocusGroupItem = forwardRef<any, RovingFocusItemProps & { value: string }>
       },
       ...(isWeb && {
         onKeyDown: (e: KeyboardEvent) => {
-          if (e.target !== e.currentTarget) return
           if (e.key === 'Enter' || e.code === 'Space') {
+            e.preventDefault()
             onValuesChange({ ...values, [value]: !values[value] })
           }
         },
