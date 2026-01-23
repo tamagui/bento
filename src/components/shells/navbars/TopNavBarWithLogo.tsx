@@ -140,7 +140,7 @@ export function TopNavBarWithLogo() {
         themeInverse
         p="$2"
         minW="100%"
-        tag="nav"
+        render="nav"
         items="center"
         justify="space-between"
         bg="$background"
@@ -186,7 +186,7 @@ export function TopNavBarWithLogo() {
                 )}
               </AnimatePresence>
               <Tabs.List
-                disablePassBorderRadius
+                
                 loop={false}
                 aria-label="Manage your account"
                 gap="$3"
@@ -425,7 +425,7 @@ function SideBarContent({
                 />
               </View>
               <Separator width="100%" />
-              <View flexDirection="column" width="100%" tag="ul" gap="$2">
+              <View flexDirection="column" width="100%" render="ul" gap="$2">
                 <Tabs
                   value={currentTab}
                   onValueChange={setCurrentTab}
@@ -454,7 +454,7 @@ function SideBarContent({
                       )}
                     </AnimatePresence>
                     <Tabs.List
-                      disablePassBorderRadius
+                      
                       loop={false}
                       aria-label="Manage your account"
                       gap="$1"

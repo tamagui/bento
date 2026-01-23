@@ -28,8 +28,6 @@ export const config = {
   settings: {
     ...defaultConfig.settings,
     defaultFont: 'body',
-    shouldAddPrefersColorThemes: true,
-    maxDarkLightNesting: 2,
     mediaQueryDefaultActive,
     selectionStyles: (theme) => ({
       backgroundColor: theme.color5,

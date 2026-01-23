@@ -34,7 +34,6 @@ export function DirectionSlide({
           return (
             <Item
               theme={active ? 'accent' : undefined}
-              active={active}
               value={dir}
               aria-label={dir}
               key={dir}

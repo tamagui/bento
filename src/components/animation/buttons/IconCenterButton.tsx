@@ -12,6 +12,7 @@ export function IconCenterButton() {
   const iconScale = 1.8
 
   return (
+    <View onLayout={(e: any) => setWidth(e.nativeEvent.layout.width)}>
     <Button
       size="$4"
       onPress={() => {
@@ -21,7 +22,6 @@ export function IconCenterButton() {
       {...(move && {
         theme: 'green',
       })}
-      onLayout={(e) => setWidth(e.nativeEvent.layout.width)}
     >
       <View
         transition="quick"
@@ -43,6 +43,7 @@ export function IconCenterButton() {
         Accept Terms
       </Button.Text>
     </Button>
+    </View>
   )
 }
 

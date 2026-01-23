@@ -3,7 +3,7 @@ import { useGroupMedia } from '../../../hooks/useGroupMedia'
 import type { MediaQueryKey } from '@tamagui/web'
 
 export const FormCard = styled(View, {
-  tag: 'form',
+  render: 'form',
   flexDirection: 'row',
   maxW: '100%',
   rounded: 30,

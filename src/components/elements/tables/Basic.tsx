@@ -172,7 +172,7 @@ export function BasicTable() {
           rowCounter.current++
           return (
             <Table.Row
-              backgrounded
+              
               bg="$color2"
               rowLocation={
                 rowCounter.current === 0

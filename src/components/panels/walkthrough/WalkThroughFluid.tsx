@@ -297,8 +297,8 @@ function DialogContent({
       flexDirection="column"
       p="$4"
       elevate
-      backgrounded
-      radiused
+      
+      
       borderColor="black"
     >
       <Paragraph>{title}</Paragraph>

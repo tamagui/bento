@@ -186,8 +186,8 @@ function Dialog({
       gap="$4"
       flexDirection="column"
       elevate
-      backgrounded
-      radiused
+      
+      
       borderColor="black"
     >
       <Paragraph>{title}</Paragraph>

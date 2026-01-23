@@ -197,17 +197,16 @@ const Footer = ({
           Go to page
         </Text>
         <Input
-          keyboardType="numeric"
-          {...(isWeb && {
-            type: 'number',
-          })}
+          inputMode="numeric"
+          type="number"
           defaultValue={String(table.getState().pagination.pageIndex + 1)}
-          onChangeText={(text) => {
+          onChange={(e: any) => {
+            const text = e.target?.value ?? e.nativeEvent?.text ?? ''
             const page = text ? Number(text) - 1 : 0
             table.setPageIndex(page)
           }}
           p={0}
-          text="center"
+          textAlign="center"
           maxW={45}
           minW={45}
           className="border p-1 rounded"
@@ -299,7 +298,7 @@ export function SortableTable() {
                 rowCounter.current++
                 return (
                   <Table.Row
-                    backgrounded
+                    
                     bg="$color2"
                     rowLocation={
                       rowCounter.current === 0

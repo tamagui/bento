@@ -155,7 +155,7 @@ export function SignUpScreen() {
               borderColor: '$borderColorHover',
             }}
             cursor="pointer"
-            tag="button"
+            render="button"
             height="$8"
             width="$8"
             id={uniqueId + 'add-pic'}

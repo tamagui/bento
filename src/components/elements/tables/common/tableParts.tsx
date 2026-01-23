@@ -35,7 +35,7 @@ const TableContext = createStyledContext<{
 
 /** Table Components */
 const Row = styled(ThemeableStack, {
-  tag: 'tr',
+  render: 'tr',
   flexDirection: 'row',
   context: TableContext,
   variants: {
@@ -60,7 +60,7 @@ const Row = styled(ThemeableStack, {
 })
 
 const Cell = styled(ThemeableStack, {
-  tag: 'td',
+  render: 'td',
   flexDirection: 'row',
   context: TableContext,
   grow: 0,
@@ -105,7 +105,7 @@ const Cell = styled(ThemeableStack, {
 })
 
 const HeaderCell = styled(ThemeableStack, {
-  tag: 'th',
+  render: 'th',
   flexDirection: 'row',
   context: TableContext,
   grow: 0,
@@ -147,31 +147,31 @@ const HeaderCell = styled(ThemeableStack, {
 })
 
 const TableBody = styled(ThemeableStack, {
-  tag: 'tbody',
+  render: 'tbody',
   flexDirection: 'column',
   context: TableContext,
   shrink: 1,
 })
 
 const TableHead = styled(ThemeableStack, {
-  tag: 'thead',
+  render: 'thead',
   flexDirection: 'column',
   context: TableContext,
   shrink: 1,
 })
 
 const TableFoot = styled(ThemeableStack, {
-  tag: 'tfoot',
+  render: 'tfoot',
   flexDirection: 'column',
   context: TableContext,
   shrink: 1,
 })
 
 const TableComp = styled(ThemeableStack, {
-  tag: 'table',
+  render: 'table',
   context: TableContext,
   borderWidth: 1,
-  backgrounded: true,
+  bg: '$background',
   variants: {
     /** just added these empty variants to avoid ts erros on Table */
     cellWidth: {

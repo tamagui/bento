@@ -23,7 +23,7 @@ export function HomeScreen() {
                     {group.label}
                   </Text>
                 )}
-                <YGroup size="$4" separator={<Separator />}>
+                <YGroup size="$4">
                   {group.items.map((item) => {
                     return (
                       <YGroup.Item key={item.id}>

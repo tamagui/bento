@@ -81,7 +81,7 @@ export function StatusTracker() {
           <Laptop2 size={16} />
           <SizableText size="$4">Status Tracker</SizableText>
         </View>
-        <Button chromeless size="$2" bordered rounded="$3">
+        <Button chromeless size="$2" rounded="$3">
           <Button.Text>See All</Button.Text>
         </Button>
       </View>

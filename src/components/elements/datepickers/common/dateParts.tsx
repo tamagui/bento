@@ -153,11 +153,10 @@ export const DatePickerInput = Input.Area.styleable<DatePickerInputProps>(
           <Input.Box>
             <Input.Section>
               <Input.Area
-                editable={false}
+                readOnly
                 value={value}
                 ref={ref}
-                selection={{ start: 0, end: 0 }}
-                {...rest}
+                {...(rest as any)}
                 color="$color11"
               />
             </Input.Section>

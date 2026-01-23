@@ -268,12 +268,7 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
 
       <Adapt when="maxMd" platform="touch">
         <Sheet
-          modal
           dismissOnSnapToBottom
-          animationConfig={{
-            type: 'timing',
-            duration: 350,
-          }}
         >
           <Sheet.Frame>
             <Sheet.ScrollView>

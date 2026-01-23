@@ -326,7 +326,7 @@ export function Calendar({ showTabs = true }: { showTabs?: boolean }) {
           }}
         >
           <AnimatePresence>
-            <Tabs.List disablePassBorderRadius="end" aria-label="Calendar Mode">
+            <Tabs.List  aria-label="Calendar Mode">
               <Tabs.Tab
                 focusStyle={{
                   backgroundColor: '$color3',

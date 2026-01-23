@@ -104,7 +104,7 @@ const DrawerFrame = styled(YStack, {
     unstyled: {
       false: {
         paddingVertical: '$2',
-        tag: 'nav',
+        render: 'nav',
         width: 210,
         alignItems: 'flex-start',
         justifyContent: 'flex-start',

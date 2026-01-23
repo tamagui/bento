@@ -74,7 +74,7 @@ export const TabbarSwippable = () => {
         height: '70%',
         flexShrink: 0,
         zIndex: 1000000,
-        backgroundColor: theme.color1.val,
+        backgroundColor: theme.color1?.val,
         width: pointerWidth,
         borderRadius: 1000_000,
         transform: [{ translateX: boxHPosition }],

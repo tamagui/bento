@@ -61,7 +61,7 @@ export function FullSideBar() {
           flexDirection="row"
           px={12}
           py="$2"
-          tag="nav"
+          render="nav"
           items="center"
           bg="$background"
           shadowColor="$color5"

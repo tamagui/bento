@@ -113,14 +113,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
 
       <Adapt when="maxMd" platform="touch">
         <Sheet
-          modal
           dismissOnSnapToBottom
-          animationConfig={{
-            type: 'spring',
-            damping: 20,
-            mass: 1.2,
-            stiffness: 250,
-          }}
         >
           <Sheet.Frame>
             <Sheet.ScrollView>

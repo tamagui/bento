@@ -12,7 +12,7 @@ export function AvatarOutContentAction() {
         py: '$6',
       }}
     >
-      <Button chromeless circular bordered>
+      <Button chromeless circular>
         <Avatar flexShrink={1} circular size="$3.5">
           <Avatar.Image aria-label="user photo" src="https://i.pravatar.cc/123" />
           <Avatar.Fallback background="$color10" />
