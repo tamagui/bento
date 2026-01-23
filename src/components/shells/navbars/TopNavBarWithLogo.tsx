@@ -1,8 +1,7 @@
 import { Bell, Menu } from '@tamagui/lucide-icons'
 import type { StackProps, TabLayout, TabsTabProps } from 'tamagui'
 
-import type React from 'react'
-import { useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Anchor,
   AnimatePresence,
@@ -129,22 +128,6 @@ export function TopNavBarWithLogo() {
   })
   const { sm } = useGroupMedia('window')
 
-  // Track last known position to enable smooth gliding (no jumping to 0,0)
-  const lastPosition = useRef({ x: 0, y: 0, width: 0, height: 0 })
-  const hasInteracted = useRef(false)
-  const currentPos = intentAt || activeAt
-  if (currentPos) {
-    hasInteracted.current = true
-    lastPosition.current = {
-      x: currentPos.x,
-      y: currentPos.y,
-      width: currentPos.width,
-      height: currentPos.height,
-    }
-  }
-  // Once shown, keep visible - only hide before first interaction
-  const showIndicator = hasInteracted.current
-
   return (
     <View
       flexDirection="column"
@@ -154,7 +137,7 @@ export function TopNavBarWithLogo() {
     >
       <View
         flexDirection="row"
-        theme="accent"
+        themeInverse
         p="$2"
         minW="100%"
         tag="nav"
@@ -165,28 +148,43 @@ export function TopNavBarWithLogo() {
         {sm ? (
           <SideBar />
         ) : (
-          <View flexDirection="row" p="$2" items="center" bg="#FFFF00" rounded={1000_000}>
+          <View flexDirection="row" p="$2" items="center" bg="#fff" rounded={1000_000}>
             <Image
               objectFit="contain"
               width={25}
               height={25}
               $group-window-sm={{ width: 15, height: 15 }}
-              src="/tamagui-icon.svg"
+              source={{ uri: '/bento/tamagui-icon.png' }}
               alt="Bento logo"
             />
           </View>
         )}
         {!sm && (
           <Tabs value={currentTab} onValueChange={setCurrentTab} orientation="horizontal">
-            <View flexDirection="column" position="relative">
-              <TabsRovingIndicator
-                rounded="$4"
-                opacity={showIndicator ? 1 : 0}
-                width={currentPos?.width ?? lastPosition.current.width}
-                height={currentPos?.height ?? lastPosition.current.height}
-                x={currentPos?.x ?? lastPosition.current.x}
-                y={currentPos?.y ?? lastPosition.current.y}
-              />
+            <View flexDirection="column">
+              <AnimatePresence>
+                {intentAt && (
+                  <TabsRovingIndicator
+                    rounded="$4"
+                    width={intentAt.width}
+                    height={intentAt.height}
+                    x={intentAt.x}
+                    y={intentAt.y}
+                  />
+                )}
+              </AnimatePresence>
+              <AnimatePresence>
+                {activeAt && (
+                  <TabsRovingIndicator
+                    rounded="$4"
+                    theme="accent"
+                    width={activeAt.width}
+                    height={activeAt.height}
+                    x={activeAt.x}
+                    y={activeAt.y}
+                  />
+                )}
+              </AnimatePresence>
               <Tabs.List
                 disablePassBorderRadius
                 loop={false}
@@ -201,8 +199,6 @@ export function TopNavBarWithLogo() {
                     value={link.slug}
                     onInteraction={handleOnInteraction}
                     paddingHorizontal="$4"
-                    hoverStyle={{ bg: 'transparent' }}
-                    pressStyle={{ bg: 'transparent' }}
                   >
                     <NavLink
                       key={index}
@@ -218,7 +214,7 @@ export function TopNavBarWithLogo() {
           </Tabs>
         )}
         <View flexDirection="row" items="center" gap="$3">
-          <Button circular chromeless p={0} size="$3">
+          <Button theme="accent" circular chromeless p={0} size="$3">
             <Button.Icon>
               <Bell size="$1" />
             </Button.Icon>
@@ -274,7 +270,7 @@ function ProfileDropdown({
         p={0}
         enterStyle={{ y: -10, opacity: 0 }}
         exitStyle={{ y: -10, opacity: 0 }}
-        transition={[
+        animation={[
           'quick',
           {
             opacity: {
@@ -359,10 +355,9 @@ function SideBar() {
   const toggle = useEvent(() => setOpen(!open))
   return (
     <View
-      position="relative"
       flexDirection="row"
       {...(isWeb && {
-        onKeyDown: (e: React.KeyboardEvent) => {
+        onKeyDown: (e: KeyboardEvent) => {
           if (e.key === 'Escape') {
             setOpen(false)
           }
@@ -382,10 +377,7 @@ function SideBar() {
 function SideBarContent({
   onOpenChange,
   open,
-}: {
-  onOpenChange: () => void
-  open: boolean
-}) {
+}: { onOpenChange: () => void; open: boolean }) {
   const { activeAt, currentTab, handleOnInteraction, intentAt, setCurrentTab } = useTabs()
   const { height, width } = useContainerDim('window')
 
@@ -396,7 +388,7 @@ function SideBarContent({
           <Drawer.Overlay
             height={height}
             width={width + 100}
-            transition="lazy"
+            animation="lazy"
             enterStyle={{ opacity: 0 }}
             exitStyle={{ opacity: 0 }}
           />
@@ -419,7 +411,7 @@ function SideBarContent({
                 p="$2"
                 mt="$2"
                 items="center"
-                bg="#FFFF00"
+                bg="#fff"
                 rounded={1000_000}
                 ml="$5"
               >
@@ -428,7 +420,7 @@ function SideBarContent({
                   width={30}
                   height={30}
                   $group-window-sm={{ width: 15, height: 15 }}
-                  src="/tamagui-icon.svg"
+                  source={{ uri: '/bento/tamagui-icon.png' }}
                   alt="Bento logo"
                 />
               </View>
@@ -439,7 +431,7 @@ function SideBarContent({
                   onValueChange={setCurrentTab}
                   orientation="vertical"
                 >
-                  <View position="relative" flexDirection="column" width="100%">
+                  <View flexDirection="column" width="100%">
                     <AnimatePresence>
                       {intentAt && (
                         <TabsRovingIndicator
@@ -453,6 +445,7 @@ function SideBarContent({
                     <AnimatePresence>
                       {activeAt && (
                         <TabsRovingIndicator
+                          theme="accent"
                           width={activeAt.width}
                           height={activeAt.height}
                           x={activeAt.x}
@@ -502,13 +495,24 @@ function SideBarContent({
   )
 }
 
-const TabsRovingIndicator = (props: StackProps) => {
+const TabsRovingIndicator = ({ active, ...props }: { active?: boolean } & StackProps) => {
   return (
     <View
       flexDirection="column"
       position="absolute"
-      backgroundColor="$color5"
-      transition="100ms"
+      backgroundColor="$color8"
+      opacity={0.7}
+      animation="100ms"
+      enterStyle={{
+        opacity: 0,
+      }}
+      exitStyle={{
+        opacity: 0,
+      }}
+      {...(active && {
+        backgroundColor: '$color8',
+        opacity: 0.6,
+      })}
       {...props}
     />
   )
