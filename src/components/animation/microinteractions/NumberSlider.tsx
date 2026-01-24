@@ -62,8 +62,8 @@ export const AnimatedNumbers = () => {
               <AnimatedNumber
                 key={key}
                 transition={{
-                  default: "medium",
-                  exit: "100ms",
+                  default: 'medium',
+                  exit: '100ms',
                 }}
                 animateOnly={['transform', 'opacity']}
                 enterStyle={{

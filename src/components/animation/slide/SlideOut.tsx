@@ -20,11 +20,7 @@ const axises = {
 
 type Direction = keyof typeof axises
 
-function SlideOut({
-  direction,
-}: {
-  direction: Direction
-}) {
+function SlideOut({ direction }: { direction: Direction }) {
   const axis = useMemo(() => axises[direction], [direction])
 
   const [show, setShow] = useState(true)
@@ -34,7 +30,7 @@ function SlideOut({
   }, [direction])
 
   return (
-    <View position="relative" als="flex-start">
+    <View position="relative" self="flex-start">
       {/* Layout placeholder (invisible) keeps height stable */}
       <View
         opacity={0}
@@ -70,7 +66,13 @@ function SlideOut({
               <Image src="/avatar_pro.png" width={32} height={32} />
             </XStack>
 
-            <Text pt="$4" fontWeight="600" fontSize="$8" fontFamily="$mono" color="$color">
+            <Text
+              pt="$4"
+              fontWeight="600"
+              fontSize="$8"
+              fontFamily="$mono"
+              color="$color"
+            >
               ···· ···· ···· 0225
             </Text>
           </View>
@@ -86,7 +88,7 @@ function SlideOut({
               Nate Wienert
             </Text>
             <Text
-              ta="right"
+              text="right"
               fontWeight="500"
               fontSize="$2"
               fontFamily="$mono"
@@ -131,14 +133,25 @@ function SlideOut({
             <View width={312} gap="$6">
               <View p="$3.5" position="relative">
                 <XStack items="center" justify="space-between">
-                  <Text fontWeight="500" fontSize="$3" fontFamily="$mono" color="$color10">
+                  <Text
+                    fontWeight="500"
+                    fontSize="$3"
+                    fontFamily="$mono"
+                    color="$color10"
+                  >
                     Tamagui Debit
                   </Text>
 
                   <Image src="/avatar_pro.png" width={32} height={32} />
                 </XStack>
 
-                <Text pt="$4" fontWeight="600" fontSize="$8" fontFamily="$mono" color="$color">
+                <Text
+                  pt="$4"
+                  fontWeight="600"
+                  fontSize="$8"
+                  fontFamily="$mono"
+                  color="$color"
+                >
                   ···· ···· ···· 0225
                 </Text>
               </View>
@@ -154,7 +167,7 @@ function SlideOut({
                   Nate Wienert
                 </Text>
                 <Text
-                  ta="right"
+                  text="right"
                   fontWeight="500"
                   fontSize="$2"
                   fontFamily="$mono"
