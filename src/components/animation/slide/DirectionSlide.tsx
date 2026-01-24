@@ -40,7 +40,7 @@ export function DirectionSlide({
             >
               <Text
                 fontFamily="$mono"
-                color="$color12"
+                color={active ? '$color1' : '$color12'}
                 fontWeight="600"
                 textTransform="capitalize"
               >
