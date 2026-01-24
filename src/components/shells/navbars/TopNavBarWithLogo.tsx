@@ -74,13 +74,14 @@ const useTabs = () => {
 
     prevActiveAt: null,
   })
-  const setCurrentTab = (currentTab: string) => setTabState({ ...tabState, currentTab })
+  const setCurrentTab = (currentTab: string) =>
+    setTabState((prev) => ({ ...prev, currentTab }))
 
   const setIntentIndicator = (intentAt: TabLayout | null) =>
-    setTabState({ ...tabState, intentAt })
+    setTabState((prev) => ({ ...prev, intentAt }))
 
   const setActiveIndicator = (activeAt: TabLayout | null) =>
-    setTabState({ ...tabState, prevActiveAt: tabState.activeAt, activeAt })
+    setTabState((prev) => ({ ...prev, prevActiveAt: prev.activeAt, activeAt }))
 
   const { activeAt, intentAt, currentTab } = tabState
   /**
@@ -161,7 +162,7 @@ export function TopNavBarWithLogo() {
         )}
         {!sm && (
           <Tabs value={currentTab} onValueChange={setCurrentTab} orientation="horizontal">
-            <View flexDirection="column">
+            <View flexDirection="column" position="relative">
               <AnimatePresence>
                 {intentAt && (
                   <TabsRovingIndicator
@@ -186,7 +187,6 @@ export function TopNavBarWithLogo() {
                 )}
               </AnimatePresence>
               <Tabs.List
-                
                 loop={false}
                 aria-label="Manage your account"
                 gap="$3"
@@ -377,7 +377,10 @@ function SideBar() {
 function SideBarContent({
   onOpenChange,
   open,
-}: { onOpenChange: () => void; open: boolean }) {
+}: {
+  onOpenChange: () => void
+  open: boolean
+}) {
   const { activeAt, currentTab, handleOnInteraction, intentAt, setCurrentTab } = useTabs()
   const { height, width } = useContainerDim('window')
 
@@ -388,7 +391,7 @@ function SideBarContent({
           <Drawer.Overlay
             height={height}
             width={width + 100}
-            animation="lazy"
+            transition="lazy"
             enterStyle={{ opacity: 0 }}
             exitStyle={{ opacity: 0 }}
           />
@@ -454,7 +457,6 @@ function SideBarContent({
                       )}
                     </AnimatePresence>
                     <Tabs.List
-                      
                       loop={false}
                       aria-label="Manage your account"
                       gap="$1"
@@ -502,7 +504,8 @@ const TabsRovingIndicator = ({ active, ...props }: { active?: boolean } & StackP
       position="absolute"
       backgroundColor="$color8"
       opacity={0.7}
-      animation="100ms"
+      transition="100ms"
+      pointerEvents="none"
       enterStyle={{
         opacity: 0,
       }}
