@@ -141,10 +141,15 @@ const InputFrame = styled(TInput, {
   context: InputContext,
 })
 
-const InputImpl = InputFrame.styleable((props, ref) => {
+const InputImpl = InputFrame.styleable<{
+  secureTextEntry?: boolean
+  keyboardType?: string
+  textContentType?: string
+  onChangeText?: (text: string) => void
+}>((props, ref) => {
   const { setFocused } = FocusContext.useStyledContext()
   const { size } = InputContext.useStyledContext()
-  const { ...rest } = props
+  const { secureTextEntry, keyboardType, textContentType, onChangeText, ...rest } = props
   return (
     <View flex={1}>
       <InputFrame
@@ -154,6 +159,10 @@ const InputImpl = InputFrame.styleable((props, ref) => {
         }}
         onBlur={() => setFocused(false)}
         size={size}
+        type={secureTextEntry ? 'password' : rest.type}
+        inputMode={keyboardType === 'numeric' ? 'numeric' : keyboardType === 'email-address' ? 'email' : undefined}
+        autoComplete={textContentType === 'emailAddress' ? 'email' : textContentType === 'password' ? 'current-password' : undefined}
+        onChange={onChangeText ? (e: any) => onChangeText(e.target?.value ?? e.nativeEvent?.text ?? '') : undefined}
         {...rest}
       />
     </View>

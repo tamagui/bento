@@ -23,13 +23,12 @@ export function HomeScreen() {
                     {group.label}
                   </Text>
                 )}
-                <YGroup size="$4" separator={<Separator />}>
+                <YGroup size="$4">
                   {group.items.map((item) => {
                     return (
                       <YGroup.Item key={item.id}>
                         <ListItem
                           bg="$color1"
-                          pressTheme
                           size="$4"
                           onPress={() =>
                             // @ts-expect-error

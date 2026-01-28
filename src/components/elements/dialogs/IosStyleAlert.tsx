@@ -68,7 +68,7 @@ const Alert = ({ children, ...rest }: AlertProps) => {
           <AlertDialog.Overlay
             onPress={closeDialog}
             key="overlay"
-            animation="quick"
+            transition="quick"
             enterStyle={{ opacity: 0 }}
             exitStyle={{ opacity: 0 }}
             backgroundColor="rgba(0,0,0,0.5)"
@@ -82,7 +82,10 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             overflow="hidden"
             gap="$3"
             key="content"
-            animation={[
+            left={0}
+            right={0}
+            marginHorizontal="auto"
+            transition={[
               'quick',
               {
                 opacity: {
@@ -124,14 +127,12 @@ const Alert = ({ children, ...rest }: AlertProps) => {
                 const color = button.style === 'destructive' ? '$red10' : '$green10'
                 return (
                   <View
+                    flex={1}
+                    flexBasis="auto"
                     borderRightWidth={index === 0 && !makeItVertical ? 1 : 0}
                     borderBottomWidth={makeItVertical && index < buttons.length ? 1 : 0}
                     borderColor="$borderColor"
                     key={index}
-                    {...(!makeItVertical && {
-                      flex: 1,
-                      flexBasis: 0,
-                    })}
                   >
                     <Base asChild>
                       <Button

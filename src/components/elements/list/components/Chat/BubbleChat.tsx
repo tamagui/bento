@@ -46,9 +46,9 @@ export const BubbleChat = (props: BubbleProps) => {
         maxW="80%"
       >
         {item.sticker ? (
-          <Image source={{ uri: item.sticker }} />
+          <Image src={item.sticker} />
         ) : (
-          <Text themeInverse={received}>{item.message}</Text>
+          <Text theme={received ? 'accent' : null}>{item.message}</Text>
         )}
       </View>
     </Pressable>

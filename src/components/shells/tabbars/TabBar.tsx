@@ -30,6 +30,7 @@ const CustomTabBar = View.styleable<CustomTabBarProps>(
     const { scale } = usePhoneScale()
     return (
       <View
+        position="relative"
         flexDirection="row"
         maxW="100%"
         onLayout={(e) => {
@@ -102,7 +103,7 @@ const CustomTabBar = View.styleable<CustomTabBarProps>(
           width={tabWidth}
           borderColor="$color5"
           x={hoveredIndex * tabWidth}
-          animation="100ms"
+          transition="100ms"
           position="absolute"
         />
         <View
@@ -112,7 +113,7 @@ const CustomTabBar = View.styleable<CustomTabBarProps>(
           width={tabWidth}
           borderColor="$color10"
           x={state.index * tabWidth}
-          animation="quick"
+          transition="quick"
           position="absolute"
         />
       </View>

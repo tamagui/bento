@@ -50,7 +50,7 @@ function ButtonLoadingExample() {
   return (
     <Button onPress={() => setLoading(!loading)} size="$5">
       <View
-        animation="bouncy"
+        transition="bouncy"
         flexDirection="row"
         x={loading ? 0 : -15}
         gap="$3"
@@ -59,7 +59,7 @@ function ButtonLoadingExample() {
       >
         <Button.Icon>
           <Spinner
-            animation="slow"
+            transition="slow"
             enterStyle={{
               scale: 0,
             }}

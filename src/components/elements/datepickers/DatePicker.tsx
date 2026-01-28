@@ -9,17 +9,17 @@ import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, Button, H3, View } from 'tamagui'
 
 import {
+  CalendarHeader,
   DatePicker,
   DatePickerInput,
   HeaderTypeProvider,
   MonthPicker,
-  YearPicker,
-  YearRangeSlider,
   swapOnClick,
   useHeaderType,
-  CalendarHeader,
-  type HeaderType,
   WeekView,
+  YearPicker,
+  YearRangeSlider,
+  type HeaderType,
 } from './common/dateParts'
 import { useDateAnimation } from './common/useDateAnimation'
 
@@ -88,7 +88,7 @@ function DayPicker() {
 
   return (
     <AnimatePresence key={prevNextAnimationKey}>
-      <View width="100%" gap="$4" animation="medium" {...prevNextAnimation()}>
+      <View width="100%" gap="$4" transition="medium" {...prevNextAnimation()}>
         <WeekView weekDays={weekDays} />
 
         <View
@@ -107,6 +107,7 @@ function DayPicker() {
                 key={days[0].$date.toString()}
                 gap="$1"
                 flex={1}
+                flexBasis="auto"
                 width="100%"
               >
                 {days.map((d) => (
@@ -117,7 +118,7 @@ function DayPicker() {
                     p={0}
                     {...swapOnClick(dayButton(d))}
                     bg={d.selected ? '$background' : 'transparent'}
-                    themeInverse={d.selected}
+                    theme={d.selected ? 'accent' : undefined}
                     disabled={!d.inCurrentMonth}
                   >
                     <Button.Text

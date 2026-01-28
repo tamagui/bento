@@ -1,7 +1,7 @@
-import { AlertDialog, Button, Separator, View, createContext, useEvent } from 'tamagui'
-import type { AlertDialogContentProps, ThemeName, ThemeTokens } from 'tamagui'
-import { isValidElement, useState } from 'react'
 import { Info } from '@tamagui/lucide-icons'
+import { isValidElement, useState } from 'react'
+import type { AlertDialogContentProps, ThemeName } from 'tamagui'
+import { AlertDialog, Button, Separator, View, createContext, useEvent } from 'tamagui'
 
 type AlertButton = {
   title: string
@@ -63,7 +63,7 @@ const Alert = ({ children, ...rest }: AlertProps) => {
           <AlertDialog.Overlay
             onPress={closeDialog}
             key="overlay"
-            animation="quick"
+            transition="quick"
             enterStyle={{ opacity: 0 }}
             exitStyle={{ opacity: 0 }}
             backgroundColor="rgba(0,0,0,0.5)"
@@ -76,7 +76,10 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             rounded="$8"
             gap="$3"
             key="content"
-            animation={[
+            left={0}
+            right={0}
+            marginHorizontal="auto"
+            transition={[
               'quick',
               {
                 opacity: {
@@ -135,7 +138,7 @@ const Alert = ({ children, ...rest }: AlertProps) => {
   )
 }
 
-const AlertDialogTest = (props: any) => {
+const AlertDialogTest = () => {
   const { alert } = useAlert('AlertTest')
 
   const buttons: AlertButton[] = [

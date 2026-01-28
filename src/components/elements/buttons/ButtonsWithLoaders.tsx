@@ -5,9 +5,9 @@ export function ButtonsWithLoaders() {
   return (
     <YStack gap="$3.5" $group-window-gtSm={{ flexDirection: 'row' }}>
       <View gap="$2">
-        <Button theme="blue">
+        <Button theme="blue" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -18,9 +18,9 @@ export function ButtonsWithLoaders() {
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme="red">
+        <Button theme="red" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -31,9 +31,9 @@ export function ButtonsWithLoaders() {
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme="green">
+        <Button theme="green" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -44,9 +44,9 @@ export function ButtonsWithLoaders() {
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme="purple">
+        <Button theme="purple" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -57,9 +57,9 @@ export function ButtonsWithLoaders() {
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme="pink">
+        <Button theme="pink" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -70,9 +70,9 @@ export function ButtonsWithLoaders() {
           <Button.Text>Themed</Button.Text>{' '}
         </Button>
 
-        <Button theme="yellow">
+        <Button theme="yellow" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -83,9 +83,9 @@ export function ButtonsWithLoaders() {
           <Button.Text>Themed</Button.Text>
         </Button>
 
-        <Button theme="orange">
+        <Button theme="orange" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -98,9 +98,9 @@ export function ButtonsWithLoaders() {
       </View>
 
       <View gap="$2">
-        <Button>
+        <Button gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -111,9 +111,9 @@ export function ButtonsWithLoaders() {
           <Button.Text>Active</Button.Text>
         </Button>
 
-        <Button disabled opacity={0.5}>
+        <Button disabled opacity={0.5} gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -124,9 +124,9 @@ export function ButtonsWithLoaders() {
           <Button.Text>Disabled</Button.Text>
         </Button>
 
-        <Button themeInverse>
+        <Button theme="accent" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -137,9 +137,9 @@ export function ButtonsWithLoaders() {
           <Button.Text>Theme inverse</Button.Text>
         </Button>
 
-        <Button variant="outlined">
+        <Button variant="outlined" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -150,9 +150,9 @@ export function ButtonsWithLoaders() {
           <Button.Text>Outlined</Button.Text>
         </Button>
 
-        <Button chromeless>
+        <Button chromeless gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -165,9 +165,9 @@ export function ButtonsWithLoaders() {
       </View>
 
       <View gap="$2">
-        <Button size={'$3'}>
+        <Button size="$3" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -178,9 +178,9 @@ export function ButtonsWithLoaders() {
           <Button.Text>Small</Button.Text>{' '}
         </Button>
 
-        <Button>
+        <Button gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}
@@ -191,9 +191,9 @@ export function ButtonsWithLoaders() {
           <Button.Text>Normal</Button.Text>
         </Button>
 
-        <Button size={'$6'}>
+        <Button size="$6" gap="$2">
           <Spinner
-            animation="bouncy"
+            transition="bouncy"
             enterStyle={{
               scale: 0,
             }}

@@ -169,6 +169,10 @@ const Card = withStaticProperties(Container, {
 export const useMouseEnter = () => {
   const context = useContext(MouseEnterContext)
   if (context === undefined) {
+    if (!isWeb) {
+      // Return safe fallback for native platforms where mouse events don't exist
+      return [false, () => {}] as [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+    }
     throw new Error('useMouseEnter must be used within a MouseEnterProvider')
   }
   return context
@@ -191,9 +195,10 @@ export function InteractiveCard() {
           <View width="100%" height={200}>
             <View width="100%" height="100%">
               <Image
+                src="/bento/images/wheel-list/wl_7.png"
                 width="100%"
                 height="100%"
-                source={{ uri: '/bento/images/wheel-list/wl_7.png' }}
+                objectFit="cover"
               />
             </View>
           </View>
@@ -211,8 +216,8 @@ export function InteractiveCard() {
         </Card.Item>
         <Card.Item translateZ={50} translateY={5}>
           <Button
-            themeInverse
-            animation="quick"
+            theme="accent"
+            transition="quick"
             pressStyle={{
               scale: 0.98,
             }}

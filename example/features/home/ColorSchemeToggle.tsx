@@ -17,7 +17,7 @@ export const ColorSchemeToggle = () => {
         }}
       >
         <Switch.Thumb
-          animation={[
+          transition={[
             'quick',
             {
               transform: {

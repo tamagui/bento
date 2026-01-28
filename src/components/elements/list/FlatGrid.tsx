@@ -79,7 +79,7 @@ function Item({ data }: { data: { index: number } }) {
           width="100%"
           height="100%"
           bg="$backgroundPress"
-          source={{ uri: `https://picsum.photos/250/${150 + index}` }}
+          src={`https://picsum.photos/250/${150 + index}`}
         />
       </View>
       <Paragraph size="$2" lineHeight="$1" theme="alt1">

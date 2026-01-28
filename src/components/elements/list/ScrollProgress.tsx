@@ -86,6 +86,7 @@ export function ScrollProgress() {
     <ScreenContext.Provider value={{ progress, bookmarked, setBookmarked }}>
       <View
         flex={1}
+        flexBasis="auto"
         position="relative"
         height={isWeb ? '80vh' : '100%'}
         $gtLg={{ maxH: 600 }}
@@ -133,9 +134,7 @@ const HeaderView = () => {
   }))
 
   return (
-    <View py="$4" px="$4" position="absolute" t={-1} l={0} r={0}>
-      <SafeAreaView />
-
+    <View position="absolute" t={-1} l={0} r={0}>
       <AnimatedLinearGradient
         colors={['$background', '$background08', '$background0']}
         locations={[0.8, 0.9, 1]}
@@ -144,37 +143,40 @@ const HeaderView = () => {
         pb={isWeb ? '$12' : '$16'}
         style={opacityStyle}
       />
+      <View py="$4" px="$4" position="relative">
+        <SafeAreaView />
 
-      <XStack items="center" gap="$4">
-        <ChevronLeft
-          onPress={() => {
-            //
-          }}
-        />
-
-        <AnimatedView gap="$1" style={opacityStyle} flex={1}>
-          <AnimatedText theme="blue" color="$color8" fontSize="$2" fontFamily="$mono">
-            {subTitle}
-          </AnimatedText>
-          <AnimatedText
-            // @ts-expect-error
-            fontFamily="Times New Roman"
-            numberOfLines={1}
-            fontSize="$5"
-            fontWeight="bold"
-          >
-            {title}
-          </AnimatedText>
-        </AnimatedView>
-        <TouchableOpacity onPress={() => setBookmarked(!bookmarked)}>
-          <Bookmark
-            fill={bookmarked ? '$color8' : 'none'}
-            color={bookmarked ? '$color8' : '$color'}
-            onPress={() => setBookmarked(!bookmarked)}
-            z={99}
+        <XStack items="center" gap="$4">
+          <ChevronLeft
+            onPress={() => {
+              //
+            }}
           />
-        </TouchableOpacity>
-      </XStack>
+
+          <AnimatedView gap="$1" style={opacityStyle} flex={1}>
+            <AnimatedText theme="blue" color="$color8" fontSize="$2" fontFamily="$mono">
+              {subTitle}
+            </AnimatedText>
+            <AnimatedText
+              // @ts-expect-error
+              fontFamily="Times New Roman"
+              numberOfLines={1}
+              fontSize="$5"
+              fontWeight="bold"
+            >
+              {title}
+            </AnimatedText>
+          </AnimatedView>
+          <TouchableOpacity onPress={() => setBookmarked(!bookmarked)}>
+            <Bookmark
+              fill={bookmarked ? '$color8' : 'none'}
+              color={bookmarked ? '$color8' : '$color'}
+              onPress={() => setBookmarked(!bookmarked)}
+              z={99}
+            />
+          </TouchableOpacity>
+        </XStack>
+      </View>
     </View>
   )
 }
@@ -236,6 +238,7 @@ const BottomView = () => {
 
   return (
     <AnimatedView
+      theme="accent"
       bg="$background"
       p="$2"
       borderWidth={1}
@@ -248,10 +251,9 @@ const BottomView = () => {
       shadowColor="$color5"
       items="center"
       justify="flex-end"
-      themeInverse
     >
       <AnimatedView
-        animation="quicker"
+        transition="quicker"
         scale={1}
         exitStyle={{
           scale: 1.1,
@@ -330,7 +332,7 @@ const CircleProgress = ({
           cx="0"
           cy="0"
           r={size}
-          stroke={color6.val}
+          stroke={color6?.val}
           strokeWidth={strokeWidth}
           fill="none"
         />
@@ -340,7 +342,7 @@ const CircleProgress = ({
           cx="0"
           cy="0"
           r={size}
-          stroke={color.val}
+          stroke={color?.val}
           strokeWidth={strokeWidth}
           fill="none"
           strokeDasharray={circum}
@@ -373,7 +375,7 @@ const CircleProgress = ({
             rounded="$10"
             bg="$green8"
             position="absolute"
-            animation="quicker"
+            transition="quicker"
             enterStyle={{
               scale: 0,
               opacity: 0,
@@ -390,7 +392,7 @@ const CircleProgress = ({
               rounded="$10"
               position="absolute"
               color="$color"
-              fill={color.val}
+              fill={color?.val}
             />
           </AnimatedView>
         )}

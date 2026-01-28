@@ -20,15 +20,16 @@ import {
   Image,
   ScrollView,
   Separator,
+  Sheet,
   Text,
   Unspaced,
   View,
   XGroup,
   styled,
 } from 'tamagui'
-import { useGroupMedia } from '../../hooks/useGroupMedia'
 import { IconCenterButton } from '../../animation/buttons/IconCenterButton'
 import { Input } from '../../forms/inputs/components/inputsParts'
+import { useGroupMedia } from '../../hooks/useGroupMedia'
 
 const bagImages = ['bag1.webp', 'bag2.webp', 'bag3.webp', 'bag4.webp']
 const bagNames = [
@@ -129,7 +130,7 @@ const CartTotal = ({ items }: { items: Items }) => {
     subtotalPriceWithDiscount,
     subtotalSavings,
     subtotalSavingsPercentage,
-    discountedPriceWithPromoDiscount,
+
     savingPriceWithPromoDiscount,
     taxesPrice,
     totalPrice,
@@ -243,7 +244,7 @@ const CartTotal = ({ items }: { items: Items }) => {
         <Button theme="blue">
           <Button.Text>Proceed to checkout</Button.Text>
         </Button>
-        <Button themeInverse>
+        <Button theme="accent">
           <Button.Text>Continue shopping</Button.Text>
         </Button>
       </View>
@@ -254,12 +255,6 @@ const CartTotal = ({ items }: { items: Items }) => {
 /** ------ EXAMPLE ------ */
 export function Fullpage() {
   const [items, setItems] = useState<Items>([])
-  const [isCheckout, setCheckout] = useState(false)
-
-  const handleCheckout = () => {
-    if (isCheckout) setCheckout(false)
-    else setCheckout(true)
-  }
 
   const { sm } = useGroupMedia('window')
 
@@ -281,39 +276,42 @@ export function Fullpage() {
 
           <Dialog modal>
             <Dialog.Trigger asChild>
-              <Button theme="blue" size="$3" iconAfter={ShoppingBag}>
+              <Button theme="blue" size="$3" gap="$2" iconAfter={ShoppingBag}>
                 Checkout
               </Button>
             </Dialog.Trigger>
 
             <Dialog.Adapt when="maxMd">
-              <Dialog.Sheet
-                animation="medium"
-                zIndex={200000}
-                modal
-                dismissOnSnapToBottom
-              >
-                <Dialog.Sheet.Overlay
-                  animation="quick"
+              <Sheet transition="medium" zIndex={200000} modal dismissOnSnapToBottom>
+                <Sheet.Overlay
+                  transition="quick"
                   enterStyle={{ opacity: 0 }}
                   exitStyle={{ opacity: 0 }}
                 />
-                <Dialog.Sheet.Handle />
-                <Dialog.Sheet.Frame p="$4" gap="$4">
+                <Sheet.Handle />
+                <Sheet.Frame p="$4" gap="$4">
                   <Dialog.Adapt.Contents />
-                </Dialog.Sheet.Frame>
-              </Dialog.Sheet>
+                </Sheet.Frame>
+              </Sheet>
             </Dialog.Adapt>
 
             <Dialog.Portal>
               <Dialog.Overlay
                 key="overlay"
-                animation="quick"
+                transition="quick"
                 opacity={0.5}
                 enterStyle={{ opacity: 0 }}
                 exitStyle={{ opacity: 0 }}
               />
-              <Dialog.Content borderWidth={2} borderColor="$borderColor" rounded={15}>
+              <Dialog.Content
+                key="content"
+                transition="quick"
+                exitStyle={{ opacity: 0 }}
+                enterStyle={{ x: 0, y: -20, opacity: 0, scale: 0.9 }}
+                borderWidth={2}
+                borderColor="$borderColor"
+                rounded={15}
+              >
                 <Dialog.Title>
                   <View
                     $gtMd={{
@@ -362,9 +360,11 @@ export function Fullpage() {
           gap: sm ? '$4' : '$0',
           pb: sm ? 300 : 48,
           pt: '$4',
+          flexBasis: 'auto',
         }}
         $group-window-gtSm={{
           flex: 3,
+          flexBasis: 'auto',
         }}
       >
         {items.map((item, index) => (
@@ -412,6 +412,7 @@ const Item = ({ item }: { item: Items[number] }) => {
         gap="$4"
         flexDirection="column"
         rounded="$4"
+        position="relative"
       >
         <View flexDirection="row" gap="$2" position="absolute" z={1000} t="$2" r="$2">
           <Button
@@ -437,7 +438,8 @@ const Item = ({ item }: { item: Items[number] }) => {
         </View>
 
         <Image
-          borderRadius={10}
+          src={item.image}
+          rounded={10}
           bg="$color1"
           objectFit="cover"
           height={150}
@@ -447,7 +449,6 @@ const Item = ({ item }: { item: Items[number] }) => {
           $group-window-gtMd={{
             minW: 'inherit',
           }}
-          source={{ uri: item.image }}
         />
       </View>
 

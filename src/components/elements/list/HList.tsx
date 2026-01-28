@@ -1,4 +1,4 @@
-import type { AnimationProp } from '@tamagui/web'
+import type { TransitionProp } from '@tamagui/web'
 import { Image, ScrollView, Text, View, isWeb, styled } from 'tamagui'
 
 const data = [
@@ -41,7 +41,7 @@ const animationFast = [
       overshootClamping: true,
     },
   },
-] as AnimationProp
+] as TransitionProp
 
 const animationMedium = [
   'slow',
@@ -50,7 +50,7 @@ const animationMedium = [
       overshootClamping: true,
     },
   },
-] as AnimationProp
+] as TransitionProp
 
 const animationSlow = [
   'medium',
@@ -59,24 +59,29 @@ const animationSlow = [
       overshootClamping: true,
     },
   },
-] as AnimationProp
+] as TransitionProp
 
 function HListItem({ uri, title }: { uri: string; title: string }) {
   const imagePrefix = !isWeb ? `https://tamagui.dev` : ''
 
   return (
     <HListFrame
-      animation={animationFast}
+      transition={animationFast}
       pressStyle={{
         scale: 0.98,
       }}
     >
-      <HListInner containerType="normal" group="listitem" animation="bouncy">
+      <HListInner
+        containerType="normal"
+        group="item"
+        transition="bouncy"
+        position="relative"
+      >
         <View
           flexDirection="column"
           flex={1}
           scale={1.2}
-          animation={animationMedium}
+          transition={animationMedium}
           $group-listitem-hover={{
             scale: 1.2,
           }}
@@ -84,17 +89,14 @@ function HListItem({ uri, title }: { uri: string; title: string }) {
           <Image
             width="100%"
             height={200}
-            source={{
-              uri: `${imagePrefix}/bento/images/hlist/${uri}`,
-              width: 200,
-              height: 200,
-            }}
+            objectFit="cover"
+            src={`${imagePrefix}/bento/images/hlist/${uri}`}
             scale={1}
           />
         </View>
         <View
           position="absolute"
-          animation={animationMedium}
+          transition={animationMedium}
           b={0}
           l={0}
           r={0}
@@ -105,7 +107,7 @@ function HListItem({ uri, title }: { uri: string; title: string }) {
           }}
         >
           <Text
-            animation={animationSlow}
+            transition={animationSlow}
             color="#fff"
             my="auto"
             self="center"

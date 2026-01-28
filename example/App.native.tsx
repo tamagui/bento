@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler'
 
 import { NavigationContainer } from '@react-navigation/native'
-import { SchemeProvider, setUserScheme } from '@vxrn/color-scheme'
+import { SchemeProvider, type SchemeSetting, setUserScheme } from '@vxrn/color-scheme'
 import { useFonts } from 'expo-font'
 import React from 'react'
 import { Appearance, LogBox, useColorScheme } from 'react-native'
@@ -38,7 +38,7 @@ export default function App() {
             Appearance?.setColorScheme?.(next)
           }, 350)
         } else {
-          setUserScheme(next)
+          setUserScheme(next as SchemeSetting)
         }
       },
     }

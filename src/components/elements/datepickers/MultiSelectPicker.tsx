@@ -1,9 +1,5 @@
-import {
-  DatePickerProvider as _DatePickerProvider,
-  useDatePickerContext,
-  type DatePickerProviderProps,
-} from '@rehookify/datepicker'
 import type { DPDay } from '@rehookify/datepicker'
+import { useDatePickerContext, type DatePickerProviderProps } from '@rehookify/datepicker'
 import { ChevronLeft, ChevronRight } from '@tamagui/lucide-icons'
 import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, Button, H3, Separator, View, isWeb, useMedia } from 'tamagui'
@@ -14,7 +10,6 @@ import {
   DatePickerInput,
   HeaderTypeProvider,
   MonthPicker,
-  SizableText,
   WeekView,
   YearPicker,
   YearRangeSlider,
@@ -95,7 +90,7 @@ function Calendar({
           width="100%"
           justify="center"
           items="center"
-          animation="medium"
+          transition="medium"
           gap="$4"
           {...prevNextAnimation()}
         >
@@ -117,6 +112,7 @@ function Calendar({
                   key={days[0].$date.toString()}
                   gap="$1"
                   flex={1}
+                  flexBasis="auto"
                   width="100%"
                 >
                   {days.map((d) => (
@@ -132,7 +128,7 @@ function Calendar({
                             ? '$background'
                             : 'transparent'
                       }
-                      themeInverse={d.selected}
+                      theme={d.selected ? 'accent' : undefined}
                       disabled={!d.inCurrentMonth}
                     >
                       <Button.Text
@@ -173,12 +169,6 @@ const CalendarView = ({ fullWidthMode }: CalendarViewProps) => {
     )
 
   return <Calendar order="either" calendarIndex={0} />
-}
-
-type ViewContentProps = {
-  header: 'day' | 'month' | 'year'
-  setHeader: (type: 'day' | 'month' | 'year') => void
-  fullWidthMode: boolean
 }
 
 function DatePickerBody({ config }: { config: DatePickerProviderProps['config'] }) {

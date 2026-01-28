@@ -2,6 +2,7 @@ import { Bell, Menu } from '@tamagui/lucide-icons'
 import { RovingFocusGroup } from '@tamagui/roving-focus'
 import { useState } from 'react'
 import {
+  Anchor,
   Avatar,
   Button,
   H4,
@@ -17,8 +18,7 @@ import { useContainerDim } from '../../hooks/useContainerDim'
 import { useGroupMedia } from '../../hooks/useGroupMedia'
 import { Drawer } from '../common/Drawer'
 
-const Link = styled(Text, {
-  tag: 'a',
+const Link = styled(Anchor, {
   textTransform: 'none',
   display: 'flex',
   textDecorationLine: 'none',
@@ -54,14 +54,14 @@ export function FullSideBar() {
   const [openDrawer, setOpenDrawer] = useState(false)
   const { sm } = useGroupMedia('window')
   return (
-    <View flexDirection="column" height={610} width="100%" mt="$2">
+    <View position="relative" flexDirection="column" height={610} width="100%" mt="$2">
       <View flexDirection="row" height="100%" width="100%">
         {!sm && <Sidebar />}
         <View
           flexDirection="row"
           px={12}
           py="$2"
-          tag="nav"
+          render="nav"
           items="center"
           bg="$background"
           shadowColor="$color5"
@@ -80,7 +80,7 @@ export function FullSideBar() {
             <View
               flexDirection="row"
               {...(isWeb && {
-                onKeyDown: (e: KeyboardEvent) => {
+                onKeyDown: (e: React.KeyboardEvent) => {
                   if (e.key === 'Escape') {
                     setOpenDrawer(false)
                   }
@@ -153,7 +153,7 @@ function ProfileDropdown({
         px="$3.5"
         enterStyle={{ y: -10, opacity: 0 }}
         exitStyle={{ y: -10, opacity: 0 }}
-        animation={[
+        transition={[
           'quick',
           {
             opacity: {
@@ -249,7 +249,7 @@ function FloatingSideBar({
     <View
       flexDirection="column"
       {...(isWeb && {
-        onKeyDown: (e: KeyboardEvent) => {
+        onKeyDown: (e: React.KeyboardEvent) => {
           if (e.key === 'Escape') {
             setOpen(false)
           }
@@ -263,7 +263,7 @@ function FloatingSideBar({
         <Drawer.Overlay
           height={height + 12}
           width={width + 12}
-          animation="lazy"
+          transition="lazy"
           enterStyle={{ opacity: 0 }}
           exitStyle={{ opacity: 0 }}
           z={1000000}
@@ -306,9 +306,9 @@ const SideBarContent = View.styleable((props, ref) => {
         }}
       >
         <View flexDirection="row" items="center" gap="$2.5">
-          <Avatar borderRadius="$true" size="$4" padding="$4">
+          <Avatar rounded="$true" size="$4" padding="$4">
             <Avatar.Image scale={0.6} src="/favicon.svg" />
-            <Avatar.Fallback backgroundColor="$color11" borderColor="$color11" />
+            <Avatar.Fallback bg="$color11" borderColor="$color11" />
           </Avatar>
           <H4 fontSize="$6" color="$color12">
             Hi User!
@@ -381,7 +381,7 @@ const NavLink = Link.styleable(({ children, href = '#', onPress, ...rest }, ref:
       }}
       href={href}
       active={isActive}
-      borderRadius={5}
+      rounded={5}
       /** uncomment this line in your app */
       // active={isActive}
       //@ts-ignore

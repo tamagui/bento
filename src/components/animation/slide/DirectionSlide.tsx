@@ -1,11 +1,9 @@
-import { View, Text, ToggleGroup, styled } from 'tamagui'
+import { Text, ToggleGroup, View, styled } from 'tamagui'
 
 const Item = styled(ToggleGroup.Item, {
-  color: '$color10',
   flex: 1,
   width: '100%',
   focusStyle: {
-    color: '$color1',
     backgroundColor: '$color12',
   },
 })
@@ -35,15 +33,14 @@ export function DirectionSlide({
           const active = dir === direction
           return (
             <Item
-              themeInverse={active}
-              active={active}
+              theme={active ? 'accent' : undefined}
               value={dir}
               aria-label={dir}
               key={dir}
             >
               <Text
                 fontFamily="$mono"
-                color="$color12"
+                color={active ? '$color1' : '$color12'}
                 fontWeight="600"
                 textTransform="capitalize"
               >

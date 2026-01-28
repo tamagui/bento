@@ -28,7 +28,7 @@ function SlideIn({
   return (
     <View
       gap="$2"
-      tag="article"
+      render="article"
       role="banner"
       shadowColor="$shadowColor"
       shadowOffset={{
@@ -37,7 +37,7 @@ function SlideIn({
       }}
       shadowRadius={'$5'}
       shadowOpacity={0.1}
-      animation={{
+      transition={{
         opacity: {
           type: 'bouncy',
           overshootClamping: true,
@@ -64,7 +64,7 @@ function SlideIn({
           </Text>
         </View>
 
-        <XStack bg="$background" p="$3.5" themeInverse>
+        <XStack theme="accent" bg="$background" p="$3.5">
           <Text
             flex={1}
             fontWeight="500"

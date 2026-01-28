@@ -1,6 +1,6 @@
 import { Paperclip, Send } from '@tamagui/lucide-icons'
 import { useState } from 'react'
-import { Button, Separator, Text, Tabs, TextArea, View, styled } from 'tamagui'
+import { Button, Separator, Tabs, Text, TextArea, View, styled } from 'tamagui'
 
 /** ------ EXAMPLE ------ */
 export function WritePreviewAction() {
@@ -26,7 +26,7 @@ export function WritePreviewAction() {
         rounded="$4"
       >
         <View flexDirection="row">
-          <Tabs.List width="100%" backgroundColor="$color5" borderRadius={0}>
+          <Tabs.List width="100%" backgroundColor="$color5" rounded={0}>
             <StyledTab
               borderBottomLeftRadius={0}
               borderBottomRightRadius={0}
@@ -50,29 +50,29 @@ export function WritePreviewAction() {
             </StyledTab>
           </Tabs.List>
         </View>
-        <Tabs.Content value="write" bg="$color1">
+        <Tabs.Content value="write" bg="$color1" minHeight={200}>
           <StyledTextArea
             size="$4"
             p="$4"
-            height={200}
+            flex={1}
             fontWeight="300"
-            numberOfLines={5}
+            rows={5}
             placeholder="Your comment here..."
             placeholderTextColor="$placeholderColor"
             color="$color12"
             bg="$color1"
             defaultValue={comment}
-            onChangeText={(text) => setComment(text)}
+            onChange={(e: any) => setComment(e.target?.value ?? e.nativeEvent?.text ?? '')}
           />
         </Tabs.Content>
-        <Tabs.Content bg="$color1" value="preview">
+        <Tabs.Content bg="$color1" value="preview" minHeight={200}>
           <Text
             fontSize="$3"
             lineHeight="$3"
             fontWeight="300"
             borderColor="$color1"
             p="$3"
-            height={200}
+            flex={1}
           >
             {comment ?? 'Your text preview'}
           </Text>
@@ -86,7 +86,7 @@ export function WritePreviewAction() {
               </Button.Icon>
             </Button>
           </View>
-          <Button themeInverse self="flex-end" size="$4" rounded="$10">
+          <Button theme="accent" self="flex-end" size="$4" rounded="$10">
             <Button.Icon>
               <Send />
             </Button.Icon>

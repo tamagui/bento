@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import type { SizeTokens, TamaguiElement } from 'tamagui'
+import { useEffect, useState } from 'react'
+import type { TamaguiElement } from 'tamagui'
 import {
   Avatar,
   Paragraph,
@@ -49,7 +49,7 @@ function Item(props: { item: string; index: number }) {
             size="$6"
           >
             <Avatar.Image src={`/avatars/300.jpeg`} />
-            <Avatar.Fallback backgroundColor="$background" />
+            <Avatar.Fallback bg="$background" />
           </Avatar>
         </AvatarTip.Trigger>
         <AvatarTip.Content
@@ -75,7 +75,7 @@ const AvatarTooltipContent = styled(Tooltip.Content, {
   x: 0,
   y: 0,
   opacity: 1,
-  animation: [
+  transition: [
     'bouncy',
     {
       opacity: {

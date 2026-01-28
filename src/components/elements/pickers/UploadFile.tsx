@@ -50,6 +50,7 @@ export function UploadFile() {
         </Button>
         {!file && (
           <View
+            position="relative"
             width="100%"
             items="center"
             justify="center"
@@ -70,7 +71,7 @@ export function UploadFile() {
           </View>
         )}
         {/* @ts-ignore */}
-        <View id={id} tag="input" width={0} height={0} {...getInputProps()} />
+        <View id={id} render="input" width={0} height={0} {...getInputProps()} />
       </View>
 
       {file && (
@@ -102,7 +103,7 @@ export function UploadFile() {
               </View>
             </View>
           </View>
-          <Button onPress={() => setFile(undefined)} themeInverse circular size="$2">
+          <Button theme="accent" onPress={() => setFile(undefined)} circular size="$2">
             <Button.Icon>
               <X />
             </Button.Icon>

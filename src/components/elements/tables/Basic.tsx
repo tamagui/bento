@@ -139,7 +139,7 @@ export function BasicTable() {
                               accessibilityLabel="Profile image"
                               src={value as string}
                             />
-                            <Avatar.Fallback backgroundColor="$color6" />
+                            <Avatar.Fallback bg="$color6" />
                           </Avatar>
                         ) : (
                           <Text color="$color10">{value}</Text>
@@ -172,7 +172,7 @@ export function BasicTable() {
           rowCounter.current++
           return (
             <Table.Row
-              backgrounded
+              
               bg="$color2"
               rowLocation={
                 rowCounter.current === 0

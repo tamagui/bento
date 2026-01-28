@@ -70,7 +70,6 @@ export function SignInScreen() {
               </View>
               <Input.Box>
                 <Input.Area
-                  textContentType="password"
                   secureTextEntry
                   id={'password'}
                   placeholder="Enter password"
@@ -80,38 +79,38 @@ export function SignInScreen() {
             </Input>
           </View>
         </View>
-        <Theme inverse>
-          <Button
-            disabled={status === 'loading'}
-            onPress={signIn}
-            width="100%"
-            iconAfter={
-              <AnimatePresence>
-                {status === 'loading' && (
-                  <Spinner
-                    color="$color"
-                    key="loading-spinner"
-                    opacity={1}
-                    scale={1}
-                    animation="quick"
-                    position="absolute"
-                    l="60%"
-                    enterStyle={{
-                      opacity: 0,
-                      scale: 0.5,
-                    }}
-                    exitStyle={{
-                      opacity: 0,
-                      scale: 0.5,
-                    }}
-                  />
-                )}
-              </AnimatePresence>
-            }
-          >
-            <Button.Text>Sign In</Button.Text>
-          </Button>
-        </Theme>
+
+        <Button
+          theme="accent"
+          disabled={status === 'loading'}
+          onPress={signIn}
+          width="100%"
+          iconAfter={
+            <AnimatePresence>
+              {status === 'loading' && (
+                <Spinner
+                  color="$color"
+                  key="loading-spinner"
+                  opacity={1}
+                  scale={1}
+                  transition="quick"
+                  position="absolute"
+                  l="60%"
+                  enterStyle={{
+                    opacity: 0,
+                    scale: 0.5,
+                  }}
+                  exitStyle={{
+                    opacity: 0,
+                    scale: 0.5,
+                  }}
+                />
+              )}
+            </AnimatePresence>
+          }
+        >
+          <Button.Text>Sign In</Button.Text>
+        </Button>
         <View flexDirection="column" gap="$3" width="100%" items="center">
           <Theme>
             <View
@@ -159,11 +158,7 @@ const Link = ({
   href: string
   children: React.ReactNode
 }) => {
-  return (
-    <View href={href} tag="a">
-      {children}
-    </View>
-  )
+  return <Anchor href={href}>{children}</Anchor>
 }
 
 const SignUpLink = () => {

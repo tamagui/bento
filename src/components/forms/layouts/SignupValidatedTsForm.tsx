@@ -56,7 +56,7 @@ const TextInput = (props: TextInputProps) => {
             position="absolute"
             gap="$2"
             flexDirection="row"
-            animation="bouncy"
+            transition="bouncy"
             scaleY={1}
             enterStyle={{
               opacity: 0,
@@ -114,7 +114,7 @@ const PasswordInput = (props: PasswordInputProps) => {
             position="absolute"
             gap="$2"
             flexDirection="row"
-            animation="bouncy"
+            transition="bouncy"
             scaleY={1}
             enterStyle={{
               opacity: 0,
@@ -230,7 +230,7 @@ const TwoInput = (props: TwoInputProps) => {
         flex={1}
         minW="100%"
         $group-window-gtSm={{ flexBasis: 150, minW: 'inherit' }}
-        animation="quickest"
+        transition="quickest"
         size={size}
       >
         <Input.Label htmlFor={values.firstInput.labelId}>
@@ -257,7 +257,7 @@ const TwoInput = (props: TwoInputProps) => {
               position="absolute"
               gap="$2"
               flexDirection="row"
-              animation="bouncy"
+              transition="bouncy"
               scaleY={1}
               enterStyle={{
                 opacity: 0,
@@ -311,7 +311,7 @@ const TwoInput = (props: TwoInputProps) => {
               position="absolute"
               gap="$2"
               flexDirection="row"
-              animation="bouncy"
+              transition="bouncy"
               scaleY={1}
               enterStyle={{
                 opacity: 0,
@@ -369,11 +369,7 @@ type FormValues = z.infer<typeof schema>
 export function SignupValidatedTsForm() {
   const [loading, setLoading] = useState(false)
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({
+  const { control, handleSubmit } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
       accountType: 'personal',
@@ -399,7 +395,7 @@ export function SignupValidatedTsForm() {
         <FormCard
           flexDirection="column"
           gap="$5"
-          tag="form"
+          render="form"
           $group-window-sm={{
             px: '$4',
             py: '$6',
@@ -530,7 +526,7 @@ export function SignupValidatedTsForm() {
           />
 
           <Button
-            themeInverse
+            theme="accent"
             disabled={loading}
             onPress={handleSubmit(onSubmit)}
             cursor={loading ? 'progress' : 'pointer'}
@@ -549,7 +545,7 @@ export function SignupValidatedTsForm() {
                     scale={0.5}
                     l={0}
                     x={100}
-                    animation="quick"
+                    transition="quick"
                     enterStyle={{
                       opacity: 0,
                       scale: 0.5,
@@ -563,7 +559,7 @@ export function SignupValidatedTsForm() {
               </AnimatePresence>
             }
           >
-            <Button.Text animation="quick" x={loading ? -10 : 0}>
+            <Button.Text transition="quick" x={loading ? -10 : 0}>
               Sign Up
             </Button.Text>
           </Button>

@@ -10,7 +10,7 @@ const SizableText = styled(Text, {
 
   variants: {
     size: {
-      '...fontSize': getFontSized,
+      '...fontSize': getFontSized as any, // TODO: revisit after v2 migration
     },
   } as const,
 
@@ -45,7 +45,7 @@ const data = [
 export function Meeting() {
   return (
     <View flexDirection="row" gap="$3" flexWrap="wrap" maxW="100%" px="$4" py="$6">
-      {data.map((item, index) => (
+      {data.map((item) => (
         <MeetingItem key={item.title} item={item} />
       ))}
     </View>
@@ -67,6 +67,7 @@ function MeetingItem({ item }: { item: (typeof data)[0] }) {
       width="100%"
       rounded={10}
       overflow="hidden"
+      position="relative"
     >
       <LinearGradient
         colors={['color3', '$color7']}
@@ -74,7 +75,7 @@ function MeetingItem({ item }: { item: (typeof data)[0] }) {
         end={[1, 0]}
         fullscreen
       />
-      <View flexDirection="column">
+      <View position="relative" flexDirection="column" z={1}>
         <View flexDirection="row" justify="space-between" items="center">
           <SizableText>{item.title}</SizableText>
           <Button circular size="$2">
@@ -90,14 +91,19 @@ function MeetingItem({ item }: { item: (typeof data)[0] }) {
       {item.type === 'in-person' ? (
         <Users />
       ) : (
-        <View flexDirection="row" gap="$2" items="center">
+        <View position="relative" flexDirection="row" gap="$2" items="center">
           <Circle size="$2" bg="$background02">
             <MapPin size={14} />
           </Circle>
           <SizableText>{item.whereIs}</SizableText>
         </View>
       )}
-      <View flexDirection="row" justify="space-between" items="center">
+      <View
+        position="relative"
+        flexDirection="row"
+        justify="space-between"
+        items="center"
+      >
         <SizableText color="$color11" size="$1">
           {item.label}
         </SizableText>
@@ -137,6 +143,7 @@ export function Users() {
       mr="auto"
       justify="center"
       items="center"
+      position="relative"
     >
       {users.map((item, index) => (
         <View z={index} ml={index !== 0 ? '$-2' : undefined} key={item}>
@@ -154,7 +161,7 @@ function User({ size, imageUrl }: { size: SizeTokens; imageUrl?: string }) {
   return (
     <Avatar borderWidth="$1" borderColor="$color1" circular size={size}>
       <Avatar.Image accessibilityLabel="Cam" src={imageUrl} />
-      <Avatar.Fallback backgroundColor="$background" />
+      <Avatar.Fallback bg="$background" />
     </Avatar>
   )
 }

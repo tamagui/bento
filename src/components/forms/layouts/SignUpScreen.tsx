@@ -9,9 +9,7 @@ import {
   Label,
   SizableText,
   Spinner,
-  Stack,
   Switch,
-  Theme,
   View,
   isWeb,
   useEvent,
@@ -157,13 +155,14 @@ export function SignUpScreen() {
               borderColor: '$borderColorHover',
             }}
             cursor="pointer"
-            tag="button"
+            render="button"
             height="$8"
             width="$8"
             id={uniqueId + 'add-pic'}
             theme="alt1"
+            position="relative"
           >
-            <Stack
+            <View
               theme="alt1"
               position="absolute"
               width="100%"
@@ -172,7 +171,7 @@ export function SignUpScreen() {
               items="center"
             >
               <Camera />
-            </Stack>
+            </View>
           </View>
 
           <Label fontWeight="bold" htmlFor={uniqueId + 'add-pic'} size="$3">
@@ -191,49 +190,49 @@ export function SignUpScreen() {
             marginLeft="auto"
             size="$2"
           >
-            <Switch.Thumb animation="bouncy" />
+            <Switch.Thumb transition="bouncy" />
           </Switch>
         </View>
-        <Theme inverse>
-          <Button
-            disabled={status === 'loading'}
-            onPress={signUp}
-            cursor={status === 'loading' ? 'progress' : 'pointer'}
-            self="flex-end"
-            minW="100%"
-            $gtSm={{
-              maxW: '$12',
-              minW: '$12',
-            }}
-            iconAfter={
-              <AnimatePresence>
-                {status === 'loading' && (
-                  <Spinner
-                    size="small"
-                    color="$color"
-                    key="loading-spinner"
-                    opacity={1}
-                    position="absolute"
-                    scale={0.5}
-                    l={110}
-                    animation="quick"
-                    enterStyle={{
-                      opacity: 0,
-                      scale: 0.5,
-                    }}
-                    exitStyle={{
-                      opacity: 0,
-                      scale: 0.5,
-                    }}
-                  />
-                )}
-              </AnimatePresence>
-            }
-          >
-            Sign Up
-          </Button>
-          {!isWeb && <SafeAreaView />}
-        </Theme>
+
+        <Button
+          theme="accent"
+          disabled={status === 'loading'}
+          onPress={signUp}
+          cursor={status === 'loading' ? 'progress' : 'pointer'}
+          self="flex-end"
+          minW="100%"
+          $gtSm={{
+            maxW: '$12',
+            minW: '$12',
+          }}
+          iconAfter={
+            <AnimatePresence>
+              {status === 'loading' && (
+                <Spinner
+                  size="small"
+                  color="$color"
+                  key="loading-spinner"
+                  opacity={1}
+                  position="absolute"
+                  scale={0.5}
+                  l={110}
+                  transition="quick"
+                  enterStyle={{
+                    opacity: 0,
+                    scale: 0.5,
+                  }}
+                  exitStyle={{
+                    opacity: 0,
+                    scale: 0.5,
+                  }}
+                />
+              )}
+            </AnimatePresence>
+          }
+        >
+          Sign Up
+        </Button>
+        {!isWeb && <SafeAreaView />}
       </View>
     </FormCard>
   )

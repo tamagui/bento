@@ -22,7 +22,7 @@ export function IconTitleSwitch() {
       items="center"
       gap="$2.5"
       theme="surface1"
-      animation="medium"
+      transition="medium"
       onPress={() => setChecked(!checked)}
     >
       <Baby size="$2" color="$color11" />
@@ -40,7 +40,7 @@ export function IconTitleSwitch() {
         size="$2"
         backgroundColor={checked ? '$color10' : '$color5'}
       >
-        <Switch.Thumb borderColor="$borderColor" animation="200ms" bg="$color1" />
+        <Switch.Thumb borderColor="$borderColor" transition="200ms" bg="$color1" />
       </Switch>
     </Button>
   )

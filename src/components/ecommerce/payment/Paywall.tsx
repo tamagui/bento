@@ -1,28 +1,4 @@
-import Animated, {
-  CurvedTransition,
-  Easing,
-  Extrapolation,
-  interpolate,
-  ReduceMotion,
-  type SharedValue,
-  useAnimatedStyle,
-  useSharedValue,
-  withRepeat,
-  withSpring,
-  withTiming,
-} from 'react-native-reanimated'
-import {
-  Button,
-  isWeb,
-  styled,
-  Switch,
-  Text,
-  useTheme,
-  useThemeName,
-  View,
-  XStack,
-} from 'tamagui'
-import { LinearGradient } from 'tamagui/linear-gradient'
+import type { IconProps } from '@tamagui/helpers-icon'
 import {
   Calendar,
   ChartArea,
@@ -36,11 +12,25 @@ import {
   User,
   X,
 } from '@tamagui/lucide-icons'
+import { useEffect, useState, type FunctionComponent } from 'react'
 import { Dimensions } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
-import { useEffect, useState, type FunctionComponent } from 'react'
+import Animated, {
+  CurvedTransition,
+  Easing,
+  Extrapolation,
+  interpolate,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSpring,
+  withTiming,
+  type SharedValue,
+} from 'react-native-reanimated'
+import { Button, isWeb, styled, Switch, Text, useTheme, View, XStack } from 'tamagui'
+import { LinearGradient } from 'tamagui/linear-gradient'
 import { Chip } from '../../elements/chips/components/chipsParts'
-import type { IconProps } from '@tamagui/helpers-icon'
 
 const { width } = Dimensions.get('window')
 
@@ -55,8 +45,6 @@ const AnimatedHStack = Animated.createAnimatedComponent(
 )
 
 export function Paywall() {
-  const themeName = useThemeName()
-
   const goToTermsOfService = () => {
     //
   }
@@ -66,7 +54,7 @@ export function Paywall() {
   }
 
   return (
-    <View flex={1} gap="$4" bg="$color2">
+    <View flex={1} flexBasis="auto" gap="$4" bg="$color2">
       <LinearGradient colors={['$color0', 'color2']} position="absolute" inset={0} />
 
       <ReviewListCarousel />
@@ -83,7 +71,6 @@ export function Paywall() {
       {isWeb ? (
         <XStack
           overflow="scroll"
-          scrollbarWidth="none"
           justify="flex-start"
           items="flex-end"
           gap={SPACING}
@@ -281,7 +268,7 @@ const PlanView = ({
       <View overflow="hidden">
         <View
           key="paywall-plan"
-          animation="quicker"
+          transition="quicker"
           opacity={nextStep ? 0 : 1}
           transform={[{ translateY: nextStep ? 100 : 0 }]}
           gap="$6"
@@ -326,11 +313,11 @@ const PlanView = ({
               </>
             ))}
           </View>
+
           <Button
+            theme="accent"
             flexDirection="column"
             gap={0}
-            space={0}
-            themeInverse
             height="auto"
             rounded="$10"
             onPress={() => setNextStep(true)}
@@ -345,7 +332,7 @@ const PlanView = ({
           <View position="absolute" justify="center" inset={0}>
             <View
               key="paywall-checkout"
-              animation="quicker"
+              transition="quicker"
               opacity={1}
               transform={[{ translateY: 0 }]}
               enterStyle={{ opacity: 0, transform: [{ translateY: -100 }] }}
@@ -362,7 +349,7 @@ const PlanView = ({
                   self="center"
                   justify="space-between"
                   key="switch"
-                  animation="quicker"
+                  transition="quicker"
                   rotate={annual ? '-3deg' : '0deg'}
                 >
                   <Text
@@ -387,7 +374,7 @@ const PlanView = ({
                     borderColor={'$colorTransparent'}
                   >
                     {/* switch background */}
-                    <Switch.Thumb animation="medium" bg="$colorTransparent">
+                    <Switch.Thumb transition="medium" bg="$colorTransparent">
                       <View
                         shadowOpacity={0.5}
                         shadowRadius="$4"
@@ -401,7 +388,7 @@ const PlanView = ({
                         rounded="$10"
                         items="center"
                         justify="center"
-                        animation="200ms"
+                        transition="200ms"
                         bg={'$color'}
                       />
                     </Switch.Thumb>
@@ -422,7 +409,7 @@ const PlanView = ({
                     <View height={64} justify="center" items="center" overflow="hidden">
                       <Text
                         key="monthly-price"
-                        animation="quicker"
+                        transition="quicker"
                         text="center"
                         fontSize="$10"
                         fontWeight="bold"
@@ -435,7 +422,7 @@ const PlanView = ({
 
                       <Text
                         key="annual-price"
-                        animation="quicker"
+                        transition="quicker"
                         text="center"
                         fontSize="$10"
                         fontWeight="bold"
@@ -471,7 +458,7 @@ const PlanView = ({
                         r="$-6"
                         t="$-2"
                         rotate="25deg"
-                        animation="quicker"
+                        transition="quicker"
                         opacity={1}
                         transform={[{ translateY: 0 }, { translateX: 0 }]}
                         enterStyle={{
@@ -497,14 +484,7 @@ const PlanView = ({
                 </Text>
               </View>
 
-              <Button
-                flexDirection="column"
-                gap={0}
-                space={0}
-                themeInverse
-                height="auto"
-                rounded="$10"
-              >
+              <Button flexDirection="column" gap={0} height="auto" rounded="$10">
                 <Button.Text py="$3.5" fontSize="$5" fontWeight="bold">
                   Checkout
                 </Button.Text>
@@ -560,7 +540,7 @@ const ReviewListCarousel = () => {
 
   return (
     <View
-      animation="slow"
+      transition="slow"
       opacity={1}
       transform={[{ translateY: 0 }]}
       enterStyle={{
@@ -572,6 +552,7 @@ const ReviewListCarousel = () => {
         transform: [{ translateY: 50 }],
       }}
       flex={1}
+      flexBasis="auto"
       rotate="-10deg"
       gap="$4"
       key="review-list"
@@ -622,7 +603,7 @@ const RatingView = ({ reviewer }: { reviewer: Reviewer }) => {
                 size="$1"
                 key={index}
                 color="transparent"
-                fill={active ? '#FFCF50' : color4.val}
+                fill={active ? '#FFCF50' : color4?.val}
               />
             )
           })}

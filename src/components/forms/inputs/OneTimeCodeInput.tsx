@@ -1,19 +1,19 @@
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Control, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 import { Controller, useForm } from 'react-hook-form'
 import type { SizeTokens } from 'tamagui'
 import {
   AnimatePresence,
+  Button,
   Form,
   Input,
+  Label,
   Paragraph,
   Spinner,
+  Text,
   View,
-  Button,
   XStack,
   YStack,
-  Label,
-  Text,
 } from 'tamagui'
 
 import {
@@ -62,14 +62,14 @@ function CodeConfirmationInput({
           maxLength={codeSize}
           // uncomment this for autofocus
           // autoFocus={id === 0}
-          selectTextOnFocus
-          onChangeText={(code: string) => {
+          onChange={(e: any) => {
+            const code = e.target?.value ?? e.nativeEvent?.text ?? ''
             // Max length is disabled to enable multiple digit paste
             if (code.length === codeSize) {
               // Paste logic
 
               const digits = code.split('')
-              digits.forEach((digit, index) => {
+              digits.forEach((digit: string, index: number) => {
                 // Set each digit to the corresponding input
                 setValue(`code${index}`, digit)
               })
@@ -89,9 +89,8 @@ function CodeConfirmationInput({
               }
             }
           }}
-          onKeyPress={(e) => {
-            const event = e.nativeEvent
-            if (event.key === 'Backspace') {
+          onKeyDown={(e: any) => {
+            if (e.key === 'Backspace') {
               // Prevent the backspace key from navigating back
               e.preventDefault()
 
@@ -103,18 +102,16 @@ function CodeConfirmationInput({
                 switchInputPlace(id, value)
               }
             }
-            if (event.key === 'Enter') {
+            if (e.key === 'Enter') {
               onSubmit()
             }
           }}
           inputMode="numeric"
-          keyboardType="number-pad"
-          textContentType="oneTimeCode"
           autoComplete="one-time-code"
-          secureTextEntry={secureTextEntry}
+          type={secureTextEntry ? 'password' : 'text'}
           enterKeyHint={id === codeSize - 1 ? 'done' : 'next'}
-          text="center"
-          fontSize="$8"
+          textAlign="center"
+          size="$8"
           rounded="$5"
           aspectRatio={1}
           width="100%"
@@ -211,7 +208,7 @@ function CodeConfirmation({
       minW="100%"
       justify="center"
       x={translateX}
-      animation="bouncy"
+      transition="bouncy"
       width="100%"
       mt="$2"
       flexDirection="row"
@@ -386,6 +383,7 @@ export function OneTimeCodeInputExample({
   return (
     <View items="center" justify="center" gap="$4">
       <View
+        position="relative"
         minW={300}
         items="center"
         justify="center"
@@ -395,7 +393,6 @@ export function OneTimeCodeInputExample({
         borderWidth={1}
         borderColor="$borderColor"
         bg="$background"
-        //
         $gtSm={{
           shadowColor: '$shadowColor',
           shadowOffset: {
@@ -408,7 +405,7 @@ export function OneTimeCodeInputExample({
       >
         <View position="absolute" t="$4" r="$4">
           {codeEntered ? (
-            <View animation="bouncy" key="success" flexDirection="row" gap="$2">
+            <View transition="bouncy" key="success" flexDirection="row" gap="$2">
               <AnimatePresence>
                 {verified && (
                   <Paragraph
@@ -416,18 +413,22 @@ export function OneTimeCodeInputExample({
                     color="$green10"
                     enterStyle={{ opacity: 0, x: 15 }}
                     exitStyle={{ opacity: 0, x: 15, scale: 0.5 }}
-                    animation="200ms"
+                    transition="200ms"
                   >
                     Success
                   </Paragraph>
                 )}
               </AnimatePresence>
-              <View enterStyle={{ opacity: 0.5, scale: 1.5 }} animation="bouncy">
+              <View enterStyle={{ opacity: 0.5, scale: 1.5 }} transition="bouncy">
                 <CheckCircle2 color="$green10" />
               </View>
             </View>
           ) : (
-            <View key="email" enterStyle={{ opacity: 0.5, scale: 1.5 }} animation="100ms">
+            <View
+              key="email"
+              enterStyle={{ opacity: 0.5, scale: 1.5 }}
+              transition="100ms"
+            >
               {activeInterface === 'email' ? (
                 <Mail size={16} opacity={0.25} />
               ) : (
@@ -439,7 +440,7 @@ export function OneTimeCodeInputExample({
 
         <View
           key="code"
-          animation="200ms"
+          transition="200ms"
           width="100%"
           opacity={showCode ? 0 : 1}
           pointerEvents={showCode ? 'none' : 'auto'}
@@ -447,7 +448,7 @@ export function OneTimeCodeInputExample({
         >
           <YStack
             key="code"
-            animation="200ms"
+            transition="200ms"
             exitStyle={{ opacity: 0 }}
             justify="space-between"
             gap="$4"
@@ -551,7 +552,7 @@ export function OneTimeCodeInputExample({
           width="100%"
           height="100%"
           $gtMd={{ width: '100%', p: '$5' }}
-          animation={'200ms'}
+          transition={'200ms'}
           opacity={!showCode ? 0 : 1}
           pointerEvents={!showCode ? 'none' : 'auto'}
           transform={[{ translateX: !showCode ? 150 : 0 }]}
@@ -573,6 +574,7 @@ export function OneTimeCodeInputExample({
                     items="center"
                     gap="$4"
                     pt="$6"
+                    bg="red"
                   >
                     <YStack
                       flex={1}
@@ -590,7 +592,7 @@ export function OneTimeCodeInputExample({
                       </Paragraph>
                     </YStack>
 
-                    <Button width="100%" themeInverse>
+                    <Button theme="accent" width="100%">
                       Continue
                     </Button>
                   </View>
@@ -630,7 +632,7 @@ const EmailInput = ({
       <XStack
         items="center"
         hoverStyle={{ cursor: 'pointer' }}
-        animation="200ms"
+        transition="200ms"
         onPress={() => setActiveInterface('code')}
         self="flex-start"
         gap="$1"
@@ -649,16 +651,16 @@ const EmailInput = ({
           <XStack width="100%" gap="$4" justify="flex-start" items="flex-end">
             <Input
               size="$4"
-              keyboardType="email-address"
+              inputMode="email"
               placeholder="Enter your email"
-              textContentType="emailAddress"
-              onChangeText={setEmail}
+              autoComplete="email"
+              onChange={(e: any) => setEmail(e.target?.value ?? e.nativeEvent?.text ?? '')}
               width="100%"
             />
           </XStack>
         </YStack>
 
-        <Button themeInverse onPress={onSubmit}>
+        <Button theme="accent" onPress={onSubmit}>
           Send
         </Button>
       </YStack>

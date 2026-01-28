@@ -44,13 +44,13 @@ export function ImagePicker() {
     >
       {/* need an empty input div just have image drop feature in the web */}
       {/* @ts-ignore */}
-      <View id={id} tag="input" width={0} height={0} {...getInputProps()} />
+      <View id={id} render="input" width={0} height={0} {...getInputProps()} />
       <View>
         <Button size="$3" onPress={open}>
           Pick Images
         </Button>
 
-        <View width="100%" items="center" justify="center">
+        <View position="relative" width="100%" items="center" justify="center">
           <Label
             display={images.length ? 'none' : 'flex'}
             $platform-native={{
@@ -75,7 +75,7 @@ export function ImagePicker() {
         borderLeftWidth={1}
         borderColor="$color4"
         width="100%"
-        themeInverse
+        theme="accent"
         pb="$0"
         horizontal
         overflow="scroll"
@@ -85,13 +85,7 @@ export function ImagePicker() {
         <XStack gap="$4" flexWrap="nowrap" maxH={110} px="$4" pt={10}>
           {images?.map((image, i) => (
             <View flexDirection="column" key={image} maxH={110}>
-              <Image
-                borderRadius={10}
-                key={image}
-                width={100}
-                height={100}
-                source={{ uri: image }}
-              />
+              <Image rounded={10} key={image} width={100} height={100} src={image} />
               <Button
                 onPress={() => {
                   setImages(images.filter((_, index) => index !== i))

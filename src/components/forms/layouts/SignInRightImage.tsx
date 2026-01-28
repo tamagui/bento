@@ -11,7 +11,6 @@ import {
   Separator,
   Spinner,
   Text,
-  Theme,
   View,
 } from 'tamagui'
 
@@ -78,7 +77,6 @@ export function SignInRightImage() {
               </View>
               <Input.Box>
                 <Input.Area
-                  textContentType="password"
                   secureTextEntry
                   id={uniqueId + 'password'}
                   placeholder="Enter password"
@@ -87,76 +85,69 @@ export function SignInRightImage() {
               <ForgotPasswordLink />
             </Input>
           </View>
-          <Theme inverse>
-            <Button
-              disabled={status === 'loading'}
-              onPress={signIn}
-              width="100%"
-              mb={0}
-              iconAfter={
-                <AnimatePresence>
-                  {status === 'loading' && (
-                    <Spinner
-                      color="$color"
-                      key="loading-spinner"
-                      opacity={1}
-                      scale={1}
-                      position="absolute"
-                      l="70%"
-                      $group-window-gtXs={{
-                        l: '60%',
-                      }}
-                      animation="quick"
-                      enterStyle={{
-                        opacity: 0,
-                        scale: 0.5,
-                      }}
-                      exitStyle={{
-                        opacity: 0,
-                        scale: 0.5,
-                      }}
-                    />
-                  )}
-                </AnimatePresence>
-              }
-            >
-              Continue
-            </Button>
-            <Theme inverse>
-              <View
-                flexDirection="column"
-                gap="$3"
-                width="100%"
-                self="center"
-                items="center"
-              >
-                <View flexDirection="row" width="100%" items="center" gap="$4">
-                  <Separator />
-                  <Paragraph>Or</Paragraph>
-                  <Separator />
-                </View>
-                <View flexDirection="row" flexWrap="wrap" gap="$3">
-                  <Button minW="100%">
-                    <Button.Icon>
-                      <Github color="$color10" size="$1" />
-                    </Button.Icon>
-                    <Button.Text>Continue with Github</Button.Text>
-                  </Button>
-                  <Button minW="100%">
-                    <Button.Icon>
-                      <Facebook color="$blue10" size="$1" />
-                    </Button.Icon>
-                    <Button.Text>Continue with Facebook</Button.Text>
-                  </Button>
-                </View>
-              </View>
-            </Theme>
-          </Theme>
+
+          <Button
+            theme="accent"
+            disabled={status === 'loading'}
+            onPress={signIn}
+            width="100%"
+            mb={0}
+            iconAfter={
+              <AnimatePresence>
+                {status === 'loading' && (
+                  <Spinner
+                    color="$color"
+                    key="loading-spinner"
+                    opacity={1}
+                    scale={1}
+                    position="absolute"
+                    l="70%"
+                    $group-window-gtXs={{
+                      l: '60%',
+                    }}
+                    transition="quick"
+                    enterStyle={{
+                      opacity: 0,
+                      scale: 0.5,
+                    }}
+                    exitStyle={{
+                      opacity: 0,
+                      scale: 0.5,
+                    }}
+                  />
+                )}
+              </AnimatePresence>
+            }
+          >
+            Continue
+          </Button>
+
+          <View flexDirection="column" gap="$3" width="100%" self="center" items="center">
+            <View flexDirection="row" width="100%" items="center" gap="$4">
+              <Separator />
+              <Paragraph>Or</Paragraph>
+              <Separator />
+            </View>
+            <View flexDirection="row" flexWrap="wrap" gap="$3">
+              <Button theme="accent" minW="100%">
+                <Button.Icon>
+                  <Github color="$color10" size="$1" />
+                </Button.Icon>
+                <Button.Text>Continue with Github</Button.Text>
+              </Button>
+              <Button theme="accent" minW="100%">
+                <Button.Icon>
+                  <Facebook color="$blue10" size="$1" />
+                </Button.Icon>
+                <Button.Text>Continue with Facebook</Button.Text>
+              </Button>
+            </View>
+          </View>
         </View>
         <SignUpLink />
       </View>
       <Hide when="maxMd">
-        <View flexBasis={0} grow={1.5} shrink={1} overflow="hidden">
+        <View position="relative" flexBasis={0} grow={1.5} shrink={1} overflow="hidden">
           <LinearGradient
             colors={['$red10', '$yellow10']}
             opacity={0.5}
@@ -169,9 +160,8 @@ export function SignInRightImage() {
           <Image
             width="100%"
             height="100%"
-            source={{
-              uri: 'https://images.unsplash.com/photo-1516542076529-1ea3854896f2?q=80&width=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            }}
+            objectFit="cover"
+            src="https://images.unsplash.com/photo-1516542076529-1ea3854896f2?q=80&width=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           />
         </View>
       </Hide>

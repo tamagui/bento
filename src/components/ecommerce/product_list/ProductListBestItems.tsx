@@ -6,7 +6,6 @@ import {
   H2,
   Image,
   ScrollView,
-  Stack,
   Text,
   View,
   XStack,
@@ -37,16 +36,11 @@ function Item({ item }: { item: Product }) {
           pb="$2"
           borderColor="$color5"
           gap="$2"
-          tag="article"
+          render="article"
         >
-          <Stack overflow="hidden" width="100%" height="100%">
-            <Image
-              source={{ uri: item.image }}
-              height="100%"
-              width="100%"
-              objectFit="cover"
-            />
-          </Stack>
+          <View overflow="hidden" width="100%" height="100%">
+            <Image src={item.image} height="100%" width="100%" objectFit="cover" />
+          </View>
           <View gap="$2" width="100%" p="$4" z={1} theme="dark" b={0} position="absolute">
             <H2 size="$4">{item.name}</H2>
             <XStack gap="$3">
@@ -67,7 +61,8 @@ function Item({ item }: { item: Product }) {
             b={0}
           />
         </View>
-        <Button rounded={0} themeInverse>
+
+        <Button theme="accent" rounded={0}>
           <Button.Text>ORDER NOW</Button.Text>
         </Button>
       </View>
@@ -89,7 +84,7 @@ export function ProductListBestItems() {
         px: 28,
       }}
     >
-      {products.map((item, index) => (
+      {products.map((item) => (
         <Item key={item.id} item={item} />
       ))}
     </ScrollView>

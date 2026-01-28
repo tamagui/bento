@@ -81,7 +81,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
             justify="center"
             items="center"
           >
-            <Image source={{ uri: item.flag }} width={20} height={20} />
+            <Image src={item.flag} width={20} height={20} />
             <SizableText mr="auto">{`${item.name} ${
               item.shortcut ? `(${item.shortcut})` : ''
             }`}</SizableText>
@@ -102,9 +102,9 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
       disablePreventBodyScroll
       {...rest}
     >
-      <Select.Trigger width="100%" iconAfter={ChevronDown}>
+      <Select.Trigger width="100%" iconAfter={ChevronDown} rounded="$4">
         <View flexDirection="row" gap="$3" justify="center" items="center">
-          <Image source={{ uri: selectedItem.flag }} width={20} height={20} />
+          <Image src={selectedItem.flag} width={20} height={20} />
           <SizableText mr="auto">{`${selectedItem.name} ${
             selectedItem.shortcut ? `(${selectedItem.shortcut})` : ''
           }`}</SizableText>
@@ -113,14 +113,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
 
       <Adapt when="maxMd" platform="touch">
         <Sheet
-          modal
           dismissOnSnapToBottom
-          animationConfig={{
-            type: 'spring',
-            damping: 20,
-            mass: 1.2,
-            stiffness: 250,
-          }}
         >
           <Sheet.Frame>
             <Sheet.ScrollView>
@@ -128,7 +121,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
             </Sheet.ScrollView>
           </Sheet.Frame>
           <Sheet.Overlay
-            animation="lazy"
+            transition="lazy"
             enterStyle={{ opacity: 0 }}
             exitStyle={{ opacity: 0 }}
           />
@@ -157,11 +150,14 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
 
         <Select.Viewport
           // to do animations:
-          // animation="quick"
+          // transition="quick"
           // animateOnly={['transform', 'opacity']}
           // enterStyle={{ opacity: 0, y: -10 }}
           // exitStyle={{ opacity: 0, y: 10 }}
           minW={200}
+          borderWidth={1}
+          borderColor="$borderColor"
+          rounded="$4"
         >
           <Select.Group>{selectList}</Select.Group>
         </Select.Viewport>
@@ -260,7 +256,8 @@ export function LocationNotification() {
         <Button flex={1}>
           <Button.Text>Cancel</Button.Text>
         </Button>
-        <Button themeInverse flex={1}>
+
+        <Button theme="accent" flex={1}>
           <Button.Text>Save</Button.Text>
         </Button>
       </View>
@@ -295,7 +292,7 @@ export const SizableText = styled(Text, {
 
   variants: {
     size: {
-      '...fontSize': getFontSized,
+      '...fontSize': getFontSized as any, // TODO: revisit after v2 migration
     },
   } as const,
 

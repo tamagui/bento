@@ -16,7 +16,7 @@ export function AvatarsTooltip() {
               z: 1,
               scale: 1.05,
             }}
-            animation="bouncy"
+            transition="bouncy"
             cursor="pointer"
           >
             <AvatarTip offset={5} placement="bottom" restMs={0} delay={0}>
@@ -42,7 +42,7 @@ export function AvatarsTooltip() {
               z: 1,
               scale: 1.05,
             }}
-            animation="bouncy"
+            transition="bouncy"
             cursor="pointer"
           >
             <AvatarTip offset={5} placement="bottom" delay={0}>
@@ -69,7 +69,7 @@ function Item({ imageUrl, size }: { imageUrl: string; size: SizeTokens }) {
   return (
     <Avatar borderWidth="$1" borderColor="$color1" circular size={size}>
       <Avatar.Image src={imageUrl} />
-      <Avatar.Fallback backgroundColor="$background" />
+      <Avatar.Fallback bg="$background" />
     </Avatar>
   )
 }
@@ -81,7 +81,7 @@ const AvatarTooltipContent = styled(Tooltip.Content, {
   x: 0,
   y: 0,
   opacity: 1,
-  animation: [
+  transition: [
     '100ms',
     {
       y: {

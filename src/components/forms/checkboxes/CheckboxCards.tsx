@@ -57,8 +57,6 @@ export function CheckboxCards() {
           py: '$6',
         }}
       >
-        {/* <Checkboxes.Title>Select your Gift</Checkboxes.Title> */}
-
         <Checkboxes.FocusGroup width="100%" flexDirection="row" gap="$3" flexWrap="wrap">
           {packages.map((item) => (
             <Checkboxes.FocusGroup.Item
@@ -71,8 +69,8 @@ export function CheckboxCards() {
                 minW: '49%',
               }}
             >
-              <Checkboxes.Card flex={1} minW="100%" gap="$6">
-                <View flex={1} flexDirection="column" gap="$3">
+              <Checkboxes.Card flex={1} flexBasis="auto" minW="100%" gap="$6">
+                <View flex={1} flexBasis="auto" flexDirection="column" gap="$3">
                   <View flexDirection="row" justify="space-between">
                     <View
                       flexDirection="row"

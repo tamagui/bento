@@ -52,7 +52,7 @@ const columns = [
     cell: (info) => (
       <Avatar circular size="$3">
         <Avatar.Image accessibilityLabel="Profile image" src={info.getValue()} />
-        <Avatar.Fallback backgroundColor="$color6" />
+        <Avatar.Fallback bg="$color6" />
       </Avatar>
     ),
     header: () => 'Avatar',
@@ -167,12 +167,13 @@ const Footer = ({
           </Button>
         </XGroup.Item>
       </XGroup>
+
       <View
         flexDirection="row"
         rounded={1000_000_000}
         p="$2"
         px="$6"
-        themeInverse
+        theme="accent"
         bg="$background"
         gap="$3"
         $platform-native={{ display: 'none' }}
@@ -184,6 +185,7 @@ const Footer = ({
           {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
         </Text>
       </View>
+
       <View
         $platform-native={{ display: 'none' }}
         flexDirection="row"
@@ -195,17 +197,16 @@ const Footer = ({
           Go to page
         </Text>
         <Input
-          keyboardType="numeric"
-          {...(isWeb && {
-            type: 'number',
-          })}
+          inputMode="numeric"
+          type="number"
           defaultValue={String(table.getState().pagination.pageIndex + 1)}
-          onChangeText={(text) => {
+          onChange={(e: any) => {
+            const text = e.target?.value ?? e.nativeEvent?.text ?? ''
             const page = text ? Number(text) - 1 : 0
             table.setPageIndex(page)
           }}
           p={0}
-          text="center"
+          textAlign="center"
           maxW={45}
           minW={45}
           className="border p-1 rounded"
@@ -297,7 +298,7 @@ export function SortableTable() {
                 rowCounter.current++
                 return (
                   <Table.Row
-                    backgrounded
+                    
                     bg="$color2"
                     rowLocation={
                       rowCounter.current === 0

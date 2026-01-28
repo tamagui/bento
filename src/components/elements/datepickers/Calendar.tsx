@@ -9,7 +9,6 @@ import {
   H3,
   Separator,
   SizableText,
-  Stack,
   Tabs,
   View,
   YStack,
@@ -107,7 +106,7 @@ function CalendarView({
           width="100%"
           justify="center"
           items="center"
-          animation="medium"
+          transition="medium"
           gap="$4"
           {...prevNextAnimation()}
         >
@@ -147,7 +146,7 @@ function CalendarView({
                       dayIsFirstOrLastOfMonth && day.range && day.range === 'in-range'
 
                     if (!day.inCurrentMonth) {
-                      return <Stack key={day.$date.toString()} flex={1} width="100%" />
+                      return <View key={day.$date.toString()} flex={1} width="100%" />
                     }
 
                     const BG_RANGE_STYLE: {
@@ -181,11 +180,11 @@ function CalendarView({
                     const buttonElement = (
                       <Button
                         key={day.$date.toString()}
+                        theme={day.selected ? 'accent' : undefined}
                         chromeless
                         circular
                         group="item"
                         {...swapOnClick(dayButton(day))}
-                        themeInverse={day.selected}
                         borderWidth={1}
                         borderColor={day.selected ? '$color1' : 'transparent'}
                         data-range={day.range}
@@ -199,7 +198,7 @@ function CalendarView({
                         {day.selected ? (
                           <Button.Text
                             key="text-selected"
-                            animation="quicker"
+                            transition="quicker"
                             enterStyle={{
                               opacity: 0,
                               y: 20,
@@ -240,6 +239,7 @@ function CalendarView({
 
                     return (
                       <View
+                        position="relative"
                         justify="center"
                         items="center"
                         key={day.$date.toString()}
@@ -250,10 +250,11 @@ function CalendarView({
                           day.range === 'range-start' ||
                           day.range === 'range-end') && (
                           <View
-                            animation="quick"
+                            transition="quick"
                             position="absolute"
                             width="100%"
                             height="100%"
+                            z={-1}
                             {...BG_RANGE_STYLE[day.range]}
                             enterStyle={{
                               opacity: 0,
@@ -325,11 +326,7 @@ export function Calendar({ showTabs = true }: { showTabs?: boolean }) {
           }}
         >
           <AnimatePresence>
-            <Tabs.List
-              disablePassBorderRadius="end"
-              aria-label="Calendar Mode"
-              separator={<Separator />}
-            >
+            <Tabs.List  aria-label="Calendar Mode">
               <Tabs.Tab
                 focusStyle={{
                   backgroundColor: '$color3',

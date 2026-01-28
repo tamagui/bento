@@ -107,16 +107,16 @@ export const Chat = () => {
 
   return (
     <ChatContext.Provider value={{ theme, setTheme }}>
-      <View theme={theme} height="100%" flex={1}>
+      <View theme={theme} height="100%" flex={1} flexBasis="auto">
         <View
+          theme="accent"
           bg={themeName.includes('dark') ? 'white' : 'black'}
-          themeInverse
           flex={1}
           position="absolute"
           inset={0}
         />
         <KeyboardAvoidingView
-          style={{ flex: 1 }}
+          style={{ flex: 1, flexBasis: 'auto' }}
           behavior="padding"
           keyboardVerticalOffset={0}
         >
@@ -130,6 +130,7 @@ export const Chat = () => {
             borderTopLeftRadius="$8"
             borderTopRightRadius="$8"
             flex={1}
+            flexBasis="auto"
             borderCurve="circular"
           >
             <AnimatedView style={animatedListViewStyle}>
@@ -196,22 +197,21 @@ const BottomBar = ({
                   onFocus={() => (offset.value = 0)}
                 />
                 {value.trim().length > 0 ? (
-                  <Theme name={theme.includes('accent') ? 'blue' : theme}>
-                    <Button
-                      animation="200ms"
-                      enterStyle={{ scale: 0.2 }}
-                      exitStyle={{ scale: 0.2 }}
-                      scale={1}
-                      size="$3"
-                      onPress={submit}
-                      circular
-                    >
-                      <Send />
-                    </Button>
-                  </Theme>
+                  <Button
+                    theme={theme.includes('accent') ? 'blue' : theme}
+                    transition="200ms"
+                    enterStyle={{ scale: 0.2 }}
+                    exitStyle={{ scale: 0.2 }}
+                    scale={1}
+                    size="$3"
+                    onPress={submit}
+                    circular
+                  >
+                    <Send />
+                  </Button>
                 ) : (
                   <Button
-                    animation="200ms"
+                    transition="200ms"
                     enterStyle={{ scale: 0.2 }}
                     exitStyle={{ scale: 0.2 }}
                     scale={1}
@@ -280,7 +280,7 @@ const Header = ({ offset }: { offset: SharedValue<number> }) => {
             </Text>
           </View>
 
-          <View>
+          <View position="relative">
             <Button size="$3" circular>
               <PhoneCall size={'$1'} />
             </Button>
@@ -329,6 +329,7 @@ const MenuView = ({ offset }: { offset: SharedValue<number> }) => {
               borderColor="$color10"
               borderWidth={2}
               rounded={1000}
+              position="relative"
             >
               <Avatar circular size="$8" bg="red">
                 <Avatar.Image source={{ uri: AVATAR_1_URL }} objectFit="cover" />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Anchor, H2, Image, SizableText, Square, Stack, XStack, YStack } from 'tamagui'
+import { Anchor, H2, Image, SizableText, Square, View, XStack, YStack } from 'tamagui'
 import { getProducts } from './data/products'
 
 const Link = Anchor
@@ -16,7 +16,7 @@ function Item({ item, index }: { item: Product; index: number }) {
   const labelText = isPremium ? 'Premium' : isBestSeller ? 'Best Seller' : ''
   return (
     <Link grow={1} shrink={1} flexBasis={300} href="#" textDecorationColor="transparent">
-      <YStack gap="$2" tag="article">
+      <YStack gap="$2" render="article">
         {showLabel && (
           <Square
             theme={isBestSeller ? 'purple' : 'orange'}
@@ -31,9 +31,9 @@ function Item({ item, index }: { item: Product; index: number }) {
             z={1}
           />
         )}
-        <Stack z={2} rounded={10} overflow="hidden">
-          <Stack
-            animation="quick"
+        <View z={2} rounded={10} overflow="hidden">
+          <View
+            transition="quick"
             transformOrigin="center center"
             hoverStyle={{
               scale: 1,
@@ -44,13 +44,13 @@ function Item({ item, index }: { item: Product; index: number }) {
           >
             <Image
               bg="gray"
-              source={{ uri: item.image }}
+              src={item.image}
               height="100%"
               width="100%"
               objectFit="cover"
             />
-          </Stack>
-        </Stack>
+          </View>
+        </View>
         {showLabel && (
           <YStack
             bg="$color9"

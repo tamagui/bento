@@ -2,7 +2,7 @@ import { defaultConfig } from '@tamagui/config/v4'
 import type { CreateTamaguiProps } from '@tamagui/core'
 import { setupDev } from '@tamagui/core'
 import { animations } from './animations'
-import { bodyFont, cherryBombFont, headingFont, monoFont, silkscreenFont } from './fonts'
+import { bodyFont, headingFont, monoFont, silkscreenFont } from './fonts'
 import { media, mediaQueryDefaultActive } from './media'
 import { themeDev } from './theme.dev'
 
@@ -15,7 +15,6 @@ const fonts = {
   body: bodyFont,
   mono: monoFont,
   silkscreen: silkscreenFont,
-  cherryBomb: cherryBombFont,
 }
 
 // Use v4 config as base and override with our customizations
@@ -29,10 +28,6 @@ export const config = {
   settings: {
     ...defaultConfig.settings,
     defaultFont: 'body',
-    shouldAddPrefersColorThemes: true,
-    maxDarkLightNesting: 2,
-    themeClassNameOnRoot: true,
-    disableRootThemeClass: true,
     mediaQueryDefaultActive,
     selectionStyles: (theme) => ({
       backgroundColor: theme.color5,
