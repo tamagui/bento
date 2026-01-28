@@ -21,8 +21,8 @@ jobs:
         with:
           node-version: 24.3.0
 
-      - name: Install yarn
-        run: npm i yarn -g
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Install Dependencies
         run: yarn install
