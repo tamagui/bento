@@ -118,6 +118,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@babel/types": "^7.25.2",
     "@biomejs/biome": "^1.9.4",
     "@playwright/test": "^1.49.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",

@@ -3438,6 +3438,7 @@ __metadata:
   resolution: "@tamagui/bento@workspace:."
   dependencies:
     "@babel/core": "npm:^7.25.2"
+    "@babel/types": "npm:^7.25.2"
     "@biomejs/biome": "npm:^1.9.4"
     "@hookform/resolvers": "npm:~3.10.0"
     "@ngneat/falso": "npm:~7.4.0"
