@@ -237,7 +237,7 @@ const TooltipLabelLarge = ({
   subtitle: string
 }) => {
   return (
-    <YStack flex={1} items="center" p="$7" rounded="$4" overflow="hidden">
+    <YStack flex={1} items="center" p="$7" rounded="$4" overflow="hidden" position="relative">
       <H2 flex={1} fontWeight="600" size="$8">
         {title}
       </H2>

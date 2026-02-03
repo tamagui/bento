@@ -131,7 +131,7 @@ export function TopNavBarWithUnderLineTabs() {
   })
   const { sm } = useGroupMedia('window')
   return (
-    <View flexDirection="column" height={610} width="100%">
+    <View flexDirection="column" height={610} width="100%" position="relative">
       <View
         flexDirection="row"
         theme="accent"

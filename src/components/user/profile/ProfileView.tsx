@@ -245,6 +245,7 @@ const AvatarView = memo(
               borderColor: '$color',
             }}
             style={animatedStyle}
+            position="relative"
           >
             <Image
               key="avatar"

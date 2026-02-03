@@ -37,6 +37,7 @@ function Item({ item }: { item: Product }) {
           borderColor="$color5"
           gap="$2"
           render="article"
+          position="relative"
         >
           <View overflow="hidden" width="100%" height="100%">
             <Image src={item.image} height="100%" width="100%" objectFit="cover" />

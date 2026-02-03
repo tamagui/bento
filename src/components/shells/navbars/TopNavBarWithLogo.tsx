@@ -135,6 +135,7 @@ export function TopNavBarWithLogo() {
       width="100%"
       height={610}
       $group-window-gtXs={{ height: 800 }}
+      position="relative"
     >
       <View
         flexDirection="row"

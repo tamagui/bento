@@ -264,8 +264,9 @@ const BottomView = () => {
         flexDirection="row"
         items="center"
         self="center"
+        position="relative"
       >
-        <View>
+        <View position="relative">
           <AnimatedView px="$4" style={currentAnimated}>
             <Text fontWeight="bold" fontSize="$2">
               {title}

@@ -54,7 +54,7 @@ export function Paywall() {
   }
 
   return (
-    <View flex={1} flexBasis="auto" gap="$4" bg="$color2">
+    <View flex={1} flexBasis="auto" gap="$4" bg="$color2" position="relative">
       <LinearGradient colors={['$color0', 'color2']} position="absolute" inset={0} />
 
       <ReviewListCarousel />

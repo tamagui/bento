@@ -85,6 +85,7 @@ export const ThemePicker = () => {
       horizontal
       contentContainerStyle={{ gap, px: 18 }}
       py={space * 2}
+      position="relative"
     >
       {themes.map((theme) => (
         <ThemeItem key={theme.theme} {...theme} setTheme={setTheme} />
@@ -123,6 +124,7 @@ const ThemeItem = ({
         rounded="$4"
         p="$2"
         gap="$2"
+        position="relative"
       >
         <View height="$1" rounded="$3" borderCurve="circular" bg="$color10" width="80%" />
 
