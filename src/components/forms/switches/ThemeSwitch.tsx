@@ -37,6 +37,7 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
       cursor="pointer"
       borderWidth={2}
       borderColor="$colorTransparent"
+      position="relative"
     >
       {/* switch background */}
       {larger ? <SwitchBackground checked={checked} /> : null}
