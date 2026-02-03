@@ -18,6 +18,7 @@ const ProductItem: FC<{ item: Product }> = ({ item }) => {
     <View flexDirection="column" key={item.id} mb="$6" flex={1} gap="$2.5">
       <View
         flexDirection="column"
+        position="relative"
         rounded="$8"
         shadowColor="$shadowColor"
         shadowRadius={5}

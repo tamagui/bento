@@ -1,4 +1,6 @@
 // credit to @react-native-seoul/masonry-list for the original implementation
+import type { ReactElement } from 'react'
+import React, { forwardRef, memo, useState } from 'react'
 import type {
   NativeScrollEvent,
   RefreshControlProps,
@@ -6,9 +8,6 @@ import type {
   StyleProp,
   ViewStyle,
 } from 'react-native'
-import { forwardRef } from 'react'
-import type { MutableRefObject, ReactElement } from 'react'
-import React, { memo, useState } from 'react'
 import { RefreshControl, ScrollView, View } from 'react-native'
 import { YStack, styled } from 'tamagui'
 
@@ -122,11 +121,13 @@ const MasonryListImpl = forwardRef<ScrollView, Props<any>>((props, ref) => {
           <YStack
             flex={1}
             flexDirection={horizontal ? 'column' : 'row'}
+            position="relative"
             {...(style as any)}
           >
             {Array.from(Array(numColumns), (_, num) => {
               return (
                 <YStack
+                  position="relative"
                   key={`masonry-column-${num}`}
                   flex={1 / numColumns}
                   flexDirection={horizontal ? 'row' : 'column'}
