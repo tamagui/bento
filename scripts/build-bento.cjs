@@ -19,6 +19,12 @@ function analyzeIndexFile(filePath) {
         const exportedName = node.source.value
         exportedModules.push(exportedName)
       },
+      ExportNamedDeclaration(node) {
+        // handle `export { Foo } from './foo'` (re-export from a source)
+        if (node.source && node.source.value) {
+          exportedModules.push(node.source.value)
+        }
+      },
     })
 
     return exportedModules
