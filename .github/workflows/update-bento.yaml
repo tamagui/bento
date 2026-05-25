@@ -21,14 +21,16 @@ jobs:
         with:
           node-version: 24.3.0
 
-      - name: Enable Corepack
-        run: corepack enable
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
 
       - name: Install Dependencies
-        run: yarn install
+        run: bun install --frozen-lockfile
 
       - name: Build Bento Components
-        run: yarn build:bento
+        run: bun run build:bento
 
       - name: Create .env.local
         run: |
@@ -36,10 +38,10 @@ jobs:
           echo "SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" >> .env.local
 
       - name: Upload To Supabase
-        run: yarn upload:bento
+        run: bun run upload:bento
 
       - name: Build Package
-        run: yarn build
+        run: bun run build
 
       - name: Check if version is already published
         id: check_version
