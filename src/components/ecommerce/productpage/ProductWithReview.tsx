@@ -1,7 +1,7 @@
 import { randAvatar, randFloat, randFullName, randUuid, randWord } from '@ngneat/falso'
 import { getFontSized } from '@tamagui/get-font-sized'
 import { LinearGradient } from '@tamagui/linear-gradient'
-import { Dot, Minus, Plus, Star } from '@tamagui/lucide-icons'
+import { Dot, Minus, Plus, Star } from '@tamagui/lucide-icons-2'
 import { RovingFocusGroup } from '@tamagui/roving-focus'
 import { Fragment, useEffect, useState } from 'react'
 import type { ColorTokens } from 'tamagui'

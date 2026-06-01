@@ -1,4 +1,4 @@
-import { MoonStar, Sun } from '@tamagui/lucide-icons'
+import { MoonStar, Sun } from '@tamagui/lucide-icons-2'
 import { useEffect, useId, useState } from 'react'
 import type { SizeTokens } from 'tamagui'
 import { AnimatePresence, getVariableValue, Switch, View, YStack } from 'tamagui'

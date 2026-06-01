@@ -1,4 +1,4 @@
-import { File, Upload, X } from '@tamagui/lucide-icons'
+import { File, Upload, X } from '@tamagui/lucide-icons-2'
 import { useId, useState } from 'react'
 import { Button, Label, Text, View, XStack } from 'tamagui'
 

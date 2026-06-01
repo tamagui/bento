@@ -1,4 +1,4 @@
-import { Plug, Home, Settings, Heart } from '@tamagui/lucide-icons'
+import { Plug, Home, Settings, Heart } from '@tamagui/lucide-icons-2'
 import React from 'react'
 import { YStack, Button, View, XGroup, Theme } from 'tamagui'
 

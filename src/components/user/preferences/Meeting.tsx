@@ -1,7 +1,7 @@
 import { LinearGradient } from '@tamagui/linear-gradient'
 import type { SizeTokens, ThemeName } from 'tamagui'
 import { Avatar, Button, View, styled, Text, Circle } from 'tamagui'
-import { ChevronDown, MapPin, User2 } from '@tamagui/lucide-icons'
+import { ChevronDown, MapPin, User2 } from '@tamagui/lucide-icons-2'
 import { getFontSized } from '@tamagui/get-font-sized'
 
 const SizableText = styled(Text, {

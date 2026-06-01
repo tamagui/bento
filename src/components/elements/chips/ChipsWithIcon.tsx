@@ -1,4 +1,4 @@
-import { Cake } from '@tamagui/lucide-icons'
+import { Cake } from '@tamagui/lucide-icons-2'
 import type { SizeTokens, ThemeName } from 'tamagui'
 import { View } from 'tamagui'
 import { Chip } from './components/chipsParts'

@@ -1,4 +1,4 @@
-import { User, Cable } from '@tamagui/lucide-icons'
+import { User, Cable } from '@tamagui/lucide-icons-2'
 import { useRef } from 'react'
 import type { SizeTokens } from 'tamagui'
 import { View } from 'tamagui'

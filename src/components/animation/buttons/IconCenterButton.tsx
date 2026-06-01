@@ -1,4 +1,4 @@
-import { Check } from '@tamagui/lucide-icons'
+import { Check } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
 import type { LayoutRectangle } from 'react-native'
 import { Button, View, isWeb } from 'tamagui'

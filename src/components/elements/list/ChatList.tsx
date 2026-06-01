@@ -1,5 +1,5 @@
 import { randRecentDate, randSentence } from '@ngneat/falso'
-import { Check } from '@tamagui/lucide-icons'
+import { Check } from '@tamagui/lucide-icons-2'
 import { useEffect, useState } from 'react'
 import { FlatList } from 'react-native'
 import { AnimatePresence, Avatar, Button, Text, Theme, View, styled } from 'tamagui'

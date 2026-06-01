@@ -2,7 +2,7 @@ import type { FC, ReactElement } from 'react'
 import { useMemo } from 'react'
 import { Button, Image, Text, View, type ThemeName } from 'tamagui'
 
-import { Hash, MapPin, ShoppingBag } from '@tamagui/lucide-icons'
+import { Hash, MapPin, ShoppingBag } from '@tamagui/lucide-icons-2'
 import { useContainerDim } from '../../hooks/useContainerDim'
 import { Chip } from '../chips/components/chipsParts'
 import { MasonryList } from './components/MasonryList'

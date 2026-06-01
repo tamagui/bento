@@ -1,4 +1,4 @@
-import { Ban, SunDim } from '@tamagui/lucide-icons'
+import { Ban, SunDim } from '@tamagui/lucide-icons-2'
 import type { ReactElement } from 'react'
 import type { SizeTokens } from 'tamagui'
 import { View } from 'tamagui'

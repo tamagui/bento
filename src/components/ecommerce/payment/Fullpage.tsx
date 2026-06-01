@@ -11,7 +11,7 @@ import {
   Trash,
   Truck,
   X,
-} from '@tamagui/lucide-icons'
+} from '@tamagui/lucide-icons-2'
 import { useEffect, useState } from 'react'
 import {
   Button,

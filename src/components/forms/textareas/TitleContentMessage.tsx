@@ -1,4 +1,4 @@
-import { Info } from '@tamagui/lucide-icons'
+import { Info } from '@tamagui/lucide-icons-2'
 import { Button, Label, Text, TextArea, View } from 'tamagui'
 
 /** ------ EXAMPLE ------ */

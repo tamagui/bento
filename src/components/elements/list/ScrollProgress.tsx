@@ -1,4 +1,4 @@
-import { ArrowRight, Bookmark, ChevronLeft } from '@tamagui/lucide-icons'
+import { ArrowRight, Bookmark, ChevronLeft } from '@tamagui/lucide-icons-2'
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { TouchableOpacity } from 'react-native'
 import Animated, {

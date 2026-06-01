@@ -1,4 +1,4 @@
-import { Paperclip, Send } from '@tamagui/lucide-icons'
+import { Paperclip, Send } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
 import { Button, Separator, Tabs, Text, TextArea, View, styled } from 'tamagui'
 

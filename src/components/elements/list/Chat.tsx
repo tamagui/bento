@@ -16,7 +16,7 @@ import {
   Trash,
   User,
   Video,
-} from '@tamagui/lucide-icons'
+} from '@tamagui/lucide-icons-2'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Dimensions, FlatList, Keyboard, KeyboardAvoidingView } from 'react-native'

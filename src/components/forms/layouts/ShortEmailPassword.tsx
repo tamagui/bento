@@ -1,4 +1,4 @@
-import { Lock, Mail } from '@tamagui/lucide-icons'
+import { Lock, Mail } from '@tamagui/lucide-icons-2'
 import { Button, View } from 'tamagui'
 import { Input } from '../inputs/components/inputsParts'
 import { FormCard } from './components/layoutParts'

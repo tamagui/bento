@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Eye, EyeOff, Info } from '@tamagui/lucide-icons'
+import { Eye, EyeOff, Info } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { SafeAreaView } from 'react-native'

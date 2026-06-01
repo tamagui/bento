@@ -1,4 +1,4 @@
-import { Check, Clock } from '@tamagui/lucide-icons'
+import { Check, Clock } from '@tamagui/lucide-icons-2'
 import { Checkboxes } from './common/checkboxParts'
 import { useState } from 'react'
 import { Text, View, debounce } from 'tamagui'

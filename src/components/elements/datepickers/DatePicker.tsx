@@ -4,7 +4,7 @@ import {
   type DPDay,
 } from '@rehookify/datepicker'
 
-import { ChevronLeft, ChevronRight } from '@tamagui/lucide-icons'
+import { ChevronLeft, ChevronRight } from '@tamagui/lucide-icons-2'
 import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, Button, H3, View } from 'tamagui'
 

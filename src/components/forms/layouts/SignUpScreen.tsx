@@ -1,4 +1,4 @@
-import { Camera, Check, Eye, EyeOff } from '@tamagui/lucide-icons'
+import { Camera, Check, Eye, EyeOff } from '@tamagui/lucide-icons-2'
 import { useId, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {

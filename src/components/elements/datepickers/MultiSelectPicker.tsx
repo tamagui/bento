@@ -1,6 +1,6 @@
 import type { DPDay } from '@rehookify/datepicker'
 import { useDatePickerContext, type DatePickerProviderProps } from '@rehookify/datepicker'
-import { ChevronLeft, ChevronRight } from '@tamagui/lucide-icons'
+import { ChevronLeft, ChevronRight } from '@tamagui/lucide-icons-2'
 import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, Button, H3, Separator, View, isWeb, useMedia } from 'tamagui'
 

@@ -1,4 +1,4 @@
-import { Facebook, Github } from '@tamagui/lucide-icons'
+import { Facebook, Github } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
 import {
   Anchor,

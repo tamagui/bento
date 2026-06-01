@@ -1,5 +1,5 @@
 import { LinearGradient } from '@tamagui/linear-gradient'
-import { Facebook, Github } from '@tamagui/lucide-icons'
+import { Facebook, Github } from '@tamagui/lucide-icons-2'
 import { useId, useState } from 'react'
 import {
   Anchor,

@@ -1,5 +1,5 @@
 import { randAvatar, randFullName, randUuid } from '@ngneat/falso'
-import { Phone } from '@tamagui/lucide-icons'
+import { Phone } from '@tamagui/lucide-icons-2'
 import { useEffect, useState } from 'react'
 import { FlatList } from 'react-native'
 import type { ColorTokens } from 'tamagui'

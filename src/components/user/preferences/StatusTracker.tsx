@@ -1,5 +1,5 @@
 import { getFontSized } from '@tamagui/get-font-sized'
-import { Clock4, Laptop2, MinusCircle } from '@tamagui/lucide-icons'
+import { Clock4, Laptop2, MinusCircle } from '@tamagui/lucide-icons-2'
 import { Avatar, Button, Circle, Separator, Text, Theme, View, styled } from 'tamagui'
 
 const data = {

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Button, View, getTokenValue } from 'tamagui'
-import { ArrowLeft, ArrowRight } from '@tamagui/lucide-icons'
+import { ArrowLeft, ArrowRight } from '@tamagui/lucide-icons-2'
 
 const pageNum = 5
 

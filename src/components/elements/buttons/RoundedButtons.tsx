@@ -1,4 +1,4 @@
-import { Folder } from '@tamagui/lucide-icons'
+import { Folder } from '@tamagui/lucide-icons-2'
 import { Button, View, YStack } from 'tamagui'
 
 /** ------ EXAMPLE ------ */

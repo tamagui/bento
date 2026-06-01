@@ -1,4 +1,4 @@
-import { Bell, Menu } from '@tamagui/lucide-icons'
+import { Bell, Menu } from '@tamagui/lucide-icons-2'
 import type { StackProps, TabLayout, TabsTabProps } from 'tamagui'
 
 import type React from 'react'

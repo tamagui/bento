@@ -14,7 +14,7 @@ import {
   useGet,
 } from 'tamagui'
 
-import { Crown, Moon, Waves } from '@tamagui/lucide-icons'
+import { Crown, Moon, Waves } from '@tamagui/lucide-icons-2'
 import type { LayoutRectangle } from 'react-native'
 
 const order = ['', 'takeout', 'bento', 'studio']

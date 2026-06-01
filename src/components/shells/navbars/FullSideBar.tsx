@@ -1,4 +1,4 @@
-import { Bell, Menu } from '@tamagui/lucide-icons'
+import { Bell, Menu } from '@tamagui/lucide-icons-2'
 import { RovingFocusGroup } from '@tamagui/roving-focus'
 import { useState } from 'react'
 import {

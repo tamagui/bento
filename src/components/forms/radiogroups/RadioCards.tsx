@@ -1,4 +1,4 @@
-import { Clock, Dot } from '@tamagui/lucide-icons'
+import { Clock, Dot } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
 import type { ThemeName } from 'tamagui'
 import { Card } from './components/radioParts'

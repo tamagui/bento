@@ -1,4 +1,4 @@
-import { Globe2, Search, X } from '@tamagui/lucide-icons'
+import { Globe2, Search, X } from '@tamagui/lucide-icons-2'
 import type { SizeTokens } from 'tamagui'
 import { Adapt, Popover, ScrollView, Sheet, Spinner, Text, View, isWeb } from 'tamagui'
 import { Input } from './components/inputsParts'

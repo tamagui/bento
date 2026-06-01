@@ -24,7 +24,7 @@ import {
   Mail,
   RefreshCcw,
   Smartphone,
-} from '@tamagui/lucide-icons'
+} from '@tamagui/lucide-icons-2'
 
 interface CodeConfirmationInputProps {
   id: number

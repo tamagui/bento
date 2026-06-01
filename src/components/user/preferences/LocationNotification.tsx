@@ -1,6 +1,6 @@
 import { getFontSized } from '@tamagui/get-font-sized'
 import { LinearGradient } from '@tamagui/linear-gradient'
-import { Check, ChevronDown, ChevronUp, Info, Mail } from '@tamagui/lucide-icons'
+import { Check, ChevronDown, ChevronUp, Info, Mail } from '@tamagui/lucide-icons-2'
 import { useMemo, useState } from 'react'
 import type { FontSizeTokens, SelectProps } from 'tamagui'
 import {

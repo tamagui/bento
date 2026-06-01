@@ -1,6 +1,6 @@
 import type { SizeTokens } from '@tamagui/core'
 import { View } from '@tamagui/core'
-import { Check, X } from '@tamagui/lucide-icons'
+import { Check, X } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
 import { Switch } from './common/switchParts'
 

@@ -1,4 +1,4 @@
-import { Info } from '@tamagui/lucide-icons'
+import { Info } from '@tamagui/lucide-icons-2'
 import { isValidElement, useState } from 'react'
 import type { AlertDialogContentProps, ThemeName } from 'tamagui'
 import { AlertDialog, Button, Separator, View, createContext, useEvent } from 'tamagui'

@@ -1,4 +1,4 @@
-import { Baby } from '@tamagui/lucide-icons'
+import { Baby } from '@tamagui/lucide-icons-2'
 import { useId, useState } from 'react'
 import { Button, Label, Switch, Text, View } from 'tamagui'
 

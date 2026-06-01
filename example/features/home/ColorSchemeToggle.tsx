@@ -1,4 +1,4 @@
-import { Moon, Sun } from '@tamagui/lucide-icons'
+import { Moon, Sun } from '@tamagui/lucide-icons-2'
 import { Button, Switch, XStack } from 'tamagui'
 import { useThemeControl } from '../../useThemeControl'
 

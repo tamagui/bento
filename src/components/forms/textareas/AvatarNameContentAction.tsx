@@ -1,4 +1,4 @@
-import { File, Share } from '@tamagui/lucide-icons'
+import { File, Share } from '@tamagui/lucide-icons-2'
 import { Avatar, Button, Separator, Text, TextArea, View } from 'tamagui'
 
 /** ------ EXAMPLE ------ */

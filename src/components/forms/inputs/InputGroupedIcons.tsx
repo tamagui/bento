@@ -3,7 +3,7 @@ import {
   ChevronLast,
   ChevronLeft,
   ChevronRight,
-} from '@tamagui/lucide-icons'
+} from '@tamagui/lucide-icons-2'
 import type { SizeTokens } from 'tamagui'
 import { View } from 'tamagui'
 import { Input } from './components/inputsParts'

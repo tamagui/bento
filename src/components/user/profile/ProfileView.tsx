@@ -20,7 +20,7 @@ import {
   type TextProps,
 } from 'tamagui'
 import { FlatList, Gesture, GestureDetector } from 'react-native-gesture-handler'
-import { Share } from '@tamagui/lucide-icons'
+import { Share } from '@tamagui/lucide-icons-2'
 
 const blogs = [
   {

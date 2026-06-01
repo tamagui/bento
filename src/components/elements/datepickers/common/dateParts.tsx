@@ -1,7 +1,7 @@
 import type { DatePickerProviderProps } from '@rehookify/datepicker'
 import { DatePickerProvider, useDatePickerContext } from '@rehookify/datepicker'
 import { getFontSized } from '@tamagui/get-font-sized'
-import { Calendar, ChevronLeft, ChevronRight, X } from '@tamagui/lucide-icons'
+import { Calendar, ChevronLeft, ChevronRight, X } from '@tamagui/lucide-icons-2'
 import type { GestureReponderEvent, ViewProps } from '@tamagui/web'
 import type { PopoverProps } from 'tamagui'
 import {

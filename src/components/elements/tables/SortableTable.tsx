@@ -6,7 +6,7 @@ import {
   ChevronRight,
   ChevronUp,
   ChevronsUpDown,
-} from '@tamagui/lucide-icons'
+} from '@tamagui/lucide-icons-2'
 import type { GroupingState } from '@tanstack/react-table'
 import {
   createColumnHelper,

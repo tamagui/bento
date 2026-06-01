@@ -1,4 +1,4 @@
-import { AlertCircle } from '@tamagui/lucide-icons'
+import { AlertCircle } from '@tamagui/lucide-icons-2'
 import React, { useId, useRef } from 'react'
 import type { TextInput } from 'react-native'
 import type { SizeTokens } from 'tamagui'

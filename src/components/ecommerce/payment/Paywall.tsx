@@ -11,7 +11,7 @@ import {
   Star,
   User,
   X,
-} from '@tamagui/lucide-icons'
+} from '@tamagui/lucide-icons-2'
 import { useEffect, useState, type FunctionComponent } from 'react'
 import { Dimensions } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'

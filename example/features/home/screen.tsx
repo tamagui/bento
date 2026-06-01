@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import { ChevronRight } from '@tamagui/lucide-icons'
+import { ChevronRight } from '@tamagui/lucide-icons-2'
 import { ScrollView } from 'react-native'
 import { H1, ListItem, Separator, Text, YGroup, YStack } from 'tamagui'
 

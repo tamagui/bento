@@ -1,4 +1,4 @@
-import { X } from '@tamagui/lucide-icons'
+import { X } from '@tamagui/lucide-icons-2'
 import { useId, useState } from 'react'
 import { Button, Image, Label, ScrollView, View, XStack } from 'tamagui'
 
