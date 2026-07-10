@@ -111,6 +111,8 @@ module.exports = {
     }),
     isProduction ? null : new ReactRefreshWebpackPlugin(),
     new webpack.DefinePlugin({
+      // bare global for react-native libs (worklets/reanimated reference __DEV__ directly)
+      __DEV__: NODE_ENV === 'development' ? 'true' : 'false',
       process: {
         env: {
           NODE_ENV: JSON.stringify(NODE_ENV),
