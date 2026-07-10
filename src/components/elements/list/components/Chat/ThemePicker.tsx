@@ -1,14 +1,9 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { Pressable } from 'react-native'
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-} from 'react-native-reanimated'
+import { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated'
 import { ScrollView, Text, View, type ThemeName } from 'tamagui'
+import { AnimatedView } from '../AnimatedPrimitives'
 import { useTheme } from './ChatContext'
-
-const AnimatedView = Animated.createAnimatedComponent(View)
 
 const WIDTH = 100
 const gap = 24
@@ -76,7 +71,7 @@ export const ThemePicker = () => {
     return {
       transform: [{ translateX: x.value }],
     }
-  })
+  }, [x])
 
   return (
     <ScrollView

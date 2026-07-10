@@ -21,7 +21,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Dimensions, FlatList, Keyboard, KeyboardAvoidingView } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
-import Animated, {
+import {
   Extrapolation,
   interpolate,
   runOnJS,
@@ -52,8 +52,8 @@ import { Chip } from '../chips/components/chipsParts'
 import { BubbleChat, type MessageItem } from './components/Chat/BubbleChat'
 import { ChatContext } from './components/Chat/ChatContext'
 import { ThemePicker } from './components/Chat/ThemePicker'
+import { AnimatedView } from './components/AnimatedPrimitives'
 
-const AnimatedView = Animated.createAnimatedComponent(View)
 const { height: mobileHeight } = Dimensions.get('window')
 
 const height = isWeb ? 700 : mobileHeight
@@ -65,6 +65,8 @@ const SPRING_CONFIG = {
   mass: 0.5,
   stiffness: 180,
 }
+
+const SafeAreaSpacer = () => (isWeb ? <View /> : <SafeAreaView />)
 
 const Label = styled(Text, {
   fontWeight: '500',
@@ -95,7 +97,7 @@ export const Chat = () => {
       transform: [{ translateY: withSpring(hide ? 30 : 0, SPRING_CONFIG) }],
       flex: 1,
     }
-  })
+  }, [offset])
 
   const onSend = (message: string) => {
     setList((prev) => [{ id: `${Date.now()}`, createdAt: Date.now(), message }, ...prev])
@@ -199,7 +201,7 @@ const BottomBar = ({
                 {value.trim().length > 0 ? (
                   <Button
                     theme={theme.includes('accent') ? 'blue' : theme}
-                    transition="200ms"
+                    style={{ transition: 'transform 200ms ease' }}
                     enterStyle={{ scale: 0.2 }}
                     exitStyle={{ scale: 0.2 }}
                     scale={1}
@@ -211,7 +213,7 @@ const BottomBar = ({
                   </Button>
                 ) : (
                   <Button
-                    transition="200ms"
+                    style={{ transition: 'transform 200ms ease' }}
                     enterStyle={{ scale: 0.2 }}
                     exitStyle={{ scale: 0.2 }}
                     scale={1}
@@ -227,32 +229,38 @@ const BottomBar = ({
         />
       </Form>
 
-      <SafeAreaView />
+      <SafeAreaSpacer />
     </View>
   )
 }
 
 const Header = ({ offset }: { offset: SharedValue<number> }) => {
-  const style = useAnimatedStyle(() => ({
-    height: withSpring(offset.value > 0 ? offset.value : 16, SPRING_CONFIG),
-  }))
+  const style = useAnimatedStyle(
+    () => ({
+      height: withSpring(offset.value > 0 ? offset.value : 16, SPRING_CONFIG),
+    }),
+    [offset]
+  )
 
-  const profileStyle = useAnimatedStyle(() => ({
-    opacity: withSpring(offset.value > height / 2 ? 0 : 1, SPRING_CONFIG),
-    transform: [
-      {
-        translateY: withSpring(
-          interpolate(
-            offset.value,
-            [0, height],
-            [0, -HEADER_HEIGHT * 2],
-            Extrapolation.CLAMP
+  const profileStyle = useAnimatedStyle(
+    () => ({
+      opacity: withSpring(offset.value > height / 2 ? 0 : 1, SPRING_CONFIG),
+      transform: [
+        {
+          translateY: withSpring(
+            interpolate(
+              offset.value,
+              [0, height],
+              [0, -HEADER_HEIGHT * 2],
+              Extrapolation.CLAMP
+            ),
+            SPRING_CONFIG
           ),
-          SPRING_CONFIG
-        ),
-      },
-    ],
-  }))
+        },
+      ],
+    }),
+    [offset]
+  )
 
   return (
     <AnimatedView
@@ -263,7 +271,7 @@ const Header = ({ offset }: { offset: SharedValue<number> }) => {
       bg="$background"
       justify="center"
     >
-      <SafeAreaView />
+      <SafeAreaSpacer />
 
       <AnimatedView style={profileStyle}>
         <XStack px="$4" items="center" pt="$4" gap="$3">
@@ -311,7 +319,7 @@ const MenuView = ({ offset }: { offset: SharedValue<number> }) => {
       opacity: withSpring(hide ? 0 : 1, SPRING_CONFIG),
       transform: [{ translateY: withSpring(hide ? 100 : 0, SPRING_CONFIG) }],
     }
-  })
+  }, [offset])
 
   return (
     <AnimatedView style={style}>

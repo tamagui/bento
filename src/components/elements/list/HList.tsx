@@ -1,4 +1,3 @@
-import type { TransitionProp } from '@tamagui/web'
 import { Image, ScrollView, Text, View, isWeb, styled } from 'tamagui'
 
 const data = [
@@ -34,39 +33,10 @@ export function HList() {
 
 HList.fileName = 'HList'
 
-const animationFast = [
-  'quick',
-  {
-    opacity: {
-      overshootClamping: true,
-    },
-  },
-] as TransitionProp
-
-const animationMedium = [
-  'slow',
-  {
-    opacity: {
-      overshootClamping: true,
-    },
-  },
-] as TransitionProp
-
-const animationSlow = [
-  'medium',
-  {
-    opacity: {
-      overshootClamping: true,
-    },
-  },
-] as TransitionProp
-
 function HListItem({ uri, title }: { uri: string; title: string }) {
-  const imagePrefix = !isWeb ? `https://tamagui.dev` : ''
-
   return (
     <HListFrame
-      transition={animationFast}
+      style={{ transition: 'transform 150ms ease' }}
       pressStyle={{
         scale: 0.98,
       }}
@@ -74,15 +44,15 @@ function HListItem({ uri, title }: { uri: string; title: string }) {
       <HListInner
         containerType="normal"
         group="item"
-        transition="bouncy"
+        style={{ transition: 'transform 150ms ease' }}
         position="relative"
       >
         <View
           flexDirection="column"
           flex={1}
           scale={1.2}
-          transition={animationMedium}
-          $group-listitem-hover={{
+          style={{ transition: 'transform 250ms ease' }}
+          $group-item-hover={{
             scale: 1.2,
           }}
         >
@@ -90,24 +60,24 @@ function HListItem({ uri, title }: { uri: string; title: string }) {
             width="100%"
             height={200}
             objectFit="cover"
-            src={`${imagePrefix}/bento/images/hlist/${uri}`}
+            src={`https://tamagui.dev/bento/images/hlist/${uri}`}
             scale={1}
           />
         </View>
         <View
           position="absolute"
-          transition={animationMedium}
+          style={{ transition: 'background-color 250ms ease' }}
           b={0}
           l={0}
           r={0}
           py="$4"
           bg="rgba(0,0,0,0.25)"
-          $group-listitem-hover={{
+          $group-item-hover={{
             bg: 'rgba(0,0,0,0.5)',
           }}
         >
           <Text
-            transition={animationSlow}
+            style={{ transition: 'transform 300ms ease, text-shadow 300ms ease' }}
             color="#fff"
             my="auto"
             self="center"
@@ -116,7 +86,7 @@ function HListItem({ uri, title }: { uri: string; title: string }) {
             textShadowColor="$shadowColor"
             textShadowOffset={{ height: 1, width: 0 }}
             textShadowRadius={0}
-            $group-listitem-hover={{
+            $group-item-hover={{
               y: -4,
               scale: 1.075,
               textShadowColor: '$shadowColor',

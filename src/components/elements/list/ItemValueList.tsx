@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { H1, Separator, Text, View, styled } from 'tamagui'
 
 const data = [
@@ -43,10 +44,10 @@ export function ItemValueList() {
         {data.map((item, index) => {
           const isLastItem = index === data.length - 1
           return (
-            <>
-              <Row key={index} item={item} />
-              {!isLastItem && <Separator key={`${index}-separator`} />}
-            </>
+            <Fragment key={item.title}>
+              <Row item={item} />
+              {!isLastItem && <Separator />}
+            </Fragment>
           )
         })}
       </View>

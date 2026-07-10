@@ -1,11 +1,17 @@
 import { ArrowRight, Bookmark, ChevronLeft } from '@tamagui/lucide-icons-2'
-import { createContext, useCallback, useContext, useEffect, useState } from 'react'
+import {
+  createContext,
+  forwardRef,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { TouchableOpacity } from 'react-native'
 import Animated, {
   interpolate,
   type SharedValue,
   useAnimatedProps,
-  useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -23,11 +29,24 @@ import {
   XStack,
 } from 'tamagui'
 import { LinearGradient } from 'tamagui/linear-gradient'
+import { AnimatedText, AnimatedView } from './components/AnimatedPrimitives'
+import { useScrollProgressHandler } from './useScrollProgressHandler'
 
-const AnimatedCircle = Animated.createAnimatedComponent(Circle)
-const AnimatedView = Animated.createAnimatedComponent(View)
-const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient)
-const AnimatedText = Animated.createAnimatedComponent(Text)
+const CircleFrame = forwardRef<any, any>(
+  ({ forwardedRef, nativeID: _nativeID, ...props }, ref) => (
+    <Circle ref={forwardedRef || ref} {...props} />
+  )
+)
+const AnimatedCircle = Animated.createAnimatedComponent(CircleFrame)
+
+const SafeAreaSpacer = () => (isWeb ? <View /> : <SafeAreaView />)
+const LinearGradientFrame = LinearGradient.styleable<{
+  forwardedRef?: any
+  nativeID?: string
+}>(({ forwardedRef, nativeID: _nativeID, ...props }, ref) => (
+  <LinearGradient ref={forwardedRef || ref} {...props} />
+))
+const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradientFrame)
 const AnimatedList = styled(Animated.FlatList, {
   flex: 1,
 })
@@ -47,17 +66,7 @@ export function ScrollProgress() {
   const progress = useSharedValue(0)
   const [bookmarked, setBookmarked] = useState(false)
 
-  const scrollHandler = useAnimatedScrollHandler({
-    onScroll: (event) => {
-      const height = event.contentSize.height - event.layoutMeasurement.height
-      const scrollY = event.contentOffset.y
-      const value = height > 0 ? scrollY / height : 0
-
-      if (value <= 1) {
-        progress.value = value
-      }
-    },
-  })
+  const scrollHandler = useScrollProgressHandler(progress)
 
   const ListHeaderComponent = useCallback(() => {
     return (
@@ -129,9 +138,12 @@ export function ScrollProgress() {
 const HeaderView = () => {
   const { progress, bookmarked, setBookmarked } = useScreenContext()
 
-  const opacityStyle = useAnimatedStyle(() => ({
-    opacity: interpolate(progress.value, [0.05, 0.1], [0, 1]),
-  }))
+  const opacityStyle = useAnimatedStyle(
+    () => ({
+      opacity: interpolate(progress.value, [0.05, 0.1], [0, 1]),
+    }),
+    [progress]
+  )
 
   return (
     <View position="absolute" t={-1} l={0} r={0}>
@@ -144,14 +156,12 @@ const HeaderView = () => {
         style={opacityStyle}
       />
       <View py="$4" px="$4" position="relative">
-        <SafeAreaView />
+        <SafeAreaSpacer />
 
         <XStack items="center" gap="$4">
-          <ChevronLeft
-            onPress={() => {
-              //
-            }}
-          />
+          <TouchableOpacity onPress={() => {}}>
+            <ChevronLeft />
+          </TouchableOpacity>
 
           <AnimatedView gap="$1" style={opacityStyle} flex={1}>
             <AnimatedText theme="blue" color="$color8" fontSize="$2" fontFamily="$mono">
@@ -171,7 +181,6 @@ const HeaderView = () => {
             <Bookmark
               fill={bookmarked ? '$color8' : 'none'}
               color={bookmarked ? '$color8' : '$color'}
-              onPress={() => setBookmarked(!bookmarked)}
               z={99}
             />
           </TouchableOpacity>
@@ -188,40 +197,49 @@ const BottomView = () => {
 
   const { progress, bookmarked } = useContext(ScreenContext)
 
-  const nextAnimated = useAnimatedStyle(() => ({
-    transform: [
-      {
-        translateY: withSpring(
-          progress.value >= 0.95 || showBookmark ? 0 : 100,
-          SPRING_CONFIG
-        ),
-      },
-    ],
-  }))
+  const nextAnimated = useAnimatedStyle(
+    () => ({
+      transform: [
+        {
+          translateY: withSpring(
+            progress.value >= 0.95 || showBookmark ? 0 : 100,
+            SPRING_CONFIG
+          ),
+        },
+      ],
+    }),
+    [progress, showBookmark]
+  )
 
-  const currentAnimated = useAnimatedStyle(() => ({
-    transform: [
-      {
-        translateY: withSpring(
-          progress.value >= 0.95 || showBookmark ? -100 : 0,
-          SPRING_CONFIG
-        ),
-      },
-    ],
-  }))
+  const currentAnimated = useAnimatedStyle(
+    () => ({
+      transform: [
+        {
+          translateY: withSpring(
+            progress.value >= 0.95 || showBookmark ? -100 : 0,
+            SPRING_CONFIG
+          ),
+        },
+      ],
+    }),
+    [progress, showBookmark]
+  )
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [
-      { scale: scale.value },
-      {
-        translateY: withSpring(
-          progress.value >= 0.01 || showBookmark ? 0 : 100,
-          SPRING_CONFIG
-        ),
-      },
-    ],
-    borderRadius: 48,
-  }))
+  const animatedStyle = useAnimatedStyle(
+    () => ({
+      transform: [
+        { scale: scale.value },
+        {
+          translateY: withSpring(
+            progress.value >= 0.01 || showBookmark ? 0 : 100,
+            SPRING_CONFIG
+          ),
+        },
+      ],
+      borderRadius: 48,
+    }),
+    [progress, scale, showBookmark]
+  )
 
   useEffect(() => {
     if (bookmarked) {
@@ -253,7 +271,7 @@ const BottomView = () => {
       justify="flex-end"
     >
       <AnimatedView
-        transition="quicker"
+        style={{ transition: 'transform 100ms ease' }}
         scale={1}
         exitStyle={{
           scale: 1.1,
@@ -317,13 +335,19 @@ const CircleProgress = ({
 }: { progress: SharedValue<number>; showBookmark: boolean }) => {
   const { color6, color } = useTheme()
 
-  const animatedProps = useAnimatedProps(() => ({
-    strokeDashoffset: withSpring((1 - progress.value) * circum, SPRING_CONFIG),
-  }))
+  const animatedProps = useAnimatedProps(
+    () => ({
+      strokeDashoffset: withSpring((1 - progress.value) * circum, SPRING_CONFIG),
+    }),
+    [progress]
+  )
 
-  const nextAnimated = useAnimatedStyle(() => ({
-    transform: [{ scale: withSpring(progress.value >= 0.95 ? 1 : 0, SPRING_CONFIG) }],
-  }))
+  const nextAnimated = useAnimatedStyle(
+    () => ({
+      transform: [{ scale: withSpring(progress.value >= 0.95 ? 1 : 0, SPRING_CONFIG) }],
+    }),
+    [progress]
+  )
 
   return (
     <View width={size} height={size}>
@@ -376,7 +400,7 @@ const CircleProgress = ({
             rounded="$10"
             bg="$green8"
             position="absolute"
-            transition="quicker"
+            style={{ transition: 'transform 100ms ease, opacity 100ms ease' }}
             enterStyle={{
               scale: 0,
               opacity: 0,

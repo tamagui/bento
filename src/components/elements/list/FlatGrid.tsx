@@ -92,7 +92,7 @@ function Item({ data }: { data: { index: number } }) {
         <Button size="$3" circular chromeless>
           <Avatar circular>
             <Avatar.Image
-              accessibilityLabel="Cam"
+              aria-label="Post author avatar"
               src="https://images.unsplash.com/photo-1588798204072-e5f8e649d269?&w=100"
               objectFit="cover"
             />

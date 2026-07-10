@@ -2,9 +2,7 @@ import { useState } from 'react'
 import Animated, {
   Extrapolation,
   interpolate,
-  runOnJS,
   type SharedValue,
-  useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated'
@@ -18,8 +16,9 @@ import {
   View,
   YStack,
 } from 'tamagui'
+import { useWheelScrollHandler } from './useWheelScrollHandler'
+import { AnimatedView } from './components/AnimatedPrimitives'
 
-const AnimatedView = Animated.createAnimatedComponent(View)
 const AnimatedList = styled(Animated.FlatList<CardData>, {
   flex: 1,
 })
@@ -31,45 +30,14 @@ export function WheelList({
 
   const scrollY = useSharedValue(0)
 
-  const scrollHandler = useAnimatedScrollHandler(
-    {
-      onScroll: (event) => {
-        'worklet'
-
-        const value = event.contentOffset.y
-
-        let i = Math.round(value / (ITEM_SIZE + SPACING))
-
-        if (i >= 0) {
-          // bounce value
-          if (index > data.length - 1) {
-            i = data.length - 1
-          }
-
-          runOnJS(setIndex)(i)
-
-          if (typeof onChange === 'function') runOnJS(onChange)(data[i], i)
-        }
-
-        scrollY.value = value
-      },
-
-      onMomentumEnd: (event) => {
-        'worklet'
-
-        const value = event.contentOffset.y
-        scrollY.value = Math.round(value)
-      },
-
-      onEndDrag: (event) => {
-        'worklet'
-
-        const value = event.contentOffset.y
-        scrollY.value = Math.round(value)
-      },
-    },
-    [index]
-  )
+  const scrollHandler = useWheelScrollHandler({
+    index,
+    itemStride: ITEM_SIZE + SPACING,
+    items: data,
+    onChange,
+    scrollY,
+    setIndex,
+  })
 
   return (
     <View
@@ -161,7 +129,7 @@ const CardItem = ({
     return {
       transform: [{ rotate: `${rotate}deg` }, { translateY }, { translateX }],
     }
-  })
+  }, [scrollY, inputRange])
 
   return (
     <AnimatedView
@@ -228,7 +196,7 @@ const BackgroundView = ({
     return {
       opacity: interpolate(scrollY.value, inputRange, [0, 0, 0.2, 1, 0.2, 0, 0]),
     }
-  })
+  }, [scrollY, inputRange])
 
   return (
     <AnimatedView
@@ -280,7 +248,7 @@ const SliderItem = ({
       width: width || 8,
       h: 4,
     }
-  })
+  }, [scrollY, inputRange])
 
   return <AnimatedView rounded="$6" height={4} bg="$color10" style={animatedStyle} />
 }
