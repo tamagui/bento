@@ -112,9 +112,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
       </Select.Trigger>
 
       <Adapt when="maxMd" platform="touch">
-        <Sheet
-          dismissOnSnapToBottom
-        >
+        <Sheet dismissOnSnapToBottom>
           <Sheet.Frame>
             <Sheet.ScrollView>
               <Adapt.Contents />
@@ -128,7 +126,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
         </Sheet>
       </Adapt>
 
-      <Select.Content zIndex={200000}>
+      <Select.Content z={200000}>
         <Select.ScrollUpButton
           items="center"
           justify="center"
@@ -335,7 +333,13 @@ function RadioList() {
               <View flexDirection="row" justify="space-between">
                 <SizableText size="$5">{title}</SizableText>
                 <RadioGroup.Item id={title} value={title}>
-                  <RadioGroup.Indicator />
+                  <RadioGroup.Indicator
+                    unstyled
+                    width="33%"
+                    height="33%"
+                    rounded={1000}
+                    bg="$color"
+                  />
                 </RadioGroup.Item>
               </View>
             </View>
