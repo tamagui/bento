@@ -74,7 +74,7 @@ const InputGroupFrame = styled(XGroup, {
       false: defaultInputGroupStyles,
     },
     scaleIcon: {
-      ':number': {} as any,
+      ':number': () => ({}),
     },
     applyFocusStyle: {
       ':boolean': (val, { props }) => {
@@ -141,7 +141,7 @@ const InputFrame = styled(TInput, {
   context: InputContext,
   variants: {
     scaleIcon: {
-      ':number': {},
+      ':number': () => ({}),
     },
   } as const,
 })
@@ -204,7 +204,7 @@ const InputSection = styled(XGroup.Item, {
   context: InputContext,
   variants: {
     scaleIcon: {
-      ':number': {},
+      ':number': () => ({}),
     },
   } as const,
 })
@@ -216,7 +216,7 @@ const Button = styled(TButton, {
 
   variants: {
     scaleIcon: {
-      ':number': {},
+      ':number': () => ({}),
     },
     size: {
       '...size': (val = '$true', { tokens }) => {
@@ -246,7 +246,7 @@ export const InputIconFrame = styled(View, {
 
   variants: {
     scaleIcon: {
-      ':number': {},
+      ':number': () => ({}),
     },
     size: {
       '...size': (val, { tokens }) => {
@@ -292,7 +292,7 @@ export const InputContainerFrame = styled(View, {
 
   variants: {
     scaleIcon: {
-      ':number': {},
+      ':number': () => ({}),
     },
     size: {
       '...size': (val, { tokens }) => ({
@@ -303,7 +303,7 @@ export const InputContainerFrame = styled(View, {
       '...color': () => ({}),
     },
     gapScale: {
-      ':number': {} as any,
+      ':number': () => ({}),
     },
   } as const,
 
@@ -316,10 +316,12 @@ export const InputLabel = styled(Label, {
   context: InputContext,
   variants: {
     scaleIcon: {
-      ':number': {},
+      ':number': () => ({}),
     },
     size: {
-      '...fontSize': getFontSized as any,
+      '...fontSize': (val, extras) =>
+        // getFontSized keeps an invariant TextProps generic despite this Label-compatible context.
+        getFontSized(val, extras as Parameters<typeof getFontSized>[1]),
     },
   } as const,
 })
@@ -330,7 +332,7 @@ export const InputInfo = styled(Text, {
 
   variants: {
     scaleIcon: {
-      ':number': {},
+      ':number': () => ({}),
     },
     size: {
       '...fontSize': (val, { font }) => {
@@ -359,7 +361,7 @@ const InputXGroup = styled(XGroup, {
 
   variants: {
     scaleIcon: {
-      ':number': {},
+      ':number': () => ({}),
     },
     size: {
       '...size': (val, { tokens }) => {
