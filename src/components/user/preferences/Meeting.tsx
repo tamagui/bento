@@ -147,7 +147,7 @@ export function Users() {
     >
       {users.map((item, index) => (
         <View z={index} ml={index !== 0 ? '$-2' : undefined} key={item}>
-          <User size="$2" imageUrl={`/avatars/300 (1).jpeg`} />
+          <User size="$2" imageUrl="https://i.pravatar.cc/150?img=1" />
         </View>
       ))}
       <SizableText size="$2" fontWeight="200" mx="$1" mr="$2.5">
@@ -160,7 +160,7 @@ export function Users() {
 function User({ size, imageUrl }: { size: SizeTokens; imageUrl?: string }) {
   return (
     <Avatar borderWidth="$1" borderColor="$color1" circular size={size}>
-      <Avatar.Image accessibilityLabel="Cam" src={imageUrl} />
+      <Avatar.Image aria-label="Attendee avatar" src={imageUrl} />
       <Avatar.Fallback bg="$background" />
     </Avatar>
   )

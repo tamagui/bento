@@ -10,7 +10,7 @@ const data = {
       min: '',
       job: 'Developer',
       id: '1',
-      avatar: '/avatars/300 (5).jpeg',
+      avatar: 'https://i.pravatar.cc/150?img=5',
     },
   ],
   away: [
@@ -28,7 +28,7 @@ const data = {
       min: '15m',
       replacedBy: '',
       id: '3',
-      avatar: '/avatars/300 (3).jpeg',
+      avatar: 'https://i.pravatar.cc/150?img=3',
     },
     {
       name: 'Eva sam',
@@ -120,7 +120,7 @@ function User({
     <View flexDirection="row" items="center" gap="$3">
       <View position="relative">
         <Avatar rounded="$2" size="$3" circular>
-          <Avatar.Image accessibilityLabel="Cam" src={avatar} />
+          <Avatar.Image aria-label={`${name} avatar`} src={avatar} />
           <Avatar.Fallback bg="$background" />
         </Avatar>
         <Circle
