@@ -2,7 +2,6 @@ import { memo, useEffect, useState } from 'react'
 import { type FlatListProps, SafeAreaView } from 'react-native'
 import Animated, {
   interpolate,
-  useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -21,6 +20,7 @@ import {
 } from 'tamagui'
 import { FlatList, Gesture, GestureDetector } from 'react-native-gesture-handler'
 import { Share } from '@tamagui/lucide-icons-2'
+import { useProfileScrollHandler } from './useProfileScrollHandler'
 
 const blogs = [
   {
@@ -49,9 +49,7 @@ export const ProfileView = () => {
 
   const scrollY = useSharedValue(0)
 
-  const scrollHandler = useAnimatedScrollHandler((event) => {
-    scrollY.value = event.contentOffset.y
-  })
+  const scrollHandler = useProfileScrollHandler(scrollY)
 
   const renderItem = ({ item }: { item: Blog }) => {
     return (
@@ -213,7 +211,7 @@ const AvatarView = memo(
           },
         ],
       }
-    })
+    }, [rotation])
 
     useEffect(() => {
       rotation.value = withSpring(followed ? 2 : -2, {
@@ -314,7 +312,7 @@ const Header = ({ scrollY }: { scrollY: SharedValue<number> }) => {
     return {
       opacity: interpolate(scrollY.value, [100, 164], [0, 1]),
     }
-  })
+  }, [scrollY])
 
   return (
     <AnimatedView
