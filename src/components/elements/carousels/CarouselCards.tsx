@@ -1,6 +1,8 @@
-import { useRef, useState } from 'react'
+import { ChevronLeft, ChevronRight } from '@tamagui/lucide-icons-2'
 import { ScrollView } from 'react-native'
-import { Avatar, Text, View, XStack, YStack } from 'tamagui'
+import { Avatar, Button, Text, View, XStack, YStack, isWeb } from 'tamagui'
+import { useReducedMotion } from '../../hooks'
+import { useCarousel } from './common/useCarousel'
 
 const testimonials = [
   {
@@ -38,27 +40,45 @@ const GAP = 14
 
 /** ------ EXAMPLE ------ */
 export function CarouselCards() {
-  const scrollRef = useRef<ScrollView>(null)
-  const [index, setIndex] = useState(0)
+  const reducedMotion = useReducedMotion()
+  const {
+    goTo,
+    index,
+    interval,
+    onItemLayout,
+    onMomentumScrollEnd,
+    onScroll,
+    scrollRef,
+  } = useCarousel(testimonials.length, CARD_W, GAP)
 
   return (
-    <YStack gap="$3" width="100%" maxW={720}>
+    <YStack
+      gap="$3"
+      width="100%"
+      maxW={720}
+      role={isWeb ? 'group' : undefined}
+      aria-roledescription={isWeb ? 'carousel' : undefined}
+      aria-label="Customer testimonials"
+    >
       <ScrollView
         ref={scrollRef}
         horizontal
         showsHorizontalScrollIndicator={false}
-        snapToInterval={CARD_W + GAP}
+        snapToInterval={interval}
         decelerationRate="fast"
-        onScroll={(e) =>
-          setIndex(Math.round(e.nativeEvent.contentOffset.x / (CARD_W + GAP)))
-        }
+        onScroll={onScroll}
+        onMomentumScrollEnd={onMomentumScrollEnd}
         scrollEventThrottle={32}
       >
         <XStack gap={GAP} px="$1" py="$2">
-          {testimonials.map((t) => (
+          {testimonials.map((t, i) => (
             <YStack
               key={t.id}
+              role={isWeb ? 'group' : undefined}
+              aria-roledescription={isWeb ? 'slide' : undefined}
+              aria-label={`Testimonial from ${t.name}, ${i + 1} of ${testimonials.length}`}
               width={CARD_W}
+              maxW="80vw"
               p="$4"
               gap="$3"
               rounded="$6"
@@ -66,6 +86,7 @@ export function CarouselCards() {
               borderWidth={1}
               borderColor="$color4"
               hoverStyle={{ borderColor: '$color6' }}
+              onLayout={i === 0 ? onItemLayout : undefined}
             >
               <Text fontSize="$4" lineHeight="$5" color="$color12">
                 “{t.quote}”
@@ -88,17 +109,51 @@ export function CarouselCards() {
           ))}
         </XStack>
       </ScrollView>
-      <XStack gap="$1.5" self="center">
-        {testimonials.map((t, i) => (
-          <View
-            key={t.id}
-            width={i === index ? 18 : 7}
-            height={7}
-            rounded={1000}
-            bg={i === index ? '$color12' : '$color6'}
-            transition="200ms"
-          />
-        ))}
+      <XStack items="center" justify="space-between">
+        <Button
+          aria-label="Previous testimonial"
+          circular
+          size="$3"
+          hitSlop={isWeb ? undefined : 8}
+          variant="outlined"
+          opacity={index === 0 ? 0.4 : 1}
+          disabled={index === 0}
+          onPress={() => goTo(index - 1, !reducedMotion)}
+          icon={<ChevronLeft size={16} />}
+        />
+        <XStack gap="$1">
+          {testimonials.map((t, i) => (
+            <Button
+              key={t.id}
+              aria-label={`Go to testimonial ${i + 1} from ${t.name}`}
+              aria-current={i === index ? 'true' : undefined}
+              unstyled
+              cursor="pointer"
+              hitSlop={isWeb ? undefined : 10}
+              onPress={() => goTo(i, !reducedMotion)}
+              p="$1.5"
+            >
+              <View
+                width={i === index ? 18 : 7}
+                height={7}
+                rounded={1000}
+                bg={i === index ? '$color12' : '$color6'}
+                transition={reducedMotion ? undefined : '200ms'}
+              />
+            </Button>
+          ))}
+        </XStack>
+        <Button
+          aria-label="Next testimonial"
+          circular
+          size="$3"
+          hitSlop={isWeb ? undefined : 8}
+          variant="outlined"
+          opacity={index === testimonials.length - 1 ? 0.4 : 1}
+          disabled={index === testimonials.length - 1}
+          onPress={() => goTo(index + 1, !reducedMotion)}
+          icon={<ChevronRight size={16} />}
+        />
       </XStack>
     </YStack>
   )
