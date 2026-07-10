@@ -151,12 +151,20 @@ const InputImpl = InputFrame.styleable<{
   keyboardType?: string
   textContentType?: string
   onChangeText?: (text: string) => void
+  onLayout?: (event: any) => void
 }>((props, ref) => {
   const { setFocused } = FocusContext.useStyledContext()
   const { size } = InputContext.useStyledContext()
-  const { secureTextEntry, keyboardType, textContentType, onChangeText, ...rest } = props
+  const {
+    secureTextEntry,
+    keyboardType,
+    textContentType,
+    onChangeText,
+    onLayout,
+    ...rest
+  } = props
   return (
-    <View flex={1}>
+    <View flex={1} onLayout={onLayout}>
       <InputFrame
         ref={ref}
         onFocus={() => {
@@ -165,9 +173,25 @@ const InputImpl = InputFrame.styleable<{
         onBlur={() => setFocused(false)}
         size={size}
         type={secureTextEntry ? 'password' : rest.type}
-        inputMode={keyboardType === 'numeric' ? 'numeric' : keyboardType === 'email-address' ? 'email' : undefined}
-        autoComplete={textContentType === 'emailAddress' ? 'email' : textContentType === 'password' ? 'current-password' : undefined}
-        onChange={onChangeText ? (e: any) => onChangeText(e.target?.value ?? e.nativeEvent?.text ?? '') : undefined}
+        inputMode={
+          keyboardType === 'numeric'
+            ? 'numeric'
+            : keyboardType === 'email-address'
+              ? 'email'
+              : undefined
+        }
+        autoComplete={
+          textContentType === 'emailAddress'
+            ? 'email'
+            : textContentType === 'password'
+              ? 'current-password'
+              : undefined
+        }
+        onChange={
+          onChangeText
+            ? (e: any) => onChangeText(e.target?.value ?? e.nativeEvent?.text ?? '')
+            : undefined
+        }
         {...rest}
       />
     </View>

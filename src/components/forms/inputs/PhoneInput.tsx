@@ -233,7 +233,6 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
         borderColor="$borderColor"
         enterStyle={{ y: -10, opacity: 0 }}
         exitStyle={{ y: -10, opacity: 0 }}
-        elevate
         transition={[
           'quick',
           {
