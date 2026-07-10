@@ -80,7 +80,7 @@ export const commandGroups: CommandGroup[] = [
         'Start a new team project',
         Plus,
         ['add', 'new'],
-        ['⌘', 'P']
+        ['mod', 'P']
       ),
       command(
         'new-document',

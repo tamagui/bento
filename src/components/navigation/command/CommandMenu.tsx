@@ -1,5 +1,5 @@
 import { Search, SearchX, X } from '@tamagui/lucide-icons-2'
-import { useEffect, useId, useMemo, useState } from 'react'
+import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import type { KeyboardEvent } from 'react'
 import {
   Button,
@@ -15,15 +15,35 @@ import {
 } from 'tamagui'
 import { filterCommandGroups, type CommandItem } from './commandData'
 
+/** platform-correct modifier glyph for shortcut hints */
+export const modKey =
+  isWeb && typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform)
+    ? '⌘'
+    : 'Ctrl'
+
+const shortcutKey = (key: string) => (key === 'mod' ? modKey : key)
+
 type CommandMenuProps = {
   autoFocus?: boolean
+  /** tighter chrome for narrow containers: shorter placeholder, no ESC hint */
+  compact?: boolean
   onDismiss?: () => void
   onSelect: (item: CommandItem) => void
 }
 
-export function CommandMenu({ autoFocus, onDismiss, onSelect }: CommandMenuProps) {
+export function CommandMenu({ autoFocus, compact, onDismiss, onSelect }: CommandMenuProps) {
   const [query, setQuery] = useState('')
   const [activeIndex, setActiveIndex] = useState(0)
+  // hover activates only on true pointer movement (coordinate delta) — the
+  // panel opening under a stationary cursor, and Chrome's synthetic mousemove
+  // after keyboard scrolling, must not steal the keyboard selection
+  const lastPointer = useRef<{ x: number; y: number } | null>(null)
+  const handleRowMouseMove = (index: number, event: React.MouseEvent) => {
+    const { clientX, clientY } = event
+    if (lastPointer.current?.x === clientX && lastPointer.current?.y === clientY) return
+    lastPointer.current = { x: clientX, y: clientY }
+    setActiveIndex(index)
+  }
   const id = useId().replaceAll(':', '')
   const listboxId = `command-list-${id}`
   const groups = useMemo(() => filterCommandGroups(query), [query])
@@ -100,7 +120,7 @@ export function CommandMenu({ autoFocus, onDismiss, onSelect }: CommandMenuProps
           onChangeText={setQuery}
           onKeyDown={handleKeyDown}
           outlineWidth={0}
-          placeholder="Search pages and actions…"
+          placeholder={compact ? 'Search…' : 'Search pages and actions…'}
           placeholderTextColor="$color10"
           role="combobox"
           value={query}
@@ -112,11 +132,12 @@ export function CommandMenu({ autoFocus, onDismiss, onSelect }: CommandMenuProps
             circular
             icon={X}
             onPress={() => setQuery('')}
-            size="$2"
+            size="$2.5"
+            hitSlop={isWeb ? undefined : 8}
           />
         )}
         {isWeb ? (
-          <Kbd>ESC</Kbd>
+          !compact && <Kbd>ESC</Kbd>
         ) : (
           <Button
             aria-label="Close"
@@ -168,10 +189,12 @@ export function CommandMenu({ autoFocus, onDismiss, onSelect }: CommandMenuProps
                     active={active}
                     aria-selected={active}
                     // biome-ignore lint/a11y/useSemanticElements: Native options cannot contain this rich ARIA listbox row.
-                    role="option"
+                    role={isWeb ? 'option' : 'menuitem'}
                     tabIndex={-1}
                     onFocus={() => setActiveIndex(index)}
-                    onMouseEnter={() => setActiveIndex(index)}
+                    onMouseMove={(event: React.MouseEvent) =>
+                      handleRowMouseMove(index, event)
+                    }
                     onPress={() => selectItem(item)}
                   >
                     <Icon
@@ -195,7 +218,7 @@ export function CommandMenu({ autoFocus, onDismiss, onSelect }: CommandMenuProps
                     {isWeb && !!item.shortcut?.length && (
                       <XStack gap="$1" aria-hidden>
                         {item.shortcut.map((key) => (
-                          <Kbd key={key}>{key}</Kbd>
+                          <Kbd key={key}>{shortcutKey(key)}</Kbd>
                         ))}
                       </XStack>
                     )}
@@ -297,6 +320,8 @@ export const Kbd = styled(Text, {
   render: 'kbd',
   items: 'center',
   justify: 'center',
+  shrink: 0,
+  whiteSpace: 'nowrap',
   minW: 24,
   height: 24,
   px: '$1.5',

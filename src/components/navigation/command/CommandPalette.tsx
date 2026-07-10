@@ -1,5 +1,6 @@
 import { Command as CommandIcon, Search } from '@tamagui/lucide-icons-2'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { SafeAreaInsetsContext } from 'react-native-safe-area-context'
 import {
   Button,
   Dialog,
@@ -13,22 +14,25 @@ import {
   useThemeName,
 } from 'tamagui'
 import { useGroupMedia } from '../../hooks/useGroupMedia'
-import { CommandMenu, Kbd } from './CommandMenu'
+import { CommandMenu, Kbd, modKey } from './CommandMenu'
 import type { CommandItem } from './commandData'
-
-const smoothEase = 'cubic-bezier(0.32, 0.72, 0, 1)'
 
 export function CommandPalette() {
   const [open, setOpen] = useState(false)
   const [lastAction, setLastAction] = useState('No command selected yet')
   const { sm } = useGroupMedia('window')
   const themeName = useThemeName()
-  const portalThemeName =
-    isWeb &&
-    typeof document !== 'undefined' &&
-    document.documentElement.classList.contains('t_dark')
-      ? 'dark'
-      : themeName
+  const triggerRef = useRef<any>(null)
+  // context (not the hook) so web galleries without a SafeAreaProvider still work
+  const insets = useContext(SafeAreaInsetsContext)
+
+  const handleOpenChange = (next: boolean) => {
+    setOpen(next)
+    if (!next && isWeb) {
+      // hand focus back to the launcher once the exit animation lands
+      setTimeout(() => triggerRef.current?.focus?.(), 150)
+    }
+  }
 
   useEffect(() => {
     if (!isWeb) return
@@ -36,34 +40,21 @@ export function CommandPalette() {
     const handleShortcut = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLocaleLowerCase() === 'k') {
         event.preventDefault()
-        setOpen((current) => !current)
+        handleOpenChange(!open)
       }
     }
 
     window.addEventListener('keydown', handleShortcut)
     return () => window.removeEventListener('keydown', handleShortcut)
-  }, [])
+  })
 
   const selectCommand = (item: CommandItem) => {
     setLastAction(`${item.label} selected`)
-    setOpen(false)
+    handleOpenChange(false)
   }
 
   return (
     <YStack width="100%" maxW={720} items="center" gap="$4" py="$7">
-      {isWeb && (
-        <style>{`
-          [data-command-overlay], [data-command-panel] {
-            transition-timing-function: ${smoothEase} !important;
-          }
-          @media (prefers-reduced-motion: reduce) {
-            [data-command-overlay], [data-command-panel] {
-              transition-duration: 0.01ms !important;
-            }
-          }
-        `}</style>
-      )}
-
       <YStack items="center" gap="$2">
         <View
           bg="$color3"
@@ -86,8 +77,9 @@ export function CommandPalette() {
         </Paragraph>
       </YStack>
 
-      <Dialog modal open={open} onOpenChange={setOpen}>
+      <Dialog modal open={open} onOpenChange={handleOpenChange}>
         <Button
+          ref={triggerRef}
           aria-haspopup="dialog"
           aria-expanded={open}
           icon={Search}
@@ -104,26 +96,26 @@ export function CommandPalette() {
           Open command palette
           {isWeb && (
             <XStack ml="$2" gap="$1" aria-hidden>
-              <Kbd>⌘</Kbd>
+              <Kbd>{modKey}</Kbd>
               <Kbd>K</Kbd>
             </XStack>
           )}
         </Button>
 
-        <Theme name={portalThemeName}>
+        <Theme name={themeName}>
           <Dialog.Portal>
             <Dialog.Overlay
               data-command-overlay
               key="command-overlay"
+              bg="$shadow6"
               enterStyle={{ opacity: 0 }}
               exitStyle={{ opacity: 0 }}
               opacity={1}
               style={{
-                backgroundColor: 'rgba(8, 10, 14, 0.58)',
                 backdropFilter: 'blur(7px)',
                 WebkitBackdropFilter: 'blur(7px)',
               }}
-              transition={{ default: 'quicker', exit: 'quickest' }}
+              transition="100ms"
             />
 
             <Dialog.Content
@@ -141,14 +133,14 @@ export function CommandPalette() {
               overflow="hidden"
               p={0}
               // full-screen on native must clear the status bar / dynamic island
-              pt={!isWeb && sm ? 62 : 0}
+              pt={!isWeb && sm ? (insets?.top ?? 54) + 8 : 0}
               rounded={sm ? 0 : '$8'}
               style={
                 sm
                   ? { inset: 0 }
                   : { left: 0, right: 0, top: '10vh', marginHorizontal: 'auto' }
               }
-              transition={{ default: '200ms', exit: '100ms' }}
+              transition="100ms"
               width="100%"
             >
               <Dialog.Title
@@ -171,7 +163,8 @@ export function CommandPalette() {
               </Dialog.Description>
               <CommandMenu
                 autoFocus
-                onDismiss={() => setOpen(false)}
+                compact={sm}
+                onDismiss={() => handleOpenChange(false)}
                 onSelect={selectCommand}
               />
             </Dialog.Content>
