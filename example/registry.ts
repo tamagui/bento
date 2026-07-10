@@ -42,8 +42,14 @@ export const componentMap: Record<string, Record<string, any>> = {
   command: Components.Command,
   toasts: Components.Toasts,
   carousels: Components.Carousels,
+  'marketing-sections': Components.MarketingSections,
+  progress: Components.Progress,
   'data-grid': Components.DataGrid,
   kanban: Components.Kanban,
+  'settings-cells': Components.SettingsCells,
+  steppers: Components.Steppers,
+  'file-upload': Components.FileUpload,
+  pricing: Components.Pricing,
 }
 
 // only capitalized function exports are renderable demos (skip helpers/types)
@@ -68,6 +74,7 @@ export const sections: { label: string; items: { title: string; id: string }[] }
       { title: 'Switches', id: 'switches' },
       { title: 'Textareas', id: 'textareas' },
       { title: 'Form Layouts', id: 'layouts' },
+      { title: 'File Upload', id: 'file-upload' },
       { title: 'Pickers', id: 'pickers' },
     ],
   },
@@ -93,6 +100,7 @@ export const sections: { label: string; items: { title: string; id: string }[] }
       { title: 'Empty States', id: 'empty-states' },
       { title: 'Skeletons', id: 'skeletons' },
       { title: 'Stats', id: 'stats' },
+      { title: 'Progress', id: 'progress' },
       { title: 'Ratings', id: 'ratings' },
     ],
   },
@@ -113,6 +121,7 @@ export const sections: { label: string; items: { title: string; id: string }[] }
     items: [
       { title: 'Command Palette', id: 'command' },
       { title: 'Accordions', id: 'accordions' },
+      { title: 'Steppers', id: 'steppers' },
       { title: 'Navigation Bars', id: 'navbars' },
       { title: 'Tab Bars', id: 'tabbars' },
       { title: 'Drawer', id: 'shells' },
@@ -128,6 +137,13 @@ export const sections: { label: string; items: { title: string; id: string }[] }
     ],
   },
   {
+    label: 'Marketing',
+    items: [
+      { title: 'Sections', id: 'marketing-sections' },
+      { title: 'Pricing', id: 'pricing' },
+    ],
+  },
+  {
     label: 'E-commerce',
     items: [
       { title: 'Payment', id: 'payment' },
@@ -140,6 +156,7 @@ export const sections: { label: string; items: { title: string; id: string }[] }
     items: [
       { title: 'Preferences', id: 'preferences' },
       { title: 'Profile', id: 'profile' },
+      { title: 'Settings Cells', id: 'settings-cells' },
       { title: 'Walkthrough', id: 'walkthrough' },
     ],
   },
