@@ -18,7 +18,7 @@ export function AvatarsTooltipFancy() {
     <View gap="$6">
       <View flexDirection="row">
         {items.map((item, index) => (
-          <Item item={item} index={index} key={item} />
+          <Item item={item} index={index} key={`${item}-${index}`} />
         ))}
       </View>
     </View>
@@ -38,7 +38,7 @@ function Item(props: { item: string; index: number }) {
   })
 
   return (
-    <View ml={index !== 0 ? '$-4' : undefined} z={index} key={item} cursor="pointer">
+    <View ml={index !== 0 ? '$-4' : undefined} z={index} cursor="pointer">
       <AvatarTip offset={5} placement="top" delay={0}>
         <AvatarTip.Trigger>
           <Avatar
@@ -48,7 +48,7 @@ function Item(props: { item: string; index: number }) {
             circular
             size="$6"
           >
-            <Avatar.Image src={`/avatars/300.jpeg`} />
+            <Avatar.Image src={`https://i.pravatar.cc/150?img=${index + 10}`} />
             <Avatar.Fallback bg="$background" />
           </Avatar>
         </AvatarTip.Trigger>

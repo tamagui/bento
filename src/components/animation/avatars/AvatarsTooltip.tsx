@@ -11,17 +11,20 @@ export function AvatarsTooltip() {
         {items.map((item, index) => (
           <View
             ml={index !== 0 ? '$-2' : undefined}
-            key={item}
+            key={`${item}-${index}`}
             hoverStyle={{
               z: 1,
               scale: 1.05,
             }}
-            transition="bouncy"
+            style={{ transition: 'transform 150ms ease' }}
             cursor="pointer"
           >
             <AvatarTip offset={5} placement="bottom" restMs={0} delay={0}>
               <AvatarTip.Trigger>
-                <Item size="$4" imageUrl={`/avatars/300.jpeg`} />
+                <Item
+                  size="$4"
+                  imageUrl={`https://i.pravatar.cc/150?img=${index + 10}`}
+                />
               </AvatarTip.Trigger>
               <AvatarTip.Content elevation={2} transformOrigin="center top">
                 <AvatarTip.Arrow />
@@ -37,17 +40,20 @@ export function AvatarsTooltip() {
         {items.map((item, index) => (
           <View
             ml={index !== 0 ? '$-4' : undefined}
-            key={item}
+            key={`${item}-${index}`}
             hoverStyle={{
               z: 1,
               scale: 1.05,
             }}
-            transition="bouncy"
+            style={{ transition: 'transform 150ms ease' }}
             cursor="pointer"
           >
             <AvatarTip offset={5} placement="bottom" delay={0}>
               <AvatarTip.Trigger>
-                <Item size="$6" imageUrl={`/avatars/300.jpeg`} />
+                <Item
+                  size="$6"
+                  imageUrl={`https://i.pravatar.cc/150?img=${index + 10}`}
+                />
               </AvatarTip.Trigger>
               <AvatarTip.Content elevation={2} transformOrigin="center top">
                 <AvatarTip.Arrow />
