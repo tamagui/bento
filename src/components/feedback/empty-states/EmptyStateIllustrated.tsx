@@ -1,10 +1,12 @@
 import { Cloud, FileText, Sparkles } from '@tamagui/lucide-icons-2'
-import { Button, H2, Paragraph, View, XStack, YStack } from 'tamagui'
+import { useToastController } from '@tamagui/toast'
+import { Button, H2, Paragraph, View, XStack, YStack, isWeb } from 'tamagui'
 
 export function EmptyStateIllustrated() {
+  const toast = useToastController()
   return (
     <YStack
-      render="output"
+      render={isWeb ? 'section' : undefined}
       aria-label="Empty workspace"
       width="100%"
       maxW={680}
@@ -50,8 +52,22 @@ export function EmptyStateIllustrated() {
         workspace.
       </Paragraph>
       <XStack gap="$3" flexWrap="wrap" justify="center">
-        <Button theme="accent">New document</Button>
-        <Button variant="outlined">Upload file</Button>
+        <Button
+          theme="accent"
+          onPress={() =>
+            toast.show('New document', { message: 'Would open a blank document' })
+          }
+        >
+          New document
+        </Button>
+        <Button
+          variant="outlined"
+          onPress={() =>
+            toast.show('Upload', { message: 'Would open the file picker' })
+          }
+        >
+          Upload file
+        </Button>
       </XStack>
     </YStack>
   )
