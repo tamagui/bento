@@ -16,7 +16,6 @@ export function SwitchCustomIcons({ size }: { size?: SizeTokens }) {
         checked={checked}
         onCheckedChange={setChecked}
         backgroundColor="$red10"
-        // @ts-expect-error
         activeStyle={{ backgroundColor: '$green10' }}
       >
         <Switch.Icon placement="left">
