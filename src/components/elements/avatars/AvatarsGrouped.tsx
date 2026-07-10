@@ -49,7 +49,7 @@ function AvatarGroup({ size, items }: { size: SizeTokens; items: React.ReactNode
           key={index}
           z={index}
           ml={index !== 0 ? -(getTokenValue(size as any) ?? 20) * 1.5 : undefined}
-          transition="bouncy"
+          style={{ transition: 'transform 150ms ease' }}
           x={0}
           {...(hovered && {
             x: index * 8,
