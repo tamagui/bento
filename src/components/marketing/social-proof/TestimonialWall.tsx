@@ -1,6 +1,8 @@
 import { Quote } from '@tamagui/lucide-icons-2'
-import { Avatar, Paragraph, Text, XStack, YStack } from 'tamagui'
+import { Avatar, Paragraph, Text, XStack, YStack, isWeb } from 'tamagui'
 
+// fictional testimonials for layout preview — publish only real, approved
+// customer quotes with names used by permission
 const quotes = [
   {
     quote:
@@ -47,18 +49,20 @@ export function TestimonialWall() {
       {quotes.map((item, index) => (
         <YStack
           key={item.name}
+          render={isWeb ? 'blockquote' : undefined}
           width="48%"
           minW={280}
           flex={1}
           minH={index % 2 ? 210 : 250}
           gap="$4"
+          m={0}
           p="$5"
           rounded="$8"
           borderWidth={1}
           borderColor="$borderColor"
           bg="$background"
         >
-          <Quote size={24} color="$accentColor" />
+          <Quote size={24} color="$accentColor" aria-hidden />
           <Paragraph flex={1} fontSize="$5" lineHeight="$6" color="$color11">
             “{item.quote}”
           </Paragraph>
@@ -70,7 +74,7 @@ export function TestimonialWall() {
                 </Text>
               </Avatar.Fallback>
             </Avatar>
-            <YStack>
+            <YStack render={isWeb ? 'cite' : undefined} style={isWeb ? { fontStyle: 'normal' } : undefined}>
               <Text fontWeight="800" letterSpacing={0}>
                 {item.name}
               </Text>

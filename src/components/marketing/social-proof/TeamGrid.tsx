@@ -1,11 +1,13 @@
-import { Github, Linkedin, Twitter } from '@tamagui/lucide-icons-2'
-import { Avatar, Button, Text, XStack, YStack } from 'tamagui'
+import { Mail } from '@tamagui/lucide-icons-2'
+import { Anchor, Avatar, Text, XStack, YStack } from 'tamagui'
 
+// fictional placeholder team — dead social buttons are worse than none, so
+// each card carries one real action (email) until you wire actual profiles
 const team = [
-  { name: 'Maya Chen', initials: 'MC', role: 'Co-founder · Product', color: '$purple5' },
-  { name: 'Noah Williams', initials: 'NW', role: 'Engineering lead', color: '$blue5' },
-  { name: 'Priya Shah', initials: 'PS', role: 'Design director', color: '$orange5' },
-  { name: 'Mateo Rivera', initials: 'MR', role: 'Customer success', color: '$green5' },
+  { name: 'Maya Chen', initials: 'MC', role: 'Co-founder · Product', color: '$purple5', email: 'maya@bento.example' },
+  { name: 'Noah Williams', initials: 'NW', role: 'Engineering lead', color: '$blue5', email: 'noah@bento.example' },
+  { name: 'Priya Shah', initials: 'PS', role: 'Design director', color: '$orange5', email: 'priya@bento.example' },
+  { name: 'Mateo Rivera', initials: 'MR', role: 'Customer success', color: '$green5', email: 'mateo@bento.example' },
 ] as const
 
 export function TeamGrid() {
@@ -40,29 +42,21 @@ export function TeamGrid() {
               {member.role}
             </Text>
           </YStack>
-          <XStack gap="$1">
-            <Button
-              circular
-              chromeless
-              size="$3"
-              icon={Twitter}
-              aria-label={`${member.name} on X`}
-            />
-            <Button
-              circular
-              chromeless
-              size="$3"
-              icon={Linkedin}
-              aria-label={`${member.name} on LinkedIn`}
-            />
-            <Button
-              circular
-              chromeless
-              size="$3"
-              icon={Github}
-              aria-label={`${member.name} on GitHub`}
-            />
-          </XStack>
+          <Anchor
+            href={`mailto:${member.email}`}
+            aria-label={`Email ${member.name}`}
+            color="$color10"
+            p="$3"
+            rounded="$4"
+            hoverStyle={{ color: '$color12', bg: '$color2' }}
+          >
+            <XStack items="center" gap="$2">
+              <Mail size={16} />
+              <Text color="$color10" fontSize="$3">
+                Email
+              </Text>
+            </XStack>
+          </Anchor>
         </YStack>
       ))}
     </XStack>
