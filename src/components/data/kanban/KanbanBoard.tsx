@@ -1,6 +1,5 @@
 import {
   CalendarDays,
-  Check,
   ChevronRight,
   MoreHorizontal,
   RotateCcw,
@@ -21,6 +20,7 @@ import {
   isWeb,
 } from 'tamagui'
 import { useGroupMedia } from '../../hooks/useGroupMedia'
+import { useReducedMotion } from '../../hooks'
 
 type ColumnId = 'todo' | 'progress' | 'done'
 type TaskLabel = 'Design' | 'Engineering' | 'Research' | 'Marketing'
@@ -41,12 +41,24 @@ type DragState = {
   fromColumn: ColumnId
   overColumn: ColumnId
   overIndex: number
-  startX: number
-  startY: number
-  x: number
-  y: number
   mode: 'pointer' | 'keyboard'
 }
+
+type PendingDrag = {
+  taskId: string
+  columnId: ColumnId
+  index: number
+  startX: number
+  startY: number
+  el: HTMLElement
+}
+
+type DragGeometry = {
+  id: ColumnId
+  left: number
+  right: number
+  cardMids: number[]
+}[]
 
 const columnOrder: ColumnId[] = ['todo', 'progress', 'done']
 const columnNames: Record<ColumnId, string> = {
@@ -103,7 +115,17 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
   const [board, setBoard] = useState<BoardState>(() => cloneBoard(initialBoard))
   const [drag, setDragState] = useState<DragState | null>(null)
   const [announcement, setAnnouncement] = useState('')
+  const [page, setPage] = useState(0)
   const dragRef = useRef<DragState | null>(null)
+  // pointer-drag internals live in refs: the moving card follows the pointer
+  // through direct DOM transforms, and React state only changes when the
+  // target column/position changes — never per pointer frame
+  const pending = useRef<PendingDrag | null>(null)
+  const dragEl = useRef<HTMLElement | null>(null)
+  const dragStart = useRef({ x: 0, y: 0 })
+  const geometry = useRef<DragGeometry>([])
+  const boardRef = useRef<HTMLElement | null>(null)
+  const reducedMotion = useReducedMotion()
   const { sm } = useGroupMedia('window')
   const columnWidth = compact ? 276 : 304
   const gap = 16
@@ -135,16 +157,52 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
     )
     if (isWeb) {
       requestAnimationFrame(() => {
-        document.querySelector<HTMLElement>(`[data-task-id="${taskId}"]`)?.focus()
+        // scope to this board so duplicate boards on a page don't cross-focus
+        boardRef.current
+          ?.querySelector<HTMLElement>(`[data-task-id="${taskId}"]`)
+          ?.focus()
       })
     }
   }
 
+  const clearPointerVisuals = () => {
+    if (dragEl.current) {
+      dragEl.current.style.transform = ''
+      dragEl.current.style.transition = ''
+    }
+    dragEl.current = null
+    pending.current = null
+  }
+
   const drop = () => {
     const current = dragRef.current
+    clearPointerVisuals()
     if (!current) return
     moveTask(current.taskId, current.overColumn, current.overIndex)
     setDrag(null)
+  }
+
+  const snapshotGeometry = (taskId: string): DragGeometry => {
+    const root = boardRef.current
+    if (!root) return []
+    return Array.from(root.querySelectorAll<HTMLElement>('[data-kanban-column]')).map(
+      (column) => {
+        const rect = column.getBoundingClientRect()
+        return {
+          id: column.dataset.columnId as ColumnId,
+          left: rect.left,
+          right: rect.right,
+          cardMids: Array.from(
+            column.querySelectorAll<HTMLElement>('[data-kanban-card]')
+          )
+            .filter((card) => card.dataset.taskId !== taskId)
+            .map((card) => {
+              const cardRect = card.getBoundingClientRect()
+              return cardRect.top + cardRect.height / 2
+            }),
+        }
+      }
+    )
   }
 
   const startPointerDrag = (
@@ -153,56 +211,86 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
     columnId: ColumnId,
     index: number
   ) => {
-    if (!isWeb || event.button !== 0) return
+    // mouse only: touch keeps native scrolling and uses the move menu instead
+    if (!isWeb || event.pointerType !== 'mouse' || event.button !== 0) return
     if ((event.target as HTMLElement).closest('button')) return
-    event.preventDefault()
-    event.currentTarget.setPointerCapture(event.pointerId)
-    setDrag({
+    pending.current = {
       taskId: taskItem.id,
-      fromColumn: columnId,
-      overColumn: columnId,
-      overIndex: index,
+      columnId,
+      index,
       startX: event.clientX,
       startY: event.clientY,
-      x: event.clientX,
-      y: event.clientY,
-      mode: 'pointer',
-    })
-    setAnnouncement(
-      `${taskItem.title} lifted. Move pointer to a column and release to drop.`
-    )
+      el: event.currentTarget as HTMLElement,
+    }
   }
 
   const updatePointerDrag = (event: PointerEvent<HTMLDivElement>) => {
-    const current = dragRef.current
-    if (!isWeb || !current || current.mode !== 'pointer') return
-    const elements = document.elementsFromPoint(event.clientX, event.clientY)
-    const target = elements.find(
-      (element) =>
-        !element.closest('[data-dragging="true"]') &&
-        element.closest('[data-kanban-column]')
-    )
-    const columnElement = target?.closest<HTMLElement>('[data-kanban-column]')
-    const overColumn = columnElement?.dataset.columnId as ColumnId | undefined
-    if (!columnElement || !overColumn) {
-      setDrag({ ...current, x: event.clientX, y: event.clientY })
-      return
+    if (!isWeb) return
+
+    // promote a pending press to a drag only after real movement, so plain
+    // clicks (menu, focus) never lift the card
+    const waiting = pending.current
+    if (waiting && !dragRef.current) {
+      const distance = Math.hypot(
+        event.clientX - waiting.startX,
+        event.clientY - waiting.startY
+      )
+      if (distance < 6) return
+      waiting.el.setPointerCapture(event.pointerId)
+      dragEl.current = waiting.el
+      dragStart.current = { x: waiting.startX, y: waiting.startY }
+      waiting.el.style.transition = 'none'
+      geometry.current = snapshotGeometry(waiting.taskId)
+      const location = locateTask(waiting.taskId)
+      setDrag({
+        taskId: waiting.taskId,
+        fromColumn: waiting.columnId,
+        overColumn: waiting.columnId,
+        overIndex: waiting.index,
+        mode: 'pointer',
+      })
+      setAnnouncement(
+        `${location?.taskItem.title ?? 'Card'} lifted. Move pointer to a column and release to drop.`
+      )
+      pending.current = null
     }
 
-    const cards = Array.from(
-      columnElement.querySelectorAll<HTMLElement>('[data-kanban-card]')
-    ).filter((card) => card.dataset.taskId !== current.taskId)
-    const overIndex = cards.findIndex((card) => {
-      const rect = card.getBoundingClientRect()
-      return event.clientY < rect.top + rect.height / 2
-    })
-    setDrag({
-      ...current,
-      overColumn,
-      overIndex: overIndex < 0 ? cards.length : overIndex,
-      x: event.clientX,
-      y: event.clientY,
-    })
+    const current = dragRef.current
+    if (!current || current.mode !== 'pointer' || !dragEl.current) return
+
+    const dx = event.clientX - dragStart.current.x
+    const dy = event.clientY - dragStart.current.y
+    dragEl.current.style.transform = reducedMotion
+      ? `translate(${dx}px, ${dy}px)`
+      : `translate(${dx}px, ${dy}px) rotate(2deg) scale(1.03)`
+
+    // hit-test the geometry snapshot — no layout reads during the drag
+    const overColumn =
+      geometry.current.find(
+        (column) => event.clientX >= column.left && event.clientX <= column.right
+      ) ?? null
+    if (!overColumn) return
+    const midIndex = overColumn.cardMids.findIndex((mid) => event.clientY < mid)
+    const overIndex = midIndex < 0 ? overColumn.cardMids.length : midIndex
+    if (current.overColumn !== overColumn.id || current.overIndex !== overIndex) {
+      setDrag({ ...current, overColumn: overColumn.id, overIndex })
+    }
+  }
+
+  const endPointer = () => {
+    if (dragRef.current?.mode === 'pointer') {
+      drop()
+    } else {
+      pending.current = null
+    }
+  }
+
+  const cancelPointer = () => {
+    clearPointerVisuals()
+    if (dragRef.current?.mode === 'pointer') {
+      setDrag(null)
+      setAnnouncement('Move cancelled')
+    }
   }
 
   const handleKeyboard = (
@@ -221,10 +309,6 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
           fromColumn: columnId,
           overColumn: columnId,
           overIndex: index,
-          startX: 0,
-          startY: 0,
-          x: 0,
-          y: 0,
           mode: 'keyboard',
         })
         setAnnouncement(`${taskItem.title} lifted. Use arrow keys, then Space to drop.`)
@@ -284,6 +368,7 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
             key={column.id}
             data-kanban-column
             data-column-id={column.id}
+            render={isWeb ? 'section' : undefined}
             aria-label={`${column.label}, ${column.tasks.length} tasks`}
             bg={highlighted ? '$color3' : '$color2'}
             borderColor={highlighted ? '$color8' : '$color5'}
@@ -295,7 +380,7 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
             width={sm ? '82vw' : columnWidth}
             maxW={columnWidth}
             style={
-              isWeb
+              isWeb && !reducedMotion
                 ? {
                     transition:
                       'background-color 180ms cubic-bezier(0.32, 0.72, 0, 1), border-color 100ms ease-out',
@@ -328,7 +413,7 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
               </View>
             </XStack>
             <Separator />
-            <YStack gap="$2" flex={1}>
+            <YStack gap="$2" flex={1} role={isWeb ? 'list' : undefined}>
               {column.tasks.map((taskItem, index) => {
                 const isDragging = drag?.taskId === taskItem.id
                 const showIndicator =
@@ -342,6 +427,7 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
                       compact={compact}
                       dragging={isDragging}
                       drag={isDragging ? drag : null}
+                      reducedMotion={reducedMotion}
                       onKeyDown={(event) =>
                         handleKeyboard(event, taskItem, column.id, index)
                       }
@@ -349,7 +435,8 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
                         startPointerDrag(event, taskItem, column.id, index)
                       }
                       onPointerMove={updatePointerDrag}
-                      onPointerUp={drop}
+                      onPointerUp={endPointer}
+                      onPointerCancel={cancelPointer}
                       onMoveTo={(toColumn) => moveTask(taskItem.id, toColumn)}
                     />
                   </View>
@@ -365,7 +452,13 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
   )
 
   return (
-    <YStack width="100%" maxW={1040} gap="$4" py="$5">
+    <YStack
+      width="100%"
+      maxW={1040}
+      gap="$4"
+      py="$5"
+      ref={boardRef as any}
+    >
       <XStack
         items={sm ? 'stretch' : 'center'}
         justify="space-between"
@@ -386,6 +479,7 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
           aria-label="Reset board"
           icon={RotateCcw}
           onPress={() => {
+            clearPointerVisuals()
             setBoard(cloneBoard(initialBoard))
             setDrag(null)
             setAnnouncement('Board reset')
@@ -399,21 +493,42 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
       </XStack>
 
       {sm ? (
-        <ScrollView
-          horizontal
-          decelerationRate="fast"
-          showsHorizontalScrollIndicator={false}
-          snapToInterval={columnWidth + gap}
-        >
-          {boardContent}
-        </ScrollView>
+        <YStack gap="$2">
+          <ScrollView
+            horizontal
+            decelerationRate="fast"
+            showsHorizontalScrollIndicator={false}
+            snapToInterval={columnWidth + gap}
+            scrollEventThrottle={64}
+            onScroll={(event) => {
+              const next = Math.round(
+                event.nativeEvent.contentOffset.x / (columnWidth + gap)
+              )
+              const clamped = Math.max(0, Math.min(columnOrder.length - 1, next))
+              if (clamped !== page) setPage(clamped)
+            }}
+          >
+            {boardContent}
+          </ScrollView>
+          <XStack self="center" gap="$1.5" aria-hidden>
+            {columnOrder.map((columnId, index) => (
+              <View
+                key={columnId}
+                width={7}
+                height={7}
+                rounded={1000}
+                bg={index === page ? '$color10' : '$color6'}
+              />
+            ))}
+          </XStack>
+        </YStack>
       ) : (
         boardContent
       )}
 
       <Text
         render="output"
-        aria-live="assertive"
+        aria-live="polite"
         position="absolute"
         width={1}
         height={1}
@@ -432,10 +547,12 @@ type TaskCardProps = {
   compact: boolean
   dragging: boolean
   drag: DragState | null
+  reducedMotion: boolean
   onKeyDown: (event: KeyboardEvent<HTMLDivElement>) => void
   onPointerDown: (event: PointerEvent<HTMLDivElement>) => void
   onPointerMove: (event: PointerEvent<HTMLDivElement>) => void
   onPointerUp: () => void
+  onPointerCancel: () => void
   onMoveTo: (columnId: ColumnId) => void
 }
 
@@ -445,10 +562,12 @@ function TaskCard({
   compact,
   dragging,
   drag,
+  reducedMotion,
   onKeyDown,
   onPointerDown,
   onPointerMove,
   onPointerUp,
+  onPointerCancel,
   onMoveTo,
 }: TaskCardProps) {
   return (
@@ -456,6 +575,8 @@ function TaskCard({
       data-kanban-card
       data-task-id={taskItem.id}
       data-dragging={dragging}
+      role={isWeb ? 'listitem' : undefined}
+      aria-roledescription={isWeb ? 'Draggable task. Press Space to lift.' : undefined}
       aria-label={`${taskItem.title}, ${taskItem.label}, due ${taskItem.due}`}
       bg="$background"
       borderColor={dragging ? '$color8' : '$color5'}
@@ -466,14 +587,10 @@ function TaskCard({
       gap="$3"
       opacity={dragging && drag?.mode === 'keyboard' ? 0.72 : 1}
       p={compact ? '$3' : '$4'}
-      rotate={dragging && drag?.mode === 'pointer' ? '2deg' : '0deg'}
-      scale={dragging ? 1.03 : 1}
       tabIndex={0}
-      x={drag?.mode === 'pointer' ? drag.x - drag.startX : 0}
-      y={drag?.mode === 'pointer' ? drag.y - drag.startY : 0}
       z={dragging ? 100 : 1}
       style={
-        isWeb
+        isWeb && !reducedMotion
           ? {
               transition:
                 'transform 180ms cubic-bezier(0.32, 0.72, 0, 1), box-shadow 180ms cubic-bezier(0.32, 0.72, 0, 1), border-color 100ms ease-out',
@@ -493,6 +610,7 @@ function TaskCard({
             onPointerDown,
             onPointerMove,
             onPointerUp,
+            onPointerCancel,
           }
         : {})}
     >
@@ -542,8 +660,9 @@ function MoveMenu({
           aria-label={`Move ${taskItem.title}`}
           chromeless
           circular
+          hitSlop={isWeb ? undefined : 10}
           icon={MoreHorizontal}
-          size="$2"
+          size="$2.5"
         />
       </Popover.Trigger>
       <Popover.Content
