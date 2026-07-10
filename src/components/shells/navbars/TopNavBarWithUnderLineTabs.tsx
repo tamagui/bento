@@ -182,7 +182,6 @@ export function TopNavBarWithUnderLineTabs() {
                 )}
               </AnimatePresence>
               <Tabs.List
-                
                 loop={false}
                 aria-label="Manage your account"
                 gap="$3"
@@ -458,7 +457,6 @@ function SideBarContent({
                       )}
                     </AnimatePresence>
                     <Tabs.List
-                      
                       loop={false}
                       aria-label="Manage your account"
                       gap="$1"

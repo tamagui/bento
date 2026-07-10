@@ -36,7 +36,9 @@ const Link = styled(Anchor, {
   variants: {
     active: {
       true: {
-        backgroundColor: '$backgroundPress',
+        backgroundColor: '$color3',
+        borderLeftWidth: 3,
+        borderLeftColor: '$color9',
       },
     },
   },
@@ -286,6 +288,7 @@ function FloatingSideBar({
 }
 
 const SideBarContent = View.styleable((props, ref) => {
+  const [selected, setSelected] = useState('Sign In')
   return (
     <View
       flexDirection="column"
@@ -306,9 +309,12 @@ const SideBarContent = View.styleable((props, ref) => {
         }}
       >
         <View flexDirection="row" items="center" gap="$2.5">
-          <Avatar rounded="$true" size="$4" padding="$4">
-            <Avatar.Image scale={0.6} src="/favicon.svg" />
-            <Avatar.Fallback bg="$color11" borderColor="$color11" />
+          <Avatar circular size="$4">
+            <Avatar.Image
+              aria-label="User avatar"
+              src="https://i.pravatar.cc/150?img=32"
+            />
+            <Avatar.Fallback bg="$color6" />
           </Avatar>
           <H4 fontSize="$6" color="$color12">
             Hi User!
@@ -316,15 +322,15 @@ const SideBarContent = View.styleable((props, ref) => {
         </View>
       </View>
       <View flexDirection="column" grow={1} bg="$background">
-        <View
-          bg="$backgroundFocus"
-          p="$2.5"
-          pl="$5"
-          $group-window-gtXs={{
-            pl: '$5',
-          }}
-        >
-          <Text fontSize="$5" lineHeight="$5" fontWeight="400" color="$color12">
+        <View p="$2.5" pl="$5" pt="$4">
+          <Text
+            fontSize="$2"
+            lineHeight="$2"
+            fontWeight="700"
+            color="$color10"
+            letterSpacing={1}
+            textTransform="uppercase"
+          >
             Auth
           </Text>
         </View>
@@ -333,7 +339,12 @@ const SideBarContent = View.styleable((props, ref) => {
             {['Sign In', 'Sign Up', 'Forgot Password', 'Reset Password'].map(
               (item, index) => (
                 <RovingFocusGroup.Item key={index} focusable>
-                  <NavLink pl="$5" href="#">
+                  <NavLink
+                    pl="$5"
+                    href="#"
+                    active={selected === item}
+                    onPress={() => setSelected(item)}
+                  >
                     {item}
                   </NavLink>
                 </RovingFocusGroup.Item>
@@ -341,8 +352,15 @@ const SideBarContent = View.styleable((props, ref) => {
             )}
           </RovingFocusGroup>
         </View>
-        <View bg="$backgroundFocus" p="$2.5" pl="$5">
-          <Text fontSize="$5" lineHeight="$5" fontWeight="400" color="$color12">
+        <View p="$2.5" pl="$5" pt="$4">
+          <Text
+            fontSize="$2"
+            lineHeight="$2"
+            fontWeight="700"
+            color="$color10"
+            letterSpacing={1}
+            textTransform="uppercase"
+          >
             User
           </Text>
         </View>
@@ -364,12 +382,10 @@ const SideBarContent = View.styleable((props, ref) => {
 
 const NavLink = Link.styleable(({ children, href = '#', onPress, ...rest }, ref: any) => {
   /**
-   * use the following logic in to check if the route is active
-   * const router = useRouter();
-   * const currentPath = router.pathname;
-   * const isActive = href === currentPath;
+   * in a real app derive this from the router:
+   * const isActive = href === router.pathname
    */
-  const isActive = false
+  const isActive = rest.active ?? false
 
   return (
     <Link

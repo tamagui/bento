@@ -151,7 +151,15 @@ export function TopNavBarWithLogo() {
           {sm ? (
             <SideBar />
           ) : (
-            <View flexDirection="row" p="$2" items="center" bg="#fff" rounded={1000_000}>
+            <View
+              flexDirection="row"
+              p="$2"
+              items="center"
+              bg="$color2"
+              borderWidth={1}
+              borderColor="$borderColor"
+              rounded={1000_000}
+            >
               <Image
                 objectFit="contain"
                 width={25}
@@ -337,7 +345,7 @@ const NavLink = View.styleable<{ href: string }>(
   ({ children, href = '#', ...rest }, ref) => {
     return (
       <View ref={ref} rounded={5} py="$2" items="center" justify="center" {...rest}>
-        <Anchor href={href}>
+        <Anchor href={href} textDecorationLine="none">
           <Text
             opacity={0.9}
             fontSize="$5"
