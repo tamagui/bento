@@ -1,6 +1,6 @@
 import { Baby } from '@tamagui/lucide-icons-2'
 import { useId, useState } from 'react'
-import { Button, Label, Switch, Text, View } from 'tamagui'
+import { Label, Switch, Text, View, XStack } from 'tamagui'
 
 /** ------ EXAMPLE ------ */
 export function IconTitleSwitch() {
@@ -8,8 +8,7 @@ export function IconTitleSwitch() {
   const [checked, setChecked] = useState(true)
 
   return (
-    <Button
-      flexDirection="row"
+    <XStack
       maxW="100%"
       borderColor="$borderColor"
       borderWidth={1}
@@ -22,8 +21,7 @@ export function IconTitleSwitch() {
       items="center"
       gap="$2.5"
       theme="surface1"
-      transition="medium"
-      onPress={() => setChecked(!checked)}
+      bg="$background"
     >
       <Baby size="$2" color="$color11" />
       <View flexDirection="column">
@@ -42,7 +40,7 @@ export function IconTitleSwitch() {
       >
         <Switch.Thumb borderColor="$borderColor" transition="200ms" bg="$color1" />
       </Switch>
-    </Button>
+    </XStack>
   )
 }
 
