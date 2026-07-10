@@ -17,6 +17,7 @@ import {
   XStack,
   YStack,
   type TextProps,
+  isWeb,
 } from 'tamagui'
 import { FlatList, Gesture, GestureDetector } from 'react-native-gesture-handler'
 import { Share } from '@tamagui/lucide-icons-2'
@@ -38,9 +39,20 @@ const blogs = [
 ]
 
 // @ts-ignore react 19 has issue with type here
-const AnimatedFlatList = Animated.createAnimatedComponent<FlatListProps<Blog>>(FlatList)
+const NativeAnimatedFlatList =
+  Animated.createAnimatedComponent<FlatListProps<Blog>>(FlatList)
+const AnimatedFlatList = isWeb ? FlatList : NativeAnimatedFlatList
 
-const AnimatedView = Animated.createAnimatedComponent(View)
+const AnimatedViewFrame = View.styleable<{ forwardedRef?: any; nativeID?: string }>(
+  ({ forwardedRef, nativeID, ...props }, ref) => (
+    <View
+      ref={forwardedRef || ref}
+      {...props}
+      {...(!isWeb && nativeID ? { nativeID } : {})}
+    />
+  )
+)
+const AnimatedView = Animated.createAnimatedComponent(AnimatedViewFrame)
 
 type Blog = (typeof blogs)[number]
 
@@ -133,7 +145,7 @@ const ButtonGroup = ({
     <XStack pt="$4" gap="$4">
       <Button
         theme={followed ? 'accent' : 'red'}
-        transition="200ms"
+        style={{ transition: 'background-color 200ms ease' }}
         flex={1}
         height="$6"
         rounded="$10"
@@ -152,7 +164,7 @@ const ButtonGroup = ({
                 y: 10,
               }}
               opacity={1}
-              transition="bouncy"
+              style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
               fontFamily="$mono"
               fontWeight="bold"
               fontSize="$5"
@@ -174,7 +186,7 @@ const ButtonGroup = ({
                 y: -10,
               }}
               opacity={1}
-              transition="bouncy"
+              style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
             >
               Follow
             </Button.Text>
@@ -194,6 +206,7 @@ const AvatarView = memo(
     const rotation = useSharedValue(0)
 
     const gesture = Gesture.Pan()
+      .runOnJS(true)
       .onUpdate((event) => {
         rotation.value = event.translationX / 100
       })
@@ -291,7 +304,7 @@ const Follower = ({ followed }: { followed: boolean }) => {
       ))}
       <YStack gap="$1">
         <Text
-          transition="quick"
+          style={{ transition: 'color 150ms ease' }}
           fontFamily="$silkscreen"
           fontSize="$8"
           fontWeight="bold"
