@@ -1,0 +1,47 @@
+import { Command } from '@tamagui/lucide-icons-2'
+import { useState } from 'react'
+import { Text, View, XStack, YStack } from 'tamagui'
+import { CommandMenu } from './CommandMenu'
+import type { CommandItem } from './commandData'
+
+export function CommandPaletteInline() {
+  const [lastAction, setLastAction] = useState('Choose a command from the list')
+
+  const selectCommand = (item: CommandItem) => {
+    setLastAction(`${item.label} selected`)
+  }
+
+  return (
+    <YStack width="100%" maxW={680} gap="$3">
+      <YStack
+        bg="$background"
+        borderColor="$color6"
+        borderWidth={1}
+        elevation="$4"
+        height={620}
+        maxH="78vh"
+        overflow="hidden"
+        rounded="$8"
+      >
+        <CommandMenu onSelect={selectCommand} />
+      </YStack>
+      <XStack render="output" aria-live="polite" gap="$2" items="center" px="$1">
+        <View
+          width={28}
+          height={28}
+          bg="$color3"
+          items="center"
+          justify="center"
+          rounded={1000}
+        >
+          <Command size={14} color="$color10" />
+        </View>
+        <Text color="$color10" fontSize="$2">
+          {lastAction}
+        </Text>
+      </XStack>
+    </YStack>
+  )
+}
+
+CommandPaletteInline.fileName = 'CommandPaletteInline'
