@@ -63,7 +63,7 @@ function SlideOut({ direction }: { direction: Direction }) {
                 Tamagui Debit
               </Text>
 
-              <Image src="/avatar_pro.png" width={32} height={32} />
+              <Image src="/images/bentologo.png" width={32} height={32} />
             </XStack>
 
             <Text
@@ -142,7 +142,7 @@ function SlideOut({ direction }: { direction: Direction }) {
                     Tamagui Debit
                   </Text>
 
-                  <Image src="/avatar_pro.png" width={32} height={32} />
+                  <Image src="/images/bentologo.png" width={32} height={32} />
                 </XStack>
 
                 <Text

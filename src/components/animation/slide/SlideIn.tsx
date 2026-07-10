@@ -56,7 +56,7 @@ function SlideIn({
               Tamagui Debit
             </Text>
 
-            <Image src="/avatar_pro.png" width={32} height={32} />
+            <Image src="/images/bentologo.png" width={32} height={32} />
           </XStack>
 
           <Text pt="$4" fontWeight="600" fontSize="$8" fontFamily="$mono" color="$color">
