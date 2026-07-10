@@ -2,18 +2,48 @@ import { Package, Tag, Truck } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
 import { Button, Input, Separator, Text, View, XStack, YStack } from 'tamagui'
 
+// integer cents everywhere — floats never touch money math
 const items = [
-  { name: 'Contour desk lamp', detail: 'Graphite · 1', price: 128, color: '$blue5' },
-  { name: 'Wool desk mat', detail: 'Stone · 1', price: 46, color: '$orange5' },
+  { name: 'Contour desk lamp', detail: 'Graphite · 1', priceCents: 12800, color: '$blue5' },
+  { name: 'Wool desk mat', detail: 'Stone · 1', priceCents: 4600, color: '$orange5' },
 ] as const
+
+// promo codes are validated against a known table with real effects;
+// a live store would revalidate these server-side
+const promoCodes: Record<string, { percentOff: number }> = {
+  SAVE10: { percentOff: 10 },
+  WELCOME5: { percentOff: 5 },
+}
+
+const TAX_RATE = 0.08
+
+const money = (cents: number) =>
+  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
+    cents / 100
+  )
 
 export function CheckoutSummary() {
   const [code, setCode] = useState('')
-  const [applied, setApplied] = useState(false)
-  const subtotal = items.reduce((sum, item) => sum + item.price, 0)
-  const discount = applied ? 18 : 0
-  const tax = 13.92
+  const [applied, setApplied] = useState<string | null>(null)
+  const [promoError, setPromoError] = useState('')
+
+  const subtotal = items.reduce((sum, item) => sum + item.priceCents, 0)
+  const discount = applied
+    ? Math.round((subtotal * promoCodes[applied].percentOff) / 100)
+    : 0
+  const tax = Math.round((subtotal - discount) * TAX_RATE)
   const total = subtotal - discount + tax
+
+  const applyCode = () => {
+    const normalized = code.trim().toUpperCase()
+    if (promoCodes[normalized]) {
+      setApplied(normalized)
+      setPromoError('')
+    } else {
+      setPromoError(`“${normalized}” isn’t a valid code.`)
+    }
+  }
+
   return (
     <YStack
       width="100%"
@@ -30,7 +60,7 @@ export function CheckoutSummary() {
         <Text fontSize="$7" fontWeight="900" letterSpacing={0}>
           Order summary
         </Text>
-        <Package size={22} color="$color9" />
+        <Package size={22} color="$color9" aria-hidden />
       </XStack>
       <YStack gap="$4">
         {items.map((item) => (
@@ -43,7 +73,7 @@ export function CheckoutSummary() {
               items="center"
               justify="center"
             >
-              <Package size={24} color="$color11" />
+              <Package size={24} color="$color11" aria-hidden />
             </View>
             <YStack flex={1} gap="$1">
               <Text fontWeight="700" letterSpacing={0}>
@@ -53,7 +83,7 @@ export function CheckoutSummary() {
                 {item.detail}
               </Text>
             </YStack>
-            <Text fontWeight="700">${item.price.toFixed(2)}</Text>
+            <Text fontWeight="700">{money(item.priceCents)}</Text>
           </XStack>
         ))}
       </YStack>
@@ -66,22 +96,32 @@ export function CheckoutSummary() {
           <Input
             flex={1}
             value={code}
-            onChangeText={setCode}
+            onChangeText={(value) => {
+              setCode(value)
+              setPromoError('')
+            }}
             placeholder="SAVE10"
             aria-label="Promo code"
+            aria-invalid={!!promoError}
+            aria-describedby={promoError ? 'promo-error' : undefined}
             autoCapitalize="characters"
           />
           <Button
             icon={Tag}
-            disabled={!code.trim() || applied}
-            onPress={() => setApplied(true)}
+            disabled={!code.trim() || !!applied}
+            onPress={applyCode}
           >
             {applied ? 'Applied' : 'Apply'}
           </Button>
         </XStack>
         {applied ? (
-          <Text fontSize="$2" color="$green10">
-            SAVE10 applied · $18 off
+          <Text fontSize="$2" color="$green10" aria-live="polite">
+            {applied} applied · {promoCodes[applied].percentOff}% off ({money(discount)})
+          </Text>
+        ) : null}
+        {promoError ? (
+          <Text id="promo-error" fontSize="$2" color="$red10" aria-live="polite">
+            {promoError}
           </Text>
         ) : null}
       </YStack>
@@ -89,24 +129,24 @@ export function CheckoutSummary() {
       <YStack gap="$3">
         <XStack justify="space-between">
           <Text color="$color9">Subtotal</Text>
-          <Text>${subtotal.toFixed(2)}</Text>
+          <Text>{money(subtotal)}</Text>
         </XStack>
         {applied ? (
           <XStack justify="space-between">
-            <Text color="$green10">Discount</Text>
-            <Text color="$green10">−${discount.toFixed(2)}</Text>
+            <Text color="$green10">Discount ({promoCodes[applied].percentOff}%)</Text>
+            <Text color="$green10">−{money(discount)}</Text>
           </XStack>
         ) : null}
         <XStack justify="space-between">
           <Text color="$color9">Shipping</Text>
           <XStack items="center" gap="$1">
-            <Truck size={14} color="$green10" />
+            <Truck size={14} color="$green10" aria-hidden />
             <Text color="$green10">Free</Text>
           </XStack>
         </XStack>
         <XStack justify="space-between">
-          <Text color="$color9">Estimated tax</Text>
-          <Text>${tax.toFixed(2)}</Text>
+          <Text color="$color9">Estimated tax (8%)</Text>
+          <Text>{money(tax)}</Text>
         </XStack>
         <Separator />
         <XStack justify="space-between" items="center">
@@ -114,7 +154,7 @@ export function CheckoutSummary() {
             Total
           </Text>
           <Text fontSize="$7" fontWeight="900">
-            ${total.toFixed(2)}
+            {money(total)}
           </Text>
         </XStack>
       </YStack>
