@@ -34,6 +34,8 @@ export const componentMap: Record<string, Record<string, any>> = {
   skeletons: Components.Skeletons,
   stats: Components.Stats,
   banners: Components.Banners,
+  'ai-chat': Components.AIChat,
+  command: Components.Command,
 }
 
 // only capitalized function exports are renderable demos (skip helpers/types)
