@@ -45,18 +45,18 @@ function SlideOut({ direction }: { direction: Direction }) {
         }}
         shadowRadius={'$5'}
         shadowOpacity={0.1}
-        transition={{
-          opacity: {
-            type: 'bouncy',
-            overshootClamping: true,
-          },
-        }}
+        style={{ transition: 'transform 250ms ease, opacity 250ms ease' }}
         rounded="$8"
         overflow="hidden"
         borderWidth={2}
         borderColor="$color4"
       >
-        <View width={312} maxW="100%" $group-window-sm={{ width: '100%', minW: 260 }} gap="$6">
+        <View
+          width={312}
+          maxW="100%"
+          $group-window-sm={{ width: '100%', minW: 260 }}
+          gap="$6"
+        >
           <View p="$3.5" position="relative">
             <XStack items="center" justify="space-between">
               <Text fontWeight="500" fontSize="$3" fontFamily="$mono" color="$color10">
@@ -118,19 +118,19 @@ function SlideOut({ direction }: { direction: Direction }) {
             shadowOffset={{ width: 0, height: -6 }}
             shadowRadius="$5"
             shadowOpacity={0.1}
-            transition={{
-              opacity: {
-                type: 'bouncy',
-                overshootClamping: true,
-              },
-            }}
+            style={{ transition: 'transform 250ms ease, opacity 250ms ease' }}
             rounded="$8"
             overflow="hidden"
             borderWidth={2}
             borderColor="$color4"
             exitStyle={{ opacity: 0, [axis.axis]: axis.value }}
           >
-            <View width={312} maxW="100%" $group-window-sm={{ width: '100%', minW: 260 }} gap="$6">
+            <View
+              width={312}
+              maxW="100%"
+              $group-window-sm={{ width: '100%', minW: 260 }}
+              gap="$6"
+            >
               <View p="$3.5" position="relative">
                 <XStack items="center" justify="space-between">
                   <Text
