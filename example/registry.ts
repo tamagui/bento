@@ -53,3 +53,79 @@ export function getGroupItems(groupId: string): [string, any][] {
 }
 
 export const groupIds = Object.keys(componentMap)
+
+// sectioned presentation shared by native home + web index
+export const sections: { label: string; items: { title: string; id: string }[] }[] = [
+  {
+    label: 'Forms',
+    items: [
+      { title: 'Inputs', id: 'inputs' },
+      { title: 'Checkboxes', id: 'checkboxes' },
+      { title: 'Radio Groups', id: 'radiogroups' },
+      { title: 'Switches', id: 'switches' },
+      { title: 'Textareas', id: 'textareas' },
+      { title: 'Form Layouts', id: 'layouts' },
+      { title: 'Pickers', id: 'pickers' },
+    ],
+  },
+  {
+    label: 'Elements',
+    items: [
+      { title: 'Avatars', id: 'avatars' },
+      { title: 'Buttons', id: 'buttons' },
+      { title: 'Chips', id: 'chips' },
+      { title: 'Datepickers', id: 'datepickers' },
+      { title: 'Dialogs', id: 'dialogs' },
+      { title: 'Lists', id: 'list' },
+      { title: 'Tables', id: 'tables' },
+    ],
+  },
+  {
+    label: 'Feedback',
+    items: [
+      { title: 'Toasts', id: 'toasts' },
+      { title: 'Banners', id: 'banners' },
+      { title: 'Empty States', id: 'empty-states' },
+      { title: 'Skeletons', id: 'skeletons' },
+      { title: 'Stats', id: 'stats' },
+    ],
+  },
+  {
+    label: 'AI',
+    items: [{ title: 'Chat', id: 'ai-chat' }],
+  },
+  {
+    label: 'Navigation & Shells',
+    items: [
+      { title: 'Command Palette', id: 'command' },
+      { title: 'Navigation Bars', id: 'navbars' },
+      { title: 'Tab Bars', id: 'tabbars' },
+      { title: 'Drawer', id: 'shells' },
+    ],
+  },
+  {
+    label: 'Animations',
+    items: [
+      { title: 'Buttons', id: 'animation-buttons' },
+      { title: 'Avatars', id: 'animation-avatars' },
+      { title: 'Microinteractions', id: 'microinteractions' },
+      { title: 'Slides', id: 'slide' },
+    ],
+  },
+  {
+    label: 'E-commerce',
+    items: [
+      { title: 'Payment', id: 'payment' },
+      { title: 'Product Page', id: 'productpage' },
+      { title: 'Product Lists', id: 'product-list' },
+    ],
+  },
+  {
+    label: 'User & Panels',
+    items: [
+      { title: 'Preferences', id: 'preferences' },
+      { title: 'Profile', id: 'profile' },
+      { title: 'Walkthrough', id: 'walkthrough' },
+    ],
+  },
+]

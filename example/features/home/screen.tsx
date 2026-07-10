@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import { ChevronRight } from '@tamagui/lucide-icons-2'
 import { ScrollView } from 'react-native'
 import { H1, ListItem, Separator, Text, YGroup, YStack } from 'tamagui'
+import { sections as componentGroups } from '../../registry'
 
 export function HomeScreen() {
   const navigation = useNavigation()
@@ -51,56 +52,3 @@ export function HomeScreen() {
   )
 }
 
-const componentGroups = [
-  {
-    label: 'Forms',
-    items: [
-      { title: 'Inputs', id: 'inputs' },
-      { title: 'Checkboxes', id: 'checkboxes' },
-      { title: 'Radio Groups', id: 'radiogroups' },
-      { title: 'Switches', id: 'switches' },
-      { title: 'Textareas', id: 'textareas' },
-      { title: 'Form Layouts', id: 'layouts' },
-    ],
-  },
-  {
-    label: 'Elements',
-    items: [
-      { title: 'Avatars', id: 'avatars' },
-      { title: 'Buttons', id: 'buttons' },
-      { title: 'Chips', id: 'chips' },
-      { title: 'Datepickers', id: 'datepickers' },
-      { title: 'Dialogs', id: 'dialogs' },
-      { title: 'Lists', id: 'list' },
-      { title: 'Pickers', id: 'pickers' },
-      { title: 'Tables', id: 'tables' },
-    ],
-  },
-  {
-    label: 'Shells',
-    items: [
-      { title: 'Navigation Bars', id: 'navbars' },
-      { title: 'Tab Bars', id: 'tabbars' },
-    ],
-  },
-  {
-    label: 'Animations',
-    items: [
-      { title: 'Buttons', id: 'animation-buttons' },
-      { title: 'Avatars', id: 'animation-avatars' },
-      { title: 'Microinteractions', id: 'microinteractions' },
-      { title: 'Slides', id: 'slide' },
-    ],
-  },
-  {
-    label: 'E-commerce',
-    items: [
-      { title: 'Payment', id: 'payment' },
-      { title: 'Product Page', id: 'productpage' },
-    ],
-  },
-  {
-    label: 'User',
-    items: [{ title: 'Preferences', id: 'preferences' }],
-  },
-]
