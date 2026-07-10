@@ -2,12 +2,32 @@ import { Check, ChevronDown, Search } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
 import { Input, Select, Text, XStack, YStack } from 'tamagui'
 
-const categories = ['All content', 'Projects', 'People', 'Files']
+const categories = ['All content', 'Projects', 'People', 'Files'] as const
+
+// counts derive from actual data, never a hard-coded number
+const workspace = [
+  { title: 'Design system', category: 'Projects' },
+  { title: 'Design reviews', category: 'Projects' },
+  { title: 'Landing redesign', category: 'Projects' },
+  { title: 'Quarterly planning', category: 'Projects' },
+  { title: 'Dana Designer', category: 'People' },
+  { title: 'Devon Fields', category: 'People' },
+  { title: 'Maya Chen', category: 'People' },
+  { title: 'design-tokens.json', category: 'Files' },
+  { title: 'redesign-brief.pdf', category: 'Files' },
+  { title: 'roadmap.fig', category: 'Files' },
+]
 
 export function SearchWithFilters() {
   const [query, setQuery] = useState('design')
-  const [category, setCategory] = useState('All content')
-  const count = query ? 24 : 186
+  const [category, setCategory] = useState<string>('All content')
+
+  const results = workspace.filter(
+    (item) =>
+      (category === 'All content' || item.category === category) &&
+      item.title.toLowerCase().includes(query.trim().toLowerCase())
+  )
+
   return (
     <YStack width="100%" maxW={860} self="center" gap="$3">
       <XStack gap="$3" flexWrap="wrap">
@@ -22,7 +42,7 @@ export function SearchWithFilters() {
           borderColor="$borderColor"
           bg="$background"
         >
-          <Search size={19} color="$color9" />
+          <Search size={19} color="$color9" aria-hidden />
           <Input
             unstyled
             flex={1}
@@ -55,18 +75,37 @@ export function SearchWithFilters() {
           </Select.Content>
         </Select>
       </XStack>
-      <Text color="$color9" fontSize="$2" letterSpacing={0}>
-        {count} results in {category.toLowerCase()}
-        {query ? (
+      <Text color="$color9" fontSize="$2" letterSpacing={0} aria-live="polite">
+        {results.length} result{results.length === 1 ? '' : 's'} in{' '}
+        {category.toLowerCase()}
+        {query.trim() ? (
           <>
             {' '}
             for{' '}
             <Text fontWeight="800" color="$color11">
-              “{query}”
+              “{query.trim()}”
             </Text>
           </>
         ) : null}
       </Text>
+      <YStack gap="$1">
+        {results.slice(0, 5).map((item) => (
+          <XStack
+            key={item.title}
+            justify="space-between"
+            items="center"
+            px="$3"
+            py="$2.5"
+            rounded="$4"
+            bg="$color2"
+          >
+            <Text color="$color11">{item.title}</Text>
+            <Text fontSize="$1" color="$color9" textTransform="uppercase">
+              {item.category}
+            </Text>
+          </XStack>
+        ))}
+      </YStack>
     </YStack>
   )
 }
