@@ -26,12 +26,16 @@ export function Navigation() {
       <Stack.Screen
         name="component"
         component={ComponentScreen}
-        options={{
-          title: 'Component',
+        options={({ route }) => ({
+          // "settings-cells" -> "Settings Cells"
+          title: (route.params?.id ?? 'Component')
+            .split('-')
+            .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+            .join(' '),
           headerRight() {
             return <ColorSchemeToggle />
           },
-        }}
+        })}
       />
     </Stack.Navigator>
   )

@@ -1,15 +1,14 @@
-import type { TamaguiProviderProps } from 'tamagui'
-import { TamaguiProvider } from 'tamagui'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import type { TamaguiProviderProps } from 'tamagui'
 
-import config from '../../tamagui.config'
+import { Provider as BentoProvider } from '../../src/components/provider/Provider'
 
-export function Provider({ children, ...rest }: Omit<TamaguiProviderProps, 'config'>) {
+// native app shell: gesture root + the same provider stack the web gallery
+// uses (tamagui + scheme + toasts), so both platforms share one code path
+export function Provider(props: Omit<TamaguiProviderProps, 'config'>) {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <TamaguiProvider config={config} {...rest}>
-        {children}
-      </TamaguiProvider>
+      <BentoProvider {...props} />
     </GestureHandlerRootView>
   )
 }

@@ -10,7 +10,6 @@ export const ColorSchemeToggle = () => {
     <XStack items="center" gap="$2">
       <Button chromeless disabled width={20} icon={Moon} />
       <Switch
-        native
         checked={checked}
         onCheckedChange={() => {
           theme.set(theme.value === 'dark' ? 'light' : 'dark')

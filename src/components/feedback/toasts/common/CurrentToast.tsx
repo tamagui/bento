@@ -41,7 +41,8 @@ export function CurrentToast() {
       px="$3.5"
       py="$3"
     >
-      <XStack items="center" gap="$3" maxW={360}>
+      {/* explicit width: on native, flex children of a content-sized row collapse to 0 */}
+      <XStack items="center" gap="$3" width={340} maxW="100%">
         {icons[variant]}
         <YStack flex={1} gap="$0.5">
           <Toast.Title>
