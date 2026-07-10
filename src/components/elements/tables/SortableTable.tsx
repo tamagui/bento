@@ -336,7 +336,7 @@ export function SortableTable() {
                               fontSize="$3"
                               fontWeight="600"
                               color="$color12"
-                              userSelect="none"
+                              select="none"
                             >
                               {header.isPlaceholder
                                 ? null
