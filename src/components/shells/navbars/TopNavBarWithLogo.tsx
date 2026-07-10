@@ -13,6 +13,7 @@ import {
   Separator,
   Tabs,
   Text,
+  Theme,
   View,
   isWeb,
   styled,
@@ -137,96 +138,101 @@ export function TopNavBarWithLogo() {
       $group-window-gtXs={{ height: 800 }}
       position="relative"
     >
-      <View
-        flexDirection="row"
-        themeInverse
-        p="$2"
-        minW="100%"
-        render="nav"
-        items="center"
-        justify="space-between"
-        bg="$background"
-      >
-        {sm ? (
-          <SideBar />
-        ) : (
-          <View flexDirection="row" p="$2" items="center" bg="#fff" rounded={1000_000}>
-            <Image
-              objectFit="contain"
-              width={25}
-              height={25}
-              $group-window-sm={{ width: 15, height: 15 }}
-              source={{ uri: '/bento/tamagui-icon.png' }}
-              alt="Bento logo"
+      <Theme inverse>
+        <View
+          flexDirection="row"
+          p="$2"
+          minW="100%"
+          render="nav"
+          items="center"
+          justify="space-between"
+          bg="$background"
+        >
+          {sm ? (
+            <SideBar />
+          ) : (
+            <View flexDirection="row" p="$2" items="center" bg="#fff" rounded={1000_000}>
+              <Image
+                objectFit="contain"
+                width={25}
+                height={25}
+                $group-window-sm={{ width: 15, height: 15 }}
+                source={{ uri: '/bento/tamagui-icon.png' }}
+                alt="Bento logo"
+              />
+            </View>
+          )}
+          {!sm && (
+            <Tabs
+              value={currentTab}
+              onValueChange={setCurrentTab}
+              orientation="horizontal"
+            >
+              <View flexDirection="column" position="relative">
+                <AnimatePresence>
+                  {intentAt && (
+                    <TabsRovingIndicator
+                      rounded="$4"
+                      width={intentAt.width}
+                      height={intentAt.height}
+                      x={intentAt.x}
+                      y={intentAt.y}
+                    />
+                  )}
+                </AnimatePresence>
+                <AnimatePresence>
+                  {activeAt && (
+                    <TabsRovingIndicator
+                      rounded="$4"
+                      theme="accent"
+                      width={activeAt.width}
+                      height={activeAt.height}
+                      x={activeAt.x}
+                      y={activeAt.y}
+                    />
+                  )}
+                </AnimatePresence>
+                <Tabs.List
+                  loop={false}
+                  aria-label="Manage your account"
+                  gap="$3"
+                  backgroundColor="transparent"
+                >
+                  {links.map((link, index) => (
+                    <Tabs.Tab
+                      key={link.title}
+                      unstyled
+                      value={link.slug}
+                      onInteraction={handleOnInteraction}
+                      paddingHorizontal="$4"
+                    >
+                      <NavLink
+                        key={index}
+                        // Note: replace href with /bento/shells/navbars/${link.slug}
+                        href={`/bento/shells/navbars/#`}
+                      >
+                        {link.title}
+                      </NavLink>
+                    </Tabs.Tab>
+                  ))}
+                </Tabs.List>
+              </View>
+            </Tabs>
+          )}
+          <View flexDirection="row" items="center" gap="$3">
+            <Button theme="accent" circular chromeless p={0} size="$3">
+              <Button.Icon>
+                <Bell size="$1" />
+              </Button.Icon>
+            </Button>
+            <ProfileDropdown
+              triggerOpen={triggerOpen}
+              setTriggerOpen={setTriggerOpen}
+              closeTrigger={closeTrigger}
             />
           </View>
-        )}
-        {!sm && (
-          <Tabs value={currentTab} onValueChange={setCurrentTab} orientation="horizontal">
-            <View flexDirection="column" position="relative">
-              <AnimatePresence>
-                {intentAt && (
-                  <TabsRovingIndicator
-                    rounded="$4"
-                    width={intentAt.width}
-                    height={intentAt.height}
-                    x={intentAt.x}
-                    y={intentAt.y}
-                  />
-                )}
-              </AnimatePresence>
-              <AnimatePresence>
-                {activeAt && (
-                  <TabsRovingIndicator
-                    rounded="$4"
-                    theme="accent"
-                    width={activeAt.width}
-                    height={activeAt.height}
-                    x={activeAt.x}
-                    y={activeAt.y}
-                  />
-                )}
-              </AnimatePresence>
-              <Tabs.List
-                loop={false}
-                aria-label="Manage your account"
-                gap="$3"
-                backgroundColor="transparent"
-              >
-                {links.map((link, index) => (
-                  <Tabs.Tab
-                    key={link.title}
-                    unstyled
-                    value={link.slug}
-                    onInteraction={handleOnInteraction}
-                    paddingHorizontal="$4"
-                  >
-                    <NavLink
-                      key={index}
-                      // Note: replace href with /bento/shells/navbars/${link.slug}
-                      href={`/bento/shells/navbars/#`}
-                    >
-                      {link.title}
-                    </NavLink>
-                  </Tabs.Tab>
-                ))}
-              </Tabs.List>
-            </View>
-          </Tabs>
-        )}
-        <View flexDirection="row" items="center" gap="$3">
-          <Button theme="accent" circular chromeless p={0} size="$3">
-            <Button.Icon>
-              <Bell size="$1" />
-            </Button.Icon>
-          </Button>
-          <ProfileDropdown
-            triggerOpen={triggerOpen}
-            setTriggerOpen={setTriggerOpen}
-            closeTrigger={closeTrigger}
-          />
         </View>
-      </View>
+      </Theme>
       {!sm && <View flexDirection="row" bg="$background" height="100%" />}
     </View>
   )
