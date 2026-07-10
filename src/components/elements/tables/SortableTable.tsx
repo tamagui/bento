@@ -51,7 +51,7 @@ const columns = [
   columnHelper.accessor('avatar', {
     cell: (info) => (
       <Avatar circular size="$3">
-        <Avatar.Image accessibilityLabel="Profile image" src={info.getValue()} />
+        <Avatar.Image aria-label="Profile image" src={info.getValue()} />
         <Avatar.Fallback bg="$color6" />
       </Avatar>
     ),
@@ -298,7 +298,6 @@ export function SortableTable() {
                 rowCounter.current++
                 return (
                   <Table.Row
-                    
                     bg="$color2"
                     rowLocation={
                       rowCounter.current === 0
@@ -338,7 +337,7 @@ export function SortableTable() {
                             gap="$2"
                             items="center"
                           >
-                            <Text fontSize="$4" selectable={false}>
+                            <Text fontSize="$4" userSelect="none">
                               {header.isPlaceholder
                                 ? null
                                 : flexRender(

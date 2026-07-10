@@ -55,7 +55,7 @@ const columns = [
   columnHelper.accessor('avatar', {
     cell: (info) => (
       <Avatar circular size="$3">
-        <Avatar.Image accessibilityLabel="Profile image" src={info.getValue()} />
+        <Avatar.Image aria-label="Profile image" src={info.getValue()} />
         <Avatar.Fallback bg="$color6" />
       </Avatar>
     ),
@@ -136,7 +136,7 @@ export function BasicTable() {
                         {name === 'avatar' ? (
                           <Avatar circular size="$3">
                             <Avatar.Image
-                              accessibilityLabel="Profile image"
+                              aria-label="Profile image"
                               src={value as string}
                             />
                             <Avatar.Fallback bg="$color6" />
@@ -172,7 +172,6 @@ export function BasicTable() {
           rowCounter.current++
           return (
             <Table.Row
-              
               bg="$color2"
               rowLocation={
                 rowCounter.current === 0

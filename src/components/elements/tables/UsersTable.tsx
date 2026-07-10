@@ -129,7 +129,7 @@ const defaultData: Person[] = [
   (row, index) =>
     ({
       ...row,
-      avatar: `/avatars/300 (1).jpeg`,
+      avatar: 'https://i.pravatar.cc/150?img=1',
     }) as Person
 )
 
@@ -148,7 +148,7 @@ const columns = [
         return (
           <View flexDirection="row" items="center" gap="$3" ml="$2">
             <Avatar circular size="$4">
-              <Avatar.Image accessibilityLabel="Profile image" src={image} />
+              <Avatar.Image aria-label="Profile image" src={image} />
               <Avatar.Fallback bg="$color6" />
             </Avatar>
             <View flexDirection="column">
@@ -240,7 +240,7 @@ export function UsersTable() {
             >
               <XStack items="center" py="$1" ml="$3" gap="$2">
                 <Avatar circular size="$3">
-                  <Avatar.Image accessibilityLabel="Profile image" src={row.avatar} />
+                  <Avatar.Image aria-label="Profile image" src={row.avatar} />
                   <Avatar.Fallback bg="$color6" />
                 </Avatar>
                 <View justify="space-between">
