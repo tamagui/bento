@@ -1,5 +1,5 @@
 import { Clock3, Search, X } from '@tamagui/lucide-icons-2'
-import { useEffect, useMemo, useState } from 'react'
+import { type KeyboardEvent, useEffect, useMemo, useState } from 'react'
 import { Button, Input, Text, XStack, YStack } from 'tamagui'
 
 const catalog = [
@@ -50,6 +50,13 @@ export function SearchAutocomplete() {
     setQuery(value)
     setOpen(false)
   }
+  const handleKey = (key: string) => {
+    if (key === 'ArrowDown')
+      setActive((current) => Math.min(current + 1, suggestions.length - 1))
+    if (key === 'ArrowUp') setActive((current) => Math.max(current - 1, 0))
+    if (key === 'Enter' && suggestions[active]) choose(suggestions[active])
+    if (key === 'Escape') setOpen(false)
+  }
   return (
     <YStack width="100%" maxW={620} self="center" gap="$2" position="relative">
       <XStack
@@ -74,15 +81,8 @@ export function SearchAutocomplete() {
           onFocus={() => setOpen(true)}
           placeholder="Search projects, people, or files"
           aria-label="Search"
-          onKeyPress={(event) => {
-            if (event.nativeEvent.key === 'ArrowDown')
-              setActive((current) => Math.min(current + 1, suggestions.length - 1))
-            if (event.nativeEvent.key === 'ArrowUp')
-              setActive((current) => Math.max(current - 1, 0))
-            if (event.nativeEvent.key === 'Enter' && suggestions[active])
-              choose(suggestions[active])
-            if (event.nativeEvent.key === 'Escape') setOpen(false)
-          }}
+          onKeyDown={(event: KeyboardEvent<HTMLInputElement>) => handleKey(event.key)}
+          onKeyPress={(event) => handleKey(event.nativeEvent.key)}
         />
         {query ? (
           <Button
