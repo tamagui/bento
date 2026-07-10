@@ -169,7 +169,6 @@ function Calendar({
                         key={day.$date.toString()}
                         chromeless
                         circular
-                        group="item"
                         {...swapOnClick(dayButton(day))}
                         theme={day.selected ? 'accent' : undefined}
                         borderWidth={1}

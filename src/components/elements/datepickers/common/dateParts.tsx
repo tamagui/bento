@@ -167,7 +167,7 @@ export const DatePickerInput = Input.Area.styleable<DatePickerInputProps>(
   (props, ref) => {
     const { value, onButtonPress, size = '$3', onReset, onLayout, ...rest } = props
     return (
-      <View onLayout={onLayout} $platform-native={{ minW: '100%' }}>
+      <View onLayout={isWeb ? undefined : onLayout} $platform-native={{ minW: '100%' }}>
         <Input cursor="pointer" onPress={onButtonPress} size={size}>
           <Input.Box>
             <Input.Section>

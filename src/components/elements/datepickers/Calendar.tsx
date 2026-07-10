@@ -182,7 +182,6 @@ function CalendarView({
                         theme={day.selected ? 'accent' : undefined}
                         chromeless
                         circular
-                        group="item"
                         {...swapOnClick(dayButton(day))}
                         borderWidth={1}
                         borderColor={day.selected ? '$color1' : 'transparent'}
