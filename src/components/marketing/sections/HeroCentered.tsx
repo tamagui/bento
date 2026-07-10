@@ -1,10 +1,20 @@
 import { ArrowRight, Play } from '@tamagui/lucide-icons-2'
-import { Button, H1, Text, View, XStack, YStack } from 'tamagui'
+import { Button, H1, Text, View, XStack, YStack, isWeb } from 'tamagui'
+import { openUrl } from './common/openUrl'
 
 /** ------ EXAMPLE ------ */
 export function HeroCentered() {
   return (
-    <YStack items="center" gap="$5" py="$10" px="$4" width="100%" maxW={780}>
+    <YStack
+      render={isWeb ? 'section' : undefined}
+      aria-label="Hero"
+      items="center"
+      gap="$5"
+      py="$10"
+      px="$4"
+      width="100%"
+      maxW={780}
+    >
       <XStack
         items="center"
         gap="$2"
@@ -49,6 +59,7 @@ export function HeroCentered() {
           hoverStyle={{ opacity: 0.9 }}
           pressStyle={{ scale: 0.98 }}
           iconAfter={<ArrowRight size={16} color="$color1" />}
+          onPress={() => openUrl('https://tamagui.dev/docs/intro/introduction')}
         >
           <Text color="$color1" fontWeight="600">
             Start building
@@ -61,6 +72,7 @@ export function HeroCentered() {
           borderColor="$color6"
           hoverStyle={{ bg: '$color3' }}
           icon={<Play size={14} />}
+          onPress={() => openUrl('https://www.youtube.com/@tamagui_dev')}
         >
           <Text color="$color11">Watch demo</Text>
         </Button>
