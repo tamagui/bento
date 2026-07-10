@@ -149,8 +149,8 @@ export function SignInRightImage() {
       <Hide when="maxMd">
         <View position="relative" flexBasis={0} grow={1.5} shrink={1} overflow="hidden">
           <LinearGradient
-            colors={['$red10', '$yellow10']}
-            opacity={0.5}
+            colors={['$blue9', '$purple9']}
+            opacity={0.15}
             start={[0, 1]}
             end={[0, 0]}
             position="absolute"

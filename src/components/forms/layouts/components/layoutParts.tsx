@@ -7,6 +7,9 @@ export const FormCard = styled(View, {
   flexDirection: 'row',
   maxW: '100%',
   rounded: 30,
+  bg: '$color1',
+  borderWidth: 1,
+  borderColor: '$color4',
   $gtSm: {
     p: '$6',
     shadowColor: '$shadowColor',

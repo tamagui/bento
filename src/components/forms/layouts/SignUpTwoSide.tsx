@@ -268,7 +268,13 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
   const selectedItem = data[Number(val)]
 
   return (
-    <Select id={id} value={val} onValueChange={setVal} disablePreventBodyScroll>
+    <Select
+      id={id}
+      value={val}
+      onValueChange={setVal}
+      disablePreventBodyScroll
+      zIndex={200000}
+    >
       <Select.Trigger width="100%" iconAfter={ChevronDown} rounded="$4">
         <View flexDirection="row" gap="$3" justify="center" items="center">
           <Image src={selectedItem.flag} width={20} height={20} />
@@ -293,7 +299,7 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
         </Sheet>
       </Adapt>
 
-      <Select.Content z={200000}>
+      <Select.Content>
         <Select.ScrollUpButton
           items="center"
           justify="center"
