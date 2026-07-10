@@ -43,6 +43,7 @@ export const componentMap: Record<string, Record<string, any>> = {
   toasts: Components.Toasts,
   carousels: Components.Carousels,
   'data-grid': Components.DataGrid,
+  kanban: Components.Kanban,
 }
 
 // only capitalized function exports are renderable demos (skip helpers/types)
@@ -99,6 +100,7 @@ export const sections: { label: string; items: { title: string; id: string }[] }
     label: 'Data',
     items: [
       { title: 'Data Grid', id: 'data-grid' },
+      { title: 'Kanban Board', id: 'kanban' },
       { title: 'Timeline', id: 'timeline' },
     ],
   },
