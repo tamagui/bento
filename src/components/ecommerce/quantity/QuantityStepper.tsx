@@ -33,6 +33,7 @@ export function QuantityStepper() {
           rounded={0}
           chromeless
           icon={Minus}
+          color="$color11"
           disabled={value <= 1}
           aria-label="Decrease quantity"
           onPressIn={() => start(-1)}
@@ -47,6 +48,7 @@ export function QuantityStepper() {
           rounded={0}
           chromeless
           icon={Plus}
+          color="$color11"
           disabled={value >= 10}
           aria-label="Increase quantity"
           onPressIn={() => start(1)}

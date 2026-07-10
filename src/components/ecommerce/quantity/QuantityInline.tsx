@@ -63,6 +63,7 @@ export function QuantityInline() {
           rounded={0}
           chromeless
           icon={Minus}
+          color="$color11"
           aria-label={value === 1 ? 'Remove item' : 'Decrease quantity'}
           onPressIn={() => start(-1)}
           onPressOut={stop}
@@ -76,6 +77,7 @@ export function QuantityInline() {
           rounded={0}
           chromeless
           icon={Plus}
+          color="$color11"
           disabled={value >= 8}
           aria-label="Increase quantity"
           onPressIn={() => start(1)}
