@@ -1,6 +1,6 @@
 import { Check, ChevronDown } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
-import { Select, Text, XStack } from 'tamagui'
+import { Adapt, Select, Sheet, XStack } from 'tamagui'
 import { CellCopy, SettingsCellFrame } from './common/SettingsCellFrame'
 
 const options = ['Automatic', 'Light', 'Dark']
@@ -21,6 +21,20 @@ export function CellSelect({ grouped = false }: { grouped?: boolean }) {
         >
           <Select.Value placeholder="Appearance" />
         </Select.Trigger>
+        {/* touch gets a bottom sheet instead of a desktop dropdown */}
+        <Adapt when="maxMd" platform="touch">
+          <Sheet modal dismissOnSnapToBottom snapPointsMode="fit">
+            <Sheet.Frame p="$4">
+              <Adapt.Contents />
+            </Sheet.Frame>
+            <Sheet.Overlay
+              bg="$shadow6"
+              enterStyle={{ opacity: 0 }}
+              exitStyle={{ opacity: 0 }}
+              transition="100ms"
+            />
+          </Sheet>
+        </Adapt>
         <Select.Content>
           <Select.Viewport minW={180} p="$1" rounded="$5" bg="$background">
             <Select.Group>

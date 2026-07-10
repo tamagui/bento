@@ -1,8 +1,17 @@
 import { ChevronRight } from '@tamagui/lucide-icons-2'
+import { useToastController } from '@tamagui/toast'
 import { Button } from 'tamagui'
 import { CellCopy, SettingsCellFrame } from './common/SettingsCellFrame'
 
-export function CellDisclosure({ grouped = false }: { grouped?: boolean }) {
+export function CellDisclosure({
+  grouped = false,
+  onPress,
+}: {
+  grouped?: boolean
+  /** navigate to the detail screen; the demo default just proves the press */
+  onPress?: () => void
+}) {
+  const toast = useToastController()
   const row = (
     <Button
       unstyled
@@ -14,12 +23,23 @@ export function CellDisclosure({ grouped = false }: { grouped?: boolean }) {
       items="center"
       justify="space-between"
       gap="$3"
+      cursor="pointer"
       aria-label="Open notification settings"
+      onPress={
+        onPress ??
+        (() => toast.show('Notifications', { message: 'Would open notification settings' }))
+      }
       pressStyle={{ bg: '$color3' }}
       hoverStyle={{ bg: '$color2' }}
+      focusVisibleStyle={{
+        outlineColor: '$outlineColor',
+        outlineOffset: -2,
+        outlineStyle: 'solid',
+        outlineWidth: 2,
+      }}
     >
       <CellCopy label="Notifications" />
-      <ChevronRight size={18} color="$color9" />
+      <ChevronRight size={18} color="$color9" aria-hidden />
     </Button>
   )
   return grouped ? row : <SettingsCellFrame>{row}</SettingsCellFrame>
