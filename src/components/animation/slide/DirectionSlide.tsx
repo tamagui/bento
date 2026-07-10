@@ -2,9 +2,18 @@ import { Text, ToggleGroup, View, styled } from 'tamagui'
 
 const Item = styled(ToggleGroup.Item, {
   flex: 1,
-  width: '100%',
-  focusStyle: {
-    backgroundColor: '$color12',
+  py: '$2.5',
+  hoverStyle: {
+    backgroundColor: '$color3',
+  },
+  pressStyle: {
+    backgroundColor: '$color4',
+  },
+  focusVisibleStyle: {
+    outlineWidth: 2,
+    outlineStyle: 'solid',
+    outlineColor: '$color8',
+    outlineOffset: -2,
   },
 })
 
@@ -22,6 +31,7 @@ export function DirectionSlide({
     <View flexDirection="row" gap="$2">
       <ToggleGroup
         orientation="horizontal"
+        flexDirection="row"
         type="single"
         disableDeactivation={true}
         value={direction}
@@ -38,8 +48,7 @@ export function DirectionSlide({
               key={dir}
             >
               <Text
-                fontFamily="$mono"
-                color={active ? '$color1' : '$color12'}
+                color={active ? '$color' : '$color11'}
                 fontWeight="600"
                 textTransform="capitalize"
               >

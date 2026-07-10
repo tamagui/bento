@@ -49,7 +49,7 @@ function SlideIn({
       borderWidth={2}
       borderColor="$color4"
     >
-      <View width={312} gap="$6">
+      <View width={312} maxW="100%" $group-window-sm={{ width: '100%', minW: 260 }} gap="$6">
         <View p="$3.5" position="relative">
           <XStack items="center" justify="space-between">
             <Text fontWeight="500" fontSize="$3" fontFamily="$mono" color="$color10">
