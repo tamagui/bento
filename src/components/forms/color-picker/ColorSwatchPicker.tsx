@@ -2,6 +2,14 @@ import { Check } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
 import { Button, Input, Text, View, XStack, YStack } from 'tamagui'
 
+// pick a readable check color from the swatch's own luminance
+const inkFor = (hexColor: string) => {
+  const n = Number.parseInt(hexColor.slice(1), 16)
+  const luminance =
+    0.299 * ((n >> 16) & 255) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)
+  return luminance > 150 ? '#111827' : '#ffffff'
+}
+
 const presets = [
   '#FF5757',
   '#FF9F43',
@@ -69,7 +77,7 @@ export function ColorSwatchPicker() {
               borderColor={selected ? '$color12' : '$borderColor'}
               p={0}
               icon={selected ? Check : undefined}
-              color={preset === '#111827' ? 'white' : '#111827'}
+              color={inkFor(preset)}
               aria-label={`Select color ${preset}`}
               aria-pressed={selected}
               style={{ backgroundColor: preset }}
@@ -91,10 +99,12 @@ export function ColorSwatchPicker() {
           maxLength={7}
           autoCapitalize="characters"
           aria-label="Custom hex color"
+          aria-invalid={!validHex}
+          aria-describedby={validHex ? undefined : 'color-hex-error'}
           borderColor={validHex ? '$borderColor' : '$red8'}
         />
         {!validHex ? (
-          <Text fontSize="$2" color="$red10">
+          <Text id="color-hex-error" aria-live="polite" fontSize="$2" color="$red10">
             Use a six-digit hex value, like #3A86FF.
           </Text>
         ) : null}
