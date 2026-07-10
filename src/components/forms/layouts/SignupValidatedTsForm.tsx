@@ -56,7 +56,7 @@ const TextInput = (props: TextInputProps) => {
             position="absolute"
             gap="$2"
             flexDirection="row"
-            transition="bouncy"
+            style={{ transition: 'transform 250ms ease' }}
             scaleY={1}
             enterStyle={{
               opacity: 0,
@@ -114,7 +114,7 @@ const PasswordInput = (props: PasswordInputProps) => {
             position="absolute"
             gap="$2"
             flexDirection="row"
-            transition="bouncy"
+            style={{ transition: 'transform 250ms ease' }}
             scaleY={1}
             enterStyle={{
               opacity: 0,
@@ -236,7 +236,7 @@ const TwoInput = (props: TwoInputProps) => {
         flex={1}
         minW="100%"
         $group-window-gtSm={{ flexBasis: 150, minW: 'inherit' }}
-        transition="quickest"
+        style={{ transition: 'border-color 100ms ease' }}
         size={size}
       >
         <Input.Label htmlFor={values.firstInput.labelId}>
@@ -263,7 +263,7 @@ const TwoInput = (props: TwoInputProps) => {
               position="absolute"
               gap="$2"
               flexDirection="row"
-              transition="bouncy"
+              style={{ transition: 'transform 250ms ease' }}
               scaleY={1}
               enterStyle={{
                 opacity: 0,
@@ -317,7 +317,7 @@ const TwoInput = (props: TwoInputProps) => {
               position="absolute"
               gap="$2"
               flexDirection="row"
-              transition="bouncy"
+              style={{ transition: 'transform 250ms ease' }}
               scaleY={1}
               enterStyle={{
                 opacity: 0,
@@ -551,7 +551,7 @@ export function SignupValidatedTsForm() {
                     scale={0.5}
                     l={0}
                     x={100}
-                    transition="quick"
+                    style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
                     enterStyle={{
                       opacity: 0,
                       scale: 0.5,
@@ -565,7 +565,10 @@ export function SignupValidatedTsForm() {
               </AnimatePresence>
             }
           >
-            <Button.Text transition="quick" x={loading ? -10 : 0}>
+            <Button.Text
+              style={{ transition: 'transform 150ms ease' }}
+              x={loading ? -10 : 0}
+            >
               Sign Up
             </Button.Text>
           </Button>

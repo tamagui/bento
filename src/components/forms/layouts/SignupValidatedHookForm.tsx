@@ -95,7 +95,7 @@ export function SignupValidatedHookForm() {
                 flex={1}
                 minW="100%"
                 $group-window-gtSm={{ flexBasis: 150, minW: 'inherit' }}
-                transition="quickest"
+                style={{ transition: 'border-color 100ms ease' }}
                 size="$4"
               >
                 <Input.Label>First Name</Input.Label>
@@ -114,7 +114,7 @@ export function SignupValidatedHookForm() {
                       position="absolute"
                       gap="$2"
                       flexDirection="row"
-                      transition="bouncy"
+                      style={{ transition: 'transform 250ms ease' }}
                       scaleY={1}
                       enterStyle={{
                         opacity: 0,
@@ -149,7 +149,7 @@ export function SignupValidatedHookForm() {
                 flex={1}
                 minW="100%"
                 $group-window-gtSm={{ flexBasis: 150, minW: 'inherit' }}
-                transition="quickest"
+                style={{ transition: 'border-color 100ms ease' }}
                 size="$4"
               >
                 <Input.Label>Last Name</Input.Label>
@@ -168,7 +168,7 @@ export function SignupValidatedHookForm() {
                       position="absolute"
                       gap="$2"
                       flexDirection="row"
-                      transition="bouncy"
+                      style={{ transition: 'transform 250ms ease' }}
                       scaleY={1}
                       enterStyle={{
                         opacity: 0,
@@ -219,7 +219,7 @@ export function SignupValidatedHookForm() {
                     position="absolute"
                     gap="$2"
                     flexDirection="row"
-                    transition="bouncy"
+                    style={{ transition: 'transform 250ms ease' }}
                     scaleY={1}
                     enterStyle={{
                       opacity: 0,
@@ -278,7 +278,7 @@ export function SignupValidatedHookForm() {
                     position="absolute"
                     gap="$2"
                     flexDirection="row"
-                    transition="bouncy"
+                    style={{ transition: 'transform 250ms ease' }}
                     scaleY={1}
                     enterStyle={{
                       opacity: 0,
@@ -341,7 +341,7 @@ export function SignupValidatedHookForm() {
                     position="absolute"
                     gap="$2"
                     flexDirection="row"
-                    transition="bouncy"
+                    style={{ transition: 'transform 250ms ease' }}
                     scaleY={1}
                     enterStyle={{
                       opacity: 0,
@@ -436,7 +436,7 @@ export function SignupValidatedHookForm() {
                     position="absolute"
                     gap="$2"
                     flexDirection="row"
-                    transition="bouncy"
+                    style={{ transition: 'transform 250ms ease' }}
                     scaleY={1}
                     enterStyle={{
                       opacity: 0,
@@ -478,7 +478,7 @@ export function SignupValidatedHookForm() {
                   position="absolute"
                   scale={0.5}
                   l={110}
-                  transition="quick"
+                  style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
                   enterStyle={{
                     opacity: 0,
                     scale: 0.5,

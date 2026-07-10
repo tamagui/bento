@@ -190,7 +190,7 @@ export function SignUpScreen() {
             marginLeft="auto"
             size="$2"
           >
-            <Switch.Thumb transition="bouncy" />
+            <Switch.Thumb style={{ transition: 'transform 250ms ease' }} />
           </Switch>
         </View>
 
@@ -216,7 +216,7 @@ export function SignUpScreen() {
                   position="absolute"
                   scale={0.5}
                   l={110}
-                  transition="quick"
+                  style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
                   enterStyle={{
                     opacity: 0,
                     scale: 0.5,
