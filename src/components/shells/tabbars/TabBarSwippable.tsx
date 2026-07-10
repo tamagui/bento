@@ -78,7 +78,7 @@ export const TabbarSwippable = () => {
         width: pointerWidth,
         borderRadius: 1000_000,
         transform: [{ translateX: boxHPosition }],
-        shadowColor: theme.shadowColor.val,
+        shadowColor: theme.shadowColor?.val,
         shadowOffset: {
           width: 0,
           height: 1,
@@ -87,7 +87,7 @@ export const TabbarSwippable = () => {
         shadowRadius: 2.22,
         elevation: 3,
       }) as ViewStyle,
-    [theme.color2.val, theme.shadowColor.val, pointerWidth]
+    [theme.color1?.val, theme.shadowColor?.val, pointerWidth]
   )
 
   return (

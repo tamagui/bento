@@ -1,5 +1,6 @@
 import { Bell, Menu } from '@tamagui/lucide-icons-2'
-import type { StackProps, TabLayout, TabsTabProps } from 'tamagui'
+import type { KeyboardEvent as ReactKeyboardEvent } from 'react'
+import type { TabLayout, TabsTabProps, ViewProps } from 'tamagui'
 
 import { useEffect, useState } from 'react'
 import {
@@ -18,6 +19,7 @@ import {
   isWeb,
   styled,
   useEvent,
+  useThemeName,
 } from 'tamagui'
 import { useGroupMedia } from '../../hooks/useGroupMedia'
 
@@ -129,6 +131,8 @@ export function TopNavBarWithLogo() {
     setTriggerOpen(false)
   })
   const { sm } = useGroupMedia('window')
+  const themeName = useThemeName()
+  const inverseThemeName = themeName.startsWith('dark') ? 'light' : 'dark'
 
   return (
     <View
@@ -138,7 +142,7 @@ export function TopNavBarWithLogo() {
       $group-window-gtXs={{ height: 800 }}
       position="relative"
     >
-      <Theme inverse>
+      <Theme name={inverseThemeName}>
         <View
           flexDirection="row"
           p="$2"
@@ -285,7 +289,7 @@ function ProfileDropdown({
         p={0}
         enterStyle={{ y: -10, opacity: 0 }}
         exitStyle={{ y: -10, opacity: 0 }}
-        animation={[
+        transition={[
           'quick',
           {
             opacity: {
@@ -372,7 +376,7 @@ function SideBar() {
     <View
       flexDirection="row"
       {...(isWeb && {
-        onKeyDown: (e: KeyboardEvent) => {
+        onKeyDown: (e: ReactKeyboardEvent<HTMLDivElement>) => {
           if (e.key === 'Escape') {
             setOpen(false)
           }
@@ -512,7 +516,7 @@ function SideBarContent({
   )
 }
 
-const TabsRovingIndicator = ({ active, ...props }: { active?: boolean } & StackProps) => {
+const TabsRovingIndicator = ({ active, ...props }: { active?: boolean } & ViewProps) => {
   return (
     <View
       flexDirection="column"

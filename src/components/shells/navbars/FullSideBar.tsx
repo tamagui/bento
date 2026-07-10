@@ -33,15 +33,6 @@ const Link = styled(Anchor, {
   pressStyle: {
     bg: '$backgroundPress',
   },
-  variants: {
-    active: {
-      true: {
-        backgroundColor: '$color3',
-        borderLeftWidth: 3,
-        borderLeftColor: '$color9',
-      },
-    },
-  },
   '$group-window-xs': {
     py: '$2.5',
   },
@@ -380,52 +371,51 @@ const SideBarContent = View.styleable((props, ref) => {
   )
 })
 
-const NavLink = Link.styleable(({ children, href = '#', onPress, ...rest }, ref: any) => {
-  /**
-   * in a real app derive this from the router:
-   * const isActive = href === router.pathname
-   */
-  const isActive = rest.active ?? false
-
-  return (
-    <Link
-      ref={ref}
-      onPress={(e) => {
-        // Prevent page from jumping to the top on Safari when clicking a link with href="#"
-        if (href === '#') e.preventDefault()
-        if (onPress) onPress(e)
-      }}
-      href={href}
-      active={isActive}
-      rounded={5}
-      /** uncomment this line in your app */
-      // active={isActive}
-      //@ts-ignore
-      group="navLink"
-      draggable={false}
-      {...rest}
-    >
-      <Text
-        fontSize="$5"
-        fontWeight="$5"
-        lineHeight="$5"
-        color="$color11"
-        opacity={0.7}
-        // opacity={isActive ? 1 : 0.9}
-        $group-navLink-hover={{
-          opacity: 1,
+const NavLink = Link.styleable<{ active?: boolean }>(
+  ({ active = false, children, href = '#', onPress, ...rest }, ref) => {
+    /**
+     * in a real app derive this from the router:
+     * const active = href === router.pathname
+     */
+    return (
+      <Link
+        ref={ref}
+        onPress={(event) => {
+          // Prevent page from jumping to the top on Safari when clicking a link with href="#"
+          if (href === '#') event.preventDefault()
+          onPress?.(event)
         }}
-        $group-navLink-focus={{
-          opacity: 1,
-        }}
-        $group-window-xs={{
-          fontSize: '$3',
-          fontWeight: '$3',
-          lineHeight: '$3',
-        }}
+        href={href}
+        bg={active ? '$color3' : undefined}
+        borderLeftWidth={active ? 3 : 0}
+        borderLeftColor={active ? '$color9' : 'transparent'}
+        rounded={5}
+        group="navLink"
+        {...{ draggable: false }}
+        {...rest}
       >
-        {children}
-      </Text>
-    </Link>
-  )
-})
+        <Text
+          fontSize="$5"
+          fontWeight="$5"
+          lineHeight="$5"
+          color="$color11"
+          opacity={0.7}
+          // opacity={isActive ? 1 : 0.9}
+          $group-navLink-hover={{
+            opacity: 1,
+          }}
+          $group-navLink-focus={{
+            opacity: 1,
+          }}
+          $group-window-xs={{
+            fontSize: '$3',
+            fontWeight: '$3',
+            lineHeight: '$3',
+          }}
+        >
+          {children}
+        </Text>
+      </Link>
+    )
+  }
+)

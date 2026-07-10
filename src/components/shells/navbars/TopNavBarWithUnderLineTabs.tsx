@@ -1,5 +1,5 @@
 import { Bell, Menu } from '@tamagui/lucide-icons-2'
-import type { StackProps, TabLayout, TabsTabProps } from 'tamagui'
+import type { TabLayout, TabsTabProps, ViewProps } from 'tamagui'
 
 import type React from 'react'
 import { useState } from 'react'
@@ -497,7 +497,7 @@ function SideBarContent({
   )
 }
 
-const TabsRovingIndicator = ({ active, ...props }: { active?: boolean } & StackProps) => {
+const TabsRovingIndicator = ({ active, ...props }: { active?: boolean } & ViewProps) => {
   return (
     <View
       flexDirection="column"
