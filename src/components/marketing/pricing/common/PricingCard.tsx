@@ -37,8 +37,8 @@ export function PricingCard({
           px="$2.5"
           py="$1"
           rounded={999}
-          bg="$accentColor"
-          color="white"
+          bg="$color12"
+          color="$color1"
           fontSize="$1"
           fontWeight="800"
           textTransform="uppercase"
@@ -70,8 +70,8 @@ export function PricingCard({
         ))}
       </YStack>
       <Button
-        bg={featured ? '$accentColor' : '$color3'}
-        color={featured ? 'white' : '$color12'}
+        bg={featured ? '$color12' : '$color3'}
+        color={featured ? '$color1' : '$color12'}
         aria-label={`Choose ${plan.name} plan`}
       >
         Choose {plan.name}
