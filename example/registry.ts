@@ -26,6 +26,10 @@ export const componentMap: Record<string, Record<string, any>> = {
   payment: Components.Payment,
   productpage: Components.Productpage,
   preferences: Components.Preferences,
+  profile: Components.UserProfile,
+  walkthrough: Components.Walkthrough,
+  'product-list': Components.ProductList,
+  shells: Components.Shells,
 }
 
 // only capitalized function exports are renderable demos (skip helpers/types)
