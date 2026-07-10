@@ -5,6 +5,8 @@ import { FacetControls } from './common/FacetControls'
 
 export function FilterSheet() {
   const [open, setOpen] = useState(false)
+  const [resetKey, setResetKey] = useState(0)
+  const [cleared, setCleared] = useState(false)
   return (
     <YStack width="100%" maxW={480} self="center" gap="$3">
       <Button
@@ -40,17 +42,20 @@ export function FilterSheet() {
           </XStack>
           <Separator />
           <YStack p="$5" maxH={520} overflow="scroll">
-            <FacetControls />
+            <FacetControls key={resetKey} initialSelected={cleared ? [] : undefined} />
           </YStack>
           <Separator />
           <XStack p="$4" gap="$3">
-            <Button flex={1}>Clear all</Button>
             <Button
-              flex={2}
-              bg="$accentColor"
-              color="white"
-              onPress={() => setOpen(false)}
+              flex={1}
+              onPress={() => {
+                setCleared(true)
+                setResetKey((current) => current + 1)
+              }}
             >
+              Clear all
+            </Button>
+            <Button flex={2} bg="$color12" color="$color1" onPress={() => setOpen(false)}>
               Apply · 124 results
             </Button>
           </XStack>

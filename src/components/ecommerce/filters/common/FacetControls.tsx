@@ -9,8 +9,12 @@ const facets = [
   { label: 'Limited edition', count: 9 },
 ]
 
-export function FacetControls() {
-  const [selected, setSelected] = useState(['New arrivals', 'Best sellers'])
+export function FacetControls({
+  initialSelected = ['New arrivals', 'Best sellers'],
+}: {
+  initialSelected?: string[]
+}) {
+  const [selected, setSelected] = useState(initialSelected)
   const [minimum, setMinimum] = useState(20)
   const [maximum, setMaximum] = useState(180)
   return (
