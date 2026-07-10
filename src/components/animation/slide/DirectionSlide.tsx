@@ -23,7 +23,6 @@ export function DirectionSlide({
       <ToggleGroup
         orientation="horizontal"
         type="single"
-        size="$2"
         disableDeactivation={true}
         value={direction}
         onValueChange={(value) => setDirection(value as Direction)}

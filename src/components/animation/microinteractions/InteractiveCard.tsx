@@ -15,18 +15,23 @@ const MouseEnterContext = createContext<
   [boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined
 >(undefined)
 
+// Tamagui refs resolve to HTMLElements on web but stay cross-platform in its public type.
+const getWebElement = (element: TamaguiElement | null) =>
+  isWeb ? (element as HTMLElement | null) : null
+
 const Container = ({ children, ...rest }: ViewProps) => {
   const [_containerRef, setContainerRef] = useState<TamaguiElement | null>(null)
   const [perspectiveRef, setPerspectiveRef] = useState<TamaguiElement | null>(null)
   const [isMouseEntered, setIsMouseEntered] = useState(false)
 
-  const containerRef = _containerRef as HTMLDivElement
+  const containerRef = getWebElement(_containerRef)
+  const perspectiveElement = getWebElement(perspectiveRef)
 
   useEffect(() => {
-    if (perspectiveRef && isWeb) {
-      ;(perspectiveRef as HTMLDivElement).style.perspective = '1000px'
+    if (perspectiveElement) {
+      perspectiveElement.style.perspective = '1000px'
     }
-  }, [perspectiveRef])
+  }, [perspectiveElement])
 
   useEffect(() => {
     if (containerRef && isWeb) {
@@ -88,17 +93,18 @@ const Container = ({ children, ...rest }: ViewProps) => {
 
 const Body = View.styleable(({ children, ...rest }, forwardedRef) => {
   const [perspectiveRef, setPerspectiveRef] = useState<TamaguiElement | null>(null)
+  const perspectiveElement = getWebElement(perspectiveRef)
 
   const composedRef = useComposedRefs(forwardedRef, setPerspectiveRef)
 
   useEffect(() => {
-    if (perspectiveRef && isWeb) {
-      ;(perspectiveRef as HTMLDivElement).style.transformStyle = 'preserve-3d'
+    if (perspectiveElement) {
+      perspectiveElement.style.transformStyle = 'preserve-3d'
     }
-  }, [perspectiveRef])
+  }, [perspectiveElement])
 
   return (
-    <View ref={(ref) => composedRef(ref as any)} {...rest}>
+    <View ref={composedRef} {...rest}>
       {children}
     </View>
   )
@@ -127,6 +133,7 @@ const Item = View.styleable<ItemProps>(
     forwardedRef
   ) => {
     const [ref, setRef] = useState<TamaguiElement | null>(null)
+    const element = getWebElement(ref)
     const setComposedRef = useComposedRefs(forwardedRef, setRef)
     const [isMouseEntered] = useMouseEnter()
 
@@ -137,18 +144,18 @@ const Item = View.styleable<ItemProps>(
     }, [isMouseEntered])
 
     useEffect(() => {
-      if (isWeb && ref) {
-        ;(ref as HTMLElement).style.transition = 'all 200ms linear'
+      if (element) {
+        element.style.transition = 'all 200ms linear'
       }
-    }, [ref])
+    }, [element])
 
     const handleAnimations = () => {
-      if (!ref) return
+      if (!element) return
       if (isMouseEntered) {
-        ;(ref as HTMLElement).style.transform =
+        element.style.transform =
           `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`
       } else {
-        ;(ref as HTMLElement).style.transform =
+        element.style.transform =
           `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`
       }
     }
