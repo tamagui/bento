@@ -5,7 +5,7 @@ import {
   ChevronRight,
   MapPin,
 } from '@tamagui/lucide-icons-2'
-import { type KeyboardEvent, useMemo, useState } from 'react'
+import { type KeyboardEvent, useMemo, useRef, useState } from 'react'
 import {
   Button,
   Paragraph,
@@ -49,11 +49,14 @@ const categoryStyles: Record<
 }
 
 const focusRing = {
-  outlineColor: '$blue8',
+  outlineColor: '$outlineColor',
   outlineOffset: 2,
   outlineStyle: 'solid' as const,
   outlineWidth: 2,
 } as const
+
+const eventCountLabel = (count: number) =>
+  count === 1 ? '1 event' : `${count} events`
 
 export function CalendarMonth() {
   const [selectedDate, setSelectedDate] = useState(() => new Date(FIXED_TODAY))
@@ -104,7 +107,7 @@ export function AgendaList() {
         />
         <View bg="$color3" rounded="$10" px="$3" py="$1.5" self="flex-start">
           <Text color="$color11" fontSize="$2" fontWeight="700">
-            {eventCount} events
+            {eventCountLabel(eventCount)}
           </Text>
         </View>
       </XStack>
@@ -208,15 +211,34 @@ function MonthCalendar({
 }: MonthCalendarProps) {
   const [focusedDate, setFocusedDate] = useState(() => new Date(selectedDate))
   const { sm } = useGroupMedia('window')
-  const days = getMonthGrid(visibleMonth)
+  // scope DOM focus lookups to this instance so several calendars can coexist
+  const gridRef = useRef<HTMLElement | null>(null)
+  const days = useMemo(() => getMonthGrid(visibleMonth), [visibleMonth])
 
-  const moveFocus = (date: Date, amount: number) => {
-    const next = addDays(date, amount)
+  const moveFocus = (next: Date) => {
     setFocusedDate(next)
     if (!sameMonth(next, visibleMonth)) {
       onVisibleMonthChange(new Date(next.getFullYear(), next.getMonth(), 1))
     }
-    focusCalendarDay(next)
+    focusDayIn(gridRef.current, 'data-calendar-day', next)
+  }
+
+  const goMonth = (amount: number) => {
+    const nextMonth = addMonths(visibleMonth, amount)
+    onVisibleMonthChange(nextMonth)
+    // keep the roving tab stop in the visible month
+    const lastDay = new Date(
+      nextMonth.getFullYear(),
+      nextMonth.getMonth() + 1,
+      0
+    ).getDate()
+    setFocusedDate(
+      new Date(
+        nextMonth.getFullYear(),
+        nextMonth.getMonth(),
+        Math.min(focusedDate.getDate(), lastDay)
+      )
+    )
   }
 
   const handleDayKeyDown = (event: KeyboardEvent<HTMLDivElement>, date: Date) => {
@@ -233,7 +255,20 @@ function MonthCalendar({
 
     if (direction) {
       event.preventDefault()
-      moveFocus(date, direction)
+      moveFocus(addDays(date, direction))
+      return
+    }
+
+    if (event.key === 'PageUp' || event.key === 'PageDown') {
+      event.preventDefault()
+      moveFocus(addMonths(date, event.key === 'PageDown' ? 1 : -1))
+      return
+    }
+
+    if (event.key === 'Home' || event.key === 'End') {
+      event.preventDefault()
+      const weekStart = startOfWeek(date)
+      moveFocus(event.key === 'Home' ? weekStart : addDays(weekStart, 6))
       return
     }
 
@@ -260,63 +295,75 @@ function MonthCalendar({
         label={getMonthLabel(visibleMonth)}
         previousLabel="Previous month"
         nextLabel="Next month"
-        onPrevious={() => onVisibleMonthChange(addMonths(visibleMonth, -1))}
-        onNext={() => onVisibleMonthChange(addMonths(visibleMonth, 1))}
+        onPrevious={() => goMonth(-1)}
+        onNext={() => goMonth(1)}
       />
-
-      <YStack
-        width="100%"
-        aria-label={getMonthLabel(visibleMonth)}
-        render={isWeb ? <table role="grid" /> : undefined}
+      {/* announce month changes to assistive tech */}
+      <Text
+        render="output"
+        aria-live="polite"
+        position="absolute"
+        width={1}
+        height={1}
+        opacity={0}
+        overflow="hidden"
       >
-        <YStack render={isWeb ? <thead /> : undefined}>
+        {getMonthLabel(visibleMonth)}
+      </Text>
+
+      {/* ARIA grid over flex rows: equal 1/7 columns regardless of content */}
+      <YStack
+        ref={gridRef as any}
+        width="100%"
+        role={isWeb ? 'grid' : undefined}
+        aria-label={getMonthLabel(visibleMonth)}
+      >
+        <XStack
+          role={isWeb ? 'row' : undefined}
+          bg="$color2"
+          borderBottomWidth={1}
+          borderColor="$color4"
+        >
+          {weekdayLabels.map((weekday) => (
+            <View
+              key={weekday}
+              role={isWeb ? 'columnheader' : undefined}
+              flex={1}
+              flexBasis={0}
+              minW={0}
+              items="center"
+              py="$2"
+            >
+              <Text color="$color10" fontSize="$1" fontWeight="700">
+                {weekday}
+              </Text>
+            </View>
+          ))}
+        </XStack>
+
+        {rows.map((week, rowIndex) => (
           <XStack
-            render={isWeb ? <tr /> : undefined}
-            bg="$color2"
-            borderBottomWidth={1}
+            key={dateKey(week[0])}
+            role={isWeb ? 'row' : undefined}
+            borderBottomWidth={rowIndex < rows.length - 1 ? 1 : 0}
             borderColor="$color4"
           >
-            {weekdayLabels.map((weekday) => (
-              <View
-                key={weekday}
-                render={isWeb ? <th scope="col" /> : undefined}
-                flex={1}
-                items="center"
-                py="$2"
-              >
-                <Text color="$color10" fontSize="$1" fontWeight="700">
-                  {weekday}
-                </Text>
-              </View>
+            {week.map((date, columnIndex) => (
+              <MonthDay
+                key={dateKey(date)}
+                date={date}
+                compact={sm}
+                currentMonth={sameMonth(date, visibleMonth)}
+                focused={sameDay(date, focusedDate)}
+                selected={sameDay(date, selectedDate)}
+                borderLeft={columnIndex > 0}
+                onFocus={() => setFocusedDate(date)}
+                onKeyDown={(event) => handleDayKeyDown(event, date)}
+                onSelect={() => onSelectDate(date)}
+              />
             ))}
           </XStack>
-        </YStack>
-
-        <YStack render={isWeb ? <tbody /> : undefined}>
-          {rows.map((week, rowIndex) => (
-            <XStack
-              key={dateKey(week[0])}
-              render={isWeb ? <tr /> : undefined}
-              borderBottomWidth={rowIndex < rows.length - 1 ? 1 : 0}
-              borderColor="$color4"
-            >
-              {week.map((date, columnIndex) => (
-                <MonthDay
-                  key={dateKey(date)}
-                  date={date}
-                  compact={sm}
-                  currentMonth={sameMonth(date, visibleMonth)}
-                  focused={sameDay(date, focusedDate)}
-                  selected={sameDay(date, selectedDate)}
-                  borderLeft={columnIndex > 0}
-                  onFocus={() => setFocusedDate(date)}
-                  onKeyDown={(event) => handleDayKeyDown(event, date)}
-                  onSelect={() => onSelectDate(date)}
-                />
-              ))}
-            </XStack>
-          ))}
-        </YStack>
+        ))}
       </YStack>
     </YStack>
   )
@@ -340,9 +387,10 @@ function CalendarHeader({
       <Button
         aria-label={previousLabel}
         circular
+        hitSlop={isWeb ? undefined : 8}
         icon={ChevronLeft}
         onPress={onPrevious}
-        size="$3"
+        size={isWeb ? '$3' : '$4'}
         variant="outlined"
         focusVisibleStyle={focusRing}
       />
@@ -355,9 +403,10 @@ function CalendarHeader({
       <Button
         aria-label={nextLabel}
         circular
+        hitSlop={isWeb ? undefined : 8}
         icon={ChevronRight}
         onPress={onNext}
-        size="$3"
+        size={isWeb ? '$3' : '$4'}
         variant="outlined"
         focusVisibleStyle={focusRing}
       />
@@ -392,23 +441,27 @@ function MonthDay({
   const visibleEvents = events.slice(0, 2)
   const hiddenCount = Math.max(0, events.length - visibleEvents.length)
   const today = sameDay(date, FIXED_TODAY)
-  const eventLabel = events.length ? `, ${events.length} events` : ', no events'
+  const eventLabel = events.length ? `, ${eventCountLabel(events.length)}` : ', no events'
 
   return (
     <View
-      render={isWeb ? <td /> : undefined}
+      // gridcell is valid ARIA but missing from tamagui's Role union
+      role={isWeb ? ('gridcell' as any) : undefined}
+      aria-selected={isWeb ? selected : undefined}
       borderLeftWidth={borderLeft ? 1 : 0}
       borderColor="$color4"
       flex={1}
+      flexBasis={0}
       height={compact ? 72 : 96}
       minW={0}
     >
       <Button
         unstyled
         render={isWeb ? <button /> : undefined}
+        // roving tab stop (needs tamagui >= 2.4.4 for tabIndex to pass through)
+        tabIndex={focused ? 0 : -1}
         aria-current={today ? 'date' : undefined}
         aria-label={`${getLongDateLabel(date)}${eventLabel}`}
-        aria-selected={selected}
         data-calendar-day={dateKey(date)}
         bg={selected ? '$blue3' : currentMonth ? '$color1' : '$color2'}
         borderColor={selected ? '$blue9' : '$color4'}
@@ -420,7 +473,6 @@ function MonthDay({
         opacity={currentMonth ? 1 : 0.52}
         p={compact ? '$1' : '$2'}
         rounded={0}
-        tabIndex={focused ? 0 : -1}
         transition="100ms"
         items="stretch"
         justify="flex-start"
@@ -448,46 +500,50 @@ function MonthDay({
         >
           {date.getDate()}
         </Text>
-        <YStack gap={2} mt={compact ? 1 : '$1'} overflow="hidden">
-          {visibleEvents.map((calendarEvent) => (
-            <EventChip
-              key={calendarEvent.id}
-              calendarEvent={calendarEvent}
-              compact={compact}
-            />
-          ))}
-          {!!hiddenCount && (
-            <Text color="$color10" fontSize={9} fontWeight="700" numberOfLines={1}>
-              +{hiddenCount} more
-            </Text>
-          )}
-        </YStack>
+        {compact ? (
+          // narrow cells: dots + count read far better than truncated 8px text
+          <XStack gap={3} mt="$1" items="center" justify="center" minH={10}>
+            {events.slice(0, 3).map((calendarEvent) => (
+              <View
+                key={calendarEvent.id}
+                width={5}
+                height={5}
+                rounded="$10"
+                bg={categoryStyles[calendarEvent.category].dot}
+              />
+            ))}
+            {events.length > 3 && (
+              <Text color="$color10" fontSize={10} fontWeight="700">
+                +{events.length - 3}
+              </Text>
+            )}
+          </XStack>
+        ) : (
+          <YStack gap={2} mt="$1" overflow="hidden">
+            {visibleEvents.map((calendarEvent) => (
+              <EventChip key={calendarEvent.id} calendarEvent={calendarEvent} />
+            ))}
+            {!!hiddenCount && (
+              <Text color="$color10" fontSize={10} fontWeight="700" numberOfLines={1}>
+                +{hiddenCount} more
+              </Text>
+            )}
+          </YStack>
+        )}
       </Button>
     </View>
   )
 }
 
-function EventChip({
-  calendarEvent,
-  compact,
-}: {
-  calendarEvent: CalendarEvent
-  compact: boolean
-}) {
+function EventChip({ calendarEvent }: { calendarEvent: CalendarEvent }) {
   const colors = categoryStyles[calendarEvent.category]
   return (
-    <View
-      bg={colors.soft}
-      rounded="$2"
-      px={compact ? 2 : '$1.5'}
-      py={1}
-      overflow="hidden"
-    >
+    <View bg={colors.soft} rounded="$2" px="$1.5" py={1} overflow="hidden">
       <Text
         color={colors.text}
-        fontSize={compact ? 8 : 10}
+        fontSize={10}
         fontWeight="700"
-        lineHeight={compact ? 10 : 13}
+        lineHeight={13}
         numberOfLines={1}
       >
         {calendarEvent.title}
@@ -668,6 +724,7 @@ function WeekStrip({
 }) {
   const weekStart = startOfWeek(selectedDate)
   const days = getAgendaDays(weekStart, 7)
+  const stripRef = useRef<HTMLElement | null>(null)
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>, date: Date) => {
     const amount = event.key === 'ArrowLeft' ? -1 : event.key === 'ArrowRight' ? 1 : 0
@@ -675,7 +732,7 @@ function WeekStrip({
     event.preventDefault()
     const next = addDays(date, amount)
     onSelectDate(next)
-    focusWeekDay(next)
+    focusDayIn(stripRef.current, 'data-calendar-week-day', next)
   }
 
   return (
@@ -688,11 +745,11 @@ function WeekStrip({
         onNext={() => onSelectDate(addDays(selectedDate, 7))}
       />
       <XStack
+        ref={stripRef as any}
         px="$2"
         pb="$3"
         gap="$1"
         aria-label="Choose a day"
-        accessibilityRole={isWeb ? undefined : 'menu'}
         render={isWeb ? <div role="listbox" tabIndex={-1} /> : undefined}
       >
         {days.map((date) => {
@@ -706,8 +763,9 @@ function WeekStrip({
               render={
                 isWeb ? <button role="option" aria-selected={selected} /> : undefined
               }
-              aria-label={`${getLongDateLabel(date)}, ${events.length} events`}
-              aria-selected={selected}
+              tabIndex={selected ? 0 : -1}
+              aria-label={`${getLongDateLabel(date)}, ${eventCountLabel(events.length)}`}
+              aria-selected={isWeb ? undefined : selected}
               data-calendar-week-day={dateKey(date)}
               bg={selected ? '$blue3' : '$color2'}
               borderColor={selected ? '$blue9' : '$color4'}
@@ -719,7 +777,6 @@ function WeekStrip({
               items="center"
               justify="center"
               gap={2}
-              tabIndex={selected ? 0 : -1}
               transition="100ms"
               onKeyDown={(event) => handleKeyDown(event, date)}
               onPress={() => onSelectDate(date)}
@@ -756,18 +813,10 @@ function WeekStrip({
   )
 }
 
-function focusCalendarDay(date: Date) {
-  if (!isWeb) return
+/** focus a day button inside one calendar instance only */
+function focusDayIn(root: HTMLElement | null, attribute: string, date: Date) {
+  if (!isWeb || !root) return
   requestAnimationFrame(() => {
-    document.querySelector<HTMLElement>(`[data-calendar-day="${dateKey(date)}"]`)?.focus()
-  })
-}
-
-function focusWeekDay(date: Date) {
-  if (!isWeb) return
-  requestAnimationFrame(() => {
-    document
-      .querySelector<HTMLElement>(`[data-calendar-week-day="${dateKey(date)}"]`)
-      ?.focus()
+    root.querySelector<HTMLElement>(`[${attribute}="${dateKey(date)}"]`)?.focus()
   })
 }
