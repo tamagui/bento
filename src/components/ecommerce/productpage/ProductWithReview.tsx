@@ -127,7 +127,7 @@ export function ProductWithReview() {
                 <View
                   flexDirection="row"
                   cursor="pointer"
-                  transition="lazy"
+                  style={{ transition: 'transform 200ms ease' }}
                   hoverStyle={{
                     scale: 1.1,
                   }}
@@ -235,7 +235,9 @@ export function ProductWithReview() {
                           {!xs && (
                             <View
                               width="100%"
-                              transition="bouncy"
+                              style={{
+                                transition: 'transform 150ms ease, opacity 150ms ease',
+                              }}
                               position="absolute"
                               justify="center"
                               items="center"
