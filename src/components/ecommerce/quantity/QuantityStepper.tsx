@@ -1,9 +1,9 @@
-import { Minus, Plus } from '@tamagui/lucide-icons-2'
-import { Button, Text, XStack, YStack } from 'tamagui'
+import { Text, YStack } from 'tamagui'
+import { SpinControl } from './common/SpinControl'
 import { useHoldQuantity } from './common/useHoldQuantity'
 
 export function QuantityStepper() {
-  const { value, start, stop } = useHoldQuantity(2, 1, 10)
+  const { value, announced, setValue, start, stop } = useHoldQuantity(2, 1, 10)
   return (
     <YStack
       width="100%"
@@ -20,43 +20,29 @@ export function QuantityStepper() {
       <Text fontSize="$5" fontWeight="800" letterSpacing={0}>
         Quantity
       </Text>
-      <XStack
-        items="center"
-        overflow="hidden"
-        rounded="$6"
-        borderWidth={1}
-        borderColor="$borderColor"
-      >
-        <Button
-          width={52}
-          height={48}
-          rounded={0}
-          chromeless
-          icon={Minus}
-          color="$color11"
-          disabled={value <= 1}
-          aria-label="Decrease quantity"
-          onPressIn={() => start(-1)}
-          onPressOut={stop}
-        />
-        <Text width={64} text="center" fontSize="$6" fontWeight="900" aria-live="polite">
-          {value}
-        </Text>
-        <Button
-          width={52}
-          height={48}
-          rounded={0}
-          chromeless
-          icon={Plus}
-          color="$color11"
-          disabled={value >= 10}
-          aria-label="Increase quantity"
-          onPressIn={() => start(1)}
-          onPressOut={stop}
-        />
-      </XStack>
+      <SpinControl
+        label="Quantity"
+        value={value}
+        min={1}
+        max={10}
+        size={48}
+        onStart={start}
+        onStop={stop}
+        onSet={setValue}
+      />
       <Text fontSize="$2" color="$color9">
         Press and hold to change quickly · max 10
+      </Text>
+      <Text
+        render="output"
+        aria-live="polite"
+        position="absolute"
+        width={1}
+        height={1}
+        opacity={0}
+        overflow="hidden"
+      >
+        {`Quantity ${announced}`}
       </Text>
     </YStack>
   )

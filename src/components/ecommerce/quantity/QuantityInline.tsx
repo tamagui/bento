@@ -1,9 +1,13 @@
-import { Minus, Package, Plus } from '@tamagui/lucide-icons-2'
+import { Package } from '@tamagui/lucide-icons-2'
 import { Button, Text, View, XStack, YStack } from 'tamagui'
+import { SpinControl, formatMoney } from './common/SpinControl'
 import { useHoldQuantity } from './common/useHoldQuantity'
 
+const UNIT_PRICE = 128
+
 export function QuantityInline() {
-  const { value, setValue, start, stop } = useHoldQuantity(2, 0, 8)
+  const { value, announced, setValue, start, stop } = useHoldQuantity(2, 0, 8)
+
   if (value === 0) {
     return (
       <XStack
@@ -18,19 +22,25 @@ export function QuantityInline() {
         borderColor="$borderColor"
         bg="$color2"
       >
-        <Text color="$color9">Item removed from cart</Text>
+        <Text color="$color9" aria-live="polite">
+          Item removed from cart
+        </Text>
         <Button size="$3" onPress={() => setValue(1)}>
           Undo
         </Button>
       </XStack>
     )
   }
+
   return (
+    // wraps into two comfortable rows on narrow screens instead of
+    // crushing the title one character per line
     <XStack
       width="100%"
       maxW={620}
       self="center"
       items="center"
+      flexWrap="wrap"
       gap="$3"
       p="$4"
       rounded="$6"
@@ -38,54 +48,51 @@ export function QuantityInline() {
       borderColor="$borderColor"
       bg="$background"
     >
-      <View
-        width={52}
-        height={52}
-        rounded="$5"
-        bg="$blue5"
-        items="center"
-        justify="center"
-      >
-        <Package size={22} color="$color11" />
-      </View>
-      <YStack flex={1} gap="$1">
-        <Text fontWeight="800" letterSpacing={0}>
-          Contour desk lamp
-        </Text>
-        <Text fontSize="$2" color="$color9">
-          $128 each
-        </Text>
-      </YStack>
-      <XStack items="center" rounded="$5" borderWidth={1} borderColor="$borderColor">
-        <Button
-          width={38}
-          height={36}
-          rounded={0}
-          chromeless
-          icon={Minus}
-          color="$color11"
-          aria-label={value === 1 ? 'Remove item' : 'Decrease quantity'}
-          onPressIn={() => start(-1)}
-          onPressOut={stop}
-        />
-        <Text width={34} text="center" fontWeight="800" aria-live="polite">
-          {value}
-        </Text>
-        <Button
-          width={38}
-          height={36}
-          rounded={0}
-          chromeless
-          icon={Plus}
-          color="$color11"
-          disabled={value >= 8}
-          aria-label="Increase quantity"
-          onPressIn={() => start(1)}
-          onPressOut={stop}
-        />
+      <XStack items="center" gap="$3" flex={1} minW={200}>
+        <View
+          width={52}
+          height={52}
+          rounded="$5"
+          bg="$blue5"
+          items="center"
+          justify="center"
+        >
+          <Package size={22} color="$color11" aria-hidden />
+        </View>
+        <YStack flex={1} minW={0} gap="$1">
+          <Text fontWeight="800" letterSpacing={0} numberOfLines={1}>
+            Contour desk lamp
+          </Text>
+          <Text fontSize="$2" color="$color9">
+            {formatMoney(UNIT_PRICE)} each
+          </Text>
+        </YStack>
       </XStack>
-      <Text width={72} text="right" fontWeight="900">
-        ${value * 128}
+      <XStack items="center" gap="$3" justify="space-between" grow={1} flexBasis={220}>
+        <SpinControl
+          label="Contour desk lamp quantity"
+          value={value}
+          min={0}
+          max={8}
+          onStart={start}
+          onStop={stop}
+          onSet={setValue}
+          decreaseLabel={value === 1 ? 'Remove item' : 'Decrease quantity'}
+        />
+        <Text minW={72} text="right" fontWeight="900">
+          {formatMoney(value * UNIT_PRICE)}
+        </Text>
+      </XStack>
+      <Text
+        render="output"
+        aria-live="polite"
+        position="absolute"
+        width={1}
+        height={1}
+        opacity={0}
+        overflow="hidden"
+      >
+        {`Quantity ${announced}, total ${formatMoney(announced * UNIT_PRICE)}`}
       </Text>
     </XStack>
   )
