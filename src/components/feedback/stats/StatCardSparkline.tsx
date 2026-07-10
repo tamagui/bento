@@ -24,10 +24,19 @@ export function StatCardSparkline() {
             24,892
           </Text>
         </YStack>
-        <XStack theme="green" bg="$color3" rounded={1000} px="$2.5" py="$1" gap="$1">
-          <ArrowUpRight size={14} color="$color10" />
+        <XStack
+          theme="green"
+          aria-label="Up 8.7% vs last month, improving"
+          bg="$color3"
+          rounded={1000}
+          px="$2.5"
+          py="$1"
+          gap="$1"
+          items="center"
+        >
+          <ArrowUpRight size={14} color="$color10" aria-hidden />
           <Text fontSize="$2" color="$color11" fontWeight="600">
-            8.7%
+            +8.7%
           </Text>
         </XStack>
       </XStack>
