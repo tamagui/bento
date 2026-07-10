@@ -47,6 +47,7 @@ export const componentMap: Record<string, Record<string, any>> = {
   menus: Components.Menus,
   'data-grid': Components.DataGrid,
   kanban: Components.Kanban,
+  calendar: Components.Calendar,
   'settings-cells': Components.SettingsCells,
   steppers: Components.Steppers,
   'file-upload': Components.FileUpload,
@@ -115,6 +116,7 @@ export const sections: { label: string; items: { title: string; id: string }[] }
     items: [
       { title: 'Data Grid', id: 'data-grid' },
       { title: 'Kanban Board', id: 'kanban' },
+      { title: 'Calendar & Agenda', id: 'calendar' },
       { title: 'Timeline', id: 'timeline' },
       { title: 'Notifications', id: 'notifications' },
     ],
