@@ -50,6 +50,10 @@ export const componentMap: Record<string, Record<string, any>> = {
   steppers: Components.Steppers,
   'file-upload': Components.FileUpload,
   pricing: Components.Pricing,
+  filters: Components.Filters,
+  checkout: Components.Checkout,
+  notifications: Components.Notifications,
+  'social-proof': Components.SocialProof,
 }
 
 // only capitalized function exports are renderable demos (skip helpers/types)
@@ -110,6 +114,7 @@ export const sections: { label: string; items: { title: string; id: string }[] }
       { title: 'Data Grid', id: 'data-grid' },
       { title: 'Kanban Board', id: 'kanban' },
       { title: 'Timeline', id: 'timeline' },
+      { title: 'Notifications', id: 'notifications' },
     ],
   },
   {
@@ -141,6 +146,7 @@ export const sections: { label: string; items: { title: string; id: string }[] }
     items: [
       { title: 'Sections', id: 'marketing-sections' },
       { title: 'Pricing', id: 'pricing' },
+      { title: 'Social Proof', id: 'social-proof' },
     ],
   },
   {
@@ -149,6 +155,8 @@ export const sections: { label: string; items: { title: string; id: string }[] }
       { title: 'Payment', id: 'payment' },
       { title: 'Product Page', id: 'productpage' },
       { title: 'Product Lists', id: 'product-list' },
+      { title: 'Filters', id: 'filters' },
+      { title: 'Checkout', id: 'checkout' },
     ],
   },
   {
