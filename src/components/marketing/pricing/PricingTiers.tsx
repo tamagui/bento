@@ -10,6 +10,7 @@ const cadence = [
 
 export function PricingTiers() {
   const [billing, setBilling] = useState('annual')
+  const [selected, setSelected] = useState<string | null>(null)
   return (
     <YStack width="100%" maxW={1080} self="center" gap="$6">
       <YStack self="center" items="center" gap="$3" maxW={520}>
@@ -30,9 +31,22 @@ export function PricingTiers() {
             plan={plan}
             featured={index === 1}
             annual={billing === 'annual'}
+            selected={selected === plan.name}
+            onSelect={() => setSelected(plan.name)}
           />
         ))}
       </XStack>
+      <Text
+        render="output"
+        aria-live="polite"
+        position="absolute"
+        width={1}
+        height={1}
+        opacity={0}
+        overflow="hidden"
+      >
+        {selected ? `${selected} plan selected, billed ${billing}` : ''}
+      </Text>
     </YStack>
   )
 }
