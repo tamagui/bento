@@ -41,6 +41,8 @@ export const componentMap: Record<string, Record<string, any>> = {
   'ai-chat': Components.AIChat,
   command: Components.Command,
   toasts: Components.Toasts,
+  carousels: Components.Carousels,
+  'data-grid': Components.DataGrid,
 }
 
 // only capitalized function exports are renderable demos (skip helpers/types)
@@ -78,6 +80,7 @@ export const sections: { label: string; items: { title: string; id: string }[] }
       { title: 'Dialogs', id: 'dialogs' },
       { title: 'Lists', id: 'list' },
       { title: 'Tables', id: 'tables' },
+      { title: 'Carousels', id: 'carousels' },
     ],
   },
   {
@@ -88,6 +91,13 @@ export const sections: { label: string; items: { title: string; id: string }[] }
       { title: 'Empty States', id: 'empty-states' },
       { title: 'Skeletons', id: 'skeletons' },
       { title: 'Stats', id: 'stats' },
+    ],
+  },
+  {
+    label: 'Data',
+    items: [
+      { title: 'Data Grid', id: 'data-grid' },
+      { title: 'Timeline', id: 'timeline' },
     ],
   },
   {
