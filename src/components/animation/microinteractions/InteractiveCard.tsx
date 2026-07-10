@@ -195,7 +195,7 @@ export function InteractiveCard() {
           <View width="100%" height={200}>
             <View width="100%" height="100%">
               <Image
-                src="/bento/images/wheel-list/wl_7.png"
+                src="/images/jacket1.webp"
                 width="100%"
                 height="100%"
                 objectFit="cover"
