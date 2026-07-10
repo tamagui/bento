@@ -30,6 +30,10 @@ export const componentMap: Record<string, Record<string, any>> = {
   walkthrough: Components.Walkthrough,
   'product-list': Components.ProductList,
   shells: Components.Shells,
+  'empty-states': Components.EmptyStates,
+  skeletons: Components.Skeletons,
+  stats: Components.Stats,
+  banners: Components.Banners,
 }
 
 // only capitalized function exports are renderable demos (skip helpers/types)
