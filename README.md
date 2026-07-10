@@ -19,9 +19,29 @@ yarn ios           # Run on iOS
 
 ### Web
 ```bash
-yarn dev           # Start webpack dev server (localhost:8080)
+yarn dev           # Start webpack dev server (localhost:9000)
 yarn dev:web:prod  # Production mode
 ```
+
+The web gallery is URL-driven:
+
+- `http://localhost:9000/` — index of every group with counts
+- `?group=tables` — all items in a group
+- `?group=tables&item=BasicTable` — a single item (used for screenshots)
+- `&theme=dark` / `&theme=light` — force a theme
+- `&centered=false` — top-aligned frame for tall components
+
+### Visual audit sweep
+
+```bash
+node scripts/audit-sweep.mjs            # all groups × light/dark × 360/1280
+node scripts/audit-sweep.mjs tables toasts   # only specific groups
+```
+
+Writes screenshots to `audit/screenshots/` and a `sweep-report.json` with
+console errors and horizontal-overflow measurements per capture. A group is
+"clean" when it has zero console errors and zero overflow at both widths in
+both themes.
 
 ### Native (iOS/Android)
 The bento repo includes a standalone native app showcasing components:
@@ -78,5 +98,16 @@ On every push to `main`:
 /example          - Standalone demo app
   App.native.tsx  - Native app entry
   App.tsx         - Web app entry
-  /components     - Demo app components
+  registry.ts     - Shared group registry (web gallery + native navigator)
+  Gallery.tsx     - Web gallery browser
+  /features       - Native navigator screens
 ```
+
+### Adding a component group
+
+1. Create `src/components/<area>/<group>/YourComponent.tsx` exporting a
+   capitalized component with a `fileName` static.
+2. Register the group in `example/registry.ts` in BOTH `componentMap` and
+   the `sections` array (the sections array drives the native home screen).
+3. Verify: `node scripts/audit-sweep.mjs <group>` must pass clean in both
+   themes at 360 and 1280.
