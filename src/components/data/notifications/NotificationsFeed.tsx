@@ -1,31 +1,58 @@
 import { CheckCheck } from '@tamagui/lucide-icons-2'
-import { useState } from 'react'
 import { Button, Text, XStack, YStack } from 'tamagui'
+import { useGroupMedia } from '../../hooks/useGroupMedia'
 import {
   earlierNotifications,
   NotificationRow,
   todayNotifications,
+  useNotifications,
 } from './common/NotificationRow'
 
 export function NotificationsFeed() {
-  const [readAll, setReadAll] = useState(false)
-  const markRead = (notification: (typeof todayNotifications)[number]) => ({
-    ...notification,
-    unread: readAll ? false : notification.unread,
-  })
+  const { items, unreadCount, markRead, markAllRead } = useNotifications([
+    ...todayNotifications,
+    ...earlierNotifications,
+  ])
+  const { sm } = useGroupMedia('window')
+  const today = items.slice(0, todayNotifications.length)
+  const earlier = items.slice(todayNotifications.length)
+
   return (
     <YStack width="100%" maxW={680} self="center" gap="$5">
-      <XStack justify="space-between" items="center">
+      <XStack
+        justify="space-between"
+        items={sm ? 'flex-start' : 'center'}
+        flexDirection={sm ? 'column' : 'row'}
+        gap="$2"
+      >
         <YStack gap="$1">
           <Text fontSize="$8" fontWeight="900" letterSpacing={0}>
             Notifications
           </Text>
           <Text color="$color9">Keep up with your team.</Text>
         </YStack>
-        <Button size="$3" chromeless icon={CheckCheck} onPress={() => setReadAll(true)}>
+        <Button
+          size="$3"
+          chromeless
+          icon={CheckCheck}
+          disabled={unreadCount === 0}
+          opacity={unreadCount === 0 ? 0.5 : 1}
+          onPress={markAllRead}
+        >
           Mark all read
         </Button>
       </XStack>
+      <Text
+        render="output"
+        aria-live="polite"
+        position="absolute"
+        width={1}
+        height={1}
+        opacity={0}
+        overflow="hidden"
+      >
+        {unreadCount === 0 ? 'All notifications read' : `${unreadCount} unread`}
+      </Text>
       <YStack gap="$5">
         <YStack gap="$2">
           <Text
@@ -38,10 +65,11 @@ export function NotificationsFeed() {
           >
             Today
           </Text>
-          {todayNotifications.map((notification) => (
+          {today.map((notification) => (
             <NotificationRow
               key={notification.id}
-              notification={markRead(notification)}
+              notification={notification}
+              onPress={() => markRead(notification.id)}
             />
           ))}
         </YStack>
@@ -56,8 +84,12 @@ export function NotificationsFeed() {
           >
             Earlier
           </Text>
-          {earlierNotifications.map((notification) => (
-            <NotificationRow key={notification.id} notification={notification} />
+          {earlier.map((notification) => (
+            <NotificationRow
+              key={notification.id}
+              notification={notification}
+              onPress={() => markRead(notification.id)}
+            />
           ))}
         </YStack>
       </YStack>
