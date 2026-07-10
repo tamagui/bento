@@ -112,22 +112,13 @@ export function StepperForm() {
             <Text fontWeight="600">{name}</Text>
           </YStack>
         )}
-        <Text
-          id="stepper-form-error"
-          aria-live="polite"
-          color="$red10"
-          minH={20}
-        >
+        <Text id="stepper-form-error" aria-live="polite" color="$red10" minH={20}>
           {error}
         </Text>
       </YStack>
       <XStack justify="space-between">
         {/* spacer keeps layout when Back is genuinely absent at step 0 */}
-        {step === 0 ? (
-          <View />
-        ) : (
-          <Button onPress={() => setStep(step - 1)}>Back</Button>
-        )}
+        {step === 0 ? <View /> : <Button onPress={() => setStep(step - 1)}>Back</Button>}
         <Button theme="accent" onPress={step === 2 ? () => setStep(3) : next}>
           {step === 2 ? 'Finish' : 'Next'}
         </Button>

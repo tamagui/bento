@@ -41,7 +41,13 @@ export function StatCard() {
           <Paragraph render={isWeb ? 'dt' : undefined} color="$color10" m={0}>
             {metric.label}
           </Paragraph>
-          <XStack render={isWeb ? 'dd' : undefined} items="flex-end" justify="space-between" gap="$3" m={0}>
+          <XStack
+            render={isWeb ? 'dd' : undefined}
+            items="flex-end"
+            justify="space-between"
+            gap="$3"
+            m={0}
+          >
             <Text fontSize="$9" lineHeight="$9" fontWeight="700">
               {formatStat(metric.value, metric.kind)}
             </Text>

@@ -46,7 +46,8 @@ export function TrendChip({ metric }: { metric: StatMetric }) {
     >
       <TrendIcon size={14} color="$color10" aria-hidden />
       <Text fontSize="$2" color="$color11" fontWeight="600">
-        {up ? '+' : '−'}{Math.abs(metric.deltaPct)}%
+        {up ? '+' : '−'}
+        {Math.abs(metric.deltaPct)}%
       </Text>
     </XStack>
   )

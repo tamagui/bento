@@ -6,7 +6,11 @@ import { SchemeProvider } from '@vxrn/color-scheme'
 
 import config from '../../../tamagui.config'
 
-export function Provider({ children, defaultTheme = 'light', ...rest }: Omit<TamaguiProviderProps, 'config'>) {
+export function Provider({
+  children,
+  defaultTheme = 'light',
+  ...rest
+}: Omit<TamaguiProviderProps, 'config'>) {
   return (
     <TamaguiProvider config={config} defaultTheme={defaultTheme} {...rest}>
       <SchemeProvider>

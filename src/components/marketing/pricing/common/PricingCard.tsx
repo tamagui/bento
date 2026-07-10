@@ -92,9 +92,7 @@ export function PricingCard({
       <Button
         bg={selected ? '$green9' : featured ? '$color12' : '$color3'}
         color={selected || featured ? '$color1' : '$color12'}
-        aria-label={
-          selected ? `${plan.name} plan selected` : `Choose ${plan.name} plan`
-        }
+        aria-label={selected ? `${plan.name} plan selected` : `Choose ${plan.name} plan`}
         aria-pressed={selected}
         onPress={onSelect}
       >

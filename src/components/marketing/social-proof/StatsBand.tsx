@@ -51,7 +51,12 @@ export function StatsBand() {
                 </Text>
               </XStack>
             </XStack>
-            <Text render={isWeb ? 'dt' : undefined} color="$color9" letterSpacing={0} m={0}>
+            <Text
+              render={isWeb ? 'dt' : undefined}
+              color="$color9"
+              letterSpacing={0}
+              m={0}
+            >
               {stat.label} · vs last quarter
             </Text>
           </YStack>

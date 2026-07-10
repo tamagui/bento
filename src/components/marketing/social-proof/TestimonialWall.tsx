@@ -74,7 +74,10 @@ export function TestimonialWall() {
                 </Text>
               </Avatar.Fallback>
             </Avatar>
-            <YStack render={isWeb ? 'cite' : undefined} style={isWeb ? { fontStyle: 'normal' } : undefined}>
+            <YStack
+              render={isWeb ? 'cite' : undefined}
+              style={isWeb ? { fontStyle: 'normal' } : undefined}
+            >
               <Text fontWeight="800" letterSpacing={0}>
                 {item.name}
               </Text>

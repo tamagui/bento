@@ -109,14 +109,35 @@ export function FeatureTour({
       <XStack height="100%">
         {/* containers are measured too, so target coordinates compose to
             canvas space without any hard-coded offsets */}
-        <YStack onLayout={measure('sidebar')} width={150} p="$3" gap="$2" bg="$background">
+        <YStack
+          onLayout={measure('sidebar')}
+          width={150}
+          p="$3"
+          gap="$2"
+          bg="$background"
+        >
           <View width={88} height={18} rounded="$3" bg="$color5" mb="$3" />
           {/* the inbox row is a real measured tour target */}
-          <View onLayout={measure('inbox')} width={116} height={34} rounded="$4" bg="$color4" />
+          <View
+            onLayout={measure('inbox')}
+            width={116}
+            height={34}
+            rounded="$4"
+            bg="$color4"
+          />
           {[1, 2, 3].map((item) => (
             <View key={item} width={92} height={34} rounded="$4" bg="transparent" />
           ))}
-          <View onLayout={measure('invite')} mt="auto" width={116} height={38} rounded="$4" bg="$color4" items="center" justify="center">
+          <View
+            onLayout={measure('invite')}
+            mt="auto"
+            width={116}
+            height={38}
+            rounded="$4"
+            bg="$color4"
+            items="center"
+            justify="center"
+          >
             <Text fontSize="$1" color="$color9">
               Invite
             </Text>
@@ -151,6 +172,7 @@ export function FeatureTour({
           )}
           <YStack
             id="feature-tour-card"
+            // biome-ignore lint/a11y/useSemanticElements: React Native has no equivalent semantic element; the demo shares one tree across platforms.
             role="dialog"
             aria-label={`Quick tour step ${step + 1} of ${steps.length}: ${current.title}`}
             tabIndex={-1}
@@ -207,18 +229,16 @@ export function FeatureTour({
               </XStack>
               <XStack gap="$2">
                 {step > 0 && (
-                  <Button
-                    chromeless
-                    color="$color3"
-                    onPress={() => setStep(step - 1)}
-                  >
+                  <Button chromeless color="$color3" onPress={() => setStep(step - 1)}>
                     Back
                   </Button>
                 )}
                 <Button
                   bg="$color1"
                   color="$color12"
-                  onPress={() => (step === steps.length - 1 ? finish() : setStep(step + 1))}
+                  onPress={() =>
+                    step === steps.length - 1 ? finish() : setStep(step + 1)
+                  }
                 >
                   {step === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
@@ -244,7 +264,11 @@ export function FeatureTour({
             items="center"
             justify="center"
           >
-            <Check size={28} color={outcome === 'completed' ? '$green11' : '$color9'} aria-hidden />
+            <Check
+              size={28}
+              color={outcome === 'completed' ? '$green11' : '$color9'}
+              aria-hidden
+            />
           </View>
           <Text fontSize="$8" fontWeight="900" letterSpacing={0}>
             {outcome === 'completed' ? 'Tour complete' : 'Tour skipped'}

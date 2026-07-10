@@ -191,6 +191,7 @@ export function CheckoutSteps() {
               return (
                 <Button
                   key={method.id}
+                  // biome-ignore lint/a11y/useSemanticElements: React Native has no cross-platform radio input primitive.
                   role="radio"
                   aria-checked={selected}
                   justify="space-between"
@@ -201,7 +202,8 @@ export function CheckoutSteps() {
                   onPress={() => setField('shipping', method.id)}
                 >
                   <Text fontWeight="600">
-                    {method.label} · {method.priceCents === 0 ? 'Free' : money(method.priceCents)}
+                    {method.label} ·{' '}
+                    {method.priceCents === 0 ? 'Free' : money(method.priceCents)}
                   </Text>
                   <Text color="$color9" fontSize="$2">
                     {method.eta}
@@ -234,8 +236,8 @@ export function CheckoutSteps() {
               </Text>
             </YStack>
             <Text fontSize="$2" color="$color9">
-              Cards are tokenized by the payment provider — this demo never
-              handles raw card numbers.
+              Cards are tokenized by the payment provider — this demo never handles raw
+              card numbers.
             </Text>
           </YStack>
         )}

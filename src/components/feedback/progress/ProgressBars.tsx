@@ -60,7 +60,12 @@ export function ProgressBars() {
       <ProgressBar value={94} label="API quota" color="$red9" />
       <ProgressBar value={live} label="Uploading photo.jpg" color="$green9" />
       {live >= 100 && (
-        <Button size="$2.5" self="flex-start" variant="outlined" onPress={() => setLive(0)}>
+        <Button
+          size="$2.5"
+          self="flex-start"
+          variant="outlined"
+          onPress={() => setLive(0)}
+        >
           Restart upload demo
         </Button>
       )}

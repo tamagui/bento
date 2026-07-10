@@ -57,11 +57,48 @@ only (`100ms`/`150ms`/`200ms`/`quick`); self-contained demos with mock data.
 New groups must pass `node scripts/audit-sweep.mjs <group>` clean before
 registering (see README).
 
+## Critique round (post-expansion deep review)
+
+A dedicated reviewer critiqued all 30 new groups one by one against an 8-axis
+rubric (UI, UX, perf, design taste, responsive, platform-unique primitives,
+tamagui size/theme leverage, HeroUI Pro comparison). Full per-group notes were
+produced externally; every ranked blocker/major finding was then fixed,
+playwright-verified, and committed per group. The recurring classes fixed:
+
+- **Inert/fake actions** (banners, empty-states, marketing, social-proof,
+  pricing, checkout, kanban, menus, timeline): every CTA now performs a real
+  navigation, mutation, or visible state change; dead `href="#"` links and
+  decorative buttons were removed or wired.
+- **Broken interaction contracts**: command palette dismissal (853ms → 133ms
+  with focus restore), filters draft/commit sheet (Apply used to discard
+  edits), calendar's unequal table columns + 42 tab stops (now an equal-width
+  ARIA grid with a single roving tab stop), carousel snap interval vs measured
+  slide width, segmented-control pill misalignment, quantity hold-repeat
+  runaway, stale toast timers killing the wrong toast.
+- **Unnamed controls**: sliders name the semantic Thumb (settings-cells,
+  color-picker, filters range), progress bars/meters/rings all carry
+  role + label + clamped values.
+- **State honesty**: counts/results derive from real data (search, filters,
+  notifications badge, checkout totals in integer cents with validated promo
+  codes); onboarding checklist completion derives from domain state through
+  real inline flows; stats decouple direction from sentiment.
+- **Platform adapters**: touch gets sheets (notifications, settings select),
+  long-press context menus, 44pt targets via native hitSlop, reduced-motion
+  everywhere timers/transitions animate; native file picks actually work.
+
+Consciously deferred (noted per group, out of demo scope): extracting fully
+generic typed component APIs, virtualization for unbounded lists, RTL logical
+properties, URL/history sync, and multi-variant families at HeroUI Pro's
+breadth.
+
 ## Known remaining (tracked, not blockers)
 
-- Upstream tamagui PRs #4119 / #4120 are patched into this repo's
-  `node_modules` dists; a fresh `yarn install` before those PRs publish will
-  reintroduce the switches/animation-buttons crashes and nativeID warnings.
+- Upstream tamagui PRs #4119 / #4120 / #4121 (Button clobbered user
+  `tabIndex`) / #4123 (Toast stale close timer hides the replacing toast) are
+  patched into this repo's `node_modules` dists; a fresh `yarn install`
+  before those PRs publish will reintroduce those bugs. The #4119 local patch
+  also gained a guard so `__tamaguiTheme` props only attach to animated
+  custom components (they leaked to the DOM on every element otherwise).
 - The iOS simulator runthrough (all 24 post-expansion groups, light + dark,
   interactive) surfaced and got fixes for: native toast crash (example app had
   its own Provider without ToastProvider — now unified), non-functional theme

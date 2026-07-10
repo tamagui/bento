@@ -125,7 +125,11 @@ export function DropZone() {
             : undefined
         }
       >
-        <UploadCloud size={38} color={dragging ? '$accentColor' : '$color10'} aria-hidden />
+        <UploadCloud
+          size={38}
+          color={dragging ? '$accentColor' : '$color10'}
+          aria-hidden
+        />
         <YStack items="center" gap="$1">
           <Text fontSize="$6" fontWeight="700" letterSpacing={0}>
             {isWeb ? 'Drop files here' : 'Add your files'}
@@ -179,7 +183,10 @@ export function DropZone() {
                 <Text flex={1} fontWeight="600" numberOfLines={1} letterSpacing={0}>
                   {file.name}
                 </Text>
-                <Text fontSize="$2" color={file.status === 'failed' ? '$red10' : '$color9'}>
+                <Text
+                  fontSize="$2"
+                  color={file.status === 'failed' ? '$red10' : '$color9'}
+                >
                   {file.status === 'failed'
                     ? 'Upload failed'
                     : file.status === 'uploading'

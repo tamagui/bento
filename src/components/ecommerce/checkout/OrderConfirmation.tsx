@@ -91,7 +91,11 @@ export function OrderConfirmation() {
                   borderWidth={1}
                   borderColor={event.done ? '$green9' : '$color6'}
                 >
-                  <Icon size={17} color={event.done ? '$white1' : '$color9'} aria-hidden />
+                  <Icon
+                    size={17}
+                    color={event.done ? '$white1' : '$color9'}
+                    aria-hidden
+                  />
                 </View>
                 {index < timeline.length - 1 ? (
                   <View width={2} flex={1} bg={event.done ? '$green8' : '$color5'} />
@@ -128,7 +132,10 @@ export function OrderConfirmation() {
             <YStack key={row.label} gap="$2.5">
               {index === orderDetails.length - 1 && <Separator />}
               <XStack justify="space-between" gap="$3">
-                <Text color={index === orderDetails.length - 1 ? '$color12' : '$color10'} fontWeight={index === orderDetails.length - 1 ? '800' : '400'}>
+                <Text
+                  color={index === orderDetails.length - 1 ? '$color12' : '$color10'}
+                  fontWeight={index === orderDetails.length - 1 ? '800' : '400'}
+                >
                   {row.label}
                 </Text>
                 <Text fontWeight={index === orderDetails.length - 1 ? '900' : '600'}>

@@ -25,12 +25,14 @@ export function StepperHorizontal({
       self="center"
       items="flex-start"
       px="$4"
+      // biome-ignore lint/a11y/useSemanticElements: React Native has no equivalent semantic element; the demo shares one tree across platforms.
       role="list"
       aria-label="Progress"
     >
       {steps.map((step, index) => (
         <XStack
           key={step.label}
+          // biome-ignore lint/a11y/useSemanticElements: React Native has no equivalent semantic element; the demo shares one tree across platforms.
           role="listitem"
           aria-current={step.state === 'current' ? 'step' : undefined}
           aria-label={`Step ${index + 1} of ${steps.length}: ${step.label}, ${step.state === 'done' ? 'completed' : step.state}`}

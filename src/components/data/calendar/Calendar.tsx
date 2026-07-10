@@ -55,8 +55,7 @@ const focusRing = {
   outlineWidth: 2,
 } as const
 
-const eventCountLabel = (count: number) =>
-  count === 1 ? '1 event' : `${count} events`
+const eventCountLabel = (count: number) => (count === 1 ? '1 event' : `${count} events`)
 
 export function CalendarMonth() {
   const [selectedDate, setSelectedDate] = useState(() => new Date(FIXED_TODAY))

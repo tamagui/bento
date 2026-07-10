@@ -113,7 +113,11 @@ export function PricingComparison() {
             </Table.Head>
             <Table.Body>
               {rows.map((row) => (
-                <Table.Row key={row.feature} borderTopWidth={1} borderColor="$borderColor">
+                <Table.Row
+                  key={row.feature}
+                  borderTopWidth={1}
+                  borderColor="$borderColor"
+                >
                   {/* row header semantics: feature names label their row */}
                   <Table.HeaderCell
                     render={isWeb ? <th scope="row" /> : undefined}

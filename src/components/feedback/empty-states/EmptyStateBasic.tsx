@@ -42,7 +42,8 @@ export function EmptyStateBasic({
         aria-label="Create your first project"
         onPress={
           onAction ??
-          (() => toast.show('New project', { message: 'Would open the project composer' }))
+          (() =>
+            toast.show('New project', { message: 'Would open the project composer' }))
         }
       >
         {actionLabel}

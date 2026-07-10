@@ -24,7 +24,8 @@ export function useCarousel(count: number, fallbackWidth: number, gap: number) {
   const updateFromOffset = (x: number, maxX: number) => {
     // the tail slides can never reach the left edge, so end-of-scroll
     // always means the last index
-    const next = maxX > 0 && x >= maxX - 4 ? count - 1 : clampIndex(Math.round(x / interval))
+    const next =
+      maxX > 0 && x >= maxX - 4 ? count - 1 : clampIndex(Math.round(x / interval))
     setIndex((current) => (current === next ? current : next))
   }
 

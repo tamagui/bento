@@ -27,7 +27,8 @@ export function CellDisclosure({
       aria-label="Open notification settings"
       onPress={
         onPress ??
-        (() => toast.show('Notifications', { message: 'Would open notification settings' }))
+        (() =>
+          toast.show('Notifications', { message: 'Would open notification settings' }))
       }
       pressStyle={{ bg: '$color3' }}
       hoverStyle={{ bg: '$color2' }}

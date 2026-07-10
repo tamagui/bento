@@ -16,10 +16,7 @@ export function ToastPromise() {
     new Promise<void>((resolve, reject) => {
       attempts.current += 1
       const fail = attempts.current % 3 === 0
-      setTimeout(
-        () => (fail ? reject(new Error('Network dropped')) : resolve()),
-        1800
-      )
+      setTimeout(() => (fail ? reject(new Error('Network dropped')) : resolve()), 1800)
     })
 
   const run = async () => {

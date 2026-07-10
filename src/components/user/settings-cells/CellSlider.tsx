@@ -25,7 +25,13 @@ export function CellSlider({ grouped = false }: { grouped?: boolean }) {
           />
         </Slider>
         <Volume2 size={18} color="$color9" aria-hidden />
-        <Text width={44} text="right" color="$color10" fontSize="$3" fontVariant={['tabular-nums']}>
+        <Text
+          width={44}
+          text="right"
+          color="$color10"
+          fontSize="$3"
+          fontVariant={['tabular-nums']}
+        >
           {volume[0]}%
         </Text>
       </XStack>

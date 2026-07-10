@@ -192,9 +192,7 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
           id: column.dataset.columnId as ColumnId,
           left: rect.left,
           right: rect.right,
-          cardMids: Array.from(
-            column.querySelectorAll<HTMLElement>('[data-kanban-card]')
-          )
+          cardMids: Array.from(column.querySelectorAll<HTMLElement>('[data-kanban-card]'))
             .filter((card) => card.dataset.taskId !== taskId)
             .map((card) => {
               const cardRect = card.getBoundingClientRect()
@@ -452,13 +450,7 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
   )
 
   return (
-    <YStack
-      width="100%"
-      maxW={1040}
-      gap="$4"
-      py="$5"
-      ref={boardRef as any}
-    >
+    <YStack width="100%" maxW={1040} gap="$4" py="$5" ref={boardRef as any}>
       <XStack
         items={sm ? 'stretch' : 'center'}
         justify="space-between"

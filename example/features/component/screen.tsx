@@ -15,7 +15,6 @@ export function ComponentScreen() {
   const route = useRoute<ComponentRouteProp>()
   const componentId = route.params?.id
 
-
   const componentGroup = componentMap[componentId]
 
   if (!componentGroup) {

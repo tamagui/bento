@@ -61,7 +61,12 @@ export function UploadMultiple() {
           {rejection}
         </Text>
       )}
-      <XStack flexWrap="wrap" gap="$3" role={isWeb ? 'list' : undefined} aria-label="Gallery previews">
+      <XStack
+        flexWrap="wrap"
+        gap="$3"
+        role={isWeb ? 'list' : undefined}
+        aria-label="Gallery previews"
+      >
         {previews.map((preview) => (
           <View
             key={preview.id}

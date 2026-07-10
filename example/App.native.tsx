@@ -1,10 +1,6 @@
 import 'react-native-gesture-handler'
 
-import {
-  DarkTheme,
-  DefaultTheme,
-  NavigationContainer,
-} from '@react-navigation/native'
+import { DarkTheme, DefaultTheme, NavigationContainer } from '@react-navigation/native'
 import { useFonts } from 'expo-font'
 import React from 'react'
 import { Appearance, LogBox, useColorScheme } from 'react-native'
@@ -54,7 +50,9 @@ export default function App() {
         <Provider defaultTheme={activeTheme}>
           {/* Theme applies dynamically; TamaguiProvider defaultTheme is initial-only */}
           <Theme name={activeTheme}>
-            <NavigationContainer theme={activeTheme === 'dark' ? DarkTheme : DefaultTheme}>
+            <NavigationContainer
+              theme={activeTheme === 'dark' ? DarkTheme : DefaultTheme}
+            >
               <Navigation />
             </NavigationContainer>
           </Theme>

@@ -37,7 +37,14 @@ export function TimelineBasic() {
       {events.map((event, index) => (
         <XStack key={event.id} render={isWeb ? <li /> : undefined} gap="$4">
           <YStack width={20} items="center">
-            <View width={12} height={12} rounded={1000} bg="$accentColor" mt="$1.5" z={1} />
+            <View
+              width={12}
+              height={12}
+              rounded={1000}
+              bg="$accentColor"
+              mt="$1.5"
+              z={1}
+            />
             {index < events.length - 1 && <View flex={1} width={2} bg="$color5" />}
           </YStack>
           <YStack flex={1} gap="$1" pb="$5">

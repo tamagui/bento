@@ -34,7 +34,8 @@ export function TimelineSteps() {
       render={isWeb ? <ol style={{ listStyleType: 'none' }} /> : undefined}
     >
       {steps.map((step, index) => {
-        const state = index < current ? 'done' : index === current ? 'current' : 'upcoming'
+        const state =
+          index < current ? 'done' : index === current ? 'current' : 'upcoming'
         return (
           <XStack
             key={step.id}

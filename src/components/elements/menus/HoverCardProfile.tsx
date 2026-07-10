@@ -87,7 +87,10 @@ export function HoverCardProfile() {
         <YStack gap="$3">
           <XStack justify="space-between" items="flex-start" gap="$4">
             <Avatar circular size="$5">
-              <Avatar.Image aria-label="Sofia Reyes" src="https://i.pravatar.cc/96?img=47" />
+              <Avatar.Image
+                aria-label="Sofia Reyes"
+                src="https://i.pravatar.cc/96?img=47"
+              />
               <Avatar.Fallback bg="$color6" />
             </Avatar>
             <Button
@@ -133,10 +136,16 @@ export function HoverCardProfile() {
           </XStack>
           <XStack gap="$4">
             <Text fontSize="$2" color="$color11">
-              <Text fontWeight="700" color="$color12">128</Text> following
+              <Text fontWeight="700" color="$color12">
+                128
+              </Text>{' '}
+              following
             </Text>
             <Text fontSize="$2" color="$color11">
-              <Text fontWeight="700" color="$color12">{following ? '4,210' : '4,209'}</Text> followers
+              <Text fontWeight="700" color="$color12">
+                {following ? '4,210' : '4,209'}
+              </Text>{' '}
+              followers
             </Text>
           </XStack>
         </YStack>

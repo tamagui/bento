@@ -1,6 +1,17 @@
 import { Check, Mail } from '@tamagui/lucide-icons-2'
 import { useEffect, useState } from 'react'
-import { Anchor, Button, Input, Paragraph, Spinner, Text, View, XStack, YStack, isWeb } from 'tamagui'
+import {
+  Anchor,
+  Button,
+  Input,
+  Paragraph,
+  Spinner,
+  Text,
+  View,
+  XStack,
+  YStack,
+  isWeb,
+} from 'tamagui'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
@@ -17,9 +28,7 @@ export function NewsletterSignup({
   // keep focus in the flow when the form unmounts into the success panel
   useEffect(() => {
     if (status === 'sent' && isWeb) {
-      requestAnimationFrame(() =>
-        document.getElementById('newsletter-success')?.focus()
-      )
+      requestAnimationFrame(() => document.getElementById('newsletter-success')?.focus())
     }
   }, [status])
 
@@ -31,7 +40,8 @@ export function NewsletterSignup({
     }
     setError('')
     setStatus('sending')
-    await (onSubscribe?.(normalized) ?? new Promise((resolve) => setTimeout(resolve, 900)))
+    await (onSubscribe?.(normalized) ??
+      new Promise((resolve) => setTimeout(resolve, 900)))
     setStatus('sent')
   }
 

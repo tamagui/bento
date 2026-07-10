@@ -12,7 +12,12 @@ export function SegmentedBasic() {
   const [value, setValue] = useState('week')
   return (
     <View width="100%" maxW={480} self="center">
-      <SegmentedFrame label="Calendar view" options={options} value={value} onValueChange={setValue} />
+      <SegmentedFrame
+        label="Calendar view"
+        options={options}
+        value={value}
+        onValueChange={setValue}
+      />
     </View>
   )
 }

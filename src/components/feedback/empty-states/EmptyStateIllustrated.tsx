@@ -62,9 +62,7 @@ export function EmptyStateIllustrated() {
         </Button>
         <Button
           variant="outlined"
-          onPress={() =>
-            toast.show('Upload', { message: 'Would open the file picker' })
-          }
+          onPress={() => toast.show('Upload', { message: 'Would open the file picker' })}
         >
           Upload file
         </Button>

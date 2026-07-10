@@ -41,15 +41,9 @@ export function HeroCentered() {
         Ship beautiful apps twice as fast
       </H1>
 
-      <Text
-        fontSize="$5"
-        lineHeight="$6"
-        color="$color10"
-        text="center"
-        maxW={520}
-      >
-        A universal component library with an optimizing compiler. Write once,
-        render native everywhere, and keep every pixel on brand.
+      <Text fontSize="$5" lineHeight="$6" color="$color10" text="center" maxW={520}>
+        A universal component library with an optimizing compiler. Write once, render
+        native everywhere, and keep every pixel on brand.
       </Text>
 
       <XStack gap="$3" pt="$2" flexWrap="wrap" justify="center">

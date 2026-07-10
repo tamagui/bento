@@ -20,7 +20,7 @@ export const BubbleFrame = styled(View, {
   py: '$2.5',
 
   variants: {
-    role: {
+    sender: {
       user: {
         self: 'flex-end',
         bg: '$color12',
@@ -36,17 +36,17 @@ export const BubbleFrame = styled(View, {
 })
 
 export function BubbleText({
-  role,
+  sender,
   children,
 }: {
-  role: ChatRole
+  sender: ChatRole
   children: React.ReactNode
 }) {
   return (
     <Text
       fontSize="$4"
       lineHeight="$5"
-      color={role === 'user' ? '$color1' : '$color12'}
+      color={sender === 'user' ? '$color1' : '$color12'}
     >
       {children}
     </Text>
@@ -72,10 +72,7 @@ export function AssistantAvatar() {
 export function UserAvatar({ src }: { src?: string }) {
   return (
     <Avatar circular size={28}>
-      <Avatar.Image
-        aria-label="You"
-        src={src ?? 'https://i.pravatar.cc/64?img=68'}
-      />
+      <Avatar.Image aria-label="You" src={src ?? 'https://i.pravatar.cc/64?img=68'} />
       <Avatar.Fallback bg="$color6" />
     </Avatar>
   )
@@ -176,8 +173,8 @@ export function MessageRow({
       {!isUser && <AssistantAvatar />}
       {/* single width cap here — BubbleFrame stretches within it */}
       <YStack gap="$1.5" maxW="85%" items={isUser ? 'flex-end' : 'flex-start'}>
-        <BubbleFrame role={message.role}>
-          <BubbleText role={message.role}>
+        <BubbleFrame sender={message.role}>
+          <BubbleText sender={message.role}>
             {message.content}
             {message.streaming && <StreamingCaret />}
           </BubbleText>

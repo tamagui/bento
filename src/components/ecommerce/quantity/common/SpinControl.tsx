@@ -32,7 +32,13 @@ export function SpinControl({
   }
 
   return (
-    <XStack items="center" overflow="hidden" rounded="$5" borderWidth={1} borderColor="$borderColor">
+    <XStack
+      items="center"
+      overflow="hidden"
+      rounded="$5"
+      borderWidth={1}
+      borderColor="$borderColor"
+    >
       <Button
         width={size}
         height={size}

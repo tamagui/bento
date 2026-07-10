@@ -59,11 +59,7 @@ export function TimelineActivity() {
       {activities.map((activity, index) => {
         const Icon = activity.icon
         return (
-          <XStack
-            key={activity.id}
-            render={isWeb ? <li /> : undefined}
-            gap="$4"
-          >
+          <XStack key={activity.id} render={isWeb ? <li /> : undefined} gap="$4">
             <YStack width={42} items="center">
               <Avatar circular size="$3.5">
                 <Avatar.Image
@@ -101,7 +97,9 @@ export function TimelineActivity() {
                   shrink={0}
                   aria-label={activity.timeAgo}
                   render={
-                    isWeb ? <time dateTime={activity.at} title={activity.exact} /> : undefined
+                    isWeb ? (
+                      <time dateTime={activity.at} title={activity.exact} />
+                    ) : undefined
                   }
                 >
                   {activity.time}

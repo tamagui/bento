@@ -4,10 +4,34 @@ import { Anchor, Avatar, Text, XStack, YStack } from 'tamagui'
 // fictional placeholder team — dead social buttons are worse than none, so
 // each card carries one real action (email) until you wire actual profiles
 const team = [
-  { name: 'Maya Chen', initials: 'MC', role: 'Co-founder · Product', color: '$purple5', email: 'maya@bento.example' },
-  { name: 'Noah Williams', initials: 'NW', role: 'Engineering lead', color: '$blue5', email: 'noah@bento.example' },
-  { name: 'Priya Shah', initials: 'PS', role: 'Design director', color: '$orange5', email: 'priya@bento.example' },
-  { name: 'Mateo Rivera', initials: 'MR', role: 'Customer success', color: '$green5', email: 'mateo@bento.example' },
+  {
+    name: 'Maya Chen',
+    initials: 'MC',
+    role: 'Co-founder · Product',
+    color: '$purple5',
+    email: 'maya@bento.example',
+  },
+  {
+    name: 'Noah Williams',
+    initials: 'NW',
+    role: 'Engineering lead',
+    color: '$blue5',
+    email: 'noah@bento.example',
+  },
+  {
+    name: 'Priya Shah',
+    initials: 'PS',
+    role: 'Design director',
+    color: '$orange5',
+    email: 'priya@bento.example',
+  },
+  {
+    name: 'Mateo Rivera',
+    initials: 'MR',
+    role: 'Customer success',
+    color: '$green5',
+    email: 'mateo@bento.example',
+  },
 ] as const
 
 export function TeamGrid() {

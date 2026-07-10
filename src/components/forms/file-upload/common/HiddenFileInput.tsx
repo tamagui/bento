@@ -1,10 +1,4 @@
-import {
-  createElement,
-  useEffect,
-  useRef,
-  type ChangeEvent,
-  type ReactNode,
-} from 'react'
+import { createElement, useEffect, useRef, type ChangeEvent, type ReactNode } from 'react'
 import { Platform } from 'react-native'
 
 export type PickedFile = {
@@ -41,7 +35,9 @@ export function validateFiles(
   for (const file of files) {
     const extension = file.name.split('.').pop()?.toLowerCase() ?? ''
     if (limits.extensions && !limits.extensions.includes(extension)) {
-      rejected.push(`${file.name}: only ${limits.extensions.join(', ').toUpperCase()} allowed`)
+      rejected.push(
+        `${file.name}: only ${limits.extensions.join(', ').toUpperCase()} allowed`
+      )
       continue
     }
     if (limits.maxBytes && file.size > limits.maxBytes) {
@@ -83,7 +79,9 @@ export function useFilePicker({
         onFiles([
           {
             id: `native-sample-${nativePickCounter}`,
-            name: image ? `photo-${nativePickCounter}.jpg` : `document-${nativePickCounter}.pdf`,
+            name: image
+              ? `photo-${nativePickCounter}.jpg`
+              : `document-${nativePickCounter}.pdf`,
             size: 1_400_000 + nativePickCounter * 250_000,
             type: image ? 'image/jpeg' : 'application/pdf',
             uri: image

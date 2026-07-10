@@ -4,7 +4,12 @@ import { Button, Input, Separator, Text, View, XStack, YStack } from 'tamagui'
 
 // integer cents everywhere — floats never touch money math
 const items = [
-  { name: 'Contour desk lamp', detail: 'Graphite · 1', priceCents: 12800, color: '$blue5' },
+  {
+    name: 'Contour desk lamp',
+    detail: 'Graphite · 1',
+    priceCents: 12800,
+    color: '$blue5',
+  },
   { name: 'Wool desk mat', detail: 'Stone · 1', priceCents: 4600, color: '$orange5' },
 ] as const
 
@@ -106,11 +111,7 @@ export function CheckoutSummary() {
             aria-describedby={promoError ? 'promo-error' : undefined}
             autoCapitalize="characters"
           />
-          <Button
-            icon={Tag}
-            disabled={!code.trim() || !!applied}
-            onPress={applyCode}
-          >
+          <Button icon={Tag} disabled={!code.trim() || !!applied} onPress={applyCode}>
             {applied ? 'Applied' : 'Apply'}
           </Button>
         </XStack>

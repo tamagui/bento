@@ -31,7 +31,12 @@ type CommandMenuProps = {
   onSelect: (item: CommandItem) => void
 }
 
-export function CommandMenu({ autoFocus, compact, onDismiss, onSelect }: CommandMenuProps) {
+export function CommandMenu({
+  autoFocus,
+  compact,
+  onDismiss,
+  onSelect,
+}: CommandMenuProps) {
   const [query, setQuery] = useState('')
   const [activeIndex, setActiveIndex] = useState(0)
   // hover activates only on true pointer movement (coordinate delta) — the
@@ -139,12 +144,7 @@ export function CommandMenu({ autoFocus, compact, onDismiss, onSelect }: Command
         {isWeb ? (
           !compact && <Kbd>ESC</Kbd>
         ) : (
-          <Button
-            aria-label="Close"
-            chromeless
-            onPress={onDismiss}
-            size="$2"
-          >
+          <Button aria-label="Close" chromeless onPress={onDismiss} size="$2">
             <Text color="$color10" fontSize="$3">
               Cancel
             </Text>
@@ -255,7 +255,14 @@ export function CommandMenu({ autoFocus, compact, onDismiss, onSelect }: Command
       {isWeb && (
         <>
           <Separator />
-          <XStack aria-hidden gap="$4" items="center" justify="flex-end" minH={48} px="$4">
+          <XStack
+            aria-hidden
+            gap="$4"
+            items="center"
+            justify="flex-end"
+            minH={48}
+            px="$4"
+          >
             <Hint label="Navigate" keys={['↑', '↓']} />
             <Hint label="Select" keys={['↵']} />
           </XStack>

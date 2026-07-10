@@ -93,10 +93,13 @@ export function SegmentedFrame({
         return (
           <XStack
             key={option.value}
-            ref={((el: HTMLElement | null) => {
-              itemRefs.current[optionIndex] = el
-            }) as any}
+            ref={
+              ((el: HTMLElement | null) => {
+                itemRefs.current[optionIndex] = el
+              }) as any
+            }
             render={isWeb ? <button type="button" /> : undefined}
+            // biome-ignore lint/a11y/useSemanticElements: React Native has no equivalent semantic element; the demo shares one tree across platforms.
             role="radio"
             aria-checked={selected}
             aria-label={option.label}

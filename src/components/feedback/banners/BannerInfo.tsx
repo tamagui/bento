@@ -7,7 +7,10 @@ export function BannerInfo() {
       icon={Info}
       label="Information banner"
       theme="blue"
-      action={{ label: 'Read policy', href: 'https://tamagui.dev/docs/intro/introduction' }}
+      action={{
+        label: 'Read policy',
+        href: 'https://tamagui.dev/docs/intro/introduction',
+      }}
     >
       A new workspace policy is available for your team.
     </Banner>

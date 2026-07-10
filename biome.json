@@ -4,7 +4,7 @@
     "enabled": false
   },
   "files": {
-    "ignore": ["**/*/generated-*.ts", ".tamagui", "dist"]
+    "ignore": ["**/*/generated-*.ts", ".tamagui", "dist", "audit"]
   },
   "linter": {
     "enabled": true,
@@ -86,5 +86,17 @@
       "semicolons": "asNeeded",
       "quoteStyle": "single"
     }
-  }
+  },
+  "overrides": [
+    {
+      "include": ["scripts/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsoleLog": "off"
+          }
+        }
+      }
+    }
+  ]
 }

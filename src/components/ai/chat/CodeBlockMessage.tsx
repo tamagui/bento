@@ -84,13 +84,13 @@ export function CodeBlockMessage() {
     <XStack gap="$2.5" items="flex-end" width="100%" maxW={560}>
       <AssistantAvatar />
       <YStack gap="$1.5" flex={1}>
-        <BubbleFrame role="assistant" maxW="100%" self="stretch">
+        <BubbleFrame sender="assistant" maxW="100%" self="stretch">
           <YStack gap="$2">
-            <BubbleText role="assistant">
+            <BubbleText sender="assistant">
               Here's a minimal Tamagui card component:
             </BubbleText>
             <CodeBlock code={codeSample} lang="tsx" />
-            <BubbleText role="assistant">
+            <BubbleText sender="assistant">
               The tokens adapt to light and dark automatically.
             </BubbleText>
           </YStack>

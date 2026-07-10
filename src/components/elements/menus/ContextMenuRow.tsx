@@ -1,11 +1,4 @@
-import {
-  Archive,
-  Copy,
-  PencilLine,
-  Share2,
-  Star,
-  Trash2,
-} from '@tamagui/lucide-icons-2'
+import { Archive, Copy, PencilLine, Share2, Star, Trash2 } from '@tamagui/lucide-icons-2'
 import { useRef, useState } from 'react'
 import { Button, Popover, Separator, Text, View, XStack, YStack, isWeb } from 'tamagui'
 import { useReducedMotion } from '../../hooks'
@@ -187,9 +180,7 @@ export function ContextMenuRow() {
               e.preventDefault()
               const rect = e.currentTarget.getBoundingClientRect?.()
               openMenu(
-                rect
-                  ? { x: e.clientX - rect.left, y: e.clientY - rect.top }
-                  : undefined
+                rect ? { x: e.clientX - rect.left, y: e.clientY - rect.top } : undefined
               )
             }}
           >

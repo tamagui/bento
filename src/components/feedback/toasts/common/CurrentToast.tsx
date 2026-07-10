@@ -25,8 +25,11 @@ export function CurrentToast() {
 
   if (!toast || toast.isHandledNatively) return null
 
-  const { variant = 'info', actionLabel, onAction } =
-    (toast.customData as ToastCustomData | undefined) ?? {}
+  const {
+    variant = 'info',
+    actionLabel,
+    onAction,
+  } = (toast.customData as ToastCustomData | undefined) ?? {}
 
   return (
     <Toast

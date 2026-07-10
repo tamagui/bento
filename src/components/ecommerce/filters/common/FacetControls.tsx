@@ -22,12 +22,7 @@ export const emptyFilters: FilterState = {
   max: PRICE_MAX,
 }
 
-export const facetNames = [
-  'New arrivals',
-  'Best sellers',
-  'On sale',
-  'Limited edition',
-]
+export const facetNames = ['New arrivals', 'Best sellers', 'On sale', 'Limited edition']
 
 // every count and result in the group derives from this catalog
 export const products = [
@@ -86,6 +81,7 @@ export function FacetControls({
 
   return (
     <YStack gap="$6">
+      {/* biome-ignore lint/a11y/useSemanticElements: React Native has no equivalent semantic element; the demo shares one tree across platforms. */}
       <YStack gap="$1" role="group" aria-label="Collection">
         <Text fontSize="$5" fontWeight="800" letterSpacing={0} mb="$2">
           Collection
@@ -94,8 +90,7 @@ export function FacetControls({
           const checked = value.collections.includes(facet)
           // count within the current price window so numbers stay truthful
           const count = products.filter(
-            (p) =>
-              p.tags.includes(facet) && p.price >= value.min && p.price <= value.max
+            (p) => p.tags.includes(facet) && p.price >= value.min && p.price <= value.max
           ).length
           return (
             // the whole row is the press target
@@ -131,6 +126,7 @@ export function FacetControls({
           )
         })}
       </YStack>
+      {/* biome-ignore lint/a11y/useSemanticElements: React Native has no equivalent semantic element; the demo shares one tree across platforms. */}
       <YStack gap="$4" role="group" aria-label="Price range">
         <XStack justify="space-between" items="center">
           <Text fontSize="$5" fontWeight="800" letterSpacing={0}>
@@ -144,7 +140,11 @@ export function FacetControls({
         <Slider
           value={[value.min, value.max]}
           onValueChange={([min, max]) =>
-            onChange({ ...value, min: Math.min(min, max - 10), max: Math.max(max, min + 10) })
+            onChange({
+              ...value,
+              min: Math.min(min, max - 10),
+              max: Math.max(max, min + 10),
+            })
           }
           min={PRICE_MIN}
           max={PRICE_MAX}

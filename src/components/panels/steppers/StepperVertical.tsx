@@ -17,10 +17,19 @@ const steps: { description: string; label: string; state: StepState }[] = [
 
 export function StepperVertical() {
   return (
-    <YStack width="100%" maxW={480} self="center" px="$4" role="list" aria-label="Setup progress">
+    <YStack
+      width="100%"
+      maxW={480}
+      self="center"
+      px="$4"
+      // biome-ignore lint/a11y/useSemanticElements: React Native has no equivalent semantic element; the demo shares one tree across platforms.
+      role="list"
+      aria-label="Setup progress"
+    >
       {steps.map((step, index) => (
         <XStack
           key={step.label}
+          // biome-ignore lint/a11y/useSemanticElements: React Native has no equivalent semantic element; the demo shares one tree across platforms.
           role="listitem"
           aria-current={step.state === 'current' ? 'step' : undefined}
           aria-label={`Step ${index + 1} of ${steps.length}: ${step.label}, ${step.state === 'done' ? 'completed' : step.state}`}
