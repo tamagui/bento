@@ -167,7 +167,13 @@ const MyRadio = (props: MyRadioProps) => {
         {values.map(({ value, label, labelId }) => (
           <View key={label} flexDirection="row" items="center" gap="$3">
             <RadioGroup.Item id={labelId} value={value}>
-              <RadioGroup.Indicator />
+              <RadioGroup.Indicator
+                unstyled
+                width="33%"
+                height="33%"
+                rounded={1000}
+                bg="$color"
+              />
             </RadioGroup.Item>
 
             <Input.Label htmlFor={labelId}>{label}</Input.Label>

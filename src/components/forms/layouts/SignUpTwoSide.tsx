@@ -110,14 +110,26 @@ export function SignUpTwoSideScreen() {
               >
                 <View flexDirection="row" items="center" gap="$3">
                   <RadioGroup.Item id={uniqueId + 'single'} value="single">
-                    <RadioGroup.Indicator />
+                    <RadioGroup.Indicator
+                      unstyled
+                      width="33%"
+                      height="33%"
+                      rounded={1000}
+                      bg="$color"
+                    />
                   </RadioGroup.Item>
 
                   <Input.Label htmlFor={uniqueId + 'single'}>Single</Input.Label>
                 </View>
                 <View flexDirection="row" items="center" gap="$3">
                   <RadioGroup.Item id={uniqueId + 'married'} value="married">
-                    <RadioGroup.Indicator />
+                    <RadioGroup.Indicator
+                      unstyled
+                      width="33%"
+                      height="33%"
+                      rounded={1000}
+                      bg="$color"
+                    />
                   </RadioGroup.Item>
 
                   <Input.Label htmlFor={uniqueId + 'married'}>Married</Input.Label>
@@ -267,9 +279,7 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
       </Select.Trigger>
 
       <Adapt when="maxMd" platform="touch">
-        <Sheet
-          dismissOnSnapToBottom
-        >
+        <Sheet dismissOnSnapToBottom>
           <Sheet.Frame>
             <Sheet.ScrollView>
               <Adapt.Contents />
@@ -283,7 +293,7 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
         </Sheet>
       </Adapt>
 
-      <Select.Content zIndex={200000}>
+      <Select.Content z={200000}>
         <Select.ScrollUpButton
           items="center"
           justify="center"

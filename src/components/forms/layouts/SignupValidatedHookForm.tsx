@@ -379,14 +379,26 @@ export function SignupValidatedHookForm() {
               >
                 <View flexDirection="row" items="center" gap="$3">
                   <RadioGroup.Item id={'personal-t1'} value="personal">
-                    <RadioGroup.Indicator />
+                    <RadioGroup.Indicator
+                      unstyled
+                      width="33%"
+                      height="33%"
+                      rounded={1000}
+                      bg="$color"
+                    />
                   </RadioGroup.Item>
 
                   <Input.Label htmlFor={'personal-t1'}>Personal</Input.Label>
                 </View>
                 <View flexDirection="row" items="center" gap="$3">
                   <RadioGroup.Item id={'business-t1'} value="business">
-                    <RadioGroup.Indicator />
+                    <RadioGroup.Indicator
+                      unstyled
+                      width="33%"
+                      height="33%"
+                      rounded={1000}
+                      bg="$color"
+                    />
                   </RadioGroup.Item>
 
                   <Input.Label htmlFor={'business-t1'}>Business</Input.Label>
