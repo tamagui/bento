@@ -4,7 +4,7 @@ import { Square } from 'tamagui'
 const GroupDemo = () => <Square size={100} bg="$color" />
 const AccordionDemo = () => <Square size={100} bg="$colorPress" />
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { View as RNView } from 'react-native'
+import type { View as RNView } from 'react-native'
 import {
   AnimatePresence,
   Button,
@@ -114,7 +114,7 @@ function WalkThroughComp({
   }, [activeStep, itemsDim])
 
   return (
-    <PortalProvider rootHostName={PORTAL_WALKTHROUGH_HOST_NAME}>
+    <PortalProvider rootHostName={PORTAL_WALKTHROUGH_HOST_NAME} shouldAddRootHost={false}>
       <PortalItem hostName={PORTAL_WALKTHROUGH_HOST_NAME}>
         <AnimatePresence>
           {activeStep <= numberOfSteps - 1 && (
@@ -297,8 +297,6 @@ function DialogContent({
       flexDirection="column"
       p="$4"
       elevate
-      
-      
       borderColor="black"
     >
       <Paragraph>{title}</Paragraph>
