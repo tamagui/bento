@@ -1,12 +1,23 @@
 import { Check, ChevronDown, X } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
-import { Button, Select, Text, XStack } from 'tamagui'
+import { Button, Select, Text, XStack, isWeb } from 'tamagui'
+import { products } from './common/FacetControls'
 
 const sortOptions = ['Featured', 'Newest', 'Price: low to high', 'Price: high to low']
 
+// each chip is a real predicate over the shared catalog
+const chipDefs: Record<string, (p: (typeof products)[number]) => boolean> = {
+  'New arrivals': (p) => p.tags.includes('New arrivals'),
+  'Under $100': (p) => p.price < 100,
+  'On sale': (p) => p.tags.includes('On sale'),
+}
+
 export function FilterChipsBar() {
-  const [chips, setChips] = useState(['New arrivals', 'Under $200', 'In stock'])
+  const [chips, setChips] = useState(Object.keys(chipDefs))
   const [sort, setSort] = useState('Featured')
+
+  const results = products.filter((p) => chips.every((chip) => chipDefs[chip](p)))
+
   return (
     <XStack width="100%" maxW={920} self="center" flexWrap="wrap" gap="$2" items="center">
       {chips.map((chip) => (
@@ -16,6 +27,7 @@ export function FilterChipsBar() {
           rounded={999}
           bg="$color3"
           iconAfter={X}
+          hitSlop={isWeb ? undefined : 6}
           aria-label={`Remove ${chip} filter`}
           onPress={() => setChips((current) => current.filter((item) => item !== chip))}
         >
@@ -29,6 +41,9 @@ export function FilterChipsBar() {
       ) : (
         <Text color="$color9">No active filters</Text>
       )}
+      <Text color="$color9" fontSize="$2" aria-live="polite">
+        {results.length} result{results.length === 1 ? '' : 's'}
+      </Text>
       <XStack ml="auto" items="center" gap="$2">
         <Text color="$color9" fontSize="$2">
           Sort
