@@ -100,6 +100,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
       value={val}
       onValueChange={setVal}
       disablePreventBodyScroll
+      zIndex={200000}
       {...rest}
     >
       <Select.Trigger width="100%" iconAfter={ChevronDown} rounded="$4">
@@ -126,7 +127,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
         </Sheet>
       </Adapt>
 
-      <Select.Content z={200000}>
+      <Select.Content>
         <Select.ScrollUpButton
           items="center"
           justify="center"
