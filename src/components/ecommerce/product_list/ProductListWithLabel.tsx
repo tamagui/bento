@@ -33,7 +33,7 @@ function Item({ item, index }: { item: Product; index: number }) {
         )}
         <View z={2} rounded={10} overflow="hidden">
           <View
-            transition="quick"
+            style={{ transition: 'transform 150ms ease' }}
             transformOrigin="center center"
             hoverStyle={{
               scale: 1,

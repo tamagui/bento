@@ -65,7 +65,7 @@ export const getProducts = () => {
         name,
         price: product.price,
         discount: randNumber({ min: 10, max: 50 }),
-        image: `/bento/images/${image}`,
+        image: `https://tamagui.dev/bento/images${image}`,
       }
     })
 }
