@@ -56,7 +56,8 @@ type GridPerson = {
   avatar: string
   role: string
   status: PersonStatus
-  joined: string
+  /** timestamp so sorting is chronological; format only when rendering */
+  joinedAt: number
   projects: number
 }
 
@@ -69,9 +70,25 @@ const widths: Record<string, number> = {
   name: 250,
   role: 180,
   status: 140,
-  joined: 160,
+  joinedAt: 160,
   projects: 120,
 }
+
+const formatJoined = (timestamp: number) =>
+  new Date(timestamp).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  })
+
+const toCsv = (people: GridPerson[]) =>
+  [
+    'Name,Email,Role,Status,Joined,Projects',
+    ...people.map(
+      (p) =>
+        `${p.name},${p.email},${p.role},${p.status},${formatJoined(p.joinedAt)},${p.projects}`
+    ),
+  ].join('\n')
 
 export function DataGrid() {
   return <DataGridCore />
@@ -91,6 +108,8 @@ function DataGridCore({ compact = false }: DataGridCoreProps) {
   const [loading, setLoading] = useState(false)
   const [sorting, setSorting] = useState<SortingState>([])
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
+  const [announcement, setAnnouncement] = useState('')
+  const [archived, setArchived] = useState<GridPerson[]>([])
   const { sm } = useGroupMedia('window')
 
   const columns = useMemo<ColumnDef<GridPerson>[]>(
@@ -155,7 +174,11 @@ function DataGridCore({ compact = false }: DataGridCoreProps) {
         header: 'Status',
         cell: ({ getValue }) => <StatusBadge status={getValue<PersonStatus>()} />,
       },
-      { accessorKey: 'joined', header: 'Joined' },
+      {
+        accessorKey: 'joinedAt',
+        header: 'Joined',
+        cell: ({ getValue }) => formatJoined(getValue<number>()),
+      },
       { accessorKey: 'projects', header: 'Projects' },
     ],
     [compact]
@@ -181,7 +204,49 @@ function DataGridCore({ compact = false }: DataGridCoreProps) {
   const resetData = () => {
     setData(initialData)
     setRowSelection({})
+    setArchived([])
+    setAnnouncement('')
     table.setPageIndex(0)
+  }
+
+  const archiveSelected = () => {
+    const selected = table.getSelectedRowModel().rows.map((row) => row.original)
+    setData((current) => current.filter((p) => !selected.some((s) => s.id === p.id)))
+    setArchived(selected)
+    setRowSelection({})
+    setAnnouncement(
+      `${selected.length} member${selected.length === 1 ? '' : 's'} archived`
+    )
+  }
+
+  const undoArchive = () => {
+    setData((current) =>
+      // restore in original order
+      initialData.filter(
+        (p) => current.some((c) => c.id === p.id) || archived.some((a) => a.id === p.id)
+      )
+    )
+    setArchived([])
+    setAnnouncement('Archive undone')
+  }
+
+  const exportSelected = async () => {
+    const selected = table.getSelectedRowModel().rows.map((row) => row.original)
+    const csv = toCsv(selected)
+    if (isWeb) {
+      const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }))
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'team-directory.csv'
+      link.click()
+      URL.revokeObjectURL(url)
+    } else {
+      const { Share } = require('react-native')
+      await Share.share({ message: csv })
+    }
+    setAnnouncement(
+      `Exported ${selected.length} member${selected.length === 1 ? '' : 's'}`
+    )
   }
 
   return (
@@ -244,10 +309,22 @@ function DataGridCore({ compact = false }: DataGridCoreProps) {
                 {selectedCount} selected
               </Text>
               <XStack gap="$1" justify={sm ? 'space-between' : 'flex-end'}>
-                <Button chromeless color="$color12" icon={Archive} size="$3">
+                <Button
+                  chromeless
+                  color="$color12"
+                  icon={Archive}
+                  onPress={archiveSelected}
+                  size="$3"
+                >
                   Archive
                 </Button>
-                <Button chromeless color="$color12" icon={Download} size="$3">
+                <Button
+                  chromeless
+                  color="$color12"
+                  icon={Download}
+                  onPress={exportSelected}
+                  size="$3"
+                >
                   Export
                 </Button>
                 <Button
@@ -259,6 +336,33 @@ function DataGridCore({ compact = false }: DataGridCoreProps) {
                   Clear
                 </Button>
               </XStack>
+            </XStack>
+          )}
+          {!selectedCount && !!announcement && (
+            <XStack
+              key="announcement"
+              render="output"
+              aria-live="polite"
+              bg="$color2"
+              borderColor="$color6"
+              borderWidth={1}
+              rounded="$5"
+              gap="$3"
+              items="center"
+              minH={52}
+              px="$3"
+              transition={{ default: 'quicker', exit: 'quickest' }}
+              enterStyle={{ opacity: 0, y: -8 }}
+              exitStyle={{ opacity: 0, y: -4 }}
+            >
+              <Text color="$color11" data-grid-announcement>
+                {announcement}
+              </Text>
+              {archived.length > 0 && (
+                <Button onPress={undoArchive} size="$2.5" variant="outlined">
+                  Undo
+                </Button>
+              )}
             </XStack>
           )}
         </AnimatePresence>
@@ -369,7 +473,7 @@ function DataGridCore({ compact = false }: DataGridCoreProps) {
                               style={pinned}
                               z={pinned ? 2 : 1}
                             >
-                              {typeof cell.getValue() === 'string' &&
+                              {cell.column.id !== 'select' &&
                               cell.column.id !== 'name' &&
                               cell.column.id !== 'status' ? (
                                 <Text color="$color11" fontSize={compact ? '$2' : '$3'}>
@@ -414,6 +518,7 @@ function SelectionCheckbox({
     <Checkbox
       aria-label={label}
       checked={checked}
+      hitSlop={isWeb ? undefined : 12}
       onCheckedChange={onCheckedChange}
       size="$3"
     >
@@ -450,6 +555,7 @@ function MobileCards({
           Select this page
         </Text>
       </XStack>
+      <MobileSortChips table={table} />
       <YStack
         aria-label="Team directory cards"
         accessibilityRole={isWeb ? undefined : 'list'}
@@ -496,9 +602,10 @@ function MobileCards({
               <StatusBadge status={row.original.status} />
             </XStack>
             <Separator />
-            <XStack justify="space-between" gap="$3">
+            {/* wrap so fields never crush each other at very narrow widths */}
+            <XStack flexWrap="wrap" gap="$3">
               <CardField label="Role" value={row.original.role} />
-              <CardField label="Joined" value={row.original.joined} />
+              <CardField label="Joined" value={formatJoined(row.original.joinedAt)} />
               <CardField label="Projects" value={String(row.original.projects)} />
             </XStack>
           </YStack>
@@ -508,9 +615,60 @@ function MobileCards({
   )
 }
 
+const sortOptions = [
+  { id: 'name', label: 'Name' },
+  { id: 'joinedAt', label: 'Joined' },
+  { id: 'projects', label: 'Projects' },
+]
+
+/** card mode keeps sort parity with the desktop table */
+function MobileSortChips({ table }: { table: TableInstance<GridPerson> }) {
+  const sorting = table.getState().sorting
+  return (
+    <XStack borderBottomWidth={1} gap="$2" items="center" px="$4" py="$2">
+      <Text color="$color9" fontSize="$1" fontWeight="700" textTransform="uppercase">
+        Sort
+      </Text>
+      {sortOptions.map((option) => {
+        const active = sorting[0]?.id === option.id
+        const desc = active && sorting[0]?.desc
+        return (
+          <Button
+            key={option.id}
+            aria-label={`Sort by ${option.label}${
+              active ? (desc ? ', descending' : ', ascending') : ''
+            }`}
+            aria-pressed={active}
+            bg={active ? '$color4' : '$color2'}
+            borderColor={active ? '$color8' : '$color5'}
+            borderWidth={1}
+            hitSlop={isWeb ? undefined : 6}
+            iconAfter={active ? (desc ? ChevronDown : ChevronUp) : undefined}
+            onPress={() =>
+              table.setSorting(
+                !active
+                  ? [{ id: option.id, desc: false }]
+                  : desc
+                    ? []
+                    : [{ id: option.id, desc: true }]
+              )
+            }
+            rounded="$10"
+            size="$2.5"
+          >
+            <Text color={active ? '$color12' : '$color11'} fontSize="$2">
+              {option.label}
+            </Text>
+          </Button>
+        )
+      })}
+    </XStack>
+  )
+}
+
 function CardField({ label, value }: { label: string; value: string }) {
   return (
-    <YStack gap="$1" minW={0}>
+    <YStack gap="$1" minW={0} grow={1} flexBasis="28%">
       <Text color="$color9" fontSize="$1" fontWeight="700" textTransform="uppercase">
         {label}
       </Text>
@@ -540,7 +698,9 @@ function PaginationFooter({
       py="$2"
     >
       <Text color="$color10" fontSize="$2">
-        {selectedCount ? `${selectedCount} of 200 selected` : '200 total members'}
+        {selectedCount
+          ? `${selectedCount} of ${table.getPrePaginationRowModel().rows.length} selected`
+          : `${table.getPrePaginationRowModel().rows.length} total members`}
       </Text>
       <Text color="$color11" fontSize="$2" fontWeight="600" data-grid-page>
         Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
@@ -593,7 +753,9 @@ function PageButton({
       disabled={disabled}
       icon={icon}
       onPress={onPress}
-      size="$3"
+      // comfortable touch size on native. tamagui keeps disabled buttons
+      // focusable with aria-disabled (discoverable-disabled pattern)
+      size={isWeb ? '$3' : '$4'}
       variant="outlined"
     />
   )
@@ -662,11 +824,7 @@ function makeGridData(count: number): GridPerson[] {
       avatar: `https://i.pravatar.cc/96?img=${(index % 68) + 1}`,
       role: roles[index % roles.length],
       status: statuses[index % statuses.length],
-      joined: new Date(
-        2022 + (index % 4),
-        index % 12,
-        (index % 27) + 1
-      ).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+      joinedAt: new Date(2022 + (index % 4), index % 12, (index % 27) + 1).getTime(),
       projects: (index * 7) % 24,
     }
   })
