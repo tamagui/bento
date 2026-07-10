@@ -88,7 +88,12 @@ function DayPicker() {
 
   return (
     <AnimatePresence key={prevNextAnimationKey}>
-      <View width="100%" gap="$4" transition="medium" {...prevNextAnimation()}>
+      <View
+        width="100%"
+        gap="$4"
+        style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
+        {...prevNextAnimation()}
+      >
         <WeekView weekDays={weekDays} />
 
         <View

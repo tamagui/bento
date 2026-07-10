@@ -97,7 +97,7 @@ function Calendar({
           width="100%"
           justify="center"
           items="center"
-          transition="medium"
+          style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
           gap="$4"
           {...prevNextAnimation()}
         >

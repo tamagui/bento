@@ -105,7 +105,7 @@ function CalendarView({
           width="100%"
           justify="center"
           items="center"
-          transition="medium"
+          style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
           gap="$4"
           {...prevNextAnimation()}
         >
@@ -197,7 +197,9 @@ function CalendarView({
                         {day.selected ? (
                           <Button.Text
                             key="text-selected"
-                            transition="quicker"
+                            style={{
+                              transition: 'transform 100ms ease, opacity 100ms ease',
+                            }}
                             enterStyle={{
                               opacity: 0,
                               y: 20,
@@ -245,7 +247,7 @@ function CalendarView({
                           day.range === 'range-start' ||
                           day.range === 'range-end') && (
                           <View
-                            transition="quick"
+                            style={{ transition: 'opacity 150ms ease' }}
                             position="absolute"
                             width="100%"
                             height="100%"

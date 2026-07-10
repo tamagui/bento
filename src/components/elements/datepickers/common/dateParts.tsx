@@ -4,7 +4,6 @@ import { getFontSized } from '@tamagui/get-font-sized'
 import { Calendar, ChevronLeft, ChevronRight, X } from '@tamagui/lucide-icons-2'
 import type { GestureReponderEvent, ViewProps } from '@tamagui/web'
 import type { PopoverProps } from 'tamagui'
-import { LinearGradient } from 'tamagui/linear-gradient'
 import {
   Adapt,
   AnimatePresence,
@@ -38,32 +37,15 @@ export function RangeGradient({
   color: '$color5' | '$color6'
   direction: 'leftToRight' | 'rightToLeft'
 }) {
-  if (isWeb) {
-    const angle = direction === 'leftToRight' ? '90deg' : '270deg'
-    return (
-      <View
-        flex={1}
-        width="100%"
-        style={{
-          backgroundImage: `linear-gradient(${angle}, var(--${color.slice(1)}) 30%, var(--background06))`,
-        }}
-      >
-        {children}
-      </View>
-    )
-  }
-
   return (
-    <LinearGradient
+    <View
       flex={1}
       width="100%"
-      colors={[color, '$background06']}
-      start={direction === 'leftToRight' ? [0, 1] : [1, 1]}
-      end={direction === 'leftToRight' ? [1, 1] : [0, 1]}
-      locations={[0.3, 1]}
+      bg={color}
+      opacity={direction === 'leftToRight' ? 0.9 : 0.75}
     >
       {children}
-    </LinearGradient>
+    </View>
   )
 }
 
@@ -135,7 +117,7 @@ const DatePickerImpl = (props: DatePickerProps) => {
               <Adapt.Contents />
             </Sheet.Frame>
             <Sheet.Overlay
-              transition="lazy"
+              style={{ transition: 'opacity 200ms ease' }}
               opacity={0.8}
               enterStyle={{ opacity: 0 }}
               exitStyle={{ opacity: 0 }}
@@ -149,7 +131,6 @@ const DatePickerImpl = (props: DatePickerProps) => {
 }
 
 const DatePickerContent = styled(Popover.Content, {
-  transition: 'quick',
   variants: {
     unstyled: {
       false: {
@@ -250,7 +231,7 @@ export function MonthPicker({
         flexDirection="row"
         flexWrap="wrap"
         gap="$2"
-        transition="100ms"
+        style={{ transition: 'transform 100ms ease, opacity 100ms ease' }}
         grow={0}
         $platform-native={{
           justify: 'space-between',
@@ -303,7 +284,7 @@ export function YearPicker({
     <AnimatePresence key={prevNextAnimationKey}>
       <View
         {...prevNextAnimation()}
-        transition={'quick'}
+        style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
         flexDirection="row"
         flexWrap="wrap"
         gap="$2"
