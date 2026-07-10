@@ -137,3 +137,5 @@ bento-output/
 # @end expo-cli
 /ios
 /android
+# visual audit output (regenerate with scripts/audit-sweep.mjs)
+audit/

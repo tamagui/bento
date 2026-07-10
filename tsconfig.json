@@ -30,5 +30,6 @@
     "example/**/*.tsx",
     "tamagui.config.ts"
   ],
-  "exclude": ["test", "types", "node_modules", "dist", "**/__tests__"]
+  "exclude": ["test", "types", "node_modules", "dist", "**/__tests__"],
+  "extends": "expo/tsconfig.base"
 }

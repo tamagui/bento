@@ -13,36 +13,40 @@ export function IconCenterButton() {
 
   return (
     <View onLayout={(e: any) => setWidth(e.nativeEvent.layout.width)}>
-    <Button
-      size="$4"
-      onPress={() => {
-        setMove(!move)
-      }}
-      overflow="hidden"
-      {...(move && {
-        theme: 'green',
-      })}
-    >
-      <View
-        transition="quick"
-        x={
-          move
-            ? buttonWidth / 2 -
-              (iconDim!.width * iconScale) / 2 -
-              (isWeb ? 0 : iconDim!.x)
-            : 0
-        }
-        scale={move ? iconScale : 1}
-        onLayout={(e) => setIconDim(e.nativeEvent.layout)}
+      <Button
+        size="$4"
+        onPress={() => {
+          setMove(!move)
+        }}
+        overflow="hidden"
+        {...(move && {
+          theme: 'green',
+        })}
       >
-        <Button.Icon>
-          <Check />
-        </Button.Icon>
-      </View>
-      <Button.Text transition="medium" x={move ? buttonWidth : 0} opacity={move ? 0 : 1}>
-        Accept Terms
-      </Button.Text>
-    </Button>
+        <View
+          transition="quick"
+          x={
+            move
+              ? buttonWidth / 2 -
+                (iconDim!.width * iconScale) / 2 -
+                (isWeb ? 0 : iconDim!.x)
+              : 0
+          }
+          scale={move ? iconScale : 1}
+          onLayout={(e) => setIconDim(e.nativeEvent.layout)}
+        >
+          <Button.Icon>
+            <Check />
+          </Button.Icon>
+        </View>
+        <Button.Text
+          transition="medium"
+          x={move ? buttonWidth : 0}
+          opacity={move ? 0 : 1}
+        >
+          Accept Terms
+        </Button.Text>
+      </Button>
     </View>
   )
 }

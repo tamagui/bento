@@ -14,7 +14,9 @@ const discovered = await index.evaluate(() =>
 )
 await index.close()
 
-const groups = (requested.length ? requested : discovered).filter((group) => !skipped.has(group))
+const groups = (requested.length ? requested : discovered).filter(
+  (group) => !skipped.has(group)
+)
 
 for (const group of groups) {
   for (const theme of ['light', 'dark']) {
@@ -36,7 +38,8 @@ for (const group of groups) {
       issues.push(`${message.type()} ${JSON.stringify(args)}`)
     })
     page.on('response', (response) => {
-      if (response.status() >= 400) issues.push(`http ${response.status()} ${response.url()}`)
+      if (response.status() >= 400)
+        issues.push(`http ${response.status()} ${response.url()}`)
     })
 
     await page.goto(`${base}/?group=${group}&theme=${theme}`, {

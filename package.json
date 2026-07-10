@@ -143,6 +143,7 @@
     "html-webpack-plugin": "^5.5.0",
     "metro-runtime": "*",
     "mini-css-extract-plugin": "^2.9.1",
+    "playwright": "^1.61.1",
     "tamagui-loader": "latest",
     "tilg": "0.1.1",
     "typescript": "~5.9.2",

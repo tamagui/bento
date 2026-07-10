@@ -44,10 +44,13 @@ for (const group of groups) {
         })
         // horizontal overflow check at mobile width
         const overflow = await p.evaluate(
-          () => document.documentElement.scrollWidth - document.documentElement.clientWidth
+          () =>
+            document.documentElement.scrollWidth - document.documentElement.clientWidth
         )
         report.push({ group, theme, width, errs, overflowPx: overflow })
-        process.stdout.write(`✓ ${group} ${theme} ${width}${overflow > 2 ? ` OVERFLOW ${overflow}px` : ''}${errs.length ? ` ERRS ${errs.length}` : ''}\n`)
+        process.stdout.write(
+          `✓ ${group} ${theme} ${width}${overflow > 2 ? ` OVERFLOW ${overflow}px` : ''}${errs.length ? ` ERRS ${errs.length}` : ''}\n`
+        )
       } catch (e) {
         report.push({ group, theme, width, fatal: String(e).slice(0, 200) })
         process.stdout.write(`✗ ${group} ${theme} ${width}: ${String(e).slice(0, 80)}\n`)
