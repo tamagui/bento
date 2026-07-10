@@ -32,25 +32,25 @@ const product = {
     'Making fresh tracks this cold-weather jacket will keep you comfortable with warm Thermarator insulation, a thermal-reflective lining that holds in heat, and a durable water-resistant shell.',
   pictures: [
     {
-      picture: '/bento/images/jacket/jacket1.jpg',
+      picture: '/images/jacket1.webp',
       meta: {
         colorName: 'Cyron',
       },
     },
     {
-      picture: '/bento/images/jacket/jacket2.webp',
+      picture: '/images/jacket2.webp',
       meta: {
         colorName: 'Light Green',
       },
     },
     {
-      picture: '/bento/images/jacket/jacket3.jpg',
+      picture: '/images/jacket3.webp',
       meta: {
         colorName: 'White',
       },
     },
     {
-      picture: '/bento/images/jacket/jacket4.jpg',
+      picture: '/images/jacket4.webp',
       meta: {
         colorName: 'Dark Green',
       },
