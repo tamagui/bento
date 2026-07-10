@@ -7,11 +7,11 @@ import {
   Trash2,
 } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
-import { Popover, Separator, Text, View, XStack, YStack } from 'tamagui'
+import { Popover, Separator, Text, View, XStack, YStack, isWeb } from 'tamagui'
 
 const actions = [
-  { icon: PencilLine, label: 'Rename', shortcut: '⌘R' },
-  { icon: Copy, label: 'Duplicate', shortcut: '⌘D' },
+  { icon: PencilLine, label: 'Rename', shortcut: isWeb ? '⌘R' : '' },
+  { icon: Copy, label: 'Duplicate', shortcut: isWeb ? '⌘D' : '' },
   { icon: Share2, label: 'Share…', shortcut: '' },
   { icon: Star, label: 'Add to favorites', shortcut: '' },
   { icon: Archive, label: 'Archive', shortcut: '' },
@@ -92,7 +92,7 @@ export function ContextMenuRow() {
                 Q3 Launch plan.pdf
               </Text>
               <Text fontSize="$2" color="$color10">
-                Right-click (or tap) for actions
+                {isWeb ? 'Right-click or tap for actions' : 'Tap for actions'}
               </Text>
             </YStack>
           </XStack>

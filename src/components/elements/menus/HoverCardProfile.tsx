@@ -1,30 +1,33 @@
 import { Calendar, MapPin } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
-import { Anchor, Avatar, Button, Popover, Text, XStack, YStack } from 'tamagui'
+import { Avatar, Button, Popover, Text, XStack, YStack } from 'tamagui'
 
 /** ------ EXAMPLE ------ */
 export function HoverCardProfile() {
   const [open, setOpen] = useState(false)
 
   return (
-    <Popover open={open} onOpenChange={setOpen} placement="top" offset={8}>
+    <Popover open={open} onOpenChange={setOpen} placement="bottom-start" offset={8}>
       <Popover.Trigger asChild>
-        <Anchor
-          href="#"
-          fontSize="$4"
-          fontWeight="600"
-          color="$blue10"
-          textDecorationLine="none"
-          hoverStyle={{ color: '$blue11' }}
+        {/* view-based trigger: text-based triggers don't press/measure on native */}
+        <XStack
+          self="flex-start"
+          cursor="pointer"
           onMouseEnter={() => setOpen(true)}
           onMouseLeave={() => setOpen(false)}
-          onPress={(e: any) => {
-            e.preventDefault()
-            setOpen((v) => !v)
-          }}
+          onPress={() => setOpen(true)}
         >
-          @sofia
-        </Anchor>
+          <Text
+            role="link"
+            tabIndex={0}
+            fontSize="$4"
+            fontWeight="600"
+            color="$blue10"
+            hoverStyle={{ color: '$blue11' }}
+          >
+            @sofia
+          </Text>
+        </XStack>
       </Popover.Trigger>
       <Popover.Content
         rounded="$6"
@@ -36,7 +39,7 @@ export function HoverCardProfile() {
         shadowColor="$shadowColor"
         shadowRadius={16}
         shadowOffset={{ width: 0, height: 6 }}
-        // transition intentionally omitted: animated views resolve wrong theme (UPSTREAM-BUGS.md #1)
+        transition="100ms"
         enterStyle={{ opacity: 0, y: 4, scale: 0.98 }}
         exitStyle={{ opacity: 0, y: 4, scale: 0.98 }}
         onMouseEnter={() => setOpen(true)}

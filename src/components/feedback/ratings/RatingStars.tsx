@@ -52,7 +52,7 @@ export function RatingStars() {
                       width={half ? '50%' : '100%'}
                       overflow="hidden"
                     >
-                      <Star size={24} color="$yellow10" fill="$yellow10" />
+                      <Star size={24} color="$yellow10" fill="currentColor" />
                     </View>
                   )}
                 </View>

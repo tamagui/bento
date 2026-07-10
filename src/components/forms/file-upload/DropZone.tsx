@@ -2,7 +2,7 @@ import { FileText, Trash2, UploadCloud } from '@tamagui/lucide-icons-2'
 import type { DragEvent } from 'react'
 import { useRef, useState } from 'react'
 import { Platform } from 'react-native'
-import { Button, Text, View, XStack, YStack } from 'tamagui'
+import { Button, Text, View, XStack, YStack, isWeb } from 'tamagui'
 import { HiddenFileInput } from './common/HiddenFileInput'
 
 type UploadFile = { id: string; name: string; progress: number; size: string }
@@ -63,7 +63,7 @@ export function DropZone() {
         <UploadCloud size={38} color={dragging ? '$accentColor' : '$color10'} />
         <YStack items="center" gap="$1">
           <Text fontSize="$6" fontWeight="700" letterSpacing={0}>
-            Drop files here
+            {isWeb ? 'Drop files here' : 'Add your files'}
           </Text>
           <Text color="$color9" text="center" letterSpacing={0}>
             PDF, PNG, JPG or ZIP up to 20 MB

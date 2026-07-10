@@ -19,7 +19,7 @@ const invitations: NotificationData[] = [
     detail: 'invited you to Research Lab.',
     time: '2 hours ago',
     unread: true,
-    accent: '$teal5',
+    accent: '$green5',
   },
 ]
 

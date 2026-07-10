@@ -1,5 +1,6 @@
 import { Check, X } from '@tamagui/lucide-icons-2'
 import { ScrollView, Text, YStack } from 'tamagui'
+import { useGroupMedia } from '../../hooks/useGroupMedia'
 import { Table } from '../../elements/tables/common/tableParts'
 
 const rows = [
@@ -22,11 +23,17 @@ function Value({ value }: { value: boolean | string }) {
 const firstColumn = { position: 'sticky' as const, left: 0 }
 
 export function PricingComparison() {
+  const { sm } = useGroupMedia('window')
   return (
     <YStack width="100%" maxW={920} self="center" gap="$4">
       <Text fontSize="$8" fontWeight="900" letterSpacing={-0.5}>
         Compare every feature
       </Text>
+      {sm && (
+        <Text fontSize="$2" color="$color9">
+          Swipe sideways to compare all plans
+        </Text>
+      )}
       <ScrollView horizontal showsHorizontalScrollIndicator>
         <Table
           aria-label="Pricing feature comparison"

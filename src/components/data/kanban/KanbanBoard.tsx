@@ -377,7 +377,9 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
             Product launch
           </Text>
           <Paragraph color="$color10">
-            Drag work forward or use Space and arrow keys.
+            {isWeb
+              ? 'Drag work forward or use Space and arrow keys.'
+              : 'Use the card menu to move work forward.'}
           </Paragraph>
         </YStack>
         <Button

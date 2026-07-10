@@ -115,7 +115,20 @@ export function CommandMenu({ autoFocus, onDismiss, onSelect }: CommandMenuProps
             size="$2"
           />
         )}
-        <Kbd>ESC</Kbd>
+        {isWeb ? (
+          <Kbd>ESC</Kbd>
+        ) : (
+          <Button
+            aria-label="Close"
+            chromeless
+            onPress={onDismiss}
+            size="$2"
+          >
+            <Text color="$color10" fontSize="$3">
+              Cancel
+            </Text>
+          </Button>
+        )}
       </SearchField>
 
       <Separator />
@@ -179,7 +192,7 @@ export function CommandMenu({ autoFocus, onDismiss, onSelect }: CommandMenuProps
                         {item.description}
                       </Text>
                     </YStack>
-                    {!!item.shortcut?.length && (
+                    {isWeb && !!item.shortcut?.length && (
                       <XStack gap="$1" aria-hidden>
                         {item.shortcut.map((key) => (
                           <Kbd key={key}>{key}</Kbd>
@@ -216,11 +229,15 @@ export function CommandMenu({ autoFocus, onDismiss, onSelect }: CommandMenuProps
         </YStack>
       </ScrollView>
 
-      <Separator />
-      <XStack aria-hidden gap="$4" items="center" justify="flex-end" minH={48} px="$4">
-        <Hint label="Navigate" keys={['↑', '↓']} />
-        <Hint label="Select" keys={['↵']} />
-      </XStack>
+      {isWeb && (
+        <>
+          <Separator />
+          <XStack aria-hidden gap="$4" items="center" justify="flex-end" minH={48} px="$4">
+            <Hint label="Navigate" keys={['↑', '↓']} />
+            <Hint label="Select" keys={['↵']} />
+          </XStack>
+        </>
+      )}
     </YStack>
   )
 }

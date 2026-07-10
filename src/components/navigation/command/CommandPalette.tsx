@@ -102,10 +102,12 @@ export function CommandPalette() {
           }}
         >
           Open command palette
-          <XStack ml="$2" gap="$1" aria-hidden>
-            <Kbd>⌘</Kbd>
-            <Kbd>K</Kbd>
-          </XStack>
+          {isWeb && (
+            <XStack ml="$2" gap="$1" aria-hidden>
+              <Kbd>⌘</Kbd>
+              <Kbd>K</Kbd>
+            </XStack>
+          )}
         </Button>
 
         <Theme name={portalThemeName}>
@@ -138,6 +140,8 @@ export function CommandPalette() {
               maxW={sm ? '100%' : 680}
               overflow="hidden"
               p={0}
+              // full-screen on native must clear the status bar / dynamic island
+              pt={!isWeb && sm ? 62 : 0}
               rounded={sm ? 0 : '$8'}
               style={
                 sm

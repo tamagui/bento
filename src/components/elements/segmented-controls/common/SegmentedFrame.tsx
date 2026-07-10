@@ -37,21 +37,23 @@ export function SegmentedFrame({
       position="relative"
       overflow="hidden"
     >
-      <View
-        pointerEvents="none"
-        position="absolute"
-        t="$1"
-        b="$1"
-        width={`${100 / options.length}%`}
-        l={`${(index * 100) / options.length}%`}
-        rounded="$5"
-        bg="$background"
-        borderWidth={1}
-        borderColor="$borderColor"
-        style={{
-          transition: 'left 250ms cubic-bezier(0.32, 0.72, 0, 1)',
-        }}
-      />
+      {/* inset track so pill percentages align with the padded item area */}
+      <View pointerEvents="none" position="absolute" t="$1" b="$1" l="$1" r="$1">
+        <View
+          position="absolute"
+          t={0}
+          b={0}
+          width={`${100 / options.length}%`}
+          l={`${(index * 100) / options.length}%`}
+          rounded="$5"
+          bg="$background"
+          borderWidth={1}
+          borderColor="$borderColor"
+          style={{
+            transition: 'left 250ms cubic-bezier(0.32, 0.72, 0, 1)',
+          }}
+        />
+      </View>
       {options.map((option) => (
         <ToggleGroup.Item
           unstyled
