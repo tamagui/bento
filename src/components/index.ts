@@ -1,3 +1,4 @@
+export * as Toasts from './feedback/toasts'
 export * as AIChat from './ai/chat'
 export * as Inputs from './forms/inputs'
 export * as Preferences from './user/preferences'
