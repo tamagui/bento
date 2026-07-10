@@ -218,7 +218,7 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
             <Adapt.Contents />
           </Sheet.Frame>
           <Sheet.Overlay
-            transition="quick"
+            style={{ transition: 'opacity 150ms ease' }}
             opacity={0.8}
             enterStyle={{ opacity: 0 }}
             exitStyle={{ opacity: 0 }}
@@ -233,14 +233,7 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
         borderColor="$borderColor"
         enterStyle={{ y: -10, opacity: 0 }}
         exitStyle={{ y: -10, opacity: 0 }}
-        transition={[
-          'quick',
-          {
-            opacity: {
-              overshootClamping: true,
-            },
-          },
-        ]}
+        style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
         p={0}
       >
         <RegionFilterInput open={open} setOpen={setOpen} setRegionCode={setRegionCode} />
