@@ -1,9 +1,15 @@
 import { Text, View, XStack, YStack } from 'tamagui'
 import { StepIndicator, type StepState } from './common/StepIndicator'
 
-const labels = ['Account', 'Profile', 'Confirm']
+const defaultLabels = ['Account', 'Profile', 'Confirm']
 
-export function StepperHorizontal({ currentStep = 1 }: { currentStep?: number }) {
+export function StepperHorizontal({
+  currentStep = 1,
+  labels = defaultLabels,
+}: {
+  currentStep?: number
+  labels?: string[]
+}) {
   const steps = labels.map((label, index) => ({
     label,
     state: (index < currentStep
