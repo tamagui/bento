@@ -1,5 +1,8 @@
 import { ArrowRight, Sparkles } from '@tamagui/lucide-icons-2'
-import { Button, H3, Paragraph, View, XStack, YStack } from 'tamagui'
+import { Linking } from 'react-native'
+import { Button, H3, Paragraph, View, XStack, YStack, isWeb } from 'tamagui'
+
+const upgradeUrl = 'https://tamagui.dev/bento'
 
 export function BannerCTA() {
   return (
@@ -35,6 +38,9 @@ export function BannerCTA() {
         theme="purple"
         iconAfter={ArrowRight}
         aria-label="Explore analytics upgrade"
+        onPress={() =>
+          isWeb ? window.open(upgradeUrl, '_blank') : Linking.openURL(upgradeUrl)
+        }
       >
         Explore analytics
       </Button>
