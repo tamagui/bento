@@ -15,7 +15,7 @@ export function RatingWithCount() {
       borderWidth={1}
       borderColor="$borderColor"
     >
-      <StarMeter rating={4.5} />
+      <StarMeter rating={4.6} />
       <Paragraph color="$color10">4.6 · 1,284 reviews</Paragraph>
     </XStack>
   )
