@@ -40,11 +40,19 @@ export function PricingComparison() {
         >
           <Table.Head>
             <Table.Row bg="$color2">
-              <Table.HeaderCell cellWidth={240} bg="$color2" style={firstColumn} z={3}>
+              <Table.HeaderCell
+                width={240}
+                minW={240}
+                shrink={0}
+                px="$3"
+                bg="$color2"
+                style={firstColumn}
+                z={3}
+              >
                 <Text fontWeight="700">Features</Text>
               </Table.HeaderCell>
               {['Starter', 'Studio', 'Scale'].map((plan) => (
-                <Table.HeaderCell key={plan} cellWidth={170}>
+                <Table.HeaderCell key={plan} width={170} minW={170} shrink={0} px="$3">
                   <Text fontWeight="700">{plan}</Text>
                 </Table.HeaderCell>
               ))}
@@ -53,18 +61,26 @@ export function PricingComparison() {
           <Table.Body>
             {rows.map((row) => (
               <Table.Row key={row.feature} borderTopWidth={1} borderColor="$borderColor">
-                <Table.Cell cellWidth={240} bg="$background" style={firstColumn} z={2}>
+                <Table.Cell
+                  width={240}
+                  minW={240}
+                  shrink={0}
+                  px="$3"
+                  bg="$background"
+                  style={firstColumn}
+                  z={2}
+                >
                   <Text fontWeight="600" letterSpacing={0}>
                     {row.feature}
                   </Text>
                 </Table.Cell>
-                <Table.Cell cellWidth={170}>
+                <Table.Cell width={170} minW={170} shrink={0} px="$3">
                   <Value value={row.starter} />
                 </Table.Cell>
-                <Table.Cell cellWidth={170}>
+                <Table.Cell width={170} minW={170} shrink={0} px="$3">
                   <Value value={row.studio} />
                 </Table.Cell>
-                <Table.Cell cellWidth={170}>
+                <Table.Cell width={170} minW={170} shrink={0} px="$3">
                   <Value value={row.scale} />
                 </Table.Cell>
               </Table.Row>
