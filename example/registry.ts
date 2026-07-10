@@ -44,6 +44,7 @@ export const componentMap: Record<string, Record<string, any>> = {
   carousels: Components.Carousels,
   'marketing-sections': Components.MarketingSections,
   progress: Components.Progress,
+  menus: Components.Menus,
   'data-grid': Components.DataGrid,
   kanban: Components.Kanban,
   'settings-cells': Components.SettingsCells,
@@ -94,6 +95,7 @@ export const sections: { label: string; items: { title: string; id: string }[] }
       { title: 'Segmented Controls', id: 'segmented-controls' },
       { title: 'Tables', id: 'tables' },
       { title: 'Carousels', id: 'carousels' },
+      { title: 'Menus', id: 'menus' },
     ],
   },
   {

@@ -21,7 +21,12 @@ const App = () => {
   }
 
   return (
-    <Provider defaultTheme={(forcedTheme ?? userScheme.value) as any}>
+    <Provider
+      // key remount keeps the JS theme context in sync with the scheme class —
+      // portaled content (popovers/toasts) resolves from JS context, not CSS
+      key={(forcedTheme ?? userScheme.value) as string}
+      defaultTheme={(forcedTheme ?? userScheme.value) as any}
+    >
       <link href="/fonts/inter.css" rel="stylesheet" />
 
       <style

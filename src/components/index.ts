@@ -1,3 +1,4 @@
+export * as Menus from './elements/menus'
 export * as Progress from './feedback/progress'
 export * as MarketingSections from './marketing/sections'
 export * as Pricing from './marketing/pricing'

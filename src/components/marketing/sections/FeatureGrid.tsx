@@ -58,7 +58,8 @@ export function FeatureGrid() {
             bg="$color1"
             borderWidth={1}
             borderColor="$color4"
-            hoverStyle={{ borderColor: '$color6' }}
+            hoverStyle={{ borderColor: '$color6', y: -2 }}
+            transition="200ms"
           >
             <View
               width={38}
