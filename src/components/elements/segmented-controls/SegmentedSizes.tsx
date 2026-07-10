@@ -15,6 +15,7 @@ function SizeExample({ size }: { size: 'sm' | 'md' | 'lg' }) {
         {size}
       </Text>
       <SegmentedFrame
+        label={`Billing period (${size})`}
         size={size}
         options={options}
         value={value}

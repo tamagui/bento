@@ -20,7 +20,7 @@ export function PricingTiers() {
           Start small, then unlock more collaboration when your team is ready.
         </Text>
         <YStack width={280} mt="$2">
-          <SegmentedFrame options={cadence} value={billing} onValueChange={setBilling} />
+          <SegmentedFrame label="Billing period" options={cadence} value={billing} onValueChange={setBilling} />
         </YStack>
       </YStack>
       <XStack flexWrap="wrap" gap="$4" items="stretch">

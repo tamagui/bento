@@ -12,7 +12,7 @@ export function SegmentedIcons() {
   ]
   return (
     <View width="100%" maxW={560} self="center">
-      <SegmentedFrame options={options} value={value} onValueChange={setValue} />
+      <SegmentedFrame label="Layout density" options={options} value={value} onValueChange={setValue} />
     </View>
   )
 }
