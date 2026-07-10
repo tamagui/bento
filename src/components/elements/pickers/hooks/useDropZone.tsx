@@ -4,11 +4,13 @@ import * as DropZone from 'react-dropzone'
 import type { DropZoneOptionsCustom } from '../types'
 
 export function useDropZone(options: DropZoneOptionsCustom) {
-  const accept = options.mediaTypes
-    ?.map((mediaType) => mimTypes[mediaType])
-    .reduce((a, b) => ({ ...a, ...b }))
+  const accept = options.mediaTypes?.includes('All')
+    ? undefined
+    : options.mediaTypes
+        ?.map((mediaType) => mimTypes[mediaType])
+        .reduce((a, b) => ({ ...a, ...b }))
 
-  return DropZone.useDropzone({ ...options, accept: accept || { '*/*': [] } })
+  return DropZone.useDropzone({ ...options, accept })
 }
 
 const mimTypes = {
@@ -21,7 +23,5 @@ const mimTypes = {
   Audios: {
     'audio/*': [],
   },
-  All: {
-    '*/*': [],
-  },
+  All: {},
 }
