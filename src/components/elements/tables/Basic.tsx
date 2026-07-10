@@ -5,7 +5,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import * as React from 'react'
-import { Avatar, Separator, Text, View, YStack, getTokenValue } from 'tamagui'
+import { Avatar, Separator, Text, View, XStack, YStack } from 'tamagui'
 import { useGroupMedia } from '../../hooks/useGroupMedia'
 import { Table } from './common/tableParts'
 
@@ -15,7 +15,7 @@ type Person = {
   lastName: string
   age: number
   visits: number
-  status: string
+  status: 'active' | 'paused' | 'vacation'
   progress: number
 }
 
@@ -26,7 +26,7 @@ const defaultData: Person[] = [
     lastName: 'Smith',
     age: 24,
     visits: 100,
-    status: 'In Relationship',
+    status: 'active',
     progress: 50,
   },
   {
@@ -35,7 +35,7 @@ const defaultData: Person[] = [
     lastName: 'Loren',
     age: 40,
     visits: 40,
-    status: 'Single',
+    status: 'paused',
     progress: 80,
   },
   {
@@ -44,10 +44,57 @@ const defaultData: Person[] = [
     lastName: 'Satriani',
     age: 45,
     visits: 20,
-    status: 'Complicated',
+    status: 'vacation',
     progress: 10,
   },
+  {
+    avatar: `https://i.pravatar.cc/150?img=4`,
+    firstName: 'Mia',
+    lastName: 'Havertz',
+    age: 31,
+    visits: 214,
+    status: 'active',
+    progress: 92,
+  },
 ]
+
+const statusTheme: Record<
+  Person['status'],
+  { bg: string; color: string; label: string }
+> = {
+  active: { bg: '$green4', color: '$green11', label: 'Active' },
+  paused: { bg: '$yellow4', color: '$yellow11', label: 'Paused' },
+  vacation: { bg: '$blue4', color: '$blue11', label: 'Vacation' },
+}
+
+function StatusBadge({ status }: { status: Person['status'] }) {
+  const t = statusTheme[status]
+  return (
+    <View bg={t.bg as any} rounded="$10" px="$2.5" py="$1" self="center">
+      <Text fontSize="$2" fontWeight="600" color={t.color as any}>
+        {t.label}
+      </Text>
+    </View>
+  )
+}
+
+function ProgressCell({ value }: { value: number }) {
+  return (
+    <XStack items="center" gap="$2" minW={90}>
+      <View flex={1} height={6} rounded="$10" bg="$color4" overflow="hidden">
+        <View
+          width={`${value}%`}
+          height="100%"
+          rounded="$10"
+          bg={value > 66 ? '$green9' : value > 33 ? '$yellow9' : '$red9'}
+        />
+      </View>
+      <Text fontSize="$2" color="$color10" width={30} text="right">
+        {value}
+      </Text>
+    </XStack>
+  )
+}
 
 const columnHelper = createColumnHelper<Person>()
 
@@ -60,42 +107,50 @@ const columns = [
       </Avatar>
     ),
     header: () => 'Avatar',
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('firstName', {
     cell: (info) => info.getValue(),
     header: () => 'First Name',
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('lastName', {
     cell: (info) => info.getValue(),
     header: () => 'Last Name',
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('age', {
     header: () => 'Age',
     cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('visits', {
-    header: () => 'Vists',
-    footer: (info) => info.column.id,
+    header: () => 'Visits',
+    cell: (info) => info.renderValue(),
   }),
   columnHelper.accessor('status', {
-    header: 'Status',
-    footer: (info) => info.column.id,
+    header: () => 'Status',
+    cell: (info) => <StatusBadge status={info.getValue()} />,
   }),
   columnHelper.accessor('progress', {
-    header: 'Progress',
-    footer: (info) => info.column.id,
+    header: () => 'Progress',
+    cell: (info) => <ProgressCell value={info.getValue()} />,
   }),
 ]
 
-const CELL_WIDTH = '$15'
+const CELL_WIDTH = '$12'
+
+// per-column widths: identity columns wide, numerics narrow, rich cells wider
+const COLUMN_WIDTHS: Record<string, number> = {
+  avatar: 80,
+  firstName: 130,
+  lastName: 130,
+  age: 70,
+  visits: 80,
+  status: 120,
+  progress: 160,
+}
+const TABLE_WIDTH = Object.values(COLUMN_WIDTHS).reduce((a, b) => a + b, 0)
 
 /** ------ EXAMPLE ------ */
 export function BasicTable() {
-  const [data, setData] = React.useState(() => [...defaultData])
+  const [data] = React.useState(() => [...defaultData])
 
   const table = useReactTable({
     data,
@@ -107,49 +162,42 @@ export function BasicTable() {
 
   const headerGroups = table.getHeaderGroups()
   const tableRows = table.getRowModel().rows
-  const footerGroups = table.getFooterGroups()
-
-  const allRowsLenght = tableRows.length + headerGroups.length + footerGroups.length
-  const rowCounter = React.useRef(-1)
-  rowCounter.current = -1
 
   if (sm) {
     return (
-      <YStack gap="$5" width="100%" py="$6">
+      <YStack gap="$4" width="100%" py="$4">
         {defaultData.map((row, i) => {
           return (
             <View
               key={i}
-              rounded="$4"
-              borderWidth="$1"
+              rounded="$5"
+              borderWidth={1}
               borderColor="$borderColor"
-              flex={1}
+              bg="$color1"
               self="stretch"
+              p="$4"
               gap="$3"
             >
-              <View gap="$3" mx="$3" my="$3">
-                {Object.entries(row).map(([name, value], i) => {
-                  return (
-                    <View key={i}>
-                      <View flexDirection="row" items="center" justify="space-between">
-                        <Text>{name.charAt(0).toUpperCase() + name.slice(1)}</Text>
-                        {name === 'avatar' ? (
-                          <Avatar circular size="$3">
-                            <Avatar.Image
-                              aria-label="Profile image"
-                              src={value as string}
-                            />
-                            <Avatar.Fallback bg="$color6" />
-                          </Avatar>
-                        ) : (
-                          <Text color="$color10">{value}</Text>
-                        )}
-                      </View>
-                      {i !== Object.entries(row).length - 1 && <Separator mt="$3" />}
-                    </View>
-                  )
-                })}
-              </View>
+              <XStack items="center" gap="$3">
+                <Avatar circular size="$4">
+                  <Avatar.Image
+                    aria-label={`${row.firstName} ${row.lastName}`}
+                    src={row.avatar}
+                  />
+                  <Avatar.Fallback bg="$color6" />
+                </Avatar>
+                <YStack flex={1}>
+                  <Text fontWeight="700" color="$color12">
+                    {row.firstName} {row.lastName}
+                  </Text>
+                  <Text fontSize="$2" color="$color10">
+                    {row.age} yrs · {row.visits} visits
+                  </Text>
+                </YStack>
+                <StatusBadge status={row.status} />
+              </XStack>
+              <Separator />
+              <ProgressCell value={row.progress} />
             </View>
           )
         })}
@@ -164,120 +212,69 @@ export function BasicTable() {
       cellWidth={CELL_WIDTH}
       cellHeight="$5"
       borderWidth={0.5}
-      maxW={getTokenValue(CELL_WIDTH) * columns.length}
-      my="$15"
+      maxW={TABLE_WIDTH}
+      my="$4"
     >
       <Table.Head>
-        {headerGroups.map((headerGroup) => {
-          rowCounter.current++
-          return (
-            <Table.Row
-              bg="$color2"
-              rowLocation={
-                rowCounter.current === 0
-                  ? 'first'
-                  : rowCounter.current === allRowsLenght - 1
-                    ? 'last'
-                    : 'middle'
-              }
-              key={headerGroup.id}
-            >
-              {headerGroup.headers.map((header) => (
-                <Table.HeaderCell
-                  cellLocation={
-                    header.id === 'avatar'
-                      ? 'first'
-                      : header.id === 'progress'
-                        ? 'last'
-                        : 'middle'
-                  }
-                  key={header.id}
-                >
-                  <Text fontSize="$4">
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(header.column.columnDef.header, header.getContext())}
-                  </Text>
-                </Table.HeaderCell>
-              ))}
-            </Table.Row>
-          )
-        })}
+        {headerGroups.map((headerGroup) => (
+          <Table.Row bg="$color2" rowLocation="first" key={headerGroup.id}>
+            {headerGroup.headers.map((header) => (
+              <Table.HeaderCell
+                width={COLUMN_WIDTHS[header.id]}
+                cellLocation={
+                  header.id === 'avatar'
+                    ? 'first'
+                    : header.id === 'progress'
+                      ? 'last'
+                      : 'middle'
+                }
+                key={header.id}
+              >
+                <Text fontSize="$3" fontWeight="600" color="$color12">
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(header.column.columnDef.header, header.getContext())}
+                </Text>
+              </Table.HeaderCell>
+            ))}
+          </Table.Row>
+        ))}
       </Table.Head>
       <Table.Body>
-        {tableRows.map((row) => {
-          rowCounter.current++
-          return (
-            <Table.Row
-              rowLocation={
-                rowCounter.current === 0
-                  ? 'first'
-                  : rowCounter.current === allRowsLenght - 1
-                    ? 'last'
-                    : 'middle'
-              }
-              key={row.id}
-            >
-              {row.getVisibleCells().map((cell) => (
-                <Table.Cell
-                  cellLocation={
-                    cell.column.id === 'avatar'
-                      ? 'first'
-                      : cell.column.id === 'progress'
-                        ? 'last'
-                        : 'middle'
-                  }
-                  key={cell.id}
-                >
-                  {cell.column.id === 'avatar' ? (
-                    <>{flexRender(cell.column.columnDef.cell, cell.getContext())}</>
-                  ) : (
-                    <Text fontSize="$4" color="$color11">
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </Text>
-                  )}
-                </Table.Cell>
-              ))}
-            </Table.Row>
-          )
-        })}
-      </Table.Body>
-      <Table.Foot>
-        {footerGroups.map((footerGroup) => {
-          rowCounter.current++
-          return (
-            <Table.Row
-              rowLocation={
-                rowCounter.current === 0
-                  ? 'first'
-                  : rowCounter.current === allRowsLenght - 1
-                    ? 'last'
-                    : 'middle'
-              }
-              key={footerGroup.id}
-            >
-              {footerGroup.headers.map((header, index) => (
-                <Table.HeaderCell
-                  cellLocation={
-                    index === 0
-                      ? 'first'
-                      : index === footerGroup.headers.length - 1
-                        ? 'last'
-                        : 'middle'
-                  }
-                  key={header.id}
-                >
-                  <Text fontSize="$3">
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(header.column.columnDef.footer, header.getContext())}
+        {tableRows.map((row, rowIndex) => (
+          <Table.Row
+            hoverStyle={{ bg: '$color3' }}
+            bg={rowIndex % 2 === 1 ? '$color1' : 'transparent'}
+            rowLocation={rowIndex === tableRows.length - 1 ? 'last' : 'middle'}
+            key={row.id}
+          >
+            {row.getVisibleCells().map((cell) => (
+              <Table.Cell
+                width={COLUMN_WIDTHS[cell.column.id]}
+                px="$3"
+                cellLocation={
+                  cell.column.id === 'avatar'
+                    ? 'first'
+                    : cell.column.id === 'progress'
+                      ? 'last'
+                      : 'middle'
+                }
+                key={cell.id}
+              >
+                {cell.column.id === 'avatar' ||
+                cell.column.id === 'status' ||
+                cell.column.id === 'progress' ? (
+                  <>{flexRender(cell.column.columnDef.cell, cell.getContext())}</>
+                ) : (
+                  <Text fontSize="$4" color="$color11">
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </Text>
-                </Table.HeaderCell>
-              ))}
-            </Table.Row>
-          )
-        })}
-      </Table.Foot>
+                )}
+              </Table.Cell>
+            ))}
+          </Table.Row>
+        ))}
+      </Table.Body>
     </Table>
   )
 }

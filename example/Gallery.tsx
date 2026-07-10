@@ -33,16 +33,22 @@ function GroupIndex() {
   )
 }
 
+// "InputWithLabelDemo" -> "Input With Label Demo"
+function prettyName(name: string) {
+  return name.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+}
+
 function ItemFrame({ name, children }: { name: string; children: any }) {
   return (
     <YStack gap="$3" width="100%">
       <XStack items="center" gap="$3">
-        <H3 size="$5" color="$color11">
-          {name}
+        <H3 size="$5" color="$color11" textTransform="none">
+          {prettyName(name)}
         </H3>
         <Separator />
       </XStack>
       <View
+        group="window"
         width="100%"
         items="center"
         justify="center"

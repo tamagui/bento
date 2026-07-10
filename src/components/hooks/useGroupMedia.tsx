@@ -17,7 +17,7 @@ export const useGroupMedia = (name: string): UseMediaState => {
 
   useEffect(() => {
     const currentMedia = {}
-    return groups.subscribe(({ layout }) => {
+    const apply = (layout?: WidthHeight) => {
       if (layout && mediaGroups) {
         const mediaState = getMediaState(mediaGroups.current, layout)
         const next = mergeIfNotShallowEqual(currentMedia, mediaState)
@@ -26,7 +26,11 @@ export const useGroupMedia = (name: string): UseMediaState => {
           setMediaState({ ...(currentMedia as any) })
         }
       }
-    })
+    }
+    // groups that already measured before we mounted never re-emit — read the
+    // stored layout once so initial render matches (fixes first-paint state)
+    apply((groups.state as any).layout)
+    return groups.subscribe(({ layout }) => apply(layout))
   }, [name, setMediaState])
 
   return new Proxy(finalState!, {
