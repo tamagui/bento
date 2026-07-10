@@ -4,6 +4,7 @@ import { getFontSized } from '@tamagui/get-font-sized'
 import { Calendar, ChevronLeft, ChevronRight, X } from '@tamagui/lucide-icons-2'
 import type { GestureReponderEvent, ViewProps } from '@tamagui/web'
 import type { PopoverProps } from 'tamagui'
+import { LinearGradient } from 'tamagui/linear-gradient'
 import {
   Adapt,
   AnimatePresence,
@@ -27,6 +28,44 @@ type DatePickerProps = PopoverProps & {
 }
 
 export type HeaderType = 'day' | 'month' | 'year'
+
+export function RangeGradient({
+  children,
+  color,
+  direction,
+}: {
+  children: ReactNode
+  color: '$color5' | '$color6'
+  direction: 'leftToRight' | 'rightToLeft'
+}) {
+  if (isWeb) {
+    const angle = direction === 'leftToRight' ? '90deg' : '270deg'
+    return (
+      <View
+        flex={1}
+        width="100%"
+        style={{
+          backgroundImage: `linear-gradient(${angle}, var(--${color.slice(1)}) 30%, var(--background06))`,
+        }}
+      >
+        {children}
+      </View>
+    )
+  }
+
+  return (
+    <LinearGradient
+      flex={1}
+      width="100%"
+      colors={[color, '$background06']}
+      start={direction === 'leftToRight' ? [0, 1] : [1, 1]}
+      end={direction === 'leftToRight' ? [1, 1] : [0, 1]}
+      locations={[0.3, 1]}
+    >
+      {children}
+    </LinearGradient>
+  )
+}
 
 /** rehookify internally return `onClick` and that's incompatible with native */
 export function swapOnClick<D>(d: D) {
@@ -119,7 +158,6 @@ const DatePickerContent = styled(Popover.Content, {
         borderColor: '$borderColor',
         enterStyle: { y: -10, opacity: 0 },
         exitStyle: { y: -10, opacity: 0 },
-        elevate: true,
       },
     },
   } as const,
@@ -146,9 +184,9 @@ type DatePickerInputProps = {
 
 export const DatePickerInput = Input.Area.styleable<DatePickerInputProps>(
   (props, ref) => {
-    const { value, onButtonPress, size = '$3', onReset, ...rest } = props
+    const { value, onButtonPress, size = '$3', onReset, onLayout, ...rest } = props
     return (
-      <View $platform-native={{ minW: '100%' }}>
+      <View onLayout={onLayout} $platform-native={{ minW: '100%' }}>
         <Input cursor="pointer" onPress={onButtonPress} size={size}>
           <Input.Box>
             <Input.Section>

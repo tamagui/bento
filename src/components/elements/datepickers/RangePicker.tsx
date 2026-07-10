@@ -3,16 +3,7 @@ import { useDatePickerContext } from '@rehookify/datepicker'
 import { ChevronLeft, ChevronRight } from '@tamagui/lucide-icons-2'
 import { useEffect, useMemo, useState } from 'react'
 import type { GetProps } from 'tamagui'
-import {
-  AnimatePresence,
-  Button,
-  H3,
-  Separator,
-  View,
-  isWeb,
-  useMedia,
-} from 'tamagui'
-import { LinearGradient } from 'tamagui/linear-gradient'
+import { AnimatePresence, Button, H3, Separator, View, isWeb, useMedia } from 'tamagui'
 
 import {
   CalendarHeader,
@@ -20,6 +11,7 @@ import {
   DatePickerInput,
   HeaderTypeProvider,
   MonthPicker,
+  RangeGradient,
   WeekView,
   YearPicker,
   YearRangeSlider,
@@ -120,7 +112,7 @@ function Calendar({
             {calendarWeeks.map((days) => {
               const isWeekInCalendarMonth = days.some((day) => day.inCurrentMonth)
               if (!isWeekInCalendarMonth) {
-                return <View flex={1} />
+                return <View key={days[0].$date.toString()} flex={1} />
               }
 
               return (
@@ -147,7 +139,7 @@ function Calendar({
                       dayIsFirstOrLastOfMonth && day.range && day.range === 'in-range'
 
                     if (!day.inCurrentMonth) {
-                      return <View flex={1} width="100%" />
+                      return <View key={day.$date.toString()} flex={1} width="100%" />
                     }
 
                     const BG_RANGE_STYLE: {
@@ -209,16 +201,13 @@ function Calendar({
                         day.$date.getDate() === 1 ? 'rightToLeft' : 'leftToRight'
 
                       return (
-                        <LinearGradient
+                        <RangeGradient
                           key={day.$date.toString()}
-                          flex={1}
-                          colors={['$color6', '$background06']}
-                          start={direction === 'leftToRight' ? [0, 1] : [1, 1]}
-                          end={direction === 'leftToRight' ? [1, 1] : [0, 1]}
-                          locations={[0.3, 1]}
+                          color="$color6"
+                          direction={direction}
                         >
                           {buttonElement}
-                        </LinearGradient>
+                        </RangeGradient>
                       )
                     }
 

@@ -1,7 +1,7 @@
 import type { DPDatesMode, DPDay, DatePickerProviderProps } from '@rehookify/datepicker'
 import { useDatePickerContext } from '@rehookify/datepicker'
 import { ChevronLeft, ChevronRight } from '@tamagui/lucide-icons-2'
-import { useMemo, useState } from 'react'
+import { Fragment, useMemo, useState } from 'react'
 import type { GetProps } from 'tamagui'
 import {
   AnimatePresence,
@@ -15,12 +15,11 @@ import {
   isWeb,
   useMedia,
 } from 'tamagui'
-import { LinearGradient } from 'tamagui/linear-gradient'
-
 import {
   CalendarHeader,
   HeaderTypeProvider,
   MonthPicker,
+  RangeGradient,
   WeekView,
   YearPicker,
   YearRangeSlider,
@@ -121,7 +120,7 @@ function CalendarView({
             {calendarWeeks.map((days) => {
               const isWeekInCalendarMonth = days.some((day) => day.inCurrentMonth)
               if (!isWeekInCalendarMonth) {
-                return <View flex={1} />
+                return <View key={days[0].$date.toString()} flex={1} />
               }
 
               return (
@@ -223,17 +222,13 @@ function CalendarView({
                         day.$date.getDate() === 1 ? 'rightToLeft' : 'leftToRight'
 
                       return (
-                        <LinearGradient
+                        <RangeGradient
                           key={day.$date.toString()}
-                          flex={1}
-                          width="100%"
-                          colors={['$color5', '$background06']}
-                          start={direction === 'leftToRight' ? [0, 1] : [1, 1]}
-                          end={direction === 'leftToRight' ? [1, 1] : [0, 1]}
-                          locations={[0.3, 1]}
+                          color="$color5"
+                          direction={direction}
                         >
                           {buttonElement}
-                        </LinearGradient>
+                        </RangeGradient>
                       )
                     }
 
@@ -326,8 +321,9 @@ export function Calendar({ showTabs = true }: { showTabs?: boolean }) {
           }}
         >
           <AnimatePresence>
-            <Tabs.List  aria-label="Calendar Mode">
+            <Tabs.List aria-label="Calendar Mode">
               <Tabs.Tab
+                key="range"
                 focusStyle={{
                   backgroundColor: '$color3',
                 }}
@@ -336,6 +332,7 @@ export function Calendar({ showTabs = true }: { showTabs?: boolean }) {
                 <SizableText>Range</SizableText>
               </Tabs.Tab>
               <Tabs.Tab
+                key="single"
                 focusStyle={{
                   backgroundColor: '$color3',
                 }}
@@ -344,6 +341,7 @@ export function Calendar({ showTabs = true }: { showTabs?: boolean }) {
                 <SizableText>Single</SizableText>
               </Tabs.Tab>
               <Tabs.Tab
+                key="multiple"
                 focusStyle={{
                   backgroundColor: '$color3',
                 }}
@@ -375,11 +373,11 @@ export function Calendar({ showTabs = true }: { showTabs?: boolean }) {
             <CalendarView order="either" calendarIndex={0} />
           )}
           {header === 'day' && fullWidthMode && (
-            <>
+            <Fragment key="dual-calendar">
               <CalendarView order="first" calendarIndex={1} />
               <Separator vertical />
               <CalendarView order="last" calendarIndex={0} />
-            </>
+            </Fragment>
           )}
           {header === 'year' && (
             <View items="center" gap="$2">
