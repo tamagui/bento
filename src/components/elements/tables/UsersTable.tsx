@@ -167,11 +167,9 @@ const columns = [
   columnHelper.accessor('age', {
     header: () => 'Age',
     cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('status', {
     header: 'Status',
-    footer: (info) => info.column.id,
     cell: (info) => {
       const val = info.renderValue()
       return <StatusButton status={val?.toLocaleLowerCase() ?? ''} />
@@ -179,7 +177,6 @@ const columns = [
   }),
   columnHelper.accessor('role', {
     header: 'Role',
-    footer: (info) => info.column.id,
   }),
 ]
 
@@ -345,12 +342,13 @@ export function UsersTable() {
         })}
       </Table.Head>
       <Table.Body>
-        {tableRows.map((row) => {
+        {tableRows.map((row, bodyIndex) => {
           rowCounter.current++
           return (
             <Table.Row
+              bg={bodyIndex % 2 === 1 ? '$color1' : 'transparent'}
               hoverStyle={{
-                bg: '$color2',
+                bg: '$color3',
               }}
               rowLocation={
                 rowCounter.current === 0

@@ -8,6 +8,7 @@ import * as React from 'react'
 import { Avatar, Separator, Text, View, XStack, YStack } from 'tamagui'
 import { useGroupMedia } from '../../hooks/useGroupMedia'
 import { Table } from './common/tableParts'
+import { ProgressCell, StatusBadge } from './common/cells'
 
 type Person = {
   avatar: string
@@ -57,44 +58,6 @@ const defaultData: Person[] = [
     progress: 92,
   },
 ]
-
-const statusTheme: Record<
-  Person['status'],
-  { bg: string; color: string; label: string }
-> = {
-  active: { bg: '$green4', color: '$green11', label: 'Active' },
-  paused: { bg: '$yellow4', color: '$yellow11', label: 'Paused' },
-  vacation: { bg: '$blue4', color: '$blue11', label: 'Vacation' },
-}
-
-function StatusBadge({ status }: { status: Person['status'] }) {
-  const t = statusTheme[status]
-  return (
-    <View bg={t.bg as any} rounded="$10" px="$2.5" py="$1" self="center">
-      <Text fontSize="$2" fontWeight="600" color={t.color as any}>
-        {t.label}
-      </Text>
-    </View>
-  )
-}
-
-function ProgressCell({ value }: { value: number }) {
-  return (
-    <XStack items="center" gap="$2" minW={90}>
-      <View flex={1} height={6} rounded="$10" bg="$color4" overflow="hidden">
-        <View
-          width={`${value}%`}
-          height="100%"
-          rounded="$10"
-          bg={value > 66 ? '$green9' : value > 33 ? '$yellow9' : '$red9'}
-        />
-      </View>
-      <Text fontSize="$2" color="$color10" width={30} text="right">
-        {value}
-      </Text>
-    </XStack>
-  )
-}
 
 const columnHelper = createColumnHelper<Person>()
 

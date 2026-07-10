@@ -32,6 +32,7 @@ import {
 } from 'tamagui'
 import { useGroupMedia } from '../../hooks/useGroupMedia'
 
+import { ProgressCell, StatusBadge } from './common/cells'
 import { Table } from './common/tableParts'
 import { makeData } from './utils/makeData'
 
@@ -56,34 +57,29 @@ const columns = [
       </Avatar>
     ),
     header: () => 'Avatar',
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('firstName', {
     cell: (info) => info.getValue(),
     header: () => 'First Name',
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('lastName', {
     cell: (info) => <Text>{info.getValue()}</Text>,
     header: () => 'Last Name',
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('age', {
     cell: (info) => <Text>{info.renderValue()}</Text>,
     header: () => 'Age',
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('visits', {
     header: () => 'Visits',
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('status', {
     header: 'Status',
-    footer: (info) => info.column.id,
+    cell: (info) => <StatusBadge status={info.getValue()} />,
   }),
   columnHelper.accessor('progress', {
     header: 'Progress',
-    footer: (info) => info.column.id,
+    cell: (info) => <ProgressCell value={info.getValue()} />,
   }),
 ]
 
@@ -243,7 +239,6 @@ export function SortableTable() {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    debugTable: true,
   })
 
   const headerGroups = table.getHeaderGroups()
@@ -337,7 +332,12 @@ export function SortableTable() {
                             gap="$2"
                             items="center"
                           >
-                            <Text fontSize="$4" userSelect="none">
+                            <Text
+                              fontSize="$3"
+                              fontWeight="600"
+                              color="$color12"
+                              userSelect="none"
+                            >
                               {header.isPlaceholder
                                 ? null
                                 : flexRender(
@@ -366,8 +366,9 @@ export function SortableTable() {
                 return (
                   <Table.Row
                     minW={TABLE_WIDTH}
+                    bg={index % 2 === 1 ? '$color1' : 'transparent'}
                     hoverStyle={{
-                      bg: '$color2',
+                      bg: '$color3',
                     }}
                     rowLocation={
                       rowCounter.current === 0
@@ -389,7 +390,9 @@ export function SortableTable() {
                         }
                         key={cell.id}
                       >
-                        {cell.column.id === 'avatar' ? (
+                        {cell.column.id === 'avatar' ||
+                        cell.column.id === 'status' ||
+                        cell.column.id === 'progress' ? (
                           <>{flexRender(cell.column.columnDef.cell, cell.getContext())}</>
                         ) : (
                           <Text fontSize="$4" color="$color11">
