@@ -62,5 +62,14 @@ registering (see README).
 - Upstream tamagui PRs #4119 / #4120 are patched into this repo's
   `node_modules` dists; a fresh `yarn install` before those PRs publish will
   reintroduce the switches/animation-buttons crashes and nativeID warnings.
-- iOS runthrough findings are appended below when the pass completes; anything
-  actionable gets filed as a fix commit, not left in this doc.
+- The iOS simulator runthrough (all 24 post-expansion groups, light + dark,
+  interactive) surfaced and got fixes for: native toast crash (example app had
+  its own Provider without ToastProvider — now unified), non-functional theme
+  toggle + white nav header in dark (dynamic Theme wrapper + react-navigation
+  DarkTheme), generic "Component" screen titles, toast text collapsing
+  (flex-in-content-sized-row), Progress "NaN%" (parameterized primitive was
+  barrel-exported and rendered bare), command palette under the status bar +
+  keyboard hints on touch, hover card with no tap fallback, desktop copy in
+  kanban/file-upload/menus, outline-only rating stars (SVG fill token),
+  segmented pill inset, missing avatar fallback color ($teal5 isn't a token).
+  All verified on the simulator and re-swept on web.
