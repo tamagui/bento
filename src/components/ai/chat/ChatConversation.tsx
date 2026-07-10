@@ -1,7 +1,8 @@
-import { Copy, RefreshCw, ThumbsDown, ThumbsUp } from '@tamagui/lucide-icons-2'
-import { useEffect, useRef, useState } from 'react'
+import { Check, Copy, RefreshCw, ThumbsDown, ThumbsUp } from '@tamagui/lucide-icons-2'
+import { useRef, useState } from 'react'
 import { ScrollView } from 'react-native'
-import { Button, Text, View, XStack, YStack } from 'tamagui'
+import { Button, Text, View, XStack, YStack, isWeb } from 'tamagui'
+import { useClipboard } from '../../hooks'
 import type { ChatMessage } from './common/chatParts'
 import { MessageRow, TypingDots, useMockStream } from './common/chatParts'
 
@@ -29,20 +30,28 @@ const streamedAnswer =
 
 function IconAction({
   label,
+  active,
+  activeColor,
   children,
   onPress,
 }: {
   label: string
+  active?: boolean
+  activeColor?: string
   children: React.ReactNode
   onPress?: () => void
 }) {
   return (
     <Button
       aria-label={label}
-      size="$2"
+      aria-pressed={active}
+      size="$2.5"
       chromeless
       circular
+      // expand touch targets to ~44pt without growing the compact toolbar
+      hitSlop={isWeb ? undefined : 8}
       onPress={onPress}
+      bg={active ? '$color4' : 'transparent'}
       hoverStyle={{ bg: '$color4' }}
       pressStyle={{ bg: '$color5' }}
     >
@@ -51,23 +60,85 @@ function IconAction({
   )
 }
 
-/** ------ EXAMPLE ------ */
-export function ChatConversation() {
+/**
+ * owns all per-stream state so token updates rerender only this subtree,
+ * never the transcript above it
+ */
+function StreamingAnswer() {
   const [runId, setRunId] = useState(0)
   const { text, done, restart } = useMockStream(streamedAnswer, { cps: 60 })
-  const scrollRef = useRef<ScrollView>(null)
-  const [copied, setCopied] = useState(false)
+  const { onCopy, hasCopied } = useClipboard(streamedAnswer)
+  const [feedback, setFeedback] = useState<'up' | 'down' | null>(null)
 
-  // auto-follow the stream
-  useEffect(() => {
-    scrollRef.current?.scrollToEnd({ animated: true })
-  }, [text])
+  if (text.length === 0) {
+    return (
+      <XStack gap="$2.5" items="center">
+        <TypingDots />
+      </XStack>
+    )
+  }
+
+  return (
+    <MessageRow
+      message={{
+        id: `stream-${runId}`,
+        role: 'assistant',
+        content: text,
+        streaming: !done,
+      }}
+    >
+      {done && (
+        <XStack gap="$1" pt="$1" items="center">
+          <IconAction label="Copy response" onPress={onCopy}>
+            {hasCopied ? (
+              <Check size={16} color="$green10" />
+            ) : (
+              <Copy size={16} color="$color10" />
+            )}
+          </IconAction>
+          <IconAction
+            label="Regenerate"
+            onPress={() => {
+              setRunId((r) => r + 1)
+              setFeedback(null)
+              restart()
+            }}
+          >
+            <RefreshCw size={16} color="$color10" />
+          </IconAction>
+          <IconAction
+            label="Good response"
+            active={feedback === 'up'}
+            onPress={() => setFeedback((f) => (f === 'up' ? null : 'up'))}
+          >
+            <ThumbsUp size={16} color={feedback === 'up' ? '$green10' : '$color10'} />
+          </IconAction>
+          <IconAction
+            label="Bad response"
+            active={feedback === 'down'}
+            onPress={() => setFeedback((f) => (f === 'down' ? null : 'down'))}
+          >
+            <ThumbsDown size={16} color={feedback === 'down' ? '$red10' : '$color10'} />
+          </IconAction>
+          <Text aria-live="polite" fontSize="$1" color="$green10" pl="$1">
+            {hasCopied ? 'Copied' : ''}
+          </Text>
+        </XStack>
+      )}
+    </MessageRow>
+  )
+}
+
+/** ------ EXAMPLE ------ */
+export function ChatConversation() {
+  const scrollRef = useRef<ScrollView>(null)
 
   return (
     <View
       width="100%"
       maxW={560}
       height={480}
+      maxH="100%"
       rounded="$6"
       borderWidth={1}
       borderColor="$color4"
@@ -87,61 +158,29 @@ export function ChatConversation() {
           Assistant
         </Text>
         <XStack items="center" gap="$2">
-          <View width={8} height={8} rounded={1000} bg="$green9" />
+          <View aria-hidden width={8} height={8} rounded={1000} bg="$green9" />
           <Text fontSize="$2" color="$color10">
             Online
           </Text>
         </XStack>
       </XStack>
 
-      <ScrollView ref={scrollRef} style={{ flex: 1 }}>
-        <YStack p="$4" gap="$4">
+      <ScrollView
+        ref={scrollRef}
+        style={{ flex: 1 }}
+        // follow growth without restarting an animated scroll per token
+        onContentSizeChange={() => scrollRef.current?.scrollToEnd({ animated: false })}
+      >
+        <YStack
+          p="$4"
+          gap="$4"
+          role={isWeb ? 'log' : undefined}
+          aria-label="Conversation"
+        >
           {history.map((m) => (
             <MessageRow key={m.id} message={m} />
           ))}
-          {text.length === 0 ? (
-            <XStack gap="$2.5" items="center">
-              <TypingDots />
-            </XStack>
-          ) : (
-            <MessageRow
-              message={{
-                id: `stream-${runId}`,
-                role: 'assistant',
-                content: text,
-                streaming: !done,
-              }}
-            >
-              {done && (
-                <XStack gap="$1" pt="$1">
-                  <IconAction
-                    label="Copy response"
-                    onPress={() => {
-                      setCopied(true)
-                      setTimeout(() => setCopied(false), 1200)
-                    }}
-                  >
-                    <Copy size={14} color={copied ? '$green10' : '$color10'} />
-                  </IconAction>
-                  <IconAction
-                    label="Regenerate"
-                    onPress={() => {
-                      setRunId((r) => r + 1)
-                      restart()
-                    }}
-                  >
-                    <RefreshCw size={14} color="$color10" />
-                  </IconAction>
-                  <IconAction label="Good response">
-                    <ThumbsUp size={14} color="$color10" />
-                  </IconAction>
-                  <IconAction label="Bad response">
-                    <ThumbsDown size={14} color="$color10" />
-                  </IconAction>
-                </XStack>
-              )}
-            </MessageRow>
-          )}
+          <StreamingAnswer />
         </YStack>
       </ScrollView>
     </View>

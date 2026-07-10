@@ -1,6 +1,6 @@
 import { Check, Copy } from '@tamagui/lucide-icons-2'
-import { useState } from 'react'
-import { Button, Text, View, XStack, YStack } from 'tamagui'
+import { Button, ScrollView, Text, XStack, YStack, isWeb } from 'tamagui'
+import { useClipboard } from '../../hooks'
 import { AssistantAvatar, BubbleFrame, BubbleText } from './common/chatParts'
 
 const codeSample = `import { View, Text } from 'tamagui'
@@ -14,50 +14,66 @@ export function Card() {
 }`
 
 function CodeBlock({ code, lang }: { code: string; lang: string }) {
-  const [copied, setCopied] = useState(false)
+  const { onCopy, hasCopied } = useClipboard(code)
   return (
     <YStack
       rounded="$5"
       overflow="hidden"
       borderWidth={1}
-      borderColor="$color5"
+      borderColor="$color6"
       self="stretch"
       my="$1"
     >
       <XStack
         px="$3"
         py="$1.5"
-        bg="$color3"
+        bg="$color2"
         items="center"
         justify="space-between"
         borderBottomWidth={1}
-        borderColor="$color5"
+        borderColor="$color6"
       >
         <Text fontSize="$1" color="$color10" fontFamily="$mono">
           {lang}
         </Text>
         <Button
           aria-label="Copy code"
-          size="$1"
+          size="$2"
           chromeless
-          onPress={() => {
-            setCopied(true)
-            setTimeout(() => setCopied(false), 1500)
-          }}
+          hitSlop={isWeb ? undefined : 10}
+          onPress={onCopy}
           icon={
-            copied ? <Check size={12} color="$green10" /> : <Copy size={12} color="$color10" />
+            hasCopied ? (
+              <Check size={12} color="$green10" />
+            ) : (
+              <Copy size={12} color="$color10" />
+            )
           }
         >
-          <Text fontSize="$1" color={copied ? '$green10' : '$color10'}>
-            {copied ? 'Copied' : 'Copy'}
+          <Text
+            aria-live="polite"
+            fontSize="$1"
+            color={hasCopied ? '$green10' : '$color10'}
+          >
+            {hasCopied ? 'Copied' : 'Copy'}
           </Text>
         </Button>
       </XStack>
-      <View bg="$color2" p="$3">
-        <Text fontFamily="$mono" fontSize="$2" lineHeight="$3" color="$color12">
+      {/* horizontal scroll keeps indentation intact at narrow widths */}
+      <ScrollView horizontal bg="$color1" showsHorizontalScrollIndicator={false}>
+        <Text
+          fontFamily="$mono"
+          fontSize="$2"
+          lineHeight="$3"
+          color="$color12"
+          p="$3"
+          // web text is selectable by default; native needs the opt-in
+          selectable={isWeb ? undefined : true}
+          whiteSpace="pre"
+        >
           {code}
         </Text>
-      </View>
+      </ScrollView>
     </YStack>
   )
 }

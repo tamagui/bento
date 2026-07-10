@@ -1,4 +1,3 @@
-import { AccessibilityInfo } from 'react-native'
 import {
   createContext,
   type ReactNode,
@@ -8,6 +7,7 @@ import {
   useState,
 } from 'react'
 import { type GetProps, View, isWeb } from 'tamagui'
+import { useReducedMotion } from '../../../hooks'
 
 const SHIMMER_DURATION = 1600
 const SHARED_CLOCK_STARTED_AT = Date.now()
@@ -17,29 +17,6 @@ const SkeletonClockContext = createContext({
   pulse: false,
   reducedMotion: false,
 })
-
-function useReducedMotion() {
-  const [reducedMotion, setReducedMotion] = useState(false)
-
-  useEffect(() => {
-    if (isWeb && typeof window !== 'undefined') {
-      const query = window.matchMedia('(prefers-reduced-motion: reduce)')
-      const update = () => setReducedMotion(query.matches)
-      update()
-      query.addEventListener?.('change', update)
-      return () => query.removeEventListener?.('change', update)
-    }
-
-    AccessibilityInfo.isReduceMotionEnabled().then(setReducedMotion)
-    const subscription = AccessibilityInfo.addEventListener(
-      'reduceMotionChanged',
-      setReducedMotion
-    )
-    return () => subscription.remove()
-  }, [])
-
-  return reducedMotion
-}
 
 export function SkeletonScene({ children }: { children: ReactNode }) {
   const reducedMotion = useReducedMotion()
