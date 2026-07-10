@@ -59,7 +59,13 @@ export function Horizontal() {
             >
               <View onPress={(e) => e.stopPropagation()}>
                 <RadioGroup.Item id={uniqueId + label} value={label}>
-                  <RadioGroup.Indicator />
+                  <RadioGroup.Indicator
+                    unstyled
+                    width="33%"
+                    height="33%"
+                    rounded={1000}
+                    bg="$color"
+                  />
                 </RadioGroup.Item>
               </View>
 

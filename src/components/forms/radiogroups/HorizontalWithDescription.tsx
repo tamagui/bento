@@ -90,7 +90,13 @@ const Item = ({ id, label, description, icon, setValue, selected }: ItemProps) =
     >
       <View onPress={(e) => e.stopPropagation()}>
         <RadioGroup.Item m="$1" id={id} value={id}>
-          <RadioGroup.Indicator />
+          <RadioGroup.Indicator
+            unstyled
+            width="33%"
+            height="33%"
+            rounded={1000}
+            bg="$color"
+          />
         </RadioGroup.Item>
       </View>
 

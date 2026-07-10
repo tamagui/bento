@@ -114,7 +114,13 @@ function Item({
           </View>
 
           <RadioGroup.Item id={title} value={title}>
-            <RadioGroup.Indicator />
+            <RadioGroup.Indicator
+              unstyled
+              width="33%"
+              height="33%"
+              rounded={1000}
+              bg="$color"
+            />
           </RadioGroup.Item>
         </View>
         <Text fontSize="$3" theme="alt1">

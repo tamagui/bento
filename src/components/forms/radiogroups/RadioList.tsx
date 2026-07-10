@@ -137,7 +137,13 @@ function Item({
 
       <View onPress={(e) => e.stopPropagation()}>
         <RadioGroup.Item id={key} value={key}>
-          <RadioGroup.Indicator />
+          <RadioGroup.Indicator
+            unstyled
+            width="33%"
+            height="33%"
+            rounded={1000}
+            bg="$color"
+          />
         </RadioGroup.Item>
       </View>
     </Card>

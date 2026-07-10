@@ -108,7 +108,13 @@ function Item({
             </View>
             <View onPress={(e) => e.stopPropagation()}>
               <RadioGroup.Item marginLeft="auto" id={id} value={id}>
-                <RadioGroup.Indicator />
+                <RadioGroup.Indicator
+                  unstyled
+                  width="33%"
+                  height="33%"
+                  rounded={1000}
+                  bg="$color"
+                />
               </RadioGroup.Item>
             </View>
           </View>
