@@ -2,7 +2,17 @@ import React, { useEffect, useMemo, useRef } from 'react'
 import type { ViewStyle } from 'react-native'
 import { Animated, PanResponder } from 'react-native'
 import type { TabsContentProps } from 'tamagui'
-import { H5, Separator, Tabs, Text, View, debounce, useEvent, useTheme } from 'tamagui'
+import {
+  H5,
+  Separator,
+  Tabs,
+  Text,
+  View,
+  debounce,
+  isWeb,
+  useEvent,
+  useTheme,
+} from 'tamagui'
 
 const tabs = ['Tab 1', 'Tab 2', 'Tab 3']
 
@@ -25,7 +35,7 @@ export const TabbarSwippable = () => {
     boxHPosition.flattenOffset()
     Animated.spring(boxHPosition, {
       toValue: activeTabIndex * pointerWidthRef.current,
-      useNativeDriver: true,
+      useNativeDriver: !isWeb,
     }).start()
   })
 
@@ -43,7 +53,7 @@ export const TabbarSwippable = () => {
         dragging.current = true
       },
       onPanResponderMove: Animated.event([null, { dx: boxHPosition }], {
-        useNativeDriver: true,
+        useNativeDriver: !isWeb,
       }),
       onPanResponderRelease: (_, gestureState) => {
         const nearestTab = Math.max(
@@ -58,7 +68,7 @@ export const TabbarSwippable = () => {
 
         Animated.spring(boxHPosition, {
           toValue: nearestTab * pointerWidthRef.current,
-          useNativeDriver: true,
+          useNativeDriver: !isWeb,
         }).start()
         dragging.current = false
 
@@ -78,13 +88,14 @@ export const TabbarSwippable = () => {
         width: pointerWidth,
         borderRadius: 1000_000,
         transform: [{ translateX: boxHPosition }],
-        shadowColor: theme.shadowColor?.val,
-        shadowOffset: {
-          width: 0,
-          height: 1,
-        },
-        shadowOpacity: 0.22,
-        shadowRadius: 2.22,
+        ...(isWeb
+          ? { boxShadow: `0 1px 2.22px ${theme.shadowColor?.val}` }
+          : {
+              shadowColor: theme.shadowColor?.val,
+              shadowOffset: { width: 0, height: 1 },
+              shadowOpacity: 0.22,
+              shadowRadius: 2.22,
+            }),
         elevation: 3,
       }) as ViewStyle,
     [theme.color1?.val, theme.shadowColor?.val, pointerWidth]

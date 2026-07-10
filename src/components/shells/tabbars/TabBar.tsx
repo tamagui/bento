@@ -103,7 +103,7 @@ const CustomTabBar = View.styleable<CustomTabBarProps>(
           width={tabWidth}
           borderColor="$color5"
           x={hoveredIndex * tabWidth}
-          transition="100ms"
+          style={{ transition: 'transform 100ms ease, opacity 100ms ease' }}
           position="absolute"
         />
         <View
@@ -113,7 +113,7 @@ const CustomTabBar = View.styleable<CustomTabBarProps>(
           width={tabWidth}
           borderColor="$color10"
           x={state.index * tabWidth}
-          transition="quick"
+          style={{ transition: 'transform 150ms ease' }}
           position="absolute"
         />
       </View>
