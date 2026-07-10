@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Text, View, XStack, YStack } from 'tamagui'
 
-function Bar({
+export function ProgressBar({
   value,
   label,
   color = '$color12',
@@ -30,12 +30,7 @@ function Bar({
         bg="$color4"
         overflow="hidden"
       >
-        <View
-          width={`${value}%`}
-          height="100%"
-          rounded={1000}
-          bg={color as any}
-        />
+        <View width={`${value}%`} height="100%" rounded={1000} bg={color as any} />
       </View>
     </YStack>
   )
@@ -54,10 +49,10 @@ export function ProgressBars() {
 
   return (
     <YStack gap="$5" width="100%" maxW={420}>
-      <Bar value={72} label="Storage used" />
-      <Bar value={38} label="Monthly budget" color="$yellow9" />
-      <Bar value={94} label="API quota" color="$red9" />
-      <Bar value={live} label="Uploading photo.jpg" color="$green9" />
+      <ProgressBar value={72} label="Storage used" />
+      <ProgressBar value={38} label="Monthly budget" color="$yellow9" />
+      <ProgressBar value={94} label="API quota" color="$red9" />
+      <ProgressBar value={live} label="Uploading photo.jpg" color="$green9" />
     </YStack>
   )
 }
