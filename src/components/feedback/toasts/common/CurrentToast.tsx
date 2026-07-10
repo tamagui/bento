@@ -1,6 +1,6 @@
 import { CheckCircle2, Info, X, XCircle } from '@tamagui/lucide-icons-2'
 import { Toast, useToastState } from '@tamagui/toast'
-import { Button, Text, XStack, YStack } from 'tamagui'
+import { Button, Text, XStack, YStack, isWeb } from 'tamagui'
 
 const icons: Record<string, any> = {
   success: <CheckCircle2 size={18} color="$green10" />,
@@ -8,17 +8,25 @@ const icons: Record<string, any> = {
   info: <Info size={18} color="$blue10" />,
 }
 
+export type ToastCustomData = {
+  variant?: 'success' | 'error' | 'info'
+  /** renders an action button inside the toast (undo, retry, …) */
+  actionLabel?: string
+  onAction?: () => void
+}
+
 /**
  * global toast renderer — mount ONCE next to your ToastViewport.
- * demos trigger toasts via useToastController; the `variant` custom data
- * drives the icon + accent.
+ * demos trigger toasts via useToastController; `customData` drives the
+ * icon, accent, and optional action slot.
  */
 export function CurrentToast() {
   const toast = useToastState()
 
   if (!toast || toast.isHandledNatively) return null
 
-  const variant = (toast.customData?.variant as string) ?? 'info'
+  const { variant = 'info', actionLabel, onAction } =
+    (toast.customData as ToastCustomData | undefined) ?? {}
 
   return (
     <Toast
@@ -58,9 +66,23 @@ export function CurrentToast() {
             </Toast.Description>
           )}
         </YStack>
+        {!!actionLabel && !!onAction && (
+          <Toast.Action asChild altText={actionLabel}>
+            {/* Toast.Close defaults aria-label="Close"; name it after the action */}
+            <Button aria-label={actionLabel} size="$2.5" onPress={onAction}>
+              {actionLabel}
+            </Button>
+          </Toast.Action>
+        )}
         <Toast.Close asChild>
-          <Button aria-label="Dismiss" size="$1" circular chromeless>
-            <X size={12} color="$color10" />
+          <Button
+            aria-label="Dismiss"
+            size="$2"
+            circular
+            chromeless
+            hitSlop={isWeb ? undefined : 12}
+          >
+            <X size={14} color="$color10" />
           </Button>
         </Toast.Close>
       </XStack>
