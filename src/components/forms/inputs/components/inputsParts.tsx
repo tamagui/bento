@@ -139,6 +139,11 @@ export const inputSizeVariant: SizeVariantSpreadFunction<any> = (
 const InputFrame = styled(TInput, {
   unstyled: true,
   context: InputContext,
+  variants: {
+    scaleIcon: {
+      ':number': {},
+    },
+  } as const,
 })
 
 const InputImpl = InputFrame.styleable<{
@@ -173,6 +178,11 @@ const InputSection = styled(XGroup.Item, {
   justify: 'center',
   items: 'center',
   context: InputContext,
+  variants: {
+    scaleIcon: {
+      ':number': {},
+    },
+  } as const,
 })
 
 const Button = styled(TButton, {
@@ -181,6 +191,9 @@ const Button = styled(TButton, {
   items: 'center',
 
   variants: {
+    scaleIcon: {
+      ':number': {},
+    },
     size: {
       '...size': (val = '$true', { tokens }) => {
         if (typeof val === 'number') {
@@ -208,6 +221,9 @@ export const InputIconFrame = styled(View, {
   context: InputContext,
 
   variants: {
+    scaleIcon: {
+      ':number': {},
+    },
     size: {
       '...size': (val, { tokens }) => {
         return {
@@ -251,6 +267,9 @@ export const InputContainerFrame = styled(View, {
   flexDirection: 'column',
 
   variants: {
+    scaleIcon: {
+      ':number': {},
+    },
     size: {
       '...size': (val, { tokens }) => ({
         gap: tokens.space[val].val * 0.3,
@@ -272,6 +291,9 @@ export const InputContainerFrame = styled(View, {
 export const InputLabel = styled(Label, {
   context: InputContext,
   variants: {
+    scaleIcon: {
+      ':number': {},
+    },
     size: {
       '...fontSize': getFontSized as any,
     },
@@ -283,6 +305,9 @@ export const InputInfo = styled(Text, {
   color: '$color10',
 
   variants: {
+    scaleIcon: {
+      ':number': {},
+    },
     size: {
       '...fontSize': (val, { font }) => {
         if (!font) return
@@ -309,6 +334,9 @@ const InputXGroup = styled(XGroup, {
   context: InputContext,
 
   variants: {
+    scaleIcon: {
+      ':number': {},
+    },
     size: {
       '...size': (val, { tokens }) => {
         const radiusToken = tokens.radius[val] ?? tokens.radius['$true']

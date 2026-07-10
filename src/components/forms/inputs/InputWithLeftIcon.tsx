@@ -17,7 +17,7 @@ export function InputWithLeftIconDemo({ size = '$4' }: { size?: SizeTokens }) {
           <Input.Icon {...focusTrigger}>
             <Antenna />
           </Input.Icon>
-          <Input.Area ref={inputRef} pl={0} placeholder="Set antena number" />
+          <Input.Area ref={inputRef} pl={0} placeholder="Set antenna number" />
         </Input.Box>
       </Input>
     </View>
