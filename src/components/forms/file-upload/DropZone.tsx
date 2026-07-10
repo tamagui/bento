@@ -2,7 +2,7 @@ import { FileText, Trash2, UploadCloud } from '@tamagui/lucide-icons-2'
 import type { DragEvent } from 'react'
 import { useRef, useState } from 'react'
 import { Platform } from 'react-native'
-import { Button, Progress, Text, XStack, YStack } from 'tamagui'
+import { Button, Text, View, XStack, YStack } from 'tamagui'
 import { HiddenFileInput } from './common/HiddenFileInput'
 
 type UploadFile = { id: string; name: string; progress: number; size: string }
@@ -99,9 +99,14 @@ export function DropZone() {
                   {file.size}
                 </Text>
               </XStack>
-              <Progress value={file.progress} height={5} bg="$color4">
-                <Progress.Indicator bg="$accentColor" />
-              </Progress>
+              <View height={5} rounded={999} bg="$color4" overflow="hidden">
+                <View
+                  height="100%"
+                  width={`${file.progress}%`}
+                  rounded={999}
+                  bg="$accentColor"
+                />
+              </View>
             </YStack>
             <Button
               circular
