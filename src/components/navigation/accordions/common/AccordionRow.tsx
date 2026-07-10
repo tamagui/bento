@@ -1,6 +1,7 @@
 import { ChevronDown } from '@tamagui/lucide-icons-2'
 import type { ReactNode } from 'react'
-import { Accordion, Paragraph, Text, View, YStack } from 'tamagui'
+import { Accordion, Paragraph, Text, View, YStack, isWeb } from 'tamagui'
+import { useReducedMotion } from '../../../hooks'
 
 export type AccordionEntry = {
   content: ReactNode
@@ -17,6 +18,11 @@ export function AccordionRow({
   entry: AccordionEntry
   open: boolean
 }) {
+  const reducedMotion = useReducedMotion()
+  const ease = (property: string) =>
+    isWeb && !reducedMotion
+      ? { transition: `${property} 250ms cubic-bezier(0.32, 0.72, 0, 1)` }
+      : undefined
   return (
     <Accordion.Item
       value={entry.value}
@@ -43,20 +49,12 @@ export function AccordionRow({
           <Text fontWeight="600" fontSize="$5" letterSpacing={0}>
             {entry.title}
           </Text>
-          <View
-            rotate={open ? '180deg' : '0deg'}
-            style={{ transition: 'transform 250ms cubic-bezier(0.32, 0.72, 0, 1)' }}
-          >
+          <View rotate={open ? '180deg' : '0deg'} style={ease('transform')}>
             <ChevronDown size={18} color="$color10" />
           </View>
         </Accordion.Trigger>
       </Accordion.Header>
-      <Accordion.Content
-        overflow="hidden"
-        px="$4"
-        pb="$4"
-        style={{ transition: 'height 250ms cubic-bezier(0.32, 0.72, 0, 1)' }}
-      >
+      <Accordion.Content overflow="hidden" px="$4" pb="$4" style={ease('height')}>
         {typeof entry.content === 'string' ? (
           <Paragraph color="$color10" lineHeight="$5">
             {entry.content}
