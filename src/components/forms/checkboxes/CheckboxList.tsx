@@ -13,7 +13,7 @@ const items = [
   },
   {
     checked: false,
-    title: 'Cappucino',
+    title: 'Cappuccino',
     desc: 'Espresso with steamed milk foam',
     key: 'cappucino',
     avatar: 'https://tamagui.dev/bento/images/coffee2.jpg',
