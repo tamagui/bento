@@ -17,6 +17,7 @@ export function TitleContentMessage() {
         Title of Text Area
       </Label>
       <TextArea
+        placeholderTextColor="$color9"
         id="title-content"
         size="$3"
         fontWeight="300"

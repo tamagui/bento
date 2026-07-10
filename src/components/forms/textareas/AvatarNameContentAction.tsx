@@ -34,6 +34,7 @@ export function AvatarNameContentAction() {
         </View>
       </View>
       <TextArea
+        placeholderTextColor="$color9"
         unstyled
         size="$4"
         fontWeight="300"

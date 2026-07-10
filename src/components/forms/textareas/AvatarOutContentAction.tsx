@@ -20,6 +20,7 @@ export function AvatarOutContentAction() {
       </Button>
       <View flexDirection="column" shrink={1} flexBasis={400} gap="$3">
         <TextArea
+        placeholderTextColor="$color9"
           size="$3"
           fontWeight="300"
           height={180}
