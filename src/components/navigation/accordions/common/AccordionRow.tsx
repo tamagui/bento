@@ -1,6 +1,6 @@
 import { ChevronDown } from '@tamagui/lucide-icons-2'
 import type { ReactNode } from 'react'
-import { Accordion, Paragraph, Text, View, XStack, YStack } from 'tamagui'
+import { Accordion, Paragraph, Text, View, YStack } from 'tamagui'
 
 export type AccordionEntry = {
   content: ReactNode
@@ -40,7 +40,7 @@ export function AccordionRow({
           hoverStyle={{ bg: '$color2' }}
           focusVisibleStyle={{ outlineWidth: 2, outlineColor: '$color8' }}
         >
-          <Text flex={1} fontWeight="600" fontSize="$5">
+          <Text fontWeight="600" fontSize="$5" letterSpacing={0}>
             {entry.title}
           </Text>
           <View
