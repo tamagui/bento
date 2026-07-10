@@ -1,6 +1,6 @@
 import { CheckCircle2 } from '@tamagui/lucide-icons-2'
-import { useState } from 'react'
-import { Button, Input, Paragraph, Text, XStack, YStack } from 'tamagui'
+import { useRef, useState } from 'react'
+import { Button, Input, Paragraph, Text, View, XStack, YStack, isWeb } from 'tamagui'
 import { StepperHorizontal } from './StepperHorizontal'
 
 export function StepperForm() {
@@ -8,16 +8,37 @@ export function StepperForm() {
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [error, setError] = useState('')
+  const inputRef = useRef<any>(null)
 
   const next = () => {
     const valid = step === 0 ? email.includes('@') : name.trim().length > 1
     if (!valid) {
       setError(step === 0 ? 'Enter a valid email address.' : 'Enter your display name.')
+      // put the user back where the fix happens
+      inputRef.current?.focus?.()
       return
     }
     setError('')
     setStep((current) => current + 1)
   }
+
+  const restart = () => {
+    setStep(0)
+    setEmail('')
+    setName('')
+    setError('')
+  }
+
+  const submitOnEnter = isWeb
+    ? {
+        onKeyDown: (event: any) => {
+          if (event.key === 'Enter') {
+            event.preventDefault()
+            next()
+          }
+        },
+      }
+    : { onSubmitEditing: next }
 
   if (step === 3) {
     return (
@@ -29,7 +50,7 @@ export function StepperForm() {
         <Paragraph text="center" color="$color10">
           Your workspace profile is ready to use.
         </Paragraph>
-        <Button mt="$2" onPress={() => setStep(0)}>
+        <Button mt="$2" onPress={restart}>
           Start over
         </Button>
       </YStack>
@@ -47,6 +68,7 @@ export function StepperForm() {
       borderWidth={1}
       borderColor="$borderColor"
       bg="$background"
+      render={isWeb ? 'form' : undefined}
     >
       <StepperHorizontal currentStep={step} />
       <YStack gap="$3">
@@ -59,18 +81,26 @@ export function StepperForm() {
         </Text>
         {step === 0 ? (
           <Input
+            ref={inputRef}
             value={email}
             onChangeText={setEmail}
             placeholder="you@example.com"
             aria-label="Email address"
+            aria-invalid={!!error}
+            aria-describedby={error ? 'stepper-form-error' : undefined}
             autoCapitalize="none"
+            {...submitOnEnter}
           />
         ) : step === 1 ? (
           <Input
+            ref={inputRef}
             value={name}
             onChangeText={setName}
             placeholder="Display name"
             aria-label="Display name"
+            aria-invalid={!!error}
+            aria-describedby={error ? 'stepper-form-error' : undefined}
+            {...submitOnEnter}
           />
         ) : (
           <YStack gap="$2" p="$4" rounded="$5" bg="$color2">
@@ -82,22 +112,23 @@ export function StepperForm() {
             <Text fontWeight="600">{name}</Text>
           </YStack>
         )}
-        {error ? <Text color="$red10">{error}</Text> : null}
+        <Text
+          id="stepper-form-error"
+          aria-live="polite"
+          color="$red10"
+          minH={20}
+        >
+          {error}
+        </Text>
       </YStack>
       <XStack justify="space-between">
-        <Button
-          disabled={step === 0}
-          opacity={step === 0 ? 0 : 1}
-          onPress={() => setStep(step - 1)}
-        >
-          Back
-        </Button>
-        <Button
-          bg="$accentColor"
-          color="white"
-          hoverStyle={{ opacity: 0.9 }}
-          onPress={step === 2 ? () => setStep(3) : next}
-        >
+        {/* spacer keeps layout when Back is genuinely absent at step 0 */}
+        {step === 0 ? (
+          <View />
+        ) : (
+          <Button onPress={() => setStep(step - 1)}>Back</Button>
+        )}
+        <Button theme="accent" onPress={step === 2 ? () => setStep(3) : next}>
           {step === 2 ? 'Finish' : 'Next'}
         </Button>
       </XStack>

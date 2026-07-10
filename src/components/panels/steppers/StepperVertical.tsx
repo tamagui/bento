@@ -17,9 +17,16 @@ const steps: { description: string; label: string; state: StepState }[] = [
 
 export function StepperVertical() {
   return (
-    <YStack width="100%" maxW={480} self="center" px="$4">
+    <YStack width="100%" maxW={480} self="center" px="$4" role="list" aria-label="Setup progress">
       {steps.map((step, index) => (
-        <XStack key={step.label} gap="$4" minH={96}>
+        <XStack
+          key={step.label}
+          role="listitem"
+          aria-current={step.state === 'current' ? 'step' : undefined}
+          aria-label={`Step ${index + 1} of ${steps.length}: ${step.label}, ${step.state === 'done' ? 'completed' : step.state}`}
+          gap="$4"
+          minH={96}
+        >
           <YStack items="center">
             <StepIndicator number={index + 1} state={step.state} />
             {index < steps.length - 1 ? (

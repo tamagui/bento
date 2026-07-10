@@ -19,10 +19,21 @@ export function StepperHorizontal({
         : 'upcoming') as StepState,
   }))
   return (
-    <XStack width="100%" maxW={720} self="center" items="flex-start" px="$4">
+    <XStack
+      width="100%"
+      maxW={720}
+      self="center"
+      items="flex-start"
+      px="$4"
+      role="list"
+      aria-label="Progress"
+    >
       {steps.map((step, index) => (
         <XStack
           key={step.label}
+          role="listitem"
+          aria-current={step.state === 'current' ? 'step' : undefined}
+          aria-label={`Step ${index + 1} of ${steps.length}: ${step.label}, ${step.state === 'done' ? 'completed' : step.state}`}
           flex={index === steps.length - 1 ? 0 : 1}
           items="flex-start"
         >
