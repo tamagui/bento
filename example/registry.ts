@@ -79,6 +79,7 @@ export const sections: { label: string; items: { title: string; id: string }[] }
       { title: 'Datepickers', id: 'datepickers' },
       { title: 'Dialogs', id: 'dialogs' },
       { title: 'Lists', id: 'list' },
+      { title: 'Segmented Controls', id: 'segmented-controls' },
       { title: 'Tables', id: 'tables' },
       { title: 'Carousels', id: 'carousels' },
     ],
@@ -91,6 +92,7 @@ export const sections: { label: string; items: { title: string; id: string }[] }
       { title: 'Empty States', id: 'empty-states' },
       { title: 'Skeletons', id: 'skeletons' },
       { title: 'Stats', id: 'stats' },
+      { title: 'Ratings', id: 'ratings' },
     ],
   },
   {
@@ -108,6 +110,7 @@ export const sections: { label: string; items: { title: string; id: string }[] }
     label: 'Navigation & Shells',
     items: [
       { title: 'Command Palette', id: 'command' },
+      { title: 'Accordions', id: 'accordions' },
       { title: 'Navigation Bars', id: 'navbars' },
       { title: 'Tab Bars', id: 'tabbars' },
       { title: 'Drawer', id: 'shells' },
