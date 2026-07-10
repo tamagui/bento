@@ -152,11 +152,9 @@ const Item = View.styleable<ItemProps>(
     const handleAnimations = () => {
       if (!element) return
       if (isMouseEntered) {
-        element.style.transform =
-          `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`
+        element.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`
       } else {
-        element.style.transform =
-          `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`
+        element.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`
       }
     }
 
@@ -224,7 +222,7 @@ export function InteractiveCard() {
         <Card.Item translateZ={50} translateY={5}>
           <Button
             theme="accent"
-            transition="quick"
+            style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
             pressStyle={{
               scale: 0.98,
             }}
