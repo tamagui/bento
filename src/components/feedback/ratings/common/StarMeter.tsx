@@ -17,7 +17,7 @@ export function StarMeter({ rating, size = 20 }: { rating: number; size?: number
                 width={half ? '50%' : '100%'}
                 overflow="hidden"
               >
-                <Star size={size} color="$yellow10" fill="$yellow10" />
+                <Star size={size} color="$yellow10" fill="currentColor" />
               </View>
             )}
           </View>
