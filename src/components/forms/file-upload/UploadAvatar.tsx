@@ -1,14 +1,22 @@
 import { Camera, UserRound } from '@tamagui/lucide-icons-2'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { Avatar, Button, Text, View, YStack } from 'tamagui'
-import { HiddenFileInput } from './common/HiddenFileInput'
+import {
+  useFilePicker,
+  useObjectUrlCleanup,
+  type PickedFile,
+} from './common/HiddenFileInput'
 
 export function UploadAvatar() {
-  const inputRef = useRef<HTMLInputElement>(null)
   const [source, setSource] = useState<string>()
-  const addImage = ([file]: File[]) => {
-    if (file) setSource(URL.createObjectURL(file))
+  useObjectUrlCleanup([source])
+
+  const addImage = ([file]: PickedFile[]) => {
+    if (file?.uri) setSource(file.uri)
   }
+
+  const picker = useFilePicker({ accept: 'image/*', onFiles: addImage })
+
   return (
     <YStack width="100%" maxW={420} self="center" items="center" gap="$4" p="$5">
       <View position="relative">
@@ -27,7 +35,7 @@ export function UploadAvatar() {
           color="$color1"
           icon={Camera}
           aria-label="Upload profile photo"
-          onPress={() => inputRef.current?.click()}
+          onPress={picker.pick}
           hoverStyle={{ opacity: 0.95 }}
         />
       </View>
@@ -39,8 +47,8 @@ export function UploadAvatar() {
           Square JPG or PNG, at least 400 × 400 px
         </Text>
       </YStack>
-      <Button onPress={() => inputRef.current?.click()}>Choose photo</Button>
-      <HiddenFileInput inputRef={inputRef} accept="image/*" onFiles={addImage} />
+      <Button onPress={picker.pick}>Choose photo</Button>
+      {picker.inputElement}
     </YStack>
   )
 }

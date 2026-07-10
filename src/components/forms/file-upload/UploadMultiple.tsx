@@ -1,7 +1,14 @@
 import { ImagePlus, Trash2 } from '@tamagui/lucide-icons-2'
-import { useRef, useState } from 'react'
-import { Button, Image, Text, View, XStack, YStack } from 'tamagui'
-import { HiddenFileInput } from './common/HiddenFileInput'
+import { useState } from 'react'
+import { Button, Image, Text, View, XStack, YStack, isWeb } from 'tamagui'
+import {
+  useFilePicker,
+  useObjectUrlCleanup,
+  validateFiles,
+  type PickedFile,
+} from './common/HiddenFileInput'
+
+const LIMITS = { maxFiles: 8 }
 
 type Preview = {
   id: string
@@ -17,18 +24,27 @@ const initial: Preview[] = [
 ]
 
 export function UploadMultiple() {
-  const inputRef = useRef<HTMLInputElement>(null)
   const [previews, setPreviews] = useState(initial)
-  const addImages = (files: File[]) =>
+  const [rejection, setRejection] = useState('')
+
+  // revoke object URLs when previews are removed or on unmount
+  useObjectUrlCleanup(previews.map((p) => p.source))
+
+  const addImages = (files: PickedFile[]) => {
+    const { accepted, rejected } = validateFiles(files, LIMITS, previews.length)
+    setRejection(rejected[0] ?? '')
     setPreviews((current) => [
       ...current,
-      ...files.map((file) => ({
-        id: `${file.name}-${file.lastModified}`,
+      ...accepted.map((file) => ({
+        id: file.id,
         name: file.name,
-        source: URL.createObjectURL(file),
+        source: file.uri,
         color: '$color4' as const,
       })),
     ])
+  }
+
+  const picker = useFilePicker({ accept: 'image/*', multiple: true, onFiles: addImages })
 
   return (
     <YStack width="100%" maxW={700} self="center" gap="$4">
@@ -40,10 +56,16 @@ export function UploadMultiple() {
           Add up to eight product photos.
         </Text>
       </YStack>
-      <XStack flexWrap="wrap" gap="$3">
+      {!!rejection && (
+        <Text role="alert" fontSize="$2" color="$red10">
+          {rejection}
+        </Text>
+      )}
+      <XStack flexWrap="wrap" gap="$3" role={isWeb ? 'list' : undefined} aria-label="Gallery previews">
         {previews.map((preview) => (
           <View
             key={preview.id}
+            role={isWeb ? 'listitem' : undefined}
             width={148}
             height={128}
             rounded="$6"
@@ -51,10 +73,16 @@ export function UploadMultiple() {
             bg={preview.color}
           >
             {preview.source ? (
-              <Image src={preview.source} width="100%" height="100%" objectFit="cover" />
+              <Image
+                src={preview.source}
+                width="100%"
+                height="100%"
+                objectFit="cover"
+                aria-label={preview.name}
+              />
             ) : (
               <View flex={1} items="center" justify="center">
-                <ImagePlus size={28} color="$color11" />
+                <ImagePlus size={28} color="$color11" aria-hidden />
                 <Text mt="$2" fontSize="$2" color="$color11" letterSpacing={0}>
                   {preview.name}
                 </Text>
@@ -67,6 +95,7 @@ export function UploadMultiple() {
               circular
               size="$2.5"
               icon={Trash2}
+              hitSlop={isWeb ? undefined : 10}
               aria-label={`Remove ${preview.name}`}
               onPress={() =>
                 setPreviews((current) => current.filter((item) => item.id !== preview.id))
@@ -84,17 +113,12 @@ export function UploadMultiple() {
           bg="transparent"
           icon={ImagePlus}
           aria-label="Add gallery images"
-          onPress={() => inputRef.current?.click()}
+          onPress={picker.pick}
         >
           Add images
         </Button>
       </XStack>
-      <HiddenFileInput
-        inputRef={inputRef}
-        accept="image/*"
-        multiple
-        onFiles={addImages}
-      />
+      {picker.inputElement}
     </YStack>
   )
 }
