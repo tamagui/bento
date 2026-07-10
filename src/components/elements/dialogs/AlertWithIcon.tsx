@@ -14,7 +14,7 @@ type AlertParam = {
   message: string
   buttons: AlertButton[]
   theme?: ThemeName
-  icon?: React.ReactNode
+  icon?: React.ReactElement | React.ElementType
 }
 
 interface AlertDialogContextProps {
@@ -29,7 +29,7 @@ type AlertProps = AlertDialogContentProps & {
   children: React.ReactNode
 }
 
-const renderComponent = (Component: any) => {
+const renderComponent = (Component: AlertParam['icon']) => {
   if (!Component) return null
   if (isValidElement(Component)) return Component
   return <Component />
@@ -66,7 +66,7 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             transition="quick"
             enterStyle={{ opacity: 0 }}
             exitStyle={{ opacity: 0 }}
-            backgroundColor="rgba(0,0,0,0.5)"
+            background="rgba(0,0,0,0.5)"
           />
           <AlertDialog.Content
             theme={theme}
@@ -76,9 +76,7 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             rounded="$8"
             gap="$3"
             key="content"
-            left={0}
-            right={0}
-            marginHorizontal="auto"
+            style={{ left: 0, right: 0, marginHorizontal: 'auto' }}
             transition={[
               'quick',
               {

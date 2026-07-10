@@ -66,7 +66,7 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             transition="quick"
             enterStyle={{ opacity: 0 }}
             exitStyle={{ opacity: 0 }}
-            backgroundColor="rgba(0,0,0,0.5)"
+            background="rgba(0,0,0,0.5)"
           />
           <AlertDialog.Content
             p="$5"
@@ -74,9 +74,7 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             rounded="$6"
             gap="$4"
             key="content"
-            left={0}
-            right={0}
-            marginHorizontal="auto"
+            style={{ left: 0, right: 0, marginHorizontal: 'auto' }}
             transition={[
               'quick',
               {
