@@ -9,35 +9,35 @@ const data = {
     title: 'Americano',
     desc: 'Espresso with hot water',
     key: 'rs_americano',
-    avatar: '/bento/images/coffee1.jpg',
+    avatar: 'https://tamagui.dev/bento/images/coffee1.jpg',
   },
   rs_cappucino: {
     checked: false,
-    title: 'Cappucino',
+    title: 'Cappuccino',
     desc: 'Espresso with steamed milk foam',
     key: 'rs_cappucino',
-    avatar: '/bento/images/coffee2.jpg',
+    avatar: 'https://tamagui.dev/bento/images/coffee2.jpg',
   },
   rs_espresso: {
     checked: false,
     title: 'Espresso',
     desc: 'A concentrated form of coffee served in shots',
     key: 'rs_espresso',
-    avatar: '/bento/images/coffee3.jpg',
+    avatar: 'https://tamagui.dev/bento/images/coffee3.jpg',
   },
   rs_flatWhite: {
     checked: false,
     title: 'Flat White',
     desc: 'Espresso with steamed milk',
     key: 'rs_flatWhite',
-    avatar: '/bento/images/coffee4.jpg',
+    avatar: 'https://tamagui.dev/bento/images/coffee4.jpg',
   },
   rs_latte: {
     title: 'Latte',
     checked: false,
     desc: 'Espresso with steamed milk',
     key: 'rs_latte',
-    avatar: '/bento/images/coffee5.jpg',
+    avatar: 'https://tamagui.dev/bento/images/coffee5.jpg',
   },
 }
 
@@ -113,10 +113,9 @@ function Item({
         rounded: 0,
         py: '$4',
       }}
-      transition="100ms"
     >
       <Avatar circular size="$4">
-        <Avatar.Image accessibilityLabel="Cam" src={item.avatar} />
+        <Avatar.Image aria-label={`${title} thumbnail`} src={item.avatar} />
         <Avatar.Fallback bg="$background" />
       </Avatar>
 
