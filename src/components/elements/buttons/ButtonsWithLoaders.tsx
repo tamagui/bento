@@ -1,4 +1,13 @@
-import { Button, Spinner, View, YStack } from 'tamagui'
+import { Button, Spinner as TamaguiSpinner, View, YStack, type GetProps } from 'tamagui'
+
+function Spinner({
+  enterStyle: _enterStyle,
+  exitStyle: _exitStyle,
+  transition: _transition,
+  ...props
+}: GetProps<typeof TamaguiSpinner>) {
+  return <TamaguiSpinner {...props} />
+}
 
 /** ------ EXAMPLE ------ */
 export function ButtonsWithLoaders() {
