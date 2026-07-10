@@ -12,7 +12,7 @@ import {
   User,
   X,
 } from '@tamagui/lucide-icons-2'
-import { useEffect, useState, type FunctionComponent } from 'react'
+import { Fragment, useEffect, useState, type FunctionComponent } from 'react'
 import { Dimensions } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {
@@ -34,15 +34,32 @@ import { Chip } from '../../elements/chips/components/chipsParts'
 
 const { width } = Dimensions.get('window')
 
-const AnimatedView = Animated.createAnimatedComponent(View)
+type WebSafeAnimationProps = { forwardedRef?: any; layout?: any; nativeID?: string }
 
-const AnimatedHStack = Animated.createAnimatedComponent(
-  styled(Animated.View, {
-    flexDirection: 'row',
-    items: 'center',
-    gap: '$4',
-  })
+const AnimatedViewFrame = View.styleable<WebSafeAnimationProps>(
+  ({ forwardedRef, layout, nativeID, ...props }, ref) => (
+    <View
+      ref={forwardedRef || ref}
+      {...props}
+      {...(!isWeb && nativeID ? { nativeID } : {})}
+      {...(!isWeb && layout ? { layout } : {})}
+    />
+  )
 )
+const AnimatedView = Animated.createAnimatedComponent(AnimatedViewFrame)
+
+const HStackFrame = styled(XStack, { items: 'center', gap: '$4' })
+const AnimatedHStackFrame = HStackFrame.styleable<WebSafeAnimationProps>(
+  ({ forwardedRef, layout, nativeID, ...props }, ref) => (
+    <HStackFrame
+      ref={forwardedRef || ref}
+      {...props}
+      {...(!isWeb && nativeID ? { nativeID } : {})}
+      {...(!isWeb && layout ? { layout } : {})}
+    />
+  )
+)
+const AnimatedHStack = Animated.createAnimatedComponent(AnimatedHStackFrame)
 
 export function Paywall() {
   const goToTermsOfService = () => {
@@ -148,9 +165,12 @@ const PlanList = () => {
       }
     })
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: scrollX.value }],
-  }))
+  const animatedStyle = useAnimatedStyle(
+    () => ({
+      transform: [{ translateX: scrollX.value }],
+    }),
+    [scrollX]
+  )
 
   return (
     <GestureDetector gesture={gesture} touchAction="pan-x">
@@ -185,6 +205,18 @@ const PlanView = ({
   const range = Array.from({ length: length }, (_, i) => index + i - 1)
 
   const style = useAnimatedStyle(() => {
+    if (isWeb) {
+      return {
+        transform: [
+          { translateX: 0 },
+          { scale: 1 },
+          { translateY: 0 },
+          { rotate: '0deg' },
+        ],
+        opacity: 1,
+      }
+    }
+
     const position = (scrollX.value / SIZE_RANGE) * -1
 
     // keep position in the center
@@ -220,7 +252,7 @@ const PlanView = ({
       transform: [{ translateX }, { scale }, { translateY }, { rotate: `${rotate}deg` }],
       opacity,
     }
-  })
+  }, [scrollX, index])
 
   const { title, description, price, yearPrice, features } = plan
 
@@ -265,10 +297,10 @@ const PlanView = ({
       height={nextStep ? 'auto' : '100%'}
       grow={1}
     >
-      <View overflow="hidden">
+      <View key="plan-content" overflow="hidden">
         <View
           key="paywall-plan"
-          transition="quicker"
+          style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
           opacity={nextStep ? 0 : 1}
           transform={[{ translateY: nextStep ? 100 : 0 }]}
           gap="$6"
@@ -298,19 +330,15 @@ const PlanView = ({
             py="$3.5"
           >
             {features.map(({ name, Icon }, index) => (
-              <>
-                <XStack px="$3.5" items="center" gap="$3" key={name}>
+              <Fragment key={name}>
+                <XStack px="$3.5" items="center" gap="$3">
                   <Icon color="$color" />
                   <Text>{name}</Text>
                 </XStack>
                 {index !== features.length - 1 && (
-                  <View
-                    key={`${name}-${index}`}
-                    borderTopWidth={1}
-                    borderColor="$borderColor"
-                  />
+                  <View borderTopWidth={1} borderColor="$borderColor" />
                 )}
-              </>
+              </Fragment>
             ))}
           </View>
 
@@ -329,10 +357,10 @@ const PlanView = ({
         </View>
 
         {nextStep && (
-          <View position="absolute" justify="center" inset={0}>
+          <View key="checkout" position="absolute" justify="center" inset={0}>
             <View
               key="paywall-checkout"
-              transition="quicker"
+              style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
               opacity={1}
               transform={[{ translateY: 0 }]}
               enterStyle={{ opacity: 0, transform: [{ translateY: -100 }] }}
@@ -349,7 +377,7 @@ const PlanView = ({
                   self="center"
                   justify="space-between"
                   key="switch"
-                  transition="quicker"
+                  style={{ transition: 'transform 150ms ease' }}
                   rotate={annual ? '-3deg' : '0deg'}
                 >
                   <Text
@@ -374,7 +402,10 @@ const PlanView = ({
                     borderColor={'$colorTransparent'}
                   >
                     {/* switch background */}
-                    <Switch.Thumb transition="medium" bg="$colorTransparent">
+                    <Switch.Thumb
+                      style={{ transition: 'transform 200ms ease' }}
+                      bg="$colorTransparent"
+                    >
                       <View
                         shadowOpacity={0.5}
                         shadowRadius="$4"
@@ -388,7 +419,7 @@ const PlanView = ({
                         rounded="$10"
                         items="center"
                         justify="center"
-                        transition="200ms"
+                        style={{ transition: 'background-color 200ms ease' }}
                         bg={'$color'}
                       />
                     </Switch.Thumb>
@@ -409,7 +440,7 @@ const PlanView = ({
                     <View height={64} justify="center" items="center" overflow="hidden">
                       <Text
                         key="monthly-price"
-                        transition="quicker"
+                        style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
                         text="center"
                         fontSize="$10"
                         fontWeight="bold"
@@ -422,7 +453,7 @@ const PlanView = ({
 
                       <Text
                         key="annual-price"
-                        transition="quicker"
+                        style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
                         text="center"
                         fontSize="$10"
                         fontWeight="bold"
@@ -433,7 +464,7 @@ const PlanView = ({
                         {formatCurrency(yearPrice)}
                       </Text>
 
-                      {PriceGradient()}
+                      <PriceGradient key="top-gradient" />
                       <View
                         position="absolute"
                         r={0}
@@ -442,7 +473,7 @@ const PlanView = ({
                         height={12}
                         l={0}
                       >
-                        {PriceGradient()}
+                        <PriceGradient key="bottom-gradient" />
                       </View>
                     </View>
 
@@ -458,7 +489,7 @@ const PlanView = ({
                         r="$-6"
                         t="$-2"
                         rotate="25deg"
-                        transition="quicker"
+                        style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
                         opacity={1}
                         transform={[{ translateY: 0 }, { translateX: 0 }]}
                         enterStyle={{
@@ -516,13 +547,19 @@ const ReviewListCarousel = () => {
   const slideLeft = useSharedValue(0)
   const slideRight = useSharedValue(0)
 
-  const animatedSlideLeft = useAnimatedStyle(() => ({
-    transform: [{ translateX: slideLeft.value }],
-  }))
+  const animatedSlideLeft = useAnimatedStyle(
+    () => ({
+      transform: [{ translateX: slideLeft.value }],
+    }),
+    [slideLeft]
+  )
 
-  const animatedSlideRight = useAnimatedStyle(() => ({
-    transform: [{ translateX: slideRight.value }],
-  }))
+  const animatedSlideRight = useAnimatedStyle(
+    () => ({
+      transform: [{ translateX: slideRight.value }],
+    }),
+    [slideRight]
+  )
 
   useEffect(() => {
     slideLeft.value = withRepeat(
@@ -540,7 +577,7 @@ const ReviewListCarousel = () => {
 
   return (
     <View
-      transition="slow"
+      style={{ transition: 'transform 250ms ease, opacity 150ms ease' }}
       opacity={1}
       transform={[{ translateY: 0 }]}
       enterStyle={{
