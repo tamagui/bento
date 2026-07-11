@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import type { TamaguiElement, ViewProps } from 'tamagui'
 import {
+  createStyledHOC,
   Button,
   H3,
   Image,
@@ -91,7 +92,7 @@ const Container = ({ children, ...rest }: ViewProps) => {
   )
 }
 
-const Body = View.styleable(({ children, ...rest }, forwardedRef) => {
+const Body = createStyledHOC(View)(({ children, ...rest }, forwardedRef) => {
   const [perspectiveRef, setPerspectiveRef] = useState<TamaguiElement | null>(null)
   const perspectiveElement = getWebElement(perspectiveRef)
 
@@ -118,7 +119,7 @@ type ItemProps = {
   rotateY?: number | string
   rotateZ?: number | string
 }
-const Item = View.styleable<ItemProps>(
+const Item = createStyledHOC(View)<ItemProps>(
   (
     {
       translateX = 0,

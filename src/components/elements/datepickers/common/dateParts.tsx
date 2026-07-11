@@ -5,6 +5,7 @@ import { Calendar, ChevronLeft, ChevronRight, X } from '@tamagui/lucide-icons-2'
 import type { GestureReponderEvent, ViewProps } from '@tamagui/web'
 import type { PopoverProps } from 'tamagui'
 import {
+  createStyledHOC,
   Adapt,
   AnimatePresence,
   Button,
@@ -163,7 +164,7 @@ type DatePickerInputProps = {
   onButtonPress?: (e: GestureReponderEvent) => void
 }
 
-export const DatePickerInput = Input.Area.styleable<DatePickerInputProps>(
+export const DatePickerInput = createStyledHOC(Input.Area)<DatePickerInputProps>(
   (props, ref) => {
     const { value, onButtonPress, size = '$3', onReset, onLayout, ...rest } = props
     return (

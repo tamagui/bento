@@ -1,12 +1,12 @@
 import Animated from 'react-native-reanimated'
-import { Text, View, isWeb } from 'tamagui'
+import { createStyledHOC, Text, View, isWeb } from 'tamagui'
 
 type AnimationProps = {
   forwardedRef?: any
   nativeID?: string
 }
 
-const ViewFrame = View.styleable<AnimationProps>(
+const ViewFrame = createStyledHOC(View)<AnimationProps>(
   ({ forwardedRef, nativeID, ...props }, ref) => (
     <View
       ref={forwardedRef || ref}
@@ -16,7 +16,7 @@ const ViewFrame = View.styleable<AnimationProps>(
   )
 )
 
-const TextFrame = Text.styleable<AnimationProps>(
+const TextFrame = createStyledHOC(Text)<AnimationProps>(
   ({ forwardedRef, nativeID, ...props }, ref) => (
     <Text
       ref={forwardedRef || ref}

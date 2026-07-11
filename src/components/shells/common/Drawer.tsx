@@ -5,6 +5,7 @@ import type { Animated } from 'react-native'
 import { PanResponder } from 'react-native'
 import type { ViewProps, TamaguiElement } from 'tamagui'
 import {
+  createStyledHOC,
   AnimatePresence,
   View,
   YStack,
@@ -156,7 +157,7 @@ const Overlay = styled(YStack, {
   },
 })
 
-const DrawerOverlay = Overlay.styleable((props, ref) => {
+const DrawerOverlay = createStyledHOC(Overlay)((props, ref) => {
   const { setOpen } = DrawerContext.useStyledContext()
   return <Overlay ref={ref} onPress={() => setOpen(false)} {...props} />
 })
@@ -177,7 +178,7 @@ const DrawerSwipeable = forwardRef<
   )
 })
 
-const DrawerContent = DrawerFrame.styleable((props, ref) => {
+const DrawerContent = createStyledHOC(DrawerFrame)((props, ref) => {
   const { children, ...rest } = props
 
   return (

@@ -1,6 +1,7 @@
 import * as React from 'react'
 import type { PopoverProps } from 'tamagui'
 import {
+  createStyledHOC,
   AnimatePresence,
   H2,
   Paragraph,
@@ -66,7 +67,7 @@ const SlidingPopover = (props: PopoverProps) => {
   )
 }
 
-const SlidingPopoverTrigger = YStack.styleable<{ id: string }>(
+const SlidingPopoverTrigger = createStyledHOC(YStack)<{ id: string }>(
   ({ id, ...props }, ref) => {
     const context = React.useContext(SlidingPopoverContext)
     const [layout, setLayout] = React.useState<LayoutRectangle>()

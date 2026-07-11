@@ -4,6 +4,7 @@ import type { TabLayout, TabsTabProps, ViewProps } from 'tamagui'
 
 import { useEffect, useState } from 'react'
 import {
+  createStyledHOC,
   Anchor,
   AnimatePresence,
   Avatar,
@@ -345,7 +346,7 @@ const DropDownText = styled(Text, {
   },
 })
 
-const NavLink = View.styleable<{ href: string }>(
+const NavLink = createStyledHOC(View)<{ href: string }>(
   ({ children, href = '#', ...rest }, ref) => {
     return (
       <View ref={ref} rounded={5} py="$2" items="center" justify="center" {...rest}>

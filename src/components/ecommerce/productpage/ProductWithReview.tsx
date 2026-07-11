@@ -6,6 +6,7 @@ import { RovingFocusGroup } from '@tamagui/roving-focus'
 import { Fragment, useEffect, useState } from 'react'
 import type { ColorTokens } from 'tamagui'
 import {
+  createStyledHOC,
   Avatar,
   Button,
   Circle,
@@ -491,7 +492,7 @@ function SizeSelector() {
   )
 }
 
-const ItemCounter = XGroup.styleable((props, ref) => {
+const ItemCounter = createStyledHOC(XGroup)((props, ref) => {
   const [count, setCount] = useState(1)
 
   return (
@@ -597,7 +598,7 @@ type ReviewProps = {
   review: ReviewsArray[0]
 }
 
-const Review = View.styleable<ReviewProps>(({ review, ...rest }, forwardRef) => {
+const Review = createStyledHOC(View)<ReviewProps>(({ review, ...rest }, forwardRef) => {
   return (
     <View
       flexDirection="column"

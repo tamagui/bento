@@ -2,6 +2,7 @@ import { getFontSized } from '@tamagui/get-font-sized'
 import { forwardRef } from 'react'
 import type { ColorTokens, FontSizeTokens, GetProps, SizeTokens } from 'tamagui'
 import {
+  createStyledHOC,
   View,
   Avatar as TAvatar,
   createStyledContext,
@@ -86,7 +87,7 @@ const getIconSize = (size: FontSizeTokens, scale: number) => {
   )
 }
 
-export const AvatarIcon = AvatarIconFrame.styleable<{ scaleIcon?: number }>(
+export const AvatarIcon = createStyledHOC(AvatarIconFrame)<{ scaleIcon?: number }>(
   (props, ref) => {
     const { children, scaleIcon = 1, ...rest } = props
     const { size, color: colorProp } = AvatarContext.useStyledContext()

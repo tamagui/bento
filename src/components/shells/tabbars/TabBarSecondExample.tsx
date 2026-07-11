@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Text, View, isWeb } from 'tamagui'
+import { createStyledHOC, Button, Text, View, isWeb } from 'tamagui'
 import { usePhoneScale } from '../../hooks/usePhoneScale'
 
 type CustomTabBarProps = {
@@ -22,7 +22,7 @@ type CustomTabBarProps = {
   }
 }
 
-const CustomTabBar = View.styleable<CustomTabBarProps>(
+const CustomTabBar = createStyledHOC(View)<CustomTabBarProps>(
   ({ state, descriptors, navigation, ...rest }, ref) => {
     const [tabWidth, setTabWidth] = useState(100)
     const [hoveredIndex, setHoveredIndex] = useState(state.index)

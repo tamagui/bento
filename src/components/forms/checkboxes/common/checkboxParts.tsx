@@ -4,6 +4,7 @@ import type { KeyboardEvent, PropsWithChildren } from 'react'
 import { forwardRef } from 'react'
 import type { CheckedState, YStackProps } from 'tamagui'
 import {
+  createStyledHOC,
   Group,
   H2,
   Checkbox as TCheckbox,
@@ -102,7 +103,7 @@ const CheckboxesImp = <K extends string>(
   )
 }
 
-const Checkbox = TCheckbox.styleable((props, ref) => {
+const Checkbox = createStyledHOC(TCheckbox)((props, ref) => {
   const { checked: userChecked, onCheckedChange, ...rest } = props
   const { values, onValuesChange } = CheckboxesContext.useStyledContext()
   const { value: focusItemValue } = FocusItemContext.useStyledContext()
@@ -160,7 +161,7 @@ const CardFrame = styled(View, {
   } as const,
 })
 
-const Card = CardFrame.styleable<CardProps>((props, ref) => {
+const Card = createStyledHOC(CardFrame)<CardProps>((props, ref) => {
   const { ...rest } = props
   const { values } = CheckboxesContext.useStyledContext()
   const { value } = FocusItemContext.useStyledContext()

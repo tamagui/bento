@@ -28,7 +28,17 @@ import Animated, {
   withTiming,
   type SharedValue,
 } from 'react-native-reanimated'
-import { Button, isWeb, styled, Switch, Text, useTheme, View, XStack } from 'tamagui'
+import {
+  createStyledHOC,
+  Button,
+  isWeb,
+  styled,
+  Switch,
+  Text,
+  useTheme,
+  View,
+  XStack,
+} from 'tamagui'
 import { LinearGradient } from 'tamagui/linear-gradient'
 import { Chip } from '../../elements/chips/components/chipsParts'
 
@@ -36,7 +46,7 @@ const { width } = Dimensions.get('window')
 
 type WebSafeAnimationProps = { forwardedRef?: any; layout?: any; nativeID?: string }
 
-const AnimatedViewFrame = View.styleable<WebSafeAnimationProps>(
+const AnimatedViewFrame = createStyledHOC(View)<WebSafeAnimationProps>(
   ({ forwardedRef, layout, nativeID, ...props }, ref) => (
     <View
       ref={forwardedRef || ref}
@@ -49,7 +59,7 @@ const AnimatedViewFrame = View.styleable<WebSafeAnimationProps>(
 const AnimatedView = Animated.createAnimatedComponent(AnimatedViewFrame)
 
 const HStackFrame = styled(XStack, { items: 'center', gap: '$4' })
-const AnimatedHStackFrame = HStackFrame.styleable<WebSafeAnimationProps>(
+const AnimatedHStackFrame = createStyledHOC(HStackFrame)<WebSafeAnimationProps>(
   ({ forwardedRef, layout, nativeID, ...props }, ref) => (
     <HStackFrame
       ref={forwardedRef || ref}

@@ -2,6 +2,7 @@ import { Bell, Menu } from '@tamagui/lucide-icons-2'
 import { RovingFocusGroup } from '@tamagui/roving-focus'
 import { useState } from 'react'
 import {
+  createStyledHOC,
   Anchor,
   Avatar,
   Button,
@@ -278,7 +279,7 @@ function FloatingSideBar({
   )
 }
 
-const SideBarContent = View.styleable((props, ref) => {
+const SideBarContent = createStyledHOC(View)((props, ref) => {
   const [selected, setSelected] = useState('Sign In')
   return (
     <View
@@ -371,7 +372,7 @@ const SideBarContent = View.styleable((props, ref) => {
   )
 })
 
-const NavLink = Link.styleable<{ active?: boolean }>(
+const NavLink = createStyledHOC(Link)<{ active?: boolean }>(
   ({ active = false, children, href = '#', onPress, ...rest }, ref) => {
     /**
      * in a real app derive this from the router:

@@ -8,6 +8,7 @@ import Animated, {
   type SharedValue,
 } from 'react-native-reanimated'
 import {
+  createStyledHOC,
   AnimatePresence,
   Button,
   getTokenValue,
@@ -43,15 +44,16 @@ const NativeAnimatedFlatList =
   Animated.createAnimatedComponent<FlatListProps<Blog>>(FlatList)
 const AnimatedFlatList = isWeb ? FlatList : NativeAnimatedFlatList
 
-const AnimatedViewFrame = View.styleable<{ forwardedRef?: any; nativeID?: string }>(
-  ({ forwardedRef, nativeID, ...props }, ref) => (
-    <View
-      ref={forwardedRef || ref}
-      {...props}
-      {...(!isWeb && nativeID ? { nativeID } : {})}
-    />
-  )
-)
+const AnimatedViewFrame = createStyledHOC(View)<{
+  forwardedRef?: any
+  nativeID?: string
+}>(({ forwardedRef, nativeID, ...props }, ref) => (
+  <View
+    ref={forwardedRef || ref}
+    {...props}
+    {...(!isWeb && nativeID ? { nativeID } : {})}
+  />
+))
 const AnimatedView = Animated.createAnimatedComponent(AnimatedViewFrame)
 
 type Blog = (typeof blogs)[number]

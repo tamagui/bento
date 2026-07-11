@@ -1,6 +1,7 @@
 import type { ColorTokens, FontSizeTokens, SizeTokens } from '@tamagui/core'
 import { getSize } from '@tamagui/get-token'
 import {
+  createStyledHOC,
   createSwitch,
   View,
   getVariableValue,
@@ -143,7 +144,7 @@ const getIconSize = (size: FontSizeTokens, scale: number) => {
     (typeof size === 'number' ? size * 0.5 : getFontSize(size as FontSizeTokens)) * scale
   )
 }
-export const SwitchIcon = SwitchIconFrame.styleable<{
+export const SwitchIcon = createStyledHOC(SwitchIconFrame)<{
   scaleIcon?: number
   color?: ColorTokens | string
 }>((props, ref) => {

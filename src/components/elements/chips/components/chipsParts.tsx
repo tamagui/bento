@@ -1,6 +1,7 @@
 import { getFontSized } from '@tamagui/get-font-sized'
 import type { ColorTokens, FontSizeTokens, SizeTokens } from 'tamagui'
 import {
+  createStyledHOC,
   createStyledContext,
   getFontSize,
   styled,
@@ -115,7 +116,7 @@ const ChipIconFrame = styled(View, {
   },
 })
 
-const ChipIcon = ChipIconFrame.styleable<ChipIconProps>((props, ref) => {
+const ChipIcon = createStyledHOC(ChipIconFrame)<ChipIconProps>((props, ref) => {
   const { children, scaleIcon = 0.7, size, color, ...rest } = props
   const chipContext = ChipContext.useStyledContext()
   const finalSize = size || chipContext.size

@@ -5,6 +5,7 @@ import type { SizeVariantSpreadFunction } from '@tamagui/web'
 import { useState } from 'react'
 import type { ColorTokens, FontSizeTokens } from 'tamagui'
 import {
+  createStyledHOC,
   Label,
   Button as TButton,
   Input as TInput,
@@ -101,7 +102,7 @@ const FocusContext = createStyledContext({
   focused: false,
 })
 
-const InputGroupImpl = InputGroupFrame.styleable((props, forwardedRef) => {
+const InputGroupImpl = createStyledHOC(InputGroupFrame)((props, forwardedRef) => {
   const { children, ...rest } = props
   const [focused, setFocused] = useState(false)
 
@@ -146,7 +147,7 @@ const InputFrame = styled(TInput, {
   } as const,
 })
 
-const InputImpl = InputFrame.styleable<{
+const InputImpl = createStyledHOC(InputFrame)<{
   secureTextEntry?: boolean
   keyboardType?: string
   textContentType?: string
@@ -264,7 +265,7 @@ const getIconSize = (size: FontSizeTokens, scale: number) => {
   )
 }
 
-const InputIcon = InputIconFrame.styleable<{
+const InputIcon = createStyledHOC(InputIconFrame)<{
   scaleIcon?: number
   color?: ColorTokens | string
 }>((props, ref) => {

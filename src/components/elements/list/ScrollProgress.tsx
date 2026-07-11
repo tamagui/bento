@@ -19,6 +19,7 @@ import Animated, {
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Svg, { Circle } from 'react-native-svg'
 import {
+  createStyledHOC,
   AnimatePresence,
   getToken,
   isWeb,
@@ -40,7 +41,7 @@ const CircleFrame = forwardRef<any, any>(
 const AnimatedCircle = Animated.createAnimatedComponent(CircleFrame)
 
 const SafeAreaSpacer = () => (isWeb ? <View /> : <SafeAreaView />)
-const LinearGradientFrame = LinearGradient.styleable<{
+const LinearGradientFrame = createStyledHOC(LinearGradient)<{
   forwardedRef?: any
   nativeID?: string
 }>(({ forwardedRef, nativeID: _nativeID, ...props }, ref) => (
