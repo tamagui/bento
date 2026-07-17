@@ -70,7 +70,7 @@ function MeetingItem({ item }: { item: (typeof data)[0] }) {
       position="relative"
     >
       <LinearGradient
-        colors={['color3', '$color7']}
+        colors={['$color3', '$color7']}
         start={[1, 1]}
         end={[1, 0]}
         fullscreen
