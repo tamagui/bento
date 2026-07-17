@@ -328,7 +328,7 @@ export function ProductWithReview() {
                       fontSize: '$6',
                     }}
                   >
-                    ${599}
+                    ${(product.price - product.discount) / 100}
                   </Text>
                   <Text
                     fontSize="$6"
@@ -338,7 +338,7 @@ export function ProductWithReview() {
                       fontSize: '$4',
                     }}
                   >
-                    ${650}
+                    ${product.price / 100}
                   </Text>
                 </View>
               </View>
