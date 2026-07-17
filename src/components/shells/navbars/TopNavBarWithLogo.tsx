@@ -169,7 +169,7 @@ export function TopNavBarWithLogo() {
                 width={25}
                 height={25}
                 $group-window-sm={{ width: 15, height: 15 }}
-                source={{ uri: '/bento/tamagui-icon.png' }}
+                src="/bento/tamagui-icon.png"
                 alt="Bento logo"
               />
             </View>
@@ -442,7 +442,7 @@ function SideBarContent({
                   width={30}
                   height={30}
                   $group-window-sm={{ width: 15, height: 15 }}
-                  source={{ uri: '/bento/tamagui-icon.png' }}
+                  src="/bento/tamagui-icon.png"
                   alt="Bento logo"
                 />
               </View>
