@@ -52,9 +52,7 @@ export function ButtonPulse() {
     >
       {variants.map((v) => (
         <React.Fragment key={v.variant}>
-          {[...v.theme]
-            .sort(() => Math.random() - 0.5)
-            .map((theme) => (
+          {[...v.theme].map((theme) => (
               <Theme key={theme} name={theme}>
                 <Theme name={v.variant === 'accent' ? 'accent' : undefined}>
                   <CustomButton animVariant={v.variant} transition={v.transition}>

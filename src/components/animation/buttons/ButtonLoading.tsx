@@ -41,12 +41,12 @@ export function ButtonLoading() {
 function ButtonLoadingExample() {
   const [loading, setLoading] = useState(true)
   useEffect(() => {
-    // toggle loading state after every 1 second
+    // toggle loading state every 3 seconds
     const interval = setInterval(() => {
-      setLoading(!loading)
+      setLoading((prev) => !prev)
     }, 3000)
     return () => clearInterval(interval as NodeJS.Timeout)
-  })
+  }, [])
   return (
     <Button onPress={() => setLoading(!loading)} size="$5">
       <View
