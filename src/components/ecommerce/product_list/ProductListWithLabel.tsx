@@ -72,7 +72,7 @@ function Item({ item, index }: { item: Product; index: number }) {
           <XStack gap="$3">
             <SizableText fontWeight="bold">${item.price}</SizableText>
             <SizableText theme="alt1" textDecorationLine="line-through">
-              ${item.price}
+              ${item.originalPrice}
             </SizableText>
           </XStack>
         </YStack>

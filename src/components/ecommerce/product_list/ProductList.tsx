@@ -25,7 +25,7 @@ function Item({ item }: { item: Product }) {
           <XStack gap="$3">
             <StyledText fontWeight="bold">${item.price}</StyledText>
             <StyledText theme="alt1" textDecorationLine="line-through">
-              ${item.price}
+              ${item.originalPrice}
             </StyledText>
           </XStack>
         </YStack>

@@ -60,11 +60,14 @@ export const getProducts = () => {
       const category = allImages[i % allImages.length]
       const name = Object.keys(category)[i % 10]
       const image = category[name]
+      const discount = randNumber({ min: 10, max: 50 })
       return {
         id: i,
         name,
         price: product.price,
-        discount: randNumber({ min: 10, max: 50 }),
+        discount,
+        // pre-discount price, so strikethrough displays differ from the live price
+        originalPrice: (Number(product.price) / (1 - discount / 100)).toFixed(2),
         image: `https://tamagui.dev/bento/images${image}`,
       }
     })
