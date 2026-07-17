@@ -86,7 +86,7 @@ export const SwitchFrame = styled(View, {
         backgroundColor: '$green10',
       },
       false: {
-        backgroundColor: '$red10',
+        backgroundColor: '$color5',
       },
     },
 
