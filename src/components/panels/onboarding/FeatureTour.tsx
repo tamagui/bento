@@ -176,6 +176,9 @@ export function FeatureTour({
             role="dialog"
             aria-label={`Quick tour step ${step + 1} of ${steps.length}: ${current.title}`}
             tabIndex={-1}
+            // programmatic focus target: suppress the default browser outline (the
+            // spotlight ring already indicates the active step)
+            outlineStyle="none"
             position="absolute"
             r={18}
             t={cardTop}
