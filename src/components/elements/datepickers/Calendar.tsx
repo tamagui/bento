@@ -152,7 +152,7 @@ function CalendarView({
                       [key: string]: GetProps<typeof View>
                     } = {
                       'in-range': {
-                        background: dayIsFirstOrLastOfMonth ? 'transprent' : '$color5',
+                        background: dayIsFirstOrLastOfMonth ? 'transparent' : '$color5',
                       },
                       'range-start': {
                         bg: '$color5',
