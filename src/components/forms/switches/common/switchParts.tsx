@@ -2,28 +2,46 @@ import type { ColorTokens, FontSizeTokens, SizeTokens } from '@tamagui/core'
 import { getSize } from '@tamagui/get-token'
 import {
   createStyledHOC,
-  createSwitch,
-  View,
+  getFontSize,
+  getVariable,
   getVariableValue,
   styled,
-  getFontSize,
-  useTheme,
-  getVariable,
-  useGetThemedIcon,
-  withStaticProperties,
+  Switch as TamaguiSwitch,
   SwitchStyledContext,
+  useGetThemedIcon,
+  useTheme,
+  View,
+  withStaticProperties,
   type SwitchProps,
 } from 'tamagui'
 
-export const SwitchThumb = styled(View, {
-  name: 'SwitchThumb',
-  theme: 'accent',
-  transition: 'quick',
+// mirror exactly what the wrapped tamagui components accept (style shorthands,
+// longhands, pseudo styles) instead of the narrower exported SwitchProps
+type FrameProps = React.ComponentProps<typeof TamaguiSwitch>
+type ThumbProps = React.ComponentProps<typeof TamaguiSwitch.Thumb>
 
-  variants: {
-    unstyled: {
-      false: {
-        size: '$true',
+// v3 ships Switch unstyled - this is bento's skin over it. It stays a plain
+// wrapper rather than styled(): a styled() layer over a component that owns a
+// styled context reads that context and re-emits its values as props, which
+// would re-provide the *outer* (empty) SwitchStyledContext over the real one
+// and leave the thumb without `active`/`size`.
+const headless = process.env.TAMAGUI_HEADLESS === '1'
+
+const getSwitchHeight = (val: SizeTokens | number | true) =>
+  Math.round(getVariableValue(getSize(val)) * 0.65)
+
+const getSwitchWidth = (val: SizeTokens | number | true) => getSwitchHeight(val) * 2
+
+export function SwitchThumb(props: ThumbProps) {
+  const { size: sizeContext } = SwitchStyledContext.useStyledContext()
+  const size = props.size ?? sizeContext ?? true
+  const thumbSize = getSwitchHeight(size)
+  return (
+    <TamaguiSwitch.Thumb
+      transition="quick"
+      {...(!headless && {
+        height: thumbSize,
+        width: thumbSize,
         backgroundColor: '#fff',
         borderRadius: 1000,
         shadowColor: '#000',
@@ -33,81 +51,11 @@ export const SwitchThumb = styled(View, {
         elevation: 2,
         justify: 'center',
         items: 'center',
-      },
-    },
-
-    checked: {
-      true: {},
-    },
-
-    size: {
-      '...size': (val) => {
-        const size = getSwitchHeight(val)
-        return {
-          height: size,
-          width: size,
-        }
-      },
-    },
-  } as const,
-
-  defaultVariants: {
-    unstyled: process.env.TAMAGUI_HEADLESS === '1' ? true : false,
-  },
-})
-
-const getSwitchHeight = (val: SizeTokens) =>
-  Math.round(getVariableValue(getSize(val)) * 0.65)
-
-const getSwitchWidth = (val: SizeTokens) => getSwitchHeight(val) * 2
-
-export const SwitchFrame = styled(View, {
-  name: 'Switch',
-  render: 'button',
-
-  variants: {
-    unstyled: {
-      false: {
-        position: 'relative',
-        borderRadius: 1000,
-        backgroundColor: '$background',
-        borderWidth: 2,
-        borderColor: '$background',
-
-        focusStyle: {
-          outlineColor: '$outlineColor',
-          outlineStyle: 'solid',
-          outlineWidth: 2,
-        },
-      },
-    },
-
-    checked: {
-      true: {
-        backgroundColor: '$green10',
-      },
-      false: {
-        backgroundColor: '$red10',
-      },
-    },
-
-    size: {
-      '...size': (val) => {
-        const height = getSwitchHeight(val) + 4
-        const width = getSwitchWidth(val) + 4
-        return {
-          height,
-          minHeight: height,
-          width,
-        }
-      },
-    },
-  } as const,
-
-  defaultVariants: {
-    unstyled: process.env.TAMAGUI_HEADLESS === '1' ? true : false,
-  },
-})
+      })}
+      {...props}
+    />
+  )
+}
 
 const SwitchIconFrame = styled(View, {
   position: 'absolute',
@@ -144,6 +92,7 @@ const getIconSize = (size: FontSizeTokens, scale: number) => {
     (typeof size === 'number' ? size * 0.5 : getFontSize(size as FontSizeTokens)) * scale
   )
 }
+
 export const SwitchIcon = createStyledHOC(SwitchIconFrame)<{
   scaleIcon?: number
   color?: ColorTokens | string
@@ -168,12 +117,36 @@ export const SwitchIcon = createStyledHOC(SwitchIconFrame)<{
   )
 })
 
-const SwitchComp = createSwitch({
-  Frame: SwitchFrame,
-  Thumb: SwitchThumb,
-})
+function SwitchFrame(props: FrameProps) {
+  const size = props.size ?? true
+  const height = getSwitchHeight(size) + 4
+  return (
+    <TamaguiSwitch
+      {...(!headless && {
+        position: 'relative',
+        borderRadius: 1000,
+        backgroundColor: '$background',
+        borderWidth: 2,
+        borderColor: '$background',
+        height,
+        minHeight: height,
+        width: getSwitchWidth(size) + 4,
+        focusStyle: {
+          outlineColor: '$outlineColor',
+          outlineStyle: 'solid',
+          outlineWidth: 2,
+        },
+        // the checked track color the v2 Switch applied by default, so a switch
+        // that sets no activeStyle of its own still reads as on/off
+        activeStyle: { backgroundColor: '$backgroundActive' },
+      })}
+      {...props}
+    />
+  )
+}
 
-export const Switch = withStaticProperties(SwitchComp, {
+export const Switch = withStaticProperties(SwitchFrame, {
+  Thumb: SwitchThumb,
   Icon: SwitchIcon,
 })
 
