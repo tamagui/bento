@@ -78,6 +78,50 @@ Bento is automatically available via `@tamagui/bento-or-not`:
 - **CI/Production**: Installed from GitHub Packages
 - **Without bento**: Graceful stubs (components won't render)
 
+### Import tamagui from `tamagui`, not from `@tamagui/*`
+
+tamagui.dev bundles this repo's `src/` directly (aliased, not the built
+package), so bento's bare imports resolve against **bento's own
+`node_modules`** first. The site's vite config only dedupes `tamagui`,
+`@tamagui/core`, `@tamagui/web` and the packages in its `include` list
+(`@tamagui/get-token`, `@tamagui/get-font-sized`, `@tamagui/linear-gradient`,
+`@tamagui/roving-focus`, `@tamagui/focus-scope`).
+
+Any *other* bare `@tamagui/*` import silently pulls a second, stale copy of
+that package into the bundle, compiled against the deduped core. It fails at
+runtime, not at build time — e.g. importing `@tamagui/switch-headless` dragged
+in an old `@tamagui/label` whose module body called the removed
+`.styleable()`, crashing the whole site build.
+
+So: import from `tamagui` whenever the umbrella re-exports what you need, and
+only reach for a bare `@tamagui/*` package if it is in the deduped list above.
+
+### v3 ships several primitives unstyled
+
+`tamagui` v3's styled skin set covers Button, Select, Sheet, Accordion,
+Dialog, Slider, ToggleGroup, Input/TextArea, ListItem, Toast, Card, Progress,
+Label, Separator and Surface. **Switch, Checkbox, RadioGroup, Tabs, Avatar and
+Group are behavior-only** — importing them straight from `tamagui` gives you an
+element with no size, so it renders at 0x0 while still compiling and still
+firing its aria/state attributes. Bento carries its own skins for these; use
+those rather than the bare primitive:
+
+- `forms/switches/common/switchParts` -> `Switch`
+- `forms/checkboxes/common/checkboxParts` -> `CheckboxSkin`, `Checkboxes`
+- `forms/radiogroups/components/radioParts` -> `RadioGroup`
+
+Two traps when writing such a skin:
+
+- **Do not `styled()` a primitive that owns a styled context** (Switch,
+  Checkbox). A `styled()` layer reads that context and re-emits its values as
+  props, which re-provides the empty outer context over the real one — the
+  control still toggles, but its thumb/indicator never gets `active` or `size`.
+  Use a plain wrapper component that spreads style props instead.
+- **`withStaticProperties` mutates its argument in place.** Wrapping an
+  imported component overwrites the real one for every consumer, and a wrapper
+  that renders `Imported.Item` then recurses into itself. Capture the base
+  parts in `const`s first and wrap a local function.
+
 ## GitHub Actions
 
 On every push to `main`:
