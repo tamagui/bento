@@ -9,11 +9,11 @@ import {
   Label,
   SizableText,
   Spinner,
-  Switch,
   View,
   isWeb,
   useEvent,
 } from 'tamagui'
+import { Switch } from '../switches/common/switchParts'
 import { Input } from '../inputs/components/inputsParts'
 import { FormCard } from './components/layoutParts'
 

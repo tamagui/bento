@@ -33,13 +33,13 @@ import {
   Button,
   isWeb,
   styled,
-  Switch,
   Text,
   useTheme,
   View,
   XStack,
 } from 'tamagui'
 import { LinearGradient } from 'tamagui/linear-gradient'
+import { Switch } from '../../forms/switches/common/switchParts'
 import { Chip } from '../../elements/chips/components/chipsParts'
 
 const { width } = Dimensions.get('window')

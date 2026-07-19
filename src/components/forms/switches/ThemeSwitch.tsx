@@ -1,7 +1,8 @@
 import { MoonStar, Sun } from '@tamagui/lucide-icons-2'
 import { useEffect, useId, useState } from 'react'
 import type { SizeTokens } from 'tamagui'
-import { AnimatePresence, getVariableValue, Switch, View, YStack } from 'tamagui'
+import { AnimatePresence, getVariableValue, View, YStack } from 'tamagui'
+import { Switch } from './common/switchParts'
 
 import { getSize } from '@tamagui/get-token'
 import { useUserScheme } from '@vxrn/color-scheme'

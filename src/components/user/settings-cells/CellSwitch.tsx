@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Switch, XStack, isWeb } from 'tamagui'
+import { XStack, isWeb } from 'tamagui'
+import { Switch } from '../../forms/switches/common/switchParts'
 import { useReducedMotion } from '../../hooks'
 import { CellCopy, SettingsCellFrame } from './common/SettingsCellFrame'
 

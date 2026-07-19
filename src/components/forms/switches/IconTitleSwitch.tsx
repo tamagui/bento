@@ -1,6 +1,7 @@
 import { Baby } from '@tamagui/lucide-icons-2'
 import { useId, useState } from 'react'
-import { Label, Switch, Text, View, XStack } from 'tamagui'
+import { Label, Text, View, XStack } from 'tamagui'
+import { Switch } from './common/switchParts'
 
 /** ------ EXAMPLE ------ */
 export function IconTitleSwitch() {
