@@ -1,8 +1,8 @@
 import { Clock, Dot } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
 import type { ThemeName } from 'tamagui'
-import { Card } from './components/radioParts'
-import { H2, RadioGroup, Text, View } from 'tamagui'
+import { Card, RadioGroup } from './components/radioParts'
+import { H2, Text, View } from 'tamagui'
 
 const packages = [
   {

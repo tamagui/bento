@@ -3,10 +3,11 @@ import { Eye, EyeOff, Info } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { SafeAreaView } from 'react-native'
-import { AnimatePresence, Button, H1, isWeb, RadioGroup, Spinner, View } from 'tamagui'
+import { AnimatePresence, Button, H1, isWeb, Spinner, View } from 'tamagui'
 import { z } from 'zod'
 import { Input } from '../inputs/components/inputsParts'
 import { FormCard } from './components/layoutParts'
+import { RadioGroup } from '../radiogroups/components/radioParts'
 
 const schema = z
   .object({

@@ -10,13 +10,13 @@ import {
   H1,
   H2,
   isWeb,
-  RadioGroup,
   Spinner,
   View,
 } from 'tamagui'
 import { z } from 'zod'
 import { Input, InputContext } from '../inputs/components/inputsParts'
 import { FormCard } from './components/layoutParts'
+import { RadioGroup } from '../radiogroups/components/radioParts'
 
 type TextInputProps = {
   label: string

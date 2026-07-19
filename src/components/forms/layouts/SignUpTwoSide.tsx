@@ -7,7 +7,6 @@ import {
   H1,
   Image,
   Label,
-  RadioGroup,
   Select,
   Separator,
   Sheet,
@@ -17,6 +16,7 @@ import {
 } from 'tamagui'
 import { Checkboxes } from '../checkboxes/common/checkboxParts'
 import { Input } from '../inputs/components/inputsParts'
+import { RadioGroup } from '../radiogroups/components/radioParts'
 
 const notifications = [
   {

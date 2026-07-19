@@ -8,7 +8,6 @@ import {
   Button,
   Image,
   Label,
-  RadioGroup,
   Select,
   Separator,
   Sheet,
@@ -18,6 +17,7 @@ import {
   styled,
   Text,
 } from 'tamagui'
+import { RadioGroup } from '../../forms/radiogroups/components/radioParts'
 
 const languages = [
   { name: 'English', shortcut: 'EN', flag: 'US' },

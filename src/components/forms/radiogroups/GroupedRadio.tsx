@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Avatar, Label, RadioGroup, Text, YGroup, View, useEvent } from 'tamagui'
-import { Card } from './components/radioParts'
+import { Avatar, Label, Text, YGroup, View, useEvent } from 'tamagui'
+import { Card, RadioGroup } from './components/radioParts'
 
 const items = [
   {
