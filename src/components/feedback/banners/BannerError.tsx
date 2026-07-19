@@ -1,9 +1,8 @@
 import { CircleX } from '@tamagui/lucide-icons-2'
-import { useToastController } from '@tamagui/toast'
+import { toast } from '@tamagui/toast'
 import { Banner } from './common/Banner'
 
 export function BannerError() {
-  const toast = useToastController()
   return (
     <Banner
       icon={CircleX}
@@ -13,9 +12,9 @@ export function BannerError() {
       action={{
         label: 'Retry sync',
         onPress: () =>
-          toast.show('Sync started', {
-            message: 'Retrying 3 records…',
-            customData: { variant: 'info' },
+          toast('Sync started', {
+            description: 'Retrying 3 records…',
+            data: { variant: 'info' },
           }),
       }}
     >

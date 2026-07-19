@@ -1,9 +1,8 @@
 import { Cloud, FileText, Sparkles } from '@tamagui/lucide-icons-2'
-import { useToastController } from '@tamagui/toast'
+import { toast } from '@tamagui/toast'
 import { Button, H2, Paragraph, View, XStack, YStack, isWeb } from 'tamagui'
 
 export function EmptyStateIllustrated() {
-  const toast = useToastController()
   return (
     <YStack
       render={isWeb ? 'section' : undefined}
@@ -55,14 +54,14 @@ export function EmptyStateIllustrated() {
         <Button
           theme="accent"
           onPress={() =>
-            toast.show('New document', { message: 'Would open a blank document' })
+            toast('New document', { description: 'Would open a blank document' })
           }
         >
           New document
         </Button>
         <Button
           variant="outlined"
-          onPress={() => toast.show('Upload', { message: 'Would open the file picker' })}
+          onPress={() => toast('Upload', { description: 'Would open the file picker' })}
         >
           Upload file
         </Button>

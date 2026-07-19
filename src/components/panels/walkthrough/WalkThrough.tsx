@@ -13,7 +13,6 @@ import {
   PortalItem,
   PortalProvider,
   View,
-  ThemeableStack,
   XStack,
   YStack,
   createStyledContext,
@@ -180,12 +179,12 @@ function Dialog({
   const isLastStep = currentStep === numberOfSteps
   const isFirstStep = currentStep === 0
   return (
-    <ThemeableStack
+    <YStack
       borderWidth={2}
       bg="#fff"
       gap="$4"
       flexDirection="column"
-      elevate
+      elevation="$4"
       borderColor="black"
     >
       <Paragraph>{title}</Paragraph>
@@ -203,7 +202,7 @@ function Dialog({
           )}
         </Button>
       </XStack>
-    </ThemeableStack>
+    </YStack>
   )
 }
 

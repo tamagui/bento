@@ -1,6 +1,6 @@
 import type { SizeTokens } from 'tamagui'
 import {
-  ThemeableStack,
+  YStack,
   createStyledContext,
   styled,
   withStaticProperties,
@@ -34,7 +34,7 @@ const TableContext = createStyledContext<{
 })
 
 /** Table Components */
-const Row = styled(ThemeableStack, {
+const Row = styled(YStack, {
   render: 'tr',
   flexDirection: 'row',
   context: TableContext,
@@ -59,7 +59,7 @@ const Row = styled(ThemeableStack, {
   },
 })
 
-const Cell = styled(ThemeableStack, {
+const Cell = styled(YStack, {
   render: 'td',
   flexDirection: 'row',
   context: TableContext,
@@ -104,7 +104,7 @@ const Cell = styled(ThemeableStack, {
   } as const,
 })
 
-const HeaderCell = styled(ThemeableStack, {
+const HeaderCell = styled(YStack, {
   render: 'th',
   flexDirection: 'row',
   context: TableContext,
@@ -146,28 +146,28 @@ const HeaderCell = styled(ThemeableStack, {
   } as const,
 })
 
-const TableBody = styled(ThemeableStack, {
+const TableBody = styled(YStack, {
   render: 'tbody',
   flexDirection: 'column',
   context: TableContext,
   shrink: 1,
 })
 
-const TableHead = styled(ThemeableStack, {
+const TableHead = styled(YStack, {
   render: 'thead',
   flexDirection: 'column',
   context: TableContext,
   shrink: 1,
 })
 
-const TableFoot = styled(ThemeableStack, {
+const TableFoot = styled(YStack, {
   render: 'tfoot',
   flexDirection: 'column',
   context: TableContext,
   shrink: 1,
 })
 
-const TableComp = styled(ThemeableStack, {
+const TableComp = styled(YStack, {
   render: 'table',
   context: TableContext,
   borderWidth: 1,

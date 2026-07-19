@@ -1,5 +1,5 @@
 import { Inbox } from '@tamagui/lucide-icons-2'
-import { useToastController } from '@tamagui/toast'
+import { toast } from '@tamagui/toast'
 import { Button, H3, Paragraph, View, YStack, isWeb } from 'tamagui'
 
 export function EmptyStateBasic({
@@ -13,7 +13,6 @@ export function EmptyStateBasic({
   actionLabel?: string
   onAction?: () => void
 }) {
-  const toast = useToastController()
   return (
     <YStack
       render={isWeb ? 'section' : undefined}
@@ -43,7 +42,7 @@ export function EmptyStateBasic({
         onPress={
           onAction ??
           (() =>
-            toast.show('New project', { message: 'Would open the project composer' }))
+            toast('New project', { description: 'Would open the project composer' }))
         }
       >
         {actionLabel}

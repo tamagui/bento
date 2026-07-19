@@ -1,12 +1,11 @@
 import { UploadCloud } from '@tamagui/lucide-icons-2'
-import { useToastController } from '@tamagui/toast'
+import { toast } from '@tamagui/toast'
 import { useRef, useState } from 'react'
 import { Button, Spinner, Text } from 'tamagui'
 import type { ToastCustomData } from './common/CurrentToast'
 
 /** ------ EXAMPLE ------ */
 export function ToastPromise() {
-  const toast = useToastController()
   const [busy, setBusy] = useState(false)
   const attempts = useRef(0)
   const cancelled = useRef(false)
@@ -22,29 +21,29 @@ export function ToastPromise() {
   const run = async () => {
     setBusy(true)
     cancelled.current = false
-    toast.show('Uploading…', {
-      message: 'photo-2107.jpg',
+    toast('Uploading…', {
+      description: 'photo-2107.jpg',
       duration: 30000,
-      customData: { variant: 'info' } satisfies ToastCustomData,
+      data: { variant: 'info' } satisfies ToastCustomData,
     })
     try {
       await upload()
       if (cancelled.current) return
-      toast.show('Upload complete', {
-        message: 'photo-2107.jpg is now available.',
-        customData: { variant: 'success' } satisfies ToastCustomData,
+      toast('Upload complete', {
+        description: 'photo-2107.jpg is now available.',
+        data: { variant: 'success' } satisfies ToastCustomData,
       })
     } catch (error) {
       if (cancelled.current) return
-      toast.show('Upload failed', {
-        message: `${(error as Error).message} — nothing was saved.`,
+      toast('Upload failed', {
+        description: `${(error as Error).message} — nothing was saved.`,
         // errors stay up long enough to act on
         duration: 8000,
-        customData: {
+        data: {
           variant: 'error',
           actionLabel: 'Retry',
           onAction: () => {
-            toast.hide()
+            toast.dismiss()
             run()
           },
         } satisfies ToastCustomData,
@@ -57,9 +56,9 @@ export function ToastPromise() {
   const cancel = () => {
     cancelled.current = true
     setBusy(false)
-    toast.show('Upload cancelled', {
-      message: 'photo-2107.jpg was not uploaded.',
-      customData: { variant: 'info' } satisfies ToastCustomData,
+    toast('Upload cancelled', {
+      description: 'photo-2107.jpg was not uploaded.',
+      data: { variant: 'info' } satisfies ToastCustomData,
     })
   }
 

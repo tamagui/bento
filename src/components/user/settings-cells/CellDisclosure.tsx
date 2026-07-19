@@ -1,5 +1,5 @@
 import { ChevronRight } from '@tamagui/lucide-icons-2'
-import { useToastController } from '@tamagui/toast'
+import { toast } from '@tamagui/toast'
 import { Button } from 'tamagui'
 import { CellCopy, SettingsCellFrame } from './common/SettingsCellFrame'
 
@@ -11,7 +11,6 @@ export function CellDisclosure({
   /** navigate to the detail screen; the demo default just proves the press */
   onPress?: () => void
 }) {
-  const toast = useToastController()
   const row = (
     <Button
       unstyled
@@ -28,7 +27,7 @@ export function CellDisclosure({
       onPress={
         onPress ??
         (() =>
-          toast.show('Notifications', { message: 'Would open notification settings' }))
+          toast('Notifications', { description: 'Would open notification settings' }))
       }
       pressStyle={{ bg: '$color3' }}
       hoverStyle={{ bg: '$color2' }}

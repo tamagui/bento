@@ -1,5 +1,5 @@
 import { Trash2 } from '@tamagui/lucide-icons-2'
-import { useToastController } from '@tamagui/toast'
+import { toast } from '@tamagui/toast'
 import { useState } from 'react'
 import { Button, Text, XStack } from 'tamagui'
 import type { ToastCustomData } from './common/CurrentToast'
@@ -8,21 +8,20 @@ const TOTAL = 3
 
 /** ------ EXAMPLE ------ */
 export function ToastAction() {
-  const toast = useToastController()
   const [items, setItems] = useState(TOTAL)
 
   const deleteOne = () => {
     setItems((n) => Math.max(0, n - 1))
-    toast.show('Message deleted', {
-      message: 'Undo to restore it.',
-      customData: {
+    toast('Message deleted', {
+      description: 'Undo to restore it.',
+      data: {
         variant: 'info',
         actionLabel: 'Undo',
         // undo lives inside the toast and expires with it; hiding after
         // restore keeps it idempotent
         onAction: () => {
           setItems((n) => Math.min(TOTAL, n + 1))
-          toast.hide()
+          toast.dismiss()
         },
       } satisfies ToastCustomData,
     })

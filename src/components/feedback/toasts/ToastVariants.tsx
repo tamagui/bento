@@ -1,19 +1,17 @@
 import { CheckCircle2, Info, XCircle } from '@tamagui/lucide-icons-2'
-import { useToastController } from '@tamagui/toast'
+import { toast } from '@tamagui/toast'
 import { Button, Text, XStack } from 'tamagui'
 
 /** ------ EXAMPLE ------ */
 export function ToastVariants() {
-  const toast = useToastController()
-
   return (
     <XStack gap="$3" flexWrap="wrap" justify="center">
       <Button
         icon={<CheckCircle2 size={16} color="$green10" />}
         onPress={() =>
-          toast.show('Changes saved', {
-            message: 'Your profile has been updated.',
-            customData: { variant: 'success' },
+          toast('Changes saved', {
+            description: 'Your profile has been updated.',
+            data: { variant: 'success' },
           })
         }
       >
@@ -22,9 +20,9 @@ export function ToastVariants() {
       <Button
         icon={<XCircle size={16} color="$red10" />}
         onPress={() =>
-          toast.show('Upload failed', {
-            message: 'The file exceeds the 10MB limit.',
-            customData: { variant: 'error' },
+          toast('Upload failed', {
+            description: 'The file exceeds the 10MB limit.',
+            data: { variant: 'error' },
           })
         }
       >
@@ -33,9 +31,9 @@ export function ToastVariants() {
       <Button
         icon={<Info size={16} color="$blue10" />}
         onPress={() =>
-          toast.show('Heads up', {
-            message: 'A new version is available.',
-            customData: { variant: 'info' },
+          toast('Heads up', {
+            description: 'A new version is available.',
+            data: { variant: 'info' },
           })
         }
       >

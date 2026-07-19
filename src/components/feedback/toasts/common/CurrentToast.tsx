@@ -1,5 +1,5 @@
 import { CheckCircle2, Info, X, XCircle } from '@tamagui/lucide-icons-2'
-import { Toast, useToastState } from '@tamagui/toast'
+import { Toast, type ToastItemRenderProps } from '@tamagui/toast'
 import { Button, Text, XStack, YStack, isWeb } from 'tamagui'
 
 const icons: Record<string, any> = {
@@ -16,33 +16,26 @@ export type ToastCustomData = {
 }
 
 /**
- * global toast renderer — mount ONCE next to your ToastViewport.
- * demos trigger toasts via useToastController; `customData` drives the
- * icon, accent, and optional action slot.
+ * v3 renderItem for `<Toast.List>` — the Provider mounts the list once inside its
+ * `<Toast.Viewport>`. Callers trigger toasts via `toast(title, { description, data })`;
+ * `data` (ToastCustomData) drives the icon, accent, and optional action slot.
  */
-export function CurrentToast() {
-  const toast = useToastState()
-
-  if (!toast || toast.isHandledNatively) return null
-
+export const renderBentoToast = ({ toast: t, index }: ToastItemRenderProps) => {
   const {
     variant = 'info',
     actionLabel,
     onAction,
-  } = (toast.customData as ToastCustomData | undefined) ?? {}
+  } = (t.data as ToastCustomData | undefined) ?? {}
+
+  const title = typeof t.title === 'function' ? t.title() : t.title
+  const description = typeof t.description === 'function' ? t.description() : t.description
 
   return (
-    <Toast
-      key={toast.id}
-      duration={toast.duration}
-      viewportName={toast.viewportName}
+    <Toast.Item
+      key={t.id}
+      toast={t}
+      index={index}
       rounded="$6"
-      transition="200ms"
-      enterStyle={{ opacity: 0, scale: 0.96, y: -12 }}
-      exitStyle={{ opacity: 0, scale: 0.98, y: -6 }}
-      y={0}
-      opacity={1}
-      scale={1}
       bg="$color1"
       borderWidth={1}
       borderColor="$color5"
@@ -58,13 +51,13 @@ export function CurrentToast() {
         <YStack flex={1} gap="$0.5">
           <Toast.Title>
             <Text fontWeight="600" fontSize="$3" color="$color12">
-              {toast.title}
+              {title}
             </Text>
           </Toast.Title>
-          {!!toast.message && (
+          {!!description && (
             <Toast.Description>
               <Text fontSize="$2" color="$color10">
-                {toast.message}
+                {description}
               </Text>
             </Toast.Description>
           )}
@@ -82,13 +75,13 @@ export function CurrentToast() {
             aria-label="Dismiss"
             size="$2"
             circular
-            chromeless
+            variant="quiet"
             hitSlop={isWeb ? undefined : 12}
           >
             <X size={14} color="$color10" />
           </Button>
         </Toast.Close>
       </XStack>
-    </Toast>
+    </Toast.Item>
   )
 }

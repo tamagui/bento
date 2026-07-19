@@ -1,5 +1,5 @@
-import { ToastProvider, ToastViewport } from '@tamagui/toast'
-import { CurrentToast } from '../feedback/toasts/common/CurrentToast'
+import { Toast } from '@tamagui/toast'
+import { renderBentoToast } from '../feedback/toasts/common/CurrentToast'
 import type { TamaguiProviderProps } from 'tamagui'
 import { TamaguiProvider, isWeb } from 'tamagui'
 import { SchemeProvider } from '@vxrn/color-scheme'
@@ -14,12 +14,15 @@ export function Provider({
   return (
     <TamaguiProvider config={config} defaultTheme={defaultTheme} {...rest}>
       <SchemeProvider>
-        <ToastProvider swipeDirection="horizontal">
+        {/* v3 composable Toast: one root renders the viewport + the styled list;
+            callers trigger toasts via the global `toast()`. */}
+        <Toast position="top-center" swipeDirection="horizontal">
           {children}
-          <CurrentToast />
           {/* native needs to clear the status bar / dynamic island */}
-          <ToastViewport left={0} right={0} top={isWeb ? 10 : 70} />
-        </ToastProvider>
+          <Toast.Viewport offset={{ top: isWeb ? 10 : 70, left: 0, right: 0 }}>
+            <Toast.List renderItem={renderBentoToast} />
+          </Toast.Viewport>
+        </Toast>
       </SchemeProvider>
     </TamaguiProvider>
   )
