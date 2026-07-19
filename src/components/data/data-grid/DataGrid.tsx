@@ -31,7 +31,6 @@ import {
   AnimatePresence,
   Avatar,
   Button,
-  Checkbox,
   Paragraph,
   ScrollView,
   Separator,
@@ -46,6 +45,7 @@ import { Skeleton, SkeletonScene } from '../../feedback/skeletons/common/Skeleto
 import { useGroupMedia } from '../../hooks/useGroupMedia'
 import { StatusBadge } from '../../elements/tables/common/cells'
 import { Table } from '../../elements/tables/common/tableParts'
+import { CheckboxSkin as Checkbox } from '../../forms/checkboxes/common/checkboxParts'
 
 type PersonStatus = 'active' | 'paused' | 'vacation'
 

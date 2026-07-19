@@ -1,14 +1,19 @@
+import { getSize } from '@tamagui/get-token'
 import type { RovingFocusGroupProps, RovingFocusItemProps } from '@tamagui/roving-focus'
 import { RovingFocusGroup } from '@tamagui/roving-focus'
 import type { KeyboardEvent, PropsWithChildren } from 'react'
 import { forwardRef } from 'react'
 import type { CheckedState, YStackProps } from 'tamagui'
 import {
+  CheckboxStyledContext,
   createStyledHOC,
+  getVariableValue,
   Group,
   H2,
   Checkbox as TCheckbox,
   styled,
+  useGetThemedIcon,
+  useTheme,
   withStaticProperties,
   isWeb,
   createStyledContext,
@@ -103,6 +108,74 @@ const CheckboxesImp = <K extends string>(
   )
 }
 
+// v3 ships Checkbox unstyled, so bento carries the skin. Reproduces the v2
+// createCheckbox frame: a square at 45% of the size token, radius at an eighth
+// of it, themed background, 1px border and the hover/press/focus states.
+//
+// Deliberately a plain wrapper, not styled(TCheckbox, ...). See
+// forms/switches/common/switchParts.tsx for why styled() over a tamagui
+// primitive that owns a styled context silently breaks it.
+type CheckboxSkinProps = React.ComponentProps<typeof TCheckbox>
+
+const checkboxSizeToken = (size: CheckboxSkinProps['size']) =>
+  getVariableValue(getSize(size ?? true)) as number
+
+const checkboxBox = (size: CheckboxSkinProps['size']) =>
+  Math.round(checkboxSizeToken(size) * 0.45)
+
+function CheckboxSkinFrame(props: CheckboxSkinProps) {
+  const box = checkboxBox(props.size)
+  return (
+    <TCheckbox
+      width={box}
+      height={box}
+      borderRadius={checkboxSizeToken(props.size) / 8}
+      backgroundColor="$background"
+      items="center"
+      justify="center"
+      borderWidth={1}
+      borderColor="$borderColor"
+      hoverStyle={{ borderColor: '$borderColorHover' }}
+      pressStyle={{ backgroundColor: '$backgroundPress', borderColor: '$borderColorPress' }}
+      focusStyle={{ borderColor: '$borderColorFocus' }}
+      focusVisibleStyle={{
+        outlineStyle: 'solid',
+        outlineWidth: 2,
+        outlineColor: '$outlineColor',
+      }}
+      // the checked fill the v2 Checkbox applied by default
+      activeStyle={{ bg: '$backgroundActive' }}
+      {...props}
+    />
+  )
+}
+
+// v2's createCheckbox sized and themed the indicator's icon off the checkbox
+// size; v3's unstyled Indicator does not, so a bare <Check /> renders at
+// lucide's 24px default and overflows the box.
+const BaseCheckboxIndicator = TCheckbox.Indicator
+
+function CheckboxIndicator({
+  children,
+  ...props
+}: React.ComponentProps<typeof BaseCheckboxIndicator>) {
+  const { size } = CheckboxStyledContext.useStyledContext()
+  const theme = useTheme()
+  const getThemedIcon = useGetThemedIcon({
+    size: Math.round(checkboxBox(size) * 0.75),
+    color: theme.color,
+  })
+  return (
+    <BaseCheckboxIndicator {...props}>
+      {getThemedIcon(children)}
+    </BaseCheckboxIndicator>
+  )
+}
+
+export const CheckboxSkin = withStaticProperties(CheckboxSkinFrame, {
+  Indicator: CheckboxIndicator,
+})
+
 const Checkbox = createStyledHOC(TCheckbox)((props, ref) => {
   const { checked: userChecked, onCheckedChange, ...rest } = props
   const { values, onValuesChange } = CheckboxesContext.useStyledContext()
@@ -120,7 +193,7 @@ const Checkbox = createStyledHOC(TCheckbox)((props, ref) => {
     ...rest,
   }
 
-  return <TCheckbox ref={ref} value={focusItemValue} {...rest} {...attrs} />
+  return <CheckboxSkin ref={ref} value={focusItemValue} {...rest} {...attrs} />
 })
 
 type CardProps = {
@@ -181,7 +254,7 @@ export const Checkboxes = withStaticProperties(CheckboxesImp, {
   }),
   Title,
   Checkbox: withStaticProperties(Checkbox, {
-    Indicator: TCheckbox.Indicator,
+    Indicator: CheckboxIndicator,
     Label,
   }),
   Card,

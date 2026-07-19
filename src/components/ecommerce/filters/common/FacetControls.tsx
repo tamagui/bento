@@ -1,5 +1,6 @@
 import { Check } from '@tamagui/lucide-icons-2'
-import { Checkbox, Slider, Text, XStack, YStack, isWeb } from 'tamagui'
+import { Slider, Text, XStack, YStack, isWeb } from 'tamagui'
+import { CheckboxSkin as Checkbox } from '../../../forms/checkboxes/common/checkboxParts'
 
 export type FilterState = {
   collections: string[]

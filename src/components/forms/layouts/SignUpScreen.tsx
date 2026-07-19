@@ -4,7 +4,6 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import {
   AnimatePresence,
   Button,
-  Checkbox,
   H1,
   Label,
   SizableText,
@@ -16,6 +15,7 @@ import {
 import { Switch } from '../switches/common/switchParts'
 import { Input } from '../inputs/components/inputsParts'
 import { FormCard } from './components/layoutParts'
+import { CheckboxSkin as Checkbox } from '../checkboxes/common/checkboxParts'
 
 /** simulate signin */
 function useSignIn() {
