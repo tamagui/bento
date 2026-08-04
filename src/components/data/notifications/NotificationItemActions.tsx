@@ -12,7 +12,7 @@ const invitations: NotificationData[] = [
     at: '2026-07-10T10:48:00',
     exact: 'Jul 10, 2026, 10:48 AM',
     unread: true,
-    accent: '$pink5',
+    accent: 'pink-300',
   },
   {
     id: 'research',
@@ -23,7 +23,7 @@ const invitations: NotificationData[] = [
     at: '2026-07-10T09:00:00',
     exact: 'Jul 10, 2026, 9:00 AM',
     unread: true,
-    accent: '$green5',
+    accent: 'green-300',
   },
 ]
 
@@ -59,12 +59,12 @@ export function NotificationItemActions() {
       width="100%"
       maxW={620}
       self="center"
-      gap="$3"
-      p="$3"
-      rounded="$8"
+      gap="3"
+      p="3"
+      rounded="8"
       borderWidth={1}
-      borderColor="$borderColor"
-      bg="$background"
+      borderColor="border-color"
+      bg="background"
     >
       <Text
         render="output"
@@ -86,24 +86,24 @@ export function NotificationItemActions() {
             notification={notification}
             action={
               state === 'accepted' || state === 'declined' ? (
-                <XStack mt="$2" gap="$3" items="center">
+                <XStack mt="2" gap="3" items="center">
                   <Text
-                    fontSize="$2"
-                    color={state === 'accepted' ? '$green10' : '$color9'}
+                    fontSize="2"
+                    color={`${state === 'accepted' ? 'green-600' : 'color8'}`}
                     textTransform="capitalize"
                   >
                     {state}
                   </Text>
-                  <Button size="$2.5" chromeless onPress={() => undo(notification)}>
+                  <Button size="8" variant="quiet" onPress={() => undo(notification)}>
                     Undo
                   </Button>
                 </XStack>
               ) : (
-                <XStack mt="$2" gap="$2">
+                <XStack mt="2" gap="2">
                   <Button
-                    size={isWeb ? '$3' : '$4'}
-                    bg="$color12"
-                    color="$color1"
+                    size={isWeb ? '3' : '4'}
+                    bg="color11"
+                    color="color1"
                     disabled={busy}
                     icon={state === 'accepting' ? <Spinner size="small" /> : undefined}
                     onPress={() => resolve(notification, 'accepted')}
@@ -111,7 +111,7 @@ export function NotificationItemActions() {
                     {state === 'accepting' ? 'Accepting…' : 'Accept'}
                   </Button>
                   <Button
-                    size={isWeb ? '$3' : '$4'}
+                    size={isWeb ? '3' : '4'}
                     disabled={busy}
                     icon={state === 'declining' ? <Spinner size="small" /> : undefined}
                     onPress={() => resolve(notification, 'declined')}

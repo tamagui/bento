@@ -44,10 +44,15 @@ import { Chip } from '../../elements/chips/components/chipsParts'
 
 const { width } = Dimensions.get('window')
 
-type WebSafeAnimationProps = { forwardedRef?: any; layout?: any; nativeID?: string }
+type WebSafeAnimationProps = {
+  forwardedRef?: any
+  layout?: any
+  nativeID?: string
+}
 
-const AnimatedViewFrame = createStyledHOC(View)<WebSafeAnimationProps>(
-  ({ forwardedRef, layout, nativeID, ...props }, ref) => (
+const AnimatedViewFrame = createStyledHOC(
+  View,
+  ({ forwardedRef, layout, nativeID, ...props }: WebSafeAnimationProps, ref) => (
     <View
       ref={forwardedRef || ref}
       {...props}
@@ -58,9 +63,13 @@ const AnimatedViewFrame = createStyledHOC(View)<WebSafeAnimationProps>(
 )
 const AnimatedView = Animated.createAnimatedComponent(AnimatedViewFrame)
 
-const HStackFrame = styled(XStack, { items: 'center', gap: '$4' })
-const AnimatedHStackFrame = createStyledHOC(HStackFrame)<WebSafeAnimationProps>(
-  ({ forwardedRef, layout, nativeID, ...props }, ref) => (
+const HStackFrame = styled(XStack, {
+  items: 'center',
+  gap: '4',
+})
+const AnimatedHStackFrame = createStyledHOC(
+  HStackFrame,
+  ({ forwardedRef, layout, nativeID, ...props }: WebSafeAnimationProps, ref) => (
     <HStackFrame
       ref={forwardedRef || ref}
       {...props}
@@ -81,13 +90,13 @@ export function Paywall() {
   }
 
   return (
-    <View flex={1} flexBasis="auto" gap="$4" bg="$color2" position="relative">
-      <LinearGradient colors={['$color0', 'color2']} position="absolute" inset={0} />
+    <View flex={1} flexBasis="auto" gap="4" bg="color2" position="relative">
+      <LinearGradient colors={['color/0', 'color2']} position="absolute" inset={0} />
 
       <ReviewListCarousel />
 
       <LinearGradient
-        colors={['$background0', '$background', '$background']}
+        colors={['background/0', 'background', 'background']}
         height={'100%'}
         position="absolute"
         l={0}
@@ -116,11 +125,11 @@ export function Paywall() {
         <PlanList />
       )}
 
-      <XStack gap="$4" justify="center" items="center" pb={SPACING * 2}>
-        <Text onPress={goToTermsOfService} fontSize="$4" color="$color8">
+      <XStack gap="4" justify="center" items="center" pb={SPACING * 2}>
+        <Text onPress={goToTermsOfService} fontSize="4" color="color7">
           Terms of Service
         </Text>
-        <Text onPress={oRestore} fontSize="$4" color="$color8">
+        <Text onPress={oRestore} fontSize="4" color="color7">
           Restore
         </Text>
       </XStack>
@@ -203,7 +212,11 @@ const PlanView = ({
   plan,
   scrollX,
   index,
-}: { plan: Plan; scrollX: SharedValue<number>; index: number }) => {
+}: {
+  plan: Plan
+  scrollX: SharedValue<number>
+  index: number
+}) => {
   const [annual, setAnnual] = useState(false)
   const [nextStep, setNextStep] = useState(false)
 
@@ -269,7 +282,7 @@ const PlanView = ({
   const PriceGradient = () => {
     return (
       <LinearGradient
-        colors={['$background', '$background0']}
+        colors={['background', 'background/0']}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
         position="absolute"
@@ -284,26 +297,13 @@ const PlanView = ({
   return (
     <AnimatedView
       style={style}
-      {...(isWeb
-        ? {
-            $gtMd: {
-              width: 500,
-            },
-
-            width: '100%',
-          }
-        : {
-            width: PLAN_ITEM_WIDTH,
-          })}
+      width={isWeb ? '100% gtMd:500px' : PLAN_ITEM_WIDTH}
       layout={CurvedTransition.duration(325).reduceMotion(ReduceMotion.System).build()}
-      bg="$background"
+      bg="background"
       borderWidth={1}
-      borderColor="$borderColor"
-      rounded="$8"
-      shadowColor="$shadowColor"
-      shadowOffset={{ width: 0, height: 0 }}
-      shadowOpacity={0.15}
-      shadowRadius={'$6'}
+      borderColor="border-color"
+      rounded="8"
+      boxShadow="0 0 32px shadow-color"
       height={nextStep ? 'auto' : '100%'}
       grow={1}
     >
@@ -313,40 +313,34 @@ const PlanView = ({
           style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
           opacity={nextStep ? 0 : 1}
           transform={[{ translateY: nextStep ? 100 : 0 }]}
-          gap="$6"
-          p="$6"
+          gap="6"
+          p="6"
         >
-          <View gap="$2">
-            <XStack gap="$2">
-              <Text flex={1} fontWeight="bold" fontSize="$8">
+          <View gap="2">
+            <XStack gap="2">
+              <Text flex={1} fontWeight="bold" fontSize="8">
                 {title}
               </Text>
-              <Text fontWeight="500" fontSize="$6">
+              <Text fontWeight="500" fontSize="6">
                 {formatCurrency(price)}/
-                <Text fontWeight="500" fontSize="$4" color="$color12">
+                <Text fontWeight="500" fontSize="4" color="color11">
                   month
                 </Text>
               </Text>
             </XStack>
-            <Text color="$color8" fontSize="$6">
+            <Text color="color7" fontSize="6">
               {description}
             </Text>
           </View>
-          <View
-            gap="$3.5"
-            borderWidth={1}
-            borderColor="$borderColor"
-            rounded="$6"
-            py="$3.5"
-          >
+          <View gap="4" borderWidth={1} borderColor="border-color" rounded="6" py="4">
             {features.map(({ name, Icon }, index) => (
               <Fragment key={name}>
-                <XStack px="$3.5" items="center" gap="$3">
-                  <Icon color="$color" />
+                <XStack px="4" items="center" gap="3">
+                  <Icon color="color" />
                   <Text>{name}</Text>
                 </XStack>
                 {index !== features.length - 1 && (
-                  <View borderTopWidth={1} borderColor="$borderColor" />
+                  <View borderTopWidth={1} borderColor="border-color" />
                 )}
               </Fragment>
             ))}
@@ -357,10 +351,10 @@ const PlanView = ({
             flexDirection="column"
             gap={0}
             height="auto"
-            rounded="$10"
+            rounded="10"
             onPress={() => setNextStep(true)}
           >
-            <Button.Text py="$3.5" fontSize="$5" fontWeight="bold">
+            <Button.Text py="4" fontSize="5" fontWeight="bold">
               Subscribe
             </Button.Text>
           </Button>
@@ -371,30 +365,28 @@ const PlanView = ({
             <View
               key="paywall-checkout"
               style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
-              opacity={1}
-              transform={[{ translateY: 0 }]}
-              enterStyle={{ opacity: 0, transform: [{ translateY: -100 }] }}
-              exitStyle={{ opacity: 0, transform: [{ translateY: -100 }] }}
-              gap="$6"
-              theme={annual ? 'green' : undefined}
-              p="$6"
+              opacity="1 enter:0 exit:0"
+              transform={`translateY(0px) enter:translateY(-100px) exit:translateY(-100px)`}
+              gap="6"
+              p="6"
               flex={1}
+              theme={annual ? 'green' : undefined}
             >
-              <View flex={1} justify="center" gap="$4" py="$4">
+              <View flex={1} justify="center" gap="4" py="4">
                 <XStack
-                  gap="$4"
+                  gap="4"
                   items="center"
                   self="center"
                   justify="space-between"
+                  rotate={annual ? '-3deg' : '0deg'}
                   key="switch"
                   style={{ transition: 'transform 150ms ease' }}
-                  rotate={annual ? '-3deg' : '0deg'}
                 >
                   <Text
-                    fontSize="$5"
+                    fontSize="5"
                     {...(!annual
-                      ? { color: '$color', fontWeight: '600' }
-                      : { color: '$black10' })}
+                      ? { color: 'color', fontWeight: '600' }
+                      : { color: 'black' })}
                   >
                     Monthly
                   </Text>
@@ -403,58 +395,55 @@ const PlanView = ({
                     onCheckedChange={(checked) => {
                       setAnnual(checked)
                     }}
-                    size={'$3'}
-                    bg={annual ? '$color' : '$color8'}
+                    size={'3'}
+                    bg={`${annual ? 'color' : 'color7'}`}
                     justify="center"
                     items="center"
                     cursor="pointer"
                     borderWidth={2}
-                    borderColor={'$colorTransparent'}
+                    borderColor="transparent"
                   >
                     {/* switch background */}
                     <Switch.Thumb
                       style={{ transition: 'transform 200ms ease' }}
-                      bg="$colorTransparent"
+                      bg="transparent"
                     >
                       <View
-                        shadowOpacity={0.5}
-                        shadowRadius="$4"
-                        shadowOffset={{
-                          width: '$4',
-                          height: 0,
-                        }}
-                        m={'$1'}
+                        boxShadow="18px 0 18px shadow-color"
+                        m="1"
                         flex={1}
                         overflow="hidden"
-                        rounded="$10"
+                        rounded="10"
                         items="center"
                         justify="center"
+                        bg="color"
                         style={{ transition: 'background-color 200ms ease' }}
-                        bg={'$color'}
                       />
                     </Switch.Thumb>
                   </Switch>
 
                   <Text
-                    fontSize="$5"
+                    fontSize="5"
                     {...(annual
-                      ? { color: '$color', fontWeight: '600' }
-                      : { color: '$black10' })}
+                      ? { color: 'color', fontWeight: '600' }
+                      : { color: 'black' })}
                   >
                     Annual
                   </Text>
                 </XStack>
 
-                <View py="$2">
+                <View py="2">
                   <View items="center" self="center" position="relative">
                     <View height={64} justify="center" items="center" overflow="hidden">
                       <Text
                         key="monthly-price"
-                        style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
+                        style={{
+                          transition: 'transform 150ms ease, opacity 150ms ease',
+                        }}
                         text="center"
-                        fontSize="$10"
+                        fontSize="10"
                         fontWeight="bold"
-                        px="$2"
+                        px="2"
                         opacity={annual ? 0 : 1}
                         transform={[{ translateY: annual ? -56 : 0 }]}
                       >
@@ -463,9 +452,11 @@ const PlanView = ({
 
                       <Text
                         key="annual-price"
-                        style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
+                        style={{
+                          transition: 'transform 150ms ease, opacity 150ms ease',
+                        }}
                         text="center"
-                        fontSize="$10"
+                        fontSize="10"
                         fontWeight="bold"
                         transform={[{ translateY: !annual ? 56 : 0 }]}
                         opacity={annual ? 1 : 0}
@@ -487,30 +478,24 @@ const PlanView = ({
                       </View>
                     </View>
 
-                    <Text color="$color8" text="center" fontSize="$4">
+                    <Text color="color7" text="center" fontSize="4">
                       Monthly
                     </Text>
 
                     {annual && (
                       <Chip
-                        size="$3"
+                        size="3"
                         circular
                         position="absolute"
-                        r="$-6"
-                        t="$-2"
+                        r="-6"
+                        t="-2"
                         rotate="25deg"
-                        style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
-                        opacity={1}
-                        transform={[{ translateY: 0 }, { translateX: 0 }]}
-                        enterStyle={{
-                          opacity: 0,
-                          transform: [{ translateY: -10 }, { translateX: 10 }],
+                        opacity="1 enter:0 exit:0"
+                        transform={`translateY(0px) translateX(0px) enter:translateY(-10px) translateX(10px) exit:translateY(-10px) translateX(10px)`}
+                        px="3"
+                        style={{
+                          transition: 'transform 150ms ease, opacity 150ms ease',
                         }}
-                        exitStyle={{
-                          opacity: 0,
-                          transform: [{ translateY: -10 }, { translateX: 10 }],
-                        }}
-                        px="$3"
                       >
                         <Chip.Text fontWeight="600">
                           -{Math.round(((price - yearPrice) / price) * 100)}%
@@ -520,25 +505,25 @@ const PlanView = ({
                   </View>
                 </View>
 
-                <Text text="center" fontSize="$6">
+                <Text text="center" fontSize="6">
                   {description}
                 </Text>
               </View>
 
-              <Button flexDirection="column" gap={0} height="auto" rounded="$10">
-                <Button.Text py="$3.5" fontSize="$5" fontWeight="bold">
+              <Button flexDirection="column" gap={0} height="auto" rounded="10">
+                <Button.Text py="4" fontSize="5" fontWeight="bold">
                   Checkout
                 </Button.Text>
               </Button>
             </View>
             <Button
               self="flex-end"
-              circular
-              bg="$colorTransparent"
-              onPress={() => setNextStep(false)}
+              bg="transparent"
               position="absolute"
-              t="$4"
-              r="$4"
+              t="4"
+              r="4"
+              circular
+              onPress={() => setNextStep(false)}
             >
               <Button.Icon>
                 <X size={24} />
@@ -588,20 +573,12 @@ const ReviewListCarousel = () => {
   return (
     <View
       style={{ transition: 'transform 250ms ease, opacity 150ms ease' }}
-      opacity={1}
-      transform={[{ translateY: 0 }]}
-      enterStyle={{
-        opacity: 0,
-        transform: [{ translateY: 50 }],
-      }}
-      exitStyle={{
-        opacity: 0,
-        transform: [{ translateY: 50 }],
-      }}
+      opacity="1 enter:0 exit:0"
+      transform={`translateY(0px) enter:translateY(50px) exit:translateY(50px)`}
       flex={1}
       flexBasis="auto"
       rotate="-10deg"
-      gap="$4"
+      gap="4"
       key="review-list"
     >
       <AnimatedHStack style={animatedSlideLeft}>
@@ -629,25 +606,25 @@ const RatingView = ({ reviewer }: { reviewer: Reviewer }) => {
   const { color4 } = useTheme()
   return (
     <View
-      rounded="$4"
-      gap="$2"
+      rounded="4"
+      gap="2"
       overflow="hidden"
       width="70%"
       maxW={REVIEW_WIDTH}
       height="100%"
-      p="$3.5"
-      bg="$color1"
+      p="4"
+      bg="color1"
     >
-      <XStack items="center" gap="$2">
-        <Text fontSize="$5" fontWeight="bold" numberOfLines={1} flex={1}>
+      <XStack items="center" gap="2">
+        <Text fontSize="5" fontWeight="bold" flex={1} numberOfLines={1}>
           {reviewer.name}
         </Text>
-        <XStack items="center" gap="$1">
+        <XStack items="center" gap="1">
           {Array.from({ length: 5 }).map((_, index) => {
             const active = index < reviewer.rating
             return (
               <Star
-                size="$1"
+                size="1"
                 key={index}
                 color="transparent"
                 fill={active ? '#FFCF50' : color4?.val}

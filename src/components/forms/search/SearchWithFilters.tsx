@@ -29,22 +29,23 @@ export function SearchWithFilters() {
   )
 
   return (
-    <YStack width="100%" maxW={860} self="center" gap="$3">
-      <XStack gap="$3" flexWrap="wrap">
+    <YStack width="100%" maxW={860} self="center" gap="3">
+      <XStack gap="3" flexWrap="wrap">
         <XStack
           flex={1}
           minW={260}
           items="center"
-          gap="$2"
-          px="$3"
-          rounded="$6"
+          gap="2"
+          px="3"
+          rounded="6"
           borderWidth={1}
-          borderColor="$borderColor"
-          bg="$background"
+          borderColor="border-color"
+          bg="background"
         >
-          <Search size={19} color="$color9" aria-hidden />
+          <Search size={19} color="color8" aria-hidden />
           <Input
-            unstyled
+            bg="transparent"
+            borderWidth={0}
             flex={1}
             height={46}
             value={query}
@@ -54,17 +55,16 @@ export function SearchWithFilters() {
           />
         </XStack>
         <Select value={category} onValueChange={setCategory} disablePreventBodyScroll>
-          <Select.Trigger
-            width={180}
-            iconAfter={ChevronDown}
-            aria-label="Filter search category"
-          >
+          <Select.Trigger width={180} aria-label="Filter search category">
             <Select.Value />
+            <Select.Icon>
+              <ChevronDown />
+            </Select.Icon>
           </Select.Trigger>
           <Select.Content>
-            <Select.Viewport minW={200} p="$1" rounded="$5" bg="$background">
+            <Select.Viewport minW={200} p="1" rounded="5" bg="background">
               {categories.map((option, index) => (
-                <Select.Item key={option} value={option} index={index} rounded="$3">
+                <Select.Item key={option} value={option} rounded="3">
                   <Select.ItemText>{option}</Select.ItemText>
                   <Select.ItemIndicator ml="auto">
                     <Check size={15} />
@@ -75,32 +75,32 @@ export function SearchWithFilters() {
           </Select.Content>
         </Select>
       </XStack>
-      <Text color="$color9" fontSize="$2" letterSpacing={0} aria-live="polite">
+      <Text color="color8" fontSize="2" letterSpacing={0} aria-live="polite">
         {results.length} result{results.length === 1 ? '' : 's'} in{' '}
         {category.toLowerCase()}
         {query.trim() ? (
           <>
             {' '}
             for{' '}
-            <Text fontWeight="800" color="$color11">
+            <Text fontWeight="800" color="color10">
               “{query.trim()}”
             </Text>
           </>
         ) : null}
       </Text>
-      <YStack gap="$1">
+      <YStack gap="1">
         {results.slice(0, 5).map((item) => (
           <XStack
             key={item.title}
             justify="space-between"
             items="center"
-            px="$3"
-            py="$2.5"
-            rounded="$4"
-            bg="$color2"
+            px="3"
+            py="2-5"
+            rounded="4"
+            bg="color2"
           >
-            <Text color="$color11">{item.title}</Text>
-            <Text fontSize="$1" color="$color9" textTransform="uppercase">
+            <Text color="color10">{item.title}</Text>
+            <Text fontSize="1" color="color8" textTransform="uppercase">
               {item.category}
             </Text>
           </XStack>

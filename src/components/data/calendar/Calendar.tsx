@@ -42,17 +42,17 @@ const categoryStyles: Record<
   EventCategory,
   { soft: ColorTokens; text: ColorTokens; dot: ColorTokens }
 > = {
-  Design: { soft: '$purple4', text: '$purple11', dot: '$purple9' },
-  Focus: { soft: '$blue4', text: '$blue11', dot: '$blue9' },
-  Personal: { soft: '$orange4', text: '$orange11', dot: '$orange9' },
-  Team: { soft: '$green4', text: '$green11', dot: '$green9' },
+  Design: { soft: 'purple-200', text: 'purple-700', dot: 'purple-500' },
+  Focus: { soft: 'blue-200', text: 'blue-700', dot: 'blue-500' },
+  Personal: { soft: 'orange-200', text: 'orange-700', dot: 'orange-500' },
+  Team: { soft: 'green-200', text: 'green-700', dot: 'green-500' },
 }
 
 const focusRing = {
-  outlineColor: '$outlineColor',
-  outlineOffset: 2,
-  outlineStyle: 'solid' as const,
-  outlineWidth: 2,
+  outlineColor: 'focus-visible:outline-color',
+  outlineOffset: 'focus-visible:2px',
+  outlineStyle: 'focus-visible:solid' as const,
+  outlineWidth: 'focus-visible:2px',
 } as const
 
 const eventCountLabel = (count: number) => (count === 1 ? '1 event' : `${count} events`)
@@ -64,7 +64,7 @@ export function CalendarMonth() {
   )
 
   return (
-    <YStack width="100%" maxW={960} self="center" gap="$4" py="$5">
+    <YStack width="100%" maxW={960} self="center" gap="4" py="5">
       <DemoHeading
         title="Project calendar"
         description="Navigate with arrow keys and press Enter to select a day."
@@ -75,7 +75,7 @@ export function CalendarMonth() {
         onSelectDate={setSelectedDate}
         onVisibleMonthChange={setVisibleMonth}
       />
-      <Text color="$color10" fontSize="$3" aria-live="polite">
+      <Text color="color9" fontSize="3" aria-live="polite">
         Selected: {getLongDateLabel(selectedDate)}
       </Text>
     </YStack>
@@ -93,19 +93,19 @@ export function AgendaList() {
   )
 
   return (
-    <YStack width="100%" maxW={760} self="center" gap="$4" py="$5">
+    <YStack width="100%" maxW={760} self="center" gap="4" py="5">
       <XStack
         items="flex-start"
         justify="space-between"
-        gap="$3"
+        gap="3"
         flexDirection={sm ? 'column' : 'row'}
       >
         <DemoHeading
           title="Upcoming agenda"
           description="A seven-day view with time, category, and location context."
         />
-        <View bg="$color3" rounded="$10" px="$3" py="$1.5" self="flex-start">
-          <Text color="$color11" fontSize="$2" fontWeight="700">
+        <View bg="color3" rounded="10" px="3" py="1" self="flex-start">
+          <Text color="color10" fontSize="2" fontWeight="700">
             {eventCountLabel(eventCount)}
           </Text>
         </View>
@@ -130,7 +130,7 @@ export function CalendarAgendaSplit() {
   }
 
   return (
-    <YStack width="100%" maxW={1180} self="center" gap="$4" py="$5">
+    <YStack width="100%" maxW={1180} self="center" gap="4" py="5">
       <DemoHeading
         title="Calendar and agenda"
         description={
@@ -143,10 +143,10 @@ export function CalendarAgendaSplit() {
       {sm ? (
         <YStack
           borderWidth={1}
-          borderColor="$color5"
-          rounded="$7"
+          borderColor="color5"
+          rounded="7"
           overflow="hidden"
-          bg="$color1"
+          bg="color1"
         >
           <WeekStrip selectedDate={selectedDate} onSelectDate={selectDate} />
           <Separator />
@@ -155,13 +155,13 @@ export function CalendarAgendaSplit() {
       ) : (
         <XStack
           borderWidth={1}
-          borderColor="$color5"
-          rounded="$8"
+          borderColor="color5"
+          rounded="8"
           overflow="hidden"
-          bg="$color1"
+          bg="color1"
           items="stretch"
         >
-          <YStack flex={1} minW={0} p="$4">
+          <YStack flex={1} minW={0} p="4">
             <MonthCalendar
               embedded
               selectedDate={selectedDate}
@@ -182,13 +182,19 @@ export function CalendarAgendaSplit() {
 
 CalendarAgendaSplit.fileName = 'CalendarAgendaSplit'
 
-function DemoHeading({ title, description }: { title: string; description: string }) {
+function DemoHeading({
+  title,
+  description,
+}: {
+  title: string
+  description: string
+}) {
   return (
-    <YStack gap="$1" minW={0} maxW="100%" flex={1}>
-      <Text color="$color12" fontSize="$7" fontWeight="700">
+    <YStack gap="1" minW={0} maxW="100%" flex={1}>
+      <Text color="color11" fontSize="7" fontWeight="700">
         {title}
       </Text>
-      <Paragraph color="$color10">{description}</Paragraph>
+      <Paragraph color="color9">{description}</Paragraph>
     </YStack>
   )
 }
@@ -285,10 +291,10 @@ function MonthCalendar({
     <YStack
       width="100%"
       borderWidth={embedded ? 0 : 1}
-      borderColor="$color5"
-      rounded={embedded ? 0 : '$8'}
+      borderColor="color5"
+      rounded={embedded ? 0 : '8'}
       overflow="hidden"
-      bg="$color1"
+      bg="color1"
     >
       <CalendarHeader
         label={getMonthLabel(visibleMonth)}
@@ -319,9 +325,9 @@ function MonthCalendar({
       >
         <XStack
           role={isWeb ? 'row' : undefined}
-          bg="$color2"
+          bg="color2"
           borderBottomWidth={1}
-          borderColor="$color4"
+          borderColor="color4"
         >
           {weekdayLabels.map((weekday) => (
             <View
@@ -331,9 +337,9 @@ function MonthCalendar({
               flexBasis={0}
               minW={0}
               items="center"
-              py="$2"
+              py="2"
             >
-              <Text color="$color10" fontSize="$1" fontWeight="700">
+              <Text color="color9" fontSize="1" fontWeight="700">
                 {weekday}
               </Text>
             </View>
@@ -345,7 +351,7 @@ function MonthCalendar({
             key={dateKey(week[0])}
             role={isWeb ? 'row' : undefined}
             borderBottomWidth={rowIndex < rows.length - 1 ? 1 : 0}
-            borderColor="$color4"
+            borderColor="color4"
           >
             {week.map((date, columnIndex) => (
               <MonthDay
@@ -382,20 +388,20 @@ function CalendarHeader({
   onNext: () => void
 }) {
   return (
-    <XStack minH={64} px="$3" items="center" justify="space-between" gap="$3">
+    <XStack minH={64} px="3" items="center" justify="space-between" gap="3">
       <Button
         aria-label={previousLabel}
         circular
         hitSlop={isWeb ? undefined : 8}
         icon={ChevronLeft}
         onPress={onPrevious}
-        size={isWeb ? '$3' : '$4'}
+        size={isWeb ? '3' : '4'}
         variant="outlined"
-        focusVisibleStyle={focusRing}
+        {...focusRing}
       />
-      <XStack gap="$2" items="center">
-        <CalendarDays size={18} color="$color10" aria-hidden />
-        <Text color="$color12" fontSize="$5" fontWeight="700">
+      <XStack gap="2" items="center">
+        <CalendarDays size={18} color="color9" aria-hidden />
+        <Text color="color11" fontSize="5" fontWeight="700">
           {label}
         </Text>
       </XStack>
@@ -405,9 +411,9 @@ function CalendarHeader({
         hitSlop={isWeb ? undefined : 8}
         icon={ChevronRight}
         onPress={onNext}
-        size={isWeb ? '$3' : '$4'}
+        size={isWeb ? '3' : '4'}
         variant="outlined"
-        focusVisibleStyle={focusRing}
+        {...focusRing}
       />
     </XStack>
   )
@@ -448,52 +454,53 @@ function MonthDay({
       role={isWeb ? ('gridcell' as any) : undefined}
       aria-selected={isWeb ? selected : undefined}
       borderLeftWidth={borderLeft ? 1 : 0}
-      borderColor="$color4"
+      borderColor="color4"
       flex={1}
       flexBasis={0}
       height={compact ? 72 : 96}
       minW={0}
     >
       <Button
-        unstyled
+        variant="quiet"
         render={isWeb ? <button /> : undefined}
-        // roving tab stop (needs tamagui >= 2.4.4 for tabIndex to pass through)
         tabIndex={focused ? 0 : -1}
         aria-current={today ? 'date' : undefined}
         aria-label={`${getLongDateLabel(date)}${eventLabel}`}
         data-calendar-day={dateKey(date)}
-        bg={selected ? '$blue3' : currentMonth ? '$color1' : '$color2'}
-        borderColor={selected ? '$blue9' : '$color4'}
+        bg={`${selected ? 'blue-100' : currentMonth ? 'color1' : 'color2'} hover:color3`}
+        borderColor={`${selected ? 'blue-500' : 'color4'}`}
         borderWidth={selected ? 2 : 0}
         cursor="pointer"
         width="100%"
         height="100%"
         minW={0}
         opacity={currentMonth ? 1 : 0.52}
-        p={compact ? '$1' : '$2'}
+        p={`${compact ? '1' : '2'}`}
         rounded={0}
         transition="100ms"
         items="stretch"
         justify="flex-start"
+        scale="press:0.98"
+        outlineColor={
+          today && !selected
+            ? 'blue-500 focus-visible:outline-color'
+            : 'focus-visible:outline-color'
+        }
+        outlineOffset={
+          today && !selected ? '-3px focus-visible:2px' : 'focus-visible:2px'
+        }
+        outlineStyle={
+          today && !selected ? 'solid focus-visible:solid' : 'focus-visible:solid'
+        }
+        outlineWidth={today && !selected ? '2px focus-visible:2px' : 'focus-visible:2px'}
         onFocus={onFocus}
         onKeyDown={onKeyDown}
         onPress={onSelect}
-        hoverStyle={{ bg: '$color3' }}
-        pressStyle={{ scale: 0.98 }}
-        focusVisibleStyle={focusRing}
-        {...(today && !selected
-          ? {
-              outlineColor: '$blue8',
-              outlineOffset: -3,
-              outlineStyle: 'solid',
-              outlineWidth: 2,
-            }
-          : {})}
       >
         <Text
           self="flex-end"
-          color={selected ? '$blue11' : today ? '$color12' : '$color10'}
-          fontSize="$2"
+          color={`${selected ? 'blue-700' : today ? 'color11' : 'color9'}`}
+          fontSize="2"
           fontWeight={selected || today ? '800' : '600'}
           lineHeight={16}
         >
@@ -501,29 +508,29 @@ function MonthDay({
         </Text>
         {compact ? (
           // narrow cells: dots + count read far better than truncated 8px text
-          <XStack gap={3} mt="$1" items="center" justify="center" minH={10}>
+          <XStack gap={3} mt="1" items="center" justify="center" minH={10}>
             {events.slice(0, 3).map((calendarEvent) => (
               <View
                 key={calendarEvent.id}
                 width={5}
                 height={5}
-                rounded="$10"
+                rounded="10"
                 bg={categoryStyles[calendarEvent.category].dot}
               />
             ))}
             {events.length > 3 && (
-              <Text color="$color10" fontSize={10} fontWeight="700">
+              <Text color="color9" fontSize={10} fontWeight="700">
                 +{events.length - 3}
               </Text>
             )}
           </XStack>
         ) : (
-          <YStack gap={2} mt="$1" overflow="hidden">
+          <YStack gap={2} mt="1" overflow="hidden">
             {visibleEvents.map((calendarEvent) => (
               <EventChip key={calendarEvent.id} calendarEvent={calendarEvent} />
             ))}
             {!!hiddenCount && (
-              <Text color="$color10" fontSize={10} fontWeight="700" numberOfLines={1}>
+              <Text color="color9" fontSize={10} fontWeight="700" numberOfLines={1}>
                 +{hiddenCount} more
               </Text>
             )}
@@ -537,7 +544,7 @@ function MonthDay({
 function EventChip({ calendarEvent }: { calendarEvent: CalendarEvent }) {
   const colors = categoryStyles[calendarEvent.category]
   return (
-    <View bg={colors.soft} rounded="$2" px="$1.5" py={1} overflow="hidden">
+    <View bg={colors.soft} rounded="2" px="1" py={1} overflow="hidden">
       <Text
         color={colors.text}
         fontSize={10}
@@ -553,14 +560,8 @@ function EventChip({ calendarEvent }: { calendarEvent: CalendarEvent }) {
 
 function AgendaSurface({ days }: { days: Date[] }) {
   return (
-    <ScrollView
-      maxH={620}
-      borderWidth={1}
-      borderColor="$color5"
-      rounded="$8"
-      bg="$color1"
-    >
-      <YStack pb="$3">
+    <ScrollView maxH={620} borderWidth={1} borderColor="color5" rounded="8" bg="color1">
+      <YStack pb="3">
         {days.map((date) => (
           <AgendaDay key={dateKey(date)} date={date} />
         ))}
@@ -577,23 +578,23 @@ function AgendaDay({ date }: { date: Date }) {
         position="sticky"
         t={0}
         z={10}
-        bg="$color2"
+        bg="color2"
         borderBottomWidth={1}
-        borderColor="$color4"
+        borderColor="color4"
         items="center"
         justify="space-between"
-        px="$4"
-        py="$2.5"
+        px="4"
+        py="2-5"
       >
-        <Text color="$color12" fontSize="$3" fontWeight="800">
+        <Text color="color11" fontSize="3" fontWeight="800">
           {getAgendaHeading(date)}
         </Text>
-        <Text color="$color10" fontSize="$2">
+        <Text color="color9" fontSize="2">
           {date.getDate()} {getMonthLabel(date).split(' ')[0].slice(0, 3)}
         </Text>
       </XStack>
       {events.length ? (
-        <YStack px="$4" py="$2">
+        <YStack px="4" py="2">
           {events.map((calendarEvent, index) => (
             <AgendaEventRow
               key={calendarEvent.id}
@@ -618,33 +619,33 @@ function AgendaEventRow({
 }) {
   const colors = categoryStyles[calendarEvent.category]
   return (
-    <XStack minH={88} gap="$3">
-      <YStack width={72} pt="$3">
-        <Text color="$color12" fontSize="$2" fontWeight="700">
+    <XStack minH={88} gap="3">
+      <YStack width={72} pt="3">
+        <Text color="color11" fontSize="2" fontWeight="700">
           {calendarEvent.start}
         </Text>
-        <Text color="$color9" fontSize="$1">
+        <Text color="color8" fontSize="1">
           {calendarEvent.end}
         </Text>
       </YStack>
-      <YStack width={14} items="center" pt="$4">
-        <View width={10} height={10} rounded="$10" bg={colors.dot} />
-        {!last && <View flex={1} width={2} bg="$color4" mt="$1" />}
+      <YStack width={14} items="center" pt="4">
+        <View width={10} height={10} rounded="10" bg={colors.dot} />
+        {!last && <View flex={1} width={2} bg="color4" mt="1" />}
       </YStack>
-      <YStack flex={1} minW={0} py="$3" gap="$1.5">
-        <XStack gap="$2" items="center" flexWrap="wrap">
-          <Text color="$color12" fontSize="$4" fontWeight="700" numberOfLines={1}>
+      <YStack flex={1} minW={0} py="3" gap="1">
+        <XStack gap="2" items="center" flexWrap="wrap">
+          <Text color="color11" fontSize="4" fontWeight="700" numberOfLines={1}>
             {calendarEvent.title}
           </Text>
-          <View bg={colors.soft} rounded="$10" px="$2" py={2}>
-            <Text color={colors.text} fontSize="$1" fontWeight="700">
+          <View bg={colors.soft} rounded="10" px="2" py={2}>
+            <Text color={colors.text} fontSize="1" fontWeight="700">
               {calendarEvent.category}
             </Text>
           </View>
         </XStack>
-        <XStack gap="$1.5" items="center">
-          <MapPin size={13} color="$color9" aria-hidden />
-          <Text color="$color10" fontSize="$2" numberOfLines={1}>
+        <XStack gap="1" items="center">
+          <MapPin size={13} color="color8" aria-hidden />
+          <Text color="color9" fontSize="2" numberOfLines={1}>
             {calendarEvent.location}
           </Text>
         </XStack>
@@ -657,21 +658,21 @@ function DayAgendaPanel({ date }: { date: Date }) {
   const events = getEventsForDate(date)
   return (
     <YStack minH={520} flex={1}>
-      <YStack px="$4" py="$4" gap="$1" bg="$color2">
-        <Text color="$color10" fontSize="$2" fontWeight="700" textTransform="uppercase">
+      <YStack px="4" py="4" gap="1" bg="color2">
+        <Text color="color9" fontSize="2" fontWeight="700" textTransform="uppercase">
           {getAgendaHeading(date)}
         </Text>
-        <Text color="$color12" fontSize="$6" fontWeight="800">
+        <Text color="color11" fontSize="6" fontWeight="800">
           {getLongDateLabel(date)}
         </Text>
-        <Text color="$color10" fontSize="$2" aria-live="polite">
+        <Text color="color9" fontSize="2" aria-live="polite">
           {events.length ? `${events.length} scheduled` : 'Your day is open'}
         </Text>
       </YStack>
       <Separator />
       {events.length ? (
         <ScrollView flex={1}>
-          <YStack px="$4" py="$2">
+          <YStack px="4" py="2">
             {events.map((calendarEvent, index) => (
               <AgendaEventRow
                 key={calendarEvent.id}
@@ -697,17 +698,17 @@ function AgendaEmptyState({ compact }: { compact?: boolean }) {
       minH={compact ? 112 : 260}
       items="center"
       justify="center"
-      gap="$2"
-      px="$5"
-      py={compact ? '$4' : '$7'}
+      gap="2"
+      px="5"
+      py={`${compact ? '4' : '7'}`}
     >
-      <View bg="$color3" rounded="$10" p="$2.5">
-        <CalendarX2 size={compact ? 20 : 28} color="$color9" aria-hidden />
+      <View bg="color3" rounded="10" p="2-5">
+        <CalendarX2 size={compact ? 20 : 28} color="color8" aria-hidden />
       </View>
-      <Text color="$color12" fontSize={compact ? '$3' : '$5'} fontWeight="700">
+      <Text color="color11" fontSize={`${compact ? '3' : '5'}`} fontWeight="700">
         No events scheduled
       </Text>
-      <Text color="$color10" fontSize="$2" text="center" maxW={280}>
+      <Text color="color9" fontSize="2" text="center" maxW={280}>
         Keep the time open or add a focus block.
       </Text>
     </YStack>
@@ -735,7 +736,7 @@ function WeekStrip({
   }
 
   return (
-    <YStack bg="$color1">
+    <YStack bg="color1">
       <CalendarHeader
         label={getMonthLabel(selectedDate)}
         previousLabel="Previous week"
@@ -745,9 +746,9 @@ function WeekStrip({
       />
       <XStack
         ref={stripRef as any}
-        px="$2"
-        pb="$3"
-        gap="$1"
+        px="2"
+        pb="3"
+        gap="1"
         aria-label="Choose a day"
         render={isWeb ? <div role="listbox" tabIndex={-1} /> : undefined}
       >
@@ -758,7 +759,7 @@ function WeekStrip({
           return (
             <Button
               key={dateKey(date)}
-              unstyled
+              variant="quiet"
               render={
                 isWeb ? <button role="option" aria-selected={selected} /> : undefined
               }
@@ -766,10 +767,10 @@ function WeekStrip({
               aria-label={`${getLongDateLabel(date)}, ${eventCountLabel(events.length)}`}
               aria-selected={isWeb ? undefined : selected}
               data-calendar-week-day={dateKey(date)}
-              bg={selected ? '$blue3' : '$color2'}
-              borderColor={selected ? '$blue9' : '$color4'}
+              bg={`${selected ? 'blue-100' : 'color2'} hover:color3`}
+              borderColor={`${selected ? 'blue-500' : 'color4'}`}
               borderWidth={selected ? 2 : 1}
-              rounded="$5"
+              rounded="5"
               flex={1}
               minW={0}
               height={72}
@@ -777,18 +778,17 @@ function WeekStrip({
               justify="center"
               gap={2}
               transition="100ms"
+              scale="press:0.98"
+              {...focusRing}
               onKeyDown={(event) => handleKeyDown(event, date)}
               onPress={() => onSelectDate(date)}
-              hoverStyle={{ bg: '$color3' }}
-              pressStyle={{ scale: 0.98 }}
-              focusVisibleStyle={focusRing}
             >
-              <Text color="$color10" fontSize={9} fontWeight="700">
+              <Text color="color9" fontSize={9} fontWeight="700">
                 {weekdayLabels[(date.getDay() + 6) % 7].slice(0, 2)}
               </Text>
               <Text
-                color={selected ? '$blue11' : today ? '$color12' : '$color11'}
-                fontSize="$4"
+                color={`${selected ? 'blue-700' : today ? 'color11' : 'color10'}`}
+                fontSize="4"
                 fontWeight={selected || today ? '800' : '600'}
               >
                 {date.getDate()}
@@ -799,7 +799,7 @@ function WeekStrip({
                     key={calendarEvent.id}
                     width={4}
                     height={4}
-                    rounded="$10"
+                    rounded="10"
                     bg={categoryStyles[calendarEvent.category].dot}
                   />
                 ))}

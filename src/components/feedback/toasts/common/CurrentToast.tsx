@@ -1,11 +1,10 @@
 import { CheckCircle2, Info, X, XCircle } from '@tamagui/lucide-icons-2'
-import { Toast, type ToastItemRenderProps } from '@tamagui/toast'
-import { Button, Text, XStack, YStack, isWeb } from 'tamagui'
+import { Text, Toast, XStack, YStack, isWeb, type ToastItemRenderProps } from 'tamagui'
 
 const icons: Record<string, any> = {
-  success: <CheckCircle2 size={18} color="$green10" />,
-  error: <XCircle size={18} color="$red10" />,
-  info: <Info size={18} color="$blue10" />,
+  success: <CheckCircle2 size={18} color="green-600" />,
+  error: <XCircle size={18} color="red-600" />,
+  info: <Info size={18} color="blue-600" />,
 }
 
 export type ToastCustomData = {
@@ -28,58 +27,55 @@ export const renderBentoToast = ({ toast: t, index }: ToastItemRenderProps) => {
   } = (t.data as ToastCustomData | undefined) ?? {}
 
   const title = typeof t.title === 'function' ? t.title() : t.title
-  const description = typeof t.description === 'function' ? t.description() : t.description
+  const description =
+    typeof t.description === 'function' ? t.description() : t.description
 
   return (
     <Toast.Item
       key={t.id}
       toast={t}
       index={index}
-      rounded="$6"
-      bg="$color1"
+      rounded="6"
+      bg="color1"
       borderWidth={1}
-      borderColor="$color5"
-      shadowColor="$shadowColor"
-      shadowRadius={12}
-      shadowOffset={{ width: 0, height: 4 }}
-      px="$3.5"
-      py="$3"
+      borderColor="color5"
+      boxShadow="0 4px 12px shadow-color"
+      px="4"
+      py="3"
     >
       {/* explicit width: on native, flex children of a content-sized row collapse to 0 */}
-      <XStack items="center" gap="$3" width={340} maxW="100%">
+      <XStack items="center" gap="3" width={340} maxW="100%">
         {icons[variant]}
-        <YStack flex={1} gap="$0.5">
+        <YStack flex={1} gap="px">
           <Toast.Title>
-            <Text fontWeight="600" fontSize="$3" color="$color12">
+            <Text fontWeight="600" fontSize="3" color="color11">
               {title}
             </Text>
           </Toast.Title>
           {!!description && (
             <Toast.Description>
-              <Text fontSize="$2" color="$color10">
+              <Text fontSize="2" color="color9">
                 {description}
               </Text>
             </Toast.Description>
           )}
         </YStack>
         {!!actionLabel && !!onAction && (
-          <Toast.Action asChild altText={actionLabel}>
-            {/* Toast.Close defaults aria-label="Close"; name it after the action */}
-            <Button aria-label={actionLabel} size="$2.5" onPress={onAction}>
+          <Toast.Action aria-label={actionLabel} height={32} onPress={onAction}>
+            <Text fontSize="2" fontWeight="600">
               {actionLabel}
-            </Button>
+            </Text>
           </Toast.Action>
         )}
-        <Toast.Close asChild>
-          <Button
-            aria-label="Dismiss"
-            size="$2"
-            circular
-            variant="quiet"
-            hitSlop={isWeb ? undefined : 12}
-          >
-            <X size={14} color="$color10" />
-          </Button>
+        <Toast.Close
+          aria-label="Dismiss"
+          width={28}
+          height={28}
+          items="center"
+          justify="center"
+          hitSlop={isWeb ? undefined : 12}
+        >
+          <X size={14} color="color9" />
         </Toast.Close>
       </XStack>
     </Toast.Item>

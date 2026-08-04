@@ -13,13 +13,12 @@ export const PaginationControl = () => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % pageNum)
   }
 
-  const paginationWidth =
-    (2 * getTokenValue('$2') + (pageNum - 1) * getTokenValue('$0.75')) * 10
+  const paginationWidth = (2 * getTokenValue('2', 'radius') + (pageNum - 1) * 1.5) * 10
 
   return (
-    <View flex={1} flexDirection="row" items="center" justify="center" gap="$3">
+    <View flex={1} flexDirection="row" items="center" justify="center" gap="3">
       <Button
-        size="$4"
+        size="4"
         circular
         icon={ArrowLeft}
         scaleIcon={1.5}
@@ -29,27 +28,27 @@ export const PaginationControl = () => {
         flexDirection="row"
         items="center"
         justify="center"
-        gap="$3"
-        bg="$color5"
+        gap="3"
+        bg="color5"
         width={paginationWidth}
-        height="$4"
-        px="$4"
-        rounded="$8"
+        height="4"
+        px="4"
+        rounded="8"
       >
         {Array.from({ length: pageNum }).map((_, index) => (
           <View
             key={index}
-            width={activeIndex === index ? '$2' : '$0.75'}
-            height="$0.75"
-            rounded="$5"
-            bg={activeIndex === index ? '$color12' : '$color10'}
+            width={activeIndex === index ? '7' : '2'}
+            height="2"
+            rounded="5"
+            bg={`${activeIndex === index ? 'color11' : 'color9'}`}
             style={{ transition: 'background-color 200ms ease' }}
             animateOnly={['width', 'backgroundColor']}
           />
         ))}
       </View>
       <Button
-        size="$4"
+        size="4"
         circular
         icon={ArrowRight}
         scaleIcon={1.5}

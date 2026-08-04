@@ -2,19 +2,12 @@ import { Text, ToggleGroup, View, styled } from 'tamagui'
 
 const Item = styled(ToggleGroup.Item, {
   flex: 1,
-  py: '$2.5',
-  hoverStyle: {
-    backgroundColor: '$color3',
-  },
-  pressStyle: {
-    backgroundColor: '$color4',
-  },
-  focusVisibleStyle: {
-    outlineWidth: 2,
-    outlineStyle: 'solid',
-    outlineColor: '$color8',
-    outlineOffset: -2,
-  },
+  py: '2-5',
+  backgroundColor: 'hover:color3 press:color4',
+  outlineWidth: 'focus-visible:2px',
+  outlineStyle: 'focus-visible:solid',
+  outlineColor: 'focus-visible:color7',
+  outlineOffset: 'focus-visible:-2px',
 })
 
 const directions = ['left', 'right', 'top', 'bottom'] as const
@@ -28,7 +21,7 @@ export function DirectionSlide({
   setDirection: (direction: Direction) => void
 }) {
   return (
-    <View flexDirection="row" gap="$2">
+    <View flexDirection="row" gap="2">
       <ToggleGroup
         orientation="horizontal"
         flexDirection="row"
@@ -48,7 +41,7 @@ export function DirectionSlide({
               key={dir}
             >
               <Text
-                color={active ? '$color' : '$color11'}
+                color={`${active ? 'color' : 'color10'}`}
                 fontWeight="600"
                 textTransform="capitalize"
               >

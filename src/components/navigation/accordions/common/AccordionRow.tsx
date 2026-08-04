@@ -26,10 +26,10 @@ export function AccordionRow({
   return (
     <Accordion.Item
       value={entry.value}
-      rounded={bordered ? '$6' : undefined}
+      rounded={bordered ? '6' : undefined}
       borderWidth={bordered ? 1 : 0}
-      borderColor="$borderColor"
-      bg={bordered ? '$background' : 'transparent'}
+      borderColor="border-color"
+      bg={`${bordered ? 'background' : 'transparent'}`}
       overflow="hidden"
     >
       <Accordion.Header>
@@ -38,25 +38,25 @@ export function AccordionRow({
           width="100%"
           justify="space-between"
           items="center"
-          gap="$3"
-          px="$4"
-          py="$3.5"
-          bg="transparent"
+          gap="3"
+          px="4"
+          py="4"
+          bg="transparent hover:color2"
           borderWidth={0}
-          hoverStyle={{ bg: '$color2' }}
-          focusVisibleStyle={{ outlineWidth: 2, outlineColor: '$color8' }}
+          outlineWidth="focus-visible:2px"
+          outlineColor="focus-visible:color7"
         >
-          <Text fontWeight="600" fontSize="$5" letterSpacing={0}>
+          <Text fontWeight="600" fontSize="5" letterSpacing={0}>
             {entry.title}
           </Text>
           <View rotate={open ? '180deg' : '0deg'} style={ease('transform')}>
-            <ChevronDown size={18} color="$color10" />
+            <ChevronDown size={18} color="color9" />
           </View>
         </Accordion.Trigger>
       </Accordion.Header>
-      <Accordion.Content overflow="hidden" px="$4" pb="$4" style={ease('height')}>
+      <Accordion.Content overflow="hidden" px="4" pb="4" style={ease('height')}>
         {typeof entry.content === 'string' ? (
-          <Paragraph color="$color10" lineHeight="$5">
+          <Paragraph color="color9" lineHeight="5">
             {entry.content}
           </Paragraph>
         ) : (
@@ -88,7 +88,7 @@ export const basicEntries: AccordionEntry[] = [
 
 export function AccordionFrame({ children }: { children: ReactNode }) {
   return (
-    <YStack width="100%" maxW={680} self="center" gap="$2">
+    <YStack width="100%" maxW={680} self="center" gap="2">
       {children}
     </YStack>
   )

@@ -39,21 +39,31 @@ const blogs = [
   },
 ]
 
-// @ts-ignore react 19 has issue with type here
-const NativeAnimatedFlatList =
-  Animated.createAnimatedComponent<FlatListProps<Blog>>(FlatList)
-const AnimatedFlatList = isWeb ? FlatList : NativeAnimatedFlatList
+const NativeAnimatedFlatList = Animated.createAnimatedComponent(FlatList)
+const AnimatedFlatList = (
+  isWeb ? FlatList : NativeAnimatedFlatList
+) as React.ComponentType<FlatListProps<Blog>>
 
-const AnimatedViewFrame = createStyledHOC(View)<{
-  forwardedRef?: any
-  nativeID?: string
-}>(({ forwardedRef, nativeID, ...props }, ref) => (
-  <View
-    ref={forwardedRef || ref}
-    {...props}
-    {...(!isWeb && nativeID ? { nativeID } : {})}
-  />
-))
+const AnimatedViewFrame = createStyledHOC(
+  View,
+  (
+    {
+      forwardedRef,
+      nativeID,
+      ...props
+    }: {
+      forwardedRef?: any
+      nativeID?: string
+    },
+    ref
+  ) => (
+    <View
+      ref={forwardedRef || ref}
+      {...props}
+      {...(!isWeb && nativeID ? { nativeID } : {})}
+    />
+  )
+)
 const AnimatedView = Animated.createAnimatedComponent(AnimatedViewFrame)
 
 type Blog = (typeof blogs)[number]
@@ -67,13 +77,13 @@ export const ProfileView = () => {
 
   const renderItem = ({ item }: { item: Blog }) => {
     return (
-      <XStack gap="$4" px="$6" py="$4">
-        <Image rounded="$8" width={78} height={78} src={item.image} />
-        <YStack flex={1} gap="$2">
-          <Text fontSize="$6" fontWeight="600" color="$color12">
+      <XStack gap="4" px="6" py="4">
+        <Image rounded="8" width={78} height={78} src={item.image} />
+        <YStack flex={1} gap="2">
+          <Text fontSize="6" fontWeight="600" color="color11">
             {item.title}
           </Text>
-          <Text fontFamily="$mono" fontSize="$4" fontWeight="400" color="$color10">
+          <Text fontFamily="mono" fontSize="4" fontWeight="400" color="color9">
             {item.minutesToRead} minutes
           </Text>
         </YStack>
@@ -82,42 +92,42 @@ export const ProfileView = () => {
   }
 
   return (
-    <YStack width="100%" height="100%" $gtMd={{ maxW: 400 }} bg="$color6">
+    <YStack width="100%" height="100%" maxW="gtMd:400px" bg="color6">
       <SafeAreaView />
       <YStack
         key="fake-stack"
-        borderTopLeftRadius="$10"
-        borderTopRightRadius="$10"
+        borderTopLeftRadius="10"
+        borderTopRightRadius="10"
         width="100%"
         height={56}
         mb={-32}
-        bg="$color4"
+        bg="color4"
       />
 
       <YStack
         overflow="hidden"
-        rounded="$10"
+        rounded="10"
         width="100%"
         height="100%"
-        bg="$color2"
+        bg="color2"
         flex={1}
       >
         <AnimatedFlatList
           onScroll={scrollHandler}
           ListHeaderComponent={() => (
-            <YStack width="100%" p="$6" gap="$4">
+            <YStack width="100%" p="6" gap="4">
               <AvatarView followed={followed} />
 
-              <YStack pt="$2">
-                <Text fontWeight="900" fontFamily="$mono" fontSize="$10">
+              <YStack pt="2">
+                <Text fontWeight="900" fontFamily="mono" fontSize="10">
                   John Doe
                 </Text>
-                <Text color="$color10" fontSize="$5" fontFamily="$silkscreen">
+                <Text color="color9" fontSize="5" fontFamily="silkscreen">
                   @john_doe
                 </Text>
               </YStack>
 
-              <HashText lineHeight="$5" fontSize="$5" color="$color10">
+              <HashText lineHeight="5" fontSize="5" color="color9">
                 🚀 Built my first full-stack app from scratch, learned TypeScript, and
                 dove deep into React Native #CodeLife #DevJourney
               </HashText>
@@ -142,52 +152,41 @@ export const ProfileView = () => {
 const ButtonGroup = ({
   followed,
   setFollowed,
-}: { followed: boolean; setFollowed: (followed: boolean) => void }) => {
+}: {
+  followed: boolean
+  setFollowed: (followed: boolean) => void
+}) => {
   return (
-    <XStack pt="$4" gap="$4">
+    <XStack pt="4" gap="4">
       <Button
         theme={followed ? 'accent' : 'red'}
         style={{ transition: 'background-color 200ms ease' }}
         flex={1}
-        height="$6"
-        rounded="$10"
+        height="6"
+        rounded="10"
         onPress={() => setFollowed(!followed)}
       >
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence mode="wait">
           {followed ? (
             <Button.Text
               key={'Following'}
-              enterStyle={{
-                opacity: 0,
-                y: 10,
-              }}
-              exitStyle={{
-                opacity: 0,
-                y: 10,
-              }}
-              opacity={1}
-              style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
-              fontFamily="$mono"
+              y="enter:10px exit:10px"
+              opacity="1 enter:0 exit:0"
+              fontFamily="mono"
               fontWeight="bold"
-              fontSize="$5"
+              fontSize="5"
+              style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
             >
               Following
             </Button.Text>
           ) : (
             <Button.Text
               key={'Follow'}
-              fontFamily="$mono"
+              fontFamily="mono"
               fontWeight="bold"
-              fontSize="$5"
-              enterStyle={{
-                opacity: 0,
-                y: -10,
-              }}
-              exitStyle={{
-                opacity: 0,
-                y: -10,
-              }}
-              opacity={1}
+              fontSize="5"
+              y="enter:-10px exit:-10px"
+              opacity="1 enter:0 exit:0"
               style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
             >
               Follow
@@ -196,7 +195,7 @@ const ButtonGroup = ({
         </AnimatePresence>
       </Button>
 
-      <Button height="$6" width="$6" rounded="$10">
+      <Button height="6" width="6" rounded="10">
         <Share />
       </Button>
     </XStack>
@@ -238,25 +237,16 @@ const AvatarView = memo(
 
     return (
       <GestureDetector gesture={gesture}>
-        <View
-          self="flex-start"
-          shadowColor="$color6"
-          shadowOffset={{ width: 0, height: '$-3' }}
-          shadowOpacity={1}
-          shadowRadius="$4"
-        >
+        <View self="flex-start" boxShadow="0 -13px 18px color6">
           <AnimatedView
             key={'avatar'}
-            width="$12"
-            height="$12"
-            rounded="$8"
+            width="12"
+            height="12"
+            rounded="8"
             overflow="hidden"
-            bg="$color1"
+            bg="color1"
             borderWidth={3}
-            borderColor="$color1"
-            $theme-dark={{
-              borderColor: '$color',
-            }}
+            borderColor="color1 dark:color"
             style={animatedStyle}
             position="relative"
           >
@@ -293,28 +283,28 @@ const Follower = ({ followed }: { followed: boolean }) => {
   }, [followed])
 
   return (
-    <XStack items="center" gap="$2">
+    <XStack items="center" gap="2">
       {followerData.map((follower, index) => (
         <Image
-          rounded="$10"
+          rounded="10"
+          width="4"
+          height="4"
+          ml={index !== 0 ? -(getTokenValue('5') ?? 20) * 1.5 : undefined}
           key={follower.avatar}
-          width="$4"
-          height="$4"
-          ml={index !== 0 ? -(getTokenValue('$5') ?? 20) * 1.5 : undefined}
           src={follower.avatar}
         />
       ))}
-      <YStack gap="$1">
+      <YStack gap="1">
         <Text
           style={{ transition: 'color 150ms ease' }}
-          fontFamily="$silkscreen"
-          fontSize="$8"
+          fontFamily="silkscreen"
+          fontSize="8"
           fontWeight="bold"
-          color="$color12"
+          color="color11"
         >
           {follower}
         </Text>
-        <Text fontFamily="$mono" fontSize="$4" fontWeight="500" color="$color12">
+        <Text fontFamily="mono" fontSize="4" fontWeight="500" color="color11">
           Followers
         </Text>
       </YStack>
@@ -332,27 +322,24 @@ const Header = ({ scrollY }: { scrollY: SharedValue<number> }) => {
   return (
     <AnimatedView
       position="absolute"
-      bg="$color1"
+      bg="color1"
       t={0}
       l={0}
       r={0}
       style={header}
-      p="$4"
+      p="4"
       items="center"
       justify="center"
-      shadowColor="$color5"
-      shadowOffset={{ width: 0, height: 0 }}
-      shadowOpacity={1}
-      shadowRadius="$8"
+      boxShadow="0 0 46px color5"
     >
-      <XStack gap="$2" items="center">
+      <XStack gap="2" items="center">
         <Image
           width={24}
           aspectRatio={1}
-          rounded="$2"
+          rounded="2"
           src="https://tamagui.dev/bento/images/avatar_1.png"
         />
-        <Text fontFamily="$mono" fontSize="$4" fontWeight="600" color="$color12">
+        <Text fontFamily="mono" fontSize="4" fontWeight="600" color="color11">
           John Doe
         </Text>
       </XStack>
@@ -367,7 +354,7 @@ const HashText = ({ children, ...props }: { children: string } & TextProps) => {
     <Text {...props}>
       {mainText}
       {hashtags.map((hashtag) => (
-        <Text fontFamily="$mono" fontWeight="600" key={hashtag}>
+        <Text fontFamily="mono" fontWeight="600" key={hashtag}>
           {' '}
           {hashtag}
         </Text>

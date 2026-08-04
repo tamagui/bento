@@ -1,3 +1,4 @@
+import { Group } from '../../../BentoSkins'
 import { getSize } from '@tamagui/get-token'
 import type { RovingFocusGroupProps, RovingFocusItemProps } from '@tamagui/roving-focus'
 import { RovingFocusGroup } from '@tamagui/roving-focus'
@@ -8,7 +9,6 @@ import {
   CheckboxStyledContext,
   createStyledHOC,
   getVariableValue,
-  Group,
   H2,
   Checkbox as TCheckbox,
   styled,
@@ -29,21 +29,17 @@ const CheckboxesContext = createStyledContext<{
   onValuesChange: () => {},
 })
 
-const FocusGroup = forwardRef<React.ElementRef<typeof View>, RovingFocusGroupProps>(
-  (props, ref) => {
-    return (
-      <RovingFocusGroup
-        focusable
-        outlineOffset={1}
-        focusStyle={{
-          z: 1000,
-        }}
-        {...props}
-        ref={ref}
-      />
-    )
-  }
-)
+const FocusGroup = forwardRef<any, RovingFocusGroupProps>((props, ref) => {
+  return (
+    <RovingFocusGroup
+      tabIndex={0}
+      outlineOffset={1}
+      z="focus:1000px"
+      {...props}
+      ref={ref}
+    />
+  )
+})
 
 const FocusItemContext = createStyledContext({
   value: '',
@@ -55,12 +51,10 @@ const FocusGroupItem = forwardRef<any, RovingFocusItemProps & { value: string }>
     const { values, onValuesChange } = CheckboxesContext.useStyledContext()
 
     const attrs = {
-      focusable: true,
+      tabIndex: 0,
       outlineOffset: 1,
       flexShrink: 1,
-      focusStyle: {
-        z: 1,
-      },
+      z: 'focus:1',
       ...(isWeb && {
         onKeyDown: (e: KeyboardEvent) => {
           if (e.key === 'Enter' || e.code === 'Space') {
@@ -88,7 +82,7 @@ const RadiusGroup = styled(Group, {
 })
 
 const Title = styled(H2, {
-  size: '$8',
+  size: '8',
 })
 
 type CheckboxesProps<K extends string> = {
@@ -130,22 +124,16 @@ function CheckboxSkinFrame(props: CheckboxSkinProps) {
       width={box}
       height={box}
       borderRadius={checkboxSizeToken(props.size) / 8}
-      backgroundColor="$background"
+      backgroundColor="background press:background-press"
       items="center"
       justify="center"
       borderWidth={1}
-      borderColor="$borderColor"
-      hoverStyle={{ borderColor: '$borderColorHover' }}
-      pressStyle={{ backgroundColor: '$backgroundPress', borderColor: '$borderColorPress' }}
-      focusStyle={{ borderColor: '$borderColorFocus' }}
-      focusVisibleStyle={{
-        outlineStyle: 'solid',
-        outlineWidth: 2,
-        outlineColor: '$outlineColor',
-      }}
-      // the checked fill the v2 Checkbox applied by default
-      activeStyle={{ bg: '$backgroundActive' }}
+      borderColor="border-color hover:border-color-hover press:border-color-press focus:border-color-focus"
+      outlineStyle="focus-visible:solid"
+      outlineWidth="focus-visible:2px"
+      outlineColor="focus-visible:outline-color"
       {...props}
+      activeStyle={{ bg: 'background-press' }}
     />
   )
 }
@@ -166,9 +154,7 @@ function CheckboxIndicator({
     color: theme.color,
   })
   return (
-    <BaseCheckboxIndicator {...props}>
-      {getThemedIcon(children)}
-    </BaseCheckboxIndicator>
+    <BaseCheckboxIndicator {...props}>{getThemedIcon(children)}</BaseCheckboxIndicator>
   )
 }
 
@@ -176,7 +162,7 @@ export const CheckboxSkin = withStaticProperties(CheckboxSkinFrame, {
   Indicator: CheckboxIndicator,
 })
 
-const Checkbox = createStyledHOC(TCheckbox)((props, ref) => {
+const Checkbox = createStyledHOC(TCheckbox, (props, ref) => {
   const { checked: userChecked, onCheckedChange, ...rest } = props
   const { values, onValuesChange } = CheckboxesContext.useStyledContext()
   const { value: focusItemValue } = FocusItemContext.useStyledContext()
@@ -196,45 +182,28 @@ const Checkbox = createStyledHOC(TCheckbox)((props, ref) => {
   return <CheckboxSkin ref={ref} value={focusItemValue} {...rest} {...attrs} />
 })
 
-type CardProps = {
-  unstyled?: boolean
-}
+type CardProps = React.ComponentProps<typeof CardFrame>
 
 const CardFrame = styled(View, {
   cursor: 'pointer',
   width: '100%',
-  rounded: '$4',
-  p: '$3',
-  bg: '$background',
-  borderColor: '$borderColor',
+  rounded: '4',
+  p: '3',
+  bg: 'background hover:background-hover focus:background-focus press:background-press',
+  borderColor:
+    'border-color hover:border-color-hover focus:border-color-focus press:border-color-press',
   borderWidth: 1,
-  focusStyle: {
-    bg: '$backgroundFocus',
-    borderColor: '$borderColorFocus',
-  },
-  hoverStyle: {
-    bg: '$backgroundHover',
-    borderColor: '$borderColorHover',
-  },
-
-  ...(process.env.TAMAGUI_TARGET === 'web' && {
-    pressStyle: {
-      bg: '$backgroundPress',
-      borderColor: '$borderColorPress',
-    },
-  }),
-
   variants: {
     active: {
       true: {
-        backgroundColor: '$backgroundFocus',
-        borderColor: '$borderColorFocus',
+        backgroundColor: 'background-focus',
+        borderColor: 'border-color-focus',
       },
     },
   } as const,
 })
 
-const Card = createStyledHOC(CardFrame)<CardProps>((props, ref) => {
+const Card = createStyledHOC(CardFrame, (props: CardProps, ref) => {
   const { ...rest } = props
   const { values } = CheckboxesContext.useStyledContext()
   const { value } = FocusItemContext.useStyledContext()

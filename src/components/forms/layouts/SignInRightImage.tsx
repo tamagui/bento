@@ -15,6 +15,7 @@ import {
 } from 'tamagui'
 
 import { Input } from '../inputs/components/inputsParts'
+import { useGroupMedia } from '../../hooks/useGroupMedia'
 import { Hide } from './components/layoutParts'
 
 /** simulate signin */
@@ -35,6 +36,7 @@ function useSignIn() {
 export function SignInRightImage() {
   const uniqueId = useId()
   const { signIn, status } = useSignIn()
+  const { xs } = useGroupMedia('window')
   return (
     <View flexDirection="row" minW="100%" height="100%" items="stretch">
       <View
@@ -44,34 +46,26 @@ export function SignInRightImage() {
         flexBasis={0}
         grow={1}
         shrink={1}
-        gap="$6"
+        gap="6"
         mx="auto"
-        $group-window-gtXs={{
-          px: '$12',
-          maxW: 600,
-          py: '$8',
-        }}
+        px="@gtXs/window:12"
+        maxW="@gtXs/window:600px"
+        py="@gtXs/window:8"
       >
-        <H1
-          self="center"
-          size="$8"
-          $group-window-xs={{
-            size: '$7',
-          }}
-        >
+        <H1 self="center" size={xs ? '7' : '8'}>
           Sign in to your account
         </H1>
-        <View flexDirection="column" gap="$3" minW="100%">
-          <View flexDirection="column" gap="$1">
-            <Input size="$4" minW="100%">
+        <View flexDirection="column" gap="3" minW="100%">
+          <View flexDirection="column" gap="1">
+            <Input size="4" minW="100%">
               <Input.Label htmlFor={uniqueId + 'email'}>Email</Input.Label>
               <Input.Box>
                 <Input.Area id={uniqueId + 'email'} placeholder="email@example.com" />
               </Input.Box>
             </Input>
           </View>
-          <View flexDirection="column" gap="$1">
-            <Input size="$4">
+          <View flexDirection="column" gap="1">
+            <Input size="4">
               <View flexDirection="row" items="center" justify="space-between">
                 <Input.Label htmlFor={uniqueId + 'password'}>Password</Input.Label>
               </View>
@@ -96,24 +90,13 @@ export function SignInRightImage() {
               <AnimatePresence>
                 {status === 'loading' && (
                   <Spinner
-                    color="$color"
-                    key="loading-spinner"
-                    opacity={1}
-                    scale={1}
+                    color="color"
+                    opacity="1 enter:0 exit:0"
+                    scale="1 enter:0.5 exit:0.5"
                     position="absolute"
-                    l="70%"
-                    $group-window-gtXs={{
-                      l: '60%',
-                    }}
+                    l="70% @gtXs/window:60%"
                     transition="quick"
-                    enterStyle={{
-                      opacity: 0,
-                      scale: 0.5,
-                    }}
-                    exitStyle={{
-                      opacity: 0,
-                      scale: 0.5,
-                    }}
+                    key="loading-spinner"
                   />
                 )}
               </AnimatePresence>
@@ -122,22 +105,22 @@ export function SignInRightImage() {
             Continue
           </Button>
 
-          <View flexDirection="column" gap="$3" width="100%" self="center" items="center">
-            <View flexDirection="row" width="100%" items="center" gap="$4">
+          <View flexDirection="column" gap="3" width="100%" self="center" items="center">
+            <View flexDirection="row" width="100%" items="center" gap="4">
               <Separator />
               <Paragraph>Or</Paragraph>
               <Separator />
             </View>
-            <View flexDirection="row" flexWrap="wrap" gap="$3">
+            <View flexDirection="row" flexWrap="wrap" gap="3">
               <Button theme="accent" minW="100%">
                 <Button.Icon>
-                  <Github color="$color10" size="$1" />
+                  <Github color="color9" size="1" />
                 </Button.Icon>
                 <Button.Text>Continue with Github</Button.Text>
               </Button>
               <Button theme="accent" minW="100%">
                 <Button.Icon>
-                  <Facebook color="$blue10" size="$1" />
+                  <Facebook color="blue-600" size="1" />
                 </Button.Icon>
                 <Button.Text>Continue with Facebook</Button.Text>
               </Button>
@@ -149,12 +132,12 @@ export function SignInRightImage() {
       <Hide when="maxMd">
         <View position="relative" flexBasis={0} grow={1.5} shrink={1} overflow="hidden">
           <LinearGradient
-            colors={['$blue9', '$purple9']}
+            colors={['blue-500', 'purple-500']}
             opacity={0.15}
             start={[0, 1]}
             end={[0, 0]}
             position="absolute"
-            fullscreen
+            inset={0}
             z={5}
           />
           <Image
@@ -176,12 +159,7 @@ const SignUpLink = () => {
     <Anchor self="center" href={`#`}>
       <Paragraph text="center">
         Don&apos;t have an account?{' '}
-        <Text
-          hoverStyle={{
-            color: '$colorHover',
-          }}
-          textDecorationLine="underline"
-        >
+        <Text color="hover:color-hover" textDecorationLine="underline">
           Sign up
         </Text>
       </Paragraph>
@@ -192,14 +170,7 @@ const SignUpLink = () => {
 const ForgotPasswordLink = () => {
   return (
     <Anchor self="flex-end" href={`#`}>
-      <Paragraph
-        color="$color11"
-        hoverStyle={{
-          color: '$color12',
-        }}
-        size="$1"
-        mt="$1"
-      >
+      <Paragraph color="color10 hover:color11" mt="1" size="1">
         Forgot your password?
       </Paragraph>
     </Anchor>

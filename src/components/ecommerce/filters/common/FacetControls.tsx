@@ -30,7 +30,11 @@ export const products = [
   { name: 'Alta desk lamp', price: 89, tags: ['New arrivals', 'Best sellers'] },
   { name: 'Bergen throw', price: 45, tags: ['New arrivals', 'On sale'] },
   { name: 'Cedar bookshelf', price: 189, tags: ['Best sellers'] },
-  { name: 'Drift lounge chair', price: 159, tags: ['Best sellers', 'Limited edition'] },
+  {
+    name: 'Drift lounge chair',
+    price: 159,
+    tags: ['Best sellers', 'Limited edition'],
+  },
   { name: 'Ember candle set', price: 24, tags: ['On sale'] },
   { name: 'Fjord side table', price: 120, tags: ['New arrivals'] },
   { name: 'Grove planter', price: 32, tags: ['New arrivals', 'On sale'] },
@@ -81,10 +85,10 @@ export function FacetControls({
     })
 
   return (
-    <YStack gap="$6">
+    <YStack gap="6">
       {/* biome-ignore lint/a11y/useSemanticElements: React Native has no equivalent semantic element; the demo shares one tree across platforms. */}
-      <YStack gap="$1" role="group" aria-label="Collection">
-        <Text fontSize="$5" fontWeight="800" letterSpacing={0} mb="$2">
+      <YStack gap="1" role="group" aria-label="Collection">
+        <Text fontSize="5" fontWeight="800" letterSpacing={0} mb="2">
           Collection
         </Text>
         {facetNames.map((facet) => {
@@ -98,14 +102,13 @@ export function FacetControls({
             <XStack
               key={facet}
               items="center"
-              gap="$3"
+              gap="3"
               minH={44}
               cursor="pointer"
-              rounded="$3"
-              px="$1"
+              rounded="3"
+              px="1"
+              bg="hover:color2 press:color3"
               onPress={() => toggle(facet)}
-              hoverStyle={{ bg: '$color2' }}
-              pressStyle={{ bg: '$color3' }}
             >
               <Checkbox
                 checked={checked}
@@ -117,10 +120,10 @@ export function FacetControls({
                   <Check size={14} />
                 </Checkbox.Indicator>
               </Checkbox>
-              <Text flex={1} color="$color11" letterSpacing={0}>
+              <Text flex={1} color="color10" letterSpacing={0}>
                 {facet}
               </Text>
-              <Text fontSize="$2" color="$color8">
+              <Text fontSize="2" color="color7">
                 {count}
               </Text>
             </XStack>
@@ -128,12 +131,12 @@ export function FacetControls({
         })}
       </YStack>
       {/* biome-ignore lint/a11y/useSemanticElements: React Native has no equivalent semantic element; the demo shares one tree across platforms. */}
-      <YStack gap="$4" role="group" aria-label="Price range">
+      <YStack gap="4" role="group" aria-label="Price range">
         <XStack justify="space-between" items="center">
-          <Text fontSize="$5" fontWeight="800" letterSpacing={0}>
+          <Text fontSize="5" fontWeight="800" letterSpacing={0}>
             Price range
           </Text>
-          <Text fontSize="$3" color="$color9" letterSpacing={0} aria-live="polite">
+          <Text fontSize="3" color="color8" letterSpacing={0} aria-live="polite">
             {formatPrice(value.min)} – {formatPrice(value.max)}
           </Text>
         </XStack>
@@ -152,16 +155,16 @@ export function FacetControls({
           step={10}
           minStepsBetweenThumbs={1}
         >
-          <Slider.Track height={6} bg="$color4">
-            <Slider.TrackActive bg="$accentColor" />
+          <Slider.Track height={6} bg="color4">
+            <Slider.TrackActive bg="accent-color" />
           </Slider.Track>
           <Slider.Thumb
             aria-label="Minimum price"
             aria-valuetext={formatPrice(value.min)}
             index={0}
             rounded={999}
-            size="$2"
-            bg="$color12"
+            bg="color11"
+            size="2"
             hitSlop={isWeb ? undefined : 12}
           />
           <Slider.Thumb
@@ -169,8 +172,8 @@ export function FacetControls({
             aria-valuetext={formatPrice(value.max)}
             index={1}
             rounded={999}
-            size="$2"
-            bg="$color12"
+            bg="color11"
+            size="2"
             hitSlop={isWeb ? undefined : 12}
           />
         </Slider>

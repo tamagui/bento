@@ -2563,7 +2563,7 @@
     "@tamagui/use-presence" "2.4.3"
     "@tamagui/web" "2.4.3"
 
-"@tamagui/animations-reanimated@2.4.3":
+"@tamagui/animations-reanimated@2.4.3", "@tamagui/animations-reanimated@latest":
   version "2.4.3"
   resolved "https://registry.npmjs.org/@tamagui/animations-reanimated/-/animations-reanimated-2.4.3.tgz#8666d7184f289d9fd7e43e721930bfa4fdbf7f80"
   integrity sha512-qQ5CZCNv5CL5vAW6q0+uyGlrIsswM/RAT2V4aO50wlQKTF9AVHYVPJRlLBtjpgAzhFr+Uxp3nYjz72O08efv+g==
@@ -2804,7 +2804,7 @@
     "@tamagui/use-controllable-state" "2.4.3"
     "@tamagui/web" "2.4.3"
 
-"@tamagui/core@2.4.3":
+"@tamagui/core@2.4.3", "@tamagui/core@latest":
   version "2.4.3"
   resolved "https://registry.npmjs.org/@tamagui/core/-/core-2.4.3.tgz#b76abb83ab2bb514273948c172e10342f2fb10d1"
   integrity sha512-g//ohzzfEJ1mpp9oF0JRbj655HafspkXGM8fDIjb0McQBOzgdKnvuEA0It47NmAvHjd3TxIV3BnYUfcgSutuVw==
@@ -2929,7 +2929,7 @@
     "@tamagui/compose-refs" "2.4.3"
     "@tamagui/use-event" "2.4.3"
 
-"@tamagui/focus-scope@2.4.3":
+"@tamagui/focus-scope@2.4.3", "@tamagui/focus-scope@latest":
   version "2.4.3"
   resolved "https://registry.npmjs.org/@tamagui/focus-scope/-/focus-scope-2.4.3.tgz#e5b72076c5185232c5d90c6bfb38c02399a7eef0"
   integrity sha512-EPPEAQPtkLol08eolQ4n0m29NjoHegJoEpgBx3/QjPR/0xi4woAREJLqY6scUSiBbDSt2/vdvWi0/DPPVTdsdg==
@@ -2956,7 +2956,7 @@
   dependencies:
     "@tamagui/core" "2.4.3"
 
-"@tamagui/font-silkscreen@2.4.3":
+"@tamagui/font-silkscreen@2.4.3", "@tamagui/font-silkscreen@latest":
   version "2.4.3"
   resolved "https://registry.npmjs.org/@tamagui/font-silkscreen/-/font-silkscreen-2.4.3.tgz#adfd1901043e1c0d17737bd78c63a0bb60b51d11"
   integrity sha512-cqdoE+u9jup4NjPEjO/3oa2f9LA3cW3Ef+GK1tKUPEiITkRmrEctPY21LEhpo1c/m5SyvfPxt0IjxrmEy6LIWg==
@@ -2997,7 +2997,7 @@
     "@tamagui/get-token" "2.4.3"
     "@tamagui/web" "2.4.3"
 
-"@tamagui/get-font-sized@2.4.3":
+"@tamagui/get-font-sized@2.4.3", "@tamagui/get-font-sized@latest":
   version "2.4.3"
   resolved "https://registry.npmjs.org/@tamagui/get-font-sized/-/get-font-sized-2.4.3.tgz#9fba802120270f82f5276bd1aacb7878ac320e1b"
   integrity sha512-kn+xASUTFuwJ1T12LqBPFMugwEEl4Ru4r43vnO1tlxdlWlzKhf5j0rdxranluV0U4Hnt2rJXm5WVDPSG1nWFzg==
@@ -3005,7 +3005,7 @@
     "@tamagui/constants" "2.4.3"
     "@tamagui/web" "2.4.3"
 
-"@tamagui/get-token@2.4.3":
+"@tamagui/get-token@2.4.3", "@tamagui/get-token@latest":
   version "2.4.3"
   resolved "https://registry.npmjs.org/@tamagui/get-token/-/get-token-2.4.3.tgz#921ce01481000b4442850a238e8b3d4515274744"
   integrity sha512-popyeL1AjI2JajhorjKx9FdVTbgx84xSADRyv6xDL6B9Rx869U6nVqwbbfYEAID0itLN71yb7/R+uWgUlnOjow==
@@ -3024,7 +3024,7 @@
     "@tamagui/stacks" "2.4.3"
     "@tamagui/use-controllable-state" "2.4.3"
 
-"@tamagui/helpers-icon@2.4.3":
+"@tamagui/helpers-icon@2.4.3", "@tamagui/helpers-icon@latest":
   version "2.4.3"
   resolved "https://registry.npmjs.org/@tamagui/helpers-icon/-/helpers-icon-2.4.3.tgz#ee2d9d03c464425d7f75d5092021fb2497e671de"
   integrity sha512-eyuKq69obEn0RC6cqUtA2hz7FjgkFnNQnlyhluozssdZj1bi5J1quu5SYNZ6oIDXax+bGT/KU/5h5gsPO5O2Bg==
@@ -3101,7 +3101,7 @@
     "@tamagui/text" "2.4.3"
     "@tamagui/web" "2.4.3"
 
-"@tamagui/linear-gradient@2.4.3":
+"@tamagui/linear-gradient@2.4.3", "@tamagui/linear-gradient@latest":
   version "2.4.3"
   resolved "https://registry.npmjs.org/@tamagui/linear-gradient/-/linear-gradient-2.4.3.tgz#899af8f25664a50800b2179115d59ef82fa200db"
   integrity sha512-unu4iZmuox1dtVyoHm4dDrfkEUTYSz+WOZEyvhplvW0c2vugu9xPdgesMkH1cFCkvYXOEcwzOnWL28SuEVOolw==
@@ -3144,6 +3144,13 @@
     "@tamagui/popper" "2.4.3"
     "@tamagui/use-controllable-state" "2.4.3"
     "@tamagui/web" "2.4.3"
+
+"@tamagui/metro-plugin@latest":
+  version "2.4.3"
+  resolved "https://registry.npmjs.org/@tamagui/metro-plugin/-/metro-plugin-2.4.3.tgz"
+  integrity sha512-ZumMcbmftmjLV10CJQNZPr3dOk6RPE9N2Cf0oCDvb+VVLrwHGX0jhi2kHA8bH5SYCCbVAiRjVeipz/ocs8dWbQ==
+  dependencies:
+    "@tamagui/static" "2.4.3"
 
 "@tamagui/native@2.4.3":
   version "2.4.3"
@@ -3808,7 +3815,7 @@
     outdent "^0.8.0"
     react-native-web "^0.21.0"
 
-"@tamagui/web@2.4.3":
+"@tamagui/web@2.4.3", "@tamagui/web@latest":
   version "2.4.3"
   resolved "https://registry.npmjs.org/@tamagui/web/-/web-2.4.3.tgz#e6739878f7f6ffda1e1c977e8cba4155724690ea"
   integrity sha512-rGxJh9qfdZqVl0ehWXBl+uSvEj1hN7tJvg36O7z7PRuEXdgLgcXhmfw1o4vki2+x6jJJIf7up2jv0eNkrYQ4sQ==

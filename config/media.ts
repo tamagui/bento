@@ -4,7 +4,7 @@ export const widths = [660, 800, 1020, 1280]
 // note order is important!
 // earlier defined = less important
 
-// v4 Config
+// bento breakpoints carried forward alongside the v6 config.
 const breakpoints = {
   '2xl': 1536,
   xl: 1280,
@@ -16,7 +16,7 @@ const breakpoints = {
 }
 
 export const media = {
-  // v4 Config
+  // max-width aliases used by the examples and Adapt.
   maxXs: { maxWidth: breakpoints.xs },
   max2xs: { maxWidth: breakpoints['2xs'] },
   maxSm: { maxWidth: breakpoints.sm },

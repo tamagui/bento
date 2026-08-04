@@ -1,9 +1,9 @@
 import { Text, View, XStack, YStack } from 'tamagui'
 
 const segments = [
-  { to: 60, color: '$green9', zone: 'normal' },
-  { to: 85, color: '$yellow9', zone: 'elevated' },
-  { to: 100, color: '$red9', zone: 'critical' },
+  { to: 60, color: 'green-500', zone: 'normal' },
+  { to: 85, color: 'yellow-500', zone: 'elevated' },
+  { to: 100, color: 'red-500', zone: 'critical' },
 ]
 
 const clamp = (value: number) =>
@@ -13,12 +13,12 @@ function Meter({ value, label }: { value: number; label: string }) {
   const percent = clamp(value)
   const segment = segments.find((s) => percent <= s.to) ?? segments[segments.length - 1]
   return (
-    <YStack gap="$1.5" width="100%">
+    <YStack gap="1" width="100%">
       <XStack justify="space-between">
-        <Text fontSize="$3" color="$color11">
+        <Text fontSize="3" color="color10">
           {label}
         </Text>
-        <Text fontSize="$3" fontWeight="600" color={segment.color as any}>
+        <Text fontSize="3" fontWeight="600" color={segment.color as any}>
           {percent}%
         </Text>
       </XStack>
@@ -34,7 +34,7 @@ function Meter({ value, label }: { value: number; label: string }) {
         height={10}
         rounded={1000}
         overflow="hidden"
-        bg="$color4"
+        bg="color4"
       >
         <View
           width={`${percent}%`}
@@ -52,7 +52,7 @@ function Meter({ value, label }: { value: number; label: string }) {
             t={0}
             b={0}
             width={2}
-            bg="$color1"
+            bg="color1"
           />
         ))}
       </View>
@@ -63,7 +63,7 @@ function Meter({ value, label }: { value: number; label: string }) {
 /** ------ EXAMPLE ------ */
 export function MeterThresholds() {
   return (
-    <YStack gap="$5" width="100%" maxW={420}>
+    <YStack gap="5" width="100%" maxW={420}>
       <Meter value={42} label="CPU" />
       <Meter value={71} label="Memory" />
       <Meter value={93} label="Disk" />

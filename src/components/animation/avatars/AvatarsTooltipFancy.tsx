@@ -1,21 +1,14 @@
+import { Avatar } from '../../BentoSkins'
 import { useEffect, useState } from 'react'
 import type { TamaguiElement } from 'tamagui'
-import {
-  Avatar,
-  Paragraph,
-  Tooltip,
-  View,
-  isWeb,
-  styled,
-  withStaticProperties,
-} from 'tamagui'
+import { Paragraph, Tooltip, View, isWeb, styled, withStaticProperties } from 'tamagui'
 
 const items = ['Developer', 'User', 'Athlete', 'User', 'Designer']
 
 /** ------ EXAMPLE ------ */
 export function AvatarsTooltipFancy() {
   return (
-    <View gap="$6">
+    <View gap="6">
       <View flexDirection="row">
         {items.map((item, index) => (
           <Item item={item} index={index} key={`${item}-${index}`} />
@@ -38,18 +31,18 @@ function Item(props: { item: string; index: number }) {
   })
 
   return (
-    <View ml={index !== 0 ? '$-4' : undefined} z={index} cursor="pointer">
+    <View ml={index !== 0 ? '-4' : undefined} z={index} cursor="pointer">
       <AvatarTip offset={5} placement="top" delay={0}>
         <AvatarTip.Trigger>
           <Avatar
             ref={setInnerRef}
-            borderWidth="$1"
-            borderColor="$color1"
+            borderWidth="1"
+            borderColor="color1"
             circular
-            size="$6"
+            size="6"
           >
             <Avatar.Image src={`https://i.pravatar.cc/150?img=${index + 10}`} />
-            <Avatar.Fallback bg="$background" />
+            <Avatar.Fallback bg="background" />
           </Avatar>
         </AvatarTip.Trigger>
         <AvatarTip.Content
@@ -59,7 +52,7 @@ function Item(props: { item: string; index: number }) {
           rotate={position.degree}
           transformOrigin="center bottom"
         >
-          <Paragraph size="$2" lineHeight="$1" px="$2">
+          <Paragraph size="2" lineHeight="1" px="2">
             {item}
           </Paragraph>
         </AvatarTip.Content>
@@ -69,12 +62,10 @@ function Item(props: { item: string; index: number }) {
 }
 
 const AvatarTooltipContent = styled(Tooltip.Content, {
-  enterStyle: { x: 0, y: 15, opacity: 0, scale: 0.9 },
-  exitStyle: { x: 0, y: 15, opacity: 0, scale: 0.9 },
-  scale: 1,
-  x: 0,
-  y: 0,
-  opacity: 1,
+  scale: '1 enter:0.9 exit:0.9',
+  x: '0 enter:0 exit:0',
+  y: '0 enter:15px exit:15px',
+  opacity: '1 enter:0 exit:0',
   transition: [
     'bouncy',
     {

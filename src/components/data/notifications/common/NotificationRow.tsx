@@ -1,7 +1,8 @@
+import { Avatar } from '../../../BentoSkins'
 import type { ReactNode } from 'react'
 import { useState } from 'react'
 import type { ColorTokens } from 'tamagui'
-import { Avatar, Text, View, XStack, YStack, isWeb } from 'tamagui'
+import { Text, View, XStack, YStack, isWeb } from 'tamagui'
 
 export type NotificationData = {
   accent: ColorTokens
@@ -43,37 +44,31 @@ export function NotificationRow({
   return (
     <XStack
       width="100%"
-      gap="$3"
-      p="$3"
-      rounded="$5"
-      bg={notification.unread ? '$color2' : 'transparent'}
+      gap="3"
+      p="3"
+      rounded="5"
+      bg={`${notification.unread ? 'color2' : 'transparent'}${onPress ? ` hover:${notification.unread ? 'color3' : 'color2'} press:color3` : ''}`}
       items="flex-start"
+      onPress={onPress}
+      cursor={onPress ? 'pointer' : undefined}
+      role={onPress ? 'button' : undefined}
+      tabIndex={onPress ? 0 : undefined}
+      outlineColor={onPress ? 'focus-visible:outline-color' : undefined}
+      outlineOffset={onPress ? 'focus-visible:-2px' : undefined}
+      outlineStyle={onPress ? 'focus-visible:solid' : undefined}
+      outlineWidth={onPress ? 'focus-visible:2px' : undefined}
+      onKeyDown={(event: any) => {
+        if (onPress && isWeb && (event.key === 'Enter' || event.key === ' ')) {
+          event.preventDefault()
+          onPress()
+        }
+      }}
       aria-label={`${notification.unread ? 'Unread notification' : 'Notification'}: ${notification.actor} ${notification.detail}`}
-      {...(onPress && {
-        onPress,
-        cursor: 'pointer',
-        role: 'button',
-        tabIndex: 0,
-        hoverStyle: { bg: notification.unread ? '$color3' : '$color2' },
-        pressStyle: { bg: '$color3' },
-        focusVisibleStyle: {
-          outlineColor: '$outlineColor',
-          outlineOffset: -2,
-          outlineStyle: 'solid',
-          outlineWidth: 2,
-        },
-        onKeyDown: (event: any) => {
-          if (isWeb && (event.key === 'Enter' || event.key === ' ')) {
-            event.preventDefault()
-            onPress()
-          }
-        },
-      })}
     >
       <View position="relative">
-        <Avatar circular size="$4">
+        <Avatar circular size="4">
           <Avatar.Fallback bg={notification.accent} items="center" justify="center">
-            <Text fontSize="$2" fontWeight="800" color="$color12">
+            <Text fontSize="2" fontWeight="800" color="color11">
               {notification.initials}
             </Text>
           </Avatar.Fallback>
@@ -87,22 +82,22 @@ export function NotificationRow({
             width={9}
             height={9}
             rounded={999}
-            bg="$accentColor"
+            bg="accent-color"
             borderWidth={2}
-            borderColor="$background"
+            borderColor="background"
           />
         ) : null}
       </View>
-      <YStack flex={1} gap="$1">
-        <Text color="$color11" lineHeight="$5" letterSpacing={0}>
+      <YStack flex={1} gap="1">
+        <Text color="color10" lineHeight="5" letterSpacing={0}>
           <Text fontWeight="800" letterSpacing={0}>
             {notification.actor}
           </Text>{' '}
           {notification.detail}
         </Text>
         <Text
-          fontSize="$2"
-          color="$color8"
+          fontSize="2"
+          color="color7"
           render={
             isWeb ? (
               <time dateTime={notification.at} title={notification.exact} />
@@ -127,7 +122,7 @@ export const todayNotifications: NotificationData[] = [
     at: '2026-07-10T10:52:00',
     exact: 'Jul 10, 2026, 10:52 AM',
     unread: true,
-    accent: '$purple5',
+    accent: 'purple-300',
   },
   {
     id: 'mention',
@@ -138,7 +133,7 @@ export const todayNotifications: NotificationData[] = [
     at: '2026-07-10T10:18:00',
     exact: 'Jul 10, 2026, 10:18 AM',
     unread: true,
-    accent: '$blue5',
+    accent: 'blue-300',
   },
 ]
 
@@ -152,7 +147,7 @@ export const earlierNotifications: NotificationData[] = [
     at: '2026-07-09T16:30:00',
     exact: 'Jul 9, 2026, 4:30 PM',
     unread: false,
-    accent: '$orange5',
+    accent: 'orange-300',
   },
   {
     id: 'invite',
@@ -163,6 +158,6 @@ export const earlierNotifications: NotificationData[] = [
     at: '2026-07-06T09:00:00',
     exact: 'Jul 6, 2026, 9:00 AM',
     unread: false,
-    accent: '$green5',
+    accent: 'green-300',
   },
 ]

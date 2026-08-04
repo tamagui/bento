@@ -1,4 +1,4 @@
-import { defaultConfig } from '@tamagui/config/v4'
+import { defaultConfig } from '@tamagui/config/v6'
 import type { CreateTamaguiProps } from '@tamagui/core'
 import { setupDev } from '@tamagui/core'
 import { animations } from './animations'
@@ -17,14 +17,13 @@ const fonts = {
   silkscreen: silkscreenFont,
 }
 
-// Use v4 config as base and override with our customizations
+// use the v6 config as the base and override it with Bento's customizations
 export const config = {
   ...defaultConfig,
   fonts,
   animations,
   themes: themeDev,
   media,
-  // v4 has shorthands built-in, no need to import
   settings: {
     ...defaultConfig.settings,
     defaultFont: 'body',
@@ -34,7 +33,7 @@ export const config = {
       color: theme.color11,
     }),
     allowedStyleValues: 'somewhat-strict-web',
-    autocompleteSpecificTokens: 'except-special',
+    onlyAllowShorthands: false,
   },
 } satisfies CreateTamaguiProps
 

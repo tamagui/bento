@@ -35,24 +35,24 @@ export function SpinControl({
     <XStack
       items="center"
       overflow="hidden"
-      rounded="$5"
+      rounded="5"
       borderWidth={1}
-      borderColor="$borderColor"
+      borderColor="border-color"
     >
       <Button
         width={size}
         height={size}
         rounded={0}
-        chromeless
+        color="color10"
+        variant="quiet"
         icon={Minus}
-        color="$color11"
         disabled={value <= min}
         aria-label={decreaseLabel ?? 'Decrease quantity'}
         onPressIn={() => onStart(-1)}
         onPressOut={onStop}
       />
       <Input
-        unstyled
+        borderWidth={0}
         role="spinbutton"
         aria-label={label}
         aria-valuemin={min}
@@ -62,8 +62,8 @@ export function SpinControl({
         height={size}
         text="center"
         fontWeight="800"
-        fontSize="$4"
-        color="$color12"
+        fontSize="4"
+        color="color11"
         bg="transparent"
         keyboardType="number-pad"
         inputMode="numeric"
@@ -91,9 +91,9 @@ export function SpinControl({
         width={size}
         height={size}
         rounded={0}
-        chromeless
+        color="color10"
+        variant="quiet"
         icon={Plus}
-        color="$color11"
         disabled={value >= max}
         aria-label="Increase quantity"
         onPressIn={() => onStart(1)}

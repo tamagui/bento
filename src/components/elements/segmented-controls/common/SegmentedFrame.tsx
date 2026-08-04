@@ -26,7 +26,7 @@ export function SegmentedFrame({
   const index = options.findIndex((option) => option.value === value)
   // compact density is a mouse affordance; touch keeps 44pt minimum
   const heights = isWeb ? { sm: 34, md: 42, lg: 50 } : { sm: 44, md: 46, lg: 52 }
-  const textSizes = { sm: '$2', md: '$3', lg: '$4' } as const
+  const textSizes = { sm: '2', md: '3', lg: '4' } as const
   const itemRefs = useRef<(HTMLElement | null)[]>([])
   const reducedMotion = useReducedMotion()
 
@@ -59,26 +59,25 @@ export function SegmentedFrame({
       aria-label={label}
       width="100%"
       height={heights[size]}
-      p="$1"
-      rounded="$6"
-      bg="$color3"
+      p="1"
+      rounded="6"
+      bg="color3"
       position="relative"
       overflow="hidden"
       onKeyDown={handleKeyDown}
     >
       {/* inset track so pill percentages align with the padded item area */}
-      <View pointerEvents="none" position="absolute" t="$1" b="$1" l="$1" r="$1">
+      <View pointerEvents="none" position="absolute" t="1" b="1" l="1" r="1">
         <View
           position="absolute"
           t={0}
           b={0}
           l={0}
           width={`${100 / options.length}%`}
-          rounded="$5"
-          bg="$background"
+          rounded="5"
+          bg="background"
           borderWidth={1}
-          borderColor="$borderColor"
-          // hide rather than lie when the controlled value is invalid
+          borderColor="border-color"
           opacity={index < 0 ? 0 : 1}
           style={{
             transform: `translateX(${Math.max(0, index) * 100}%)`,
@@ -99,34 +98,31 @@ export function SegmentedFrame({
               }) as any
             }
             render={isWeb ? <button type="button" /> : undefined}
-            // biome-ignore lint/a11y/useSemanticElements: React Native has no equivalent semantic element; the demo shares one tree across platforms.
             role="radio"
             aria-checked={selected}
             aria-label={option.label}
             tabIndex={isWeb ? (selected ? 0 : -1) : undefined}
             cursor="pointer"
-            onPress={() => select(optionIndex)}
             flex={1}
             flexBasis={0}
             minW={0}
             height="100%"
             z={1}
-            gap="$2"
+            gap="2"
             items="center"
             justify="center"
-            rounded="$5"
-            focusVisibleStyle={{
-              outlineWidth: 2,
-              outlineColor: '$outlineColor',
-              outlineOffset: -2,
-              outlineStyle: 'solid',
-            }}
+            rounded="5"
+            outlineWidth="focus-visible:2px"
+            outlineColor="focus-visible:outline-color"
+            outlineOffset="focus-visible:-2px"
+            outlineStyle="focus-visible:solid"
+            onPress={() => select(optionIndex)}
           >
             {option.icon}
             <Text
               fontSize={textSizes[size]}
               fontWeight="600"
-              color={selected ? '$color' : '$color10'}
+              color={`${selected ? 'color' : 'color9'}`}
               numberOfLines={1}
             >
               {option.label}

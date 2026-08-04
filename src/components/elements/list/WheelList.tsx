@@ -25,7 +25,9 @@ const AnimatedList = styled(Animated.FlatList<CardData>, {
 
 export function WheelList({
   onChange,
-}: { onChange?: (item: CardData, index: number) => void }) {
+}: {
+  onChange?: (item: CardData, index: number) => void
+}) {
   const [index, setIndex] = useState(0)
 
   const scrollY = useSharedValue(0)
@@ -45,7 +47,7 @@ export function WheelList({
       flexBasis="auto"
       position="relative"
       height={isWeb ? '80vh' : '100%'}
-      $gtLg={{ maxH: 600 }}
+      maxH="gtLg:600px"
       width="100%"
       justify="center"
       theme={data[index]?.theme}
@@ -78,11 +80,11 @@ export function WheelList({
         }}
       />
 
-      <View position="absolute" z={1} gap="$2" t={0} l={0} r={0} p="$4">
-        <Text fontWeight="800" fontFamily="$heading" fontSize="$10">
+      <View position="absolute" z={1} gap="2" t={0} l={0} r={0} p="4">
+        <Text fontWeight="800" fontFamily="heading" fontSize="10">
           Influencer
         </Text>
-        <Text fontWeight="500" fontFamily="$mono" color="$color10" fontSize="$8">
+        <Text fontWeight="500" fontFamily="mono" color="color9" fontSize="8">
           {data.length} Contacts
         </Text>
       </View>
@@ -134,30 +136,26 @@ const CardItem = ({
   return (
     <AnimatedView
       theme={cardItem.theme}
-      width="95%"
-      $gtSm={{ width: 300 }}
+      width="95% gtSm:300px"
       height={ITEM_SIZE}
       bg={cardItem.backgroundColor as ColorTokens}
-      p="$2"
-      rounded="$8"
+      p="2"
+      rounded="8"
       style={animatedStyle}
       flexDirection="row"
       items="center"
-      gap="$4"
-      shadowColor="$shadow3"
-      shadowOffset={{ width: 0, height: 0 }}
-      shadowOpacity={0.3}
-      shadowRadius="$6"
+      gap="4"
+      boxShadow="0 0 32px shadow-3"
       borderWidth={2}
-      borderColor="$color3"
+      borderColor="color3"
     >
       <View
         position="relative"
         height="100%"
         overflow="hidden"
         aspectRatio={1}
-        rounded="$6"
-        bg="$color1"
+        rounded="6"
+        bg="color1"
       >
         <Image
           height="100%"
@@ -168,17 +166,17 @@ const CardItem = ({
           inset={0}
         />
       </View>
-      <YStack px="$2" gap="$2" flex={1}>
+      <YStack px="2" gap="2" flex={1}>
         <Text
           color="white"
           textTransform="capitalize"
-          fontFamily="$heading"
+          fontFamily="heading"
           fontWeight="bold"
-          fontSize="$8"
+          fontSize="8"
         >
           {cardItem.title}
         </Text>
-        <Text fontSize="$3" fontFamily="$mono" color="white" opacity={0.8}>
+        <Text fontSize="3" fontFamily="mono" color="white" opacity={0.8}>
           {cardItem.description}
         </Text>
       </YStack>
@@ -189,7 +187,10 @@ const CardItem = ({
 const BackgroundView = ({
   index,
   scrollY,
-}: { index: number; scrollY: SharedValue<number> }) => {
+}: {
+  index: number
+  scrollY: SharedValue<number>
+}) => {
   const inputRange = getInputRange(index)
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -201,7 +202,7 @@ const BackgroundView = ({
   return (
     <AnimatedView
       theme={data[index].theme}
-      bg="$color3"
+      bg="color3"
       position="absolute"
       inset={0}
       style={animatedStyle}
@@ -220,8 +221,8 @@ const Slider = ({ scrollY }: { scrollY: SharedValue<number> }) => {
       justify="center"
       items="flex-end"
       self="center"
-      r="$4"
-      gap="$2"
+      r="4"
+      gap="2"
     >
       {data.map((item, index) => (
         <SliderItem scrollY={scrollY} key={item.id} index={index} />
@@ -233,7 +234,10 @@ const Slider = ({ scrollY }: { scrollY: SharedValue<number> }) => {
 const SliderItem = ({
   scrollY,
   index,
-}: { scrollY: SharedValue<number>; index: number }) => {
+}: {
+  scrollY: SharedValue<number>
+  index: number
+}) => {
   const inputRange = getInputRange(index + 1)
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -250,7 +254,7 @@ const SliderItem = ({
     }
   }, [scrollY, inputRange])
 
-  return <AnimatedView rounded="$6" height={4} bg="$color10" style={animatedStyle} />
+  return <AnimatedView rounded="6" height={4} bg="color9" style={animatedStyle} />
 }
 
 type CardData = {
@@ -284,7 +288,7 @@ const data: CardData[] = [
     },
     description: '10M Subscribers',
     backgroundColor: '#4F959D',
-    theme: 'cyan',
+    theme: 'teal',
   },
   {
     id: 3,
@@ -294,7 +298,7 @@ const data: CardData[] = [
     },
     description: '32M Subscribers',
     backgroundColor: '#1B4D3E',
-    theme: 'forest',
+    theme: 'green',
   },
   {
     id: 4,
@@ -314,7 +318,7 @@ const data: CardData[] = [
     },
     backgroundColor: '#C14600',
     description: '8M Subscribers',
-    theme: 'orangeRed',
+    theme: 'orange',
   },
   {
     id: 6,
@@ -324,7 +328,7 @@ const data: CardData[] = [
     },
     description: '22M Subscribers',
     backgroundColor: '#872341',
-    theme: 'burgundy',
+    theme: 'red',
   },
   {
     id: 7,
@@ -334,7 +338,7 @@ const data: CardData[] = [
     },
     backgroundColor: '#261FB3',
     description: '32M Subscribers',
-    theme: 'royalBlue',
+    theme: 'blue',
   },
   {
     id: 8,
@@ -344,7 +348,7 @@ const data: CardData[] = [
     },
     description: '12M Subscribers',
     backgroundColor: '#D84040',
-    theme: 'supreme',
+    theme: 'purple',
   },
 ]
 

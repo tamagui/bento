@@ -51,10 +51,10 @@ function Calendar({
   })
 
   return (
-    <View items="center" justify="center" flexDirection="column" gap="$4">
+    <View items="center" justify="center" flexDirection="column" gap="4">
       <View flexDirection="row" minW="100%" items="center" justify="space-between">
         {order === 'first' || order === 'either' ? (
-          <Button circular size="$4" {...swapOnClick(subtractOffset({ months: 1 }))}>
+          <Button circular size="4" {...swapOnClick(subtractOffset({ months: 1 }))}>
             <Button.Icon scaleIcon={1.5}>
               <ChevronLeft />
             </Button.Icon>
@@ -67,7 +67,7 @@ function Calendar({
 
         {isWeb &&
           (order === 'last' || order === 'either' ? (
-            <Button circular size="$4" {...swapOnClick(subtractOffset({ months: -1 }))}>
+            <Button circular size="4" {...swapOnClick(subtractOffset({ months: -1 }))}>
               <Button.Icon scaleIcon={1.5}>
                 <ChevronRight />
               </Button.Icon>
@@ -77,7 +77,7 @@ function Calendar({
           ))}
 
         {!isWeb && (
-          <Button circular size="$4" {...swapOnClick(subtractOffset({ months: -1 }))}>
+          <Button circular size="4" {...swapOnClick(subtractOffset({ months: -1 }))}>
             <Button.Icon scaleIcon={1.5}>
               <ChevronRight />
             </Button.Icon>
@@ -90,15 +90,15 @@ function Calendar({
           width="100%"
           justify="center"
           items="center"
-          style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
-          gap="$4"
+          gap="4"
           {...prevNextAnimation()}
+          style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
         >
           <WeekView weekDays={weekDays} />
 
           <View
             flexDirection="column"
-            gap="$2"
+            gap="2"
             items="center"
             justify="center"
             width="100%"
@@ -109,11 +109,11 @@ function Calendar({
                   justify="space-between"
                   items="center"
                   flexDirection="row"
-                  key={days[0].$date.toString()}
-                  gap="$1"
+                  gap="1"
                   flex={1}
                   flexBasis="auto"
                   width="100%"
+                  key={days[0].$date.toString()}
                 >
                   {days.map((d) => (
                     <Button
@@ -121,24 +121,12 @@ function Calendar({
                       circular
                       p={0}
                       {...swapOnClick(dayButton(d))}
-                      bg={
-                        !d.inCurrentMonth
-                          ? 'transparent'
-                          : d.selected
-                            ? '$background'
-                            : 'transparent'
-                      }
+                      bg={`${!d.inCurrentMonth ? 'transparent' : d.selected ? 'background' : 'transparent'}`}
                       theme={d.selected ? 'accent' : undefined}
                       disabled={!d.inCurrentMonth}
                     >
                       <Button.Text
-                        color={
-                          !d.inCurrentMonth
-                            ? '$color6'
-                            : d.selected
-                              ? '$color12'
-                              : '$color11'
-                        }
+                        color={`${!d.inCurrentMonth ? 'color6' : d.selected ? 'color11' : 'color10'}`}
                       >
                         {d.day}
                       </Button.Text>
@@ -161,7 +149,7 @@ type CalendarViewProps = {
 const CalendarView = ({ fullWidthMode }: CalendarViewProps) => {
   if (fullWidthMode)
     return (
-      <View flexDirection="row" gap="$3">
+      <View flexDirection="row" gap="3">
         <Calendar order="first" calendarIndex={1} />
         <Separator vertical />
         <Calendar order="last" calendarIndex={0} />
@@ -171,7 +159,11 @@ const CalendarView = ({ fullWidthMode }: CalendarViewProps) => {
   return <Calendar order="either" calendarIndex={0} />
 }
 
-function DatePickerBody({ config }: { config: DatePickerProviderProps['config'] }) {
+function DatePickerBody({
+  config,
+}: {
+  config: DatePickerProviderProps['config']
+}) {
   const [header, setHeader] = useState<'month' | 'year' | 'day'>('day')
   const { gtSm: fullWidthMode } = useMedia()
 
@@ -182,7 +174,7 @@ function DatePickerBody({ config }: { config: DatePickerProviderProps['config'] 
 
       case 'year':
         return (
-          <View items="center" gap="$3">
+          <View items="center" gap="3">
             <YearRangeSlider />
             <YearPicker onChange={() => setHeader('day')} />
           </View>
@@ -190,8 +182,8 @@ function DatePickerBody({ config }: { config: DatePickerProviderProps['config'] 
 
       case 'month':
         return (
-          <View gap="$4">
-            <H3 size="$7" self="center">
+          <View gap="4">
+            <H3 size="7" self="center">
               Select a month
             </H3>
             <MonthPicker onChange={() => setHeader('day')} />
@@ -205,9 +197,7 @@ function DatePickerBody({ config }: { config: DatePickerProviderProps['config'] 
 
   return (
     <HeaderTypeProvider config={config} type={header} setHeader={setHeader}>
-      <View p="$4" $gtMd={{ p: '$0' }}>
-        {renderView()}
-      </View>
+      <View p="4 gtMd:0">{renderView()}</View>
     </HeaderTypeProvider>
   )
 }

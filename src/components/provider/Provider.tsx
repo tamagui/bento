@@ -1,4 +1,4 @@
-import { Toast } from '@tamagui/toast'
+import { Toast } from 'tamagui'
 import { renderBentoToast } from '../feedback/toasts/common/CurrentToast'
 import type { TamaguiProviderProps } from 'tamagui'
 import { TamaguiProvider, isWeb } from 'tamagui'

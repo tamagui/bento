@@ -1,5 +1,5 @@
 import { ChevronRight } from '@tamagui/lucide-icons-2'
-import { toast } from '@tamagui/toast'
+import { toast } from 'tamagui'
 import { Button } from 'tamagui'
 import { CellCopy, SettingsCellFrame } from './common/SettingsCellFrame'
 
@@ -13,33 +13,32 @@ export function CellDisclosure({
 }) {
   const row = (
     <Button
-      unstyled
+      variant="quiet"
       width="100%"
       flexDirection="row"
       minH={64}
-      px="$4"
-      py="$3"
+      px="4"
+      py="3"
       items="center"
       justify="space-between"
-      gap="$3"
+      gap="3"
       cursor="pointer"
+      bg="hover:color2 press:color3"
+      outlineColor="focus-visible:outline-color"
+      outlineOffset="focus-visible:-2px"
+      outlineStyle="focus-visible:solid"
+      outlineWidth="focus-visible:2px"
       aria-label="Open notification settings"
       onPress={
         onPress ??
         (() =>
-          toast('Notifications', { description: 'Would open notification settings' }))
+          toast('Notifications', {
+            description: 'Would open notification settings',
+          }))
       }
-      pressStyle={{ bg: '$color3' }}
-      hoverStyle={{ bg: '$color2' }}
-      focusVisibleStyle={{
-        outlineColor: '$outlineColor',
-        outlineOffset: -2,
-        outlineStyle: 'solid',
-        outlineWidth: 2,
-      }}
     >
       <CellCopy label="Notifications" />
-      <ChevronRight size={18} color="$color9" aria-hidden />
+      <ChevronRight size={18} color="color8" aria-hidden />
     </Button>
   )
   return grouped ? row : <SettingsCellFrame>{row}</SettingsCellFrame>

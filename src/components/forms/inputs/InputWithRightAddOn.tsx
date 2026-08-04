@@ -1,21 +1,20 @@
 import { Copy } from '@tamagui/lucide-icons-2'
-import type { SizeTokens } from 'tamagui'
+import type { FontSizeTokens } from 'tamagui'
 import { View } from 'tamagui'
 import { Input } from './components/inputsParts'
 
 /** ------ EXAMPLE ------ */
-export function InputWithRightAddOnDemo({ size = '$4' }: { size?: SizeTokens }) {
+export function InputWithRightAddOnDemo({
+  size = '4',
+}: {
+  size?: FontSizeTokens
+}) {
   return (
     <View flexDirection="column" justify="center" items="center" height={100}>
       <Input size={size} minW="100%">
         <Input.Box>
           <Input.Section>
-            <Input.Area
-              focusStyle={{
-                outlineOffset: 1,
-              }}
-              placeholder="Copy this text"
-            />
+            <Input.Area outlineOffset="focus:1px" placeholder="Copy this text" />
           </Input.Section>
           <Input.Section>
             <Input.Button>

@@ -11,9 +11,9 @@ const SPACE = 4
 export function BottomView({ title }: BottomViewProps) {
   return (
     <>
-      <YStack position="absolute" p="$4" pb={insets.paddingBottom} b={0} l={0} r={0}>
-        <YStack justify="center" items="center" gap="$3">
-          <Text fontWeight="bold" textTransform="uppercase" fontFamily="$silkscreen">
+      <YStack position="absolute" p="4" pb={insets.paddingBottom} b={0} l={0} r={0}>
+        <YStack justify="center" items="center" gap="3">
+          <Text fontWeight="bold" textTransform="uppercase" fontFamily="silkscreen">
             {title} BY
           </Text>
 

@@ -1,6 +1,8 @@
+import { Avatar, YGroup } from '../../BentoSkins'
 import { useState } from 'react'
-import { Avatar, Label, Text, YGroup, View, useEvent } from 'tamagui'
+import { Label, Text, View, useEvent } from 'tamagui'
 import { Card, RadioGroup } from './components/radioParts'
+import { useGroupMedia } from '../../hooks/useGroupMedia'
 
 const items = [
   {
@@ -34,13 +36,11 @@ export function GroupedRadio() {
       items="center"
       justify="center"
       minW={'100%'}
-      $group-window-sm={{
-        px: '$4',
-        py: '$6',
-      }}
+      px="@sm/window:4"
+      py="@sm/window:6"
     >
       <RadioGroup value={value} onValueChange={setValue} minWidth="100%">
-        <YGroup rounded="$6" data-hover>
+        <YGroup rounded="6" data-hover>
           {items.map((item) => (
             <Item
               item={item}
@@ -66,42 +66,41 @@ function Item({
   setValue: (value: string) => void
   item: Item
 }) {
+  const { xs } = useGroupMedia('window')
   const { description, id, image, title } = item
   const onPress = useEvent(() => setValue(id))
   return (
     <YGroup.Item>
       <Card
         flexDirection="row"
-        active={selected}
-        p="$4"
-        gap="$4"
-        onPress={onPress}
+        p="4"
+        gap="4"
         borderBottomWidth={1}
         mb={-1}
-        $group-window-sm={{
-          height: 110,
-          items: 'flex-start',
-        }}
+        height="@sm/window:110px"
+        items="@sm/window:flex-start"
+        active={selected}
+        onPress={onPress}
       >
-        <Avatar circular size="$5" $group-window-xs={{ size: '$4' }}>
+        <Avatar circular size={xs ? '4' : '5'}>
           <Avatar.Image aria-label={`${title} logo`} src={image} />
-          <Avatar.Fallback bg="$background" />
+          <Avatar.Fallback bg="background" />
         </Avatar>
-        <View flex={1} gap="$2">
-          <View flexDirection="row" gap="$2">
-            <View flexDirection="row" items="center" flex={1} gap="$2">
-              <Label size="$6" fontWeight="500" lineHeight="$2" htmlFor={id}>
+        <View flex={1} gap="2">
+          <View flexDirection="row" gap="2">
+            <View flexDirection="row" items="center" flex={1} gap="2">
+              <Label size="6" fontWeight="500" lineHeight="2" htmlFor={id}>
                 {title}
               </Label>
               <View
                 theme="blue"
                 rounded={100_000}
-                bg="$color6"
+                bg="color6"
                 items="center"
-                px="$2"
-                py="$1"
+                px="2"
+                py="1"
               >
-                <Text color="$color10" fontSize="$3" fontWeight="$1">
+                <Text color="color9" fontSize="3" fontWeight="1">
                   Verified
                 </Text>
               </View>
@@ -109,11 +108,10 @@ function Item({
             <View onPress={(e) => e.stopPropagation()}>
               <RadioGroup.Item marginLeft="auto" id={id} value={id}>
                 <RadioGroup.Indicator
-                  unstyled
                   width="33%"
                   height="33%"
                   rounded={1000}
-                  bg="$color"
+                  bg="color"
                 />
               </RadioGroup.Item>
             </View>
@@ -121,10 +119,10 @@ function Item({
           <View maxW="80%">
             <Text
               wordWrap="break-word"
-              fontSize="$3"
-              lineHeight="$3"
+              fontSize="3"
+              lineHeight="3"
               fontWeight="300"
-              color="$color9"
+              color="color8"
             >
               {description}
             </Text>

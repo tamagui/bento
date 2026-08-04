@@ -1,13 +1,13 @@
 import { Antenna } from '@tamagui/lucide-icons-2'
 import { useRef } from 'react'
-import type { SizeTokens } from 'tamagui'
+import type { FontSizeTokens } from 'tamagui'
 import { View } from 'tamagui'
 import { Input } from './components/inputsParts'
 import { useForwardFocus } from './hooks/useForwardFocus'
 import type { TextInput } from 'react-native'
 
 /** ------ EXAMPLE ------ */
-export function InputWithLeftIconDemo({ size = '$4' }: { size?: SizeTokens }) {
+export function InputWithLeftIconDemo({ size = '4' }: { size?: FontSizeTokens }) {
   const inputRef = useRef<TextInput>(null)
   const focusTrigger = useForwardFocus(inputRef)
   return (

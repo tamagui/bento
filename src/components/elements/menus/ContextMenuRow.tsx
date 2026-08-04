@@ -35,27 +35,24 @@ function MenuItem({
   return (
     <XStack
       ref={itemRef as any}
-      // real button so Enter/Space activate natively
       render={isWeb ? <button type="button" /> : undefined}
       role="menuitem"
       tabIndex={-1}
       items="center"
-      gap="$2.5"
-      px="$2.5"
-      py="$2"
-      rounded="$3"
+      gap="2-5"
+      px="2-5"
+      py="2"
+      rounded="3"
       cursor="pointer"
-      hoverStyle={{ bg: danger ? '$red4' : '$color4' }}
-      pressStyle={{ bg: danger ? '$red5' : '$color5' }}
-      focusStyle={{ bg: danger ? '$red4' : '$color4' }}
+      bg={`hover:${danger ? 'red-200' : 'color4'} press:${danger ? 'red-300' : 'color5'} focus:${danger ? 'red-200' : 'color4'}`}
       onPress={onSelect}
     >
-      <Icon size={14} color={danger ? '$red10' : '$color10'} aria-hidden />
-      <Text flex={1} fontSize="$3" color={danger ? '$red10' : '$color12'}>
+      <Icon size={14} color={danger ? 'red-600' : 'color9'} aria-hidden />
+      <Text flex={1} fontSize="3" color={`${danger ? 'red-600' : 'color11'}`}>
         {label}
       </Text>
       {!!shortcut && (
-        <Text fontSize="$1" color="$color9" fontFamily="$mono" aria-hidden>
+        <Text fontSize="1" color="color8" fontFamily="mono" aria-hidden>
           {shortcut}
         </Text>
       )}
@@ -137,7 +134,7 @@ export function ContextMenuRow() {
   }
 
   return (
-    <YStack gap="$3" items="center">
+    <YStack gap="3" items="center">
       <Popover open={open} onOpenChange={setOpen} placement="bottom-start" offset={4}>
         <YStack position="relative" width={340} maxW="100%">
           {/* invisible anchor tracks the pointer so the menu opens at the cursor */}
@@ -156,23 +153,18 @@ export function ContextMenuRow() {
             aria-expanded={open}
             aria-label="Q3 Launch plan.pdf, press for actions"
             width="100%"
-            p="$3.5"
-            rounded="$5"
-            bg="$color1"
+            p="4"
+            rounded="5"
+            bg="color1"
             borderWidth={1}
-            borderColor="$color4"
+            borderColor="color4 hover:color6"
             items="center"
-            gap="$3"
+            gap="3"
             cursor="context-menu"
-            hoverStyle={{ borderColor: '$color6' }}
-            focusVisibleStyle={{
-              outlineColor: '$outlineColor',
-              outlineOffset: 2,
-              outlineStyle: 'solid',
-              outlineWidth: 2,
-            }}
-            // press is the row's primary action; menu comes from
-            // right-click / Menu key on web, long-press on touch
+            outlineColor="focus-visible:outline-color"
+            outlineOffset="focus-visible:2px"
+            outlineStyle="focus-visible:solid"
+            outlineWidth="focus-visible:2px"
             onPress={() => (isWeb ? openMenu() : setLast('Opened'))}
             onLongPress={() => openMenu()}
             onKeyDown={handleTriggerKeyDown}
@@ -187,20 +179,20 @@ export function ContextMenuRow() {
             <View
               width={38}
               height={38}
-              rounded="$3"
-              bg="$blue5"
+              rounded="3"
+              bg="blue-300"
               items="center"
               justify="center"
             >
-              <Text fontWeight="700" color="$blue11">
+              <Text fontWeight="700" color="blue-700">
                 Q3
               </Text>
             </View>
             <YStack flex={1} items="flex-start">
-              <Text fontWeight="600" color="$color12">
+              <Text fontWeight="600" color="color11">
                 Q3 Launch plan.pdf
               </Text>
-              <Text fontSize="$2" color="$color10">
+              <Text fontSize="2" color="color9">
                 {isWeb ? 'Right-click for actions' : 'Long-press for actions'}
               </Text>
             </YStack>
@@ -209,21 +201,19 @@ export function ContextMenuRow() {
         <Popover.Content
           role="menu"
           aria-label="File actions"
-          rounded="$5"
+          rounded="5"
           borderWidth={1}
-          borderColor="$color5"
-          bg="$color1"
-          p="$1.5"
+          borderColor="color5"
+          bg="color1"
+          p="1"
           minW={220}
-          shadowColor="$shadowColor"
-          shadowRadius={18}
-          shadowOffset={{ width: 0, height: 8 }}
+          boxShadow="0 8px 18px shadow-color"
           transition={reducedMotion ? undefined : '100ms'}
-          enterStyle={reducedMotion ? undefined : { opacity: 0, scale: 0.97 }}
-          exitStyle={reducedMotion ? undefined : { opacity: 0, scale: 0.98 }}
+          opacity={`${reducedMotion ? '' : 'enter:0'} exit:0`}
+          scale={`${reducedMotion ? '' : 'enter:0.97'} exit:0.98`}
           onKeyDown={handleMenuKeyDown}
         >
-          <YStack gap="$0.5" width="100%">
+          <YStack gap="px" width="100%">
             {actions.map((a) => (
               <MenuItem
                 key={a.label}
@@ -234,7 +224,7 @@ export function ContextMenuRow() {
                 onSelect={() => run(a.label)}
               />
             ))}
-            <Separator my="$1" />
+            <Separator my="1" />
             <MenuItem
               icon={Trash2}
               label="Delete"
@@ -245,8 +235,8 @@ export function ContextMenuRow() {
           </YStack>
         </Popover.Content>
       </Popover>
-      <XStack gap="$2" items="center" minH={28}>
-        <Text fontSize="$2" color="$color9" aria-live="polite">
+      <XStack gap="2" items="center" minH={28}>
+        <Text fontSize="2" color="color8" aria-live="polite">
           {last === 'Delete'
             ? 'Deleted Q3 Launch plan.pdf'
             : last
@@ -254,7 +244,7 @@ export function ContextMenuRow() {
               : 'No action yet'}
         </Text>
         {last === 'Delete' && (
-          <Button size="$2" chromeless onPress={() => setLast(null)}>
+          <Button size="2" variant="quiet" onPress={() => setLast(null)}>
             Undo
           </Button>
         )}

@@ -1,12 +1,13 @@
+import { Avatar } from '../../BentoSkins'
 import { randRecentDate, randSentence } from '@ngneat/falso'
 import { Check } from '@tamagui/lucide-icons-2'
 import { useEffect, useState } from 'react'
 import { FlatList } from 'react-native'
-import { AnimatePresence, Avatar, Button, Text, Theme, View, styled } from 'tamagui'
+import { AnimatePresence, Button, Text, Theme, View, styled } from 'tamagui'
 
 const List = styled(FlatList<Message>, {
-  bg: '$background',
-  gap: '$3',
+  bg: 'background',
+  gap: '3',
 })
 
 const avatars = [
@@ -45,21 +46,16 @@ export function ChatList() {
 
   return (
     <List
-      $group-window-gtXs={{
-        p: '$8',
-      }}
-      inverted
-      data={messages}
-      renderItem={renderItem}
-      windowSize={2}
+      p="@gtXs/window:8 @sm/window:4"
       flexDirection="column"
       height="100%"
       flex={1}
       minW="100%"
       maxH={500}
-      $group-window-sm={{
-        p: '$4',
-      }}
+      inverted
+      data={messages}
+      renderItem={renderItem}
+      windowSize={2}
       contentContainerStyle={{
         gap: 16,
       }}
@@ -97,51 +93,50 @@ function ChatItem({ item, index }: { item: Message; index: number }) {
         <View
           flexDirection={itsMe ? 'row-reverse' : 'row'}
           items="flex-start"
-          gap="$4"
+          gap="4"
           self={itsMe ? 'flex-end' : 'flex-start'}
           maxW="100%"
           minW="100%"
         >
           <Button
             transition="quick"
-            enterStyle={{
-              opacity: 0,
-              scale: 0,
-            }}
-            size="$5"
+            opacity="enter:0"
+            scale="enter:0"
+            size="5"
             circular
-            chromeless
+            variant="quiet"
           >
             <View flexDirection="row">
-              <Avatar circular size="$5">
-                <Avatar.Image objectFit="cover" source={{ uri: avatar }} />
-                <Avatar.Fallback bg="$background" />
+              <Avatar circular size="5">
+                <Avatar.Image objectFit="cover" src={avatar} />
+                <Avatar.Fallback bg="background" />
               </Avatar>
             </View>
           </Button>
           <View
             flexDirection="column"
             items={itsMe ? 'flex-end' : 'flex-start'}
-            gap="$2"
+            gap="2"
             maxW={400}
             justify="center"
             shrink={1}
           >
             <Theme name={itsMe ? 'green' : undefined}>
-              <View bg="$color2" p="$4" py="$3" rounded="$6" shrink={1}>
-                <Text
-                  fontSize="$3"
-                  fontWeight="$3"
-                  lineHeight="$3"
-                  shrink={1}
-                  select="text"
-                >
+              <View
+                bg="color2"
+                paddingRight="4"
+                paddingLeft="4"
+                py="3"
+                rounded="6"
+                shrink={1}
+              >
+                <Text fontSize="3" fontWeight="3" lineHeight="3" shrink={1} select="text">
                   {message}
                 </Text>
               </View>
             </Theme>
-            <View flexDirection={itsMe ? 'row' : 'row-reverse'} gap="$2">
-              <Text color="$color7" fontSize="$3" fontWeight="$3" lineHeight="$3">
+            <View flexDirection={itsMe ? 'row' : 'row-reverse'} gap="2">
+              <Text color="color6" fontSize="3" fontWeight="3" lineHeight="3">
                 {time}
               </Text>
               <Check size={16} color="green" />

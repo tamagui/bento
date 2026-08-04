@@ -103,11 +103,11 @@ export function WelcomeChecklist() {
           ? 'teammate@example.com'
           : 'Project name'
     return (
-      <XStack gap="$2" pl={38} pb="$2" flexWrap="wrap">
+      <XStack gap="2" pl={38} pb="2" flexWrap="wrap">
         <Input
           flex={1}
           minW={180}
-          size="$3"
+          size="3"
           value={draft}
           onChangeText={setDraft}
           placeholder={placeholder}
@@ -122,10 +122,10 @@ export function WelcomeChecklist() {
               : undefined
           }
         />
-        <Button size="$3" onPress={commit}>
+        <Button size="3" onPress={commit}>
           Save
         </Button>
-        <Button size="$3" chromeless onPress={() => setEditing(null)}>
+        <Button size="3" variant="quiet" onPress={() => setEditing(null)}>
           Cancel
         </Button>
       </XStack>
@@ -137,37 +137,37 @@ export function WelcomeChecklist() {
       width="100%"
       maxW={620}
       self="center"
-      gap="$5"
-      p="$5"
-      rounded="$8"
+      gap="5"
+      p="5"
+      rounded="8"
       borderWidth={1}
-      borderColor="$borderColor"
-      bg="$background"
+      borderColor="border-color"
+      bg="background"
     >
-      <XStack items="center" gap="$3">
+      <XStack items="center" gap="3">
         <View
           width={46}
           height={46}
-          rounded="$5"
-          bg="$color3"
+          rounded="5"
+          bg="color3"
           items="center"
           justify="center"
         >
-          <Rocket size={23} color="$accentColor" aria-hidden />
+          <Rocket size={23} color="accent-color" aria-hidden />
         </View>
-        <YStack flex={1} gap="$1">
-          <Text fontSize="$7" fontWeight="900" letterSpacing={0}>
+        <YStack flex={1} gap="1">
+          <Text fontSize="7" fontWeight="900" letterSpacing={0}>
             Welcome aboard
           </Text>
-          <Text color="$color9">Finish these steps to set up your workspace.</Text>
+          <Text color="color8">Finish these steps to set up your workspace.</Text>
         </YStack>
       </XStack>
       <ProgressBar
         value={percent}
         label={`${doneCount} of ${tasks.length} complete`}
-        color="$green9"
+        color="green-500"
       />
-      <YStack gap="$2" role={isWeb ? 'list' : undefined} aria-label="Setup tasks">
+      <YStack gap="2" role={isWeb ? 'list' : undefined} aria-label="Setup tasks">
         {tasks.map((task) => {
           const complete = task.done(workspace)
           const detail =
@@ -185,44 +185,44 @@ export function WelcomeChecklist() {
               <XStack
                 minH={58}
                 items="center"
-                gap="$3"
-                p="$3"
-                rounded="$5"
-                bg={complete ? '$color2' : 'transparent'}
+                gap="3"
+                p="3"
+                rounded="5"
+                bg={`${complete ? 'color2' : 'transparent'}`}
               >
                 {complete ? (
                   <View
                     width={26}
                     height={26}
                     rounded={999}
-                    bg="$green9"
+                    bg="green-500"
                     items="center"
                     justify="center"
                   >
-                    <Check size={15} color="$white1" aria-hidden />
+                    <Check size={15} color="white" aria-hidden />
                   </View>
                 ) : (
-                  <Circle size={26} color="$color7" aria-hidden />
+                  <Circle size={26} color="color6" aria-hidden />
                 )}
                 <YStack flex={1} minW={0}>
                   <Text
                     fontWeight="700"
-                    color={complete ? '$color9' : '$color12'}
+                    color={`${complete ? 'color8' : 'color11'}`}
                     textDecorationLine={complete ? 'line-through' : 'none'}
                     letterSpacing={0}
                   >
                     {task.label}
                   </Text>
                   {!!detail && (
-                    <Text fontSize="$2" color="$color9" numberOfLines={1}>
+                    <Text fontSize="2" color="color8" numberOfLines={1}>
                       {detail}
                     </Text>
                   )}
                 </YStack>
                 {task.id === 'integration' ? (
                   <Button
-                    size="$3"
-                    chromeless
+                    size="3"
+                    variant="quiet"
                     hitSlop={isWeb ? undefined : 8}
                     aria-label={
                       complete ? 'Disconnect integration' : 'Connect an integration'
@@ -238,8 +238,8 @@ export function WelcomeChecklist() {
                   </Button>
                 ) : (
                   <Button
-                    size="$3"
-                    chromeless
+                    size="3"
+                    variant="quiet"
                     hitSlop={isWeb ? undefined : 8}
                     aria-label={`${task.action}: ${task.label}`}
                     onPress={() => startTask(task.id)}

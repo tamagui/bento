@@ -24,8 +24,7 @@ export function StepperHorizontal({
       maxW={720}
       self="center"
       items="flex-start"
-      px="$4"
-      // biome-ignore lint/a11y/useSemanticElements: React Native has no equivalent semantic element; the demo shares one tree across platforms.
+      px="4"
       role="list"
       aria-label="Progress"
     >
@@ -39,12 +38,12 @@ export function StepperHorizontal({
           flex={index === steps.length - 1 ? 0 : 1}
           items="flex-start"
         >
-          <YStack width={88} items="center" gap="$2">
+          <YStack width={88} items="center" gap="2">
             <StepIndicator number={index + 1} state={step.state} />
             <Text
-              fontSize="$3"
+              fontSize="3"
               fontWeight={step.state === 'current' ? '700' : '500'}
-              color={step.state === 'upcoming' ? '$color9' : '$color12'}
+              color={`${step.state === 'upcoming' ? 'color8' : 'color11'}`}
               letterSpacing={0}
             >
               {step.label}
@@ -55,8 +54,8 @@ export function StepperHorizontal({
               flex={1}
               height={2}
               mt={16}
-              mx="$2"
-              bg={step.state === 'done' ? '$accentColor' : '$color5'}
+              mx="2"
+              bg={`${step.state === 'done' ? 'accent-color' : 'color5'}`}
             />
           ) : null}
         </XStack>

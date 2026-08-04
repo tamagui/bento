@@ -28,7 +28,7 @@ export function NotificationsPopover() {
   const visible = showAll ? items : items.slice(0, todayNotifications.length)
 
   return (
-    <XStack width="100%" maxW={520} self="center" justify="center" p="$7">
+    <XStack width="100%" maxW={520} self="center" justify="center" p="7">
       <Popover placement="bottom-end" stayInFrame allowFlip>
         <Popover.Trigger asChild>
           <Button
@@ -51,11 +51,11 @@ export function NotificationsPopover() {
                 height={17}
                 px={4}
                 rounded={999}
-                bg="$red9"
+                bg="red-500"
                 items="center"
                 justify="center"
               >
-                <Text color="$white1" fontSize={10} fontWeight="800">
+                <Text color="white" fontSize={10} fontWeight="800">
                   {unreadCount}
                 </Text>
               </View>
@@ -66,15 +66,11 @@ export function NotificationsPopover() {
         {/* phones get a bottom sheet instead of a desktop popover */}
         <Adapt when="maxMd" platform="touch">
           <Sheet modal dismissOnSnapToBottom snapPointsMode="fit">
-            <Sheet.Frame p="$2">
+            <Sheet.Container p="2">
+              <Sheet.Background />
               <Adapt.Contents />
-            </Sheet.Frame>
-            <Sheet.Overlay
-              bg="$shadow6"
-              enterStyle={{ opacity: 0 }}
-              exitStyle={{ opacity: 0 }}
-              transition="100ms"
-            />
+            </Sheet.Container>
+            <Sheet.Overlay bg="shadow-6" opacity="enter:0 exit:0" transition="100ms" />
           </Sheet>
         </Adapt>
 
@@ -82,23 +78,23 @@ export function NotificationsPopover() {
           width={380}
           maxW="92vw"
           p={0}
-          rounded="$7"
+          rounded="7"
           borderWidth={1}
-          borderColor="$borderColor"
-          bg="$background"
+          borderColor="border-color"
+          bg="background"
         >
           <YStack width="100%">
-            <XStack p="$4" justify="space-between" items="center">
-              <Text fontSize="$6" fontWeight="800" letterSpacing={0}>
+            <XStack p="4" justify="space-between" items="center">
+              <Text fontSize="6" fontWeight="800" letterSpacing={0}>
                 Notifications
               </Text>
-              <Text fontSize="$2" color="$accentColor" aria-live="polite">
+              <Text fontSize="2" color="accent-color" aria-live="polite">
                 {unreadCount ? `${unreadCount} new` : 'All caught up'}
               </Text>
             </XStack>
             <Separator />
             <ScrollView maxH={380}>
-              <YStack p="$2">
+              <YStack p="2">
                 {visible.map((notification) => (
                   <NotificationRow
                     key={notification.id}
@@ -110,7 +106,7 @@ export function NotificationsPopover() {
             </ScrollView>
             <Separator />
             <Button
-              chromeless
+              variant="quiet"
               rounded={0}
               aria-expanded={showAll}
               onPress={() => setShowAll((current) => !current)}

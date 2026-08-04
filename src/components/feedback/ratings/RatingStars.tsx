@@ -12,13 +12,13 @@ export function RatingStars() {
   const update = (next: number) => setRating(Math.max(0.5, Math.min(5, next)))
 
   return (
-    <YStack width="100%" maxW={520} self="center" gap="$6" p="$5">
-      <YStack gap="$2">
-        <Paragraph color="$color10">Read only · fractional support</Paragraph>
+    <YStack width="100%" maxW={520} self="center" gap="6" p="5">
+      <YStack gap="2">
+        <Paragraph color="color9">Read only · fractional support</Paragraph>
         <StarMeter rating={4.5} size={24} />
       </YStack>
-      <YStack gap="$2">
-        <Paragraph color="$color10" aria-hidden>
+      <YStack gap="2">
+        <Paragraph color="color9" aria-hidden>
           Your rating: {rating}
         </Paragraph>
         {/* one slider widget: half-step values need slider semantics, not
@@ -31,15 +31,13 @@ export function RatingStars() {
           aria-valuemax={5}
           aria-valuenow={rating}
           aria-valuetext={`${rating} of 5 stars`}
-          gap="$1"
+          gap="1"
           self="flex-start"
-          rounded="$4"
-          focusVisibleStyle={{
-            outlineColor: '$outlineColor',
-            outlineOffset: 4,
-            outlineStyle: 'solid',
-            outlineWidth: 2,
-          }}
+          rounded="4"
+          outlineColor="focus-visible:outline-color"
+          outlineOffset="focus-visible:4px"
+          outlineStyle="focus-visible:solid"
+          outlineWidth="focus-visible:2px"
           onKeyDown={(event: any) => {
             if (!isWeb) return
             if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
@@ -65,8 +63,8 @@ export function RatingStars() {
                 aria-hidden
                 cursor="pointer"
                 p={PAD}
+                scale="press:0.92"
                 hitSlop={isWeb ? undefined : 8}
-                pressStyle={{ scale: 0.92 }}
                 onPress={(event: any) => {
                   // left half of the star sets a half rating
                   const x = event.nativeEvent?.locationX ?? event.nativeEvent?.offsetX
@@ -75,7 +73,7 @@ export function RatingStars() {
                 }}
               >
                 <View width={STAR} height={STAR} position="relative">
-                  <Star size={STAR} color="$color6" />
+                  <Star size={STAR} color="color6" />
                   {fraction > 0 && (
                     <View
                       position="absolute"
@@ -83,7 +81,7 @@ export function RatingStars() {
                       width={`${fraction * 100}%`}
                       overflow="hidden"
                     >
-                      <Star size={STAR} color="$yellow10" fill="currentColor" />
+                      <Star size={STAR} color="yellow-600" fill="currentColor" />
                     </View>
                   )}
                 </View>

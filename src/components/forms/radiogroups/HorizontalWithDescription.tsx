@@ -32,10 +32,10 @@ const data = [
 export function HorizontalWithDescription() {
   const [value, setValue] = useState('vd-visa')
   return (
-    <View flexDirection="column" maxW="100%" gap="$4">
-      <View flexDirection="column" gap="$2">
+    <View flexDirection="column" maxW="100%" gap="4">
+      <View flexDirection="column" gap="2">
         <H2>Payment</H2>
-        <Text fontWeight="300" color="$color10">
+        <Text fontWeight="300" color="color9">
           Select your payment method
         </Text>
       </View>
@@ -45,8 +45,8 @@ export function HorizontalWithDescription() {
         flexDirection="row"
         flexShrink={1}
         flexWrap="wrap"
-        gap="$4"
-        rowGap="$4"
+        columnGap="4"
+        rowGap="4"
       >
         {data.map(({ id, label, icon, description }) => (
           <Item
@@ -78,32 +78,26 @@ type ItemProps = {
 const Item = ({ id, label, description, icon, setValue, selected }: ItemProps) => {
   return (
     <Card
-      rounded="$5"
+      rounded="5"
       flexDirection="row"
       flex={1}
       flexBasis={500}
       shrink={1}
-      gap="$3"
-      p="$3"
+      gap="3"
+      p="3"
       active={selected}
       onPress={() => setValue(id)}
     >
       <View onPress={(e) => e.stopPropagation()}>
-        <RadioGroup.Item m="$1" id={id} value={id}>
-          <RadioGroup.Indicator
-            unstyled
-            width="33%"
-            height="33%"
-            rounded={1000}
-            bg="$color"
-          />
+        <RadioGroup.Item m="1" id={id} value={id}>
+          <RadioGroup.Indicator width="33%" height="33%" rounded={1000} bg="color" />
         </RadioGroup.Item>
       </View>
 
-      <View flexDirection="column" gap="$1" flex={1}>
+      <View flexDirection="column" gap="1" flex={1}>
         <Label
-          size="$4"
-          lineHeight="$2"
+          size="4"
+          lineHeight="2"
           cursor="pointer"
           items="flex-start"
           flexDirection="column"
@@ -112,7 +106,7 @@ const Item = ({ id, label, description, icon, setValue, selected }: ItemProps) =
           {label}
         </Label>
 
-        <Text color="$color9">{description}</Text>
+        <Text color="color8">{description}</Text>
       </View>
     </Card>
   )

@@ -1,15 +1,15 @@
-import type { SizeTokens } from 'tamagui'
+import type { FontSizeTokens } from 'tamagui'
 import { View } from 'tamagui'
 import { Input } from './components/inputsParts'
 
 /** ------ EXAMPLE ------ */
 export function InputWithLabelDemo({
   labelText = 'Label',
-  size = '$4',
+  size = '4',
   focusOnMount = false,
   onChangeText,
 }: {
-  size?: SizeTokens
+  size?: FontSizeTokens
   focusOnMount?: boolean
   labelText?: string
   onChangeText?: (text: string) => void
@@ -17,7 +17,7 @@ export function InputWithLabelDemo({
   return (
     <View flexDirection="column" justify="center" items="center">
       <Input size={size} minW="100%">
-        <Input.Label htmlFor="input" mb="$1.5">
+        <Input.Label htmlFor="input" mb="1">
           {labelText}
         </Input.Label>
         <Input.Box>

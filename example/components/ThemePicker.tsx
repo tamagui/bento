@@ -36,7 +36,7 @@ export function ThemePicker({ themeColor, setThemeColor }: ThemePicker) {
     })
 
   return (
-    <YStack p="$4" pb={insets.paddingBottom}>
+    <YStack p="4" pb={insets.paddingBottom}>
       <XStack self="center">
         <GestureDetector gesture={pan}>
           <XStack
@@ -48,8 +48,8 @@ export function ThemePicker({ themeColor, setThemeColor }: ThemePicker) {
             mx={SPACE}
             px={SPACE}
             py={8}
-            bg="$background"
-            rounded="$10"
+            bg="background"
+            rounded="10"
           >
             {colors.map(({ emoji }, index) => (
               <Emoji key={`path-${index}-${emoji}`} position={position} index={index}>

@@ -1,5 +1,5 @@
 import { isWeb } from 'tamagui'
-// TODO: Image from tamagui doesn't have access to underlying image tag using ref
+// tamagui Image does not expose the underlying image element through its ref
 export const useZoomImageOnHover = (ref: any) => {
   if (isWeb) {
     const onMouseMove = (e) => {

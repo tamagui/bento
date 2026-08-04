@@ -1,3 +1,4 @@
+import { XGroup } from '../../BentoSkins'
 import { randFloat, randNumber, randProduct, randProductMaterial } from '@ngneat/falso'
 import {
   Coins,
@@ -24,7 +25,6 @@ import {
   Text,
   Unspaced,
   View,
-  XGroup,
   styled,
 } from 'tamagui'
 import { IconCenterButton } from '../../animation/buttons/IconCenterButton'
@@ -47,9 +47,9 @@ const bagNames = [
 const stockState = ['In stock', 'Out of stock', 'Available soon']
 
 const StyledText = styled(Text, {
-  color: '$color10',
-  fontSize: '$4',
-  lineHeight: '$4',
+  color: 'color9',
+  fontSize: '4',
+  lineHeight: '4',
 })
 
 const getItems = () => {
@@ -84,11 +84,11 @@ const tax = 0.15
 const getStockStateColor = (stockState: string) => {
   switch (stockState) {
     case 'In stock':
-      return '$green10'
+      return 'green-600'
     case 'Out of stock':
-      return '$red10'
+      return 'red-600'
     default:
-      return '$color10'
+      return 'color9'
   }
 }
 
@@ -141,30 +141,22 @@ const CartTotal = ({ items }: { items: Items }) => {
       flexDirection="column"
       rounded={5}
       width="100%"
-      bg="$color1"
-      $gtSm={{
-        px: '$7',
-        pb: '$7',
-      }}
-      gap="$4"
+      bg="color1"
+      px="gtSm:7"
+      pb="gtSm:7"
+      gap="4"
     >
       <Separator borderStyle="dashed" />
 
-      <View flexDirection="column" gap="$4">
-        <View flexDirection="column" gap="$4">
-          <Input size="$4" minW="100%">
+      <View flexDirection="column" gap="4">
+        <View flexDirection="column" gap="4">
+          <Input size="4" minW="100%">
             <Input.Box>
               <Input.Section>
                 <Input.Icon>
                   <Ticket />
                 </Input.Icon>
-                <Input.Area
-                  pl={0}
-                  focusStyle={{
-                    outlineOffset: 1,
-                  }}
-                  placeholder="Promocode"
-                />
+                <Input.Area pl={0} outlineOffset="focus:1px" placeholder="Promocode" />
               </Input.Section>
               <Input.Section>
                 <IconCenterButton />
@@ -178,21 +170,21 @@ const CartTotal = ({ items }: { items: Items }) => {
         <Separator borderStyle="dashed" />
 
         <View flexDirection="row" justify="space-between">
-          <StyledText fontSize="$5" lineHeight="$5">
+          <StyledText fontSize="5" lineHeight="5">
             Subtotal
           </StyledText>
-          <View flexDirection="row" gap="$2">
-            <StyledText fontSize="$5" lineHeight="$5" textDecorationLine="line-through">
+          <View flexDirection="row" gap="2">
+            <StyledText fontSize="5" lineHeight="5" textDecorationLine="line-through">
               ${subtotalPrice}
             </StyledText>
-            <StyledText fontSize="$5" lineHeight="$5">
+            <StyledText fontSize="5" lineHeight="5">
               ${subtotalPriceWithDiscount}
             </StyledText>
           </View>
         </View>
         <View flexDirection="row" justify="space-between">
-          <View flexDirection="row" items="center" gap="$2">
-            <PiggyBank size="$1" color="$color10" />
+          <View flexDirection="row" items="center" gap="2">
+            <PiggyBank size="1" color="color9" />
             <StyledText>Saving</StyledText>
           </View>
           <StyledText>
@@ -200,15 +192,15 @@ const CartTotal = ({ items }: { items: Items }) => {
           </StyledText>
         </View>
         <View flexDirection="row" justify="space-between">
-          <View flexDirection="row" items="center" gap="$2">
-            <Truck size="$1" color="$color10" />
+          <View flexDirection="row" items="center" gap="2">
+            <Truck size="1" color="color9" />
             <StyledText>Delivery</StyledText>
           </View>
           <StyledText>Free</StyledText>
         </View>
         <View flexDirection="row" justify="space-between">
-          <View flexDirection="row" items="center" gap="$2">
-            <Ticket size="$1" color="$color10" />
+          <View flexDirection="row" items="center" gap="2">
+            <Ticket size="1" color="color9" />
             <StyledText>Discount</StyledText>
           </View>
           <StyledText>
@@ -216,8 +208,8 @@ const CartTotal = ({ items }: { items: Items }) => {
           </StyledText>
         </View>
         <View flexDirection="row" justify="space-between">
-          <View flexDirection="row" items="center" gap="$2">
-            <Coins size="$1" color="$color10" />
+          <View flexDirection="row" items="center" gap="2">
+            <Coins size="1" color="color9" />
             <StyledText>Taxes</StyledText>
           </View>
           <StyledText>
@@ -229,18 +221,18 @@ const CartTotal = ({ items }: { items: Items }) => {
       <Separator borderStyle="dashed" />
 
       <View flexDirection="row" justify="space-between">
-        <View flexDirection="row" items="center" gap="$2">
-          <Receipt size="$1.5" />
-          <StyledText fontSize="$5" lineHeight="$5" color="$color">
+        <View flexDirection="row" items="center" gap="2">
+          <Receipt size="6" />
+          <StyledText fontSize="5" lineHeight="5" color="color">
             Total
           </StyledText>
         </View>
-        <StyledText fontSize="$5" lineHeight="$5" color="$color">
+        <StyledText fontSize="5" lineHeight="5" color="color">
           ${totalPrice}
         </StyledText>
       </View>
 
-      <View gap="$3" mt="$4">
+      <View gap="3" mt="4">
         <Button theme="blue">
           <Button.Text>Proceed to checkout</Button.Text>
         </Button>
@@ -263,35 +255,26 @@ export function Fullpage() {
   }, [])
 
   return (
-    <View
-      $gtMd={{ p: '$6' }}
-      flexDirection="column"
-      maxH={910}
-      height="100%"
-      width="100%"
-    >
-      <View flexDirection="column" gap="$3">
+    <View p="gtMd:6" flexDirection="column" maxH={910} height="100%" width="100%">
+      <View flexDirection="column" gap="3">
         <View flexDirection="row" justify="space-between">
           <H3>Cart</H3>
 
           <Dialog modal>
             <Dialog.Trigger asChild>
-              <Button theme="blue" size="$3" gap="$2" iconAfter={ShoppingBag}>
+              <Button theme="blue" size="3" gap="2" iconAfter={ShoppingBag}>
                 Checkout
               </Button>
             </Dialog.Trigger>
 
             <Dialog.Adapt when="maxMd">
               <Sheet transition="medium" zIndex={200000} modal dismissOnSnapToBottom>
-                <Sheet.Overlay
-                  transition="quick"
-                  enterStyle={{ opacity: 0 }}
-                  exitStyle={{ opacity: 0 }}
-                />
+                <Sheet.Overlay transition="quick" opacity="enter:0 exit:0" />
                 <Sheet.Handle />
-                <Sheet.Frame p="$4" gap="$4">
+                <Sheet.Container p="4" gap="4">
+                  <Sheet.Background />
                   <Dialog.Adapt.Contents />
-                </Sheet.Frame>
+                </Sheet.Container>
               </Sheet>
             </Dialog.Adapt>
 
@@ -299,31 +282,29 @@ export function Fullpage() {
               <Dialog.Overlay
                 key="overlay"
                 transition="quick"
-                opacity={0.5}
-                enterStyle={{ opacity: 0 }}
-                exitStyle={{ opacity: 0 }}
+                opacity="0.5 enter:0 exit:0"
               />
               <Dialog.Content
                 key="content"
                 transition="quick"
-                exitStyle={{ opacity: 0 }}
-                enterStyle={{ x: 0, y: -20, opacity: 0, scale: 0.9 }}
+                opacity="enter:0 exit:0"
+                x="enter:0"
+                y="enter:-20px"
+                scale="enter:0.9"
                 borderWidth={2}
-                borderColor="$borderColor"
+                borderColor="border-color"
                 rounded={15}
               >
                 <Dialog.Title>
                   <View
-                    $gtMd={{
-                      px: '$7',
-                    }}
-                    pt="$7"
-                    gap="$4"
+                    px="gtMd:7"
+                    pt="7"
+                    gap="4"
                     flexDirection="row"
                     justify="space-between"
                     items="center"
                   >
-                    <Text flex={1} fontSize="$6" fontWeight="bold" color="$color">
+                    <Text flex={1} fontSize="6" fontWeight="bold" color="color">
                       Checkout
                     </Text>
 
@@ -335,14 +316,7 @@ export function Fullpage() {
 
                 <Unspaced>
                   <Dialog.Close asChild>
-                    <Button
-                      position="absolute"
-                      t="$3"
-                      r="$3"
-                      size="$2"
-                      circular
-                      icon={X}
-                    />
+                    <Button position="absolute" t="3" r="3" size="2" circular icon={X} />
                   </Dialog.Close>
                 </Unspaced>
               </Dialog.Content>
@@ -357,20 +331,18 @@ export function Fullpage() {
         contentContainerStyle={{
           minW: '100%',
           flexDirection: 'column',
-          gap: sm ? '$4' : '$0',
+          gap: sm ? '4' : '0',
           pb: sm ? 300 : 48,
-          pt: '$4',
+          pt: '4',
           flexBasis: 'auto',
         }}
-        $group-window-gtSm={{
-          flex: 3,
-          flexBasis: 'auto',
-        }}
+        flex="@gtSm/window:3"
+        flexBasis="@gtSm/window:auto"
       >
         {items.map((item, index) => (
-          <View key={item.id} mb="$2">
+          <View key={item.id} mb="2">
             <Item item={item} />
-            {!sm && index !== items.length - 1 && <Separator my="$4" />}
+            {!sm && index !== items.length - 1 && <Separator my="4" />}
           </View>
         ))}
       </ScrollView>
@@ -396,32 +368,28 @@ const Item = ({ item }: { item: Items[number] }) => {
     <View
       flexDirection="row"
       flexWrap="wrap"
-      gap="$6"
-      $group-window-sm={{
-        gap: '$3',
-        pb: '$4',
-        borderWidth: 1,
-        borderColor: '$borderColor',
-        rounded: 15,
-      }}
+      gap="6 @sm/window:3"
+      pb="@sm/window:4"
+      borderWidth="@sm/window:1px"
+      borderColor="@sm/window:border-color"
+      rounded="@sm/window:15px"
       onLayout={onLayout}
     >
       <View
         grow={sm ? 1 : 0}
         flexBasis={125}
-        gap="$4"
+        gap="4"
         flexDirection="column"
-        rounded="$4"
+        rounded="4"
         position="relative"
       >
-        <View flexDirection="row" gap="$2" position="absolute" z={1000} t="$2" r="$2">
+        <View flexDirection="row" gap="2" position="absolute" z={1000} t="2" r="2">
           <Button
             id="add-wishlist"
             circular
-            size="$2"
-            icon={<Heart color={wishlist ? '$red10' : undefined} />}
-            $group-window-sm={{ size: '$3' }}
-            theme={wishlist ? 'red' : 'red_alt1'}
+            size={sm ? '3' : '2'}
+            icon={<Heart color={wishlist ? 'red-600' : undefined} />}
+            theme={wishlist ? 'red' : 'red_level2'}
             onPress={() => setWishlist(!wishlist)}
           />
 
@@ -429,10 +397,10 @@ const Item = ({ item }: { item: Items[number] }) => {
             <Button
               id={'remove-product' + item.id}
               circular
-              size="$3"
-              icon={<Trash color="$red10" />}
+              size="3"
+              icon={<Trash color="red-600" />}
               scaleIcon={1.1}
-              theme="red_alt1"
+              theme="red_level2"
             />
           )}
         </View>
@@ -440,15 +408,10 @@ const Item = ({ item }: { item: Items[number] }) => {
         <Image
           src={item.image}
           rounded={10}
-          bg="$color1"
+          bg="color1"
           objectFit="cover"
           height={150}
-          $platform-native={{
-            minW: layoutWidth,
-          }}
-          $group-window-gtMd={{
-            minW: 'inherit',
-          }}
+          minW={`${`native:${layoutWidth}px`} @gtMd/window:inherit`}
         />
       </View>
 
@@ -457,48 +420,33 @@ const Item = ({ item }: { item: Items[number] }) => {
         flexBasis={250}
         items="flex-start"
         justify="center"
-        gap="$2"
-        $group-window-sm={{
-          px: '$4',
-          gap: '$4',
-        }}
-        $group-window-xs={{
-          px: '$4',
-          gap: '$2',
-        }}
+        gap="2 @sm/window:4 @xs/window:2"
+        px="@sm/window:4 @xs/window:4"
       >
         <View
           flexDirection="row"
           items="center"
-          gap="$2"
-          $group-window-xs={{
-            justify: 'space-between',
-            width: '100%',
-          }}
+          gap="2"
+          justify="@xs/window:space-between"
+          width="@xs/window:100%"
         >
-          <Text
-            fontSize="$5"
-            $gtMd={{
-              fontSize: '$7',
-            }}
-            fontWeight="600"
-          >
+          <Text fontSize="5 gtMd:7" fontWeight="600">
             {item.name}
           </Text>
           {xs && (
-            <Text color={getStockStateColor(item.stockState)} fontSize="$3">
+            <Text color={getStockStateColor(item.stockState)} fontSize="3">
               {item.stockState}
             </Text>
           )}
         </View>
 
         {gtXs && (
-          <View flexDirection="row" gap="$2">
-            <Text color={getStockStateColor(item.stockState)} fontSize="$3">
+          <View flexDirection="row" gap="2">
+            <Text color={getStockStateColor(item.stockState)} fontSize="3">
               {item.stockState}
             </Text>
-            <Separator vertical my="$2" borderColor="$color10" />
-            <Text color="$red10" fontSize="$3" lineHeight="$3">
+            <Separator vertical my="2" borderColor="color9" />
+            <Text color="red-600" fontSize="3" lineHeight="3">
               Saving {Math.round(item.discount * 100)}%
             </Text>
           </View>
@@ -507,27 +455,25 @@ const Item = ({ item }: { item: Items[number] }) => {
         <View
           flexDirection="row"
           items="center"
-          gap="$2"
-          $group-window-xs={{
-            justify: 'space-between',
-            width: '100%',
-          }}
+          gap="2"
+          justify="@xs/window:space-between"
+          width="@xs/window:100%"
         >
-          <View flexDirection="row" gap="$2">
-            <Text fontSize="$5" lineHeight="$5">
+          <View flexDirection="row" gap="2">
+            <Text fontSize="5" lineHeight="5">
               ${Math.round(Number(item.price) * Number(1 - item.discount))}
             </Text>
             <Text
               textDecorationLine="line-through"
-              color="$color10"
-              fontSize="$5"
-              lineHeight="$5"
+              color="color9"
+              fontSize="5"
+              lineHeight="5"
             >
               ${Math.round(Number(item.price))}
             </Text>
           </View>
           {xs && (
-            <Text color="$red10" fontSize="$3" lineHeight="$3">
+            <Text color="red-600" fontSize="3" lineHeight="3">
               Saving {Math.round(item.discount * 100)}%
             </Text>
           )}
@@ -537,13 +483,13 @@ const Item = ({ item }: { item: Items[number] }) => {
       {sm && gtXs && (
         <Button
           id={'remove-product' + item.id}
-          size="$3"
-          m="$4"
+          size="3"
+          m="4"
+          bg="transparent"
           circular
-          icon={<Trash color="$color10" />}
+          icon={<Trash color="color9" />}
           scaleIcon={1.2}
           theme="red"
-          bg="transparent"
         />
       )}
 
@@ -551,26 +497,22 @@ const Item = ({ item }: { item: Items[number] }) => {
         flexDirection="column"
         items={sm ? 'center' : 'flex-end'}
         justify="center"
-        gap="$5"
-        $group-window-sm={{
-          width: '100%',
-          px: '$4',
-        }}
-        $group-window-gtSm={{
-          pr: '$4',
-        }}
+        gap="5"
+        width="@sm/window:100%"
+        paddingLeft="@sm/window:4"
+        pr="@sm/window:4 @gtSm/window:4"
       >
         {gtSm && (
           <View flexDirection="column" items="flex-end">
             <Text
               textDecorationLine="line-through"
-              color="$color10"
-              fontSize="$3"
-              lineHeight="$3"
+              color="color9"
+              fontSize="3"
+              lineHeight="3"
             >
               ${Math.round(Number(item.price) * Number(count))}
             </Text>
-            <Text fontSize="$8" lineHeight="$6" fontWeight="bold">
+            <Text fontSize="8" lineHeight="6" fontWeight="bold">
               $
               {Math.round(Number(item.price) * Number(count) * Number(1 - item.discount))}
             </Text>
@@ -581,23 +523,21 @@ const Item = ({ item }: { item: Items[number] }) => {
           flexDirection="row"
           items="center"
           justify="space-between"
-          gap="$4"
-          $group-window-sm={{
-            width: '100%',
-          }}
+          gap="4"
+          width="@sm/window:100%"
         >
           <ItemCounter count={count} setCount={setCount} />
 
           {sm && (
-            <View flexDirection="row" gap="$2">
-              <Text fontSize="$4" fontWeight="bold">
+            <View flexDirection="row" gap="2">
+              <Text fontSize="4" fontWeight="bold">
                 $
                 {Math.round(
                   Number(item.price) * Number(count) * Number(1 - item.discount)
                 )}
               </Text>
 
-              <Text textDecorationLine="line-through" color="$color10" fontSize="$3">
+              <Text textDecorationLine="line-through" color="color9" fontSize="3">
                 ${Math.round(Number(item.price) * Number(count))}
               </Text>
             </View>
@@ -606,15 +546,13 @@ const Item = ({ item }: { item: Items[number] }) => {
           {gtSm && (
             <Button
               id={'remove-product' + item.id}
-              size="$3"
+              size="3"
               circular
-              icon={<Trash color="$color10" />}
+              icon={<Trash color="color9" />}
               scaleIcon={1.2}
               theme="red"
               bg="transparent"
-              $group-window-sm={{
-                borderColor: '$color10',
-              }}
+              borderColor="@sm/window:color9"
             />
           )}
         </View>
@@ -630,10 +568,10 @@ interface ItemCounterProps {
 
 const ItemCounter: React.FC<ItemCounterProps> = ({ count, setCount }) => {
   return (
-    <XGroup mr="$6">
+    <XGroup mr="6">
       <Button
-        theme="alt2"
-        size="$3"
+        theme="level3"
+        size="3"
         bg="transparent"
         icon={Minus}
         onPress={() => setCount(count > 1 ? count - 1 : 1)}
@@ -642,15 +580,15 @@ const ItemCounter: React.FC<ItemCounterProps> = ({ count, setCount }) => {
         flexBasis={40}
         items="center"
         justify="center"
-        rounded="$4"
+        rounded="4"
         borderWidth={1}
-        borderColor="$borderColor"
+        borderColor="border-color"
       >
         <StyledText>{count}</StyledText>
       </View>
       <Button
-        theme="alt2"
-        size="$3"
+        theme="level3"
+        size="3"
         bg="transparent"
         icon={Plus}
         onPress={() => setCount(count < 10 ? count + 1 : 10)}

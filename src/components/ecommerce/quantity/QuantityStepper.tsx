@@ -10,14 +10,14 @@ export function QuantityStepper() {
       maxW={360}
       self="center"
       items="center"
-      gap="$3"
-      p="$5"
-      rounded="$8"
+      gap="3"
+      p="5"
+      rounded="8"
       borderWidth={1}
-      borderColor="$borderColor"
-      bg="$background"
+      borderColor="border-color"
+      bg="background"
     >
-      <Text fontSize="$5" fontWeight="800" letterSpacing={0}>
+      <Text fontSize="5" fontWeight="800" letterSpacing={0}>
         Quantity
       </Text>
       <SpinControl
@@ -30,7 +30,7 @@ export function QuantityStepper() {
         onStop={stop}
         onSet={setValue}
       />
-      <Text fontSize="$2" color="$color9">
+      <Text fontSize="2" color="color8">
         Press and hold to change quickly · max 10
       </Text>
       <Text

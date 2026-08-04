@@ -15,22 +15,21 @@ const ProductItem: FC<{ item: Product }> = ({ item }) => {
   const heightFactor = useMemo(() => Math.random() < 0.5, [])
 
   return (
-    <View flexDirection="column" key={item.id} mb="$6" flex={1} gap="$2.5">
+    <View flexDirection="column" mb="6" flex={1} gap="2-5" key={item.id}>
       <View
         flexDirection="column"
         position="relative"
-        rounded="$8"
-        shadowColor="$shadowColor"
-        shadowRadius={5}
+        rounded="8"
+        boxShadow="0 0 5px shadow-color"
         overflow="hidden"
-        style={{ transition: 'transform 150ms ease' }}
         cursor="pointer"
+        style={{ transition: 'transform 150ms ease' }}
       >
         <Image
           src={item.image}
           height={heightFactor ? 200 : 350}
           objectFit="cover"
-          bg="$backgroundPress"
+          bg="background-press"
         />
         <View
           flex={1}
@@ -38,61 +37,38 @@ const ProductItem: FC<{ item: Product }> = ({ item }) => {
           items="center"
           justify="center"
           position="absolute"
-          rounded="$8"
-          hoverStyle={{
-            backdropFilter: 'blur(15px)',
-            bg: '$background04',
-          }}
-          pressStyle={{
-            backdropFilter: 'blur(15px)',
-            bg: '$background04',
-          }}
+          rounded="8"
+          backdropFilter="hover:blur(15px) press:blur(15px)"
+          bg="hover:background04 press:background04"
           style={{
             transition: 'background-color 250ms ease, backdrop-filter 250ms ease',
           }}
         >
           <Text
             flex={1}
-            color="$color12"
-            opacity={0}
-            hoverStyle={{ opacity: 1 }}
-            pressStyle={{ opacity: 1 }}
+            color="color11"
+            opacity="0 hover:1 press:1"
+            p="4"
             style={{ transition: 'opacity 250ms ease' }}
-            p={'$4'}
           >
             {item.desc}
           </Text>
         </View>
       </View>
 
-      <View flexDirection="column" gap="$2">
-        <Text
-          color="$color12"
-          fontSize="$4"
-          fontWeight="600"
-          $gtMd={{
-            fontSize: '$8',
-            lineHeight: '$6',
-          }}
-        >
+      <View flexDirection="column" gap="2">
+        <Text color="color11" fontSize="4 gtMd:8" fontWeight="600" lineHeight="gtMd:6">
           {item.name}
         </Text>
 
-        <View flexDirection="row" items="center" justify="space-between" gap="$2">
-          <View flex={1} flexDirection="row" items="center" gap="$2" theme="alt1">
-            <MapPin size="$1" color="$color10" />
-            <Text numberOfLines={2} color="$color10" fontSize="$3">
+        <View flexDirection="row" items="center" justify="space-between" gap="2">
+          <View flex={1} flexDirection="row" items="center" gap="2" theme="level2">
+            <MapPin size="1" color="color9" />
+            <Text numberOfLines={2} color="color9" fontSize="3">
               {item.city}
             </Text>
           </View>
-          <Text
-            color="$color11"
-            theme="green"
-            $gtMd={{
-              fontSize: '$6',
-              fontWeight: '600',
-            }}
-          >
+          <Text color="color10" fontSize="gtMd:6" fontWeight="gtMd:600" theme="green">
             ${Math.floor(Number(item.price) / 10)}
           </Text>
         </View>
@@ -102,25 +78,25 @@ const ProductItem: FC<{ item: Product }> = ({ item }) => {
           flexWrap="wrap"
           items="center"
           justify="space-between"
-          gap="$2"
+          gap="2"
         >
           <Chip
             circular
             width="auto"
             maxW="50%"
-            size="$2"
-            bg="$color4"
+            bg="color4"
+            size="2"
             theme={`${colors[Math.floor(Math.random() * colors.length)]}` as ThemeName}
           >
-            <Chip.Icon color="$color9">
+            <Chip.Icon color="color8">
               <Hash />
             </Chip.Icon>
-            <Chip.Text numberOfLines={1} color="$color9">
+            <Chip.Text numberOfLines={1} color="color8">
               {item.category}
             </Chip.Text>
           </Chip>
 
-          <Button theme="accent" size="$2.5" icon={ShoppingBag}>
+          <Button theme="accent" size="8" icon={ShoppingBag}>
             Add
           </Button>
         </View>
@@ -144,13 +120,13 @@ export const MasonryListExample = () => {
   }
 
   return (
-    <View flex={1} $gtMd={{ maxH: 800 }}>
+    <View flex={1} maxH="gtMd:800px">
       <MasonryList
         flex={1}
         keyExtractor={(item): string => item.id}
         ListHeaderComponent={<View />}
-        $gtMd={{ p: '$4' }}
-        gap="$4"
+        p="gtMd:4"
+        gap="4"
         key={numberOfColumns}
         numColumns={numberOfColumns}
         data={data}

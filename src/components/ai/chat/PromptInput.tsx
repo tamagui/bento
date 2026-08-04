@@ -54,7 +54,7 @@ export function PromptInput() {
   }
 
   return (
-    <YStack width="100%" maxW={560} gap="$3">
+    <YStack width="100%" maxW={560} gap="3">
       {isWeb && (
         <input
           ref={fileRef}
@@ -69,23 +69,21 @@ export function PromptInput() {
         />
       )}
 
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} mx="$-1" px="$1">
-        <XStack gap="$2">
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} mx="-1" px="1">
+        <XStack gap="2">
           {suggestions.map((s) => (
             <Button
               key={s}
-              size="$2.5"
-              rounded="$10"
-              bg="$color3"
+              size="8"
+              rounded="10"
+              bg="color3 hover:color4 press:color5"
               borderWidth={1}
-              borderColor="$color5"
-              hoverStyle={{ bg: '$color4', borderColor: '$color6' }}
-              pressStyle={{ bg: '$color5' }}
+              borderColor="color5 hover:color6"
               onPress={() => setValue(s)}
             >
-              <XStack items="center" gap="$1.5">
-                <Sparkles size={12} color="$color10" />
-                <Text fontSize="$2" color="$color11">
+              <XStack items="center" gap="1">
+                <Sparkles size={12} color="color9" />
+                <Text fontSize="2" color="color10">
                   {s}
                 </Text>
               </XStack>
@@ -95,40 +93,39 @@ export function PromptInput() {
       </ScrollView>
 
       <YStack
-        rounded="$6"
+        rounded="6"
         borderWidth={1}
-        borderColor="$color5"
-        bg="$color2"
+        borderColor="color5 focus-within:color7"
+        bg="color2"
         overflow="hidden"
-        focusWithinStyle={{ borderColor: '$color8' }}
       >
         {attachments.length > 0 && (
-          <XStack mx="$3" mt="$3" gap="$2" flexWrap="wrap">
+          <XStack mx="3" mt="3" gap="2" flexWrap="wrap">
             {attachments.map((name, i) => (
               <XStack
                 key={`${name}-${i}`}
-                px="$2.5"
-                py="$1.5"
-                bg="$color4"
-                rounded="$4"
+                px="2-5"
+                py="1"
+                bg="color4"
+                rounded="4"
                 items="center"
-                gap="$2"
+                gap="2"
               >
-                <Paperclip size={12} color="$color10" />
-                <Text fontSize="$2" color="$color11" numberOfLines={1} maxW={180}>
+                <Paperclip size={12} color="color9" />
+                <Text fontSize="2" color="color10" maxW={180} numberOfLines={1}>
                   {name}
                 </Text>
                 <Button
                   aria-label={`Remove ${name}`}
-                  size="$1"
+                  size="1"
                   circular
-                  chromeless
+                  variant="quiet"
                   hitSlop={isWeb ? undefined : 12}
                   onPress={() =>
                     setAttachments((prev) => prev.filter((_, idx) => idx !== i))
                   }
                 >
-                  <X size={10} color="$color10" />
+                  <X size={10} color="color9" />
                 </Button>
               </XStack>
             ))}
@@ -138,33 +135,33 @@ export function PromptInput() {
         <TextArea
           aria-label="Message the assistant"
           placeholder="Ask anything…"
-          placeholderTextColor="$color9"
+          placeholderTextColor="color8"
           value={value}
           onChangeText={setValue}
           onKeyDown={isWeb ? handleKeyDown : undefined}
           borderWidth={0}
           bg="transparent"
-          px="$3.5"
-          py="$3"
+          px="4"
+          py="3"
           minH={64}
-          fontSize="$4"
-          focusStyle={{ outlineWidth: 0 }}
+          fontSize="4"
+          outlineWidth="focus:0px"
         />
 
-        <XStack px="$2.5" pb="$2.5" items="center" gap="$2">
+        <XStack px="2-5" pb="2-5" items="center" gap="2">
           <Button
             aria-label="Attach files"
-            size="$3"
+            size="3"
             circular
-            chromeless
+            variant="quiet"
             hitSlop={isWeb ? undefined : 6}
-            hoverStyle={{ bg: '$color4' }}
+            bg="hover:color4"
             onPress={addAttachment}
           >
-            <Paperclip size={16} color="$color10" />
+            <Paperclip size={16} color="color9" />
           </Button>
 
-          <Text aria-live="polite" fontSize="$1" color="$color9" flex={1}>
+          <Text aria-live="polite" fontSize="1" color="color8" flex={1}>
             {status === 'sending'
               ? 'Sending…'
               : status === 'sent'
@@ -176,25 +173,25 @@ export function PromptInput() {
 
           <Button
             aria-label={busy ? 'Stop sending' : 'Send message'}
-            size="$3"
+            size="3"
             circular
             disabled={!canSend && !busy}
-            bg={busy ? '$color4' : canSend ? '$color12' : '$color4'}
+            bg={`${busy ? 'color4' : canSend ? 'color11' : 'color4'}`}
+            opacity="hover:0.9"
+            scale="press:0.96"
             hitSlop={isWeb ? undefined : 6}
-            hoverStyle={{ opacity: 0.9 }}
-            pressStyle={{ scale: 0.96 }}
             onPress={busy ? stop : send}
           >
             {busy ? (
-              <CircleStop size={16} color="$color11" />
+              <CircleStop size={16} color="color10" />
             ) : (
-              <ArrowUp size={16} color={canSend ? '$color1' : '$color9'} />
+              <ArrowUp size={16} color={`${canSend ? 'color1' : 'color8'}`} />
             )}
           </Button>
         </XStack>
       </YStack>
 
-      <Text fontSize="$1" color="$color9" self="center">
+      <Text fontSize="1" color="color8" self="center">
         The assistant can make mistakes. Check important info.
       </Text>
     </YStack>

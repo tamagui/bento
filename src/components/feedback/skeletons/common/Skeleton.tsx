@@ -57,8 +57,16 @@ export function SkeletonScene({ children }: { children: ReactNode }) {
     if (isWeb || !pulse || reducedMotion) return
     const loop = Animated.loop(
       Animated.sequence([
-        Animated.timing(pulse, { toValue: 1, duration: 700, useNativeDriver: true }),
-        Animated.timing(pulse, { toValue: 0, duration: 700, useNativeDriver: true }),
+        Animated.timing(pulse, {
+          toValue: 1,
+          duration: 700,
+          useNativeDriver: true,
+        }),
+        Animated.timing(pulse, {
+          toValue: 0,
+          duration: 700,
+          useNativeDriver: true,
+        }),
       ])
     )
     loop.start()
@@ -91,7 +99,7 @@ export function Skeleton(props: SkeletonProps) {
     <View
       aria-hidden
       data-bento-skeleton
-      bg="$color4"
+      bg="color4"
       overflow="hidden"
       {...props}
       style={
@@ -119,7 +127,10 @@ export function Skeleton(props: SkeletonProps) {
             bottom: 0,
             left: 0,
             backgroundColor: theme.background?.val,
-            opacity: pulse.interpolate({ inputRange: [0, 1], outputRange: [0, 0.45] }),
+            opacity: pulse.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, 0.45],
+            }),
           }}
         />
       )}

@@ -1,5 +1,5 @@
 import { Inbox } from '@tamagui/lucide-icons-2'
-import { toast } from '@tamagui/toast'
+import { toast } from 'tamagui'
 import { Button, H3, Paragraph, View, YStack, isWeb } from 'tamagui'
 
 export function EmptyStateBasic({
@@ -21,28 +21,30 @@ export function EmptyStateBasic({
       maxW={520}
       self="center"
       items="center"
-      gap="$3"
-      p="$8"
-      rounded="$8"
+      gap="3"
+      p="8"
+      rounded="8"
       borderWidth={1}
-      borderColor="$borderColor"
-      bg="$background"
+      borderColor="border-color"
+      bg="background"
     >
-      <View p="$3" rounded={1000} bg="$color3">
-        <Inbox size={28} color="$color10" aria-hidden />
+      <View p="3" rounded={1000} bg="color3">
+        <Inbox size={28} color="color9" aria-hidden />
       </View>
       <H3 text="center">{title}</H3>
-      <Paragraph text="center" color="$color10" maxW={360}>
+      <Paragraph text="center" color="color9" maxW={360}>
         {description}
       </Paragraph>
       <Button
-        mt="$2"
+        mt="2"
         theme="accent"
         aria-label="Create your first project"
         onPress={
           onAction ??
           (() =>
-            toast('New project', { description: 'Would open the project composer' }))
+            toast('New project', {
+              description: 'Would open the project composer',
+            }))
         }
       >
         {actionLabel}

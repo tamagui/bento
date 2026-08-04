@@ -35,31 +35,24 @@ export function TimelineBasic() {
       render={isWeb ? <ol style={{ listStyleType: 'none' }} /> : undefined}
     >
       {events.map((event, index) => (
-        <XStack key={event.id} render={isWeb ? <li /> : undefined} gap="$4">
+        <XStack key={event.id} render={isWeb ? <li /> : undefined} gap="4">
           <YStack width={20} items="center">
-            <View
-              width={12}
-              height={12}
-              rounded={1000}
-              bg="$accentColor"
-              mt="$1.5"
-              z={1}
-            />
-            {index < events.length - 1 && <View flex={1} width={2} bg="$color5" />}
+            <View width={12} height={12} rounded={1000} bg="accent-color" mt="1" z={1} />
+            {index < events.length - 1 && <View flex={1} width={2} bg="color5" />}
           </YStack>
-          <YStack flex={1} gap="$1" pb="$5">
+          <YStack flex={1} gap="1" pb="5">
             <Text
-              fontSize="$2"
-              color="$color9"
-              fontFamily="$mono"
+              fontSize="2"
+              color="color8"
+              fontFamily="mono"
               render={isWeb ? <time dateTime={event.at} /> : undefined}
             >
               {event.time}
             </Text>
-            <Text fontSize="$5" fontWeight="700">
+            <Text fontSize="5" fontWeight="700">
               {event.title}
             </Text>
-            <Text color="$color10">{event.detail}</Text>
+            <Text color="color9">{event.detail}</Text>
           </YStack>
         </XStack>
       ))}

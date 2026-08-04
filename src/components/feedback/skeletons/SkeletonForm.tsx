@@ -9,22 +9,22 @@ export function SkeletonForm() {
         aria-label="Loading form"
         width="100%"
         maxW={520}
-        gap="$5"
-        p="$5"
-        rounded="$8"
+        gap="5"
+        p="5"
+        rounded="8"
         borderWidth={1}
-        borderColor="$borderColor"
+        borderColor="border-color"
       >
-        <Skeleton width="46%" height={24} rounded="$4" />
+        <Skeleton width="46%" height={24} rounded="4" />
         {[0, 1, 2].map((field) => (
-          <YStack key={field} gap="$2">
-            <Skeleton width={field === 1 ? '34%' : '26%'} height={12} rounded="$3" />
-            <Skeleton width="100%" height={42} rounded="$5" />
+          <YStack key={field} gap="2">
+            <Skeleton width={field === 1 ? '34%' : '26%'} height={12} rounded="3" />
+            <Skeleton width="100%" height={42} rounded="5" />
           </YStack>
         ))}
-        <XStack justify="flex-end" gap="$3">
-          <Skeleton width={86} height={40} rounded="$5" />
-          <Skeleton width={104} height={40} rounded="$5" />
+        <XStack justify="flex-end" gap="3">
+          <Skeleton width={86} height={40} rounded="5" />
+          <Skeleton width={104} height={40} rounded="5" />
         </XStack>
       </YStack>
     </SkeletonScene>

@@ -18,12 +18,12 @@ function ColorSlider({
   onChange: (value: number) => void
 }) {
   return (
-    <YStack gap="$2">
+    <YStack gap="2">
       <XStack justify="space-between">
         <Text fontWeight="700" letterSpacing={0}>
           {label}
         </Text>
-        <Text fontFamily="$mono" color="$color9">
+        <Text fontFamily="mono" color="color8">
           {value}
           {unit}
         </Text>
@@ -38,11 +38,11 @@ function ColorSlider({
         <Slider.Track
           height={12}
           rounded={999}
-          bg="$color4"
+          bg="color4"
           style={isWeb && gradient ? { backgroundImage: gradient } : undefined}
         >
           {/* the gradient rail replaces the active-track fill on web */}
-          {!(isWeb && gradient) && <Slider.TrackActive bg="$color11" />}
+          {!(isWeb && gradient) && <Slider.TrackActive bg="color10" />}
         </Slider.Track>
         {/* the thumb is the role=slider node — name and value text live here */}
         <Slider.Thumb
@@ -50,10 +50,10 @@ function ColorSlider({
           aria-valuetext={`${value}${unit}`}
           index={0}
           rounded={999}
-          size="$2"
-          bg="$color12"
+          bg="color11"
           borderWidth={2}
-          borderColor="$background"
+          borderColor="background"
+          size="2"
           hitSlop={isWeb ? undefined : 12}
         />
       </Slider>
@@ -76,31 +76,31 @@ export function ColorSliderPicker() {
       width="100%"
       maxW={520}
       self="center"
-      gap="$6"
-      p="$5"
-      rounded="$8"
+      gap="6"
+      p="5"
+      rounded="8"
       borderWidth={1}
-      borderColor="$borderColor"
-      bg="$background"
+      borderColor="border-color"
+      bg="background"
     >
       <View
         height={150}
-        rounded="$7"
+        rounded="7"
         borderWidth={1}
-        borderColor="$borderColor"
+        borderColor="border-color"
         aria-label={`Color preview: ${color}`}
         role={'img' as any}
         style={{ backgroundColor: color }}
       />
       <XStack justify="space-between" items="center">
-        <Text fontSize="$6" fontWeight="800" letterSpacing={0}>
+        <Text fontSize="6" fontWeight="800" letterSpacing={0}>
           HSL color
         </Text>
-        <Text fontFamily="$mono" color="$color9" aria-live="polite">
+        <Text fontFamily="mono" color="color8" aria-live="polite">
           {color}
         </Text>
       </XStack>
-      <YStack gap="$5">
+      <YStack gap="5">
         <ColorSlider
           label="Hue"
           value={hue}

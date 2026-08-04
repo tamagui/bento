@@ -52,83 +52,70 @@ export function SignUpTwoSideScreen() {
 
   return (
     <View flexDirection="row" width="100%" minH="100%">
-      <View
-        flexDirection="column"
-        shrink={1}
-        grow={3}
-        gap="$4"
-        $group-window-gtXs={{
-          px: '$8',
-        }}
-      >
-        <H1 size="$9" fontWeight="bold">
+      <View flexDirection="column" shrink={1} grow={3} gap="4" px="@gtXs/window:8">
+        <H1 size="9" fontWeight="bold">
           Basic Details
         </H1>
-        <Separator mx="$-4" />
+        <Separator mx="-4" />
         <View
           flexDirection="row"
           justify="space-between"
           flexWrap="wrap"
-          gap="$4"
-          $group-window-gtXs={{
-            gap: '$8',
-          }}
+          gap="4 @gtXs/window:8"
         >
           <View
             flexDirection="column"
-            gap="$4"
+            gap="4"
             flex={1}
-            minW="100%"
-            $group-window-gtSm={{ flexBasis: 200, minW: 'inherit' }}
+            minW="100% @gtSm/window:inherit"
+            flexBasis="@gtSm/window:200px"
           >
-            <View flexDirection="column" gap="$1">
-              <Input size="$4">
+            <View flexDirection="column" gap="1">
+              <Input size="4">
                 <Input.Label htmlFor={uniqueId + '1-first-name'}>First Name</Input.Label>
                 <Input.Box>
                   <Input.Area id={uniqueId + '1-first-name'} placeholder="First name" />
                 </Input.Box>
               </Input>
             </View>
-            <View flexDirection="column" gap="$1">
-              <Input size="$4">
+            <View flexDirection="column" gap="1">
+              <Input size="4">
                 <Input.Label htmlFor={uniqueId + '1-last-name'}>Last Name</Input.Label>
                 <Input.Box>
                   <Input.Area id={uniqueId + '1-last-name'} placeholder="Last name" />
                 </Input.Box>
               </Input>
             </View>
-            <View flexDirection="column" gap="$1">
+            <View flexDirection="column" gap="1">
               <Input.Label htmlFor={uniqueId + '1-marital-status'}>
                 Marital Status
               </Input.Label>
               <RadioGroup
-                gap="$8"
+                gap="8"
                 flexDirection="row"
                 value={marriageState}
                 onValueChange={setMarriageState}
                 id={uniqueId + '1-marital-status'}
               >
-                <View flexDirection="row" items="center" gap="$3">
+                <View flexDirection="row" items="center" gap="3">
                   <RadioGroup.Item id={uniqueId + 'single'} value="single">
                     <RadioGroup.Indicator
-                      unstyled
                       width="33%"
                       height="33%"
                       rounded={1000}
-                      bg="$color"
+                      bg="color"
                     />
                   </RadioGroup.Item>
 
                   <Input.Label htmlFor={uniqueId + 'single'}>Single</Input.Label>
                 </View>
-                <View flexDirection="row" items="center" gap="$3">
+                <View flexDirection="row" items="center" gap="3">
                   <RadioGroup.Item id={uniqueId + 'married'} value="married">
                     <RadioGroup.Indicator
-                      unstyled
                       width="33%"
                       height="33%"
                       rounded={1000}
-                      bg="$color"
+                      bg="color"
                     />
                   </RadioGroup.Item>
 
@@ -136,26 +123,26 @@ export function SignUpTwoSideScreen() {
                 </View>
               </RadioGroup>
             </View>
-            <View flexDirection="column" gap="$1">
+            <View flexDirection="column" gap="1">
               <Input.Label htmlFor={uniqueId + 'country'}>Country</Input.Label>
               <CountrySelect data={countries} id={uniqueId + 'country'} />
             </View>
-            <Input size="$4">
+            <Input size="4">
               <Input.Label htmlFor={uniqueId + '1-city'}>City</Input.Label>
               <Input.Box>
                 <Input.Area id={uniqueId + '1-city'} placeholder="City" />
               </Input.Box>
             </Input>
           </View>
-          <View flexDirection="column" gap="$4" flex={1} flexBasis={200}>
-            <Input size="$4">
+          <View flexDirection="column" gap="4" flex={1} flexBasis={200}>
+            <Input size="4">
               <Input.Label htmlFor={uniqueId + '1-depart'}>Department</Input.Label>
               <Input.Box>
                 <Input.Area id={uniqueId + '1-depart'} placeholder="Department" />
               </Input.Box>
             </Input>
-            <View flexDirection="column" gap="$1">
-              <Input size="$4">
+            <View flexDirection="column" gap="1">
+              <Input size="4">
                 <Input.Label htmlFor={uniqueId + '1-email'}>Email</Input.Label>
                 <Input.Box>
                   <Input.Area
@@ -172,8 +159,8 @@ export function SignUpTwoSideScreen() {
               values={values}
               onValuesChange={(values) => toggleValues(values)}
               flexDirection="column"
-              mt="$3"
-              gap="$2.5"
+              mt="3"
+              gap="2-5"
             >
               <Input.Label htmlFor={uniqueId + 'single'}>
                 Receive notifications
@@ -187,13 +174,13 @@ export function SignUpTwoSideScreen() {
                         <Checkboxes.Group.Item>
                           <Checkboxes.Card
                             flexDirection="column"
-                            key={title}
                             justify="space-between"
-                            pb="$3"
-                            pt="$-3"
+                            pb="3"
+                            pt="-3"
                             mb={-1}
                             borderBottomWidth={1}
-                            borderBottomColor="$color5"
+                            borderBottomColor="color5"
+                            key={title}
                           >
                             <View
                               flexDirection="row"
@@ -209,7 +196,7 @@ export function SignUpTwoSideScreen() {
                                 </Checkboxes.Checkbox.Indicator>
                               </Checkboxes.Checkbox>
                             </View>
-                            <Text fontSize="$4" theme="alt1">
+                            <Text fontSize="4" theme="level2">
                               {desc}
                             </Text>
                           </Checkboxes.Card>
@@ -224,14 +211,9 @@ export function SignUpTwoSideScreen() {
             <Button
               theme="accent"
               self="flex-end"
-              width="$12"
-              mt="$2.5"
-              mb="$2"
-              $sm={{
-                width: '100%',
-                mt: '$4',
-                mb: '$6',
-              }}
+              width="12 sm:100%"
+              mt="2-5 sm:4"
+              mb="2 sm:6"
             >
               <Button.Text>Save</Button.Text>
             </Button>
@@ -275,27 +257,27 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
       disablePreventBodyScroll
       zIndex={200000}
     >
-      <Select.Trigger width="100%" iconAfter={ChevronDown} rounded="$4">
-        <View flexDirection="row" gap="$3" justify="center" items="center">
+      <Select.Trigger width="100%" rounded="4">
+        <View flexDirection="row" gap="3" justify="center" items="center">
           <Image src={selectedItem.flag} width={20} height={20} />
           <Text mr="auto">{`${selectedItem.name} ${
             selectedItem.shortName ? `(${selectedItem.shortName})` : ''
           }`}</Text>
         </View>
+        <Select.Icon>
+          <ChevronDown />
+        </Select.Icon>
       </Select.Trigger>
 
       <Adapt when="maxMd" platform="touch">
         <Sheet dismissOnSnapToBottom>
-          <Sheet.Frame>
+          <Sheet.Container>
+            <Sheet.Background />
             <Sheet.ScrollView>
               <Adapt.Contents />
             </Sheet.ScrollView>
-          </Sheet.Frame>
-          <Sheet.Overlay
-            transition="lazy"
-            enterStyle={{ opacity: 0 }}
-            exitStyle={{ opacity: 0 }}
-          />
+          </Sheet.Container>
+          <Sheet.Overlay transition="lazy" opacity="enter:0 exit:0" />
         </Sheet>
       </Adapt>
 
@@ -305,7 +287,7 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
           justify="center"
           position="relative"
           width="100%"
-          height="$3"
+          height="3"
         >
           <View flexDirection="column" z={10}>
             <ChevronUp size={20} />
@@ -313,9 +295,10 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
           <LinearGradient
             start={[0, 0]}
             end={[0, 1]}
-            fullscreen
-            colors={['$background', 'transparent']}
-            rounded="$4"
+            rounded="4"
+            position="absolute"
+            inset={0}
+            colors={['background', 'transparent']}
           />
         </Select.ScrollUpButton>
 
@@ -323,12 +306,10 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
           // to do animations:
           // transition="quick"
           // animateOnly={['transform', 'opacity']}
-          // enterStyle={{ opacity: 0, y: -10 }}
-          // exitStyle={{ opacity: 0, y: 10 }}
           minW={200}
           borderWidth={1}
-          borderColor="$borderColor"
-          rounded="$4"
+          borderColor="border-color"
+          rounded="4"
         >
           <Select.Group>
             {/* for longer lists memoizing these is useful */}
@@ -337,12 +318,11 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
                 data.map((item, i) => {
                   return (
                     <Select.Item
-                      index={i}
                       key={item.name}
-                      gap="$3"
-                      value={`${i}`}
+                      gap="3"
                       justify="center"
                       items="center"
+                      value={`${i}`}
                     >
                       <Image src={item.flag} width={20} height={20} />
                       <Text mr="auto">{`${item.name} ${
@@ -364,7 +344,7 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
           justify="center"
           position="relative"
           width="100%"
-          height="$3"
+          height="3"
         >
           <View flexDirection="column" z={10}>
             <ChevronDown size={20} />
@@ -372,9 +352,10 @@ function CountrySelect({ data, id }: { data: typeof countries; id: string }) {
           <LinearGradient
             start={[0, 0]}
             end={[0, 1]}
-            fullscreen
-            colors={['transparent', '$background']}
-            rounded="$4"
+            rounded="4"
+            position="absolute"
+            inset={0}
+            colors={['transparent', 'background']}
           />
         </Select.ScrollDownButton>
       </Select.Content>

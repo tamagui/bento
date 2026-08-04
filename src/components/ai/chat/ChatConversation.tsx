@@ -45,15 +45,12 @@ function IconAction({
     <Button
       aria-label={label}
       aria-pressed={active}
-      size="$2.5"
-      chromeless
+      size="8"
+      variant="quiet"
       circular
-      // expand touch targets to ~44pt without growing the compact toolbar
       hitSlop={isWeb ? undefined : 8}
       onPress={onPress}
-      bg={active ? '$color4' : 'transparent'}
-      hoverStyle={{ bg: '$color4' }}
-      pressStyle={{ bg: '$color5' }}
+      bg={`${active ? 'color4' : 'transparent'} hover:color4 press:color5`}
     >
       {children}
     </Button>
@@ -72,7 +69,7 @@ function StreamingAnswer() {
 
   if (text.length === 0) {
     return (
-      <XStack gap="$2.5" items="center">
+      <XStack gap="2-5" items="center">
         <TypingDots />
       </XStack>
     )
@@ -88,12 +85,12 @@ function StreamingAnswer() {
       }}
     >
       {done && (
-        <XStack gap="$1" pt="$1" items="center">
+        <XStack gap="1" pt="1" items="center">
           <IconAction label="Copy response" onPress={onCopy}>
             {hasCopied ? (
-              <Check size={16} color="$green10" />
+              <Check size={16} color="green-600" />
             ) : (
-              <Copy size={16} color="$color10" />
+              <Copy size={16} color="color9" />
             )}
           </IconAction>
           <IconAction
@@ -104,23 +101,26 @@ function StreamingAnswer() {
               restart()
             }}
           >
-            <RefreshCw size={16} color="$color10" />
+            <RefreshCw size={16} color="color9" />
           </IconAction>
           <IconAction
             label="Good response"
             active={feedback === 'up'}
             onPress={() => setFeedback((f) => (f === 'up' ? null : 'up'))}
           >
-            <ThumbsUp size={16} color={feedback === 'up' ? '$green10' : '$color10'} />
+            <ThumbsUp size={16} color={`${feedback === 'up' ? 'green-600' : 'color9'}`} />
           </IconAction>
           <IconAction
             label="Bad response"
             active={feedback === 'down'}
             onPress={() => setFeedback((f) => (f === 'down' ? null : 'down'))}
           >
-            <ThumbsDown size={16} color={feedback === 'down' ? '$red10' : '$color10'} />
+            <ThumbsDown
+              size={16}
+              color={`${feedback === 'down' ? 'red-600' : 'color9'}`}
+            />
           </IconAction>
-          <Text aria-live="polite" fontSize="$1" color="$green10" pl="$1">
+          <Text aria-live="polite" fontSize="1" color="green-600" pl="1">
             {hasCopied ? 'Copied' : ''}
           </Text>
         </XStack>
@@ -139,27 +139,27 @@ export function ChatConversation() {
       maxW={560}
       height={480}
       maxH="100%"
-      rounded="$6"
+      rounded="6"
       borderWidth={1}
-      borderColor="$color4"
-      bg="$color1"
+      borderColor="color4"
+      bg="color1"
       overflow="hidden"
     >
       <XStack
-        px="$4"
-        py="$3"
+        px="4"
+        py="3"
         borderBottomWidth={1}
-        borderColor="$color4"
+        borderColor="color4"
         items="center"
         justify="space-between"
-        bg="$color2"
+        bg="color2"
       >
-        <Text fontWeight="600" color="$color12">
+        <Text fontWeight="600" color="color11">
           Assistant
         </Text>
-        <XStack items="center" gap="$2">
-          <View aria-hidden width={8} height={8} rounded={1000} bg="$green9" />
-          <Text fontSize="$2" color="$color10">
+        <XStack items="center" gap="2">
+          <View aria-hidden width={8} height={8} rounded={1000} bg="green-500" />
+          <Text fontSize="2" color="color9">
             Online
           </Text>
         </XStack>
@@ -171,12 +171,7 @@ export function ChatConversation() {
         // follow growth without restarting an animated scroll per token
         onContentSizeChange={() => scrollRef.current?.scrollToEnd({ animated: false })}
       >
-        <YStack
-          p="$4"
-          gap="$4"
-          role={isWeb ? 'log' : undefined}
-          aria-label="Conversation"
-        >
+        <YStack p="4" gap="4" role={isWeb ? 'log' : undefined} aria-label="Conversation">
           {history.map((m) => (
             <MessageRow key={m.id} message={m} />
           ))}

@@ -8,17 +8,15 @@ export function ShortEmailPassword() {
   return (
     <FormCard
       rounded={20}
-      borderColor="$borderColor"
+      borderColor="border-color"
       self="center"
-      $group-window-sm={{
-        minW: '100%',
-        px: '$5',
-        py: '$6',
-      }}
+      minW="@sm/window:100%"
+      px="@sm/window:5"
+      py="@sm/window:6"
     >
-      <View flexDirection="column" gap="$5" items="center" minW={'100%'}>
-        <View flexDirection="column" gap="$3" minW={'100%'}>
-          <Input size="$4" minW="100%">
+      <View flexDirection="column" gap="5" items="center" minW={'100%'}>
+        <View flexDirection="column" gap="3" minW={'100%'}>
+          <Input size="4" minW="100%">
             <Input.Box>
               <Input.Icon>
                 <Mail />
@@ -26,7 +24,7 @@ export function ShortEmailPassword() {
               <Input.Area pl={0} placeholder="Your Email" />
             </Input.Box>
           </Input>
-          <Input size="$4" minW="100%">
+          <Input size="4" minW="100%">
             <Input.Box>
               <Input.Icon>
                 <Lock />
@@ -37,8 +35,8 @@ export function ShortEmailPassword() {
         </View>
         <View
           flexDirection="row"
-          height="$3.5"
-          gap="$4"
+          height="10"
+          gap="4"
           justify="space-between"
           width="100%"
         >

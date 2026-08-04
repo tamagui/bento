@@ -6,13 +6,7 @@ export function AccordionBordered() {
   const [value, setValue] = useState('sharing')
   return (
     <AccordionFrame>
-      <Accordion
-        type="single"
-        collapsible
-        value={value}
-        onValueChange={setValue}
-        gap="$3"
-      >
+      <Accordion type="single" collapsible value={value} onValueChange={setValue} gap="3">
         {basicEntries.map((entry) => (
           <AccordionRow
             bordered

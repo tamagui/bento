@@ -37,14 +37,14 @@ function DateHeader() {
 
   if (header === 'month') {
     return (
-      <H3 size="$7" self="center">
+      <H3 size="7" self="center">
         Select a month
       </H3>
     )
   }
   return (
     <View flexDirection="row" width="100%" items="center" justify="space-between">
-      <Button circular size="$4" {...swapOnClick(subtractOffset({ months: 1 }))}>
+      <Button circular size="4" {...swapOnClick(subtractOffset({ months: 1 }))}>
         <Button.Icon scaleIcon={1.5}>
           <ChevronLeft />
         </Button.Icon>
@@ -52,7 +52,7 @@ function DateHeader() {
 
       <CalendarHeader year={year} month={month} setHeader={setHeader} />
 
-      <Button circular size="$4" {...swapOnClick(subtractOffset({ months: -1 }))}>
+      <Button circular size="4" {...swapOnClick(subtractOffset({ months: -1 }))}>
         <Button.Icon scaleIcon={1.5}>
           <ChevronRight />
         </Button.Icon>
@@ -90,52 +90,40 @@ function DayPicker() {
     <AnimatePresence key={prevNextAnimationKey}>
       <View
         width="100%"
-        gap="$4"
-        style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
+        gap="4"
         {...prevNextAnimation()}
+        style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
       >
         <WeekView weekDays={weekDays} />
 
-        <View
-          flexDirection="column"
-          gap="$2"
-          items="center"
-          justify="center"
-          width="100%"
-        >
+        <View flexDirection="column" gap="2" items="center" justify="center" width="100%">
           {subDays.map((days) => {
             return (
               <View
                 justify="space-between"
                 items="center"
                 flexDirection="row"
-                key={days[0].$date.toString()}
-                gap="$1"
+                gap="1"
                 flex={1}
                 flexBasis="auto"
                 width="100%"
+                key={days[0].$date.toString()}
               >
                 {days.map((d) => (
                   <Button
                     key={d.$date.toString()}
-                    chromeless
+                    variant="quiet"
                     circular
                     p={0}
                     {...swapOnClick(dayButton(d))}
-                    bg={d.selected ? '$background' : 'transparent'}
+                    bg={`${d.selected ? 'background' : 'transparent'}`}
                     theme={d.selected ? 'accent' : undefined}
                     disabled={!d.inCurrentMonth}
                   >
                     <Button.Text
                       fontWeight="500"
-                      fontSize="$4"
-                      color={
-                        d.selected
-                          ? '$color12'
-                          : d.inCurrentMonth
-                            ? '$color11'
-                            : '$color6'
-                      }
+                      fontSize="4"
+                      color={`${d.selected ? 'color11' : d.inCurrentMonth ? 'color10' : 'color6'}`}
                     >
                       {d.day}
                     </Button.Text>
@@ -150,19 +138,16 @@ function DayPicker() {
   )
 }
 
-function DatePickerBody({ config }: { config: DatePickerProviderProps['config'] }) {
+function DatePickerBody({
+  config,
+}: {
+  config: DatePickerProviderProps['config']
+}) {
   const [header, setHeader] = useState<HeaderType>('day')
 
   return (
     <HeaderTypeProvider config={config} type={header} setHeader={setHeader}>
-      <View
-        flexDirection="column"
-        items="center"
-        gap="$4"
-        width="100%"
-        p="$4"
-        $gtMd={{ p: '$2' }}
-      >
+      <View flexDirection="column" items="center" gap="4" width="100%" p="4 gtMd:2">
         <DateHeader />
         {header === 'month' && <MonthPicker onChange={() => setHeader('day')} />}
         {header === 'year' && <YearPicker onChange={() => setHeader('day')} />}

@@ -35,38 +35,38 @@ export function OrderConfirmation() {
   const currentIndex = timeline.findIndex((event) => !event.done)
 
   return (
-    <YStack width="100%" maxW={620} self="center" gap="$6" p="$5">
-      <YStack items="center" gap="$3">
+    <YStack width="100%" maxW={620} self="center" gap="6" p="5">
+      <YStack items="center" gap="3">
         <View
           width={64}
           height={64}
           rounded={999}
-          bg="$green4"
+          bg="green-200"
           items="center"
           justify="center"
         >
-          <Check size={30} color="$green11" aria-hidden />
+          <Check size={30} color="green-700" aria-hidden />
         </View>
-        <YStack items="center" gap="$1">
-          <Text fontSize="$9" fontWeight="900" text="center" letterSpacing={-0.5}>
+        <YStack items="center" gap="1">
+          <Text fontSize="9" fontWeight="900" text="center" letterSpacing={-0.5}>
             Thanks for your order
           </Text>
-          <Paragraph text="center" color="$color10">
+          <Paragraph text="center" color="color9">
             Confirmation was sent to maya@example.com.
           </Paragraph>
         </YStack>
-        <XStack px="$3" py="$2" rounded={999} bg="$color3" gap="$2" items="center">
-          <Mail size={15} color="$color9" aria-hidden />
+        <XStack px="3" py="2" rounded={999} bg="color3" gap="2" items="center">
+          <Mail size={15} color="color8" aria-hidden />
           <Text fontWeight="700">Order #BN-20481</Text>
         </XStack>
       </YStack>
       <YStack
-        p="$5"
+        p="5"
         m={0}
-        rounded="$8"
+        rounded="8"
         borderWidth={1}
-        borderColor="$borderColor"
-        bg="$background"
+        borderColor="border-color"
+        bg="background"
         aria-label="Order progress"
         render={isWeb ? <ol style={{ listStyleType: 'none' }} /> : undefined}
       >
@@ -78,7 +78,7 @@ export function OrderConfirmation() {
               render={isWeb ? <li /> : undefined}
               aria-current={index === currentIndex ? 'step' : undefined}
               minH={92}
-              gap="$4"
+              gap="4"
             >
               <YStack items="center">
                 <View
@@ -87,25 +87,25 @@ export function OrderConfirmation() {
                   rounded={999}
                   items="center"
                   justify="center"
-                  bg={event.done ? '$green9' : '$color3'}
+                  bg={`${event.done ? 'green-500' : 'color3'}`}
                   borderWidth={1}
-                  borderColor={event.done ? '$green9' : '$color6'}
+                  borderColor={`${event.done ? 'green-500' : 'color6'}`}
                 >
-                  <Icon
-                    size={17}
-                    color={event.done ? '$white1' : '$color9'}
-                    aria-hidden
-                  />
+                  <Icon size={17} color={event.done ? 'white' : 'color8'} aria-hidden />
                 </View>
                 {index < timeline.length - 1 ? (
-                  <View width={2} flex={1} bg={event.done ? '$green8' : '$color5'} />
+                  <View
+                    width={2}
+                    flex={1}
+                    bg={`${event.done ? 'green-500' : 'color5'}`}
+                  />
                 ) : null}
               </YStack>
-              <YStack flex={1} pt="$1" gap="$1">
-                <Text fontWeight="800" color={event.done ? '$color12' : '$color10'}>
+              <YStack flex={1} pt="1" gap="1">
+                <Text fontWeight="800" color={`${event.done ? 'color11' : 'color9'}`}>
                   {event.title}
                 </Text>
-                <Text color="$color9">{event.detail}</Text>
+                <Text color="color8">{event.detail}</Text>
               </YStack>
             </XStack>
           )
@@ -121,19 +121,19 @@ export function OrderConfirmation() {
       </Button>
       {showDetails && (
         <YStack
-          gap="$2.5"
-          p="$4"
-          rounded="$6"
+          gap="2-5"
+          p="4"
+          rounded="6"
           borderWidth={1}
-          borderColor="$borderColor"
-          bg="$color1"
+          borderColor="border-color"
+          bg="color1"
         >
           {orderDetails.map((row, index) => (
-            <YStack key={row.label} gap="$2.5">
+            <YStack key={row.label} gap="2-5">
               {index === orderDetails.length - 1 && <Separator />}
-              <XStack justify="space-between" gap="$3">
+              <XStack justify="space-between" gap="3">
                 <Text
-                  color={index === orderDetails.length - 1 ? '$color12' : '$color10'}
+                  color={`${index === orderDetails.length - 1 ? 'color11' : 'color9'}`}
                   fontWeight={index === orderDetails.length - 1 ? '800' : '400'}
                 >
                   {row.label}

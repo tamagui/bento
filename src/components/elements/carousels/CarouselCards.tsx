@@ -1,6 +1,7 @@
+import { Avatar } from '../../BentoSkins'
 import { ChevronLeft, ChevronRight } from '@tamagui/lucide-icons-2'
 import { ScrollView } from 'react-native'
-import { Avatar, Button, Text, View, XStack, YStack, isWeb } from 'tamagui'
+import { Button, Text, View, XStack, YStack, isWeb } from 'tamagui'
 import { useReducedMotion } from '../../hooks'
 import { useCarousel } from './common/useCarousel'
 
@@ -53,7 +54,7 @@ export function CarouselCards() {
 
   return (
     <YStack
-      gap="$3"
+      gap="3"
       width="100%"
       maxW={720}
       role={isWeb ? 'group' : undefined}
@@ -70,7 +71,7 @@ export function CarouselCards() {
         onMomentumScrollEnd={onMomentumScrollEnd}
         scrollEventThrottle={32}
       >
-        <XStack gap={GAP} px="$1" py="$2">
+        <XStack gap={GAP} px="1" py="2">
           {testimonials.map((t, i) => (
             <YStack
               key={t.id}
@@ -79,28 +80,27 @@ export function CarouselCards() {
               aria-label={`Testimonial from ${t.name}, ${i + 1} of ${testimonials.length}`}
               width={CARD_W}
               maxW="80vw"
-              p="$4"
-              gap="$3"
-              rounded="$6"
-              bg="$color1"
+              p="4"
+              gap="3"
+              rounded="6"
+              bg="color1"
               borderWidth={1}
-              borderColor="$color4"
-              hoverStyle={{ borderColor: '$color6' }}
+              borderColor="color4 hover:color6"
               onLayout={i === 0 ? onItemLayout : undefined}
             >
-              <Text fontSize="$4" lineHeight="$5" color="$color12">
+              <Text fontSize="4" lineHeight="5" color="color11">
                 “{t.quote}”
               </Text>
-              <XStack items="center" gap="$2.5" pt="$1">
-                <Avatar circular size="$3">
+              <XStack items="center" gap="2-5" pt="1">
+                <Avatar circular size="3">
                   <Avatar.Image aria-label={t.name} src={t.img} />
-                  <Avatar.Fallback bg="$color6" />
+                  <Avatar.Fallback bg="color6" />
                 </Avatar>
                 <YStack>
-                  <Text fontSize="$3" fontWeight="600" color="$color12">
+                  <Text fontSize="3" fontWeight="600" color="color11">
                     {t.name}
                   </Text>
-                  <Text fontSize="$2" color="$color10">
+                  <Text fontSize="2" color="color9">
                     {t.role}
                   </Text>
                 </YStack>
@@ -113,7 +113,7 @@ export function CarouselCards() {
         <Button
           aria-label="Previous testimonial"
           circular
-          size="$3"
+          size="3"
           hitSlop={isWeb ? undefined : 8}
           variant="outlined"
           opacity={index === 0 ? 0.4 : 1}
@@ -121,23 +121,23 @@ export function CarouselCards() {
           onPress={() => goTo(index - 1, !reducedMotion)}
           icon={<ChevronLeft size={16} />}
         />
-        <XStack gap="$1">
+        <XStack gap="1">
           {testimonials.map((t, i) => (
             <Button
               key={t.id}
               aria-label={`Go to testimonial ${i + 1} from ${t.name}`}
               aria-current={i === index ? 'true' : undefined}
-              unstyled
+              variant="quiet"
               cursor="pointer"
+              p="1"
               hitSlop={isWeb ? undefined : 10}
               onPress={() => goTo(i, !reducedMotion)}
-              p="$1.5"
             >
               <View
                 width={i === index ? 18 : 7}
                 height={7}
                 rounded={1000}
-                bg={i === index ? '$color12' : '$color6'}
+                bg={`${i === index ? 'color11' : 'color6'}`}
                 transition={reducedMotion ? undefined : '200ms'}
               />
             </Button>
@@ -146,7 +146,7 @@ export function CarouselCards() {
         <Button
           aria-label="Next testimonial"
           circular
-          size="$3"
+          size="3"
           hitSlop={isWeb ? undefined : 8}
           variant="outlined"
           opacity={index === testimonials.length - 1 ? 0.4 : 1}

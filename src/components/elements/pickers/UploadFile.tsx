@@ -36,17 +36,17 @@ export function UploadFile() {
       justify="center"
       items="center"
       borderWidth={isDragActive ? 2 : 1}
-      borderColor={isDragActive ? '$color11' : '$color9'}
-      gap="$6"
-      rounded="$3"
+      borderColor={`${isDragActive ? 'color10' : 'color8'}`}
+      gap="6"
+      rounded="3"
       overflow="hidden"
     >
-      <View gap="$3" p="$4" flex={1} items="center" justify="center">
-        <Button onPress={open} size="$3">
+      <View gap="3" p="4" flex={1} items="center" justify="center">
+        <Button onPress={open} size="3">
           <Button.Icon>
             <Upload y={-1} />
           </Button.Icon>
-          <Button.Text size="$2">Choose File here</Button.Text>
+          <Button.Text size="2">Choose File here</Button.Text>
         </Button>
         {!file && (
           <View
@@ -54,17 +54,15 @@ export function UploadFile() {
             width="100%"
             items="center"
             justify="center"
-            $platform-native={{
-              display: 'none',
-            }}
+            display="native:none"
           >
             <Label
-              t="$1"
+              t="1"
               position="absolute"
-              size="$3"
-              htmlFor={id}
-              color="$color9"
+              color="color8"
               whiteSpace="nowrap"
+              size="3"
+              htmlFor={id}
             >
               Drag a file into this area
             </Label>
@@ -77,33 +75,33 @@ export function UploadFile() {
       {file && (
         <XStack
           width="100%"
-          gap="$4"
-          p="$4"
+          gap="4"
+          p="4"
           borderTopWidth={1}
-          borderTopColor="$borderColor"
+          borderTopColor="border-color"
         >
           <View flex={1}>
             <View
               flexDirection="row"
-              theme="alt1"
-              gap="$2"
+              gap="2"
               items={'center'}
               position="absolute"
+              theme="level2"
             >
               <View shrink={0}>
-                <File color="$color" size={'$1'} />
+                <File color="color" size={'1'} />
               </View>
-              <View gap="$1" flex={1}>
-                <Text numberOfLines={1} fontSize={'$3'}>
+              <View gap="1" flex={1}>
+                <Text numberOfLines={1} fontSize="3">
                   {file.name}
                 </Text>
-                <Text numberOfLines={1} fontSize={'$3'} fontWeight="bold">
+                <Text numberOfLines={1} fontSize="3" fontWeight="bold">
                   {formatFileSize(file.size)}
                 </Text>
               </View>
             </View>
           </View>
-          <Button theme="accent" onPress={() => setFile(undefined)} circular size="$2">
+          <Button theme="accent" onPress={() => setFile(undefined)} circular size="2">
             <Button.Icon>
               <X />
             </Button.Icon>

@@ -10,19 +10,19 @@ import { componentMap, getGroupItems, groupIds } from './registry'
 function GroupIndex() {
   return (
     <ScrollView style={{ width: '100%', height: '100%' }}>
-      <YStack width="100%" maxW={900} self="center" p="$6" gap="$4">
-        <H1 size="$9">Bento</H1>
-        <Text color="$color11">
+      <YStack width="100%" maxW={900} self="center" p="6" gap="4">
+        <H1 size="9">Bento</H1>
+        <Text color="color11">
           {groupIds.length} groups ·{' '}
           {groupIds.reduce((acc, g) => acc + getGroupItems(g).length, 0)} components
         </Text>
-        <YStack gap="$2" pt="$4">
+        <YStack gap="2" pt="4">
           {groupIds.map((id) => (
-            <XStack key={id} gap="$3" items="center">
-              <Anchor href={`/?group=${id}`} fontSize="$6">
+            <XStack key={id} gap="3" items="center">
+              <Anchor href={`/?group=${id}`} fontSize="6">
                 {id}
               </Anchor>
-              <Text color="$color10" fontSize="$3">
+              <Text color="color10" fontSize="3">
                 {getGroupItems(id).length}
               </Text>
             </XStack>
@@ -42,9 +42,9 @@ function prettyName(name: string) {
 
 function ItemFrame({ name, children }: { name: string; children: any }) {
   return (
-    <YStack gap="$3" width="100%">
-      <XStack items="center" gap="$3">
-        <H3 size="$5" color="$color11" textTransform="none">
+    <YStack gap="3" width="100%">
+      <XStack items="center" gap="3">
+        <H3 size="5" color="color11" textTransform="none">
           {prettyName(name)}
         </H3>
         <Separator />
@@ -54,7 +54,7 @@ function ItemFrame({ name, children }: { name: string; children: any }) {
         width="100%"
         items="center"
         justify="center"
-        py="$4"
+        py="4"
         data-testid={`item-${name}`}
       >
         {children}
@@ -73,7 +73,7 @@ export function Gallery() {
   const items = getGroupItems(group)
   if (!items.length) {
     return (
-      <YStack flex={1} items="center" justify="center" gap="$3">
+      <YStack flex={1} items="center" justify="center" gap="3">
         <H2>Unknown group: {group}</H2>
         <Anchor href="/">Back to index</Anchor>
       </YStack>
@@ -84,13 +84,13 @@ export function Gallery() {
 
   return (
     <ScrollView style={{ width: '100%', height: '100%' }}>
-      <YStack width="100%" maxW={1000} self="center" p="$6" gap="$8">
+      <YStack width="100%" maxW={1000} self="center" p="6" gap="8">
         {!item && (
-          <XStack items="center" gap="$4">
-            <Anchor href="/" color="$color10">
+          <XStack items="center" gap="4">
+            <Anchor href="/" color="color10">
               ← index
             </Anchor>
-            <H1 size="$8">{group}</H1>
+            <H1 size="8">{group}</H1>
           </XStack>
         )}
         {shown.map(([name, Component]) => (

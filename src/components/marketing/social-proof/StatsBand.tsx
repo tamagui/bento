@@ -11,14 +11,14 @@ const stats = [
 
 export function StatsBand() {
   return (
-    <YStack width="100%" maxW={980} self="center" gap="$2">
+    <YStack width="100%" maxW={980} self="center" gap="2">
       <XStack
         flexWrap="wrap"
-        rounded="$9"
+        rounded="9"
         overflow="hidden"
         borderWidth={1}
-        borderColor="$borderColor"
-        bg="$background"
+        borderColor="border-color"
+        bg="background"
       >
         {stats.map((stat, index) => (
           <YStack
@@ -26,34 +26,34 @@ export function StatsBand() {
             render={isWeb ? 'dl' : undefined}
             flex={1}
             minW={220}
-            gap="$2"
+            gap="2"
             m={0}
-            p="$6"
+            p="6"
             borderLeftWidth={index ? 1 : 0}
-            borderColor="$borderColor"
+            borderColor="border-color"
           >
-            <XStack render={isWeb ? 'dd' : undefined} items="center" gap="$2" m={0}>
-              <Text fontSize="$10" fontWeight="900" letterSpacing={-1}>
+            <XStack render={isWeb ? 'dd' : undefined} items="center" gap="2" m={0}>
+              <Text fontSize="10" fontWeight="900" letterSpacing={-1}>
                 {stat.value}
               </Text>
               <XStack
-                px="$2"
-                py="$1"
+                px="2"
+                py="1"
                 rounded={999}
-                bg="$green3"
+                bg="green-100"
                 items="center"
-                gap="$1"
+                gap="1"
                 aria-label={`Up ${stat.delta} versus last quarter`}
               >
-                <ArrowUpRight size={13} color="$green10" aria-hidden />
-                <Text fontSize="$1" color="$green10" fontWeight="800">
+                <ArrowUpRight size={13} color="green-600" aria-hidden />
+                <Text fontSize="1" color="green-600" fontWeight="800">
                   +{stat.delta}
                 </Text>
               </XStack>
             </XStack>
             <Text
               render={isWeb ? 'dt' : undefined}
-              color="$color9"
+              color="color8"
               letterSpacing={0}
               m={0}
             >
@@ -62,7 +62,7 @@ export function StatsBand() {
           </YStack>
         ))}
       </XStack>
-      <Text fontSize="$1" color="$color8" self="center">
+      <Text fontSize="1" color="color7" self="center">
         Sample metrics for preview — cite your own audited data before publishing.
       </Text>
     </YStack>

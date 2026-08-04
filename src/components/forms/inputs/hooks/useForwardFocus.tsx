@@ -18,6 +18,6 @@ export const useForwardFocus = (target: RefObject<TamaguiElement | null>) => {
     onBlur: () => {
       setFocused(false)
     },
-    focusable: true,
+    tabIndex: 0,
   }
 }

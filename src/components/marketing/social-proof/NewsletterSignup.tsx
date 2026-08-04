@@ -55,27 +55,27 @@ export function NewsletterSignup({
         maxW={720}
         self="center"
         items="center"
-        gap="$3"
-        p="$7"
-        rounded="$9"
-        bg="$color2"
+        gap="3"
+        p="7"
+        rounded="9"
+        bg="color2"
         borderWidth={1}
-        borderColor="$borderColor"
+        borderColor="border-color"
       >
         <View
           width={48}
           height={48}
           rounded={999}
-          bg="$green4"
+          bg="green-200"
           items="center"
           justify="center"
         >
-          <Check size={24} color="$green11" aria-hidden />
+          <Check size={24} color="green-700" aria-hidden />
         </View>
-        <Text fontSize="$7" fontWeight="900" letterSpacing={0}>
+        <Text fontSize="7" fontWeight="900" letterSpacing={0}>
           You’re on the list
         </Text>
-        <Paragraph text="center" color="$color10">
+        <Paragraph text="center" color="color9">
           Watch {email.trim()} for the next product dispatch.
         </Paragraph>
       </YStack>
@@ -87,25 +87,26 @@ export function NewsletterSignup({
       width="100%"
       maxW={760}
       self="center"
-      gap="$4"
-      p="$7"
-      rounded="$9"
-      bg="$color2"
+      gap="4"
+      p="7"
+      rounded="9"
+      bg="color2"
       borderWidth={1}
-      borderColor="$borderColor"
+      borderColor="border-color"
     >
-      <YStack gap="$2">
-        <Text fontSize="$8" fontWeight="900" letterSpacing={-0.5}>
+      <YStack gap="2">
+        <Text fontSize="8" fontWeight="900" letterSpacing={-0.5}>
           Ideas worth shipping
         </Text>
-        <Paragraph color="$color10">
+        <Paragraph color="color9">
           A concise monthly note on product craft, systems, and teams.
         </Paragraph>
       </YStack>
-      <XStack gap="$2" flexWrap="wrap">
+      <XStack gap="2" flexWrap="wrap">
         <Input
           flex={1}
           minW={240}
+          borderColor={error ? 'red-500' : undefined}
           value={email}
           onChangeText={(value) => {
             setEmail(value)
@@ -117,12 +118,11 @@ export function NewsletterSignup({
           aria-describedby={error ? 'newsletter-error' : undefined}
           autoCapitalize="none"
           keyboardType="email-address"
-          borderColor={error ? '$red8' : undefined}
         />
         <Button
           icon={status === 'sending' ? <Spinner size="small" /> : Mail}
-          bg="$color12"
-          color="$color1"
+          bg="color11"
+          color="color1"
           disabled={status === 'sending'}
           onPress={subscribe}
         >
@@ -130,17 +130,17 @@ export function NewsletterSignup({
         </Button>
       </XStack>
       {!!error && (
-        <Text id="newsletter-error" aria-live="polite" fontSize="$2" color="$red10">
+        <Text id="newsletter-error" aria-live="polite" fontSize="2" color="red-600">
           {error}
         </Text>
       )}
-      <Text fontSize="$1" color="$color8">
+      <Text fontSize="1" color="color7">
         By subscribing you agree to our{' '}
         <Anchor
           href="https://tamagui.dev/privacy"
           target="_blank"
-          fontSize="$1"
-          color="$color9"
+          fontSize="1"
+          color="color8"
           textDecorationLine="underline"
         >
           privacy policy

@@ -5,10 +5,10 @@ import { AccordionRow, basicEntries } from './common/AccordionRow'
 export function AccordionFAQ() {
   const [value, setValue] = useState('overview')
   return (
-    <YStack width="100%" maxW={760} self="center" gap="$6" p="$5">
-      <YStack items="center" gap="$2">
+    <YStack width="100%" maxW={760} self="center" gap="6" p="5">
+      <YStack items="center" gap="2">
         <H2 text="center">Frequently asked questions</H2>
-        <Paragraph text="center" color="$color10">
+        <Paragraph text="center" color="color9">
           Everything you need to know before inviting your team.
         </Paragraph>
       </YStack>

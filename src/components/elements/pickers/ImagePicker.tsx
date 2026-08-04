@@ -38,30 +38,27 @@ export function ImagePicker() {
       justify="center"
       items="center"
       borderWidth={isDragActive ? 2 : 1}
-      borderColor={isDragActive ? '$color11' : '$color9'}
-      gap="$2"
-      rounded="$true"
+      borderColor={`${isDragActive ? 'color10' : 'color8'}`}
+      gap="2"
+      rounded="true"
     >
       {/* need an empty input div just have image drop feature in the web */}
       {/* @ts-ignore */}
       <View id={id} render="input" width={0} height={0} {...getInputProps()} />
       <View>
-        <Button size="$3" onPress={open}>
+        <Button size="3" onPress={open}>
           Pick Images
         </Button>
 
         <View position="relative" width="100%" items="center" justify="center">
           <Label
-            display={images.length ? 'none' : 'flex'}
-            $platform-native={{
-              display: 'none',
-            }}
-            size="$3"
-            htmlFor={id}
-            color="$color9"
-            t="$1"
+            display={`${images.length ? 'none' : 'flex'} native:none`}
+            color="color8"
+            t="1"
             position="absolute"
             whiteSpace="nowrap"
+            size="3"
+            htmlFor={id}
           >
             Drag images into this area
           </Label>
@@ -73,16 +70,16 @@ export function ImagePicker() {
         flexDirection="row"
         borderRightWidth={1}
         borderLeftWidth={1}
-        borderColor="$color4"
+        borderColor="color4"
         width="100%"
-        theme="accent"
-        pb="$0"
-        horizontal
+        pb="0"
         overflow="scroll"
         flexWrap="nowrap"
         maxH={110}
+        theme="accent"
+        horizontal
       >
-        <XStack gap="$4" flexWrap="nowrap" maxH={110} px="$4" pt={10}>
+        <XStack gap="4" flexWrap="nowrap" maxH={110} px="4" pt={10}>
           {images?.map((image, i) => (
             <View flexDirection="column" key={image} maxH={110}>
               <Image rounded={10} key={image} width={100} height={100} src={image} />
@@ -93,7 +90,7 @@ export function ImagePicker() {
                 r={0}
                 y={-6}
                 x={6}
-                size="$1"
+                size="1"
                 circular
                 position="absolute"
               >

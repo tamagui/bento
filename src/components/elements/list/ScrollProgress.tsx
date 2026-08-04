@@ -18,10 +18,11 @@ import Animated, {
 } from 'react-native-reanimated'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Svg, { Circle } from 'react-native-svg'
+import { getSpace } from '@tamagui/get-token'
 import {
   createStyledHOC,
   AnimatePresence,
-  getToken,
+  getVariableValue,
   isWeb,
   styled,
   Text,
@@ -41,12 +42,20 @@ const CircleFrame = forwardRef<any, any>(
 const AnimatedCircle = Animated.createAnimatedComponent(CircleFrame)
 
 const SafeAreaSpacer = () => (isWeb ? <View /> : <SafeAreaView />)
-const LinearGradientFrame = createStyledHOC(LinearGradient)<{
-  forwardedRef?: any
-  nativeID?: string
-}>(({ forwardedRef, nativeID: _nativeID, ...props }, ref) => (
-  <LinearGradient ref={forwardedRef || ref} {...props} />
-))
+const LinearGradientFrame = createStyledHOC(
+  LinearGradient,
+  (
+    {
+      forwardedRef,
+      nativeID: _nativeID,
+      ...props
+    }: {
+      forwardedRef?: any
+      nativeID?: string
+    },
+    ref
+  ) => <LinearGradient ref={forwardedRef || ref} {...props} />
+)
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradientFrame)
 const AnimatedList = styled(Animated.FlatList, {
   flex: 1,
@@ -72,13 +81,12 @@ export function ScrollProgress() {
   const ListHeaderComponent = useCallback(() => {
     return (
       <>
-        <View pt="$20" gap="$2" items="center">
-          <Text color="$color8" text="center" fontSize="$4" fontFamily="$mono">
+        <View pt="20" gap="2" items="center">
+          <Text color="color7" text="center" fontSize="4" fontFamily="mono">
             {subTitle}
           </Text>
 
           <Text
-            // @ts-expect-error
             fontFamily="Times New Roman"
             fontWeight="bold"
             fontSize={24}
@@ -87,7 +95,7 @@ export function ScrollProgress() {
             THE FAMOUS GENTLEMAN DON QUIXOTE OF LA MANCHA
           </Text>
         </View>
-        <View height={1} width="40%" bg="$color8" my="$6" self="center" />
+        <View height={1} width="40%" bg="color7" my="6" self="center" />
       </>
     )
   }, [])
@@ -99,7 +107,7 @@ export function ScrollProgress() {
         flexBasis="auto"
         position="relative"
         height={isWeb ? '80vh' : '100%'}
-        $gtLg={{ maxH: 600 }}
+        maxH="gtLg:600px"
         maxW={600}
         width="100%"
         justify="flex-end"
@@ -108,12 +116,7 @@ export function ScrollProgress() {
         <AnimatedList
           onScroll={scrollHandler}
           renderItem={({ item }) => (
-            <Text
-              fontSize="$6"
-              // @ts-expect-error
-              fontFamily="Times New Roman"
-              lineHeight={isWeb ? 31 : '$7'}
-            >
+            <Text fontSize="6" fontFamily="Times New Roman" lineHeight={isWeb ? 31 : '7'}>
               {item}
             </Text>
           )}
@@ -122,9 +125,9 @@ export function ScrollProgress() {
           scrollEventThrottle={16}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
-            paddingBottom: isWeb ? 100 : getToken('$space.16'),
-            paddingHorizontal: isWeb ? 16 : getToken('$space.6'),
-            gap: isWeb ? 16 : getToken('$space.4'),
+            paddingBottom: isWeb ? 100 : getVariableValue(getSpace('36')),
+            paddingHorizontal: isWeb ? 16 : getVariableValue(getSpace('8')),
+            gap: isWeb ? 16 : 18,
           }}
         />
 
@@ -149,30 +152,29 @@ const HeaderView = () => {
   return (
     <View position="absolute" t={-1} l={0} r={0}>
       <AnimatedLinearGradient
-        colors={['$background', '$background08', '$background0']}
+        colors={['background', 'background/80', 'background/0']}
         locations={[0.8, 0.9, 1]}
         position="absolute"
         inset={0}
-        pb={isWeb ? '$12' : '$16'}
+        pb={isWeb ? '12' : '16'}
         style={opacityStyle}
       />
-      <View py="$4" px="$4" position="relative">
+      <View py="4" px="4" position="relative">
         <SafeAreaSpacer />
 
-        <XStack items="center" gap="$4">
+        <XStack items="center" gap="4">
           <TouchableOpacity onPress={() => {}}>
             <ChevronLeft />
           </TouchableOpacity>
 
-          <AnimatedView gap="$1" style={opacityStyle} flex={1}>
-            <AnimatedText theme="blue" color="$color8" fontSize="$2" fontFamily="$mono">
+          <AnimatedView gap="1" style={opacityStyle} flex={1}>
+            <AnimatedText theme="blue" color="color7" fontSize="2" fontFamily="mono">
               {subTitle}
             </AnimatedText>
             <AnimatedText
-              // @ts-expect-error
               fontFamily="Times New Roman"
               numberOfLines={1}
-              fontSize="$5"
+              fontSize="5"
               fontWeight="bold"
             >
               {title}
@@ -180,8 +182,8 @@ const HeaderView = () => {
           </AnimatedView>
           <TouchableOpacity onPress={() => setBookmarked(!bookmarked)}>
             <Bookmark
-              fill={bookmarked ? '$color8' : 'none'}
-              color={bookmarked ? '$color8' : '$color'}
+              fill={bookmarked ? 'color7' : 'none'}
+              color={`${bookmarked ? 'color7' : 'color'}`}
               z={99}
             />
           </TouchableOpacity>
@@ -258,39 +260,32 @@ const BottomView = () => {
   return (
     <AnimatedView
       theme="accent"
-      bg="$background"
-      p="$2"
+      bg="background"
+      p="2"
       borderWidth={1}
-      borderColor="$color5"
+      borderColor="color5"
       style={animatedStyle}
       overflow="hidden"
       position="absolute"
-      b={isWeb ? '$4' : getToken('$space.4') * 2}
+      b={isWeb ? '4' : 36}
       self="center"
-      shadowColor="$color5"
       items="center"
       justify="flex-end"
     >
       <AnimatedView
         style={{ transition: 'transform 100ms ease' }}
-        scale={1}
-        exitStyle={{
-          scale: 1.1,
-        }}
-        enterStyle={{
-          scale: 1.1,
-        }}
+        scale="1 enter:1.1 exit:1.1"
         flexDirection="row"
         items="center"
         self="center"
         position="relative"
       >
         <View position="relative">
-          <AnimatedView px="$4" style={currentAnimated}>
-            <Text fontWeight="bold" fontSize="$2">
+          <AnimatedView px="4" style={currentAnimated}>
+            <Text fontWeight="bold" fontSize="2">
               {title}
             </Text>
-            <Text color="$color11" fontWeight="500" fontSize="$1" fontFamily="$mono">
+            <Text color="color10" fontWeight="500" fontSize="1" fontFamily="mono">
               {subTitle}
             </Text>
           </AnimatedView>
@@ -299,17 +294,17 @@ const BottomView = () => {
         <AnimatedView
           justify="center"
           items="flex-start"
-          bg="$background"
+          bg="background"
           position="absolute"
-          px="$4"
+          px="4"
           gap={0}
           inset={0}
           style={nextAnimated}
         >
-          <Text fontWeight="bold" fontSize="$2">
+          <Text fontWeight="bold" fontSize="2">
             {showBookmark ? 'Bookmarked' : 'Next'}
           </Text>
-          <Text color="$color11" fontWeight="500" fontSize="$1" fontFamily="$mono">
+          <Text color="color10" fontWeight="500" fontSize="1" fontFamily="mono">
             Chapter II
           </Text>
         </AnimatedView>
@@ -333,7 +328,10 @@ const SPRING_CONFIG = {
 const CircleProgress = ({
   progress,
   showBookmark,
-}: { progress: SharedValue<number>; showBookmark: boolean }) => {
+}: {
+  progress: SharedValue<number>
+  showBookmark: boolean
+}) => {
   const { color6, color } = useTheme()
 
   const animatedProps = useAnimatedProps(
@@ -384,11 +382,11 @@ const CircleProgress = ({
         justify="center"
         items="center"
         style={nextAnimated}
-        rounded="$10"
-        bg="$green11"
+        rounded="10"
+        bg="green-700"
         position="absolute"
       >
-        <ArrowRight color="$background" />
+        <ArrowRight color="background" />
       </AnimatedView>
 
       <AnimatePresence>
@@ -398,26 +396,19 @@ const CircleProgress = ({
             height={size}
             justify="center"
             items="center"
-            rounded="$10"
-            bg="$green8"
+            rounded="10"
+            bg="green-500"
             position="absolute"
             style={{ transition: 'transform 100ms ease, opacity 100ms ease' }}
-            enterStyle={{
-              scale: 0,
-              opacity: 0,
-            }}
-            exitStyle={{
-              scale: 0,
-              opacity: 0,
-            }}
-            scale={1}
+            scale="1 enter:0 exit:0"
+            opacity="1 enter:0 exit:0"
           >
             <Bookmark
               justify="center"
               items="center"
-              rounded="$10"
+              rounded="10"
               position="absolute"
-              color="$color"
+              color="color"
               fill={color?.val}
             />
           </AnimatedView>

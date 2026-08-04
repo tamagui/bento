@@ -42,15 +42,15 @@ export function StepperForm() {
 
   if (step === 3) {
     return (
-      <YStack width="100%" maxW={560} self="center" items="center" gap="$3" p="$7">
-        <CheckCircle2 size={46} color="$green10" />
-        <Text fontSize="$7" fontWeight="800" letterSpacing={0}>
+      <YStack width="100%" maxW={560} self="center" items="center" gap="3" p="7">
+        <CheckCircle2 size={46} color="green-600" />
+        <Text fontSize="7" fontWeight="800" letterSpacing={0}>
           You’re all set
         </Text>
-        <Paragraph text="center" color="$color10">
+        <Paragraph text="center" color="color9">
           Your workspace profile is ready to use.
         </Paragraph>
-        <Button mt="$2" onPress={restart}>
+        <Button mt="2" onPress={restart}>
           Start over
         </Button>
       </YStack>
@@ -62,17 +62,17 @@ export function StepperForm() {
       width="100%"
       maxW={680}
       self="center"
-      gap="$6"
-      p="$5"
-      rounded="$8"
+      gap="6"
+      p="5"
+      rounded="8"
       borderWidth={1}
-      borderColor="$borderColor"
-      bg="$background"
+      borderColor="border-color"
+      bg="background"
       render={isWeb ? 'form' : undefined}
     >
       <StepperHorizontal currentStep={step} />
-      <YStack gap="$3">
-        <Text fontSize="$7" fontWeight="800" letterSpacing={0}>
+      <YStack gap="3">
+        <Text fontSize="7" fontWeight="800" letterSpacing={0}>
           {step === 0
             ? 'Create your account'
             : step === 1
@@ -103,16 +103,16 @@ export function StepperForm() {
             {...submitOnEnter}
           />
         ) : (
-          <YStack gap="$2" p="$4" rounded="$5" bg="$color2">
-            <Text color="$color9">Email</Text>
+          <YStack gap="2" p="4" rounded="5" bg="color2">
+            <Text color="color8">Email</Text>
             <Text fontWeight="600">{email}</Text>
-            <Text mt="$2" color="$color9">
+            <Text mt="2" color="color8">
               Display name
             </Text>
             <Text fontWeight="600">{name}</Text>
           </YStack>
         )}
-        <Text id="stepper-form-error" aria-live="polite" color="$red10" minH={20}>
+        <Text id="stepper-form-error" aria-live="polite" color="red-600" minH={20}>
           {error}
         </Text>
       </YStack>

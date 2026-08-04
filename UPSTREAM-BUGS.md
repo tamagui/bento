@@ -7,7 +7,7 @@ Accumulating repros for upstream fixes. Fixed ones move to the bottom.
 1. RESOLVED AS BENTO BUG (not upstream): animated driver resolves theme tokens from the wrong scheme
    - repro: a styled View with `transition="200ms"` + `bg="$color1"` inside a
      dark-theme page renders with LIGHT theme values (white card), and its
-     children's `$color12` text becomes invisible. Removing `transition` fixes it.
+     children's `color11` text becomes invisible. Removing `transition` fixes it.
    - seen in: marketing/sections/FeatureGrid card (git history of this file);
      suspect the moti/animated web driver resolves tokens against the root
      scheme instead of the nearest Theme.

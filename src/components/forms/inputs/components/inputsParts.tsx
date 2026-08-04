@@ -1,29 +1,29 @@
+import { XGroup } from '../../../BentoSkins'
 import { getFontSized } from '@tamagui/get-font-sized'
 import { getSpace } from '@tamagui/get-token'
-import { User } from '@tamagui/lucide-icons-2'
 import type { SizeVariantSpreadFunction } from '@tamagui/web'
-import { useState } from 'react'
-import type { ColorTokens, FontSizeTokens } from 'tamagui'
+import { forwardRef, useState } from 'react'
+import type { ColorTokens, FontSizeTokens, TamaguiElement, YStackProps } from 'tamagui'
 import {
   createStyledHOC,
   Label,
   Button as TButton,
-  Input as TInput,
   Text,
   View,
-  XGroup,
   createStyledContext,
   getFontSize,
   getVariable,
+  getVariableValue,
   isWeb,
   styled,
   useGetThemedIcon,
   useTheme,
   withStaticProperties,
 } from 'tamagui'
+import { Input as TInput } from 'tamagui/unstyled'
 
 const defaultContextValues = {
-  size: '$true',
+  size: '4',
   scaleIcon: 1.2,
   color: undefined,
 } as const
@@ -35,57 +35,48 @@ export const InputContext = createStyledContext<{
 }>(defaultContextValues)
 
 export const defaultInputGroupStyles = {
-  size: '$true',
-  fontFamily: '$body',
+  size: '4',
+  fontFamily: 'body',
   borderWidth: 1,
-  outlineWidth: 0,
-  color: '$color',
+  color: 'color',
 
-  ...(isWeb
-    ? {
-        tabIndex: 0,
-      }
-    : {
-        focusable: true,
-      }),
+  tabIndex: 0,
 
-  borderColor: '$borderColor',
-  backgroundColor: '$color2',
+  borderColor: 'border-color hover:border-color-hover focus:border-color-focus',
+  backgroundColor: 'color2',
 
   // this fixes a flex bug where it overflows container
   minWidth: 0,
 
-  hoverStyle: {
-    borderColor: '$borderColorHover',
-  },
-
-  focusStyle: {
-    outlineColor: '$outlineColor',
-    outlineWidth: 2,
-    outlineStyle: 'solid',
-    borderColor: '$borderColorFocus',
-  },
+  outlineColor: 'focus:outline-color',
+  outlineWidth: '0 focus:2px',
+  outlineStyle: 'focus:solid',
 } as const
 
 const InputGroupFrame = styled(XGroup, {
   justify: 'space-between',
   context: InputContext,
   variants: {
-    unstyled: {
-      false: defaultInputGroupStyles,
+    framed: {
+      true: defaultInputGroupStyles,
     },
     scaleIcon: {
-      ':number': () => ({}),
+      number: () => ({}),
     },
     applyFocusStyle: {
-      ':boolean': (val, { props }) => {
+      boolean: (val) => {
         if (val) {
-          return props.focusStyle || defaultInputGroupStyles.focusStyle
+          return {
+            outlineColor: 'outline-color',
+            outlineWidth: 2,
+            outlineStyle: 'solid',
+            borderColor: 'border-color-focus',
+          }
         }
       },
     },
     size: {
-      '...size': (val, { tokens }) => {
+      Size: (val, { tokens }) => {
         return {
           borderRadius: tokens.radius[val],
         }
@@ -93,7 +84,7 @@ const InputGroupFrame = styled(XGroup, {
     },
   } as const,
   defaultVariants: {
-    unstyled: process.env.TAMAGUI_HEADLESS === '1',
+    framed: true,
   },
 })
 
@@ -102,7 +93,7 @@ const FocusContext = createStyledContext({
   focused: false,
 })
 
-const InputGroupImpl = createStyledHOC(InputGroupFrame)((props, forwardedRef) => {
+const InputBox = createStyledHOC(InputGroupFrame, (props, forwardedRef) => {
   const { children, ...rest } = props
   const [focused, setFocused] = useState(false)
 
@@ -115,89 +106,89 @@ const InputGroupImpl = createStyledHOC(InputGroupFrame)((props, forwardedRef) =>
   )
 })
 
-export const inputSizeVariant: SizeVariantSpreadFunction<any> = (
-  val = '$true',
-  extras
-) => {
-  const radiusToken = extras.tokens.radius[val] ?? extras.tokens.radius['$true']
-  const paddingHorizontal = getSpace(val, {
-    shift: -1,
-    bounds: [2],
-  })
-  const fontStyle = getFontSized(val as any, extras)
+export const inputSizeVariant: SizeVariantSpreadFunction<any> = (val = '4', extras) => {
+  const size = val === true ? '4' : val
+  const radiusToken = extras.tokens.radius[size] ?? extras.tokens.radius['4']
+  const paddingHorizontal = getVariableValue(getSpace(size)) * 0.6
+  const fontStyle = getFontSized(size as any, extras)
   // lineHeight messes up input on native
   if (!isWeb && fontStyle) {
     delete fontStyle['lineHeight']
   }
   return {
     ...fontStyle,
-    height: val,
+    height: size,
     borderRadius: extras.props.circular ? 100_000 : radiusToken,
     paddingHorizontal,
   }
 }
 
 const InputFrame = styled(TInput, {
-  unstyled: true,
   context: InputContext,
   variants: {
     scaleIcon: {
-      ':number': () => ({}),
+      number: () => ({}),
     },
   } as const,
 })
 
-const InputImpl = createStyledHOC(InputFrame)<{
-  secureTextEntry?: boolean
-  keyboardType?: string
-  textContentType?: string
-  onChangeText?: (text: string) => void
-  onLayout?: (event: any) => void
-}>((props, ref) => {
-  const { setFocused } = FocusContext.useStyledContext()
-  const { size } = InputContext.useStyledContext()
-  const {
-    secureTextEntry,
-    keyboardType,
-    textContentType,
-    onChangeText,
-    onLayout,
-    ...rest
-  } = props
-  return (
-    <View flex={1} onLayout={onLayout}>
-      <InputFrame
-        ref={ref}
-        onFocus={() => {
-          setFocused(true)
-        }}
-        onBlur={() => setFocused(false)}
-        size={size}
-        type={secureTextEntry ? 'password' : rest.type}
-        inputMode={
-          keyboardType === 'numeric'
-            ? 'numeric'
-            : keyboardType === 'email-address'
+const InputArea = createStyledHOC(
+  InputFrame,
+  (
+    props: React.ComponentProps<typeof InputFrame> & {
+      secureTextEntry?: boolean
+      keyboardType?: string
+      textContentType?: string
+      onChangeText?: (text: string) => void
+      onLayout?: (event: any) => void
+    },
+    ref
+  ) => {
+    const { setFocused } = FocusContext.useStyledContext()
+    const { size } = InputContext.useStyledContext()
+    const {
+      secureTextEntry,
+      keyboardType,
+      textContentType,
+      onChangeText,
+      onLayout,
+      ...rest
+    } = props
+    return (
+      <View flex={1} onLayout={onLayout}>
+        <InputFrame
+          ref={ref}
+          onFocus={() => {
+            setFocused(true)
+          }}
+          onBlur={() => setFocused(false)}
+          size={size}
+          type={secureTextEntry ? 'password' : rest.type}
+          inputMode={
+            keyboardType === 'numeric'
+              ? 'numeric'
+              : keyboardType === 'email-address'
+                ? 'email'
+                : undefined
+          }
+          autoComplete={
+            textContentType === 'emailAddress'
               ? 'email'
+              : textContentType === 'password'
+                ? 'current-password'
+                : undefined
+          }
+          onChange={
+            onChangeText
+              ? (e: any) => onChangeText(e.target?.value ?? e.nativeEvent?.text ?? '')
               : undefined
-        }
-        autoComplete={
-          textContentType === 'emailAddress'
-            ? 'email'
-            : textContentType === 'password'
-              ? 'current-password'
-              : undefined
-        }
-        onChange={
-          onChangeText
-            ? (e: any) => onChangeText(e.target?.value ?? e.nativeEvent?.text ?? '')
-            : undefined
-        }
-        {...rest}
-      />
-    </View>
-  )
-})
+          }
+          {...rest}
+        />
+      </View>
+    )
+  }
+)
 
 const InputSection = styled(XGroup.Item, {
   justify: 'center',
@@ -205,7 +196,7 @@ const InputSection = styled(XGroup.Item, {
   context: InputContext,
   variants: {
     scaleIcon: {
-      ':number': () => ({}),
+      number: () => ({}),
     },
   } as const,
 })
@@ -217,10 +208,10 @@ const Button = styled(TButton, {
 
   variants: {
     scaleIcon: {
-      ':number': () => ({}),
+      number: () => ({}),
     },
     size: {
-      '...size': (val = '$true', { tokens }) => {
+      Size: (val = '4', { tokens }) => {
         if (typeof val === 'number') {
           return {
             paddingHorizontal: 0,
@@ -247,10 +238,10 @@ export const InputIconFrame = styled(View, {
 
   variants: {
     scaleIcon: {
-      ':number': () => ({}),
+      number: () => ({}),
     },
     size: {
-      '...size': (val, { tokens }) => {
+      Size: (val, { tokens }) => {
         return {
           paddingHorizontal: tokens.space[val],
         }
@@ -265,62 +256,79 @@ const getIconSize = (size: FontSizeTokens, scale: number) => {
   )
 }
 
-const InputIcon = createStyledHOC(InputIconFrame)<{
-  scaleIcon?: number
-  color?: ColorTokens | string
-}>((props, ref) => {
-  const { children, color: colorProp, ...rest } = props
-  const inputContext = InputContext.useStyledContext()
-  const { size = '$true', color: contextColor, scaleIcon = 1 } = inputContext
+const InputIcon = createStyledHOC(
+  InputIconFrame,
+  (
+    props: React.PropsWithChildren<{
+      scaleIcon?: number
+      color?: ColorTokens | string
+    }>,
+    ref
+  ) => {
+    const { children, color: colorProp, ...rest } = props
+    const inputContext = InputContext.useStyledContext()
+    const { size = '4', color: contextColor, scaleIcon = 1 } = inputContext
 
-  const theme = useTheme()
-  const color = getVariable(
-    contextColor || theme[contextColor as any]?.get('web') || theme.color10?.get('web')
+    const theme = useTheme()
+    const color = getVariable(
+      contextColor || theme[contextColor as any]?.get('web') || theme.color9?.get('web')
+    )
+    const iconSize = getIconSize(size as FontSizeTokens, scaleIcon)
+
+    const getThemedIcon = useGetThemedIcon({
+      size: iconSize,
+      color: color as any,
+    })
+    return (
+      <InputIconFrame ref={ref} {...rest}>
+        {getThemedIcon(children)}
+      </InputIconFrame>
+    )
+  }
+)
+
+type InputContainerProps = React.PropsWithChildren<
+  Pick<
+    YStackProps,
+    | 'cursor'
+    | 'flex'
+    | 'flexBasis'
+    | 'minW'
+    | 'mx'
+    | 'onBlur'
+    | 'onPress'
+    | 'style'
+    | 'theme'
+  > & {
+    color?: ColorTokens | string
+    scaleIcon?: number
+    size?: FontSizeTokens
+  }
+>
+
+const InputContainer = forwardRef<TamaguiElement, InputContainerProps>(
+  ({ children, color, scaleIcon = 1.2, size = '4', ...props }, ref) => (
+    <InputContext.Provider color={color} scaleIcon={scaleIcon} size={size}>
+      <View
+        ref={ref}
+        flexDirection="column"
+        gap={getVariableValue(getSpace(size)) * 0.3}
+        {...props}
+      >
+        {children}
+      </View>
+    </InputContext.Provider>
   )
-  const iconSize = getIconSize(size as FontSizeTokens, scaleIcon)
-
-  const getThemedIcon = useGetThemedIcon({ size: iconSize, color: color as any })
-  return (
-    <InputIconFrame ref={ref} {...rest}>
-      {getThemedIcon(children)}
-    </InputIconFrame>
-  )
-})
-
-export const InputContainerFrame = styled(View, {
-  context: InputContext,
-  flexDirection: 'column',
-
-  variants: {
-    scaleIcon: {
-      ':number': () => ({}),
-    },
-    size: {
-      '...size': (val, { tokens }) => ({
-        gap: tokens.space[val].val * 0.3,
-      }),
-    },
-    color: {
-      '...color': () => ({}),
-    },
-    gapScale: {
-      ':number': () => ({}),
-    },
-  } as const,
-
-  defaultVariants: {
-    size: '$4',
-  },
-})
+)
 
 export const InputLabel = styled(Label, {
   context: InputContext,
   variants: {
     scaleIcon: {
-      ':number': () => ({}),
+      number: () => ({}),
     },
     size: {
-      '...fontSize': (val, extras) =>
+      FontSize: (val, extras) =>
         // getFontSized keeps an invariant TextProps generic despite this Label-compatible context.
         getFontSized(val, extras as Parameters<typeof getFontSized>[1]),
     },
@@ -329,18 +337,17 @@ export const InputLabel = styled(Label, {
 
 export const InputInfo = styled(Text, {
   context: InputContext,
-  color: '$color10',
-
+  color: 'color9',
   variants: {
     scaleIcon: {
-      ':number': () => ({}),
+      number: () => ({}),
     },
     size: {
-      '...fontSize': (val, { font }) => {
+      FontSize: (val, { font }) => {
         if (!font) return
         const fontSize = font.size[val].val * 0.8
         const lineHeight = font.lineHeight?.[val].val * 0.8
-        const fontWeight = font.weight?.['$2']
+        const fontWeight = font.weight?.['2']
         const letterSpacing = font.letterSpacing?.[val]
         const textTransform = font.transform?.[val]
         const fontStyle = font.style?.[val]
@@ -362,11 +369,11 @@ const InputXGroup = styled(XGroup, {
 
   variants: {
     scaleIcon: {
-      ':number': () => ({}),
+      number: () => ({}),
     },
     size: {
-      '...size': (val, { tokens }) => {
-        const radiusToken = tokens.radius[val] ?? tokens.radius['$true']
+      Size: (val, { tokens }) => {
+        const radiusToken = tokens.radius[val] ?? tokens.radius['4']
         return {
           borderRadius: radiusToken,
         }
@@ -375,9 +382,9 @@ const InputXGroup = styled(XGroup, {
   } as const,
 })
 
-export const Input = withStaticProperties(InputContainerFrame, {
-  Box: InputGroupImpl,
-  Area: InputImpl,
+export const Input = withStaticProperties(InputContainer, {
+  Box: InputBox,
+  Area: InputArea,
   Section: InputSection,
   Button,
   Icon: InputIcon,
@@ -385,27 +392,3 @@ export const Input = withStaticProperties(InputContainerFrame, {
   Label: InputLabel,
   XGroup: withStaticProperties(InputXGroup, { Item: XGroup.Item }),
 })
-
-export const InputNew = () => {
-  return (
-    <Input width={400} size="$3">
-      <Input.Box>
-        <Input.Section>
-          <Input.Icon>
-            <User />
-          </Input.Icon>
-        </Input.Section>
-        <Input.Section>
-          <Input.Area pl={0} />
-        </Input.Section>
-        <Input.Section>
-          <Input.Button>
-            <Input.Icon>
-              <User />
-            </Input.Icon>
-          </Input.Button>
-        </Input.Section>
-      </Input.Box>
-    </Input>
-  )
-}

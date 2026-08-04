@@ -64,36 +64,29 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             onPress={closeDialog}
             key="overlay"
             transition="quick"
-            enterStyle={{ opacity: 0 }}
-            exitStyle={{ opacity: 0 }}
+            opacity="enter:0 exit:0"
             background="rgba(0,0,0,0.5)"
           />
           <AlertDialog.Content
             theme={theme}
-            p="$3"
-            px="$4"
-            bg="$color1"
-            rounded="$8"
-            gap="$3"
+            paddingTop="3"
+            paddingBottom="3"
+            px="4"
+            bg="color1"
+            rounded="8"
+            gap="3"
+            transition={['quick', { opacity: { overshootClamping: true } }]}
+            x="enter:0 exit:0"
+            y="enter:-10px exit:10px"
+            opacity="enter:0 exit:0"
+            scale="enter:0.95 exit:0.95"
+            borderColor="dark:color2"
+            borderWidth="dark:1px"
+            {...rest}
             key="content"
             style={{ left: 0, right: 0, marginHorizontal: 'auto' }}
-            transition={[
-              'quick',
-              {
-                opacity: {
-                  overshootClamping: true,
-                },
-              },
-            ]}
-            enterStyle={{ x: 0, y: -10, opacity: 0, scale: 0.95 }}
-            exitStyle={{ x: 0, y: 10, opacity: 0, scale: 0.95 }}
-            $theme-dark={{
-              borderColor: '$color2',
-              borderWidth: 1,
-            }}
-            {...rest}
           >
-            <View pb="$1" flexDirection="row" gap="$3">
+            <View pb="1" flexDirection="row" gap="3">
               {icon}
               <View shrink={1}>
                 <AlertDialog.Title fontWeight="500" fontSize={20} letterSpacing={1}>
@@ -104,23 +97,16 @@ const Alert = ({ children, ...rest }: AlertProps) => {
                 </AlertDialog.Description>
               </View>
             </View>
-            <Separator borderColor="$color6" />
-            <View flexDirection="row" gap="$5" justify="flex-end" items="center" px="$2">
+            <Separator borderColor="color6" />
+            <View flexDirection="row" gap="5" justify="flex-end" items="center" px="2">
               {buttons.map((button, index) => {
                 const Base =
                   button.style === 'cancel' ? AlertDialog.Cancel : AlertDialog.Action
-                const color = button.style === 'active' ? '$color10' : '$color'
+                const color = button.style === 'active' ? 'color9' : 'color'
                 return (
                   <Base key={index} asChild>
-                    <Button unstyled rounded={1000_000} onPress={button.action}>
-                      <Button.Text
-                        opacity={0.8}
-                        color={color}
-                        hoverStyle={{
-                          opacity: 1,
-                        }}
-                        fontSize={15}
-                      >
+                    <Button variant="quiet" rounded={1000_000} onPress={button.action}>
+                      <Button.Text opacity="0.8 hover:1" color={color} fontSize={15}>
                         {button.title}
                       </Button.Text>
                     </Button>
@@ -165,7 +151,7 @@ const AlertDialogTest = () => {
           buttons,
           icon: (
             <View y={6}>
-              <Info size="$2" color="$color10" />
+              <Info size="2" color="color9" />
             </View>
           ),
           theme: 'red',

@@ -50,41 +50,35 @@ export function CheckboxCards() {
     <View width="100%" items="center">
       <Checkboxes
         minW="100%"
+        gap="4"
+        py="@sm/window:6"
         values={values}
         onValuesChange={(values) => toggleValues(values)}
-        gap="$4"
-        $group-window-sm={{
-          py: '$6',
-        }}
       >
-        <Checkboxes.FocusGroup width="100%" flexDirection="row" gap="$3" flexWrap="wrap">
+        <Checkboxes.FocusGroup width="100%" flexDirection="row" gap="3" flexWrap="wrap">
           {packages.map((item) => (
             <Checkboxes.FocusGroup.Item
               value={item.title}
               key={item.title}
-              maxW="100%"
-              minW="100%"
-              $group-window-gtSm={{
-                maxW: '49%',
-                minW: '49%',
-              }}
+              maxW="100% @gtSm/window:49%"
+              minW="100% @gtSm/window:49%"
             >
-              <Checkboxes.Card flex={1} flexBasis="auto" minW="100%" gap="$6">
-                <View flex={1} flexBasis="auto" flexDirection="column" gap="$3">
+              <Checkboxes.Card flex={1} flexBasis="auto" minW="100%" gap="6">
+                <View flex={1} flexBasis="auto" flexDirection="column" gap="3">
                   <View flexDirection="row" justify="space-between">
                     <View
                       flexDirection="row"
-                      theme={item.color}
-                      bg="$color6"
-                      rounded="$4"
+                      bg="color6"
+                      rounded="4"
                       items="center"
                       justify="center"
-                      gap="$2"
-                      py="$2"
-                      px="$3"
+                      gap="2"
+                      py="2"
+                      px="3"
+                      theme={item.color}
                     >
-                      <View width={10} height={10} bg="$color10" rounded={100} />
-                      <Text fontSize="$3" color="$color11">
+                      <View width={10} height={10} bg="color9" rounded={100} />
+                      <Text fontSize="3" color="color10">
                         {item.title}
                       </Text>
                     </View>
@@ -95,14 +89,14 @@ export function CheckboxCards() {
                       </Checkboxes.Checkbox.Indicator>
                     </Checkboxes.Checkbox>
                   </View>
-                  <Text fontSize="$3" theme="alt1">
+                  <Text fontSize="3" theme="level2">
                     {item.description}
                   </Text>
                 </View>
 
-                <View flexDirection="row" gap="$2" mt="auto" items="center">
-                  <Clock color="$color10" size={14} />
-                  <Text opacity={0.5} fontSize="$3" fontWeight="300" theme="alt2">
+                <View flexDirection="row" gap="2" mt="auto" items="center">
+                  <Clock color="color9" size={14} />
+                  <Text opacity={0.5} fontSize="3" fontWeight="300" theme="level3">
                     last bought 2 hr ago
                   </Text>
                 </View>

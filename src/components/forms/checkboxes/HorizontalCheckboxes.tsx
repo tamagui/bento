@@ -39,27 +39,27 @@ export function HorizontalCheckboxes() {
         onValuesChange={onValuesChange}
         width={600}
         maxW="100%"
-        gap="$4"
-        $group-window-sm={{
-          px: '$4',
-          py: '$6',
-        }}
+        gap="4"
+        px="@sm/window:4"
+        py="@sm/window:6"
       >
-        <YStack gap="$1">
+        <YStack gap="1">
           <Checkboxes.Title>Payment</Checkboxes.Title>
-          <Text fontSize="$5" fontWeight="300" color="$color9">
+          <Text fontSize="5" fontWeight="300" color="color8">
             Select your payment method
           </Text>
         </YStack>
 
-        <Checkboxes.FocusGroup flexDirection="row" gap="$4" flexWrap="wrap" rowGap="$2">
+        <Checkboxes.FocusGroup
+          flexDirection="row"
+          columnGap="4"
+          rowGap="2"
+          flexWrap="wrap"
+        >
           {items.map(({ id, label, checked }) => (
             <Checkboxes.FocusGroup.Item
               flex={1}
-              flexBasis="100%"
-              $group-window-gtXs={{
-                flexBasis: 150,
-              }}
+              flexBasis="100% @gtXs/window:150px"
               value={id}
               key={id}
             >
@@ -87,13 +87,11 @@ function Item({
     <View width="100%" items="center">
       <Checkboxes.Card
         flexDirection="row"
-        hoverStyle={{
-          borderColor: '$color7',
-        }}
+        borderColor="hover:color6"
         items="center"
-        gap="$3"
+        gap="3"
         p={0}
-        px="$3"
+        px="3"
         cursor="pointer"
       >
         <Checkboxes.Checkbox id={id}>

@@ -1,27 +1,20 @@
-import { Avatar, Button, TextArea, View } from 'tamagui'
+import { Avatar } from '../../BentoSkins'
+import { Button, TextArea, View } from 'tamagui'
 
 /** ------ EXAMPLE ------ */
 export function AvatarOutContentAction() {
   return (
-    <View
-      flexDirection="row"
-      width={500}
-      maxW="100%"
-      gap="$3"
-      $group-window-sm={{
-        py: '$6',
-      }}
-    >
-      <Button chromeless circular>
-        <Avatar flexShrink={1} circular size="$3.5">
+    <View flexDirection="row" width={500} maxW="100%" gap="3" py="@sm/window:6">
+      <Button variant="quiet" circular>
+        <Avatar flexShrink={1} circular size="10">
           <Avatar.Image aria-label="user photo" src="https://i.pravatar.cc/123" />
-          <Avatar.Fallback background="$color10" />
+          <Avatar.Fallback background="color9" />
         </Avatar>
       </Button>
-      <View flexDirection="column" shrink={1} flexBasis={400} gap="$3">
+      <View flexDirection="column" shrink={1} flexBasis={400} gap="3">
         <TextArea
-          placeholderTextColor="$color9"
-          size="$3"
+          placeholderTextColor="color8"
+          size="3"
           fontWeight="300"
           height={180}
           placeholder="Write your comment"

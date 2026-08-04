@@ -6,31 +6,22 @@ export const FormCard = styled(View, {
   render: 'form',
   flexDirection: 'row',
   maxW: '100%',
-  rounded: 30,
-  bg: '$color1',
-  borderWidth: 1,
-  borderColor: '$color4',
-  $gtSm: {
-    p: '$6',
-    shadowColor: '$shadowColor',
-    shadowOffset: {
-      width: 0,
-      height: 9,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 12.35,
-  },
-  $xs: {
-    borderWidth: 0,
-    rounded: 0,
-    px: '$1',
-  },
+  rounded: '30px xs:0px',
+  bg: 'color1',
+  borderWidth: '1px xs:0px',
+  borderColor: 'color4',
+  p: 'gtSm:6',
+  boxShadow: 'gtSm:(0 9px 12.35px shadow-color)',
+  px: 'xs:1',
 })
 
 export const Hide = ({
   children,
   when = 'sm',
-}: { children: React.ReactNode; when: MediaQueryKey }) => {
+}: {
+  children: React.ReactNode
+  when: MediaQueryKey
+}) => {
   const hide = useGroupMedia('window')[when]
 
   if (hide) {

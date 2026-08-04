@@ -7,8 +7,8 @@ export const ColorSchemeToggle = () => {
   const checked = theme.value === 'light'
 
   return (
-    <XStack items="center" gap="$2">
-      <Button chromeless disabled width={20} icon={Moon} />
+    <XStack items="center" gap="2">
+      <Button variant="quiet" disabled width={20} icon={Moon} />
       <Switch
         checked={checked}
         onCheckedChange={() => {
@@ -26,7 +26,7 @@ export const ColorSchemeToggle = () => {
           ]}
         />
       </Switch>
-      <Button chromeless disabled width={20} icon={Sun} />
+      <Button variant="quiet" disabled width={20} icon={Sun} />
     </XStack>
   )
 }

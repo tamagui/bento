@@ -1,3 +1,4 @@
+import { Avatar, Group } from '../../BentoSkins'
 import {
   Ban,
   BellRing,
@@ -32,11 +33,9 @@ import {
 } from 'react-native-reanimated'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {
-  Avatar,
   Button,
   Circle,
   Form,
-  Group,
   Input,
   isWeb,
   ScrollView,
@@ -70,10 +69,10 @@ const SafeAreaSpacer = () => (isWeb ? <View /> : <SafeAreaView />)
 
 const Label = styled(Text, {
   fontWeight: '500',
-  fontFamily: '$silkscreen',
+  fontFamily: 'silkscreen',
   textTransform: 'uppercase',
-  fontSize: '$2',
-  color: '$color10',
+  fontSize: '2',
+  color: 'color9',
 })
 
 export const Chat = () => {
@@ -127,10 +126,10 @@ export const Chat = () => {
           <GestureView offset={offset} />
 
           <AnimatedView
-            bg="$background"
+            bg="background"
             overflow="hidden"
-            borderTopLeftRadius="$8"
-            borderTopRightRadius="$8"
+            borderTopLeftRadius="8"
+            borderTopRightRadius="8"
             flex={1}
             flexBasis="auto"
             borderCurve="circular"
@@ -159,7 +158,10 @@ export const Chat = () => {
 const BottomBar = ({
   onSend,
   offset,
-}: { onSend: (message: string) => void; offset: SharedValue<number> }) => {
+}: {
+  onSend: (message: string) => void
+  offset: SharedValue<number>
+}) => {
   const theme = useThemeName()
 
   const { handleSubmit, control } = useForm({
@@ -185,14 +187,14 @@ const BottomBar = ({
             }
 
             return (
-              <XStack items="center" gap="$3" px="$4" py="$4">
-                <Button size="$3" circular>
+              <XStack items="center" gap="3" px="4" py="4">
+                <Button size="3" circular>
                   <Plus />
                 </Button>
                 <Input
-                  rounded="$10"
-                  placeholder="Typing..."
+                  rounded="10"
                   flex={1}
+                  placeholder="Typing..."
                   onSubmitEditing={submit}
                   value={value}
                   onChangeText={onChange}
@@ -202,10 +204,8 @@ const BottomBar = ({
                   <Button
                     theme={theme.includes('accent') ? 'blue' : theme}
                     style={{ transition: 'transform 200ms ease' }}
-                    enterStyle={{ scale: 0.2 }}
-                    exitStyle={{ scale: 0.2 }}
-                    scale={1}
-                    size="$3"
+                    scale="1 enter:0.2 exit:0.2"
+                    size="3"
                     onPress={submit}
                     circular
                   >
@@ -214,10 +214,8 @@ const BottomBar = ({
                 ) : (
                   <Button
                     style={{ transition: 'transform 200ms ease' }}
-                    enterStyle={{ scale: 0.2 }}
-                    exitStyle={{ scale: 0.2 }}
-                    scale={1}
-                    size="$3"
+                    scale="1 enter:0.2 exit:0.2"
+                    size="3"
                     circular
                   >
                     <Smile />
@@ -265,32 +263,32 @@ const Header = ({ offset }: { offset: SharedValue<number> }) => {
   return (
     <AnimatedView
       overflow="hidden"
-      borderBottomLeftRadius="$8"
-      borderBottomRightRadius="$8"
+      borderBottomLeftRadius="8"
+      borderBottomRightRadius="8"
       borderCurve="circular"
-      bg="$background"
+      bg="background"
       justify="center"
     >
       <SafeAreaSpacer />
 
       <AnimatedView style={profileStyle}>
-        <XStack px="$4" items="center" pt="$4" gap="$3">
+        <XStack px="4" items="center" pt="4" gap="3">
           <Avatar circular size={AVATAR_SIZE} bg="red">
-            <Avatar.Image source={{ uri: AVATAR_1_URL }} objectFit="cover" />
+            <Avatar.Image src={AVATAR_1_URL} objectFit="cover" />
             <Avatar.Fallback />
           </Avatar>
-          <View gap="$1" flex={1}>
-            <Text fontSize="$4" fontWeight="bold">
+          <View gap="1" flex={1}>
+            <Text fontSize="4" fontWeight="bold">
               Jony Ive
             </Text>
-            <Text theme="green" fontSize="$3" color="$color10">
+            <Text theme="green" fontSize="3" color="color9">
               online
             </Text>
           </View>
 
           <View position="relative">
-            <Button size="$3" circular>
-              <PhoneCall size={'$1'} />
+            <Button size="3" circular>
+              <PhoneCall size={'1'} />
             </Button>
             <Circle
               z={1}
@@ -325,42 +323,42 @@ const MenuView = ({ offset }: { offset: SharedValue<number> }) => {
     <AnimatedView style={style}>
       <ScrollView
         keyboardDismissMode="on-drag"
-        contentContainerStyle={{ py: '$6' }}
+        contentContainerStyle={{ py: '6' }}
         showsVerticalScrollIndicator={false}
       >
-        <View gap="$6">
-          <View gap="$3" items="center">
+        <View gap="6">
+          <View gap="3" items="center">
             <View
               theme="green"
               self="center"
-              p="$1"
-              borderColor="$color10"
+              p="1"
+              borderColor="color9"
               borderWidth={2}
               rounded={1000}
               position="relative"
             >
-              <Avatar circular size="$8" bg="red">
-                <Avatar.Image source={{ uri: AVATAR_1_URL }} objectFit="cover" />
+              <Avatar circular size="8" bg="red">
+                <Avatar.Image src={AVATAR_1_URL} objectFit="cover" />
                 <Avatar.Fallback />
               </Avatar>
               <Circle
                 position="absolute"
-                bg="$color10"
+                bg="color9"
                 height={16}
                 width={16}
                 r={4}
                 b={4}
                 borderWidth={2}
-                borderColor="$background"
+                borderColor="background"
                 z={1}
               />
             </View>
-            <View gap="$2" items="center">
-              <Text text="center" fontSize="$8" fontWeight="bold">
+            <View gap="2" items="center">
+              <Text text="center" fontSize="8" fontWeight="bold">
                 Jony Ive
               </Text>
-              <Chip circular theme="accent" size="$2">
-                <Chip.Text fontFamily="$silkscreen">@jony_ive</Chip.Text>
+              <Chip circular theme="accent" size="2">
+                <Chip.Text fontFamily="silkscreen">@jony_ive</Chip.Text>
               </Chip>
             </View>
           </View>
@@ -369,8 +367,8 @@ const MenuView = ({ offset }: { offset: SharedValue<number> }) => {
 
           <OptionsMenuGroup />
 
-          <View gap="$2">
-            <Label px="$4">Appearance</Label>
+          <View gap="2">
+            <Label px="4">Appearance</Label>
             <ThemePicker />
           </View>
 
@@ -383,9 +381,9 @@ const MenuView = ({ offset }: { offset: SharedValue<number> }) => {
 
 const OptionsMenuGroup = () => {
   return (
-    <View px="$4" gap="$3">
+    <View px="4" gap="3">
       <Label>Options</Label>
-      <Group rounded="$6" borderCurve="circular">
+      <Group rounded="6" borderCurve="circular">
         <Group.Item>
           <Button justify="flex-start">
             <Button.Icon scaleIcon={1.5}>
@@ -428,9 +426,9 @@ const OptionsMenuGroup = () => {
 
 const SettingMenuGroup = () => {
   return (
-    <View px="$4" gap="$3">
+    <View px="4" gap="3">
       <Label>Settings</Label>
-      <Group rounded="$6" borderCurve="circular">
+      <Group rounded="6" borderCurve="circular">
         <Group.Item>
           <Button justify="flex-start">
             <Button.Icon scaleIcon={1.5}>
@@ -473,7 +471,7 @@ const SettingMenuGroup = () => {
 
 const ButtonGroup = () => {
   return (
-    <XStack items="center" gap="$4" justify="center">
+    <XStack items="center" gap="4" justify="center">
       <Theme name="green">
         <Button aspectRatio={1} circular>
           <Phone />
@@ -569,7 +567,7 @@ const GestureView = ({ offset }: { offset: SharedValue<number> }) => {
 
   const Handler = () => (
     <View>
-      <View self="center" m="$2" height={6} width="$4" rounded="$4" bg="$background" />
+      <View self="center" m="2" height={6} width="4" rounded="4" bg="background" />
     </View>
   )
 

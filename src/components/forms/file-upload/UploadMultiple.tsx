@@ -14,13 +14,13 @@ type Preview = {
   id: string
   name: string
   source?: string
-  color: '$blue6' | '$orange6' | '$purple6' | '$color4'
+  color: 'blue-300' | 'orange-300' | 'purple-300' | 'color4'
 }
 
 const initial: Preview[] = [
-  { id: 'one', name: 'Ocean blue', color: '$blue6' },
-  { id: 'two', name: 'Warm coral', color: '$orange6' },
-  { id: 'three', name: 'Soft violet', color: '$purple6' },
+  { id: 'one', name: 'Ocean blue', color: 'blue-300' },
+  { id: 'two', name: 'Warm coral', color: 'orange-300' },
+  { id: 'three', name: 'Soft violet', color: 'purple-300' },
 ]
 
 export function UploadMultiple() {
@@ -39,31 +39,35 @@ export function UploadMultiple() {
         id: file.id,
         name: file.name,
         source: file.uri,
-        color: '$color4' as const,
+        color: 'color4' as const,
       })),
     ])
   }
 
-  const picker = useFilePicker({ accept: 'image/*', multiple: true, onFiles: addImages })
+  const picker = useFilePicker({
+    accept: 'image/*',
+    multiple: true,
+    onFiles: addImages,
+  })
 
   return (
-    <YStack width="100%" maxW={700} self="center" gap="$4">
-      <YStack gap="$1">
-        <Text fontSize="$6" fontWeight="700" letterSpacing={0}>
+    <YStack width="100%" maxW={700} self="center" gap="4">
+      <YStack gap="1">
+        <Text fontSize="6" fontWeight="700" letterSpacing={0}>
           Gallery images
         </Text>
-        <Text color="$color9" letterSpacing={0}>
+        <Text color="color8" letterSpacing={0}>
           Add up to eight product photos.
         </Text>
       </YStack>
       {!!rejection && (
-        <Text role="alert" fontSize="$2" color="$red10">
+        <Text role="alert" fontSize="2" color="red-600">
           {rejection}
         </Text>
       )}
       <XStack
         flexWrap="wrap"
-        gap="$3"
+        gap="3"
         role={isWeb ? 'list' : undefined}
         aria-label="Gallery previews"
       >
@@ -73,7 +77,7 @@ export function UploadMultiple() {
             role={isWeb ? 'listitem' : undefined}
             width={148}
             height={128}
-            rounded="$6"
+            rounded="6"
             overflow="hidden"
             bg={preview.color}
           >
@@ -87,18 +91,18 @@ export function UploadMultiple() {
               />
             ) : (
               <View flex={1} items="center" justify="center">
-                <ImagePlus size={28} color="$color11" aria-hidden />
-                <Text mt="$2" fontSize="$2" color="$color11" letterSpacing={0}>
+                <ImagePlus size={28} color="color10" aria-hidden />
+                <Text mt="2" fontSize="2" color="color10" letterSpacing={0}>
                   {preview.name}
                 </Text>
               </View>
             )}
             <Button
               position="absolute"
-              t="$2"
-              r="$2"
+              t="2"
+              r="2"
               circular
-              size="$2.5"
+              size="8"
               icon={Trash2}
               hitSlop={isWeb ? undefined : 10}
               aria-label={`Remove ${preview.name}`}
@@ -111,10 +115,10 @@ export function UploadMultiple() {
         <Button
           width={148}
           height={128}
-          rounded="$6"
+          rounded="6"
           borderWidth={2}
           borderStyle="dashed"
-          borderColor="$color6"
+          borderColor="color6"
           bg="transparent"
           icon={ImagePlus}
           aria-label="Add gallery images"

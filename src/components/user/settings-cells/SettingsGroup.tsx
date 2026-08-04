@@ -7,20 +7,20 @@ import { SettingsCellFrame, SettingsSectionLabel } from './common/SettingsCellFr
 
 export function SettingsGroup() {
   return (
-    <YStack width="100%" maxW={600} self="center" gap="$6" p="$3">
-      <YStack gap="$2.5">
+    <YStack width="100%" maxW={600} self="center" gap="6" p="3">
+      <YStack gap="2-5">
         <SettingsSectionLabel>General</SettingsSectionLabel>
         <SettingsCellFrame>
           <CellSelect grouped />
-          <Separator ml="$4" />
+          <Separator ml="4" />
           <CellDisclosure grouped />
         </SettingsCellFrame>
       </YStack>
-      <YStack gap="$2.5">
+      <YStack gap="2-5">
         <SettingsSectionLabel>Playback</SettingsSectionLabel>
         <SettingsCellFrame>
           <CellSwitch grouped />
-          <Separator ml="$4" />
+          <Separator ml="4" />
           <CellSlider grouped />
         </SettingsCellFrame>
       </YStack>

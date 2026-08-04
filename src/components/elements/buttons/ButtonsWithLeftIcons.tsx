@@ -1,12 +1,13 @@
+import { XGroup } from '../../BentoSkins'
 import { Plug, Home, Settings, Heart } from '@tamagui/lucide-icons-2'
 import React from 'react'
-import { YStack, Button, View, XGroup, Theme } from 'tamagui'
+import { YStack, Button, View, Theme } from 'tamagui'
 
 /** ------ EXAMPLE ------ */
 export function ButtonsWithLeftIcons() {
   return (
-    <YStack gap="$4" $group-window-gtSm={{ flexDirection: 'row' }}>
-      <View gap="$2">
+    <YStack gap="4" flexDirection="@gtSm/window:row">
+      <View gap="2">
         <Button theme="blue">
           <Button.Icon>
             <Heart />
@@ -57,7 +58,7 @@ export function ButtonsWithLeftIcons() {
         </Button>
       </View>
 
-      <View gap="$2">
+      <View gap="2">
         <Button>
           <Button.Icon>
             <Heart />
@@ -93,7 +94,7 @@ export function ButtonsWithLeftIcons() {
           <Button.Text>Outlined</Button.Text>
         </Button>
 
-        <Button chromeless>
+        <Button variant="quiet">
           <Button.Icon>
             <Heart />
           </Button.Icon>
@@ -101,8 +102,8 @@ export function ButtonsWithLeftIcons() {
         </Button>
       </View>
 
-      <View gap="$2">
-        <Button size={'$3'}>
+      <View gap="2">
+        <Button size={'3'}>
           <Button.Icon>
             <Heart />
           </Button.Icon>
@@ -116,7 +117,7 @@ export function ButtonsWithLeftIcons() {
           <Button.Text>Normal</Button.Text>
         </Button>
 
-        <Button size={'$6'}>
+        <Button size={'6'}>
           <Button.Icon>
             <Heart />
           </Button.Icon>
@@ -124,7 +125,7 @@ export function ButtonsWithLeftIcons() {
         </Button>
       </View>
 
-      <View gap="$2" $group-window-sm={{ display: 'none' }}>
+      <View gap="2" display="@sm/window:none">
         <XGroup>
           <XGroup.Item>
             <Button>

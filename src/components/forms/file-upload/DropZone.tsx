@@ -45,7 +45,11 @@ export function DropZone() {
     if (!accepted.length) return
     setFiles((current) => [
       ...current,
-      ...accepted.map((file) => ({ ...file, progress: 0, status: 'uploading' as const })),
+      ...accepted.map((file) => ({
+        ...file,
+        progress: 0,
+        status: 'uploading' as const,
+      })),
     ])
   }
 
@@ -106,35 +110,37 @@ export function DropZone() {
       : {}
 
   return (
-    <YStack width="100%" maxW={640} self="center" gap="$4">
+    <YStack width="100%" maxW={640} self="center" gap="4">
       <YStack
         {...webDropProps}
         minH={220}
         items="center"
         justify="center"
-        gap="$3"
-        p="$6"
-        rounded="$8"
+        gap="3"
+        p="6"
+        rounded="8"
         borderWidth={2}
         borderStyle="dashed"
-        borderColor={dragging ? '$accentColor' : '$color6'}
-        bg={dragging ? '$color3' : '$color2'}
+        borderColor={`${dragging ? 'accent-color' : 'color6'}`}
+        bg={`${dragging ? 'color3' : 'color2'}`}
         style={
           isWeb
-            ? { transition: 'background-color 180ms ease, border-color 180ms ease' }
+            ? {
+                transition: 'background-color 180ms ease, border-color 180ms ease',
+              }
             : undefined
         }
       >
         <UploadCloud
           size={38}
-          color={dragging ? '$accentColor' : '$color10'}
+          color={`${dragging ? 'accent-color' : 'color9'}`}
           aria-hidden
         />
-        <YStack items="center" gap="$1">
-          <Text fontSize="$6" fontWeight="700" letterSpacing={0}>
+        <YStack items="center" gap="1">
+          <Text fontSize="6" fontWeight="700" letterSpacing={0}>
             {isWeb ? 'Drop files here' : 'Add your files'}
           </Text>
-          <Text color="$color9" text="center" letterSpacing={0}>
+          <Text color="color8" text="center" letterSpacing={0}>
             PDF, PNG, JPG or ZIP up to 20 MB · max 8 files
           </Text>
         </YStack>
@@ -146,46 +152,46 @@ export function DropZone() {
       {rejections.length > 0 && (
         <YStack
           role="alert"
-          gap="$1"
-          p="$3"
-          rounded="$5"
+          gap="1"
+          p="3"
+          rounded="5"
           borderWidth={1}
-          borderColor="$red7"
-          bg="$red2"
+          borderColor="red-400"
+          bg="red-50"
         >
           {rejections.map((reason) => (
-            <Text key={reason} fontSize="$2" color="$red10">
+            <Text key={reason} fontSize="2" color="red-600">
               {reason}
             </Text>
           ))}
         </YStack>
       )}
-      <YStack gap="$2" role={isWeb ? 'list' : undefined} aria-label="Uploads">
+      <YStack gap="2" role={isWeb ? 'list' : undefined} aria-label="Uploads">
         {files.map((file) => (
           <XStack
             key={file.id}
             role={isWeb ? 'listitem' : undefined}
             items="center"
-            gap="$3"
-            p="$3"
-            rounded="$5"
+            gap="3"
+            p="3"
+            rounded="5"
             borderWidth={1}
-            borderColor={file.status === 'failed' ? '$red7' : '$borderColor'}
-            bg="$background"
+            borderColor={`${file.status === 'failed' ? 'red-400' : 'border-color'}`}
+            bg="background"
           >
             <FileText
               size={22}
-              color={file.status === 'failed' ? '$red10' : '$accentColor'}
+              color={`${file.status === 'failed' ? 'red-600' : 'accent-color'}`}
               aria-hidden
             />
-            <YStack flex={1} gap="$2">
-              <XStack justify="space-between" gap="$3">
+            <YStack flex={1} gap="2">
+              <XStack justify="space-between" gap="3">
                 <Text flex={1} fontWeight="600" numberOfLines={1} letterSpacing={0}>
                   {file.name}
                 </Text>
                 <Text
-                  fontSize="$2"
-                  color={file.status === 'failed' ? '$red10' : '$color9'}
+                  fontSize="2"
+                  color={`${file.status === 'failed' ? 'red-600' : 'color8'}`}
                 >
                   {file.status === 'failed'
                     ? 'Upload failed'
@@ -202,22 +208,22 @@ export function DropZone() {
                 aria-valuenow={file.progress}
                 height={5}
                 rounded={999}
-                bg="$color4"
+                bg="color4"
                 overflow="hidden"
               >
                 <View
                   height="100%"
                   width={`${file.progress}%`}
                   rounded={999}
-                  bg={file.status === 'failed' ? '$red9' : '$accentColor'}
+                  bg={`${file.status === 'failed' ? 'red-500' : 'accent-color'}`}
                 />
               </View>
             </YStack>
             {file.status === 'failed' && (
               <Button
                 circular
-                size="$2.5"
-                chromeless
+                size="8"
+                variant="quiet"
                 icon={RefreshCw}
                 hitSlop={isWeb ? undefined : 10}
                 aria-label={`Retry ${file.name}`}
@@ -226,8 +232,8 @@ export function DropZone() {
             )}
             <Button
               circular
-              size="$2.5"
-              chromeless
+              size="8"
+              variant="quiet"
               icon={file.status === 'uploading' ? X : Trash2}
               hitSlop={isWeb ? undefined : 10}
               aria-label={

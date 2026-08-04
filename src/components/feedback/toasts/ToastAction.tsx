@@ -1,5 +1,5 @@
 import { Trash2 } from '@tamagui/lucide-icons-2'
-import { toast } from '@tamagui/toast'
+import { toast } from 'tamagui'
 import { useState } from 'react'
 import { Button, Text, XStack } from 'tamagui'
 import type { ToastCustomData } from './common/CurrentToast'
@@ -28,8 +28,8 @@ export function ToastAction() {
   }
 
   return (
-    <XStack gap="$3" items="center">
-      <Text color="$color11">
+    <XStack gap="3" items="center">
+      <Text color="color10">
         {items} item{items === 1 ? '' : 's'} in inbox
       </Text>
       <Button disabled={items === 0} icon={<Trash2 size={16} />} onPress={deleteOne}>

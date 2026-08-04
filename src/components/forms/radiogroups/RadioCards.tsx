@@ -38,15 +38,7 @@ export function RadioCards() {
   const [value, setValue] = useState<string>()
 
   return (
-    <View
-      flexDirection="column"
-      gap="$4"
-      width="100%"
-      $group-window-sm={{
-        px: '$4',
-        py: '$6',
-      }}
-    >
+    <View flexDirection="column" gap="4" width="100%" px="@sm/window:4" py="@sm/window:6">
       <H2>Select your gift</H2>
       <RadioGroup
         value={value}
@@ -54,7 +46,7 @@ export function RadioCards() {
         flexShrink={1}
         flexDirection="row"
         flexWrap="wrap"
-        gap="$3"
+        gap="3"
       >
         {packages.map((item) => (
           <Item
@@ -91,46 +83,40 @@ function Item({
       flex={1}
       flexBasis={400}
       shrink={1}
-      gap="$6"
+      gap="6"
       active={selected}
     >
-      <View flex={1} flexBasis="auto" flexDirection="column" gap="$3">
+      <View flex={1} flexBasis="auto" flexDirection="column" gap="3">
         <View flexDirection="row" justify="space-between">
           <View
             flexDirection="row"
-            theme={color as ThemeName}
-            bg="$color6"
-            rounded="$4"
+            bg="color6"
+            rounded="4"
             items="center"
             justify="center"
-            gap="$2"
-            py="$2"
-            px="$3"
+            gap="2"
+            py="2"
+            px="3"
+            theme={color as ThemeName}
           >
-            <View width={10} height={10} bg="$color10" rounded={100} />
-            <Text fontSize="$3" color="$color11">
+            <View width={10} height={10} bg="color9" rounded={100} />
+            <Text fontSize="3" color="color10">
               {title}
             </Text>
           </View>
 
           <RadioGroup.Item id={title} value={title}>
-            <RadioGroup.Indicator
-              unstyled
-              width="33%"
-              height="33%"
-              rounded={1000}
-              bg="$color"
-            />
+            <RadioGroup.Indicator width="33%" height="33%" rounded={1000} bg="color" />
           </RadioGroup.Item>
         </View>
-        <Text fontSize="$3" theme="alt1">
+        <Text fontSize="3" theme="level2">
           {description}
         </Text>
       </View>
 
-      <View flexDirection="row" gap="$2" mt="auto" items="center">
-        <Clock color="$color10" size={14} />
-        <Text opacity={0.5} fontSize="$3" fontWeight="300" theme="alt2">
+      <View flexDirection="row" gap="2" mt="auto" items="center">
+        <Clock color="color9" size={14} />
+        <Text opacity={0.5} fontSize="3" fontWeight="300" theme="level3">
           last bought 2 hr ago
         </Text>
       </View>

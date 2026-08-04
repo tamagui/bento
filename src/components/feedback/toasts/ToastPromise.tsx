@@ -1,5 +1,5 @@
 import { UploadCloud } from '@tamagui/lucide-icons-2'
-import { toast } from '@tamagui/toast'
+import { toast } from 'tamagui'
 import { useRef, useState } from 'react'
 import { Button, Spinner, Text } from 'tamagui'
 import type { ToastCustomData } from './common/CurrentToast'

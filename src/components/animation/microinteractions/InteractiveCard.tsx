@@ -92,7 +92,7 @@ const Container = ({ children, ...rest }: ViewProps) => {
   )
 }
 
-const Body = createStyledHOC(View)(({ children, ...rest }, forwardedRef) => {
+const Body = createStyledHOC(View, ({ children, ...rest }, forwardedRef) => {
   const [perspectiveRef, setPerspectiveRef] = useState<TamaguiElement | null>(null)
   const perspectiveElement = getWebElement(perspectiveRef)
 
@@ -111,7 +111,10 @@ const Body = createStyledHOC(View)(({ children, ...rest }, forwardedRef) => {
   )
 })
 
-type ItemProps = {
+type ItemProps = Omit<
+  React.ComponentProps<typeof View>,
+  'translateX' | 'translateY' | 'rotateX' | 'rotateY' | 'rotateZ'
+> & {
   translateX?: number | string
   translateY?: number | string
   translateZ?: number | string
@@ -119,7 +122,8 @@ type ItemProps = {
   rotateY?: number | string
   rotateZ?: number | string
 }
-const Item = createStyledHOC(View)<ItemProps>(
+const Item = createStyledHOC(
+  View,
   (
     {
       translateX = 0,
@@ -130,7 +134,7 @@ const Item = createStyledHOC(View)<ItemProps>(
       rotateZ = 0,
       children,
       ...rest
-    },
+    }: ItemProps,
     forwardedRef
   ) => {
     const [ref, setRef] = useState<TamaguiElement | null>(null)
@@ -191,13 +195,13 @@ export function InteractiveCard() {
         width={400}
         maxW="100%"
         borderWidth={1}
-        borderColor="$color6"
-        p="$3"
-        rounded="$4"
-        gap="$4"
-        bg="$background"
+        borderColor="color6"
+        p="3"
+        rounded="4"
+        gap="4"
+        bg="background"
       >
-        <Card.Item translateZ={30} rounded="$4" overflow="hidden">
+        <Card.Item translateZ={30} rounded="4" overflow="hidden">
           <View width="100%" height={200}>
             <View width="100%" height="100%">
               <Image
@@ -210,23 +214,21 @@ export function InteractiveCard() {
           </View>
         </Card.Item>
         <Card.Item translateZ={25}>
-          <View px="$3" py="$2" rounded={'$5'} bg="$green5" self="flex-start">
-            <Text fontSize="$3">Label</Text>
+          <View px="3" py="2" rounded="5" bg="green-300" self="flex-start">
+            <Text fontSize="3">Label</Text>
           </View>
         </Card.Item>
         <Card.Item translateZ={15}>
-          <H3 size="$7">Heading level 3</H3>
+          <H3 size="7">Heading level 3</H3>
         </Card.Item>
         <Card.Item translateZ={10}>
-          <Text fontSize="$4">This is a brief description about card</Text>
+          <Text fontSize="4">This is a brief description about card</Text>
         </Card.Item>
         <Card.Item translateZ={50} translateY={5}>
           <Button
             theme="accent"
             style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
-            pressStyle={{
-              scale: 0.98,
-            }}
+            scale="press:0.98"
           >
             <Button.Text>Buy</Button.Text>
           </Button>

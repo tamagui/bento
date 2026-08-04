@@ -2,7 +2,11 @@ import { Text, View, XStack, YStack } from 'tamagui'
 import { StepIndicator, type StepState } from './common/StepIndicator'
 
 const steps: { description: string; label: string; state: StepState }[] = [
-  { label: 'Workspace created', description: 'Your team space is ready.', state: 'done' },
+  {
+    label: 'Workspace created',
+    description: 'Your team space is ready.',
+    state: 'done',
+  },
   {
     label: 'Invite collaborators',
     description: 'Add teammates to the project.',
@@ -21,19 +25,17 @@ export function StepperVertical() {
       width="100%"
       maxW={480}
       self="center"
-      px="$4"
-      // biome-ignore lint/a11y/useSemanticElements: React Native has no equivalent semantic element; the demo shares one tree across platforms.
+      px="4"
       role="list"
       aria-label="Setup progress"
     >
       {steps.map((step, index) => (
         <XStack
           key={step.label}
-          // biome-ignore lint/a11y/useSemanticElements: React Native has no equivalent semantic element; the demo shares one tree across platforms.
           role="listitem"
           aria-current={step.state === 'current' ? 'step' : undefined}
           aria-label={`Step ${index + 1} of ${steps.length}: ${step.label}, ${step.state === 'done' ? 'completed' : step.state}`}
-          gap="$4"
+          gap="4"
           minH={96}
         >
           <YStack items="center">
@@ -42,20 +44,20 @@ export function StepperVertical() {
               <View
                 width={2}
                 flex={1}
-                bg={step.state === 'done' ? '$accentColor' : '$color5'}
+                bg={`${step.state === 'done' ? 'accent-color' : 'color5'}`}
               />
             ) : null}
           </YStack>
-          <YStack flex={1} pt="$1" gap="$1">
+          <YStack flex={1} pt="1" gap="1">
             <Text
-              fontSize="$5"
+              fontSize="5"
               fontWeight="700"
-              color={step.state === 'upcoming' ? '$color9' : '$color12'}
+              color={`${step.state === 'upcoming' ? 'color8' : 'color11'}`}
               letterSpacing={0}
             >
               {step.label}
             </Text>
-            <Text color="$color9" letterSpacing={0}>
+            <Text color="color8" letterSpacing={0}>
               {step.description}
             </Text>
           </YStack>

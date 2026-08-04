@@ -16,9 +16,9 @@ import { getProducts } from './data/products'
 const Link = Anchor
 
 const StyledText = styled(Text, {
-  color: '$color',
-  fontSize: '$4',
-  lineHeight: '$4',
+  color: 'color',
+  fontSize: '4',
+  lineHeight: '4',
 })
 
 type Product = ReturnType<typeof getProducts>[0]
@@ -27,26 +27,26 @@ function Item({ item }: { item: Product }) {
   return (
     // Note: you can also use `Link` from solito/link
     <Link overflow="hidden" width={300} href="#" textDecorationColor="transparent">
-      <View gap="$4">
+      <View gap="4">
         <View
           height={300}
           overflow="hidden"
           rounded={5}
-          theme="dark"
-          pb="$2"
-          borderColor="$color5"
-          gap="$2"
-          render="article"
+          pb="2"
+          borderColor="color5"
+          gap="2"
           position="relative"
+          theme="dark"
+          render="article"
         >
           <View overflow="hidden" width="100%" height="100%">
             <Image src={item.image} height="100%" width="100%" objectFit="cover" />
           </View>
-          <View gap="$2" width="100%" p="$4" z={1} theme="dark" b={0} position="absolute">
-            <H2 size="$4">{item.name}</H2>
-            <XStack gap="$3">
+          <View gap="2" width="100%" p="4" z={1} b={0} position="absolute" theme="dark">
+            <H2 size="4">{item.name}</H2>
+            <XStack gap="3">
               <StyledText fontWeight="bold">${item.price}</StyledText>
-              <StyledText color="#fff" theme="red" bg="$color9" px="$2" py="$1" ml="auto">
+              <StyledText color="#fff" bg="color8" px="2" py="1" ml="auto" theme="red">
                 {10} %
               </StyledText>
             </XStack>

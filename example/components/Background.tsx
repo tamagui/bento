@@ -13,7 +13,7 @@ export const Background = ({ themeName }: { themeName?: ThemeName }) => {
     <AnimatedView
       entering={FadeIn}
       exiting={FadeOut}
-      bg={'$color3'}
+      bg={'color3'}
       position="absolute"
       inset={0}
       flex={1}
@@ -26,7 +26,7 @@ export const Background = ({ themeName }: { themeName?: ThemeName }) => {
               height={SIZE}
               borderWidth={0.3}
               opacity={0.5}
-              borderColor="$borderColor"
+              borderColor="border-color"
               key={index}
               items="center"
               justify="center"

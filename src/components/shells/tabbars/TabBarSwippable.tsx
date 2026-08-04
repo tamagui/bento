@@ -1,18 +1,9 @@
+import { Tabs } from '../../BentoSkins'
 import React, { useEffect, useMemo, useRef } from 'react'
 import type { ViewStyle } from 'react-native'
 import { Animated, PanResponder } from 'react-native'
 import type { TabsContentProps } from 'tamagui'
-import {
-  H5,
-  Separator,
-  Tabs,
-  Text,
-  View,
-  debounce,
-  isWeb,
-  useEvent,
-  useTheme,
-} from 'tamagui'
+import { H5, Separator, Text, View, debounce, isWeb, useEvent, useTheme } from 'tamagui'
 
 const tabs = ['Tab 1', 'Tab 2', 'Tab 3']
 
@@ -88,41 +79,34 @@ export const TabbarSwippable = () => {
         width: pointerWidth,
         borderRadius: 1000_000,
         transform: [{ translateX: boxHPosition }],
-        ...(isWeb
-          ? { boxShadow: `0 1px 2.22px ${theme.shadowColor?.val}` }
-          : {
-              shadowColor: theme.shadowColor?.val,
-              shadowOffset: { width: 0, height: 1 },
-              shadowOpacity: 0.22,
-              shadowRadius: 2.22,
-            }),
+        boxShadow: `0 1px 2.22px ${theme['shadow-color']?.val}`,
         elevation: 3,
       }) as ViewStyle,
-    [theme.color1?.val, theme.shadowColor?.val, pointerWidth]
+    [theme.color1?.val, theme['shadow-color']?.val, pointerWidth]
   )
 
   return (
     <Tabs
       flexDirection="column"
-      bg="$background"
+      bg="background"
       borderBottomWidth={1}
-      borderBottomColor="$color1"
-      defaultValue={tabs[0]}
+      borderBottomColor="color1"
       flex={1}
-      value={tabs[activeTabIndex]}
       justify="center"
       items="center"
       self="center"
       width="90%"
-      mt="$4"
+      mt="4"
+      defaultValue={tabs[0]}
+      value={tabs[activeTabIndex]}
     >
       <View
         flexDirection="row"
         rounded={1000_000}
-        bg="$color2"
+        bg="color2"
         justify="center"
         width="100%"
-        px="$2"
+        px="2"
         position="relative"
       >
         <Tabs.List
@@ -130,8 +114,8 @@ export const TabbarSwippable = () => {
           select="none"
           flexDirection="row"
           alignItems="center"
-          paddingVertical={'$4'}
-          height="$6"
+          paddingVertical="4"
+          height="6"
           backgroundColor="transparent"
           onLayout={(e) => {
             const width = e.nativeEvent.layout.width
@@ -141,24 +125,22 @@ export const TabbarSwippable = () => {
           <Animated.View style={animatedStyle} {...panResponder.panHandlers} />
           {tabs.map((tab, index) => (
             <Tabs.Tab
-              unstyled
+              variant="plain"
               key={index}
               value={tab}
               alignItems="center"
               flex={1}
               flexBasis={0}
               flexShrink={1}
-              bg="transparent"
-              hoverStyle={{ bg: 'transparent' }}
-              pressStyle={{ bg: 'transparent' }}
+              bg="transparent hover:transparent press:transparent"
               pointerEvents={activeTabIndex === index ? 'none' : 'auto'}
+              zIndex={1000000}
               onPress={() => {
                 chagenActiveTab(index)
               }}
-              zIndex={1000000}
             >
               <Text
-                color={index === activeTabIndex ? '$color' : '$color10'}
+                color={`${index === activeTabIndex ? 'color' : 'color9'}`}
                 select="none"
                 cursor="pointer"
               >
@@ -189,19 +171,19 @@ TabbarSwippable.fileName = 'TabBarSwippable'
 const TabsContent = (props: TabsContentProps) => {
   return (
     <Tabs.Content
-      bg="$background"
-      key="tab3"
-      p="$2"
+      bg="background"
+      p="2"
       items="center"
       justify="center"
       flex={1}
-      borderColor="$background"
-      rounded="$2"
+      borderColor="background"
+      rounded="2"
       borderTopLeftRadius={0}
       borderTopRightRadius={0}
-      borderWidth="$2"
+      borderWidth="2"
       height={600}
       {...props}
+      key="tab3"
     >
       {props.children}
     </Tabs.Content>

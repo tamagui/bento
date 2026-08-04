@@ -35,64 +35,47 @@ function SlideOut({ direction }: { direction: Direction }) {
       <View
         opacity={0}
         pointerEvents="none"
-        gap="$2"
-        render="article"
-        role="banner"
-        shadowColor="$shadowColor"
-        shadowOffset={{
-          width: 0,
-          height: -6,
-        }}
-        shadowRadius={'$5'}
-        shadowOpacity={0.1}
-        style={{ transition: 'transform 250ms ease, opacity 250ms ease' }}
-        rounded="$8"
+        gap="2"
+        boxShadow="0 -6px 24px shadow-color"
+        rounded="8"
         overflow="hidden"
         borderWidth={2}
-        borderColor="$color4"
+        borderColor="color4"
+        render="article"
+        role="banner"
+        style={{ transition: 'transform 250ms ease, opacity 250ms ease' }}
       >
-        <View
-          width={312}
-          maxW="100%"
-          $group-window-sm={{ width: '100%', minW: 260 }}
-          gap="$6"
-        >
-          <View p="$3.5" position="relative">
+        <View width="312px @sm/window:100%" maxW="100%" minW="@sm/window:260px" gap="6">
+          <View p="4" position="relative">
             <XStack items="center" justify="space-between">
-              <Text fontWeight="500" fontSize="$3" fontFamily="$mono" color="$color10">
+              <Text fontWeight="500" fontSize="3" fontFamily="mono" color="color9">
                 Tamagui Debit
               </Text>
 
               <Image src="/images/bentologo.png" width={32} height={32} />
             </XStack>
 
-            <Text
-              pt="$4"
-              fontWeight="600"
-              fontSize="$8"
-              fontFamily="$mono"
-              color="$color"
-            >
+            <Text pt="4" fontWeight="600" fontSize="8" fontFamily="mono" color="color">
               ···· ···· ···· 0225
             </Text>
           </View>
 
-          <XStack theme="accent" bg="$background" p="$3.5">
+          <XStack theme="accent" bg="background" p="4">
             <Text
               flex={1}
               fontWeight="500"
-              fontSize="$2"
-              fontFamily="$mono"
-              color="$color11"
+              fontSize="2"
+              fontFamily="mono"
+              color="color10"
             >
               Nate Wienert
             </Text>
             <Text
               text="right"
               fontWeight="500"
-              fontSize="$2"
-              fontFamily="$mono"
-              color="$color12"
+              fontSize="2"
+              fontFamily="mono"
+              color="color11"
             >
               03/26
             </Text>
@@ -111,34 +94,28 @@ function SlideOut({ direction }: { direction: Direction }) {
             t={0}
             l={0}
             r={0}
-            gap="$2"
-            render="article"
-            role="banner"
-            shadowColor="$shadowColor"
-            shadowOffset={{ width: 0, height: -6 }}
-            shadowRadius="$5"
-            shadowOpacity={0.1}
-            style={{ transition: 'transform 250ms ease, opacity 250ms ease' }}
-            rounded="$8"
+            gap="2"
+            boxShadow="0 -6px 24px shadow-color"
+            rounded="8"
             overflow="hidden"
             borderWidth={2}
-            borderColor="$color4"
-            exitStyle={{ opacity: 0, [axis.axis]: axis.value }}
+            borderColor="color4"
+            opacity="exit:0"
+            x={`exit:${axis.axis === 'x' ? axis.value : 0}px`}
+            y={`exit:${axis.axis === 'y' ? axis.value : 0}px`}
+            render="article"
+            role="banner"
+            style={{ transition: 'transform 250ms ease, opacity 250ms ease' }}
           >
             <View
-              width={312}
+              width="312px @sm/window:100%"
               maxW="100%"
-              $group-window-sm={{ width: '100%', minW: 260 }}
-              gap="$6"
+              minW="@sm/window:260px"
+              gap="6"
             >
-              <View p="$3.5" position="relative">
+              <View p="4" position="relative">
                 <XStack items="center" justify="space-between">
-                  <Text
-                    fontWeight="500"
-                    fontSize="$3"
-                    fontFamily="$mono"
-                    color="$color10"
-                  >
+                  <Text fontWeight="500" fontSize="3" fontFamily="mono" color="color9">
                     Tamagui Debit
                   </Text>
 
@@ -146,32 +123,32 @@ function SlideOut({ direction }: { direction: Direction }) {
                 </XStack>
 
                 <Text
-                  pt="$4"
+                  pt="4"
                   fontWeight="600"
-                  fontSize="$8"
-                  fontFamily="$mono"
-                  color="$color"
+                  fontSize="8"
+                  fontFamily="mono"
+                  color="color"
                 >
                   ···· ···· ···· 0225
                 </Text>
               </View>
 
-              <XStack theme="accent" bg="$background" p="$3.5">
+              <XStack theme="accent" bg="background" p="4">
                 <Text
                   flex={1}
                   fontWeight="500"
-                  fontSize="$2"
-                  fontFamily="$mono"
-                  color="$color11"
+                  fontSize="2"
+                  fontFamily="mono"
+                  color="color10"
                 >
                   Nate Wienert
                 </Text>
                 <Text
                   text="right"
                   fontWeight="500"
-                  fontSize="$2"
-                  fontFamily="$mono"
-                  color="$color12"
+                  fontSize="2"
+                  fontFamily="mono"
+                  color="color11"
                 >
                   03/26
                 </Text>
@@ -188,7 +165,7 @@ function SlideOut({ direction }: { direction: Direction }) {
 export function SlideOutDemo() {
   const [direction, setDirection] = useState<'left' | 'right' | 'top' | 'bottom'>('left')
   return (
-    <View maxW="100%" gap="$6">
+    <View maxW="100%" gap="6">
       <SlideOut direction={direction} />
       <DirectionSlide direction={direction} setDirection={setDirection} />
     </View>

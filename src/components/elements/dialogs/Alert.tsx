@@ -64,60 +64,48 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             onPress={closeDialog}
             key="overlay"
             transition="quick"
-            enterStyle={{ opacity: 0 }}
-            exitStyle={{ opacity: 0 }}
+            opacity="enter:0 exit:0"
             background="rgba(0,0,0,0.5)"
           />
           <AlertDialog.Content
-            p="$5"
-            bg="$color2"
-            rounded="$6"
-            gap="$4"
-            key="content"
-            style={{ left: 0, right: 0, marginHorizontal: 'auto' }}
-            transition={[
-              'quick',
-              {
-                opacity: {
-                  overshootClamping: true,
-                },
-              },
-            ]}
-            enterStyle={{ x: 0, y: -10, opacity: 0, scale: 0.95 }}
-            exitStyle={{ x: 0, y: 10, opacity: 0, scale: 0.95 }}
-            borderColor="$color6"
+            p="5"
+            bg="color2"
+            rounded="6"
+            gap="4"
+            transition={['quick', { opacity: { overshootClamping: true } }]}
+            x="enter:0 exit:0"
+            y="enter:-10px exit:10px"
+            opacity="enter:0 exit:0"
+            scale="enter:0.95 exit:0.95"
+            borderColor="color6"
             borderWidth={1}
             {...rest}
+            key="content"
+            style={{ left: 0, right: 0, marginHorizontal: 'auto' }}
           >
-            <View gap="$2">
-              <AlertDialog.Title fontSize="$7" fontWeight="500">
+            <View gap="2">
+              <AlertDialog.Title fontSize="7" fontWeight="500">
                 {title}
               </AlertDialog.Title>
-              <AlertDialog.Description theme="alt1" fontSize="$4">
+              <AlertDialog.Description theme="level2" fontSize="4">
                 {message}
               </AlertDialog.Description>
             </View>
-            <View flexDirection="row" gap="$3" justify="flex-end" pt="$2">
+            <View flexDirection="row" gap="3" justify="flex-end" pt="2">
               {buttons.map((button, index) => {
                 const Base =
                   button.style === 'cancel' ? AlertDialog.Cancel : AlertDialog.Action
-                const color = button.style === 'destructive' ? '$red10' : '$color12'
+                const color = button.style === 'destructive' ? 'red-600' : 'color11'
                 return (
                   <Base key={index} asChild>
                     <Button
-                      size="$3"
+                      size="3"
                       borderWidth={1}
-                      borderColor="$color8"
-                      bg="transparent"
-                      rounded="$4"
-                      px="$4"
+                      borderColor="color7"
+                      bg="transparent hover:color3 focus:color4"
+                      rounded="4"
+                      px="4"
                       onPress={button.action}
-                      hoverStyle={{
-                        bg: '$color3',
-                      }}
-                      focusStyle={{
-                        bg: '$color4',
-                      }}
                     >
                       <Button.Text color={color} fontWeight="500">
                         {button.title}

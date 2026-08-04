@@ -1,3 +1,4 @@
+import { Avatar } from '../../BentoSkins'
 import {
   createColumnHelper,
   flexRender,
@@ -6,7 +7,7 @@ import {
 } from '@tanstack/react-table'
 import * as React from 'react'
 import { useGroupMedia } from '../../hooks/useGroupMedia'
-import { Avatar, Separator, Text, View, XStack } from 'tamagui'
+import { Separator, Text, View, XStack } from 'tamagui'
 import { Table } from './common/tableParts'
 import { Circle } from 'tamagui'
 
@@ -146,14 +147,14 @@ const columns = [
       cell: (info) => {
         const { fullName, userName, image } = info.getValue()
         return (
-          <View flexDirection="row" items="center" gap="$3" ml="$2">
-            <Avatar circular size="$4">
+          <View flexDirection="row" items="center" gap="3" ml="2">
+            <Avatar circular size="4">
               <Avatar.Image aria-label="Profile image" src={image} />
-              <Avatar.Fallback bg="$color6" />
+              <Avatar.Fallback bg="color6" />
             </Avatar>
             <View flexDirection="column">
               <Text>{fullName}</Text>
-              <Text fontSize="$2" lineHeight="$2" fontWeight="$2" theme="alt2">
+              <Text fontSize="2" lineHeight="2" fontWeight="2" theme="level3">
                 {userName}
               </Text>
             </View>
@@ -185,15 +186,15 @@ const StatusButton = ({ status }: { status: string }) => {
     <View
       flexDirection="row"
       items="center"
-      gap="$2"
-      theme={status?.toLocaleLowerCase() === 'active' ? 'green' : 'orange'}
-      bg="$color6"
+      gap="2"
+      bg="color6"
       rounded={1000_000_000}
-      px="$2"
-      py="$1"
+      px="2"
+      py="1"
+      theme={status?.toLocaleLowerCase() === 'active' ? 'green' : 'orange'}
     >
-      <Circle size={10} bg="$color10" />
-      <Text color="$color10" fontWeight="$2">
+      <Circle size={10} bg="color9" />
+      <Text color="color9" fontWeight="2">
         {status}
       </Text>
     </View>
@@ -221,39 +222,39 @@ export function UsersTable() {
 
   if (sm) {
     return (
-      <View width="100%" flexDirection="column" justify="center" gap="$5" py="$6">
+      <View width="100%" flexDirection="column" justify="center" gap="5" py="6">
         {defaultData.map((row, i) => {
           return (
             <View
               key={i}
-              rounded="$4"
-              borderWidth="$1"
-              borderColor="$borderColor"
+              rounded="4"
+              borderWidth="1"
+              borderColor="border-color"
               flex={1}
               self="stretch"
               width="100%"
-              gap="$2"
-              pt="$2"
+              gap="2"
+              pt="2"
             >
-              <XStack items="center" py="$1" ml="$3" gap="$2">
-                <Avatar circular size="$3">
+              <XStack items="center" py="1" ml="3" gap="2">
+                <Avatar circular size="3">
                   <Avatar.Image aria-label="Profile image" src={row.avatar} />
-                  <Avatar.Fallback bg="$color6" />
+                  <Avatar.Fallback bg="color6" />
                 </Avatar>
                 <View justify="space-between">
                   <Text>{row.fullName}</Text>
-                  <Text fontSize="$3" color="$color10">
+                  <Text fontSize="3" color="color9">
                     {row.username}
                   </Text>
                 </View>
-                <View ml="auto" pr="$3">
+                <View ml="auto" pr="3">
                   <StatusButton status={row.status} />
                 </View>
               </XStack>
 
-              <View height={2} bg="$borderColor" />
+              <View height={2} bg="border-color" />
 
-              <View gap="$2">
+              <View gap="2">
                 {Object.entries(row)
                   .filter(
                     ([name]) =>
@@ -262,9 +263,9 @@ export function UsersTable() {
                   .map(([name, value], i) => {
                     return (
                       <View key={i}>
-                        <View flexDirection="row" justify="space-between" mx="$3" pb="$2">
+                        <View flexDirection="row" justify="space-between" mx="3" pb="2">
                           <Text>{name.charAt(0).toUpperCase() + name.slice(1)}</Text>
-                          <Text color="$color10">{value}</Text>
+                          <Text color="color9">{value}</Text>
                         </View>
                         {i !==
                           Object.entries(row).filter(
@@ -287,13 +288,13 @@ export function UsersTable() {
     <Table
       alignCells={{ x: 'center', y: 'center' }}
       alignHeaderCells={{ y: 'center', x: 'center' }}
-      cellWidth="$18"
-      cellHeight="$7"
+      cellWidth="18"
+      cellHeight="7"
       borderWidth={0}
-      p="$4"
+      p="4"
       maxW="100%"
       maxH={600}
-      gap="$5"
+      gap="5"
     >
       <Table.Head>
         {headerGroups.map((headerGroup) => {
@@ -346,10 +347,7 @@ export function UsersTable() {
           rowCounter.current++
           return (
             <Table.Row
-              bg={bodyIndex % 2 === 1 ? '$color1' : 'transparent'}
-              hoverStyle={{
-                bg: '$color3',
-              }}
+              bg={`${bodyIndex % 2 === 1 ? 'color1' : 'transparent'} hover:color3`}
               rowLocation={
                 rowCounter.current === 0
                   ? 'first'
@@ -382,7 +380,7 @@ export function UsersTable() {
                   {cell.column.id === 'user_base' ? (
                     flexRender(cell.column.columnDef.cell, cell.getContext())
                   ) : (
-                    <Text theme="alt1">
+                    <Text theme="level2">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </Text>
                   )}

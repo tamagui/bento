@@ -1,5 +1,5 @@
 import { TriangleAlert } from '@tamagui/lucide-icons-2'
-import { toast } from '@tamagui/toast'
+import { toast } from 'tamagui'
 import { Banner } from './common/Banner'
 
 export function BannerWarning() {
@@ -11,7 +11,9 @@ export function BannerWarning() {
       action={{
         label: 'Review usage',
         onPress: () =>
-          toast('Usage', { description: 'Would open the storage usage report' }),
+          toast('Usage', {
+            description: 'Would open the storage usage report',
+          }),
       }}
     >
       Your workspace is approaching its monthly storage limit.

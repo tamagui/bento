@@ -58,10 +58,16 @@ function CodeConfirmationInput({
       render={({ fieldState: { invalid }, field: { value, onChange } }) => (
         <Input
           {...register(`code${id}`)}
+          textAlign="center"
+          rounded="5"
+          aspectRatio={1}
+          width="100%"
+          height="100%"
+          flex={1}
+          bg={`${invalid ? 'red-400' : value ? 'color1' : 'color5'} focus:${invalid ? 'red-500' : 'color1'}`}
+          outlineWidth="hover:0px focus:0px"
           value={value}
           maxLength={codeSize}
-          // uncomment this for autofocus
-          // autoFocus={id === 0}
           onChange={(e: any) => {
             const code = e.target?.value ?? e.nativeEvent?.text ?? ''
             // Max length is disabled to enable multiple digit paste
@@ -110,19 +116,7 @@ function CodeConfirmationInput({
           autoComplete="one-time-code"
           type={secureTextEntry ? 'password' : 'text'}
           enterKeyHint={id === codeSize - 1 ? 'done' : 'next'}
-          textAlign="center"
-          size="$8"
-          rounded="$5"
-          aspectRatio={1}
-          width="100%"
-          height="100%"
-          flex={1}
-          bg={invalid ? '$red7' : value ? '$color1' : '$color5'}
-          hoverStyle={{ outlineWidth: 0 }}
-          focusStyle={{
-            bg: invalid ? '$red8' : '$color1',
-            outlineWidth: 0,
-          }}
+          size="8"
         />
       )}
     />
@@ -203,18 +197,18 @@ function CodeConfirmation({
 
   return (
     <Form
-      gap="$2"
+      gap="2"
       items="center"
       minW="100%"
       justify="center"
       x={translateX}
-      style={{ transition: 'transform 250ms cubic-bezier(0.32, 0.72, 0, 1)' }}
       width="100%"
-      mt="$2"
+      mt="2"
       flexDirection="row"
-      onSubmit={onSubmit}
-      mb="$0"
-      pb="$0"
+      mb="0"
+      pb="0"
+      style={{ transition: 'transform 250ms cubic-bezier(0.32, 0.72, 0, 1)' }}
+      onSubmit={() => onSubmit()}
     >
       {Array(codeSize)
         .fill(null)
@@ -297,13 +291,13 @@ const ResendTimer = ({
         items="center"
         self="flex-end"
         justify="flex-end"
-        gap="$2"
-        className="flex"
+        gap="2"
         cursor="pointer"
+        className="flex"
         onPress={handleResendClick}
       >
-        <RefreshCcw size={12} color="$blue10" />
-        <Paragraph color="$blue10" text="right" fontSize="$1">
+        <RefreshCcw size={12} color="blue-600" />
+        <Paragraph color="blue-600" text="right" fontSize="1">
           Resend OTP
         </Paragraph>
       </XStack>
@@ -315,12 +309,12 @@ const ResendTimer = ({
       items="center"
       self="flex-end"
       justify="flex-end"
-      gap="$2"
-      className="flex"
+      gap="2"
       cursor="default"
+      className="flex"
     >
-      <RefreshCcw size={12} color="$color10" />
-      <Paragraph color="$color10" text="right" fontSize="$1">
+      <RefreshCcw size={12} color="color9" />
+      <Paragraph color="color9" text="right" fontSize="1">
         Resend in {seconds} {seconds > 1 ? 'seconds' : 'second'}
       </Paragraph>
     </XStack>
@@ -329,7 +323,7 @@ const ResendTimer = ({
 
 /** ------ EXAMPLE ------ */
 export function OneTimeCodeInputExample({
-  size = '$5',
+  size = '5',
   codeSize = 4,
   secureText = false,
 }: {
@@ -381,60 +375,59 @@ export function OneTimeCodeInputExample({
   const showCode = activeInterface === 'email' || codeEntered
 
   return (
-    <View items="center" justify="center" gap="$4">
+    <View items="center" justify="center" gap="4">
       <View
         position="relative"
         minW={300}
         items="center"
         justify="center"
-        rounded="$8"
+        rounded="8"
         overflow="hidden"
-        p="$5"
+        p="5"
         borderWidth={1}
-        borderColor="$borderColor"
-        bg="$background"
-        $gtSm={{
-          shadowColor: '$shadowColor',
-          shadowOffset: {
-            width: 0,
-            height: 12,
-          },
-          shadowOpacity: 0.5,
-          shadowRadius: '$6',
-        }}
+        borderColor="border-color"
+        bg="background"
+        boxShadow="gtSm:(0 12px 32px shadow-color)"
       >
-        <View position="absolute" t="$4" r="$4">
+        <View position="absolute" t="4" r="4">
           {codeEntered ? (
             <View
               style={{ transition: 'transform 250ms ease' }}
               key="success"
               flexDirection="row"
-              gap="$2"
+              gap="2"
             >
               <AnimatePresence>
                 {verified && (
                   <Paragraph
                     key="success"
-                    color="$green10"
-                    enterStyle={{ opacity: 0, x: 15 }}
-                    exitStyle={{ opacity: 0, x: 15, scale: 0.5 }}
-                    style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
+                    color="green-600"
+                    opacity="enter:0 exit:0"
+                    x="enter:15px exit:15px"
+                    scale="exit:0.5"
+                    style={{
+                      transition: 'transform 200ms ease, opacity 200ms ease',
+                    }}
                   >
                     Success
                   </Paragraph>
                 )}
               </AnimatePresence>
               <View
-                enterStyle={{ opacity: 0.5, scale: 1.5 }}
-                style={{ transition: 'transform 250ms ease, opacity 250ms ease' }}
+                opacity="enter:0.5"
+                scale="enter:1.5"
+                style={{
+                  transition: 'transform 250ms ease, opacity 250ms ease',
+                }}
               >
-                <CheckCircle2 color="$green10" />
+                <CheckCircle2 color="green-600" />
               </View>
             </View>
           ) : (
             <View
               key="email"
-              enterStyle={{ opacity: 0.5, scale: 1.5 }}
+              opacity="enter:0.5"
+              scale="enter:1.5"
               style={{ transition: 'transform 100ms ease, opacity 100ms ease' }}
             >
               {activeInterface === 'email' ? (
@@ -457,22 +450,14 @@ export function OneTimeCodeInputExample({
           <YStack
             key="code"
             style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
-            exitStyle={{ opacity: 0 }}
+            opacity={`${code ? 0 : 1} exit:0`}
             justify="space-between"
-            gap="$4"
+            gap="4"
             width="100%"
-            opacity={code ? 0 : 1}
             height="auto"
           >
-            <View items="center" gap="$2">
-              <Text
-                fontWeight="700"
-                fontSize="$6"
-                $gtMd={{
-                  fontSize: '$8',
-                }}
-                color="$color12"
-              >
+            <View items="center" gap="2">
+              <Text fontWeight="700" fontSize="6 gtMd:8" color="color11">
                 Code
               </Text>
 
@@ -481,11 +466,11 @@ export function OneTimeCodeInputExample({
                   flexDirection="row"
                   items="center"
                   justify="center"
-                  gap="$2"
+                  gap="2"
                   width="100%"
                 >
-                  <Mail size="$1" color="$color12" />
-                  <Paragraph size="$4" fontWeight="500" color="$color12">
+                  <Mail size="1" color="color11" />
+                  <Paragraph size="4" fontWeight="500" color="color11">
                     {email}
                   </Paragraph>
                 </View>
@@ -494,19 +479,19 @@ export function OneTimeCodeInputExample({
                   flexDirection="row"
                   items="center"
                   justify="center"
-                  gap="$2"
+                  gap="2"
                   width="100%"
                 >
-                  <Smartphone size={16} color="$color12" />
-                  <Paragraph size="$4" fontWeight="500" color="$color12">
+                  <Smartphone size={16} color="color11" />
+                  <Paragraph size="4" fontWeight="500" color="color11">
                     (•••) ••• ••73
                   </Paragraph>
                 </View>
               )}
             </View>
 
-            <View px="$4" $gtMd={{ px: 0 }}>
-              <YStack gap="$2">
+            <View px="4 gtMd:0px">
+              <YStack gap="2">
                 <CodeConfirmation
                   size={size}
                   codeSize={codeSize}
@@ -524,14 +509,14 @@ export function OneTimeCodeInputExample({
             {!email ? (
               <XStack
                 borderColor="transparent"
-                onPress={() => setActiveInterface('email')}
-                gap="$2"
+                gap="2"
                 items="center"
                 justify="center"
                 cursor="pointer"
+                onPress={() => setActiveInterface('email')}
               >
-                <Mail size={16} color="$color10" />
-                <Paragraph color="$color10">Send code to email</Paragraph>
+                <Mail size={16} color="color9" />
+                <Paragraph color="color9">Send code to email</Paragraph>
               </XStack>
             ) : null}
           </YStack>
@@ -543,27 +528,26 @@ export function OneTimeCodeInputExample({
               height="100%"
               items="center"
               justify="center"
-              bg="$background"
+              bg="background"
             >
-              <Spinner color="$color10" />
+              <Spinner color="color9" />
             </View>
           ) : null}
         </View>
 
         <View
           position="absolute"
-          enterStyle={{ opacity: 0, x: 350 }}
-          exitStyle={{ opacity: 0, x: 0 }}
-          bg="$background"
+          x="enter:350px exit:0"
+          opacity={`${!showCode ? 0 : 1} enter:0 exit:0`}
+          bg="background"
           items="center"
           justify="center"
-          width="100%"
+          width="100% gtMd:100%"
           height="100%"
-          $gtMd={{ width: '100%', p: '$5' }}
-          style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
-          opacity={!showCode ? 0 : 1}
+          p="gtMd:5"
           pointerEvents={!showCode ? 'none' : 'auto'}
           transform={[{ translateX: !showCode ? 150 : 0 }]}
+          style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
         >
           <AnimatePresence>
             {(activeInterface === 'email' || codeEntered) && (
@@ -580,22 +564,16 @@ export function OneTimeCodeInputExample({
                     height="100%"
                     justify="space-between"
                     items="center"
-                    gap="$4"
-                    pt="$6"
+                    gap="4"
+                    pt="6"
                     bg="red"
                   >
-                    <YStack
-                      flex={1}
-                      justify="center"
-                      items="center"
-                      width="100%"
-                      gap="$2"
-                    >
-                      <Text fontWeight="bold" fontSize="$6">
+                    <YStack flex={1} justify="center" items="center" width="100%" gap="2">
+                      <Text fontWeight="bold" fontSize="6">
                         Code Verified
                       </Text>
 
-                      <Paragraph color="$color10" text="center">
+                      <Paragraph color="color9" text="center">
                         Congratulations, successful confirmation
                       </Paragraph>
                     </YStack>
@@ -610,9 +588,9 @@ export function OneTimeCodeInputExample({
           </AnimatePresence>
         </View>
       </View>
-      <View flexDirection="row" items="center" gap="$2">
-        <LockKeyhole size={12} color="$color10" />
-        <Paragraph size="$2" color="$color10">
+      <View flexDirection="row" items="center" gap="2">
+        <LockKeyhole size={12} color="color9" />
+        <Paragraph size="2" color="color9">
           Encrypted
         </Paragraph>
       </View>
@@ -636,29 +614,29 @@ const EmailInput = ({
   }
 
   return (
-    <View pt="$3" gap="$4" width="100%" height="100%" justify="space-between">
+    <View pt="3" gap="4" width="100%" height="100%" justify="space-between">
       <XStack
         items="center"
-        hoverStyle={{ cursor: 'pointer' }}
+        cursor="hover:pointer"
+        self="flex-start"
+        gap="1"
+        l={-4}
         style={{ transition: 'color 200ms ease' }}
         onPress={() => setActiveInterface('code')}
-        self="flex-start"
-        gap="$1"
-        l={-4}
       >
-        <ChevronLeft size="$1" color="$color10" />
+        <ChevronLeft size="1" color="color9" />
 
-        <Paragraph size="$4" color="$color10">
+        <Paragraph size="4" color="color9">
           Back
         </Paragraph>
       </XStack>
 
-      <YStack justify="flex-end" flex={1} gap="$4" width="100%">
-        <YStack gap="$0" width="100%">
+      <YStack justify="flex-end" flex={1} gap="4" width="100%">
+        <YStack gap="0" width="100%">
           <Label>Email Address</Label>
-          <XStack width="100%" gap="$4" justify="flex-start" items="flex-end">
+          <XStack width="100%" gap="4" justify="flex-start" items="flex-end">
             <Input
-              size="$4"
+              size="4"
               inputMode="email"
               placeholder="Enter your email"
               autoComplete="email"

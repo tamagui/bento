@@ -16,14 +16,14 @@ function Item({ item, index }: { item: Product; index: number }) {
   const labelText = isPremium ? 'Premium' : isBestSeller ? 'Best Seller' : ''
   return (
     <Link grow={1} shrink={1} flexBasis={300} href="#" textDecorationColor="transparent">
-      <YStack gap="$2" render="article" position="relative">
+      <YStack gap="2" position="relative" render="article">
         {showLabel && (
           <Square
             theme={isBestSeller ? 'purple' : 'orange'}
             rotate="45deg"
             width={20}
             height={20}
-            bg="$color5"
+            bg="color5"
             l={-3}
             t={34}
             borderWidth={0.4}
@@ -35,10 +35,7 @@ function Item({ item, index }: { item: Product; index: number }) {
           <View
             style={{ transition: 'transform 150ms ease' }}
             transformOrigin="center center"
-            hoverStyle={{
-              scale: 1,
-            }}
-            scale={1.1}
+            scale="1.1 hover:1"
             width="100%"
             height={300}
           >
@@ -53,25 +50,25 @@ function Item({ item, index }: { item: Product; index: number }) {
         </View>
         {showLabel && (
           <YStack
-            bg="$color9"
+            bg="color8"
             borderWidth={0.5}
-            theme={isBestSeller ? 'purple' : 'orange'}
-            rounded="$2"
+            rounded="2"
             position="absolute"
             l={-7}
             t={18}
-            px="$3"
+            px="3"
             z={2}
+            theme={isBestSeller ? 'purple' : 'orange'}
             elevation={10}
           >
             <SizableText color="#fff">{labelText}</SizableText>
           </YStack>
         )}
         <YStack>
-          <H2 size="$4">{item.name}</H2>
-          <XStack gap="$3">
+          <H2 size="4">{item.name}</H2>
+          <XStack gap="3">
             <SizableText fontWeight="bold">${item.price}</SizableText>
-            <SizableText theme="alt1" textDecorationLine="line-through">
+            <SizableText theme="level2" textDecorationLine="line-through">
               ${item.price}
             </SizableText>
           </XStack>
@@ -95,15 +92,13 @@ export function ProductListWithLabel() {
   return (
     <XStack
       flexWrap="wrap"
-      rowGap="$8"
-      columnGap="$5"
-      p="$3"
-      px="$6"
+      rowGap="8"
+      columnGap="5"
+      paddingTop="3"
+      paddingBottom="3"
+      px="6 @xs/window:3"
       maxW="100%"
       maxH={700}
-      $group-window-xs={{
-        px: '$3',
-      }}
     >
       {products.map((item, index) => (
         <Item index={index} key={item.id} item={item} />

@@ -1,4 +1,5 @@
 const { getDefaultConfig } = require('expo/metro-config')
+const { withTamagui } = require('@tamagui/metro-plugin')
 const path = require('node:path')
 
 const projectRoot = __dirname
@@ -11,4 +12,7 @@ config.resolver.unstable_enablePackageExports = true
 config.watchFolders = [projectRoot]
 config.resolver.nodeModulesPaths = [path.resolve(projectRoot, 'node_modules')]
 
-module.exports = config
+module.exports = withTamagui(config, {
+  components: ['tamagui'],
+  config: './tamagui.config.ts',
+})

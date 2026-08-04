@@ -1,5 +1,6 @@
+import { Avatar } from '../../BentoSkins'
 import { useId, useState } from 'react'
-import { Avatar, H2, Label, Text, View } from 'tamagui'
+import { H2, Label, Text, View } from 'tamagui'
 import { Card, RadioGroup } from './components/radioParts'
 
 const data = [
@@ -27,20 +28,20 @@ export function Vertical() {
     <View width="100%" items="center">
       <View
         flexDirection="column"
-        minW="100%"
-        $group-window-gtSm={{ maxW: 400, minW: 400 }}
-        gap="$4"
+        minW="100% @gtSm/window:400px"
+        maxW="@gtSm/window:400px"
+        gap="4"
       >
-        <View flexDirection="column" gap="$2">
+        <View flexDirection="column" gap="2">
           <H2>Payment</H2>
-          <Text fontWeight="300" color="$color9">
+          <Text fontWeight="300" color="color8">
             Select your payment method
           </Text>
         </View>
         <RadioGroup
-          $group-window-gtSm={{ maxW: 400 }}
+          maxW="@gtSm/window:400px"
           flexWrap="wrap"
-          gap="$2"
+          gap="2"
           flexDirection="column"
           value={value}
           onValueChange={setValue}
@@ -48,22 +49,21 @@ export function Vertical() {
           {data.map(({ id, label, icon }) => (
             <Card
               p={0}
-              key={id}
               flexDirection="row"
               items="center"
-              gap="$3"
-              px="$2.5"
+              gap="3"
+              px="2-5"
+              key={id}
               active={value === id}
               onPress={() => setValue(id)}
             >
               <View onPress={(e) => e.stopPropagation()}>
                 <RadioGroup.Item id={uniqueId + id} value={id}>
                   <RadioGroup.Indicator
-                    unstyled
                     width="33%"
                     height="33%"
                     rounded={1000}
-                    bg="$color"
+                    bg="color"
                   />
                 </RadioGroup.Item>
               </View>

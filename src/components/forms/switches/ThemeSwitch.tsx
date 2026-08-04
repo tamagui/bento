@@ -7,7 +7,7 @@ import { Switch } from './common/switchParts'
 import { getSize } from '@tamagui/get-token'
 import { useUserScheme } from '@vxrn/color-scheme'
 
-export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
+export function ThemeSwitch({ size = '8' }: { size?: SizeTokens }) {
   const uniqueId = useId()
   const [checked, setChecked] = useState(false)
 
@@ -32,39 +32,34 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
         userScheme.set(checked ? 'dark' : 'light')
       }}
       size={size}
-      backgroundColor="$background"
+      backgroundColor="background"
       justify="center"
       items="center"
       cursor="pointer"
       borderWidth={2}
-      borderColor="$colorTransparent"
+      borderColor="transparent"
       position="relative"
     >
       {/* switch background */}
       {larger ? <SwitchBackground checked={checked} /> : null}
-      <Switch.Thumb transition="medium" bg="$colorTransparent">
+      <Switch.Thumb transition="medium" bg="transparent">
         <View
-          shadowOpacity={0.5}
-          shadowRadius="$4"
-          shadowOffset={{
-            width: '$4',
-            height: 0,
-          }}
-          m={thumbSize >= 64 ? '$1.5' : '$1'}
+          boxShadow="18px 0 18px shadow-color"
+          m="1"
           flex={1}
           overflow="hidden"
-          rounded="$10"
+          rounded="10"
           items="center"
           justify="center"
-          bg="$color4"
+          bg="color4"
           transition="200ms"
         >
-          <AnimatePresence exitBeforeEnter custom={{ direction: -1 }}>
+          <AnimatePresence mode="wait" custom={{ direction: -1 }}>
             <YStack
               position="absolute"
               key="Sun"
               transition="medium"
-              fullscreen
+              inset={0}
               items="center"
               justify="center"
               opacity={checked ? 0 : 1}
@@ -80,7 +75,7 @@ export function ThemeSwitch({ size = '$8' }: { size?: SizeTokens }) {
               position="absolute"
               transition="medium"
               key="moon"
-              fullscreen
+              inset={0}
               items="center"
               justify="center"
               transform={[
@@ -117,30 +112,30 @@ const SwitchBackground = ({ checked }: { checked: boolean }) => {
         transition="200ms"
         l={checked ? '55%' : 0}
         position="absolute"
-        bg="$color7"
+        bg="color6"
         width={checked ? 4 : 30}
         height={checked ? 4 : 5}
-        rounded="$10"
+        rounded="10"
       />
       <View
         t={checked ? '33%' : '45%'}
         l="28%"
         transition="200ms"
         position="absolute"
-        bg="$color7"
+        bg="color6"
         width={checked ? 3 : 22}
         height={checked ? 3 : 5}
-        rounded="$10"
+        rounded="10"
       />
       <View
         t={'70%'}
         l={checked ? '30%' : 0}
         transition="200ms"
         position="absolute"
-        bg="$color7"
+        bg="color6"
         width={checked ? 4 : 15}
         height={checked ? 4 : 5}
-        rounded="$10"
+        rounded="10"
       />
 
       {checked ? (
@@ -149,20 +144,20 @@ const SwitchBackground = ({ checked }: { checked: boolean }) => {
             b={'35%'}
             r="35%"
             position="absolute"
-            bg="$color7"
+            bg="color6"
             width={4}
             height={4}
-            rounded="$10"
+            rounded="10"
             transition="200ms"
           />
           <View
             t={'50%'}
             r="10%"
             position="absolute"
-            bg="$color7"
+            bg="color6"
             width={3}
             height={3}
-            rounded="$10"
+            rounded="10"
             transition="200ms"
           />
         </>

@@ -1,5 +1,5 @@
 import { Globe2, Search, X } from '@tamagui/lucide-icons-2'
-import type { SizeTokens } from 'tamagui'
+import type { FontSizeTokens } from 'tamagui'
 import { Adapt, Popover, ScrollView, Sheet, Spinner, Text, View, isWeb } from 'tamagui'
 import { Input } from './components/inputsParts'
 import type React from 'react'
@@ -71,13 +71,13 @@ function RegionFilterInput(props: RegionFilterInputProps) {
   return (
     <RovingFocusGroup
       flexDirection="column"
-      gap="$3"
-      pt="$4"
+      gap="3"
+      pt="4"
       height="100%"
       width="100%"
-      bg="$color1"
+      bg="color1"
     >
-      <Input mx="$3" size="$2">
+      <Input mx="3" size="2">
         <Input.Box>
           <Input.Area
             // Note: when key changes, the input remounts and the value will be reset
@@ -96,7 +96,7 @@ function RegionFilterInput(props: RegionFilterInputProps) {
             }}
             pointerEvents="auto"
             z={10}
-            theme="alt1"
+            theme="level2"
           >
             {filter ? <X /> : <Search />}
           </Input.Icon>
@@ -119,41 +119,28 @@ function RegionFilterInput(props: RegionFilterInputProps) {
                         }
                       },
                     })}
-                    focusStyle={{
-                      outlineColor: '$outlineColor',
-                      outlineOffset: -2,
-                    }}
+                    outlineColor="focus:outline-color"
+                    outlineOffset="focus:-2px"
                   >
                     <View
                       group="item"
                       flexDirection="row"
                       items="center"
-                      gap="$3"
-                      px="$4"
-                      py="$2"
+                      gap="3"
+                      px="4"
+                      py="2"
                       borderWidth={0}
                       borderBottomWidth={1}
-                      borderColor="$borderColor"
+                      borderColor="border-color"
                       cursor="pointer"
-                      hoverStyle={{
-                        bg: '$color2',
-                      }}
-                      focusStyle={{
-                        bg: '$color2',
-                      }}
+                      bg="hover:color2 focus:color2"
                       onPress={() => {
                         setRegionCode(item.name)
                         setOpen(false)
                       }}
                     >
-                      <Text fontSize="$5">{item.flag}</Text>
-                      <Text
-                        color="$color10"
-                        $group-item-hover={{
-                          color: '$color12',
-                        }}
-                        mr="auto"
-                      >
+                      <Text fontSize="5">{item.flag}</Text>
+                      <Text color="color9 group-hover/item:color11" mr="auto">
                         {item.name}
                       </Text>
                     </View>
@@ -200,12 +187,12 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
     >
       <Popover.Trigger>
         <Input.XGroup.Item>
-          <Input.Button px="$2" onPress={() => setOpen(true)}>
+          <Input.Button px="2" onPress={() => setOpen(true)}>
             {regionCode ? (
-              <Text fontSize="$5">{selectedItem.flag}</Text>
+              <Text fontSize="5">{selectedItem.flag}</Text>
             ) : (
               <>
-                <Globe2 color="$color10" width={20} height={20} />
+                <Globe2 color="color9" width={20} height={20} />
               </>
             )}
           </Input.Button>
@@ -214,14 +201,13 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
 
       <Adapt when="maxMd" platform="touch">
         <Sheet modal dismissOnSnapToBottom>
-          <Sheet.Frame p="$4">
+          <Sheet.Container p="4">
+            <Sheet.Background />
             <Adapt.Contents />
-          </Sheet.Frame>
+          </Sheet.Container>
           <Sheet.Overlay
             style={{ transition: 'opacity 150ms ease' }}
-            opacity={0.8}
-            enterStyle={{ opacity: 0 }}
-            exitStyle={{ opacity: 0 }}
+            opacity="0.8 enter:0 exit:0"
           />
         </Sheet>
       </Adapt>
@@ -230,11 +216,11 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
         width={containerWidth}
         borderWidth={1}
         height={300}
-        borderColor="$borderColor"
-        enterStyle={{ y: -10, opacity: 0 }}
-        exitStyle={{ y: -10, opacity: 0 }}
-        style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
+        borderColor="border-color"
+        y="enter:-10px exit:-10px"
+        opacity="enter:0 exit:0"
         p={0}
+        style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
       >
         <RegionFilterInput open={open} setOpen={setOpen} setRegionCode={setRegionCode} />
       </Popover.Content>
@@ -243,7 +229,7 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
 }
 
 /** ------ EXAMPLE ------ **/
-export function PhoneInputExample({ size = '$4' }: { size?: SizeTokens }) {
+export function PhoneInputExample({ size = '4' }: { size?: FontSizeTokens }) {
   const [regionCode, setRegionCode] = useState('US')
   const [phoneNumber, setPhoneNumber] = useState('+1 ')
   const [containerWidth, setContainerWidth] = useState<number>()
@@ -256,7 +242,7 @@ export function PhoneInputExample({ size = '$4' }: { size?: SizeTokens }) {
 
   return (
     <View flexDirection="column" height={100}>
-      <Input size={size} gapScale={0.5}>
+      <Input size={size}>
         <Input.Box
           onLayout={(e) => {
             setContainerWidth(e.nativeEvent.layout.width)

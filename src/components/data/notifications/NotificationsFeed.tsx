@@ -18,22 +18,22 @@ export function NotificationsFeed() {
   const earlier = items.slice(todayNotifications.length)
 
   return (
-    <YStack width="100%" maxW={680} self="center" gap="$5">
+    <YStack width="100%" maxW={680} self="center" gap="5">
       <XStack
         justify="space-between"
         items={sm ? 'flex-start' : 'center'}
         flexDirection={sm ? 'column' : 'row'}
-        gap="$2"
+        gap="2"
       >
-        <YStack gap="$1">
-          <Text fontSize="$8" fontWeight="900" letterSpacing={0}>
+        <YStack gap="1">
+          <Text fontSize="8" fontWeight="900" letterSpacing={0}>
             Notifications
           </Text>
-          <Text color="$color9">Keep up with your team.</Text>
+          <Text color="color8">Keep up with your team.</Text>
         </YStack>
         <Button
-          size="$3"
-          chromeless
+          size="3"
+          variant="quiet"
           icon={CheckCheck}
           disabled={unreadCount === 0}
           opacity={unreadCount === 0 ? 0.5 : 1}
@@ -53,12 +53,12 @@ export function NotificationsFeed() {
       >
         {unreadCount === 0 ? 'All notifications read' : `${unreadCount} unread`}
       </Text>
-      <YStack gap="$5">
-        <YStack gap="$2">
+      <YStack gap="5">
+        <YStack gap="2">
           <Text
-            px="$3"
-            fontSize="$2"
-            color="$color9"
+            px="3"
+            fontSize="2"
+            color="color8"
             fontWeight="800"
             textTransform="uppercase"
             letterSpacing={1}
@@ -73,11 +73,11 @@ export function NotificationsFeed() {
             />
           ))}
         </YStack>
-        <YStack gap="$2">
+        <YStack gap="2">
           <Text
-            px="$3"
-            fontSize="$2"
-            color="$color9"
+            px="3"
+            fontSize="2"
+            color="color8"
             fontWeight="800"
             textTransform="uppercase"
             letterSpacing={1}

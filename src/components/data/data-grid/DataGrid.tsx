@@ -1,3 +1,4 @@
+import { Avatar } from '../../BentoSkins'
 import {
   Archive,
   Check,
@@ -29,7 +30,6 @@ import {
 import { useMemo, useState } from 'react'
 import {
   AnimatePresence,
-  Avatar,
   Button,
   Paragraph,
   ScrollView,
@@ -142,26 +142,26 @@ function DataGridCore({ compact = false }: DataGridCoreProps) {
         accessorKey: 'name',
         header: 'Member',
         cell: ({ row }) => (
-          <XStack gap="$3" items="center" minW={0}>
+          <XStack gap="3" items="center" minW={0}>
             {!compact && (
-              <Avatar circular size="$3">
+              <Avatar circular size="3">
                 <Avatar.Image
                   aria-label={`${row.original.name} profile photo`}
                   src={row.original.avatar}
                 />
-                <Avatar.Fallback bg="$color5" />
+                <Avatar.Fallback bg="color5" />
               </Avatar>
             )}
             <YStack minW={0}>
               <Text
-                color="$color12"
-                fontSize={compact ? '$3' : '$4'}
+                color="color11"
+                fontSize={`${compact ? '3' : '4'}`}
                 fontWeight="600"
                 numberOfLines={1}
               >
                 {row.original.name}
               </Text>
-              <Text color="$color10" fontSize="$2" numberOfLines={1}>
+              <Text color="color9" fontSize="2" numberOfLines={1}>
                 {row.original.email}
               </Text>
             </YStack>
@@ -250,27 +250,27 @@ function DataGridCore({ compact = false }: DataGridCoreProps) {
   }
 
   return (
-    <YStack width="100%" maxW={1180} gap="$3" py="$5">
+    <YStack width="100%" maxW={1180} gap="3" py="5">
       <XStack
-        gap="$3"
+        gap="3"
         items={sm ? 'stretch' : 'center'}
         justify="space-between"
         flexDirection={sm ? 'column' : 'row'}
       >
-        <YStack gap="$1">
-          <Text fontSize={compact ? '$6' : '$7'} fontWeight="700">
+        <YStack gap="1">
+          <Text fontSize={`${compact ? '6' : '7'}`} fontWeight="700">
             {compact ? 'Compact team grid' : 'Team directory'}
           </Text>
-          <Paragraph color="$color10" maxW="100%" numberOfLines={sm ? 2 : 1}>
+          <Paragraph color="color9" maxW="100%" numberOfLines={sm ? 2 : 1}>
             {data.length} members · sortable, selectable, and responsive
           </Paragraph>
         </YStack>
-        <XStack gap="$2">
+        <XStack gap="2">
           <Button
             aria-label={loading ? 'Stop loading preview' : 'Preview loading state'}
             icon={RefreshCw}
             onPress={() => setLoading((current) => !current)}
-            size="$3"
+            size="3"
             variant="outlined"
           >
             {loading ? 'Show data' : 'Loading state'}
@@ -279,7 +279,7 @@ function DataGridCore({ compact = false }: DataGridCoreProps) {
             aria-label={data.length ? 'Show empty state' : 'Restore grid data'}
             icon={data.length ? Trash2 : RefreshCw}
             onPress={() => (data.length ? setData([]) : resetData())}
-            size="$3"
+            size="3"
             variant="outlined"
           >
             {data.length ? 'Empty state' : 'Restore'}
@@ -292,46 +292,46 @@ function DataGridCore({ compact = false }: DataGridCoreProps) {
           {!!selectedCount && (
             <XStack
               key="bulk-actions"
-              bg="$color2"
-              borderColor="$color6"
+              bg="color2"
+              borderColor="color6"
               borderWidth={1}
-              rounded="$5"
-              gap="$2"
+              rounded="5"
+              gap="2"
               items={sm ? 'stretch' : 'center'}
               flexDirection={sm ? 'column' : 'row'}
               minH={sm ? 88 : 52}
-              px="$3"
+              px="3"
               transition={{ default: 'quicker', exit: 'quickest' }}
-              enterStyle={{ opacity: 0, y: -8 }}
-              exitStyle={{ opacity: 0, y: -4 }}
+              opacity="enter:0 exit:0"
+              y="enter:-8px exit:-4px"
             >
-              <Text color="$color12" fontWeight="700" mr="auto" data-grid-selected-count>
+              <Text color="color11" fontWeight="700" mr="auto" data-grid-selected-count>
                 {selectedCount} selected
               </Text>
-              <XStack gap="$1" justify={sm ? 'space-between' : 'flex-end'}>
+              <XStack gap="1" justify={sm ? 'space-between' : 'flex-end'}>
                 <Button
-                  chromeless
-                  color="$color12"
+                  variant="quiet"
+                  color="color11"
                   icon={Archive}
                   onPress={archiveSelected}
-                  size="$3"
+                  size="3"
                 >
                   Archive
                 </Button>
                 <Button
-                  chromeless
-                  color="$color12"
+                  variant="quiet"
+                  color="color11"
                   icon={Download}
                   onPress={exportSelected}
-                  size="$3"
+                  size="3"
                 >
                   Export
                 </Button>
                 <Button
-                  chromeless
-                  color="$color12"
+                  variant="quiet"
+                  color="color11"
                   onPress={() => setRowSelection({})}
-                  size="$3"
+                  size="3"
                 >
                   Clear
                 </Button>
@@ -343,23 +343,23 @@ function DataGridCore({ compact = false }: DataGridCoreProps) {
               key="announcement"
               render="output"
               aria-live="polite"
-              bg="$color2"
-              borderColor="$color6"
+              bg="color2"
+              borderColor="color6"
               borderWidth={1}
-              rounded="$5"
-              gap="$3"
+              rounded="5"
+              gap="3"
               items="center"
               minH={52}
-              px="$3"
+              px="3"
               transition={{ default: 'quicker', exit: 'quickest' }}
-              enterStyle={{ opacity: 0, y: -8 }}
-              exitStyle={{ opacity: 0, y: -4 }}
+              opacity="enter:0 exit:0"
+              y="enter:-8px exit:-4px"
             >
-              <Text color="$color11" data-grid-announcement>
+              <Text color="color10" data-grid-announcement>
                 {announcement}
               </Text>
               {archived.length > 0 && (
-                <Button onPress={undoArchive} size="$2.5" variant="outlined">
+                <Button onPress={undoArchive} size="8" variant="outlined">
                   Undo
                 </Button>
               )}
@@ -369,16 +369,16 @@ function DataGridCore({ compact = false }: DataGridCoreProps) {
       </View>
 
       <YStack
-        bg="$background"
-        borderColor="$borderColor"
+        bg="background"
+        borderColor="border-color"
         borderWidth={1}
         overflow="hidden"
-        rounded="$7"
+        rounded="7"
       >
         {loading ? (
           <GridSkeleton compact={compact} mobile={sm} />
         ) : !data.length ? (
-          <YStack py="$4" items="center">
+          <YStack py="4" items="center">
             <EmptyStateBasic />
           </YStack>
         ) : sm ? (
@@ -395,7 +395,7 @@ function DataGridCore({ compact = false }: DataGridCoreProps) {
               >
                 <Table.Head position="sticky" t={0} z={20}>
                   {table.getHeaderGroups().map((headerGroup) => (
-                    <Table.Row key={headerGroup.id} bg="$color2" borderBottomWidth={1}>
+                    <Table.Row key={headerGroup.id} bg="color2" borderBottomWidth={1}>
                       {headerGroup.headers.map((header) => {
                         const sorted = header.column.getIsSorted()
                         const pinned = pinnedStyle(header.column.id, true)
@@ -409,16 +409,16 @@ function DataGridCore({ compact = false }: DataGridCoreProps) {
                                   ? 'descending'
                                   : 'none'
                             }
-                            bg="$color2"
-                            cellWidth={widths[header.column.id]}
-                            px="$3"
-                            style={pinned}
+                            bg="color2"
+                            px="3"
                             z={pinned ? 22 : 20}
+                            cellWidth={widths[header.column.id]}
+                            style={pinned}
                           >
                             {header.isPlaceholder ? null : header.column.getCanSort() ? (
                               <Button
                                 aria-label={`Sort by ${String(header.column.columnDef.header)}`}
-                                chromeless
+                                variant="quiet"
                                 iconAfter={
                                   sorted === 'asc'
                                     ? ChevronUp
@@ -428,7 +428,7 @@ function DataGridCore({ compact = false }: DataGridCoreProps) {
                                 }
                                 onPress={header.column.getToggleSortingHandler()}
                                 px={0}
-                                size="$2"
+                                size="2"
                               >
                                 {flexRender(
                                   header.column.columnDef.header,
@@ -450,33 +450,32 @@ function DataGridCore({ compact = false }: DataGridCoreProps) {
                 <Table.Body>
                   {rows.map((row, index) => {
                     const rowBg = row.getIsSelected()
-                      ? '$color3'
+                      ? 'color3'
                       : index % 2
-                        ? '$color2'
-                        : '$background'
+                        ? 'color2'
+                        : 'background'
                     return (
                       <Table.Row
                         key={row.id}
                         aria-selected={row.getIsSelected()}
-                        bg={rowBg}
+                        group="data-grid-row"
                         borderBottomWidth={index === rows.length - 1 ? 0 : 1}
-                        hoverStyle={{ bg: '$color3' }}
                       >
                         {row.getVisibleCells().map((cell) => {
                           const pinned = pinnedStyle(cell.column.id, false)
                           return (
                             <Table.Cell
                               key={cell.id}
-                              bg={pinned ? rowBg : undefined}
-                              cellWidth={widths[cell.column.id]}
-                              px="$3"
-                              style={pinned}
+                              bg={`${rowBg} group-hover/data-grid-row:color3`}
+                              px="3"
                               z={pinned ? 2 : 1}
+                              cellWidth={widths[cell.column.id]}
+                              style={pinned}
                             >
                               {cell.column.id !== 'select' &&
                               cell.column.id !== 'name' &&
                               cell.column.id !== 'status' ? (
-                                <Text color="$color11" fontSize={compact ? '$2' : '$3'}>
+                                <Text color="color10" fontSize={`${compact ? '2' : '3'}`}>
                                   {flexRender(
                                     cell.column.columnDef.cell,
                                     cell.getContext()
@@ -520,7 +519,7 @@ function SelectionCheckbox({
       checked={checked}
       hitSlop={isWeb ? undefined : 12}
       onCheckedChange={onCheckedChange}
-      size="$3"
+      size="3"
     >
       <Checkbox.Indicator>
         {checked === 'indeterminate' ? <Minus size={14} /> : <Check size={14} />}
@@ -539,7 +538,7 @@ function MobileCards({
   const rows = table.getRowModel().rows
   return (
     <YStack>
-      <XStack borderBottomWidth={1} gap="$2" items="center" minH={48} px="$4">
+      <XStack borderBottomWidth={1} gap="2" items="center" minH={48} px="4">
         <SelectionCheckbox
           checked={
             table.getIsAllPageRowsSelected()
@@ -551,7 +550,7 @@ function MobileCards({
           label="Select all cards on this page"
           onCheckedChange={(checked) => table.toggleAllPageRowsSelected(!!checked)}
         />
-        <Text color="$color10" fontSize="$2" fontWeight="600">
+        <Text color="color9" fontSize="2" fontWeight="600">
           Select this page
         </Text>
       </XStack>
@@ -559,43 +558,43 @@ function MobileCards({
       <YStack
         aria-label="Team directory cards"
         accessibilityRole={isWeb ? undefined : 'list'}
-        gap="$2"
+        gap="2"
         m={0}
-        p="$3"
+        p="3"
         render={isWeb ? <ul /> : undefined}
         style={isWeb ? { listStyleType: 'none' } : undefined}
       >
         {rows.map((row) => (
           <YStack
             key={row.id}
-            bg={row.getIsSelected() ? '$color3' : '$background'}
-            borderColor={row.getIsSelected() ? '$color8' : '$color5'}
+            bg={`${row.getIsSelected() ? 'color3' : 'background'}`}
+            borderColor={`${row.getIsSelected() ? 'color7' : 'color5'}`}
             borderWidth={1}
-            rounded="$5"
-            gap="$3"
-            p={compact ? '$3' : '$4'}
+            rounded="5"
+            gap="3"
+            p={`${compact ? '3' : '4'}`}
             render={isWeb ? <li /> : undefined}
           >
-            <XStack gap="$3" items="center">
+            <XStack gap="3" items="center">
               <SelectionCheckbox
                 checked={row.getIsSelected()}
                 label={`Select ${row.original.name}`}
                 onCheckedChange={(checked) => row.toggleSelected(!!checked)}
               />
               {!compact && (
-                <Avatar circular size="$4">
+                <Avatar circular size="4">
                   <Avatar.Image
                     aria-label={`${row.original.name} profile photo`}
                     src={row.original.avatar}
                   />
-                  <Avatar.Fallback bg="$color5" />
+                  <Avatar.Fallback bg="color5" />
                 </Avatar>
               )}
               <YStack flex={1} minW={0}>
-                <Text fontSize="$4" fontWeight="700" numberOfLines={1}>
+                <Text fontSize="4" fontWeight="700" numberOfLines={1}>
                   {row.original.name}
                 </Text>
-                <Text color="$color10" fontSize="$2" numberOfLines={1}>
+                <Text color="color9" fontSize="2" numberOfLines={1}>
                   {row.original.email}
                 </Text>
               </YStack>
@@ -603,7 +602,7 @@ function MobileCards({
             </XStack>
             <Separator />
             {/* wrap so fields never crush each other at very narrow widths */}
-            <XStack flexWrap="wrap" gap="$3">
+            <XStack flexWrap="wrap" gap="3">
               <CardField label="Role" value={row.original.role} />
               <CardField label="Joined" value={formatJoined(row.original.joinedAt)} />
               <CardField label="Projects" value={String(row.original.projects)} />
@@ -625,8 +624,8 @@ const sortOptions = [
 function MobileSortChips({ table }: { table: TableInstance<GridPerson> }) {
   const sorting = table.getState().sorting
   return (
-    <XStack borderBottomWidth={1} gap="$2" items="center" px="$4" py="$2">
-      <Text color="$color9" fontSize="$1" fontWeight="700" textTransform="uppercase">
+    <XStack borderBottomWidth={1} gap="2" items="center" px="4" py="2">
+      <Text color="color8" fontSize="1" fontWeight="700" textTransform="uppercase">
         Sort
       </Text>
       {sortOptions.map((option) => {
@@ -639,9 +638,10 @@ function MobileSortChips({ table }: { table: TableInstance<GridPerson> }) {
               active ? (desc ? ', descending' : ', ascending') : ''
             }`}
             aria-pressed={active}
-            bg={active ? '$color4' : '$color2'}
-            borderColor={active ? '$color8' : '$color5'}
+            bg={`${active ? 'color4' : 'color2'}`}
+            borderColor={`${active ? 'color7' : 'color5'}`}
             borderWidth={1}
+            rounded="10"
             hitSlop={isWeb ? undefined : 6}
             iconAfter={active ? (desc ? ChevronDown : ChevronUp) : undefined}
             onPress={() =>
@@ -653,10 +653,9 @@ function MobileSortChips({ table }: { table: TableInstance<GridPerson> }) {
                     : [{ id: option.id, desc: true }]
               )
             }
-            rounded="$10"
-            size="$2.5"
+            size="8"
           >
-            <Text color={active ? '$color12' : '$color11'} fontSize="$2">
+            <Text color={`${active ? 'color11' : 'color10'}`} fontSize="2">
               {option.label}
             </Text>
           </Button>
@@ -668,11 +667,11 @@ function MobileSortChips({ table }: { table: TableInstance<GridPerson> }) {
 
 function CardField({ label, value }: { label: string; value: string }) {
   return (
-    <YStack gap="$1" minW={0} grow={1} flexBasis="28%">
-      <Text color="$color9" fontSize="$1" fontWeight="700" textTransform="uppercase">
+    <YStack gap="1" minW={0} grow={1} flexBasis="28%">
+      <Text color="color8" fontSize="1" fontWeight="700" textTransform="uppercase">
         {label}
       </Text>
-      <Text color="$color11" fontSize="$2" numberOfLines={1}>
+      <Text color="color10" fontSize="2" numberOfLines={1}>
         {value}
       </Text>
     </YStack>
@@ -690,22 +689,22 @@ function PaginationFooter({
     <XStack
       borderTopWidth={1}
       flexWrap="wrap"
-      gap="$3"
+      gap="3"
       items="center"
       justify="space-between"
       minH={64}
-      px="$3"
-      py="$2"
+      px="3"
+      py="2"
     >
-      <Text color="$color10" fontSize="$2">
+      <Text color="color9" fontSize="2">
         {selectedCount
           ? `${selectedCount} of ${table.getPrePaginationRowModel().rows.length} selected`
           : `${table.getPrePaginationRowModel().rows.length} total members`}
       </Text>
-      <Text color="$color11" fontSize="$2" fontWeight="600" data-grid-page>
+      <Text color="color10" fontSize="2" fontWeight="600" data-grid-page>
         Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
       </Text>
-      <XStack gap="$1">
+      <XStack gap="1">
         <PageButton
           label="First page"
           icon={ChevronFirst}
@@ -754,31 +753,37 @@ function PageButton({
       icon={icon}
       onPress={onPress}
       // comfortable touch size on native. tamagui keeps disabled buttons
-      // focusable with aria-disabled (discoverable-disabled pattern)
-      size={isWeb ? '$3' : '$4'}
+      // keep disabled rows discoverable by keyboard and assistive technology
+      size={isWeb ? '3' : '4'}
       variant="outlined"
     />
   )
 }
 
-function GridSkeleton({ compact, mobile }: { compact: boolean; mobile: boolean }) {
+function GridSkeleton({
+  compact,
+  mobile,
+}: {
+  compact: boolean
+  mobile: boolean
+}) {
   return (
     <SkeletonScene>
-      <YStack render="output" aria-label="Loading team directory" gap="$2" p="$3">
+      <YStack render="output" aria-label="Loading team directory" gap="2" p="3">
         {Array.from({ length: compact ? 10 : 7 }, (_, index) => (
           <XStack
             key={index}
             borderBottomWidth={index === (compact ? 9 : 6) ? 0 : 1}
-            gap="$3"
+            gap="3"
             items="center"
             minH={mobile ? 74 : compact ? 46 : 64}
-            px="$2"
+            px="2"
           >
-            <Skeleton width={20} height={20} rounded="$2" />
+            <Skeleton width={20} height={20} rounded="2" />
             {!compact && <Skeleton width={36} height={36} rounded={1000} />}
-            <YStack flex={1} gap="$2">
-              <Skeleton width={index % 2 ? '42%' : '34%'} height={12} rounded="$3" />
-              <Skeleton width={index % 2 ? '64%' : '52%'} height={10} rounded="$3" />
+            <YStack flex={1} gap="2">
+              <Skeleton width={index % 2 ? '42%' : '34%'} height={12} rounded="3" />
+              <Skeleton width={index % 2 ? '64%' : '52%'} height={10} rounded="3" />
             </YStack>
             {!mobile && <Skeleton width={90} height={22} rounded={1000} />}
           </XStack>
@@ -793,7 +798,11 @@ function pinnedStyle(columnId: string, header: boolean) {
     return { position: 'sticky' as const, left: 0, zIndex: header ? 22 : 2 }
   }
   if (columnId === 'name') {
-    return { position: 'sticky' as const, left: widths.select, zIndex: header ? 22 : 2 }
+    return {
+      position: 'sticky' as const,
+      left: widths.select,
+      zIndex: header ? 22 : 2,
+    }
   }
   return undefined
 }

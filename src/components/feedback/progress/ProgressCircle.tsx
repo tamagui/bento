@@ -8,7 +8,7 @@ function Ring({
   value,
   size = 84,
   stroke = 8,
-  color = '$green9',
+  color = 'green-500',
   label,
 }: {
   value: number
@@ -20,12 +20,12 @@ function Ring({
 }) {
   const theme = useTheme()
   const percent = clamp(value)
-  const strokeColor = theme[color.replace('$', '') as 'green9']?.val ?? color
+  const strokeColor = theme[color.replace('$', '') as 'green-500']?.val ?? color
   const trackColor = theme.color4?.val ?? 'rgba(128,128,128,0.25)'
   const r = (size - stroke) / 2
   const c = 2 * Math.PI * r
   return (
-    <YStack items="center" gap="$2">
+    <YStack items="center" gap="2">
       <View
         role="progressbar"
         aria-label={label}
@@ -59,12 +59,12 @@ function Ring({
           />
         </Svg>
         <View position="absolute" inset={0} items="center" justify="center">
-          <Text fontWeight="700" fontSize="$4" color="$color12">
+          <Text fontWeight="700" fontSize="4" color="color11">
             {percent}%
           </Text>
         </View>
       </View>
-      <Text fontSize="$2" color="$color10">
+      <Text fontSize="2" color="color9">
         {label}
       </Text>
     </YStack>
@@ -74,10 +74,10 @@ function Ring({
 /** ------ EXAMPLE ------ */
 export function ProgressCircles() {
   return (
-    <XStack gap="$6" flexWrap="wrap" justify="center">
-      <Ring value={25} color="$red9" label="Errors triaged" />
-      <Ring value={62} color="$yellow9" label="Sprint scope" />
-      <Ring value={88} color="$green9" label="Test coverage" />
+    <XStack gap="6" flexWrap="wrap" justify="center">
+      <Ring value={25} color="red-500" label="Errors triaged" />
+      <Ring value={62} color="yellow-500" label="Sprint scope" />
+      <Ring value={88} color="green-500" label="Test coverage" />
     </XStack>
   )
 }

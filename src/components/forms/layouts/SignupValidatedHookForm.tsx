@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native'
 import { AnimatePresence, Button, H1, isWeb, Spinner, View } from 'tamagui'
 import { z } from 'zod'
 import { Input } from '../inputs/components/inputsParts'
+import { useGroupMedia } from '../../hooks/useGroupMedia'
 import { FormCard } from './components/layoutParts'
 import { RadioGroup } from '../radiogroups/components/radioParts'
 
@@ -32,6 +33,7 @@ export function SignupValidatedHookForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [loading, setLoading] = useState(false)
+  const { xs } = useGroupMedia('window')
 
   const {
     control,
@@ -59,30 +61,22 @@ export function SignupValidatedHookForm() {
   return (
     <FormCard
       flexDirection="column"
-      gap="$5"
+      gap="5"
+      px="@sm/window:4"
+      py="@sm/window:6"
       render="form"
-      $group-window-sm={{
-        px: '$4',
-        py: '$6',
-      }}
     >
-      <H1
-        self="center"
-        size="$8"
-        $group-window-xs={{
-          size: '$7',
-        }}
-      >
+      <H1 self="center" size={xs ? '7' : '8'}>
         Create an account
       </H1>
 
-      <View gap="$5">
+      <View gap="5">
         <View
           flexWrap="wrap"
           flexDirection="row"
           justify="space-between"
-          columnGap="$4"
-          rowGap="$5"
+          columnGap="4"
+          rowGap="5"
         >
           <Controller
             control={control}
@@ -92,12 +86,12 @@ export function SignupValidatedHookForm() {
                 {...(errors.firstName && {
                   theme: 'red',
                 })}
-                onBlur={onBlur}
                 flex={1}
-                minW="100%"
-                $group-window-gtSm={{ flexBasis: 150, minW: 'inherit' }}
+                minW="100% @gtSm/window:inherit"
+                flexBasis="@gtSm/window:150px"
+                onBlur={onBlur}
                 style={{ transition: 'border-color 100ms ease' }}
-                size="$4"
+                size="4"
               >
                 <Input.Label>First Name</Input.Label>
                 <Input.Box>
@@ -110,23 +104,15 @@ export function SignupValidatedHookForm() {
                 <AnimatePresence>
                   {errors.firstName && (
                     <View
-                      b="$-5"
+                      b="-5"
                       l={0}
                       position="absolute"
-                      gap="$2"
+                      gap="2"
                       flexDirection="row"
+                      scaleY="1 enter:0.5 exit:0.5"
+                      opacity="enter:0 exit:0"
+                      y="enter:-10px exit:-10px"
                       style={{ transition: 'transform 250ms ease' }}
-                      scaleY={1}
-                      enterStyle={{
-                        opacity: 0,
-                        y: -10,
-                        scaleY: 0.5,
-                      }}
-                      exitStyle={{
-                        opacity: 0,
-                        y: -10,
-                        scaleY: 0.5,
-                      }}
                     >
                       <Input.Icon p={0}>
                         <Info />
@@ -146,12 +132,12 @@ export function SignupValidatedHookForm() {
                 {...(errors.lastName && {
                   theme: 'red',
                 })}
-                onBlur={onBlur}
                 flex={1}
-                minW="100%"
-                $group-window-gtSm={{ flexBasis: 150, minW: 'inherit' }}
+                minW="100% @gtSm/window:inherit"
+                flexBasis="@gtSm/window:150px"
+                onBlur={onBlur}
                 style={{ transition: 'border-color 100ms ease' }}
-                size="$4"
+                size="4"
               >
                 <Input.Label>Last Name</Input.Label>
                 <Input.Box>
@@ -164,23 +150,15 @@ export function SignupValidatedHookForm() {
                 <AnimatePresence>
                   {errors.lastName && (
                     <View
-                      b="$5"
+                      b="5"
                       l={0}
                       position="absolute"
-                      gap="$2"
+                      gap="2"
                       flexDirection="row"
+                      scaleY="1 enter:0.5 exit:0.5"
+                      opacity="enter:0 exit:0"
+                      y="enter:-10px exit:-10px"
                       style={{ transition: 'transform 250ms ease' }}
-                      scaleY={1}
-                      enterStyle={{
-                        opacity: 0,
-                        y: -10,
-                        scaleY: 0.5,
-                      }}
-                      exitStyle={{
-                        opacity: 0,
-                        y: -10,
-                        scaleY: 0.5,
-                      }}
                     >
                       <Input.Icon p={0}>
                         <Info />
@@ -202,7 +180,7 @@ export function SignupValidatedHookForm() {
                 theme: 'red',
               })}
               onBlur={onBlur}
-              size="$4"
+              size="4"
             >
               <Input.Label>Email</Input.Label>
               <Input.Box>
@@ -215,23 +193,15 @@ export function SignupValidatedHookForm() {
               <AnimatePresence>
                 {errors.email && (
                   <View
-                    b="$5"
+                    b="5"
                     l={0}
                     position="absolute"
-                    gap="$2"
+                    gap="2"
                     flexDirection="row"
+                    scaleY="1 enter:0.5 exit:0.5"
+                    opacity="enter:0 exit:0"
+                    y="enter:-10px exit:-10px"
                     style={{ transition: 'transform 250ms ease' }}
-                    scaleY={1}
-                    enterStyle={{
-                      opacity: 0,
-                      y: -10,
-                      scaleY: 0.5,
-                    }}
-                    exitStyle={{
-                      opacity: 0,
-                      y: -10,
-                      scaleY: 0.5,
-                    }}
                   >
                     <Input.Icon p={0}>
                       <Info />
@@ -253,7 +223,7 @@ export function SignupValidatedHookForm() {
                 theme: 'red',
               })}
               onBlur={onBlur}
-              size="$4"
+              size="4"
             >
               <Input.Label htmlFor={'password-t1'}>Password</Input.Label>
               <Input.Box>
@@ -268,29 +238,21 @@ export function SignupValidatedHookForm() {
                   cursor="pointer"
                   onPress={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? <Eye color="$color11" /> : <EyeOff color="$color11" />}
+                  {showPassword ? <Eye color="color10" /> : <EyeOff color="color10" />}
                 </Input.Icon>
               </Input.Box>
               <AnimatePresence>
                 {errors.password && (
                   <View
-                    b="$5"
+                    b="5"
                     l={0}
                     position="absolute"
-                    gap="$2"
+                    gap="2"
                     flexDirection="row"
+                    scaleY="1 enter:0.5 exit:0.5"
+                    opacity="enter:0 exit:0"
+                    y="enter:-10px exit:-10px"
                     style={{ transition: 'transform 250ms ease' }}
-                    scaleY={1}
-                    enterStyle={{
-                      opacity: 0,
-                      y: -10,
-                      scaleY: 0.5,
-                    }}
-                    exitStyle={{
-                      opacity: 0,
-                      y: -10,
-                      scaleY: 0.5,
-                    }}
                   >
                     <Input.Icon p={0}>
                       <Info />
@@ -312,7 +274,7 @@ export function SignupValidatedHookForm() {
                 theme: 'red',
               })}
               onBlur={onBlur}
-              size="$4"
+              size="4"
             >
               <Input.Label htmlFor={'confirmed password'}>Confirm Password</Input.Label>
               <Input.Box>
@@ -328,32 +290,24 @@ export function SignupValidatedHookForm() {
                   onPress={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
                   {showConfirmPassword ? (
-                    <Eye color="$color11" />
+                    <Eye color="color10" />
                   ) : (
-                    <EyeOff color="$color11" />
+                    <EyeOff color="color10" />
                   )}
                 </Input.Icon>
               </Input.Box>
               <AnimatePresence>
                 {errors.confirmedPassword && (
                   <View
-                    b="$-5"
+                    b="-5"
                     l={0}
                     position="absolute"
-                    gap="$2"
+                    gap="2"
                     flexDirection="row"
+                    scaleY="1 enter:0.5 exit:0.5"
+                    opacity="enter:0 exit:0"
+                    y="enter:-10px exit:-10px"
                     style={{ transition: 'transform 250ms ease' }}
-                    scaleY={1}
-                    enterStyle={{
-                      opacity: 0,
-                      y: -10,
-                      scaleY: 0.5,
-                    }}
-                    exitStyle={{
-                      opacity: 0,
-                      y: -10,
-                      scaleY: 0.5,
-                    }}
                   >
                     <Input.Icon p={0}>
                       <Info />
@@ -365,40 +319,38 @@ export function SignupValidatedHookForm() {
             </Input>
           )}
         />
-        <View flexDirection="column" gap="$1">
+        <View flexDirection="column" gap="1">
           <Input.Label htmlFor={'account-type-t1'}>Account type</Input.Label>
           <Controller
             control={control}
             name="accountType"
             render={({ field: { onChange, onBlur, value } }) => (
               <RadioGroup
-                gap="$8"
+                gap="8"
                 flexDirection="row"
                 value={value}
                 onValueChange={onChange}
                 id={'account-type-t1'}
               >
-                <View flexDirection="row" items="center" gap="$3">
+                <View flexDirection="row" items="center" gap="3">
                   <RadioGroup.Item id={'personal-t1'} value="personal">
                     <RadioGroup.Indicator
-                      unstyled
                       width="33%"
                       height="33%"
                       rounded={1000}
-                      bg="$color"
+                      bg="color"
                     />
                   </RadioGroup.Item>
 
                   <Input.Label htmlFor={'personal-t1'}>Personal</Input.Label>
                 </View>
-                <View flexDirection="row" items="center" gap="$3">
+                <View flexDirection="row" items="center" gap="3">
                   <RadioGroup.Item id={'business-t1'} value="business">
                     <RadioGroup.Indicator
-                      unstyled
                       width="33%"
                       height="33%"
                       rounded={1000}
-                      bg="$color"
+                      bg="color"
                     />
                   </RadioGroup.Item>
 
@@ -417,7 +369,7 @@ export function SignupValidatedHookForm() {
                 theme: 'red',
               })}
               onBlur={onBlur}
-              size="$4"
+              size="4"
             >
               <Input.Label>Postal code</Input.Label>
               <Input.Box>
@@ -432,23 +384,15 @@ export function SignupValidatedHookForm() {
               <AnimatePresence>
                 {errors.postalCode && (
                   <View
-                    b="$-5"
+                    b="-5"
                     l={0}
                     position="absolute"
-                    gap="$2"
+                    gap="2"
                     flexDirection="row"
+                    scaleY="1 enter:0.5 exit:0.5"
+                    opacity="enter:0 exit:0"
+                    y="enter:-10px exit:-10px"
                     style={{ transition: 'transform 250ms ease' }}
-                    scaleY={1}
-                    enterStyle={{
-                      opacity: 0,
-                      y: -10,
-                      scaleY: 0.5,
-                    }}
-                    exitStyle={{
-                      opacity: 0,
-                      y: -10,
-                      scaleY: 0.5,
-                    }}
                   >
                     <Input.Icon p={0}>
                       <Info />
@@ -473,20 +417,14 @@ export function SignupValidatedHookForm() {
               {loading && (
                 <Spinner
                   size="small"
-                  color="$color"
-                  key="loading-spinner"
-                  opacity={1}
+                  color="color"
+                  opacity="1 enter:0 exit:0"
                   position="absolute"
-                  scale={0.5}
+                  scale="0.5 enter:0.5 exit:0.5"
                   l={110}
-                  style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
-                  enterStyle={{
-                    opacity: 0,
-                    scale: 0.5,
-                  }}
-                  exitStyle={{
-                    opacity: 0,
-                    scale: 0.5,
+                  key="loading-spinner"
+                  style={{
+                    transition: 'transform 150ms ease, opacity 150ms ease',
                   }}
                 />
               )}

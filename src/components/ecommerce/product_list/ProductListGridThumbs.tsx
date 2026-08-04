@@ -7,9 +7,9 @@ const Link = Anchor
 type Product = ReturnType<typeof getProducts>[0]
 
 const StyledText = styled(Text, {
-  color: '$color',
-  fontSize: '$4',
-  lineHeight: '$4',
+  color: 'color',
+  fontSize: '4',
+  lineHeight: '4',
 })
 
 function Item({ item }: { item: Product }) {
@@ -20,22 +20,22 @@ function Item({ item }: { item: Product }) {
       shrink={0}
       borderBottomWidth={1}
       borderRightWidth={1}
-      borderColor="$color5"
-      bg="$background"
+      borderColor="color5"
+      bg="background"
       height={250}
       flexBasis={150}
-      p="$4"
-      href="#"
+      p="4"
       textDecorationColor="transparent"
+      href="#"
     >
-      <View pb="$2" gap="$2" render="article">
+      <View pb="2" gap="2" render="article">
         <View overflow="hidden" width="100%" height={100}>
           <Image src={item.image} height="100%" width="100%" objectFit="cover" />
         </View>
         <View>
-          <H2 size="$1">{item.name}</H2>
-          <XStack gap="$3">
-            <StyledText fontSize="$1" lineHeight="$1" fontWeight="bold">
+          <H2 size="1">{item.name}</H2>
+          <XStack gap="3">
+            <StyledText fontSize="1" lineHeight="1" fontWeight="bold">
               ${item.price}
             </StyledText>
           </XStack>
@@ -62,7 +62,7 @@ export function ProductListGridThumbs() {
     setProducts(getProducts())
   }, [])
   return (
-    <XStack maxW="100%" bg="$color1" flexWrap="wrap">
+    <XStack maxW="100%" bg="color1" flexWrap="wrap">
       {products.map((item) => (
         <Item key={item.id} item={item} />
       ))}

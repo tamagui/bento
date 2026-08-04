@@ -1,6 +1,7 @@
+import { Avatar, YGroup } from '../../BentoSkins'
 import { Check } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
-import { Avatar, Text, View, YGroup, debounce } from 'tamagui'
+import { Text, View, debounce } from 'tamagui'
 import { Checkboxes } from './common/checkboxParts'
 
 /** ------ EXAMPLE ------ */
@@ -48,13 +49,10 @@ export function GroupedCheckbox() {
     <View width="100%" items="center">
       <Checkboxes values={values} onValuesChange={onValuesChange}>
         <Checkboxes.FocusGroup
-          minW="100%"
+          minW="100% @gtXs/window:unset"
+          self="@gtXs/window:center"
+          maxW="@gtXs/window:400px"
           loop
-          $group-window-gtXs={{
-            self: 'center',
-            minW: 'unset',
-            maxW: 400,
-          }}
         >
           <Checkboxes.Group orientation="vertical" shrink={1} minW="100%">
             {items.map((item) => (
@@ -71,39 +69,30 @@ export function GroupedCheckbox() {
 
 GroupedCheckbox.fileName = 'GroupedCheckbox'
 
-function Item({
-  item,
-  checked,
-}: {
-  item: Item
-  checked: boolean
-}) {
+function Item({ item, checked }: { item: Item; checked: boolean }) {
   const { id, image } = item
 
   return (
     <YGroup.Item>
       <Checkboxes.Card
         flexDirection="row"
-        bg={checked ? '$backgroundPress' : '$background'}
-        borderColor={checked ? '$borderColorPress' : '$borderColor'}
+        bg={`${checked ? 'background-press' : 'background'}`}
+        borderColor={`${checked ? 'border-color-press' : 'border-color'}`}
         borderWidth={1}
         items="center"
-        gap="$3"
+        gap="3 @sm/window:2"
         width="100%"
-        p="$3.5"
+        p="4"
         minH={90}
         cursor="pointer"
-        $group-window-sm={{
-          gap: '$2',
-        }}
       >
-        <Avatar circular size="$6">
+        <Avatar circular size="6">
           <Avatar.Image src={image} />
-          <Avatar.Fallback borderColor="$background" />
+          <Avatar.Fallback borderColor="background" />
         </Avatar>
-        <View flexDirection="column" flex={1} gap="$2">
-          <View flexDirection="row" gap="$2">
-            <Checkboxes.Checkbox.Label size="$5" lineHeight="$2" htmlFor={id}>
+        <View flexDirection="column" flex={1} gap="2">
+          <View flexDirection="row" gap="2">
+            <Checkboxes.Checkbox.Label size="5" lineHeight="2" htmlFor={id}>
               Label
             </Checkboxes.Checkbox.Label>
 
@@ -115,10 +104,10 @@ function Item({
           </View>
           <Text
             numberOfLines={2}
-            fontSize="$3"
-            lineHeight="$3"
+            fontSize="3"
+            lineHeight="3"
             fontWeight="300"
-            color="$color9"
+            color="color8"
           >
             Laborum velit velit occaecat eiusmod laboris tempor. Lorem qui quis deserunt
             culpa. Ad eiusmod magna ad proident exercitation laborum qui quis

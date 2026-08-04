@@ -14,31 +14,31 @@ export function CommandPaletteInline() {
   }
 
   return (
-    <YStack width="100%" maxW={680} gap="$3">
+    <YStack width="100%" maxW={680} gap="3">
       <YStack
-        bg="$background"
-        borderColor="$color6"
+        bg="background"
+        borderColor="color6"
         borderWidth={1}
-        elevation="$4"
         height={sm ? 520 : 620}
         maxH="78vh"
         overflow="hidden"
-        rounded="$8"
+        rounded="8"
+        elevation="4"
       >
         <CommandMenu compact={sm} onSelect={selectCommand} />
       </YStack>
-      <XStack render="output" aria-live="polite" gap="$2" items="center" px="$1">
+      <XStack render="output" aria-live="polite" gap="2" items="center" px="1">
         <View
           width={28}
           height={28}
-          bg="$color3"
+          bg="color3"
           items="center"
           justify="center"
           rounded={1000}
         >
-          <Command size={14} color="$color10" />
+          <Command size={14} color="color9" />
         </View>
-        <Text color="$color10" fontSize="$2">
+        <Text color="color9" fontSize="2">
           {lastAction}
         </Text>
       </XStack>

@@ -32,17 +32,19 @@ export const BubbleChat = (props: BubbleProps) => {
     <Pressable {...props}>
       <View
         theme={
-          theme.includes('alt1') || theme === 'light' || theme === 'dark' ? 'blue' : theme
+          theme.includes('level2') || theme === 'light' || theme === 'dark'
+            ? 'blue'
+            : theme
         }
         self={received ? 'flex-start' : 'flex-end'}
-        backgroundColor={'$color10'}
+        backgroundColor="color9"
         {...(!received && {
-          backgroundColor: '$color3',
+          backgroundColor: 'color3',
           self: 'flex-end',
         })}
-        rounded="$7"
+        rounded="7"
         borderCurve="continuous"
-        p="$3"
+        p="3"
         maxW="80%"
       >
         {item.sticker ? (

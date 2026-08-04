@@ -38,34 +38,33 @@ const stats: StatMetric[] = [
 
 export function StatGrid() {
   return (
-    <XStack width="100%" maxW={820} flexWrap="wrap" gap="$4">
+    <XStack width="100%" maxW={820} flexWrap="wrap" gap="4">
       {stats.map((stat) => (
         <YStack
           key={stat.label}
           render={isWeb ? 'dl' : undefined}
           width="100%"
-          flexBasis={340}
+          flexBasis="340px @xs/window:100%"
           grow={1}
-          gap="$2"
+          gap="2"
           m={0}
-          p="$4"
-          rounded="$7"
+          p="4"
+          rounded="7"
           borderWidth={1}
-          borderColor="$borderColor"
-          bg="$background"
-          $group-window-xs={{ flexBasis: '100%' }}
+          borderColor="border-color"
+          bg="background"
         >
-          <Paragraph render={isWeb ? 'dt' : undefined} color="$color10" m={0}>
+          <Paragraph render={isWeb ? 'dt' : undefined} color="color9" m={0}>
             {stat.label}
           </Paragraph>
           <XStack
             render={isWeb ? 'dd' : undefined}
             justify="space-between"
             items="center"
-            gap="$3"
+            gap="3"
             m={0}
           >
-            <Text fontSize="$8" lineHeight="$8" fontWeight="700">
+            <Text fontSize="8" lineHeight="8" fontWeight="700">
               {formatStat(stat.value, stat.kind)}
             </Text>
             <TrendChip metric={stat} />

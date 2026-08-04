@@ -43,20 +43,18 @@ export function VerticalWithDescriptionCheckboxes() {
         values={values}
         onValuesChange={onValuesChange}
         maxW="100%"
-        $group-window-sm={{
-          px: '$4',
-          py: '$6',
-        }}
-        $group-window-gtXs={{ width: 400 }}
-        gap="$4"
+        px="@sm/window:4"
+        py="@sm/window:6"
+        width="@gtXs/window:400px"
+        gap="4"
       >
-        <YStack gap="$1">
+        <YStack gap="1">
           <Checkboxes.Title>Payment</Checkboxes.Title>
-          <Text fontSize="$5" fontWeight="300" color="$color9">
+          <Text fontSize="5" fontWeight="300" color="color8">
             Select your payment method
           </Text>
         </YStack>
-        <Checkboxes.FocusGroup minW="100%" flexWrap="wrap" gap="$2">
+        <Checkboxes.FocusGroup minW="100%" flexWrap="wrap" gap="2">
           {items.map(({ id, label, description }) => (
             <Checkboxes.FocusGroup.Item value={id} key={id}>
               <Item description={description} label={label} uniqueId={id + uniqueId} />
@@ -85,11 +83,9 @@ function Item({
         flexDirection="row"
         shrink={1}
         items="flex-start"
-        gap="$3"
-        p="$3"
-        hoverStyle={{
-          borderColor: '$color7',
-        }}
+        gap="3"
+        p="3"
+        borderColor="hover:color6"
         cursor="pointer"
         maxW="100%"
         minW="100%"
@@ -106,14 +102,14 @@ function Item({
           <Checkboxes.Checkbox.Label
             cursor="pointer"
             items="flex-start"
-            size="$4"
-            lineHeight="$2"
+            lineHeight="2"
             flexDirection="column"
+            size="4"
             htmlFor={uniqueId}
           >
             {label}
           </Checkboxes.Checkbox.Label>
-          <Text shrink={1} fontSize="$3" lineHeight="$3" fontWeight="300" color="$color9">
+          <Text shrink={1} fontSize="3" lineHeight="3" fontWeight="300" color="color8">
             {description}
           </Text>
         </View>

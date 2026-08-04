@@ -3,7 +3,7 @@ import { DatePickerProvider, useDatePickerContext } from '@rehookify/datepicker'
 import { getFontSized } from '@tamagui/get-font-sized'
 import { Calendar, ChevronLeft, ChevronRight, X } from '@tamagui/lucide-icons-2'
 import type { GestureReponderEvent, ViewProps } from '@tamagui/web'
-import type { PopoverProps } from 'tamagui'
+import type { FontSizeTokens, PopoverProps } from 'tamagui'
 import {
   createStyledHOC,
   Adapt,
@@ -35,7 +35,7 @@ export function RangeGradient({
   direction,
 }: {
   children: ReactNode
-  color: '$color5' | '$color6'
+  color: 'color5' | 'color6'
   direction: 'leftToRight' | 'rightToLeft'
 }) {
   return (
@@ -111,17 +111,16 @@ const DatePickerImpl = (props: DatePickerProps) => {
 
   return (
     <DatePickerProvider config={config}>
-      <Popover ref={popoverRef} keepChildrenMounted size="$4" allowFlip {...rest}>
+      <Popover ref={popoverRef} keepChildrenMounted size="4" allowFlip {...rest}>
         <Adapt when="maxMd">
           <Sheet modal dismissOnSnapToBottom snapPointsMode="fit">
-            <Sheet.Frame p="$4" width="100%" items="center">
+            <Sheet.Container p="4" width="100%" items="center">
+              <Sheet.Background />
               <Adapt.Contents />
-            </Sheet.Frame>
+            </Sheet.Container>
             <Sheet.Overlay
               style={{ transition: 'opacity 200ms ease' }}
-              opacity={0.8}
-              enterStyle={{ opacity: 0 }}
-              exitStyle={{ opacity: 0 }}
+              opacity="0.8 enter:0 exit:0"
             />
           </Sheet>
         </Adapt>
@@ -132,21 +131,11 @@ const DatePickerImpl = (props: DatePickerProps) => {
 }
 
 const DatePickerContent = styled(Popover.Content, {
-  variants: {
-    unstyled: {
-      false: {
-        padding: 12,
-        borderWidth: 1,
-        borderColor: '$borderColor',
-        enterStyle: { y: -10, opacity: 0 },
-        exitStyle: { y: -10, opacity: 0 },
-      },
-    },
-  } as const,
-
-  defaultVariants: {
-    unstyled: process.env.TAMAGUI_HEADLESS === '1',
-  },
+  padding: 12,
+  borderWidth: 1,
+  borderColor: 'border-color',
+  y: 'enter:-10px exit:-10px',
+  opacity: 'enter:0 exit:0',
 })
 
 export const DatePicker = withStaticProperties(DatePickerImpl, {
@@ -154,21 +143,23 @@ export const DatePicker = withStaticProperties(DatePickerImpl, {
   Content: withStaticProperties(DatePickerContent, {
     Arrow: styled(Popover.Arrow, {
       borderWidth: 1,
-      borderColor: '$borderColor',
+      borderColor: 'border-color',
     }),
   }),
 })
 
-type DatePickerInputProps = {
+type DatePickerInputProps = Omit<React.ComponentProps<typeof Input.Area>, 'size'> & {
   onReset: () => void
   onButtonPress?: (e: GestureReponderEvent) => void
+  size?: FontSizeTokens
 }
 
-export const DatePickerInput = createStyledHOC(Input.Area)<DatePickerInputProps>(
-  (props, ref) => {
-    const { value, onButtonPress, size = '$3', onReset, onLayout, ...rest } = props
+export const DatePickerInput = createStyledHOC(
+  Input.Area,
+  (props: DatePickerInputProps, ref) => {
+    const { value, onButtonPress, size = '3', onReset, onLayout, ...rest } = props
     return (
-      <View onLayout={isWeb ? undefined : onLayout} $platform-native={{ minW: '100%' }}>
+      <View onLayout={isWeb ? undefined : onLayout} minW="native:100%">
         <Input cursor="pointer" onPress={onButtonPress} size={size}>
           <Input.Box>
             <Input.Section>
@@ -177,7 +168,7 @@ export const DatePickerInput = createStyledHOC(Input.Area)<DatePickerInputProps>
                 value={value}
                 ref={ref}
                 {...(rest as any)}
-                color="$color11"
+                color="color10"
               />
             </Input.Section>
             <Input.Section>
@@ -231,32 +222,29 @@ export function MonthPicker({
         {...prevNextAnimation()}
         flexDirection="row"
         flexWrap="wrap"
-        gap="$2"
-        style={{ transition: 'transform 100ms ease, opacity 100ms ease' }}
+        gap="2"
         grow={0}
-        $platform-native={{
-          justify: 'space-between',
-          width: '100%',
-        }}
-        $gtMd={{ width: 285 }}
+        justify="native:space-between"
+        width="native:100% gtMd:285px"
+        style={{ transition: 'transform 100ms ease, opacity 100ms ease' }}
       >
         {months.map((month) => (
           <Button
             theme={month.active ? 'accent' : undefined}
-            rounded="$4"
+            rounded="4"
             shrink={0}
             flexBasis={90}
-            bg={month.active ? '$background' : 'transparent'}
-            key={month.$date.toString()}
-            chromeless
+            bg={`${month.active ? 'background' : 'transparent'}`}
             p={0}
             {...swapOnClick(
               monthButton(month, {
                 onClick: onChange as any,
               })
             )}
+            key={month.$date.toString()}
+            variant="quiet"
           >
-            <Button.Text color={month.active ? '$color12' : '$color11'}>
+            <Button.Text color={`${month.active ? 'color11' : 'color10'}`}>
               {month.month}
             </Button.Text>
           </Button>
@@ -285,33 +273,31 @@ export function YearPicker({
     <AnimatePresence key={prevNextAnimationKey}>
       <View
         {...prevNextAnimation()}
-        style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
         flexDirection="row"
         flexWrap="wrap"
-        gap="$2"
+        gap="2"
         width="100%"
-        $gtMd={{
-          maxW: 280,
-        }}
+        maxW="gtMd:280px"
+        style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
       >
         {years.map((year) => (
           <Button
             theme={year.year === Number(selectedYear) ? 'accent' : undefined}
-            rounded="$4"
+            rounded="4"
             flexBasis="30%"
             grow={1}
-            bg={year.year === Number(selectedYear) ? '$background' : 'transparent'}
-            key={year.$date.toString()}
-            chromeless
+            bg={`${year.year === Number(selectedYear) ? 'background' : 'transparent'}`}
             p={0}
             {...swapOnClick(
               yearButton(year, {
                 onClick: onChange as any,
               })
             )}
+            key={year.$date.toString()}
+            variant="quiet"
           >
             <Button.Text
-              color={year.year === Number(selectedYear) ? '$color12' : '$color11'}
+              color={`${year.year === Number(selectedYear) ? 'color11' : 'color10'}`}
             >
               {year.year}
             </Button.Text>
@@ -329,17 +315,17 @@ export function YearRangeSlider() {
 
   return (
     <View flexDirection="row" width="100%" items="center" justify="space-between">
-      <Button circular size="$4" {...swapOnClick(previousYearsButton())}>
+      <Button circular size="4" {...swapOnClick(previousYearsButton())}>
         <Button.Icon scaleIcon={1.5}>
           <ChevronLeft />
         </Button.Icon>
       </Button>
       <View y={2} flexDirection="column" items="center">
-        <SizableText size="$5">
+        <SizableText size="5">
           {`${years[0].year} - ${years[years.length - 1].year}`}
         </SizableText>
       </View>
-      <Button circular size="$4" {...swapOnClick(nextYearsButton())}>
+      <Button circular size="4" {...swapOnClick(nextYearsButton())}>
         <Button.Icon scaleIcon={1.5}>
           <ChevronRight />
         </Button.Icon>
@@ -363,7 +349,7 @@ export function YearSlider() {
       items="center"
       justify="space-between"
     >
-      <Button circular size="$3" {...swapOnClick(subtractOffset({ months: 12 }))}>
+      <Button circular size="3" {...swapOnClick(subtractOffset({ months: 12 }))}>
         <Button.Icon scaleIcon={1.5}>
           <ChevronLeft />
         </Button.Icon>
@@ -371,17 +357,14 @@ export function YearSlider() {
       <SizableText
         onPress={() => setHeader('year')}
         select="text"
-        tabIndex={0}
-        size="$6"
         cursor="pointer"
-        color="$color11"
-        hoverStyle={{
-          color: '$color12',
-        }}
+        color="color10 hover:color11"
+        tabIndex={0}
+        size="6"
       >
         {year}
       </SizableText>
-      <Button circular size="$3" {...swapOnClick(subtractOffset({ months: -12 }))}>
+      <Button circular size="3" {...swapOnClick(subtractOffset({ months: -12 }))}>
         <Button.Icon scaleIcon={1.5}>
           <ChevronRight />
         </Button.Icon>
@@ -404,26 +387,20 @@ export const CalendarHeader = ({
       <SizableText
         onPress={() => setHeader('year')}
         tabIndex={0}
-        size="$4"
+        size="4"
         cursor="pointer"
-        color="$color11"
-        hoverStyle={{
-          color: '$color12',
-        }}
+        color="color10 hover:color11"
       >
         {year}
       </SizableText>
       <SizableText
         onPress={() => setHeader('month')}
         select="auto"
-        tabIndex={0}
         cursor="pointer"
-        size="$6"
-        color="$color12"
+        color="color11 hover:color9"
         fontWeight="bold"
-        hoverStyle={{
-          color: '$color10',
-        }}
+        tabIndex={0}
+        size="6"
       >
         {month}
       </SizableText>
@@ -439,9 +416,16 @@ export const WeekView = ({
   props?: ViewProps
 }) => {
   return (
-    <View width="100%" flexDirection="row" gap="$1" {...props}>
+    <View width="100%" flexDirection="row" gap="1" {...props}>
       {weekDays.map((day) => (
-        <SizableText flex={1} theme="alt1" key={day} text="center" width="100%" size="$4">
+        <SizableText
+          flex={1}
+          theme="level2"
+          key={day}
+          text="center"
+          width="100%"
+          size="4"
+        >
           {day}
         </SizableText>
       ))}
@@ -451,15 +435,13 @@ export const WeekView = ({
 
 export const SizableText = styled(Text, {
   name: 'SizableText',
-  fontFamily: '$body',
-
+  fontFamily: 'body',
   variants: {
     size: {
-      '...fontSize': getFontSized as any, // TODO: revisit after v2 migration
+      FontSize: getFontSized as any,
     },
   } as const,
-
   defaultVariants: {
-    size: '$true',
+    size: '4',
   },
 })

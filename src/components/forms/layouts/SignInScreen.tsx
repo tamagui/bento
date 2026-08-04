@@ -13,6 +13,7 @@ import {
   View,
 } from 'tamagui'
 import { Input } from '../inputs/components/inputsParts'
+import { useGroupMedia } from '../../hooks/useGroupMedia'
 import { FormCard } from './components/layoutParts'
 
 /** simulate signin */
@@ -32,6 +33,7 @@ function useSignIn() {
 /** ------ EXAMPLE ------ */
 export function SignInScreen() {
   const { signIn, status } = useSignIn()
+  const { xs } = useGroupMedia('window')
   return (
     <FormCard>
       <View
@@ -39,32 +41,24 @@ export function SignInScreen() {
         items="stretch"
         minW="100%"
         maxW="100%"
-        gap="$4"
-        $group-window-gtSm={{
-          py: '$4',
-          width: 400,
-        }}
+        gap="4"
+        py="@gtSm/window:4"
+        width="@gtSm/window:400px"
       >
-        <H1
-          self="center"
-          size="$8"
-          $group-window-xs={{
-            size: '$7',
-          }}
-        >
+        <H1 self="center" size={xs ? '7' : '8'}>
           Sign in to your account
         </H1>
-        <View flexDirection="column" gap="$3">
-          <View flexDirection="column" gap="$1">
-            <Input size="$4">
+        <View flexDirection="column" gap="3">
+          <View flexDirection="column" gap="1">
+            <Input size="4">
               <Input.Label htmlFor="email">Email</Input.Label>
               <Input.Box>
                 <Input.Area id="email" placeholder="email@example.com" />
               </Input.Box>
             </Input>
           </View>
-          <View flexDirection="column" gap="$1">
-            <Input size="$4">
+          <View flexDirection="column" gap="1">
+            <Input size="4">
               <View flexDirection="row" items="center" justify="space-between">
                 <Input.Label htmlFor={'password'}>Password</Input.Label>
               </View>
@@ -89,21 +83,13 @@ export function SignInScreen() {
             <AnimatePresence>
               {status === 'loading' && (
                 <Spinner
-                  color="$color"
-                  key="loading-spinner"
-                  opacity={1}
-                  scale={1}
+                  color="color"
+                  opacity="1 enter:0 exit:0"
+                  scale="1 enter:0.5 exit:0.5"
                   transition="quick"
                   position="absolute"
                   l="60%"
-                  enterStyle={{
-                    opacity: 0,
-                    scale: 0.5,
-                  }}
-                  exitStyle={{
-                    opacity: 0,
-                    scale: 0.5,
-                  }}
+                  key="loading-spinner"
                 />
               )}
             </AnimatePresence>
@@ -111,30 +97,30 @@ export function SignInScreen() {
         >
           <Button.Text>Sign In</Button.Text>
         </Button>
-        <View flexDirection="column" gap="$3" width="100%" items="center">
+        <View flexDirection="column" gap="3" width="100%" items="center">
           <Theme>
             <View
               flexDirection="column"
-              gap="$3"
+              gap="3"
               width="100%"
               self="center"
               items="center"
             >
-              <View flexDirection="row" width="100%" items="center" gap="$4">
+              <View flexDirection="row" width="100%" items="center" gap="4">
                 <Separator />
                 <Paragraph>Or</Paragraph>
                 <Separator />
               </View>
-              <View flexDirection="row" flexWrap="wrap" gap="$3">
+              <View flexDirection="row" flexWrap="wrap" gap="3">
                 <Button flex={1} minW="100%">
                   <Button.Icon>
-                    <Github color="$color10" size="$1" />
+                    <Github color="color9" size="1" />
                   </Button.Icon>
                   <Button.Text>Continue with Github</Button.Text>
                 </Button>
                 <Button flex={1}>
                   <Button.Icon>
-                    <Facebook color="$blue10" size="$1" />
+                    <Facebook color="blue-600" size="1" />
                   </Button.Icon>
                   <Button.Text>Continue with Facebook</Button.Text>
                 </Button>
@@ -166,12 +152,7 @@ const SignUpLink = () => {
     <Link href={`#`}>
       <Paragraph textDecorationStyle="unset" text="center">
         Don&apos;t have an account?{' '}
-        <SizableText
-          hoverStyle={{
-            color: '$colorHover',
-          }}
-          textDecorationLine="underline"
-        >
+        <SizableText color="hover:color-hover" textDecorationLine="underline">
           Sign up
         </SizableText>
       </Paragraph>
@@ -182,14 +163,7 @@ const SignUpLink = () => {
 const ForgotPasswordLink = () => {
   return (
     <Anchor self="flex-end" href={`#`}>
-      <Paragraph
-        color="$color11"
-        hoverStyle={{
-          color: '$color12',
-        }}
-        size="$1"
-        mt="$1"
-      >
+      <Paragraph color="color10 hover:color11" mt="1" size="1">
         Forgot your password?
       </Paragraph>
     </Anchor>

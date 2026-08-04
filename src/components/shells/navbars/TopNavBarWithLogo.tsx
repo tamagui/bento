@@ -1,3 +1,4 @@
+import { Avatar, Tabs } from '../../BentoSkins'
 import { Bell, Menu } from '@tamagui/lucide-icons-2'
 import type { KeyboardEvent as ReactKeyboardEvent } from 'react'
 import type { TabLayout, TabsTabProps, ViewProps } from 'tamagui'
@@ -7,13 +8,11 @@ import {
   createStyledHOC,
   Anchor,
   AnimatePresence,
-  Avatar,
   Button,
   Image,
   Popover,
   PopoverTrigger,
   Separator,
-  Tabs,
   Text,
   Theme,
   View,
@@ -139,38 +138,36 @@ export function TopNavBarWithLogo() {
     <View
       flexDirection="column"
       width="100%"
-      height={610}
-      $group-window-gtXs={{ height: 800 }}
+      height="610px @gtXs/window:800px"
       position="relative"
     >
       <Theme name={inverseThemeName}>
         <View
           flexDirection="row"
-          p="$2"
+          p="2"
           minW="100%"
-          render="nav"
           items="center"
           justify="space-between"
-          bg="$background"
+          bg="background"
+          render="nav"
         >
           {sm ? (
             <SideBar />
           ) : (
             <View
               flexDirection="row"
-              p="$2"
+              p="2"
               items="center"
-              bg="$color2"
+              bg="color2"
               borderWidth={1}
-              borderColor="$borderColor"
+              borderColor="border-color"
               rounded={1000_000}
             >
               <Image
                 objectFit="contain"
-                width={25}
-                height={25}
-                $group-window-sm={{ width: 15, height: 15 }}
-                source={{ uri: '/bento/tamagui-icon.png' }}
+                width="25px @sm/window:15px"
+                height="25px @sm/window:15px"
+                src="/bento/tamagui-icon.png"
                 alt="Bento logo"
               />
             </View>
@@ -185,7 +182,7 @@ export function TopNavBarWithLogo() {
                 <AnimatePresence>
                   {intentAt && (
                     <TabsRovingIndicator
-                      rounded="$4"
+                      rounded="4"
                       width={intentAt.width}
                       height={intentAt.height}
                       x={intentAt.x}
@@ -196,7 +193,7 @@ export function TopNavBarWithLogo() {
                 <AnimatePresence>
                   {activeAt && (
                     <TabsRovingIndicator
-                      rounded="$4"
+                      rounded="4"
                       theme="accent"
                       width={activeAt.width}
                       height={activeAt.height}
@@ -208,16 +205,16 @@ export function TopNavBarWithLogo() {
                 <Tabs.List
                   loop={false}
                   aria-label="Manage your account"
-                  gap="$3"
+                  gap="3"
                   backgroundColor="transparent"
                 >
                   {links.map((link, index) => (
                     <Tabs.Tab
                       key={link.title}
-                      unstyled
+                      variant="plain"
                       value={link.slug}
                       onInteraction={handleOnInteraction}
-                      paddingHorizontal="$4"
+                      paddingHorizontal="4"
                     >
                       <NavLink
                         key={index}
@@ -232,10 +229,10 @@ export function TopNavBarWithLogo() {
               </View>
             </Tabs>
           )}
-          <View flexDirection="row" items="center" gap="$3">
-            <Button theme="accent" circular chromeless p={0} size="$3">
+          <View flexDirection="row" items="center" gap="3">
+            <Button theme="accent" circular variant="quiet" p={0} size="3">
               <Button.Icon>
-                <Bell size="$1" />
+                <Bell size="1" />
               </Button.Icon>
             </Button>
             <ProfileDropdown
@@ -246,7 +243,7 @@ export function TopNavBarWithLogo() {
           </View>
         </View>
       </Theme>
-      {!sm && <View flexDirection="row" bg="$background" height="100%" />}
+      {!sm && <View flexDirection="row" bg="background" height="100%" />}
     </View>
   )
 }
@@ -272,34 +269,27 @@ function ProfileDropdown({
       onOpenChange={setTriggerOpen}
     >
       <PopoverTrigger asChild>
-        <Button circular chromeless>
-          <Avatar circular size="$3">
+        <Button circular variant="quiet">
+          <Avatar circular size="3">
             <Avatar.Image
               pointerEvents="none"
               aria-label="user photo"
               src="https://i.pravatar.cc/123"
             />
-            <Avatar.Fallback bg="$color10" />
+            <Avatar.Fallback bg="color9" />
           </Avatar>
         </Button>
       </PopoverTrigger>
       <Popover.Content
         borderWidth={1}
-        borderColor="$borderColor"
-        bg="$color1"
+        borderColor="border-color"
+        bg="color1"
         p={0}
-        enterStyle={{ y: -10, opacity: 0 }}
-        exitStyle={{ y: -10, opacity: 0 }}
-        transition={[
-          'quick',
-          {
-            opacity: {
-              overshootClamping: true,
-            },
-          },
-        ]}
-        elevation={5}
+        y="enter:-10px exit:-10px"
+        opacity="enter:0 exit:0"
+        transition={['quick', { opacity: { overshootClamping: true } }]}
         overflow="hidden"
+        boxShadow="0 10px 20px shadow-color"
       >
         <DropDownItem onPress={closeTrigger}>
           <DropDownText>Accounts</DropDownText>
@@ -316,50 +306,42 @@ function ProfileDropdown({
 }
 
 const DropDownItem = styled(View, {
-  bg: '$background',
+  bg: 'background hover:background-hover press:background-press',
   width: '100%',
-  hoverStyle: {
-    bg: '$backgroundHover',
-  },
-  pressStyle: {
-    bg: '$backgroundPress',
-  },
   cursor: 'pointer',
-  px: '$4',
-  py: '$2',
+  px: '4 @xs/window:2',
+  py: '2 @xs/window:1',
   items: 'center',
   justify: 'center',
-  '$group-window-xs': {
-    px: '$2',
-    py: '$1',
-  },
 })
 
 const DropDownText = styled(Text, {
-  fontWeight: '$2',
-  lineHeight: '$2',
-  fontSize: '$2',
-  '$group-window-xs': {
-    fontWeight: '$1',
-    fontSize: '$1',
-    lineHeight: '$1',
-  },
+  fontWeight: '2 @xs/window:1',
+  lineHeight: '2 @xs/window:1',
+  fontSize: '2 @xs/window:1',
 })
 
-const NavLink = createStyledHOC(View)<{ href: string }>(
-  ({ children, href = '#', ...rest }, ref) => {
+const NavLink = createStyledHOC(
+  View,
+  (
+    {
+      children,
+      href = '#',
+      ...rest
+    }: React.ComponentProps<typeof View> & {
+      href?: string
+    },
+    ref
+  ) => {
     return (
-      <View ref={ref} rounded={5} py="$2" items="center" justify="center" {...rest}>
+      <View ref={ref} rounded={5} py="2" items="center" justify="center" {...rest}>
         <Anchor href={href} textDecorationLine="none">
           <Text
-            opacity={0.9}
-            fontSize="$5"
-            fontWeight="$5"
-            lineHeight="$5"
-            color="$color12"
-            hoverStyle={{
-              opacity: 1,
-            }}
+            opacity="0.9 hover:1"
+            fontSize="5"
+            fontWeight="5"
+            lineHeight="5"
+            color="color11"
           >
             {children}
           </Text>
@@ -384,9 +366,9 @@ function SideBar() {
         },
       })}
     >
-      <Button circular chromeless onPress={toggle}>
+      <Button circular variant="quiet" onPress={toggle}>
         <Button.Icon>
-          <Menu size="$1" />
+          <Menu size="1" />
         </Button.Icon>
       </Button>
       <SideBarContent open={open} onOpenChange={() => setOpen(false)} />
@@ -405,50 +387,46 @@ function SideBarContent({
   const { height, width } = useContainerDim('window')
 
   return (
-    <View flexDirection="column" position="absolute" mx={-12} my="$-2">
+    <View flexDirection="column" position="absolute" mx={-12} my="-2">
       <Drawer open={open} onOpenChange={onOpenChange}>
         <Drawer.Portal>
           <Drawer.Overlay
             height={height}
             width={width + 100}
             transition="lazy"
-            enterStyle={{ opacity: 0 }}
-            exitStyle={{ opacity: 0 }}
+            opacity="enter:0 exit:0"
           />
           <Drawer.Swipeable>
             <Drawer.Content
-              py="$2"
+              py="2"
               height={height}
               width={240}
               items="flex-start"
               justify="flex-start"
-              bg="$background"
-              x={-30}
+              bg="background"
+              x="-30px enter:-240px exit:-260px"
               pl={30}
-              gap="$4"
-              enterStyle={{ x: -240 }}
-              exitStyle={{ x: -260 }}
+              gap="4"
             >
               <View
                 flexDirection="row"
-                p="$2"
-                mt="$2"
+                p="2"
+                mt="2"
                 items="center"
                 bg="#fff"
                 rounded={1000_000}
-                ml="$5"
+                ml="5"
               >
                 <Image
                   objectFit="contain"
-                  width={30}
-                  height={30}
-                  $group-window-sm={{ width: 15, height: 15 }}
-                  source={{ uri: '/bento/tamagui-icon.png' }}
+                  width="30px @sm/window:15px"
+                  height="30px @sm/window:15px"
+                  src="/bento/tamagui-icon.png"
                   alt="Bento logo"
                 />
               </View>
               <Separator width="100%" />
-              <View flexDirection="column" width="100%" render="ul" gap="$2">
+              <View flexDirection="column" width="100%" gap="2" render="ul">
                 <Tabs
                   value={currentTab}
                   onValueChange={setCurrentTab}
@@ -479,14 +457,14 @@ function SideBarContent({
                     <Tabs.List
                       loop={false}
                       aria-label="Manage your account"
-                      gap="$1"
+                      gap="1"
                       width="100%"
                       backgroundColor="transparent"
                     >
                       {links.map((link, index) => (
                         <Tabs.Tab
                           key={link.title}
-                          unstyled
+                          variant="plain"
                           width="100%"
                           value={link.slug}
                           onInteraction={handleOnInteraction}
@@ -495,9 +473,8 @@ function SideBarContent({
                         >
                           <NavLink
                             key={index}
-                            // Note: replace href with /bento/shells/navbars/${link.slug}
                             href={`/bento/shells/navbars/#`}
-                            px="$5"
+                            px="5"
                             mr="auto"
                             justify="flex-start"
                           >
@@ -522,18 +499,12 @@ const TabsRovingIndicator = ({ active, ...props }: { active?: boolean } & ViewPr
     <View
       flexDirection="column"
       position="absolute"
-      backgroundColor="$color8"
-      opacity={0.7}
+      backgroundColor="color7"
+      opacity="0.7 enter:0 exit:0"
       transition="100ms"
       pointerEvents="none"
-      enterStyle={{
-        opacity: 0,
-      }}
-      exitStyle={{
-        opacity: 0,
-      }}
       {...(active && {
-        backgroundColor: '$color8',
+        backgroundColor: 'color7',
         opacity: 0.6,
       })}
       {...props}

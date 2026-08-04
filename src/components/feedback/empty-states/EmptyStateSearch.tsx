@@ -14,17 +14,17 @@ export function EmptyStateSearch({ initialQuery = 'quarterly roadmap' }) {
         maxW={560}
         self="center"
         items="center"
-        gap="$3"
-        p="$7"
+        gap="3"
+        p="7"
       >
-        <Search size={40} color="$color9" aria-hidden />
+        <Search size={40} color="color8" aria-hidden />
         <H3 text="center" aria-live="polite">
           Search cleared
         </H3>
-        <Paragraph text="center" color="$color10">
+        <Paragraph text="center" color="color9">
           Type a new phrase to search your workspace.
         </Paragraph>
-        <Button mt="$2" variant="outlined" onPress={() => setQuery(initialQuery)}>
+        <Button mt="2" variant="outlined" onPress={() => setQuery(initialQuery)}>
           Show the empty result again
         </Button>
       </YStack>
@@ -39,16 +39,16 @@ export function EmptyStateSearch({ initialQuery = 'quarterly roadmap' }) {
       maxW={560}
       self="center"
       items="center"
-      gap="$3"
-      p="$7"
+      gap="3"
+      p="7"
     >
-      <SearchX size={40} color="$color9" aria-hidden />
+      <SearchX size={40} color="color8" aria-hidden />
       <H3 text="center">No results for “{query}”</H3>
-      <Paragraph text="center" color="$color10">
+      <Paragraph text="center" color="color9">
         Try a shorter phrase, check the spelling, or clear the current search.
       </Paragraph>
       <Button
-        mt="$2"
+        mt="2"
         variant="outlined"
         icon={X}
         aria-label={`Clear search for ${query}`}

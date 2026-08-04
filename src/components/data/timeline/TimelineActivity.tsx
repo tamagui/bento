@@ -1,5 +1,6 @@
+import { Avatar } from '../../BentoSkins'
 import { GitCommit, MessageCircle, Upload } from '@tamagui/lucide-icons-2'
-import { Anchor, Avatar, Text, View, XStack, YStack, isWeb } from 'tamagui'
+import { Anchor, Text, View, XStack, YStack, isWeb } from 'tamagui'
 
 const activities = [
   {
@@ -59,41 +60,38 @@ export function TimelineActivity() {
       {activities.map((activity, index) => {
         const Icon = activity.icon
         return (
-          <XStack key={activity.id} render={isWeb ? <li /> : undefined} gap="$4">
+          <XStack key={activity.id} render={isWeb ? <li /> : undefined} gap="4">
             <YStack width={42} items="center">
-              <Avatar circular size="$3.5">
+              <Avatar circular size="10">
                 <Avatar.Image
                   src={`https://i.pravatar.cc/150?img=${activity.avatar}`}
                   aria-label={activity.person}
                 />
-                <Avatar.Fallback bg="$color4" />
+                <Avatar.Fallback bg="color4" />
               </Avatar>
-              {index < activities.length - 1 && <View flex={1} width={2} bg="$color4" />}
+              {index < activities.length - 1 && <View flex={1} width={2} bg="color4" />}
             </YStack>
-            <YStack flex={1} gap="$2" pb="$5">
-              <XStack justify="space-between" gap="$3" flexWrap="wrap">
+            <YStack flex={1} gap="2" pb="5">
+              <XStack justify="space-between" gap="3" flexWrap="wrap">
                 <Text>
                   <Anchor
                     href={activity.href}
                     target="_blank"
                     fontWeight="700"
-                    color="$color12"
-                    textDecorationLine="none"
-                    hoverStyle={{ color: '$color11', textDecorationLine: 'underline' }}
-                    focusVisibleStyle={{
-                      outlineColor: '$outlineColor',
-                      outlineOffset: 2,
-                      outlineStyle: 'solid',
-                      outlineWidth: 2,
-                    }}
+                    color="color11 hover:color10"
+                    textDecorationLine="none hover:underline"
+                    outlineColor="focus-visible:outline-color"
+                    outlineOffset="focus-visible:2px"
+                    outlineStyle="focus-visible:solid"
+                    outlineWidth="focus-visible:2px"
                   >
                     {activity.person}
                   </Anchor>{' '}
                   {activity.action}
                 </Text>
                 <Text
-                  fontSize="$2"
-                  color="$color9"
+                  fontSize="2"
+                  color="color8"
                   shrink={0}
                   aria-label={activity.timeAgo}
                   render={
@@ -105,14 +103,13 @@ export function TimelineActivity() {
                   {activity.time}
                 </Text>
               </XStack>
-              <XStack gap="$2" items="center" p="$3" rounded="$5" bg="$color2">
-                <Icon size={17} color="$color9" aria-hidden />
+              <XStack gap="2" items="center" p="3" rounded="5" bg="color2">
+                <Icon size={17} color="color8" aria-hidden />
                 <Text
                   flex={1}
-                  color="$color10"
-                  // mono only for machine strings, not prose comments
-                  fontFamily={activity.code ? '$mono' : '$body'}
-                  fontSize="$2"
+                  color="color9"
+                  fontFamily={`${activity.code ? 'mono' : 'body'}`}
+                  fontSize="2"
                 >
                   {activity.detail}
                 </Text>

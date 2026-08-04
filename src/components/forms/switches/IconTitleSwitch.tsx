@@ -11,35 +11,36 @@ export function IconTitleSwitch() {
   return (
     <XStack
       maxW="100%"
-      borderColor="$borderColor"
+      borderColor="border-color"
       borderWidth={1}
-      px="$4"
-      py="$3"
-      $group-window-sm={{ mt: '$6', mx: '$5' }}
-      rounded="$3"
+      px="4"
+      py="3"
+      mt="@sm/window:6"
+      mx="@sm/window:5"
+      rounded="3"
       width={400}
       height="auto"
       items="center"
-      gap="$2.5"
-      theme="surface1"
-      bg="$background"
+      gap="2-5"
+      bg="background"
+      theme="level2"
     >
-      <Baby size="$2" color="$color11" />
+      <Baby size="2" color="color10" />
       <View flexDirection="column">
-        <Label size="$1.5" htmlFor={uniqueId + 'switch'}>
+        <Label size="6" htmlFor={uniqueId + 'switch'}>
           Title here
         </Label>
-        <Text theme="alt1">Your description here</Text>
+        <Text theme="level2">Your description here</Text>
       </View>
       <Switch
         id={uniqueId + 'switch'}
         checked={checked}
         onCheckedChange={setChecked}
         marginLeft="auto"
-        size="$2"
-        backgroundColor={checked ? '$color10' : '$color5'}
+        backgroundColor={`${checked ? 'color9' : 'color5'}`}
+        size="2"
       >
-        <Switch.Thumb borderColor="$borderColor" transition="200ms" bg="$color1" />
+        <Switch.Thumb borderColor="border-color" transition="200ms" bg="color1" />
       </Switch>
     </XStack>
   )

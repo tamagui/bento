@@ -44,19 +44,19 @@ export function Banner({
       width="100%"
       maxW={820}
       self="center"
-      gap="$3"
+      gap="3"
       items="center"
-      p="$3.5"
-      rounded="$6"
+      p="4"
+      rounded="6"
       borderWidth={1}
-      borderColor="$color7"
-      bg="$color3"
+      borderColor="color6"
+      bg="color3"
       flexWrap="wrap"
     >
-      <View self="flex-start" pt="$1">
-        <Icon size={20} color="$color10" aria-hidden />
+      <View self="flex-start" pt="1">
+        <Icon size={20} color="color9" aria-hidden />
       </View>
-      <Paragraph flex={1} minW={220} color="$color11">
+      <Paragraph flex={1} minW={220} color="color10">
         {children}
       </Paragraph>
       {!!action &&
@@ -64,27 +64,24 @@ export function Banner({
           <Anchor
             href={action.href}
             target="_blank"
-            color="$color11"
+            color="color10 hover:color11"
             fontWeight="600"
-            fontSize="$3"
-            px="$2"
-            py="$2"
+            fontSize="3"
+            px="2"
+            py="2"
             textDecorationLine="underline"
-            hoverStyle={{ color: '$color12' }}
-            focusVisibleStyle={{
-              outlineColor: '$outlineColor',
-              outlineOffset: 2,
-              outlineStyle: 'solid',
-              outlineWidth: 2,
-            }}
+            outlineColor="focus-visible:outline-color"
+            outlineOffset="focus-visible:2px"
+            outlineStyle="focus-visible:solid"
+            outlineWidth="focus-visible:2px"
           >
             {action.label}
           </Anchor>
         ) : (
           <Button
-            size="$3"
-            chromeless
-            color="$color11"
+            size="3"
+            variant="quiet"
+            color="color10"
             hitSlop={isWeb ? undefined : 8}
             onPress={action.onPress}
           >
@@ -92,9 +89,9 @@ export function Banner({
           </Button>
         ))}
       <Button
-        size="$3"
+        size="3"
         circular
-        chromeless
+        variant="quiet"
         icon={X}
         hitSlop={isWeb ? undefined : 8}
         aria-label={`Dismiss ${label}`}

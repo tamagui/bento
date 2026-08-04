@@ -38,7 +38,7 @@ const App = () => {
         }}
       />
 
-      <YStack fullscreen width="100%" items="center" bg="$background">
+      <YStack position="absolute" inset={0} width="100%" items="center" bg="background">
         <YStack
           {...(centered && {
             items: 'center',

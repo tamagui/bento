@@ -8,9 +8,14 @@ const items = [
     name: 'Contour desk lamp',
     detail: 'Graphite · 1',
     priceCents: 12800,
-    color: '$blue5',
+    color: 'blue-300',
   },
-  { name: 'Wool desk mat', detail: 'Stone · 1', priceCents: 4600, color: '$orange5' },
+  {
+    name: 'Wool desk mat',
+    detail: 'Stone · 1',
+    priceCents: 4600,
+    color: 'orange-300',
+  },
 ] as const
 
 // promo codes are validated against a known table with real effects;
@@ -54,37 +59,37 @@ export function CheckoutSummary() {
       width="100%"
       maxW={560}
       self="center"
-      gap="$5"
-      p="$5"
-      rounded="$8"
+      gap="5"
+      p="5"
+      rounded="8"
       borderWidth={1}
-      borderColor="$borderColor"
-      bg="$background"
+      borderColor="border-color"
+      bg="background"
     >
       <XStack justify="space-between" items="center">
-        <Text fontSize="$7" fontWeight="900" letterSpacing={0}>
+        <Text fontSize="7" fontWeight="900" letterSpacing={0}>
           Order summary
         </Text>
-        <Package size={22} color="$color9" aria-hidden />
+        <Package size={22} color="color8" aria-hidden />
       </XStack>
-      <YStack gap="$4">
+      <YStack gap="4">
         {items.map((item) => (
-          <XStack key={item.name} items="center" gap="$3">
+          <XStack key={item.name} items="center" gap="3">
             <View
               width={64}
               height={64}
-              rounded="$5"
+              rounded="5"
               bg={item.color}
               items="center"
               justify="center"
             >
-              <Package size={24} color="$color11" aria-hidden />
+              <Package size={24} color="color10" aria-hidden />
             </View>
-            <YStack flex={1} gap="$1">
+            <YStack flex={1} gap="1">
               <Text fontWeight="700" letterSpacing={0}>
                 {item.name}
               </Text>
-              <Text fontSize="$2" color="$color9">
+              <Text fontSize="2" color="color8">
                 {item.detail}
               </Text>
             </YStack>
@@ -93,11 +98,11 @@ export function CheckoutSummary() {
         ))}
       </YStack>
       <Separator />
-      <YStack gap="$2">
+      <YStack gap="2">
         <Text fontWeight="700" letterSpacing={0}>
           Promo code
         </Text>
-        <XStack gap="$2">
+        <XStack gap="2">
           <Input
             flex={1}
             value={code}
@@ -116,45 +121,45 @@ export function CheckoutSummary() {
           </Button>
         </XStack>
         {applied ? (
-          <Text fontSize="$2" color="$green10" aria-live="polite">
+          <Text fontSize="2" color="green-600" aria-live="polite">
             {applied} applied · {promoCodes[applied].percentOff}% off ({money(discount)})
           </Text>
         ) : null}
         {promoError ? (
-          <Text id="promo-error" fontSize="$2" color="$red10" aria-live="polite">
+          <Text id="promo-error" fontSize="2" color="red-600" aria-live="polite">
             {promoError}
           </Text>
         ) : null}
       </YStack>
       <Separator />
-      <YStack gap="$3">
+      <YStack gap="3">
         <XStack justify="space-between">
-          <Text color="$color9">Subtotal</Text>
+          <Text color="color8">Subtotal</Text>
           <Text>{money(subtotal)}</Text>
         </XStack>
         {applied ? (
           <XStack justify="space-between">
-            <Text color="$green10">Discount ({promoCodes[applied].percentOff}%)</Text>
-            <Text color="$green10">−{money(discount)}</Text>
+            <Text color="green-600">Discount ({promoCodes[applied].percentOff}%)</Text>
+            <Text color="green-600">−{money(discount)}</Text>
           </XStack>
         ) : null}
         <XStack justify="space-between">
-          <Text color="$color9">Shipping</Text>
-          <XStack items="center" gap="$1">
-            <Truck size={14} color="$green10" aria-hidden />
-            <Text color="$green10">Free</Text>
+          <Text color="color8">Shipping</Text>
+          <XStack items="center" gap="1">
+            <Truck size={14} color="green-600" aria-hidden />
+            <Text color="green-600">Free</Text>
           </XStack>
         </XStack>
         <XStack justify="space-between">
-          <Text color="$color9">Estimated tax (8%)</Text>
+          <Text color="color8">Estimated tax (8%)</Text>
           <Text>{money(tax)}</Text>
         </XStack>
         <Separator />
         <XStack justify="space-between" items="center">
-          <Text fontSize="$6" fontWeight="800">
+          <Text fontSize="6" fontWeight="800">
             Total
           </Text>
-          <Text fontSize="$7" fontWeight="900">
+          <Text fontSize="7" fontWeight="900">
             {money(total)}
           </Text>
         </XStack>

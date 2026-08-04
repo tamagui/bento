@@ -9,14 +9,14 @@ export function RatingWithCount() {
       self="center"
       items="center"
       justify="center"
-      gap="$3"
-      p="$4"
-      rounded="$6"
+      gap="3"
+      p="4"
+      rounded="6"
       borderWidth={1}
-      borderColor="$borderColor"
+      borderColor="border-color"
     >
       <StarMeter rating={4.6} />
-      <Paragraph color="$color10">4.6 · 1,284 reviews</Paragraph>
+      <Paragraph color="color9">4.6 · 1,284 reviews</Paragraph>
     </XStack>
   )
 }

@@ -13,10 +13,14 @@ function CalendarHeader() {
   return <YearRangeSlider />
 }
 
-function DatePickerBody({ config }: { config: DatePickerProviderProps['config'] }) {
+function DatePickerBody({
+  config,
+}: {
+  config: DatePickerProviderProps['config']
+}) {
   return (
     <DatePickerProvider config={config}>
-      <View flexDirection="column" items="center" gap="$4" p="$4" $gtMd={{ p: '$0' }}>
+      <View flexDirection="column" items="center" gap="4" p="4 gtMd:0">
         <CalendarHeader />
         <YearPicker />
       </View>
@@ -70,7 +74,7 @@ export function YearPickerInput() {
       </DatePicker.Trigger>
 
       <DatePicker.Content>
-        <DatePicker.Content.Arrow borderWidth={1} borderColor="$borderColor" />
+        <DatePicker.Content.Arrow borderWidth={1} borderColor="border-color" />
         <DatePickerBody config={config} />
       </DatePicker.Content>
     </DatePicker>

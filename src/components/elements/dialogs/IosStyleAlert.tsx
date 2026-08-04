@@ -69,35 +69,27 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             onPress={closeDialog}
             key="overlay"
             transition="quick"
-            enterStyle={{ opacity: 0 }}
-            exitStyle={{ opacity: 0 }}
+            opacity="enter:0 exit:0"
             background="rgba(0,0,0,0.5)"
           />
           <AlertDialog.Content
-            px="$4"
-            pt="$3"
+            px="4"
+            pt="3"
             pb={0}
-            rounded="$6"
-            bg="$color1"
+            rounded="6"
+            bg="color1"
             overflow="hidden"
-            gap="$3"
+            gap="3"
+            transition={['quick', { opacity: { overshootClamping: true } }]}
+            x="enter:0 exit:0"
+            y="enter:-10px exit:10px"
+            opacity="enter:0 exit:0"
+            scale="enter:0.95 exit:0.95"
+            borderColor="dark:color6"
+            borderWidth="dark:1px"
+            {...rest}
             key="content"
             style={{ left: 0, right: 0, marginHorizontal: 'auto' }}
-            transition={[
-              'quick',
-              {
-                opacity: {
-                  overshootClamping: true,
-                },
-              },
-            ]}
-            enterStyle={{ x: 0, y: -10, opacity: 0, scale: 0.95 }}
-            exitStyle={{ x: 0, y: 10, opacity: 0, scale: 0.95 }}
-            $theme-dark={{
-              borderColor: '$color6',
-              borderWidth: 1,
-            }}
-            {...rest}
           >
             <View>
               <AlertDialog.Title
@@ -113,40 +105,33 @@ const Alert = ({ children, ...rest }: AlertProps) => {
             {content}
             <View
               borderTopWidth={1}
-              borderTopColor="$borderColor"
+              borderTopColor="border-color"
               flexDirection={buttons.length === 2 ? 'row' : 'column'}
-              mx="$-6"
+              mx="-6"
               justify="flex-start"
             >
               {buttons.map((button, index) => {
                 const makeItVertical = buttons.length > 2
                 const Base =
                   button.style === 'cancel' ? AlertDialog.Cancel : AlertDialog.Action
-                const color = button.style === 'destructive' ? '$red10' : '$green10'
+                const color = button.style === 'destructive' ? 'red-600' : 'green-600'
                 return (
                   <View
                     flex={1}
                     flexBasis="auto"
                     borderRightWidth={index === 0 && !makeItVertical ? 1 : 0}
                     borderBottomWidth={makeItVertical && index < buttons.length ? 1 : 0}
-                    borderColor="$borderColor"
+                    borderColor="border-color"
                     key={index}
                   >
                     <Base asChild>
                       <Button
-                        unstyled
+                        variant="quiet"
                         justify="center"
                         items="center"
-                        p="$3"
-                        opacity={0.9}
-                        focusStyle={{
-                          opacity: 1,
-                          bg: '$color4',
-                        }}
-                        hoverStyle={{
-                          opacity: 1,
-                          bg: '$color3',
-                        }}
+                        p="3"
+                        opacity="0.9 hover:1 focus:1"
+                        bg="hover:color3 focus:color4"
                         onPress={button.action}
                       >
                         <Button.Text
@@ -214,7 +199,7 @@ const AlertDialogTest = () => {
   ]
 
   return (
-    <View flexDirection="row" gap="$5">
+    <View flexDirection="row" gap="5">
       <Button
         onPress={() => {
           alert({
@@ -223,7 +208,7 @@ const AlertDialogTest = () => {
             buttons,
             content: (
               <Input
-                height="$3"
+                height="3"
                 placeholder="Your message here"
                 ref={(input) => {
                   if (input instanceof HTMLElement) {
@@ -248,7 +233,7 @@ const AlertDialogTest = () => {
             buttons: buttons2,
             content: (
               <Input
-                height="$3"
+                height="3"
                 placeholder="Your message here"
                 ref={(input) => {
                   if (input instanceof HTMLElement) {

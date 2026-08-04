@@ -12,7 +12,7 @@ import {
 } from 'tamagui'
 
 const ChipContext = createStyledContext({
-  size: '$true' as SizeTokens,
+  size: '4' as SizeTokens,
 })
 
 const CHIP_NAME = 'ChipName'
@@ -21,26 +21,19 @@ const ChipImpl = styled(View, {
   name: CHIP_NAME,
   flexDirection: 'row',
   context: ChipContext,
+  borderRadius: 5,
+  paddingHorizontal: '3',
+  backgroundColor: 'color6 hover:color6',
+  justifyContent: 'center',
+  alignItems: 'center',
   variants: {
     circular: {
       true: {
         borderRadius: 1000_000_000,
       },
     },
-    unstyled: {
-      false: {
-        borderRadius: 5,
-        paddingHorizontal: '$3',
-        backgroundColor: '$color6',
-        justifyContent: 'center',
-        alignItems: 'center',
-        hoverStyle: {
-          backgroundColor: '$color7',
-        },
-      },
-    },
     size: {
-      '...size': (val, { tokens }) => {
+      Size: (val, { tokens }) => {
         return {
           paddingHorizontal: tokens.space[val].val,
           paddingVertical: tokens.space[val].val * 0.2,
@@ -49,19 +42,14 @@ const ChipImpl = styled(View, {
     },
     pressable: {
       true: {
-        focusable: true,
+        tabIndex: 0,
         role: 'button',
-        focusVisibleStyle: {
-          outlineColor: '$outlineColor',
-          outlineStyle: 'solid',
-          outlineWidth: 2,
-        },
+        outlineColor: 'focus-visible:outline-color',
+        outlineStyle: 'focus-visible:solid',
+        outlineWidth: 'focus-visible:2px',
       },
     },
   } as const,
-  defaultVariants: {
-    unstyled: process.env.TAMAGUI_HEADLESS === '1' ? true : false,
-  },
 })
 
 const CHIP_TEXT_NAME = 'ChipText'
@@ -69,21 +57,14 @@ const CHIP_TEXT_NAME = 'ChipText'
 const ChipText = styled(Text, {
   name: CHIP_TEXT_NAME,
   context: ChipContext,
+  fontFamily: 'body',
+  color: 'color',
+  size: '4',
   variants: {
-    unstyled: {
-      false: {
-        fontFamily: '$body',
-        size: '$true',
-        color: '$color',
-      },
-    },
     size: {
-      '...fontSize': getFontSized as any, // TODO: revisit after v2 migration
+      FontSize: getFontSized as any,
     },
   } as const,
-  defaultVariants: {
-    unstyled: process.env.TAMAGUI_HEADLESS === '1' ? true : false,
-  },
 })
 
 type ChipIconProps = {
@@ -100,7 +81,7 @@ const ChipIconFrame = styled(View, {
   context: ChipContext,
   variants: {
     size: {
-      '...size': (val, { tokens }) => {
+      Size: (val, { tokens }) => {
         if (typeof val === 'number') {
           return {
             paddingHorizontal: val * 0.25,
@@ -116,7 +97,7 @@ const ChipIconFrame = styled(View, {
   },
 })
 
-const ChipIcon = createStyledHOC(ChipIconFrame)<ChipIconProps>((props, ref) => {
+const ChipIcon = createStyledHOC(ChipIconFrame, (props: ChipIconProps, ref) => {
   const { children, scaleIcon = 0.7, size, color, ...rest } = props
   const chipContext = ChipContext.useStyledContext()
   const finalSize = size || chipContext.size
@@ -126,7 +107,10 @@ const ChipIcon = createStyledHOC(ChipIconFrame)<ChipIconProps>((props, ref) => {
       ? finalSize * 0.5
       : getFontSize(finalSize as FontSizeTokens)) * scaleIcon
 
-  const getThemedIcon = useGetThemedIcon({ size: iconSize, color: color as any })
+  const getThemedIcon = useGetThemedIcon({
+    size: iconSize,
+    color: color as any,
+  })
   return (
     <ChipIconFrame ref={ref} {...rest}>
       {getThemedIcon(children)}
@@ -139,31 +123,21 @@ const CHIP_BUTTON = 'Button'
 const ButtonComp = styled(View, {
   name: CHIP_BUTTON,
   context: ChipContext,
-  focusable: true,
+  tabIndex: 0,
   role: 'button',
+  borderRadius: 1000_000_000,
+  backgroundColor:
+    'background hover:background-hover press:background-press focus:background-focus',
+  justifyContent: 'center',
+  alignItems: 'center',
   variants: {
     size: {} as any,
-    unstyled: {
-      false: {
-        borderRadius: 1000_000_000,
-        backgroundColor: '$background',
-        justifyContent: 'center',
-        alignItems: 'center',
-        hoverStyle: {
-          backgroundColor: '$backgroundHover',
-        },
-        pressStyle: {
-          backgroundColor: '$backgroundPress',
-        },
-        focusStyle: {
-          backgroundColor: '$backgroundFocus',
-        },
-      },
-    },
     alignRight: {
-      ':boolean': (val, { props, tokens }) => {
+      boolean: (val, { props, tokens }) => {
         if (val) {
-          const size = (props as any).size as SizeTokens
+          const size = (
+            (props as any).size === true ? '4' : (props as any).size
+          ) as Exclude<SizeTokens, true>
           if (typeof size === 'number') {
             return {
               x: size * 0.55,
@@ -176,9 +150,11 @@ const ButtonComp = styled(View, {
       },
     },
     alignLeft: {
-      ':boolean': (val, { props, tokens }) => {
+      boolean: (val, { props, tokens }) => {
         if (val) {
-          const size = (props as any).size as SizeTokens
+          const size = (
+            (props as any).size === true ? '4' : (props as any).size
+          ) as Exclude<SizeTokens, true>
           if (typeof size === 'number') {
             return {
               x: size * -0.55,
@@ -191,9 +167,6 @@ const ButtonComp = styled(View, {
       },
     },
   } as const,
-  defaultVariants: {
-    unstyled: process.env.TAMAGUI_HEADLESS === '1' ? true : false,
-  },
 })
 
 export const Chip = withStaticProperties(ChipImpl, {

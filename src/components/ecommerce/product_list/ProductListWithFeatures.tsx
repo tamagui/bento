@@ -7,41 +7,35 @@ const Link = Anchor
 type Product = ReturnType<typeof getProducts>[0]
 
 const StyledText = styled(Text, {
-  color: '$color',
-  fontSize: '$4',
-  lineHeight: '$4',
+  color: 'color',
+  fontSize: '4',
+  lineHeight: '4',
 })
 
 function Item({ item }: { item: Product }) {
   return (
     <Link grow={1} shrink={1} flexBasis={300} href="#" textDecorationColor="transparent">
-      <YStack
-        pb="$4"
-        borderBottomWidth={1}
-        borderColor="$color5"
-        gap="$2"
-        render="article"
-      >
+      <YStack pb="4" borderBottomWidth={1} borderColor="color5" gap="2" render="article">
         <View overflow="hidden" width="100%" height={300}>
           <Image src={item.image} height="100%" width="100%" objectFit="cover" />
         </View>
         <YStack>
-          <H2 size="$4">{item.name}</H2>
-          <XStack gap="$3">
+          <H2 size="4">{item.name}</H2>
+          <XStack gap="3">
             <StyledText fontWeight="bold">${item.price}</StyledText>
-            <StyledText color="#fff" theme="red" bg="$color9" px="$2" py="$1" ml="auto">
+            <StyledText color="#fff" bg="color8" px="2" py="1" ml="auto" theme="red">
               {item.discount}%
             </StyledText>
           </XStack>
         </YStack>
-        <YStack self="flex-start" theme="alt1" gap="$2">
+        <YStack self="flex-start" gap="2" theme="level2">
           <StyledText>XS | L | XL</StyledText>
-          <XStack gap="$1">
-            <Circle bg="$green9" size={20} />
-            <Circle bg="$red9" size={20} />
-            <Circle bg="$yellow9" size={20} />
+          <XStack gap="1">
+            <Circle bg="green-500" size={20} />
+            <Circle bg="red-500" size={20} />
+            <Circle bg="yellow-500" size={20} />
             <Circle bg="violet" size={20} />
-            <View rounded={1000_000_000} bg="$yellow9" width={20} height={20} />
+            <View rounded={1000_000_000} bg="yellow-500" width={20} height={20} />
           </XStack>
         </YStack>
       </YStack>
@@ -64,14 +58,12 @@ export function ProductListWithFeatures() {
     <XStack
       maxW="100%"
       flexWrap="wrap"
-      rowGap="$8"
-      columnGap="$5"
-      p="$3"
-      px="$6"
+      rowGap="8"
+      columnGap="5"
+      paddingTop="3"
+      paddingBottom="3"
+      px="6 @xs/window:3"
       maxH={700}
-      $group-window-xs={{
-        px: '$3',
-      }}
     >
       {products.map((item) => (
         <Item key={item.id} item={item} />

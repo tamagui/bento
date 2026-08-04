@@ -36,16 +36,16 @@ export function TrendChip({ metric }: { metric: StatMetric }) {
       aria-label={`${up ? 'Up' : 'Down'} ${Math.abs(metric.deltaPct)}% ${metric.period}, ${
         metric.sentiment === 'positive' ? 'improving' : 'worsening'
       }`}
-      bg="$color3"
+      bg="color3"
       rounded={1000}
-      px="$2.5"
-      py="$1"
-      gap="$1"
+      px="2-5"
+      py="1"
+      gap="1"
       items="center"
       self="center"
     >
-      <TrendIcon size={14} color="$color10" aria-hidden />
-      <Text fontSize="$2" color="$color11" fontWeight="600">
+      <TrendIcon size={14} color="color9" aria-hidden />
+      <Text fontSize="2" color="color10" fontWeight="600">
         {up ? '+' : '−'}
         {Math.abs(metric.deltaPct)}%
       </Text>

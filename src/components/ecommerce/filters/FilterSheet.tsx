@@ -30,7 +30,7 @@ export function FilterSheet() {
   }
 
   return (
-    <YStack width="100%" maxW={480} self="center" gap="$3">
+    <YStack width="100%" maxW={480} self="center" gap="3">
       <Button
         icon={SlidersHorizontal}
         onPress={openSheet}
@@ -39,8 +39,8 @@ export function FilterSheet() {
         Filters · {activeFilterCount(applied)}
       </Button>
 
-      <YStack gap="$1.5" aria-live="polite">
-        <Text color="$color9" fontSize="$2">
+      <YStack gap="1" aria-live="polite">
+        <Text color="color8" fontSize="2">
           {results.length} result{results.length === 1 ? '' : 's'}
         </Text>
         {results.slice(0, 3).map((product) => (
@@ -48,15 +48,15 @@ export function FilterSheet() {
             key={product.name}
             justify="space-between"
             items="center"
-            px="$3"
-            py="$2"
-            rounded="$4"
-            bg="$color2"
+            px="3"
+            py="2"
+            rounded="4"
+            bg="color2"
           >
-            <Text color="$color11" fontSize="$3">
+            <Text color="color10" fontSize="3">
               {product.name}
             </Text>
-            <Text color="$color9" fontSize="$2">
+            <Text color="color8" fontSize="2">
               ${product.price}
             </Text>
           </XStack>
@@ -70,41 +70,38 @@ export function FilterSheet() {
         dismissOnSnapToBottom
         snapPointsMode="fit"
       >
-        <Sheet.Overlay
-          bg="$shadow6"
-          enterStyle={{ opacity: 0 }}
-          exitStyle={{ opacity: 0 }}
-          transition="100ms"
-        />
+        <Sheet.Overlay bg="shadow-6" opacity="enter:0 exit:0" transition="100ms" />
         <Sheet.Handle />
-        <Sheet.Frame p={0} rounded="$9">
-          <XStack px="$5" py="$4" justify="space-between" items="center">
-            <Text fontSize="$7" fontWeight="900" letterSpacing={0}>
+        <Sheet.Container p={0}>
+          <Sheet.Background rounded="9" />
+          <XStack px="5" py="4" justify="space-between" items="center">
+            <Text fontSize="7" fontWeight="900" letterSpacing={0}>
               Filters
             </Text>
             <Button
               circular
-              chromeless
-              size="$3"
+              variant="quiet"
+              size="3"
               icon={X}
               aria-label="Close filters without applying"
               onPress={() => setOpen(false)}
             />
           </XStack>
           <Separator />
-          <Sheet.ScrollView p="$5" maxH={480}>
+          <Sheet.ScrollView p="5" maxH={480}>
             <FacetControls value={draft} onChange={setDraft} />
           </Sheet.ScrollView>
           <Separator />
-          <XStack p="$4" gap="$3">
+          <XStack p="4" gap="3">
             <Button flex={1} onPress={() => setDraft(emptyFilters)}>
               Clear all
             </Button>
-            <Button flex={2} bg="$color12" color="$color1" onPress={apply}>
-              Apply · {draftResults.length} result{draftResults.length === 1 ? '' : 's'}
+            <Button flex={2} bg="color11" color="color1" onPress={apply}>
+              Apply · {draftResults.length} result
+              {draftResults.length === 1 ? '' : 's'}
             </Button>
           </XStack>
-        </Sheet.Frame>
+        </Sheet.Container>
       </Sheet>
     </YStack>
   )

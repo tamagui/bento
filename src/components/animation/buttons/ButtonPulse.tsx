@@ -43,12 +43,12 @@ export function ButtonPulse() {
   return (
     <View
       flexDirection="row"
-      gap="$4"
+      gap="4"
       flexWrap="wrap"
       items="center"
       justify="center"
       maxW={850}
-      $group-window-sm={{ p: '$6' }}
+      p="@sm/window:6"
     >
       {variants.map((v) => (
         <React.Fragment key={v.variant}>
@@ -73,41 +73,26 @@ const CustomButton = styled(Button, {
   variants: {
     animVariant: {
       pulse: {
-        elevation: 15,
-        pressStyle: {
-          elevation: 2,
-          scale: 0.95,
-        },
+        boxShadow: '(0 12px 28px shadow-color) press:(0 2px 4px shadow-color)',
+        scale: '1 press:0.95',
       },
       accent: {
-        elevation: 15,
-        pressStyle: {
-          elevation: 2,
-          scale: 0.95,
-        },
+        boxShadow: '(0 12px 28px shadow-color) press:(0 2px 4px shadow-color)',
+        scale: '1 press:0.95',
       },
       bouncy: {
-        theme: 'alt1',
-        elevation: 15,
-        pressStyle: {
-          elevation: 7,
-          scale: 0.9,
-        },
+        theme: 'level2',
+        boxShadow: '(0 12px 28px shadow-color) press:(0 6px 14px shadow-color)',
+        scale: '1 press:0.9',
       },
       lazy: {
-        elevation: 15,
-        pressStyle: {
-          elevation: 7,
-          scale: 0.9,
-        },
+        boxShadow: '(0 12px 28px shadow-color) press:(0 6px 14px shadow-color)',
+        scale: '1 press:0.9',
       },
       bump: {
-        theme: 'surface1',
-        elevation: 15,
-        pressStyle: {
-          elevation: 7,
-          scale: 1.2,
-        },
+        theme: 'level2',
+        boxShadow: '(0 12px 28px shadow-color) press:(0 6px 14px shadow-color)',
+        scale: '1 press:1.2',
       },
     },
   } as const,

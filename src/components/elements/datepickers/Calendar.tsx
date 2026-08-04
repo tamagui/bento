@@ -1,3 +1,4 @@
+import { Tabs } from '../../BentoSkins'
 import type { DPDatesMode, DPDay, DatePickerProviderProps } from '@rehookify/datepicker'
 import { useDatePickerContext } from '@rehookify/datepicker'
 import { ChevronLeft, ChevronRight } from '@tamagui/lucide-icons-2'
@@ -9,7 +10,6 @@ import {
   H3,
   Separator,
   SizableText,
-  Tabs,
   View,
   YStack,
   isWeb,
@@ -61,7 +61,7 @@ function CalendarView({
   })
 
   return (
-    <View flexDirection="column" gap="$4">
+    <View flexDirection="column" gap="4">
       <View
         flexDirection="row"
         minW="100%"
@@ -70,7 +70,7 @@ function CalendarView({
         justify="space-between"
       >
         {order === 'first' || order === 'either' ? (
-          <Button circular size="$4" {...swapOnClick(subtractOffset({ months: 1 }))}>
+          <Button circular size="4" {...swapOnClick(subtractOffset({ months: 1 }))}>
             <Button.Icon scaleIcon={1.5}>
               <ChevronLeft />
             </Button.Icon>
@@ -83,7 +83,7 @@ function CalendarView({
 
         {isWeb &&
           (order === 'last' || order === 'either' ? (
-            <Button circular size="$4" {...swapOnClick(subtractOffset({ months: -1 }))}>
+            <Button circular size="4" {...swapOnClick(subtractOffset({ months: -1 }))}>
               <Button.Icon scaleIcon={1.5}>
                 <ChevronRight />
               </Button.Icon>
@@ -93,7 +93,7 @@ function CalendarView({
           ))}
 
         {!isWeb && (
-          <Button circular size="$4" {...swapOnClick(subtractOffset({ months: -1 }))}>
+          <Button circular size="4" {...swapOnClick(subtractOffset({ months: -1 }))}>
             <Button.Icon scaleIcon={1.5}>
               <ChevronRight />
             </Button.Icon>
@@ -105,14 +105,14 @@ function CalendarView({
           width="100%"
           justify="center"
           items="center"
-          style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
-          gap="$4"
+          gap="4"
           {...prevNextAnimation()}
+          style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
         >
           <WeekView weekDays={weekDays} />
           <View
             flexDirection="column"
-            gap="$2"
+            gap="2"
             items="center"
             justify="center"
             width="100%"
@@ -152,26 +152,26 @@ function CalendarView({
                       [key: string]: GetProps<typeof View>
                     } = {
                       'in-range': {
-                        background: dayIsFirstOrLastOfMonth ? 'transprent' : '$color5',
+                        background: dayIsFirstOrLastOfMonth ? 'transprent' : 'color5',
                       },
                       'range-start': {
-                        bg: '$color5',
+                        bg: 'color5',
                         width: '50%',
                         r: 0,
                       },
                       'range-end': {
-                        bg: '$color5',
+                        bg: 'color5',
                         width: '50%',
                         l: 0,
                       },
                       'will-be-in-range': {
-                        bg: '$color2',
+                        bg: 'color2',
                       },
                       'will-be-range-start': {
-                        bg: '$color1',
+                        bg: 'color1',
                       },
                       'will-be-range-end': {
-                        bg: '$color1',
+                        bg: 'color1',
                       },
                       '': {},
                     }
@@ -180,17 +180,17 @@ function CalendarView({
                       <Button
                         key={day.$date.toString()}
                         theme={day.selected ? 'accent' : undefined}
-                        chromeless
+                        variant="quiet"
                         circular
                         {...swapOnClick(dayButton(day))}
                         borderWidth={1}
-                        borderColor={day.selected ? '$color1' : 'transparent'}
-                        data-range={day.range}
+                        borderColor={`${day.selected ? 'color1' : 'transparent'}`}
                         {...(day.selected
                           ? {
-                              bg: '$color5',
+                              bg: 'color5',
                             }
                           : {})}
+                        data-range={day.range}
                         disabled={!day.inCurrentMonth}
                       >
                         {day.selected ? (
@@ -199,15 +199,8 @@ function CalendarView({
                             style={{
                               transition: 'transform 100ms ease, opacity 100ms ease',
                             }}
-                            enterStyle={{
-                              opacity: 0,
-                              y: 20,
-                            }}
-                            exitStyle={{
-                              opacity: 0,
-                              y: 20,
-                            }}
-                            opacity={1}
+                            y="enter:20px exit:20px"
+                            opacity="1 enter:0 exit:0"
                             fontWeight="bold"
                           >
                             {day.day}
@@ -225,7 +218,7 @@ function CalendarView({
                       return (
                         <RangeGradient
                           key={day.$date.toString()}
-                          color="$color5"
+                          color="color5"
                           direction={direction}
                         >
                           {buttonElement}
@@ -252,13 +245,7 @@ function CalendarView({
                             height="100%"
                             z={-1}
                             {...BG_RANGE_STYLE[day.range]}
-                            enterStyle={{
-                              opacity: 0,
-                            }}
-                            exitStyle={{
-                              opacity: 0,
-                            }}
-                            opacity={1}
+                            opacity="1 enter:0 exit:0"
                             y={0}
                           />
                         )}
@@ -300,22 +287,20 @@ export function Calendar({ showTabs = true }: { showTabs?: boolean }) {
   const { gtSm: fullWidthMode } = useMedia()
 
   return (
-    <YStack gap="$4">
+    <YStack gap="4">
       {showTabs && (
         <Tabs
           defaultValue="range"
           flexDirection="row"
-          orientation="horizontal"
-          rounded="$4"
-          borderWidth="$0.25"
+          rounded="4"
+          borderWidth="px"
           overflow="hidden"
           self="center"
-          $gtMd={{
-            items: 'center',
-            justify: 'center',
-          }}
-          bg="$color1"
-          borderColor="$borderColor"
+          items="gtMd:center"
+          justify="gtMd:center"
+          bg="color1"
+          borderColor="border-color"
+          orientation="horizontal"
           onValueChange={(value) => {
             setMode(value as DPDatesMode)
             onDatesChange([])
@@ -323,31 +308,13 @@ export function Calendar({ showTabs = true }: { showTabs?: boolean }) {
         >
           <AnimatePresence>
             <Tabs.List aria-label="Calendar Mode">
-              <Tabs.Tab
-                key="range"
-                focusStyle={{
-                  backgroundColor: '$color3',
-                }}
-                value="range"
-              >
+              <Tabs.Tab key="range" backgroundColor="focus:color3" value="range">
                 <SizableText>Range</SizableText>
               </Tabs.Tab>
-              <Tabs.Tab
-                key="single"
-                focusStyle={{
-                  backgroundColor: '$color3',
-                }}
-                value="single"
-              >
+              <Tabs.Tab key="single" backgroundColor="focus:color3" value="single">
                 <SizableText>Single</SizableText>
               </Tabs.Tab>
-              <Tabs.Tab
-                key="multiple"
-                focusStyle={{
-                  backgroundColor: '$color3',
-                }}
-                value="multiple"
-              >
+              <Tabs.Tab key="multiple" backgroundColor="focus:color3" value="multiple">
                 <SizableText>Multiple</SizableText>
               </Tabs.Tab>
             </Tabs.List>
@@ -358,17 +325,14 @@ export function Calendar({ showTabs = true }: { showTabs?: boolean }) {
 
       <HeaderTypeProvider config={config} type={header} setHeader={setHeader}>
         <View
-          bg="$background"
+          bg="background"
           flexDirection="row"
-          gap="$4"
-          p="$4"
+          gap="4"
+          p="4"
           borderWidth={1}
-          borderColor="$borderColor"
-          rounded="$8"
-          shadowColor="$color10"
-          shadowOffset={{ width: 0, height: '$6' }}
-          shadowOpacity={0.2}
-          shadowRadius="$6"
+          borderColor="border-color"
+          rounded="8"
+          boxShadow="0 32px 32px color9"
         >
           {header === 'day' && !fullWidthMode && (
             <CalendarView order="either" calendarIndex={0} />
@@ -381,14 +345,14 @@ export function Calendar({ showTabs = true }: { showTabs?: boolean }) {
             </Fragment>
           )}
           {header === 'year' && (
-            <View items="center" gap="$2">
+            <View items="center" gap="2">
               <YearRangeSlider />
               <YearPicker onChange={() => setHeader('day')} />
             </View>
           )}
           {header === 'month' && (
-            <View gap="$4">
-              <H3 size="$7" self="center">
+            <View gap="4">
+              <H3 size="7" self="center">
                 Select a month
               </H3>
               <MonthPicker

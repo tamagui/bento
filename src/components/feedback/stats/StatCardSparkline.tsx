@@ -4,38 +4,38 @@ import { Paragraph, Text, XStack, YStack, useTheme } from 'tamagui'
 
 export function StatCardSparkline() {
   const theme = useTheme()
-  const stroke = theme.green10?.val || theme.color10?.val
+  const stroke = theme['green-600']?.val || theme.color9?.val
 
   return (
     <YStack
       width="100%"
       maxW={460}
-      gap="$4"
-      p="$5"
-      rounded="$8"
+      gap="4"
+      p="5"
+      rounded="8"
       borderWidth={1}
-      borderColor="$borderColor"
-      bg="$background"
+      borderColor="border-color"
+      bg="background"
     >
-      <XStack justify="space-between" items="flex-start" gap="$4">
-        <YStack gap="$1">
-          <Paragraph color="$color10">Active users</Paragraph>
-          <Text fontSize="$9" lineHeight="$9" fontWeight="700">
+      <XStack justify="space-between" items="flex-start" gap="4">
+        <YStack gap="1">
+          <Paragraph color="color9">Active users</Paragraph>
+          <Text fontSize="9" lineHeight="9" fontWeight="700">
             24,892
           </Text>
         </YStack>
         <XStack
           theme="green"
           aria-label="Up 8.7% vs last month, improving"
-          bg="$color3"
+          bg="color3"
           rounded={1000}
-          px="$2.5"
-          py="$1"
-          gap="$1"
+          px="2-5"
+          py="1"
+          gap="1"
           items="center"
         >
-          <ArrowUpRight size={14} color="$color10" aria-hidden />
-          <Text fontSize="$2" color="$color11" fontWeight="600">
+          <ArrowUpRight size={14} color="color9" aria-hidden />
+          <Text fontSize="2" color="color10" fontWeight="600">
             +8.7%
           </Text>
         </XStack>

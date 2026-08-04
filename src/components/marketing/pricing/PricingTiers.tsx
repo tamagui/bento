@@ -12,15 +12,15 @@ export function PricingTiers() {
   const [billing, setBilling] = useState('annual')
   const [selected, setSelected] = useState<string | null>(null)
   return (
-    <YStack width="100%" maxW={1080} self="center" gap="$6">
-      <YStack self="center" items="center" gap="$3" maxW={520}>
-        <Text text="center" fontSize="$9" fontWeight="900" letterSpacing={-0.8}>
+    <YStack width="100%" maxW={1080} self="center" gap="6">
+      <YStack self="center" items="center" gap="3" maxW={520}>
+        <Text text="center" fontSize="9" fontWeight="900" letterSpacing={-0.8}>
           Plans that grow with you
         </Text>
-        <Text text="center" color="$color10" letterSpacing={0}>
+        <Text text="center" color="color9" letterSpacing={0}>
           Start small, then unlock more collaboration when your team is ready.
         </Text>
-        <YStack width={280} mt="$2">
+        <YStack width={280} mt="2">
           <SegmentedFrame
             label="Billing period"
             options={cadence}
@@ -29,7 +29,7 @@ export function PricingTiers() {
           />
         </YStack>
       </YStack>
-      <XStack flexWrap="wrap" gap="$4" items="stretch">
+      <XStack flexWrap="wrap" gap="4" items="stretch">
         {plans.map((plan, index) => (
           <PricingCard
             key={plan.name}

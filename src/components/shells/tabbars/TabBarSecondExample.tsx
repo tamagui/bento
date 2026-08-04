@@ -22,8 +22,9 @@ type CustomTabBarProps = {
   }
 }
 
-const CustomTabBar = createStyledHOC(View)<CustomTabBarProps>(
-  ({ state, descriptors, navigation, ...rest }, ref) => {
+const CustomTabBar = createStyledHOC(
+  View,
+  ({ state, descriptors, navigation, ...rest }: CustomTabBarProps, ref) => {
     const [tabWidth, setTabWidth] = useState(100)
     const [hoveredIndex, setHoveredIndex] = useState(state.index)
     // Note: you should remove the following line in your code
@@ -90,7 +91,7 @@ const CustomTabBar = createStyledHOC(View)<CustomTabBarProps>(
               })}
             >
               <Button
-                unstyled
+                variant="quiet"
                 height="100%"
                 width="100%"
                 justify="center"
@@ -98,10 +99,7 @@ const CustomTabBar = createStyledHOC(View)<CustomTabBarProps>(
                 onPress={onPress}
               >
                 <Text
-                  color={isFocused ? '$color10' : '$color7'}
-                  $group-item-hover={{
-                    color: isFocused ? '$color10' : '$color7',
-                  }}
+                  color={`${isFocused ? 'color9' : 'color6'} group-hover/item:${isFocused ? 'color9' : 'color6'}`}
                 >
                   {label}
                 </Text>
@@ -114,22 +112,22 @@ const CustomTabBar = createStyledHOC(View)<CustomTabBarProps>(
           height={2}
           borderWidth={1}
           width={tabWidth}
-          borderColor="$color7"
-          style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
+          borderColor="color6"
           x={hoveredIndex * (tabWidth / 2)}
           scaleX={hoveredIndex + 1}
           position="absolute"
+          style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
         />
         <View
           b={0}
           height={2}
           borderWidth={3}
           width={tabWidth}
-          borderColor="$color10"
-          style={{ transition: 'transform 200ms ease' }}
+          borderColor="color9"
           x={state.index * (tabWidth / 2)}
           scaleX={state.index + 1}
           position="absolute"
+          style={{ transition: 'transform 200ms ease' }}
         />
       </View>
     )
@@ -184,7 +182,7 @@ export function TabBarSecondExample() {
         }}
       />
       <View flexDirection="column" width="100%" flex={9} items="center" justify="center">
-        <Text fontSize="$8" fontWeight="$8" lineHeight="$8">
+        <Text fontSize="8" fontWeight="8" lineHeight="8">
           {state.routes[state.index].key}
         </Text>
       </View>

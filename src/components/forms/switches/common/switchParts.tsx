@@ -25,8 +25,6 @@ type ThumbProps = React.ComponentProps<typeof TamaguiSwitch.Thumb>
 // styled context reads that context and re-emits its values as props, which
 // would re-provide the *outer* (empty) SwitchStyledContext over the real one
 // and leave the thumb without `active`/`size`.
-const headless = process.env.TAMAGUI_HEADLESS === '1'
-
 const getSwitchHeight = (val: SizeTokens | number | true) =>
   Math.round(getVariableValue(getSize(val)) * 0.65)
 
@@ -39,19 +37,14 @@ export function SwitchThumb(props: ThumbProps) {
   return (
     <TamaguiSwitch.Thumb
       transition="quick"
-      {...(!headless && {
-        height: thumbSize,
-        width: thumbSize,
-        backgroundColor: '#fff',
-        borderRadius: 1000,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.15,
-        shadowRadius: 2,
-        elevation: 2,
-        justify: 'center',
-        items: 'center',
-      })}
+      height={thumbSize}
+      width={thumbSize}
+      backgroundColor="#fff"
+      borderRadius={1000}
+      boxShadow="0 1px 2px rgba(0, 0, 0, 0.15)"
+      elevationAndroid={2}
+      justify="center"
+      items="center"
       {...props}
     />
   )
@@ -79,7 +72,7 @@ const SwitchIconFrame = styled(View, {
       },
     },
     size: {
-      '...size': {} as any,
+      Size: {} as any,
     },
   } as const,
   defaultVariants: {
@@ -93,53 +86,53 @@ const getIconSize = (size: FontSizeTokens, scale: number) => {
   )
 }
 
-export const SwitchIcon = createStyledHOC(SwitchIconFrame)<{
-  scaleIcon?: number
-  color?: ColorTokens | string
-}>((props, ref) => {
-  const { children, color: colorProp, scaleIcon = 1.2, ...rest } = props
-  const { size } = SwitchStyledContext.useStyledContext()
+export const SwitchIcon = createStyledHOC(
+  SwitchIconFrame,
+  (
+    props: React.PropsWithChildren<{
+      scaleIcon?: number
+      color?: ColorTokens | string
+    }>,
+    ref
+  ) => {
+    const { children, color: colorProp, scaleIcon = 1.2, ...rest } = props
+    const { size } = SwitchStyledContext.useStyledContext()
 
-  const theme = useTheme()
-  const color = getVariable(
-    colorProp || theme[colorProp as any]?.get('web') || theme.color10?.get('web')
-  )
-  const iconSize = getIconSize(size as FontSizeTokens, scaleIcon)
+    const theme = useTheme()
+    const color = getVariable(
+      colorProp || theme[colorProp as any]?.get('web') || theme.color9?.get('web')
+    )
+    const iconSize = getIconSize(size as FontSizeTokens, scaleIcon)
 
-  const getThemedIcon = useGetThemedIcon({
-    size: iconSize,
-    color: color as any,
-  })
-  return (
-    <SwitchIconFrame ref={ref} {...rest}>
-      {getThemedIcon(children)}
-    </SwitchIconFrame>
-  )
-})
+    const getThemedIcon = useGetThemedIcon({
+      size: iconSize,
+      color: color as any,
+    })
+    return (
+      <SwitchIconFrame ref={ref} {...rest}>
+        {getThemedIcon(children)}
+      </SwitchIconFrame>
+    )
+  }
+)
 
 function SwitchFrame(props: FrameProps) {
   const size = props.size ?? true
   const height = getSwitchHeight(size) + 4
   return (
     <TamaguiSwitch
-      {...(!headless && {
-        position: 'relative',
-        borderRadius: 1000,
-        backgroundColor: '$background',
-        borderWidth: 2,
-        borderColor: '$background',
-        height,
-        minHeight: height,
-        width: getSwitchWidth(size) + 4,
-        focusStyle: {
-          outlineColor: '$outlineColor',
-          outlineStyle: 'solid',
-          outlineWidth: 2,
-        },
-        // the checked track color the v2 Switch applied by default, so a switch
-        // that sets no activeStyle of its own still reads as on/off
-        activeStyle: { backgroundColor: '$backgroundActive' },
-      })}
+      position="relative"
+      borderRadius={1000}
+      backgroundColor="background"
+      borderWidth={2}
+      borderColor="background"
+      height={height}
+      minHeight={height}
+      width={getSwitchWidth(size) + 4}
+      outlineColor="focus:outline-color"
+      outlineStyle="focus:solid"
+      outlineWidth="focus:2px"
+      activeStyle={{ backgroundColor: 'background-press' }}
       {...props}
     />
   )

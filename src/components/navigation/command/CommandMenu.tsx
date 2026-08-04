@@ -100,14 +100,12 @@ export function CommandMenu({
     <YStack flex={1} minH={0}>
       <SearchField
         data-command-search
-        focusWithinStyle={{
-          outlineColor: '$color8',
-          outlineOffset: 2,
-          outlineStyle: 'solid',
-          outlineWidth: 2,
-        }}
+        outlineColor="focus-within:color7"
+        outlineOffset="focus-within:2px"
+        outlineStyle="focus-within:solid"
+        outlineWidth="focus-within:2px"
       >
-        <Search size={20} color="$color10" aria-hidden />
+        <Search size={20} color="color9" aria-hidden />
         <Input
           aria-activedescendant={activeItemId}
           aria-autocomplete="list"
@@ -120,32 +118,32 @@ export function CommandMenu({
           bg="transparent"
           borderWidth={0}
           flex={1}
-          fontSize="$5"
+          fontSize="5"
           height={48}
+          outlineWidth={0}
           onChangeText={setQuery}
           onKeyDown={handleKeyDown}
-          outlineWidth={0}
           placeholder={compact ? 'Search…' : 'Search pages and actions…'}
-          placeholderTextColor="$color10"
+          placeholderTextColor="color9"
           role="combobox"
           value={query}
         />
         {!!query && (
           <Button
             aria-label="Clear search"
-            chromeless
+            variant="quiet"
             circular
             icon={X}
             onPress={() => setQuery('')}
-            size="$2.5"
+            size="8"
             hitSlop={isWeb ? undefined : 8}
           />
         )}
         {isWeb ? (
           !compact && <Kbd>ESC</Kbd>
         ) : (
-          <Button aria-label="Close" chromeless onPress={onDismiss} size="$2">
-            <Text color="$color10" fontSize="$3">
+          <Button aria-label="Close" variant="quiet" onPress={onDismiss} size="2">
+            <Text color="color9" fontSize="3">
               Cancel
             </Text>
           </Button>
@@ -159,19 +157,19 @@ export function CommandMenu({
           id={listboxId}
           aria-label="Command results"
           accessibilityRole={isWeb ? undefined : 'menu'}
-          py="$2"
+          py="2"
           render={isWeb ? <div role="listbox" tabIndex={-1} /> : undefined}
         >
           {groups.map((group) => (
             // biome-ignore lint/a11y/useSemanticElements: ARIA listboxes group rich options without a native fieldset.
-            <YStack key={group.id} role="group" aria-label={group.label} px="$2" pb="$2">
+            <YStack key={group.id} role="group" aria-label={group.label} px="2" pb="2">
               <Text
-                color="$color10"
-                fontSize="$1"
+                color="color9"
+                fontSize="1"
                 fontWeight="700"
                 letterSpacing={0.8}
-                px="$2"
-                py="$2"
+                px="2"
+                py="2"
                 textTransform="uppercase"
               >
                 {group.label}
@@ -197,26 +195,22 @@ export function CommandMenu({
                     }
                     onPress={() => selectItem(item)}
                   >
-                    <Icon
-                      size={18}
-                      color={active ? '$color12' : '$color10'}
-                      aria-hidden
-                    />
+                    <Icon size={18} color={active ? 'color11' : 'color9'} aria-hidden />
                     <YStack flex={1} minW={0}>
                       <Text
-                        color="$color12"
-                        fontSize="$4"
+                        color="color11"
+                        fontSize="4"
                         fontWeight="600"
                         numberOfLines={1}
                       >
                         {item.label}
                       </Text>
-                      <Text color="$color11" fontSize="$2" numberOfLines={1}>
+                      <Text color="color10" fontSize="2" numberOfLines={1}>
                         {item.description}
                       </Text>
                     </YStack>
                     {isWeb && !!item.shortcut?.length && (
-                      <XStack gap="$1" aria-hidden>
+                      <XStack gap="1" aria-hidden>
                         {item.shortcut.map((key) => (
                           <Kbd key={key}>{shortcutKey(key)}</Kbd>
                         ))}
@@ -233,18 +227,18 @@ export function CommandMenu({
               render="output"
               aria-label={`No results for ${query}`}
               items="center"
-              gap="$2"
-              px="$5"
-              py="$8"
+              gap="2"
+              px="5"
+              py="8"
             >
-              <SearchX size={32} color="$color9" aria-hidden />
-              <Text color="$color12" fontSize="$5" fontWeight="600" text="center">
+              <SearchX size={32} color="color8" aria-hidden />
+              <Text color="color11" fontSize="5" fontWeight="600" text="center">
                 No results for “{query}”
               </Text>
-              <Text color="$color9" fontSize="$3" text="center">
+              <Text color="color8" fontSize="3" text="center">
                 Try another phrase or clear your search.
               </Text>
-              <Button mt="$2" onPress={() => setQuery('')} size="$3" variant="outlined">
+              <Button mt="2" onPress={() => setQuery('')} size="3" variant="outlined">
                 Clear search
               </Button>
             </YStack>
@@ -255,14 +249,7 @@ export function CommandMenu({
       {isWeb && (
         <>
           <Separator />
-          <XStack
-            aria-hidden
-            gap="$4"
-            items="center"
-            justify="flex-end"
-            minH={48}
-            px="$4"
-          >
+          <XStack aria-hidden gap="4" items="center" justify="flex-end" minH={48} px="4">
             <Hint label="Navigate" keys={['↑', '↓']} />
             <Hint label="Select" keys={['↵']} />
           </XStack>
@@ -274,11 +261,11 @@ export function CommandMenu({
 
 function Hint({ keys, label }: { keys: string[]; label: string }) {
   return (
-    <XStack gap="$1.5" items="center">
+    <XStack gap="1" items="center">
       {keys.map((key) => (
         <Kbd key={key}>{key}</Kbd>
       ))}
-      <Text color="$color10" fontSize="$1">
+      <Text color="color9" fontSize="1">
         {label}
       </Text>
     </XStack>
@@ -287,37 +274,30 @@ function Hint({ keys, label }: { keys: string[]; label: string }) {
 
 const SearchField = styled(XStack, {
   items: 'center',
-  gap: '$2',
+  gap: '2',
   minH: 64,
-  px: '$4',
+  px: '4',
   outlineWidth: 0,
 })
 
 const CommandRow = styled(XStack, {
   items: 'center',
-  gap: '$3',
+  gap: '3',
   minH: 58,
-  px: '$3',
-  py: '$2',
-  rounded: '$4',
+  px: '3',
+  py: '2',
+  rounded: '4',
   cursor: 'pointer',
-  outlineWidth: 0,
-  hoverStyle: {
-    bg: '$color3',
-  },
-  focusVisibleStyle: {
-    outlineColor: '$color8',
-    outlineOffset: -2,
-    outlineStyle: 'solid',
-    outlineWidth: 2,
-  },
-  pressStyle: {
-    scale: 0.98,
-  },
+  outlineWidth: '0px focus-visible:2px',
+  bg: 'hover:color3',
+  outlineColor: 'focus-visible:color7',
+  outlineOffset: 'focus-visible:-2px',
+  outlineStyle: 'focus-visible:solid',
+  scale: 'press:0.98',
   variants: {
     active: {
       true: {
-        bg: '$color4',
+        bg: 'color4',
       },
     },
   } as const,
@@ -331,13 +311,13 @@ export const Kbd = styled(Text, {
   whiteSpace: 'nowrap',
   minW: 24,
   height: 24,
-  px: '$1.5',
-  rounded: '$2',
+  px: '1',
+  rounded: '2',
   borderWidth: 1,
-  borderColor: '$color6',
-  bg: '$color3',
-  color: '$color10',
-  fontSize: '$1',
+  borderColor: 'color6',
+  bg: 'color3',
+  color: 'color9',
+  fontSize: '1',
   fontWeight: '700',
   lineHeight: 22,
   text: 'center',

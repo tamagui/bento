@@ -14,7 +14,7 @@ export function IconCenterButton() {
   return (
     <View onLayout={(e: any) => setWidth(e.nativeEvent.layout.width)}>
       <Button
-        size="$4"
+        size="4"
         onPress={() => {
           setMove(!move)
         }}

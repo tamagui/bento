@@ -1,6 +1,6 @@
 import { User, Cable } from '@tamagui/lucide-icons-2'
 import { useRef } from 'react'
-import type { SizeTokens } from 'tamagui'
+import type { FontSizeTokens } from 'tamagui'
 import { View } from 'tamagui'
 import { Input } from './components/inputsParts'
 import { useForwardFocus } from './hooks/useForwardFocus'
@@ -11,13 +11,17 @@ import type { TextInput } from 'react-native'
  */
 
 /** ------ EXAMPLE ------ */
-export function InputBothSideIconsExample({ size = '$4' }: { size?: SizeTokens }) {
+export function InputBothSideIconsExample({
+  size = '4',
+}: {
+  size?: FontSizeTokens
+}) {
   const inputRef = useRef<TextInput>(null)
   const focusTrigger = useForwardFocus(inputRef)
 
   return (
     <View justify="center" items="center">
-      <Input gapScale={0.7} size={size} minW="100%">
+      <Input size={size} minW="100%">
         <Input.Box>
           <Input.Icon {...focusTrigger}>
             <User />

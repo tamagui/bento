@@ -101,24 +101,14 @@ const SwipeDismissableComponent = React.forwardRef<
 })
 
 const DrawerFrame = styled(YStack, {
-  variants: {
-    unstyled: {
-      false: {
-        paddingVertical: '$2',
-        render: 'nav',
-        width: 210,
-        alignItems: 'flex-start',
-        justifyContent: 'flex-start',
-        backgroundColor: '$background',
-        x: 0,
-        gap: '$4',
-      },
-    },
-  } as const,
-
-  defaultVariants: {
-    unstyled: false,
-  },
+  paddingVertical: '2',
+  width: 210,
+  alignItems: 'flex-start',
+  justifyContent: 'flex-start',
+  backgroundColor: 'background',
+  x: 0,
+  gap: '4',
+  render: 'nav',
 })
 
 type DrawerProps = {
@@ -133,31 +123,15 @@ type DrawerProps = {
 const Overlay = styled(YStack, {
   name: 'DrawerOverlay',
   context: DrawerContext,
-  enterStyle: {
-    opacity: 0,
-  },
-  exitStyle: {
-    opacity: 0,
-  },
-
-  variants: {
-    unstyled: {
-      false: {
-        fullscreen: true,
-        position: 'absolute',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        zIndex: 100_000 - 1,
-        pointerEvents: 'auto',
-      },
-    },
-  } as const,
-
-  defaultVariants: {
-    unstyled: process.env.TAMAGUI_HEADLESS === '1',
-  },
+  opacity: 'enter:0 exit:0',
+  position: 'absolute',
+  inset: 0,
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  zIndex: 100_000 - 1,
+  pointerEvents: 'auto',
 })
 
-const DrawerOverlay = createStyledHOC(Overlay)((props, ref) => {
+const DrawerOverlay = createStyledHOC(Overlay, (props, ref) => {
   const { setOpen } = DrawerContext.useStyledContext()
   return <Overlay ref={ref} onPress={() => setOpen(false)} {...props} />
 })
@@ -178,7 +152,7 @@ const DrawerSwipeable = forwardRef<
   )
 })
 
-const DrawerContent = createStyledHOC(DrawerFrame)((props, ref) => {
+const DrawerContent = createStyledHOC(DrawerFrame, (props, ref) => {
   const { children, ...rest } = props
 
   return (
@@ -186,10 +160,9 @@ const DrawerContent = createStyledHOC(DrawerFrame)((props, ref) => {
       <DrawerFrame
         ref={ref}
         transition="medium"
-        theme="accent"
-        enterStyle={{ x: -(rest.width || 210) }}
-        exitStyle={{ x: -(rest.width || 210) }}
+        x={`enter:${-(rest.width || 210)}px exit:${-(rest.width || 210)}px`}
         {...rest}
+        theme="accent"
       >
         {children}
       </DrawerFrame>

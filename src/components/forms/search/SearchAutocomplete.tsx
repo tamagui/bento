@@ -19,7 +19,7 @@ function Highlight({ label, query }: { label: string; query: string }) {
   return (
     <Text letterSpacing={0}>
       {label.slice(0, index)}
-      <Text fontWeight="900" color="$accentColor" letterSpacing={0}>
+      <Text fontWeight="900" color="accent-color" letterSpacing={0}>
         {label.slice(index, index + query.length)}
       </Text>
       {label.slice(index + query.length)}
@@ -86,20 +86,21 @@ export function SearchAutocomplete() {
   }
 
   return (
-    <YStack width="100%" maxW={620} self="center" gap="$2" position="relative">
+    <YStack width="100%" maxW={620} self="center" gap="2" position="relative">
       <XStack
         items="center"
-        gap="$2"
-        px="$3"
-        rounded="$6"
+        gap="2"
+        px="3"
+        rounded="6"
         borderWidth={1}
-        borderColor="$borderColor"
-        bg="$background"
+        borderColor="border-color"
+        bg="background"
       >
-        <Search size={19} color="$color9" aria-hidden />
+        <Search size={19} color="color8" aria-hidden />
         <Input
           ref={inputRef}
-          unstyled
+          bg="transparent"
+          borderWidth={0}
           flex={1}
           height={48}
           value={query}
@@ -120,8 +121,8 @@ export function SearchAutocomplete() {
         {query ? (
           <Button
             circular
-            chromeless
-            size="$2.5"
+            variant="quiet"
+            size="8"
             icon={X}
             hitSlop={isWeb ? undefined : 10}
             aria-label="Clear search"
@@ -154,22 +155,20 @@ export function SearchAutocomplete() {
           role={isWeb ? ('listbox' as any) : undefined}
           aria-label="Search suggestions"
           overflow="hidden"
-          rounded="$6"
+          rounded="6"
           borderWidth={1}
-          borderColor="$borderColor"
-          bg="$background"
-          shadowColor="$shadowColor"
-          shadowOpacity={0.16}
-          shadowRadius={16}
+          borderColor="border-color"
+          bg="background"
+          boxShadow="0 0 16px shadow-color"
         >
           <Text
             aria-hidden
-            px="$4"
-            pt="$3"
-            pb="$2"
-            fontSize="$1"
+            px="4"
+            pt="3"
+            pb="2"
+            fontSize="1"
             fontWeight="800"
-            color="$color8"
+            color="color7"
             textTransform="uppercase"
             letterSpacing={1}
           >
@@ -178,7 +177,7 @@ export function SearchAutocomplete() {
           {suggestions.length ? (
             suggestions.map((suggestion, index) => (
               <Button
-                unstyled
+                variant="quiet"
                 key={suggestion}
                 id={`${listboxId}-${index}`}
                 role={isWeb ? ('option' as any) : undefined}
@@ -188,27 +187,26 @@ export function SearchAutocomplete() {
                 flexDirection="row"
                 justify="flex-start"
                 items="center"
-                gap="$3"
-                px="$4"
-                py="$3"
+                gap="3"
+                px="4"
+                py="3"
                 rounded={0}
                 cursor="pointer"
-                bg={active === index ? '$color3' : 'transparent'}
-                hoverStyle={{ bg: '$color3' }}
+                bg={`${active === index ? 'color3' : 'transparent'} hover:color3`}
                 aria-label={`Search for ${suggestion}`}
                 onMouseEnter={() => setActive(index)}
                 onPress={() => choose(suggestion)}
               >
                 {debounced ? (
-                  <Search size={16} color="$color9" aria-hidden />
+                  <Search size={16} color="color8" aria-hidden />
                 ) : (
-                  <Clock3 size={16} color="$color9" aria-hidden />
+                  <Clock3 size={16} color="color8" aria-hidden />
                 )}
                 <Highlight label={suggestion} query={debounced} />
               </Button>
             ))
           ) : (
-            <Text px="$4" py="$5" color="$color9" text="center">
+            <Text px="4" py="5" color="color8" text="center">
               No matching results
             </Text>
           )}

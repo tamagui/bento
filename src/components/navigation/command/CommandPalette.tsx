@@ -54,11 +54,11 @@ export function CommandPalette() {
   }
 
   return (
-    <YStack width="100%" maxW={720} items="center" gap="$4" py="$7">
-      <YStack items="center" gap="$2">
+    <YStack width="100%" maxW={720} items="center" gap="4" py="7">
+      <YStack items="center" gap="2">
         <View
-          bg="$color3"
-          borderColor="$color6"
+          bg="color3"
+          borderColor="color6"
           borderWidth={1}
           items="center"
           justify="center"
@@ -66,12 +66,12 @@ export function CommandPalette() {
           height={52}
           rounded={1000}
         >
-          <CommandIcon size={24} color="$color11" />
+          <CommandIcon size={24} color="color10" />
         </View>
-        <Text fontSize="$7" fontWeight="700" text="center">
+        <Text fontSize="7" fontWeight="700" text="center">
           Find anything, instantly
         </Text>
-        <Paragraph color="$color10" maxW={480} text="center">
+        <Paragraph color="color9" maxW={480} text="center">
           Jump between pages, create work, and revisit recent files without leaving the
           keyboard.
         </Paragraph>
@@ -84,18 +84,16 @@ export function CommandPalette() {
           aria-expanded={open}
           icon={Search}
           onPress={() => setOpen(true)}
-          size="$5"
+          size="5"
           theme="accent"
-          focusVisibleStyle={{
-            outlineColor: '$color8',
-            outlineOffset: 2,
-            outlineStyle: 'solid',
-            outlineWidth: 2,
-          }}
+          outlineColor="focus-visible:color7"
+          outlineOffset="focus-visible:2px"
+          outlineStyle="focus-visible:solid"
+          outlineWidth="focus-visible:2px"
         >
           Open command palette
           {isWeb && (
-            <XStack ml="$2" gap="$1" aria-hidden>
+            <XStack ml="2" gap="1" aria-hidden>
               <Kbd>{modKey}</Kbd>
               <Kbd>K</Kbd>
             </XStack>
@@ -107,41 +105,39 @@ export function CommandPalette() {
             <Dialog.Overlay
               data-command-overlay
               key="command-overlay"
-              bg="$shadow6"
-              enterStyle={{ opacity: 0 }}
-              exitStyle={{ opacity: 0 }}
-              opacity={1}
+              bg="shadow-6"
+              opacity="1 enter:0 exit:0"
+              transition="100ms"
               style={{
                 backdropFilter: 'blur(7px)',
                 WebkitBackdropFilter: 'blur(7px)',
               }}
-              transition="100ms"
             />
 
             <Dialog.Content
               data-command-panel
               key="command-panel"
-              bg="$background"
-              borderColor="$color6"
+              bg="background"
+              borderColor="color6"
               borderWidth={1}
-              elevate
-              enterStyle={{ opacity: 0, scale: 0.98, y: sm ? 16 : -8 }}
-              exitStyle={{ opacity: 0, scale: 0.98, y: sm ? 12 : -4 }}
+              opacity="enter:0 exit:0"
+              scale="enter:0.98 exit:0.98"
+              y={`enter:${sm ? 16 : -8}px exit:${sm ? 12 : -4}px`}
               height={sm ? '100%' : 620}
               maxH={sm ? '100%' : '78vh'}
               maxW={sm ? '100%' : 680}
               overflow="hidden"
               p={0}
-              // full-screen on native must clear the status bar / dynamic island
               pt={!isWeb && sm ? (insets?.top ?? 54) + 8 : 0}
-              rounded={sm ? 0 : '$8'}
+              rounded={sm ? 0 : '8'}
+              transition="100ms"
+              width="100%"
+              elevate
               style={
                 sm
                   ? { inset: 0 }
                   : { left: 0, right: 0, top: '10vh', marginHorizontal: 'auto' }
               }
-              transition="100ms"
-              width="100%"
             >
               <Dialog.Title
                 position="absolute"
@@ -175,17 +171,17 @@ export function CommandPalette() {
       <XStack
         render="output"
         aria-live="polite"
-        bg="$color2"
-        borderColor="$color5"
+        bg="color2"
+        borderColor="color5"
         borderWidth={1}
-        gap="$2"
+        gap="2"
         items="center"
         minH={42}
-        px="$3"
-        rounded="$4"
+        px="3"
+        rounded="4"
       >
-        <View width={7} height={7} rounded={1000} bg="$color8" />
-        <Text color="$color10" fontSize="$2" data-command-result>
+        <View width={7} height={7} rounded={1000} bg="color7" />
+        <Text color="color9" fontSize="2" data-command-result>
           {lastAction}
         </Text>
       </XStack>

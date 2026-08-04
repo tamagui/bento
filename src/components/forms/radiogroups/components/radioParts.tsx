@@ -5,6 +5,7 @@ import {
   styled,
   View,
   withStaticProperties,
+  type SizeTokens,
 } from 'tamagui'
 
 // v3 ships RadioGroup unstyled, so bento carries the skin. Reproduces the v2
@@ -20,6 +21,7 @@ const BaseRadioGroupIndicator = TRadioGroup.Indicator
 
 type RadioItemProps = React.ComponentProps<typeof BaseRadioGroupItem> & {
   scaleSize?: number
+  size?: SizeTokens
 }
 
 function RadioGroupItem({ scaleSize = 0.5, ...props }: RadioItemProps) {
@@ -29,20 +31,15 @@ function RadioGroupItem({ scaleSize = 0.5, ...props }: RadioItemProps) {
       width={size}
       height={size}
       borderRadius={1000}
-      backgroundColor="$background"
+      backgroundColor="background hover:background-hover press:background-focus focus:background-hover"
       items="center"
       justify="center"
       borderWidth={1}
-      borderColor="$borderColor"
+      borderColor="border-color hover:border-color-hover press:border-color-focus focus:border-color-hover"
       p={0}
-      hoverStyle={{ borderColor: '$borderColorHover', backgroundColor: '$backgroundHover' }}
-      focusStyle={{ borderColor: '$borderColorHover', backgroundColor: '$backgroundHover' }}
-      focusVisibleStyle={{
-        outlineStyle: 'solid',
-        outlineWidth: 2,
-        outlineColor: '$outlineColor',
-      }}
-      pressStyle={{ borderColor: '$borderColorFocus', backgroundColor: '$backgroundFocus' }}
+      outlineStyle="focus-visible:solid"
+      outlineWidth="focus-visible:2px"
+      outlineColor="focus-visible:outline-color"
       {...props}
     />
   )
@@ -60,32 +57,17 @@ export const RadioGroup = withStaticProperties(RadioGroupFrame, {
 export const Card = styled(View, {
   cursor: 'pointer',
   width: '100%',
-  rounded: '$4',
-  p: '$3',
-  bg: '$background',
-  borderColor: '$borderColor',
+  rounded: '4',
+  p: '3',
+  bg: 'background hover:background-hover focus:background-focus press:background-press',
+  borderColor:
+    'border-color hover:border-color-hover focus:border-color-focus press:border-color-press',
   borderWidth: 1,
-  focusStyle: {
-    bg: '$backgroundFocus',
-    borderColor: '$borderColorFocus',
-  },
-  hoverStyle: {
-    bg: '$backgroundHover',
-    borderColor: '$borderColorHover',
-  },
-
-  ...(process.env.TAMAGUI_TARGET === 'web' && {
-    pressStyle: {
-      bg: '$backgroundPress',
-      borderColor: '$borderColorPress',
-    },
-  }),
-
   variants: {
     active: {
       true: {
-        bg: '$backgroundFocus',
-        borderColor: '$borderColorFocus',
+        bg: 'background-focus',
+        borderColor: 'border-color-focus',
       },
     },
   } as const,

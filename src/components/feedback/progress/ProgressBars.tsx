@@ -7,7 +7,7 @@ const clamp = (value: number) =>
 export function ProgressBar({
   value,
   label,
-  color = '$color12',
+  color = 'color11',
 }: {
   value: number
   label: string
@@ -16,12 +16,12 @@ export function ProgressBar({
   // one normalized value drives the visual, the text, and the ARIA values
   const percent = clamp(value)
   return (
-    <YStack gap="$1.5" width="100%">
+    <YStack gap="1" width="100%">
       <XStack justify="space-between">
-        <Text fontSize="$3" color="$color11">
+        <Text fontSize="3" color="color10">
           {label}
         </Text>
-        <Text fontSize="$3" color="$color10">
+        <Text fontSize="3" color="color9">
           {Math.round(percent)}%
         </Text>
       </XStack>
@@ -33,7 +33,7 @@ export function ProgressBar({
         aria-valuenow={Math.round(percent)}
         height={8}
         rounded={1000}
-        bg="$color4"
+        bg="color4"
         overflow="hidden"
       >
         <View width={`${percent}%`} height="100%" rounded={1000} bg={color as any} />
@@ -54,18 +54,13 @@ export function ProgressBars() {
   }, [live])
 
   return (
-    <YStack gap="$5" width="100%" maxW={420}>
+    <YStack gap="5" width="100%" maxW={420}>
       <ProgressBar value={72} label="Storage used" />
-      <ProgressBar value={38} label="Monthly budget" color="$yellow9" />
-      <ProgressBar value={94} label="API quota" color="$red9" />
-      <ProgressBar value={live} label="Uploading photo.jpg" color="$green9" />
+      <ProgressBar value={38} label="Monthly budget" color="yellow-500" />
+      <ProgressBar value={94} label="API quota" color="red-500" />
+      <ProgressBar value={live} label="Uploading photo.jpg" color="green-500" />
       {live >= 100 && (
-        <Button
-          size="$2.5"
-          self="flex-start"
-          variant="outlined"
-          onPress={() => setLive(0)}
-        >
+        <Button size="8" self="flex-start" variant="outlined" onPress={() => setLive(0)}>
           Restart upload demo
         </Button>
       )}

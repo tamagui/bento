@@ -67,8 +67,9 @@ const SlidingPopover = (props: PopoverProps) => {
   )
 }
 
-const SlidingPopoverTrigger = createStyledHOC(YStack)<{ id: string }>(
-  ({ id, ...props }, ref) => {
+const SlidingPopoverTrigger = createStyledHOC(
+  YStack,
+  ({ id, ...props }: { id: string }, ref) => {
     const context = React.useContext(SlidingPopoverContext)
     const [layout, setLayout] = React.useState<LayoutRectangle>()
     const getLayout = useGet(layout)
@@ -144,36 +145,30 @@ const SlidingPopoverContent = () => {
 
   return (
     <Popover.Content
-      theme="surface3"
-      enableAnimationForPositionChange
+      theme="level4"
       transition="200ms"
-      bg="$background"
-      elevation="$8"
+      bg="background"
       p={0}
-      enterStyle={{
-        y: -10,
-        opacity: 0,
-      }}
-      exitStyle={{
-        y: -10,
-        opacity: 0,
-      }}
+      y="enter:-10px exit:-10px"
+      opacity="enter:0 exit:0"
+      boxShadow="0 16px 32px shadow-color"
     >
-      <Popover.Arrow size="$4" />
+      <Popover.Arrow size="4" />
       <YStack
-        fullscreen
-        rounded="$4"
+        position="absolute"
+        inset={0}
+        rounded="4"
         style={{
           background: `linear-gradient(transparent, rgba(255,255,255,0.15))`,
           mixBlendMode: 'color-dodge',
         }}
       />
-      <YStack width={280} height={240} rounded="$4" overflow="hidden">
+      <YStack width={280} height={240} rounded="4" overflow="hidden">
         <AnimatePresence custom={{ going }} initial={false}>
           {context.id === 'takeout' && (
             <Frame key="takeout">
               <TooltipLabelLarge
-                icon={<Crown color="$color10" />}
+                icon={<Crown color="color9" />}
                 title="Takeout"
                 subtitle="A paid starter kit with Supabase, user and auth, icons, fonts, and&nbsp;more."
               />
@@ -182,7 +177,7 @@ const SlidingPopoverContent = () => {
           {context.id === 'bento' && (
             <Frame key="bento">
               <TooltipLabelLarge
-                icon={<Waves color="$color10" />}
+                icon={<Waves color="color9" />}
                 title="Bento"
                 subtitle="A suite of nicely designed copy-paste components and screens."
               />
@@ -191,7 +186,7 @@ const SlidingPopoverContent = () => {
           {context.id === 'studio' && (
             <Frame key="takeout">
               <TooltipLabelLarge
-                icon={<Moon color="$color10" />}
+                icon={<Moon color="color9" />}
                 title="Studio"
                 subtitle="Create complete theme suites with a visual step-by-step studio."
               />
@@ -205,7 +200,8 @@ const SlidingPopoverContent = () => {
 
 const Frame = styled(YStack, {
   transition: '200ms',
-  fullscreen: true,
+  position: 'absolute',
+  inset: 0,
   z: 1,
   x: 0,
   opacity: 1,
@@ -213,16 +209,10 @@ const Frame = styled(YStack, {
   variants: {
     // 1 = right, 0 = nowhere, -1 = left
     going: {
-      ':number': (going) => ({
-        enterStyle: {
-          x: going > 0 ? 60 : -60,
-          opacity: 0,
-        },
-        exitStyle: {
-          zIndex: 0,
-          x: going < 0 ? 60 : -60,
-          opacity: 0,
-        },
+      number: (going) => ({
+        x: `enter:${going > 0 ? 60 : -60}px exit:${going < 0 ? 60 : -60}px`,
+        opacity: 'enter:0 exit:0',
+        zIndex: 'exit:0',
       }),
     },
   } as const,
@@ -241,16 +231,16 @@ const TooltipLabelLarge = ({
     <YStack
       flex={1}
       items="center"
-      p="$7"
-      rounded="$4"
+      p="7"
+      rounded="4"
       overflow="hidden"
       position="relative"
     >
-      <H2 flex={1} fontWeight="600" size="$8">
+      <H2 flex={1} fontWeight="600" size="8">
         {title}
       </H2>
 
-      <Paragraph theme="alt1" flex={1} fontSize="$5">
+      <Paragraph theme="level2" flex={1} fontSize="5">
         {subtitle}
       </Paragraph>
 
@@ -262,7 +252,7 @@ const TooltipLabelLarge = ({
 }
 
 const TouchableArea = styled(View, {
-  p: '$3',
+  p: '3',
 })
 
 /** ---------- EXAMPLE --------- */
@@ -273,13 +263,13 @@ export const SlidingPopoverDemo = () => {
 
       <Popover.Trigger asChild>
         <View flexDirection="row">
-          <SlidingPopoverTrigger id="takeout" px="$4" py="$3">
+          <SlidingPopoverTrigger id="takeout" px="4" py="3">
             <Crown />
           </SlidingPopoverTrigger>
-          <SlidingPopoverTrigger id="bento" px="$4" py="$3" mx="$-2">
+          <SlidingPopoverTrigger id="bento" px="4" py="3" mx="-2">
             <Waves />
           </SlidingPopoverTrigger>
-          <SlidingPopoverTrigger id="studio" px="$4" py="$3" mx="$-2">
+          <SlidingPopoverTrigger id="studio" px="4" py="3" mx="-2">
             <Moon />
           </SlidingPopoverTrigger>
         </View>

@@ -53,7 +53,7 @@ function Calendar({
   })
 
   return (
-    <View flexDirection="column" gap="$4">
+    <View flexDirection="column" gap="4">
       <View
         flexDirection="row"
         minW="100%"
@@ -62,7 +62,7 @@ function Calendar({
         justify="space-between"
       >
         {order === 'first' || order === 'either' ? (
-          <Button circular size="$4" {...swapOnClick(subtractOffset({ months: 1 }))}>
+          <Button circular size="4" {...swapOnClick(subtractOffset({ months: 1 }))}>
             <Button.Icon scaleIcon={1.5}>
               <ChevronLeft />
             </Button.Icon>
@@ -75,7 +75,7 @@ function Calendar({
 
         {isWeb &&
           (order === 'last' || order === 'either' ? (
-            <Button circular size="$4" {...swapOnClick(subtractOffset({ months: -1 }))}>
+            <Button circular size="4" {...swapOnClick(subtractOffset({ months: -1 }))}>
               <Button.Icon scaleIcon={1.5}>
                 <ChevronRight />
               </Button.Icon>
@@ -85,7 +85,7 @@ function Calendar({
           ))}
 
         {!isWeb && (
-          <Button circular size="$4" {...swapOnClick(subtractOffset({ months: -1 }))}>
+          <Button circular size="4" {...swapOnClick(subtractOffset({ months: -1 }))}>
             <Button.Icon scaleIcon={1.5}>
               <ChevronRight />
             </Button.Icon>
@@ -97,14 +97,14 @@ function Calendar({
           width="100%"
           justify="center"
           items="center"
-          style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
-          gap="$4"
+          gap="4"
           {...prevNextAnimation()}
+          style={{ transition: 'transform 200ms ease, opacity 200ms ease' }}
         >
           <WeekView weekDays={weekDays} />
           <View
             flexDirection="column"
-            gap="$2"
+            gap="2"
             items="center"
             justify="center"
             width="100%"
@@ -146,20 +146,20 @@ function Calendar({
                       [key: string]: GetProps<typeof View>
                     } = {
                       'in-range': {
-                        bg: dayIsFirstOrLastOfMonth ? 'transparent' : '$color5',
+                        bg: dayIsFirstOrLastOfMonth ? 'transparent' : 'color5',
                       },
                       'range-start': {
-                        bg: '$color5',
+                        bg: 'color5',
                         width: '50%',
                         r: 0,
                       },
                       'range-end': {
-                        bg: '$color5',
+                        bg: 'color5',
                         width: '50%',
                         l: 0,
                       },
                       'will-be-in-range': {
-                        bg: '$color2',
+                        bg: 'color2',
                       },
                       '': {},
                     }
@@ -167,28 +167,22 @@ function Calendar({
                     const buttonElement = (
                       <Button
                         key={day.$date.toString()}
-                        chromeless
+                        variant="quiet"
                         circular
                         {...swapOnClick(dayButton(day))}
-                        theme={day.selected ? 'accent' : undefined}
                         borderWidth={1}
-                        borderColor={day.selected ? '$color1' : 'transparent'}
-                        data-range={day.range}
+                        borderColor={`${day.selected ? 'color1' : 'transparent'}`}
                         {...(day.selected
                           ? {
-                              bg: '$color5',
+                              bg: 'color5',
                             }
                           : {})}
+                        theme={day.selected ? 'accent' : undefined}
+                        data-range={day.range}
                         disabled={!day.inCurrentMonth}
                       >
                         <Button.Text
-                          color={
-                            day.selected
-                              ? '$color12'
-                              : day.inCurrentMonth
-                                ? '$color11'
-                                : '$color6'
-                          }
+                          color={`${day.selected ? 'color11' : day.inCurrentMonth ? 'color10' : 'color6'}`}
                         >
                           {day.day}
                         </Button.Text>
@@ -202,7 +196,7 @@ function Calendar({
                       return (
                         <RangeGradient
                           key={day.$date.toString()}
-                          color="$color6"
+                          color="color6"
                           direction={direction}
                         >
                           {buttonElement}
@@ -240,13 +234,17 @@ function Calendar({
   )
 }
 
-function DatePickerBody({ config }: { config: DatePickerProviderProps['config'] }) {
+function DatePickerBody({
+  config,
+}: {
+  config: DatePickerProviderProps['config']
+}) {
   const [header, setHeader] = useState<'month' | 'year' | 'day'>('day')
   const { gtSm: fullWidthMode } = useMedia()
 
   return (
     <HeaderTypeProvider config={config} type={header} setHeader={setHeader}>
-      <View flexDirection="row" gap="$4" p="$4" $gtMd={{ p: '$0' }}>
+      <View flexDirection="row" gap="4" p="4 gtMd:0">
         {header === 'day' && !fullWidthMode && (
           <Calendar order="either" calendarIndex={0} />
         )}
@@ -258,14 +256,14 @@ function DatePickerBody({ config }: { config: DatePickerProviderProps['config'] 
           </>
         )}
         {header === 'year' && (
-          <View items="center" gap="$2">
+          <View items="center" gap="2">
             <YearRangeSlider />
             <YearPicker onChange={() => setHeader('day')} />
           </View>
         )}
         {header === 'month' && (
-          <View gap="$4">
-            <H3 size="$7" self="center">
+          <View gap="4">
+            <H3 size="7" self="center">
               Select a month
             </H3>
             <MonthPicker

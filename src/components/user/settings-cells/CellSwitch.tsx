@@ -11,21 +11,20 @@ export function CellSwitch({ grouped = false }: { grouped?: boolean }) {
     // the entire row is the label, so the entire row toggles
     <XStack
       minH={72}
-      px="$4"
-      py="$3"
+      px="4"
+      py="3"
       items="center"
-      gap="$4"
+      gap="4"
       cursor="pointer"
+      bg="hover:color2 press:color3"
       onPress={() => setChecked((current) => !current)}
-      hoverStyle={{ bg: '$color2' }}
-      pressStyle={{ bg: '$color3' }}
     >
       <CellCopy
         label="Automatic updates"
         description="Install important updates overnight"
       />
       <Switch
-        size="$3"
+        size="3"
         checked={checked}
         onCheckedChange={setChecked}
         aria-label="Automatic updates"

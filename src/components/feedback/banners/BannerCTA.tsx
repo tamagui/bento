@@ -13,23 +13,23 @@ export function BannerCTA() {
       width="100%"
       maxW={900}
       self="center"
-      gap="$5"
+      gap="5"
       items="center"
       justify="space-between"
-      p="$5"
-      rounded="$8"
+      p="5"
+      rounded="8"
       borderWidth={1}
-      borderColor="$color7"
-      bg="$color3"
+      borderColor="color6"
+      bg="color3"
       flexWrap="wrap"
     >
-      <XStack gap="$4" items="center" flex={1} minW={250}>
-        <View p="$3" rounded={1000} bg="$color5">
-          <Sparkles size={24} color="$color11" />
+      <XStack gap="4" items="center" flex={1} minW={250}>
+        <View p="3" rounded={1000} bg="color5">
+          <Sparkles size={24} color="color10" />
         </View>
-        <YStack flex={1} gap="$1">
-          <H3 color="$color12">Unlock advanced team insights</H3>
-          <Paragraph color="$color10">
+        <YStack flex={1} gap="1">
+          <H3 color="color11">Unlock advanced team insights</H3>
+          <Paragraph color="color9">
             Compare trends, export reports, and automate weekly summaries.
           </Paragraph>
         </YStack>

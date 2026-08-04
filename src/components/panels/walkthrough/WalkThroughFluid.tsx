@@ -1,8 +1,8 @@
 import { Square } from 'tamagui'
 
 // Simple placeholders
-const GroupDemo = () => <Square size={100} bg="$color" />
-const AccordionDemo = () => <Square size={100} bg="$colorPress" />
+const GroupDemo = () => <Square size={100} bg="color" />
+const AccordionDemo = () => <Square size={100} bg="color-press" />
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { View as RNView } from 'react-native'
 import {
@@ -118,15 +118,14 @@ function WalkThroughComp({
         <AnimatePresence>
           {activeStep <= numberOfSteps - 1 && (
             <XStack
-              enterStyle={{ opacity: 0 }}
-              exitStyle={{ opacity: 0 }}
+              opacity="0.5 enter:0 exit:0"
               transition="quick"
               width="100%"
               minH="100%"
-              fullscreen
               borderColor="#000"
               z={1000}
-              opacity={0.5}
+              position="absolute"
+              inset={0}
             />
           )}
         </AnimatePresence>
@@ -135,23 +134,21 @@ function WalkThroughComp({
             stayInFrame
             allowFlip
             placement="bottom"
-            size="$0.5"
+            size="1"
             ref={popoverRef}
             open={activeStep <= numberOfSteps - 1 && itemsDim.length === numberOfSteps}
           >
             <Popover.Trigger />
             <Popover.Content
-              enterStyle={{ opacity: 0, scale: 0.9 }}
-              exitStyle={{ scale: 0.9 }}
-              scale={1}
+              scale="1 enter:0.9 exit:0.9"
+              opacity="1 enter:0"
               x={0}
               y={0}
-              opacity={1}
-              fullscreen
               transition="quick"
-              enableAnimationForPositionChange
+              position="absolute"
+              inset={0}
             >
-              <Popover.Arrow size="$4" borderColor="$borderColor" />
+              <Popover.Arrow size="4" borderColor="border-color" />
               <PortalHost name={PORTAL_WALKTHROUGH_DIALOG_HOST_NAME} />
             </Popover.Content>
           </Popover>
@@ -292,14 +289,14 @@ function DialogContent({
     <YStack
       borderWidth={2}
       bg="#fff"
-      gap="$4"
+      gap="4"
       flexDirection="column"
-      p="$4"
-      elevation="$4"
+      p="4"
       borderColor="black"
+      elevation="4"
     >
       <Paragraph>{title}</Paragraph>
-      <XStack gap="$2">
+      <XStack gap="2">
         {!isFirstStep && (
           <Button onPress={prevStep}>
             <Button.Text>Previous</Button.Text>
@@ -320,7 +317,7 @@ function DialogContent({
 export function WalkThroughFluidDemo() {
   return (
     <WalkThrough numberOfSteps={2}>
-      <YStack gap="$4" p={100} flex={1}>
+      <YStack gap="4" p={100} flex={1}>
         <WalkThrough.Tour
           stepNumber={0}
           renderDialog={({ nextStep, prevStep, numberOfSteps }) => (

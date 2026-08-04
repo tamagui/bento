@@ -21,15 +21,15 @@ type ThemePicker = {
 const themes: Theme[] = [
   {
     emoji: '🌙',
-    theme: 'alt1',
+    theme: 'level2',
   },
   {
     emoji: '🐝',
-    theme: 'cyan',
+    theme: 'blue',
   },
   {
     emoji: '🦋',
-    theme: 'jade',
+    theme: 'green',
   },
   {
     emoji: '🥑',
@@ -37,7 +37,7 @@ const themes: Theme[] = [
   },
   {
     emoji: '🌋',
-    theme: 'forest',
+    theme: 'green',
   },
 ]
 
@@ -89,10 +89,10 @@ export const ThemePicker = () => {
         width={SELECTED_THEME_WIDTH}
         aspectRatio={ASPECT_RATIO}
         theme={theme}
-        rounded="$6"
+        rounded="6"
         borderCurve="circular"
-        borderColor="$color10"
-        gap="$3"
+        borderColor="color9"
+        gap="3"
         l={18 - space}
         t={-space - 1}
         position="absolute"
@@ -114,19 +114,19 @@ const ThemeItem = ({
         overflow="hidden"
         width={WIDTH}
         aspectRatio={ASPECT_RATIO}
-        theme={theme}
-        bg="$background"
-        rounded="$4"
-        p="$2"
-        gap="$2"
+        bg="background"
+        rounded="4"
+        p="2"
+        gap="2"
         position="relative"
+        theme={theme}
       >
-        <View height="$1" rounded="$3" borderCurve="circular" bg="$color10" width="80%" />
+        <View height="1" rounded="3" borderCurve="circular" bg="color9" width="80%" />
 
         <View
-          bg="$color3"
-          height="$1"
-          rounded="$3"
+          bg="color3"
+          height="1"
+          rounded="3"
           width="60%"
           self="flex-end"
           borderCurve="circular"
@@ -136,9 +136,9 @@ const ThemeItem = ({
           position="absolute"
           l={0}
           r={0}
-          b="$2"
+          b="2"
           text="center"
-          fontSize="$8"
+          fontSize="8"
           fontWeight="bold"
         >
           {emoji}

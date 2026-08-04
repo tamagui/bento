@@ -1,7 +1,6 @@
-import type { SizeTokens } from '@tamagui/core'
-import { View } from '@tamagui/core'
 import { Check, X } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
+import { View, type SizeTokens } from 'tamagui'
 import { Switch } from './common/switchParts'
 
 /** ------ EXAMPLE ------ */
@@ -10,13 +9,13 @@ export function SwitchCustomIcons({ size }: { size?: SizeTokens }) {
   const [checked, setChecked] = useState(true)
 
   return (
-    <View flexDirection="column" justify="center" items="center" p="$8">
+    <View flexDirection="column" justify="center" items="center" p="8">
       <Switch
         size={size}
         checked={checked}
         onCheckedChange={setChecked}
-        backgroundColor="$red10"
-        activeStyle={{ backgroundColor: '$green10' }}
+        backgroundColor="red-600"
+        activeStyle={{ backgroundColor: 'green-600' }}
       >
         <Switch.Icon placement="left">
           <Check color="#fff" />

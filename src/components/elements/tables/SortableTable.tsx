@@ -1,3 +1,4 @@
+import { Avatar, XGroup } from '../../BentoSkins'
 import {
   ChevronDown,
   ChevronFirst,
@@ -18,15 +19,12 @@ import {
 } from '@tanstack/react-table'
 import * as React from 'react'
 import {
-  Avatar,
   Button,
   Input,
   ScrollView,
   Button as TButton,
   Text,
   View,
-  XGroup,
-  getTokenValue,
   isWeb,
   useWindowDimensions,
 } from 'tamagui'
@@ -51,9 +49,9 @@ const columnHelper = createColumnHelper<Person>()
 const columns = [
   columnHelper.accessor('avatar', {
     cell: (info) => (
-      <Avatar circular size="$3">
+      <Avatar circular size="3">
         <Avatar.Image aria-label="Profile image" src={info.getValue()} />
-        <Avatar.Fallback bg="$color6" />
+        <Avatar.Fallback bg="color6" />
       </Avatar>
     ),
     header: () => 'Avatar',
@@ -86,7 +84,10 @@ const columns = [
 const FooterContainer = ({
   children,
   Footer,
-}: { children: React.ReactNode; Footer: React.ElementType }) => {
+}: {
+  children: React.ReactNode
+  Footer: React.ElementType
+}) => {
   if (!isWeb) {
     return (
       <>
@@ -102,25 +103,26 @@ const Footer = ({
   table,
   screenWidth,
   tableWidth: TABLE_WIDTH,
-}: { table: any; screenWidth: number; tableWidth: number }) => {
+}: {
+  table: any
+  screenWidth: number
+  tableWidth: number
+}) => {
   const minW = (screenWidth - 64) / 4
   return (
     <View
-      b="$3"
-      flexDirection="column-reverse"
+      b="3"
+      flexDirection="column-reverse @gtXs/window:row"
       items="center"
-      $group-window-gtXs={{
-        position: 'relative',
-        flexDirection: 'row',
-        maxW: TABLE_WIDTH,
-      }}
-      px="$4"
+      position="@gtXs/window:relative"
+      maxW={`@gtXs/window:${TABLE_WIDTH}px`}
+      px="4"
       justify="space-between"
     >
       <XGroup>
         <XGroup.Item>
           <Button
-            $platform-native={{ minW }}
+            minW={isWeb ? undefined : minW}
             onPress={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
           >
@@ -131,7 +133,7 @@ const Footer = ({
         </XGroup.Item>
         <XGroup.Item>
           <Button
-            $platform-native={{ minW }}
+            minW={isWeb ? undefined : minW}
             onPress={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
@@ -142,7 +144,7 @@ const Footer = ({
         </XGroup.Item>
         <XGroup.Item>
           <Button
-            $platform-native={{ minW }}
+            minW={isWeb ? undefined : minW}
             onPress={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
@@ -153,7 +155,7 @@ const Footer = ({
         </XGroup.Item>
         <XGroup.Item>
           <Button
-            $platform-native={{ minW }}
+            minW={isWeb ? undefined : minW}
             onPress={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
           >
@@ -167,29 +169,30 @@ const Footer = ({
       <View
         flexDirection="row"
         rounded={1000_000_000}
-        p="$2"
-        px="$6"
+        paddingTop="2"
+        paddingBottom="2"
+        px="6"
+        bg="background"
+        gap="3"
+        display="native:none"
         theme="accent"
-        bg="$background"
-        gap="$3"
-        $platform-native={{ display: 'none' }}
       >
-        <Text fontWeight="$5" lineHeight="$5" fontSize="$5">
+        <Text fontWeight="5" lineHeight="5" fontSize="5">
           Page
         </Text>
-        <Text fontWeight="$5" lineHeight="$5" fontSize="$5">
+        <Text fontWeight="5" lineHeight="5" fontSize="5">
           {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
         </Text>
       </View>
 
       <View
-        $platform-native={{ display: 'none' }}
+        display="native:none"
         flexDirection="row"
-        gap="$4"
+        gap="4"
         items="center"
         className="flex items-center gap-1"
       >
-        <Text fontSize="$5" fontWeight="$5" lineHeight="$5">
+        <Text fontSize="5" fontWeight="5" lineHeight="5">
           Go to page
         </Text>
         <Input
@@ -249,8 +252,8 @@ export function SortableTable() {
   const rowCounter = React.useRef(-1)
   rowCounter.current = -1
 
-  const CELL_WIDTH = '$15'
-  const TABLE_WIDTH = getTokenValue(CELL_WIDTH) * columns.length
+  const CELL_WIDTH = 204
+  const TABLE_WIDTH = CELL_WIDTH * columns.length
 
   const { sm } = isWeb ? useGroupMedia('window') : { sm: true }
 
@@ -266,34 +269,35 @@ export function SortableTable() {
         <View
           flex={1}
           flexDirection="column"
-          gap="$6"
+          gap="6"
           minW={TABLE_WIDTH}
           width="100%"
-          px="$4"
-          py="$6"
+          px="4"
+          py="6"
         >
           <Table
             alignCells={{ x: 'center', y: 'center' }}
             alignHeaderCells={{ y: 'center', x: 'center' }}
             cellWidth={CELL_WIDTH}
-            cellHeight="$5"
+            cellHeight="5"
             borderWidth={0.5}
             maxW={TABLE_WIDTH}
-            borderTopRightRadius="$4"
-            borderTopLeftRadius="$4"
-            borderBottomLeftRadius="$2"
-            borderBottomRightRadius="$2"
-            mb="$10"
-            $group-window-gtXs={{
-              mb: 'inherit',
-            }}
+            borderTopRightRadius="4"
+            borderTopLeftRadius="4"
+            borderBottomLeftRadius="2"
+            borderBottomRightRadius="2"
+            mb="10 @gtXs/window:inherit"
           >
-            <Table.Head position="absolute" z="$1" maxW={TABLE_WIDTH}>
+            <Table.Head position="absolute" z="1" maxW={TABLE_WIDTH}>
               {headerGroups.map((headerGroup) => {
                 rowCounter.current++
                 return (
                   <Table.Row
-                    bg="$color2"
+                    bg="color2"
+                    borderTopRightRadius="4"
+                    borderTopLeftRadius="4"
+                    borderBottomLeftRadius="0"
+                    borderBottomRightRadius="0"
                     rowLocation={
                       rowCounter.current === 0
                         ? 'first'
@@ -302,10 +306,6 @@ export function SortableTable() {
                           : 'middle'
                     }
                     key={headerGroup.id}
-                    borderTopRightRadius="$4"
-                    borderTopLeftRadius="$4"
-                    borderBottomLeftRadius="$0"
-                    borderBottomRightRadius="$0"
                   >
                     {headerGroup.headers.map((header) => {
                       const isSortableHeader =
@@ -324,18 +324,18 @@ export function SortableTable() {
                           <View
                             flexDirection="row"
                             cursor={header.column.getCanSort() ? 'pointer' : 'none'}
+                            gap="2"
+                            items="center"
                             onPress={
                               isSortableHeader
                                 ? header.column.getToggleSortingHandler()
                                 : undefined
                             }
-                            gap="$2"
-                            items="center"
                           >
                             <Text
-                              fontSize="$3"
+                              fontSize="3"
                               fontWeight="600"
-                              color="$color12"
+                              color="color11"
                               select="none"
                             >
                               {header.isPlaceholder
@@ -346,10 +346,10 @@ export function SortableTable() {
                                   )}
                             </Text>
                             {{
-                              asc: <ChevronUp size="$1" color="$color10" />,
-                              desc: <ChevronDown size="$1" color="$color10" />,
+                              asc: <ChevronUp size="1" color="color9" />,
+                              desc: <ChevronDown size="1" color="color9" />,
                               noSort: isSortableHeader ? (
-                                <ChevronsUpDown size="$1" color="$color10" />
+                                <ChevronsUpDown size="1" color="color9" />
                               ) : null,
                             }[header.column.getIsSorted() || 'noSort'] ?? null}
                           </View>
@@ -360,16 +360,13 @@ export function SortableTable() {
                 )
               })}
             </Table.Head>
-            <Table.Body mt="$8">
+            <Table.Body mt="8">
               {tableRows.map((row, index) => {
                 rowCounter.current++
                 return (
                   <Table.Row
                     minW={TABLE_WIDTH}
-                    bg={index % 2 === 1 ? '$color1' : 'transparent'}
-                    hoverStyle={{
-                      bg: '$color3',
-                    }}
+                    bg={`${index % 2 === 1 ? 'color1' : 'transparent'} hover:color3`}
                     rowLocation={
                       rowCounter.current === 0
                         ? 'first'
@@ -395,7 +392,7 @@ export function SortableTable() {
                         cell.column.id === 'progress' ? (
                           <>{flexRender(cell.column.columnDef.cell, cell.getContext())}</>
                         ) : (
-                          <Text fontSize="$4" color="$color11">
+                          <Text fontSize="4" color="color10">
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           </Text>
                         )}

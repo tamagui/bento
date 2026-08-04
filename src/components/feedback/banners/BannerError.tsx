@@ -1,5 +1,5 @@
 import { CircleX } from '@tamagui/lucide-icons-2'
-import { toast } from '@tamagui/toast'
+import { toast } from 'tamagui'
 import { Banner } from './common/Banner'
 
 export function BannerError() {

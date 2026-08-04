@@ -1,6 +1,7 @@
+import { Avatar } from '../../../BentoSkins'
 import { Bot } from '@tamagui/lucide-icons-2'
 import { useEffect, useRef, useState } from 'react'
-import { Avatar, Text, View, XStack, YStack, styled } from 'tamagui'
+import { Text, View, XStack, YStack, styled } from 'tamagui'
 import { useReducedMotion } from '../../../hooks'
 
 /** shared primitives for the AI chat kit */
@@ -15,21 +16,20 @@ export type ChatMessage = {
 }
 
 export const BubbleFrame = styled(View, {
-  rounded: '$6',
-  px: '$3.5',
-  py: '$2.5',
-
+  rounded: '6',
+  px: '4',
+  py: '2-5',
   variants: {
     sender: {
       user: {
         self: 'flex-end',
-        bg: '$color12',
-        borderBottomRightRadius: '$2',
+        bg: 'color11',
+        borderBottomRightRadius: '2',
       },
       assistant: {
         self: 'flex-start',
-        bg: '$color3',
-        borderBottomLeftRadius: '$2',
+        bg: 'color3',
+        borderBottomLeftRadius: '2',
       },
     },
   } as const,
@@ -44,9 +44,9 @@ export function BubbleText({
 }) {
   return (
     <Text
-      fontSize="$4"
-      lineHeight="$5"
-      color={sender === 'user' ? '$color1' : '$color12'}
+      fontSize="4"
+      lineHeight="5"
+      color={`${sender === 'user' ? 'color1' : 'color11'}`}
     >
       {children}
     </Text>
@@ -59,12 +59,12 @@ export function AssistantAvatar() {
       width={28}
       height={28}
       rounded={1000}
-      bg="$color4"
+      bg="color4"
       items="center"
       justify="center"
       shrink={0}
     >
-      <Bot size={16} color="$color11" />
+      <Bot size={16} color="color10" />
     </View>
   )
 }
@@ -73,7 +73,7 @@ export function UserAvatar({ src }: { src?: string }) {
   return (
     <Avatar circular size={28}>
       <Avatar.Image aria-label="You" src={src ?? 'https://i.pravatar.cc/64?img=68'} />
-      <Avatar.Fallback bg="$color6" />
+      <Avatar.Fallback bg="color6" />
     </Avatar>
   )
 }
@@ -88,7 +88,7 @@ export function StreamingCaret() {
     return () => clearInterval(id)
   }, [reducedMotion])
   return (
-    <Text color="$color9" opacity={on ? 1 : 0.15} fontSize="$4">
+    <Text color="color8" opacity={on ? 1 : 0.15} fontSize="4">
       ▍
     </Text>
   )
@@ -140,14 +140,14 @@ export function TypingDots() {
     return () => clearInterval(id)
   }, [reducedMotion])
   return (
-    <XStack gap="$1.5" px="$1" py="$1.5" items="center">
+    <XStack gap="1" px="1" py="1" items="center">
       {[0, 1, 2].map((i) => (
         <View
           key={i}
           width={6}
           height={6}
           rounded={1000}
-          bg="$color9"
+          bg="color8"
           opacity={reducedMotion ? 0.6 : tick === i ? 1 : 0.3}
         />
       ))}
@@ -165,14 +165,14 @@ export function MessageRow({
   const isUser = message.role === 'user'
   return (
     <XStack
-      gap="$2.5"
+      gap="2-5"
       self="stretch"
       justify={isUser ? 'flex-end' : 'flex-start'}
       items="flex-end"
     >
       {!isUser && <AssistantAvatar />}
       {/* single width cap here — BubbleFrame stretches within it */}
-      <YStack gap="$1.5" maxW="85%" items={isUser ? 'flex-end' : 'flex-start'}>
+      <YStack gap="1" maxW="85%" items={isUser ? 'flex-end' : 'flex-start'}>
         <BubbleFrame sender={message.role}>
           <BubbleText sender={message.role}>
             {message.content}

@@ -1,10 +1,5 @@
 import type { SizeTokens } from 'tamagui'
-import {
-  YStack,
-  createStyledContext,
-  styled,
-  withStaticProperties,
-} from 'tamagui'
+import { YStack, createStyledContext, styled, withStaticProperties } from 'tamagui'
 
 type AlignCells = {
   y: 'center' | 'start' | 'end'
@@ -26,11 +21,11 @@ const TableContext = createStyledContext<{
   }
   borderColor: string
 }>({
-  cellWidth: '$8',
-  cellHeight: '$8',
+  cellWidth: '8',
+  cellHeight: '8',
   alignHeaderCells: { x: 'start', y: 'center' },
   alignCells: { x: 'center', y: 'center' },
-  borderColor: '$borderColor',
+  borderColor: 'border-color',
 })
 
 /** Table Components */
@@ -67,14 +62,14 @@ const Cell = styled(YStack, {
   shrink: 1,
   variants: {
     cellWidth: {
-      '...size': (name, { tokens }) => {
+      Size: (name, { tokens }) => {
         return {
           width: tokens.size[name],
         }
       },
     },
     cellHeight: {
-      '...size': (name, { tokens }) => {
+      Size: (name, { tokens }) => {
         return {
           minHeight: tokens.size[name],
         }
@@ -107,14 +102,13 @@ const Cell = styled(YStack, {
 const HeaderCell = styled(YStack, {
   render: 'th',
   flexDirection: 'row',
-  context: TableContext,
   grow: 0,
   shrink: 1,
-  py: '$3',
-
+  py: '3',
+  context: TableContext,
   variants: {
     cellWidth: {
-      '...size': (name, { tokens }) => {
+      Size: (name, { tokens }) => {
         return {
           width: tokens.size[name],
         }
@@ -171,16 +165,16 @@ const TableComp = styled(YStack, {
   render: 'table',
   context: TableContext,
   borderWidth: 1,
-  bg: '$background',
+  bg: 'background',
   variants: {
     /** just added these empty variants to avoid ts erros on Table */
     cellWidth: {
-      '...size': () => {
+      Size: () => {
         return {}
       },
     },
     cellHeight: {
-      '...size': () => {
+      Size: () => {
         return {}
       },
     },

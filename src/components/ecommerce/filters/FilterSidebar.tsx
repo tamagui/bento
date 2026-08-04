@@ -18,25 +18,25 @@ export function FilterSidebar() {
       width="100%"
       maxW={340}
       self="center"
-      gap="$5"
-      p="$5"
-      rounded="$8"
+      gap="5"
+      p="5"
+      rounded="8"
       borderWidth={1}
-      borderColor="$borderColor"
-      bg="$background"
+      borderColor="border-color"
+      bg="background"
     >
       <XStack justify="space-between" items="center">
-        <YStack gap="$1">
-          <Text fontSize="$7" fontWeight="900" letterSpacing={0}>
+        <YStack gap="1">
+          <Text fontSize="7" fontWeight="900" letterSpacing={0}>
             Filters
           </Text>
-          <Text fontSize="$2" color="$color9" aria-live="polite">
+          <Text fontSize="2" color="color8" aria-live="polite">
             {results.length} result{results.length === 1 ? '' : 's'}
           </Text>
         </YStack>
         <Button
-          chromeless
-          size="$3"
+          variant="quiet"
+          size="3"
           icon={RotateCcw}
           aria-label="Clear all filters"
           onPress={() => setFilters(emptyFilters)}
@@ -47,24 +47,24 @@ export function FilterSidebar() {
       <Separator />
       <FacetControls value={filters} onChange={setFilters} />
       <Separator />
-      <YStack gap="$1.5" aria-label="Matching products">
+      <YStack gap="1" aria-label="Matching products">
         {results.slice(0, 4).map((product) => (
           <XStack key={product.name} justify="space-between" items="center" minH={28}>
-            <Text color="$color11" fontSize="$3" numberOfLines={1}>
+            <Text color="color10" fontSize="3" numberOfLines={1}>
               {product.name}
             </Text>
-            <Text color="$color9" fontSize="$2">
+            <Text color="color8" fontSize="2">
               ${product.price}
             </Text>
           </XStack>
         ))}
         {results.length > 4 && (
-          <Text color="$color9" fontSize="$2">
+          <Text color="color8" fontSize="2">
             +{results.length - 4} more
           </Text>
         )}
         {results.length === 0 && (
-          <Text color="$color9" fontSize="$3">
+          <Text color="color8" fontSize="3">
             No products match these filters.
           </Text>
         )}

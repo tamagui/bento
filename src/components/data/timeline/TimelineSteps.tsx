@@ -40,13 +40,13 @@ export function TimelineSteps() {
           <XStack
             key={step.id}
             render={isWeb ? <li /> : undefined}
-            gap="$4"
+            gap="4"
             aria-current={state === 'current' ? 'step' : undefined}
           >
             <YStack width={32} items="center">
               {/* completed steps navigate back; others are milestones, not buttons */}
               <Button
-                unstyled
+                variant="quiet"
                 aria-label={
                   state === 'done'
                     ? `Return to step ${index + 1}, ${step.title}`
@@ -54,29 +54,27 @@ export function TimelineSteps() {
                 }
                 disabled={state !== 'done'}
                 cursor={state === 'done' ? 'pointer' : 'default'}
-                onPress={() => state === 'done' && setCurrent(index)}
                 width={28}
                 height={28}
                 rounded={1000}
                 items="center"
                 justify="center"
                 borderWidth={2}
-                borderColor={state === 'upcoming' ? '$color6' : '$accentColor'}
-                bg={state === 'done' ? '$accentColor' : '$background'}
-                hoverStyle={state === 'done' ? { opacity: 0.85 } : undefined}
-                focusVisibleStyle={{
-                  outlineColor: '$outlineColor',
-                  outlineOffset: 2,
-                  outlineStyle: 'solid',
-                  outlineWidth: 2,
-                }}
+                borderColor={`${state === 'upcoming' ? 'color6' : 'accent-color'}`}
+                bg={`${state === 'done' ? 'accent-color' : 'background'}`}
+                opacity={state === 'done' ? '1 hover:0.85' : 1}
+                outlineColor="focus-visible:outline-color"
+                outlineOffset="focus-visible:2px"
+                outlineStyle="focus-visible:solid"
+                outlineWidth="focus-visible:2px"
+                onPress={() => state === 'done' && setCurrent(index)}
               >
                 {state === 'done' ? (
-                  <Check size={16} color="$background" />
+                  <Check size={16} color="background" />
                 ) : (
                   <Text
                     fontWeight="700"
-                    color={state === 'current' ? '$accentColor' : '$color8'}
+                    color={`${state === 'current' ? 'accent-color' : 'color7'}`}
                   >
                     {index + 1}
                   </Text>
@@ -86,24 +84,24 @@ export function TimelineSteps() {
                 <View
                   flex={1}
                   width={2}
-                  bg={state === 'done' ? '$accentColor' : '$color5'}
+                  bg={`${state === 'done' ? 'accent-color' : 'color5'}`}
                 />
               )}
             </YStack>
-            <YStack flex={1} gap="$1" pt="$1" pb="$5">
+            <YStack flex={1} gap="1" pt="1" pb="5">
               <Text
-                fontSize="$5"
+                fontSize="5"
                 fontWeight="700"
-                color={state === 'upcoming' ? '$color9' : '$color'}
+                color={`${state === 'upcoming' ? 'color8' : 'color'}`}
               >
                 {step.title}
               </Text>
-              <Text color="$color10">{step.detail}</Text>
+              <Text color="color9">{step.detail}</Text>
               {state === 'current' && (
                 <Button
-                  mt="$2"
+                  mt="2"
                   self="flex-start"
-                  size="$2.5"
+                  size="8"
                   onPress={() => setCurrent(Math.min(steps.length, current + 1))}
                 >
                   {index === steps.length - 1 ? 'Finish' : 'Complete step'}

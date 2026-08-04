@@ -1,7 +1,7 @@
 import { AlertCircle } from '@tamagui/lucide-icons-2'
 import React, { useId, useRef } from 'react'
 import type { TextInput } from 'react-native'
-import type { SizeTokens } from 'tamagui'
+import type { FontSizeTokens } from 'tamagui'
 import { View } from 'tamagui'
 import { Input } from './components/inputsParts'
 import { useForwardFocus } from './hooks/useForwardFocus'
@@ -11,7 +11,7 @@ import { useForwardFocus } from './hooks/useForwardFocus'
  */
 
 /** ------ EXAMPLE ------ */
-export function InputWithErrorDemo({ size = '$4' }: { size?: SizeTokens }) {
+export function InputWithErrorDemo({ size = '4' }: { size?: FontSizeTokens }) {
   const uniqueId = useId()
   const [error, setError] = React.useState(true)
 

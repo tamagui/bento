@@ -101,11 +101,12 @@ only reach for a bare `@tamagui/*` package if it is in the deduped list above.
 `tamagui` v3's styled skin set covers Button, Select, Sheet, Accordion,
 Dialog, Slider, ToggleGroup, Input/TextArea, ListItem, Toast, Card, Progress,
 Label, Separator and Surface. **Switch, Checkbox, RadioGroup, Tabs, Avatar and
-Group are behavior-only** — importing them straight from `tamagui` gives you an
-element with no size, so it renders at 0x0 while still compiling and still
-firing its aria/state attributes. Bento carries its own skins for these; use
-those rather than the bare primitive:
+Group are behavior-only**. Their roots retain behavior and structural layout,
+but no longer provide the v2 visual defaults. Code can compile while required
+chrome is missing. Bento carries its own skins for these; use those rather than
+the bare primitive:
 
+- `components/BentoSkins` -> `Avatar`, `Tabs`, `Group`, `XGroup`, `YGroup`
 - `forms/switches/common/switchParts` -> `Switch`
 - `forms/checkboxes/common/checkboxParts` -> `CheckboxSkin`, `Checkboxes`
 - `forms/radiogroups/components/radioParts` -> `RadioGroup`
@@ -114,13 +115,19 @@ Two traps when writing such a skin:
 
 - **Do not `styled()` a primitive that owns a styled context** (Switch,
   Checkbox). A `styled()` layer reads that context and re-emits its values as
-  props, which re-provides the empty outer context over the real one — the
+  props, which re-provides the empty outer context over the real one. The
   control still toggles, but its thumb/indicator never gets `active` or `size`.
   Use a plain wrapper component that spreads style props instead.
 - **`withStaticProperties` mutates its argument in place.** Wrapping an
   imported component overwrites the real one for every consumer, and a wrapper
   that renders `Imported.Item` then recurses into itself. Capture the base
   parts in `const`s first and wrap a local function.
+
+Several v2 values have no exact v6 token equivalent. Bento deliberately keeps
+raw values where changing them would alter the layout: 21px in
+`WritePreviewAction`, 18px/36px in `ScrollProgress`, 204px in `SortableTable`,
+and 1.5px in `PaginationControl`. Revisit these after beta if the designs can be
+retuned to the v6 scale.
 
 ## GitHub Actions
 

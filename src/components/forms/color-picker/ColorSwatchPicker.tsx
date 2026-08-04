@@ -39,32 +39,32 @@ export function ColorSwatchPicker() {
       width="100%"
       maxW={460}
       self="center"
-      gap="$5"
-      p="$5"
-      rounded="$8"
+      gap="5"
+      p="5"
+      rounded="8"
       borderWidth={1}
-      borderColor="$borderColor"
-      bg="$background"
+      borderColor="border-color"
+      bg="background"
     >
-      <XStack items="center" gap="$4">
+      <XStack items="center" gap="4">
         <View
           width={72}
           height={72}
-          rounded="$6"
+          rounded="6"
           borderWidth={1}
-          borderColor="$borderColor"
+          borderColor="border-color"
           style={{ backgroundColor: color }}
         />
-        <YStack flex={1} gap="$1">
-          <Text fontSize="$6" fontWeight="800" letterSpacing={0}>
+        <YStack flex={1} gap="1">
+          <Text fontSize="6" fontWeight="800" letterSpacing={0}>
             Brand accent
           </Text>
-          <Text color="$color9" fontFamily="$mono">
+          <Text color="color8" fontFamily="mono">
             {color}
           </Text>
         </YStack>
       </XStack>
-      <XStack flexWrap="wrap" gap="$3">
+      <XStack flexWrap="wrap" gap="3">
         {presets.map((preset) => {
           const selected = color === preset
           return (
@@ -72,12 +72,12 @@ export function ColorSwatchPicker() {
               key={preset}
               width={48}
               height={48}
-              rounded="$5"
+              rounded="5"
               borderWidth={selected ? 3 : 1}
-              borderColor={selected ? '$color12' : '$borderColor'}
+              borderColor={`${selected ? 'color11' : 'border-color'}`}
               p={0}
-              icon={selected ? Check : undefined}
               color={inkFor(preset)}
+              icon={selected ? Check : undefined}
               aria-label={`Select color ${preset}`}
               aria-pressed={selected}
               style={{ backgroundColor: preset }}
@@ -89,7 +89,7 @@ export function ColorSwatchPicker() {
           )
         })}
       </XStack>
-      <YStack gap="$2">
+      <YStack gap="2">
         <Text fontWeight="700" letterSpacing={0}>
           Custom hex
         </Text>
@@ -101,10 +101,10 @@ export function ColorSwatchPicker() {
           aria-label="Custom hex color"
           aria-invalid={!validHex}
           aria-describedby={validHex ? undefined : 'color-hex-error'}
-          borderColor={validHex ? '$borderColor' : '$red8'}
+          borderColor={`${validHex ? 'border-color' : 'red-500'}`}
         />
         {!validHex ? (
-          <Text id="color-hex-error" aria-live="polite" fontSize="$2" color="$red10">
+          <Text id="color-hex-error" aria-live="polite" fontSize="2" color="red-600">
             Use a six-digit hex value, like #3A86FF.
           </Text>
         ) : null}

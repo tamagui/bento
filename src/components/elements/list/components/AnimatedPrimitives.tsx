@@ -6,8 +6,9 @@ type AnimationProps = {
   nativeID?: string
 }
 
-const ViewFrame = createStyledHOC(View)<AnimationProps>(
-  ({ forwardedRef, nativeID, ...props }, ref) => (
+const ViewFrame = createStyledHOC(
+  View,
+  ({ forwardedRef, nativeID, ...props }: AnimationProps, ref) => (
     <View
       ref={forwardedRef || ref}
       {...props}
@@ -16,8 +17,9 @@ const ViewFrame = createStyledHOC(View)<AnimationProps>(
   )
 )
 
-const TextFrame = createStyledHOC(Text)<AnimationProps>(
-  ({ forwardedRef, nativeID, ...props }, ref) => (
+const TextFrame = createStyledHOC(
+  Text,
+  ({ forwardedRef, nativeID, ...props }: AnimationProps, ref) => (
     <Text
       ref={forwardedRef || ref}
       {...props}

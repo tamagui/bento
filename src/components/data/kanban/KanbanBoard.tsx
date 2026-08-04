@@ -1,3 +1,4 @@
+import { Avatar } from '../../BentoSkins'
 import {
   CalendarDays,
   ChevronRight,
@@ -8,7 +9,6 @@ import { type KeyboardEvent, type PointerEvent, useMemo, useRef, useState } from
 import { ScrollView } from 'react-native'
 import type { ColorTokens } from 'tamagui'
 import {
-  Avatar,
   Button,
   Paragraph,
   Popover,
@@ -358,7 +358,7 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
   )
 
   const boardContent = (
-    <XStack gap={gap} px={sm ? '$2' : 0} py="$2" minW={sm ? undefined : '100%'}>
+    <XStack gap={gap} px={sm ? '2' : 0} py="2" minW={sm ? undefined : '100%'}>
       {columns.map((column) => {
         const highlighted = drag?.overColumn === column.id
         return (
@@ -368,13 +368,13 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
             data-column-id={column.id}
             render={isWeb ? 'section' : undefined}
             aria-label={`${column.label}, ${column.tasks.length} tasks`}
-            bg={highlighted ? '$color3' : '$color2'}
-            borderColor={highlighted ? '$color8' : '$color5'}
+            bg={`${highlighted ? 'color3' : 'color2'}`}
+            borderColor={`${highlighted ? 'color7' : 'color5'}`}
             borderWidth={1}
-            rounded="$7"
+            rounded="7"
             minH={compact ? 430 : 520}
-            p="$3"
-            gap="$2"
+            p="3"
+            gap="2"
             width={sm ? '82vw' : columnWidth}
             maxW={columnWidth}
             style={
@@ -387,12 +387,12 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
             }
           >
             <XStack items="center" justify="space-between" minH={38}>
-              <Text fontSize="$4" fontWeight="700">
+              <Text fontSize="4" fontWeight="700">
                 {column.label}
               </Text>
               <View
-                bg="$color4"
-                borderColor="$color6"
+                bg="color4"
+                borderColor="color6"
                 borderWidth={1}
                 rounded={1000}
                 minW={28}
@@ -401,8 +401,8 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
                 justify="center"
               >
                 <Text
-                  color="$color11"
-                  fontSize="$2"
+                  color="color10"
+                  fontSize="2"
                   fontWeight="700"
                   data-kanban-count={column.id}
                 >
@@ -411,7 +411,7 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
               </View>
             </XStack>
             <Separator />
-            <YStack gap="$2" flex={1} role={isWeb ? 'list' : undefined}>
+            <YStack gap="2" flex={1} role={isWeb ? 'list' : undefined}>
               {column.tasks.map((taskItem, index) => {
                 const isDragging = drag?.taskId === taskItem.id
                 const showIndicator =
@@ -450,18 +450,18 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
   )
 
   return (
-    <YStack width="100%" maxW={1040} gap="$4" py="$5" ref={boardRef as any}>
+    <YStack width="100%" maxW={1040} gap="4" py="5" ref={boardRef as any}>
       <XStack
         items={sm ? 'stretch' : 'center'}
         justify="space-between"
-        gap="$3"
+        gap="3"
         flexDirection={sm ? 'column' : 'row'}
       >
-        <YStack gap="$1">
-          <Text fontSize={compact ? '$6' : '$7'} fontWeight="700">
+        <YStack gap="1">
+          <Text fontSize={`${compact ? '6' : '7'}`} fontWeight="700">
             Product launch
           </Text>
-          <Paragraph color="$color10">
+          <Paragraph color="color9">
             {isWeb
               ? 'Drag work forward or use Space and arrow keys.'
               : 'Use the card menu to move work forward.'}
@@ -476,7 +476,7 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
             setDrag(null)
             setAnnouncement('Board reset')
           }}
-          size="$3"
+          size="3"
           self={sm ? 'flex-start' : undefined}
           variant="outlined"
         >
@@ -485,7 +485,7 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
       </XStack>
 
       {sm ? (
-        <YStack gap="$2">
+        <YStack gap="2">
           <ScrollView
             horizontal
             decelerationRate="fast"
@@ -502,14 +502,14 @@ function KanbanCore({ compact = false }: { compact?: boolean }) {
           >
             {boardContent}
           </ScrollView>
-          <XStack self="center" gap="$1.5" aria-hidden>
+          <XStack self="center" gap="1" aria-hidden>
             {columnOrder.map((columnId, index) => (
               <View
                 key={columnId}
                 width={7}
                 height={7}
                 rounded={1000}
-                bg={index === page ? '$color10' : '$color6'}
+                bg={`${index === page ? 'color9' : 'color6'}`}
               />
             ))}
           </XStack>
@@ -570,32 +570,20 @@ function TaskCard({
       role={isWeb ? 'listitem' : undefined}
       aria-roledescription={isWeb ? 'Draggable task. Press Space to lift.' : undefined}
       aria-label={`${taskItem.title}, ${taskItem.label}, due ${taskItem.due}`}
-      bg="$background"
-      borderColor={dragging ? '$color8' : '$color5'}
+      bg="background"
+      borderColor={`${dragging ? 'color7' : 'color5'} hover:color6`}
       borderWidth={1}
-      rounded="$5"
+      rounded="5"
       cursor={dragging ? 'grabbing' : 'grab'}
-      elevation={dragging ? '$8' : '$1'}
-      gap="$3"
+      gap="3"
       opacity={dragging && drag?.mode === 'keyboard' ? 0.72 : 1}
-      p={compact ? '$3' : '$4'}
-      tabIndex={0}
+      p={`${compact ? '3' : '4'}`}
       z={dragging ? 100 : 1}
-      style={
-        isWeb && !reducedMotion
-          ? {
-              transition:
-                'transform 180ms cubic-bezier(0.32, 0.72, 0, 1), box-shadow 180ms cubic-bezier(0.32, 0.72, 0, 1), border-color 100ms ease-out',
-            }
-          : undefined
-      }
-      focusVisibleStyle={{
-        outlineColor: '$color8',
-        outlineOffset: 2,
-        outlineStyle: 'solid',
-        outlineWidth: 2,
-      }}
-      hoverStyle={{ borderColor: '$color7', y: dragging ? undefined : -2 }}
+      outlineColor="focus-visible:color7"
+      outlineOffset="focus-visible:2px"
+      outlineStyle="focus-visible:solid"
+      outlineWidth="focus-visible:2px"
+      y={dragging ? undefined : 'hover:-2px'}
       {...(isWeb
         ? {
             onKeyDown,
@@ -605,29 +593,39 @@ function TaskCard({
             onPointerCancel,
           }
         : {})}
+      elevation={dragging ? '8' : '1'}
+      tabIndex={0}
+      style={
+        isWeb && !reducedMotion
+          ? {
+              transition:
+                'transform 180ms cubic-bezier(0.32, 0.72, 0, 1), box-shadow 180ms cubic-bezier(0.32, 0.72, 0, 1), border-color 100ms ease-out',
+            }
+          : undefined
+      }
     >
-      <XStack items="flex-start" gap="$2">
+      <XStack items="flex-start" gap="2">
         <LabelChip label={taskItem.label} />
         <View ml="auto">
           <MoveMenu currentColumn={columnId} taskItem={taskItem} onMoveTo={onMoveTo} />
         </View>
       </XStack>
-      <Text color="$color12" fontSize={compact ? '$3' : '$4'} fontWeight="700">
+      <Text color="color11" fontSize={`${compact ? '3' : '4'}`} fontWeight="700">
         {taskItem.title}
       </Text>
-      <XStack items="center" gap="$2">
+      <XStack items="center" gap="2">
         {!compact && (
-          <Avatar circular size="$2.5">
+          <Avatar circular size="8">
             <Avatar.Image aria-label={taskItem.assignee} src={taskItem.avatar} />
-            <Avatar.Fallback bg="$color5" />
+            <Avatar.Fallback bg="color5" />
           </Avatar>
         )}
-        <Text color="$color10" fontSize="$2" numberOfLines={1}>
+        <Text color="color9" fontSize="2" numberOfLines={1}>
           {taskItem.assignee}
         </Text>
-        <XStack ml="auto" gap="$1" items="center">
-          <CalendarDays size={13} color="$color9" aria-hidden />
-          <Text color="$color10" fontSize="$1">
+        <XStack ml="auto" gap="1" items="center">
+          <CalendarDays size={13} color="color8" aria-hidden />
+          <Text color="color9" fontSize="1">
             {taskItem.due}
           </Text>
         </XStack>
@@ -650,21 +648,21 @@ function MoveMenu({
       <Popover.Trigger asChild>
         <Button
           aria-label={`Move ${taskItem.title}`}
-          chromeless
+          variant="quiet"
           circular
           hitSlop={isWeb ? undefined : 10}
           icon={MoreHorizontal}
-          size="$2.5"
+          size="8"
         />
       </Popover.Trigger>
       <Popover.Content
         borderWidth={1}
-        borderColor="$color6"
-        p="$2"
-        gap="$1"
-        elevation="$6"
+        borderColor="color6"
+        p="2"
+        gap="1"
+        boxShadow="0 12px 24px shadow-color"
       >
-        <Text color="$color9" fontSize="$1" fontWeight="700" px="$2" py="$1">
+        <Text color="color8" fontSize="1" fontWeight="700" px="2" py="1">
           Move to…
         </Text>
         {columnOrder
@@ -672,11 +670,11 @@ function MoveMenu({
           .map((columnId) => (
             <Popover.Close key={columnId} asChild>
               <Button
-                chromeless
+                variant="quiet"
                 iconAfter={ChevronRight}
                 justify="space-between"
                 onPress={() => onMoveTo(columnId)}
-                size="$3"
+                size="3"
               >
                 {columnNames[columnId]}
               </Button>
@@ -689,10 +687,10 @@ function MoveMenu({
 
 function LabelChip({ label }: { label: TaskLabel }) {
   const colors: Record<TaskLabel, { bg: ColorTokens; color: ColorTokens }> = {
-    Design: { bg: '$purple4', color: '$purple11' },
-    Engineering: { bg: '$blue4', color: '$blue11' },
-    Research: { bg: '$green4', color: '$green11' },
-    Marketing: { bg: '$orange4', color: '$orange11' },
+    Design: { bg: 'purple-200', color: 'purple-700' },
+    Engineering: { bg: 'blue-200', color: 'blue-700' },
+    Research: { bg: 'green-200', color: 'green-700' },
+    Marketing: { bg: 'orange-200', color: 'orange-700' },
   }
   const tone = colors[label]
   return (
@@ -701,10 +699,10 @@ function LabelChip({ label }: { label: TaskLabel }) {
       borderColor={tone.color}
       borderWidth={1}
       rounded={1000}
-      px="$2"
-      py="$1"
+      px="2"
+      py="1"
     >
-      <Text color={tone.color} fontSize="$1" fontWeight="700">
+      <Text color={tone.color} fontSize="1" fontWeight="700">
         {label}
       </Text>
     </View>
@@ -714,8 +712,8 @@ function LabelChip({ label }: { label: TaskLabel }) {
 function DropIndicator() {
   return (
     <XStack height={8} items="center" aria-hidden>
-      <View width={7} height={7} rounded={1000} bg="$color9" />
-      <View flex={1} height={2} bg="$color9" />
+      <View width={7} height={7} rounded={1000} bg="color8" />
+      <View flex={1} height={2} bg="color8" />
     </XStack>
   )
 }

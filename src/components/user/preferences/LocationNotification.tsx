@@ -74,12 +74,11 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
       data.map((item, i) => {
         return (
           <Select.Item
-            index={i}
             key={item.name}
-            gap="$3"
-            value={`${i}`}
+            gap="3"
             justify="center"
             items="center"
+            value={`${i}`}
           >
             <Image src={item.flag} width={20} height={20} />
             <SizableText mr="auto">{`${item.name} ${
@@ -103,27 +102,27 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
       zIndex={200000}
       {...rest}
     >
-      <Select.Trigger width="100%" iconAfter={ChevronDown} rounded="$4">
-        <View flexDirection="row" gap="$3" justify="center" items="center">
+      <Select.Trigger width="100%" rounded="4">
+        <View flexDirection="row" gap="3" justify="center" items="center">
           <Image src={selectedItem.flag} width={20} height={20} />
           <SizableText mr="auto">{`${selectedItem.name} ${
             selectedItem.shortcut ? `(${selectedItem.shortcut})` : ''
           }`}</SizableText>
         </View>
+        <Select.Icon>
+          <ChevronDown />
+        </Select.Icon>
       </Select.Trigger>
 
       <Adapt when="maxMd" platform="touch">
         <Sheet dismissOnSnapToBottom>
-          <Sheet.Frame>
+          <Sheet.Container>
+            <Sheet.Background />
             <Sheet.ScrollView>
               <Adapt.Contents />
             </Sheet.ScrollView>
-          </Sheet.Frame>
-          <Sheet.Overlay
-            transition="lazy"
-            enterStyle={{ opacity: 0 }}
-            exitStyle={{ opacity: 0 }}
-          />
+          </Sheet.Container>
+          <Sheet.Overlay transition="lazy" opacity="enter:0 exit:0" />
         </Sheet>
       </Adapt>
 
@@ -133,7 +132,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
           justify="center"
           position="relative"
           width="100%"
-          height="$3"
+          height="3"
         >
           <View flexDirection="column" z={10}>
             <ChevronUp size={20} />
@@ -141,9 +140,10 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
           <LinearGradient
             start={[0, 0]}
             end={[0, 1]}
-            fullscreen
-            colors={['$background', 'transparent']}
-            rounded="$4"
+            rounded="4"
+            position="absolute"
+            inset={0}
+            colors={['background', 'transparent']}
           />
         </Select.ScrollUpButton>
 
@@ -151,12 +151,10 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
           // to do animations:
           // transition="quick"
           // animateOnly={['transform', 'opacity']}
-          // enterStyle={{ opacity: 0, y: -10 }}
-          // exitStyle={{ opacity: 0, y: 10 }}
           minW={200}
           borderWidth={1}
-          borderColor="$borderColor"
-          rounded="$4"
+          borderColor="border-color"
+          rounded="4"
         >
           <Select.Group>{selectList}</Select.Group>
         </Select.Viewport>
@@ -166,7 +164,7 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
           justify="center"
           position="relative"
           width="100%"
-          height="$3"
+          height="3"
         >
           <View flexDirection="column" z={10}>
             <ChevronDown size={20} />
@@ -174,9 +172,10 @@ function GeneralSelect({ data, ...rest }: SelectProps & { data: DataItem[] }) {
           <LinearGradient
             start={[0, 0]}
             end={[0, 1]}
-            fullscreen
-            colors={['transparent', '$background']}
-            rounded="$4"
+            rounded="4"
+            position="absolute"
+            inset={0}
+            colors={['transparent', 'background']}
           />
         </Select.ScrollDownButton>
       </Select.Content>
@@ -189,69 +188,57 @@ export function LocationNotification() {
   return (
     <View
       flexDirection="column"
-      gap="$4"
-      p="$4"
+      gap="4"
+      p="4"
       rounded={10}
-      bg="$background"
+      bg="background"
       width={520}
       maxW="100%"
-      borderWidth={1.5}
-      borderColor="$borderColor"
-      shadowColor="$shadowColor"
-      shadowRadius="$4"
-      $group-window-xs={{
-        borderWidth: 0,
-        shadowColor: 'transparent',
-      }}
+      borderWidth="1.5px @xs/window:0px"
+      borderColor="border-color"
+      boxShadow="(0 0 18px shadow-color) @xs/window:none"
     >
-      <View
-        flexDirection="row"
-        gap="$4"
-        width="100%"
-        $group-window-xs={{
-          gap: '$3',
-        }}
-      >
+      <View flexDirection="row" gap="4 @xs/window:3" width="100%">
         <Button icon={Mail} circular variant="outlined" />
         <View flexDirection="column" shrink={1}>
-          <SizableText size="$5">Update your Email Preferences</SizableText>
-          <Theme name="alt1">
-            <SizableText size="$3">
+          <SizableText size="5">Update your Email Preferences</SizableText>
+          <Theme name="level2">
+            <SizableText size="3">
               Set your language and delivery preferences below.
             </SizableText>
           </Theme>
         </View>
       </View>
       {/* minus margin will cancel padding */}
-      <Separator mx="$-4" />
-      <View flexDirection="column" gap="$4">
-        <View flexDirection="column" gap="$1">
-          <Label size="$4" lineHeight="$1" htmlFor="select-language" fontWeight="600">
+      <Separator mx="-4" />
+      <View flexDirection="column" gap="4">
+        <View flexDirection="column" gap="1">
+          <Label size="4" lineHeight="1" fontWeight="600" htmlFor="select-language">
             Language:
           </Label>
           <GeneralSelect id="select-language" data={languagesArray} />
         </View>
-        <View flexDirection="column" gap="$1">
-          <Label size="$4" lineHeight="$1" htmlFor="select-location" fontWeight="600">
+        <View flexDirection="column" gap="1">
+          <Label size="4" lineHeight="1" fontWeight="600" htmlFor="select-location">
             Location:
           </Label>
           <GeneralSelect id="select-location" data={locationsArray} />
-          <Theme name="alt1">
-            <SizableText size="$3">
+          <Theme name="level2">
+            <SizableText size="3">
               Please choose a location for relevant information.
             </SizableText>
           </Theme>
         </View>
       </View>
-      <Separator mx="$-4" />
-      <View flexDirection="column" gap="$4">
+      <Separator mx="-4" />
+      <View flexDirection="column" gap="4">
         <RadioList />
         <Theme name="green">
           <Banner>Change your email preferences at any time</Banner>
         </Theme>
       </View>
-      <Separator mx="$-4" />
-      <View flexDirection="row" gap="$3">
+      <Separator mx="-4" />
+      <View flexDirection="row" gap="3">
         <Button flex={1}>
           <Button.Text>Cancel</Button.Text>
         </Button>
@@ -267,18 +254,14 @@ export function LocationNotification() {
 LocationNotification.fileName = 'LocationNotification'
 
 const Banner = ({
-  size = '$3',
+  size = '3',
   children,
-}: { size?: FontSizeTokens; children?: React.ReactNode }) => {
+}: {
+  size?: FontSizeTokens
+  children?: React.ReactNode
+}) => {
   return (
-    <View
-      flexDirection="row"
-      items="center"
-      bg="$color7"
-      p={size}
-      gap={size}
-      rounded="$4"
-    >
+    <View flexDirection="row" items="center" bg="color6" p={size} gap={size} rounded="4">
       <Info size={getTokenValue(size as any, 'size') * 0.5} />
       <SizableText size={size}>{children}</SizableText>
     </View>
@@ -287,16 +270,14 @@ const Banner = ({
 
 export const SizableText = styled(Text, {
   name: 'SizableText',
-  fontFamily: '$body',
-
+  fontFamily: 'body',
   variants: {
     size: {
-      '...fontSize': getFontSized as any, // TODO: revisit after v2 migration
+      FontSize: getFontSized as any,
     },
   } as const,
-
   defaultVariants: {
-    size: '$true',
+    size: '4',
   },
 })
 const radioData = [
@@ -318,33 +299,32 @@ function RadioList() {
   const [value, setValue] = useState(radioData[0].title)
   return (
     <RadioGroup value={value} onValueChange={setValue}>
-      <View flexDirection="column" gap="$3">
+      <View flexDirection="column" gap="3">
         {radioData.map(({ title, desc }) => (
           <View
             flexDirection="column"
+            borderWidth="px"
+            borderColor={`${title === value ? 'color6' : 'color4'}`}
+            cursor="pointer"
+            rounded="7"
+            p="4"
             key={title}
             onPress={() => setValue(title)}
-            borderWidth="$0.5"
-            borderColor={title === value ? '$color7' : '$color4'}
-            cursor="pointer"
-            rounded="$7"
-            p="$4"
           >
             <View flexDirection="column">
               <View flexDirection="row" justify="space-between">
-                <SizableText size="$5">{title}</SizableText>
+                <SizableText size="5">{title}</SizableText>
                 <RadioGroup.Item id={title} value={title}>
                   <RadioGroup.Indicator
-                    unstyled
                     width="33%"
                     height="33%"
                     rounded={1000}
-                    bg="$color"
+                    bg="color"
                   />
                 </RadioGroup.Item>
               </View>
             </View>
-            <SizableText fontWeight="300" color="$color9" size="$4">
+            <SizableText fontWeight="300" color="color8" size="4">
               {desc}
             </SizableText>
           </View>

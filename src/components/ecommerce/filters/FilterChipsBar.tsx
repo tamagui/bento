@@ -19,13 +19,13 @@ export function FilterChipsBar() {
   const results = products.filter((p) => chips.every((chip) => chipDefs[chip](p)))
 
   return (
-    <XStack width="100%" maxW={920} self="center" flexWrap="wrap" gap="$2" items="center">
+    <XStack width="100%" maxW={920} self="center" flexWrap="wrap" gap="2" items="center">
       {chips.map((chip) => (
         <Button
           key={chip}
-          size="$3"
+          size="3"
           rounded={999}
-          bg="$color3"
+          bg="color3"
           iconAfter={X}
           hitSlop={isWeb ? undefined : 6}
           aria-label={`Remove ${chip} filter`}
@@ -35,32 +35,30 @@ export function FilterChipsBar() {
         </Button>
       ))}
       {chips.length ? (
-        <Button chromeless size="$3" onPress={() => setChips([])}>
+        <Button variant="quiet" size="3" onPress={() => setChips([])}>
           Clear
         </Button>
       ) : (
-        <Text color="$color9">No active filters</Text>
+        <Text color="color8">No active filters</Text>
       )}
-      <Text color="$color9" fontSize="$2" aria-live="polite">
+      <Text color="color8" fontSize="2" aria-live="polite">
         {results.length} result{results.length === 1 ? '' : 's'}
       </Text>
-      <XStack ml="auto" items="center" gap="$2">
-        <Text color="$color9" fontSize="$2">
+      <XStack ml="auto" items="center" gap="2">
+        <Text color="color8" fontSize="2">
           Sort
         </Text>
         <Select value={sort} onValueChange={setSort} disablePreventBodyScroll>
-          <Select.Trigger
-            width={190}
-            size="$3"
-            iconAfter={ChevronDown}
-            aria-label="Sort products"
-          >
+          <Select.Trigger width={190} size="3" aria-label="Sort products">
             <Select.Value />
+            <Select.Icon>
+              <ChevronDown />
+            </Select.Icon>
           </Select.Trigger>
           <Select.Content>
-            <Select.Viewport minW={220} p="$1" rounded="$5" bg="$background">
+            <Select.Viewport minW={220} p="1" rounded="5" bg="background">
               {sortOptions.map((option, index) => (
-                <Select.Item key={option} value={option} index={index} rounded="$3">
+                <Select.Item key={option} value={option} rounded="3">
                   <Select.ItemText>{option}</Select.ItemText>
                   <Select.ItemIndicator ml="auto">
                     <Check size={15} />

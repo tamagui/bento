@@ -19,7 +19,7 @@ const AvatarContext = createStyledContext<{
   size: SizeTokens
   color?: ColorTokens | string
 }>({
-  size: '$true',
+  size: '4',
   color: undefined,
 })
 
@@ -27,13 +27,12 @@ const AvatarIconFrame = styled(View, {
   context: AvatarContext,
   rounded: 1000_000_000,
   z: 100,
-  borderWidth: '$1',
-  borderColor: '$color1',
+  borderWidth: '1',
+  borderColor: 'color1',
   position: 'absolute',
-  bg: '$color5',
+  bg: 'color5',
   items: 'center',
   justify: 'center',
-
   variants: {
     placement: {
       'top-right': {
@@ -54,7 +53,7 @@ const AvatarIconFrame = styled(View, {
       },
     },
     offset: {
-      ':number': (val, { props }) => {
+      number: (val, { props }) => {
         const placement = (props as any).placement
         const yDir = placement.includes('top') ? -1 : 1
         const xDir = placement.includes('left') ? -1 : 1
@@ -65,7 +64,7 @@ const AvatarIconFrame = styled(View, {
       },
     },
     size: {
-      '...size': (val, { props, tokens }) => {
+      Size: (val, { props, tokens }) => {
         return {
           width: tokens.size[val].val * 0.33,
           height: tokens.size[val].val * 0.33,
@@ -73,7 +72,6 @@ const AvatarIconFrame = styled(View, {
       },
     },
   } as const,
-
   defaultVariants: {
     placement: 'top-right',
   },
@@ -87,18 +85,22 @@ const getIconSize = (size: FontSizeTokens, scale: number) => {
   )
 }
 
-export const AvatarIcon = createStyledHOC(AvatarIconFrame)<{ scaleIcon?: number }>(
-  (props, ref) => {
+export const AvatarIcon = createStyledHOC(
+  AvatarIconFrame,
+  (props: React.PropsWithChildren<{ scaleIcon?: number }>, ref) => {
     const { children, scaleIcon = 1, ...rest } = props
     const { size, color: colorProp } = AvatarContext.useStyledContext()
 
     const theme = useTheme()
     const color = getVariable(
-      colorProp || theme[colorProp as any]?.get('web') || theme.color10?.get('web')
+      colorProp || theme[colorProp as any]?.get('web') || theme.color9?.get('web')
     )
     const iconSize = getIconSize(size as FontSizeTokens, scaleIcon)
 
-    const getThemedIcon = useGetThemedIcon({ size: iconSize, color: color as any })
+    const getThemedIcon = useGetThemedIcon({
+      size: iconSize,
+      color: color as any,
+    })
     return (
       <AvatarIconFrame ref={ref} {...rest}>
         {getThemedIcon(children)}
@@ -112,30 +114,28 @@ const AvatarWrapper = styled(View, {
 
   variants: {
     size: {
-      '...size': {} as any,
+      Size: {} as any,
     },
   } as const,
 })
 
 const AvatarText = styled(Text, {
   context: AvatarContext,
-  fontFamily: '$body',
-
+  fontFamily: 'body',
   variants: {
     size: {
-      '...fontSize': getFontSized as any, // TODO: revisit after v2 migration
+      FontSize: getFontSized as any,
     },
   } as const,
-
   defaultVariants: {
-    size: '$true',
+    size: '4',
   },
 })
 
 const AvatarContent = forwardRef<any, GetProps<typeof TAvatar>>((props, ref) => {
   const { size } = AvatarContext.useStyledContext()
   return (
-    <View borderWidth="$1" borderColor="$color1" rounded={1_000_000_000}>
+    <View borderWidth="1" borderColor="color1" rounded={1_000_000_000}>
       <TAvatar elevation={5} size={size} ref={ref} {...props} />
     </View>
   )

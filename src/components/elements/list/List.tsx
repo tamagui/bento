@@ -1,53 +1,54 @@
+import { Avatar } from '../../BentoSkins'
 import { randAvatar, randFullName, randUuid } from '@ngneat/falso'
 import { Phone } from '@tamagui/lucide-icons-2'
 import { useEffect, useState } from 'react'
 import { FlatList } from 'react-native'
 import type { ColorTokens } from 'tamagui'
-import { Avatar, Button, Circle, H5, Separator, Text, View } from 'tamagui'
+import { Button, Circle, H5, Separator, Text, View } from 'tamagui'
 
 // Define more descriptive status options
 const statusOptions = [
   {
     status: 'Available',
-    color: 'green',
+    color: 'green-600',
   },
   {
     status: 'Offline',
-    color: 'gray',
+    color: 'gray-600',
   },
   {
     status: 'In a Meeting',
-    color: 'orange',
+    color: 'orange-600',
   },
   {
     status: 'On Vacation',
-    color: 'pink',
+    color: 'pink-600',
   },
   {
     status: 'Do Not Disturb',
-    color: 'red',
+    color: 'red-600',
   },
   {
     status: 'Working Remotely',
-    color: 'purple',
+    color: 'purple-600',
   },
   {
     status: 'Out for Lunch',
-    color: 'blue',
+    color: 'blue-600',
   },
   {
     status: 'Away from Desk',
-    color: 'gray',
+    color: 'gray-600',
   },
   {
     status: 'On a Call',
-    color: 'blue',
+    color: 'blue-600',
   },
   {
     status: 'Taking a Break',
-    color: 'yellow',
+    color: 'yellow-600',
   },
-]
+] satisfies { status: string; color: ColorTokens }[]
 
 // Function to generate a person with a random descriptive status
 const getPersonList = () => {
@@ -74,7 +75,7 @@ export function List() {
   )
 
   return (
-    <View width="100%" flex={1} $gtMd={{ maxH: 800, px: '$4' }}>
+    <View width="100%" flex={1} maxH="gtMd:800px" px="gtMd:4">
       <FlatList
         data={personsList}
         renderItem={renderItem}
@@ -94,40 +95,37 @@ function Item({ person }: { person: PersonList[number] }) {
   return (
     <View
       flexDirection="row"
-      py="$2"
-      gap="$4"
-      $group-window-gtXs={{
-        p: '$4',
-        gap: '$4',
-      }}
-      bg="$color1"
+      py="2"
+      gap="4 @gtXs/window:4"
+      p="@gtXs/window:4"
+      bg="color1"
       items="center"
     >
       <View position="relative">
-        <Avatar circular size="$4">
+        <Avatar circular size="4">
           <Avatar.Image objectFit="cover" src={person.image} />
-          <Avatar.Fallback bg="$background" />
+          <Avatar.Fallback bg="background" />
         </Avatar>
         <Circle
           borderWidth={1}
-          borderColor="$borderColor"
+          borderColor="border-color"
           r="3%"
           b="3%"
           z={1}
-          size={12}
           position="absolute"
-          bg={`$${person.status.color}10` as ColorTokens}
+          bg={person.status.color}
+          size={12}
         />
       </View>
       <View flex={1} flexDirection="column" shrink={1} justify="center">
         <H5>{person.name}</H5>
-        <Text fontWeight="$2" theme="alt1">
+        <Text fontWeight="2" theme="level2">
           {person.status.status}
         </Text>
       </View>
-      <Button circular size="$4" scaleIcon={1.5}>
+      <Button circular size="4" scaleIcon={1.5}>
         <Button.Icon>
-          <Phone color="$green10" />
+          <Phone color="green-600" />
         </Button.Icon>
       </Button>
     </View>

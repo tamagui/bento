@@ -1,5 +1,6 @@
+import { XGroup } from '../../BentoSkins'
 import { useState } from 'react'
-import { AnimatePresence, Button, Text, View, XGroup, styled } from 'tamagui'
+import { AnimatePresence, Button, Text, View, styled } from 'tamagui'
 import { useContainerDim } from '../../hooks/useContainerDim'
 
 /** ------ EXAMPLE ------ */
@@ -12,8 +13,8 @@ export const AnimatedNumbers = () => {
   const NUM_WIDTH = WIDTH / 3
 
   return (
-    <View justify="center" items="center" maxW="100%" gap="$5">
-      <XGroup justify="flex-start" gap="$1">
+    <View justify="center" items="center" maxW="100%" gap="5">
+      <XGroup justify="flex-start" gap="1">
         <XGroup.Item>
           <Button
             onPress={() => {
@@ -61,16 +62,12 @@ export const AnimatedNumbers = () => {
             return (
               <AnimatedNumber
                 key={key}
-                style={{ transition: 'transform 200ms ease, opacity 100ms ease' }}
+                style={{
+                  transition: 'transform 200ms ease, opacity 100ms ease',
+                }}
                 animateOnly={['transform', 'opacity']}
-                enterStyle={{
-                  y: -50,
-                  opacity: 0,
-                }}
-                exitStyle={{
-                  y: 50,
-                  opacity: 0,
-                }}
+                y="enter:-50px exit:50px"
+                opacity="enter:0 exit:0"
                 x={x}
               >
                 {num}
@@ -86,15 +83,11 @@ export const AnimatedNumbers = () => {
 AnimatedNumbers.fileName = 'NumberSlider'
 
 const AnimatedNumber = styled(Text, {
-  fontFamily: '$silkscreen',
-  fontSize: '$12',
-  lineHeight: '$12',
-  color: '$color',
+  fontFamily: 'silkscreen',
+  fontSize: '12 @xs/window:8',
+  lineHeight: '12',
+  color: 'color',
   position: 'absolute',
   y: 0,
   opacity: 1,
-
-  '$group-window-xs': {
-    fontSize: '$8',
-  },
 })

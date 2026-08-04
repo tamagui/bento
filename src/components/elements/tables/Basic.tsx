@@ -1,3 +1,4 @@
+import { Avatar } from '../../BentoSkins'
 import {
   createColumnHelper,
   flexRender,
@@ -5,7 +6,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import * as React from 'react'
-import { Avatar, Separator, Text, View, XStack, YStack } from 'tamagui'
+import { Separator, Text, View, XStack, YStack } from 'tamagui'
 import { useGroupMedia } from '../../hooks/useGroupMedia'
 import { Table } from './common/tableParts'
 import { ProgressCell, StatusBadge } from './common/cells'
@@ -64,9 +65,9 @@ const columnHelper = createColumnHelper<Person>()
 const columns = [
   columnHelper.accessor('avatar', {
     cell: (info) => (
-      <Avatar circular size="$3">
+      <Avatar circular size="3">
         <Avatar.Image aria-label="Profile image" src={info.getValue()} />
-        <Avatar.Fallback bg="$color6" />
+        <Avatar.Fallback bg="color6" />
       </Avatar>
     ),
     header: () => 'Avatar',
@@ -97,7 +98,7 @@ const columns = [
   }),
 ]
 
-const CELL_WIDTH = '$12'
+const CELL_WIDTH = '12'
 
 // per-column widths: identity columns wide, numerics narrow, rich cells wider
 const COLUMN_WIDTHS: Record<string, number> = {
@@ -128,32 +129,32 @@ export function BasicTable() {
 
   if (sm) {
     return (
-      <YStack gap="$4" width="100%" py="$4">
+      <YStack gap="4" width="100%" py="4">
         {defaultData.map((row, i) => {
           return (
             <View
               key={i}
-              rounded="$5"
+              rounded="5"
               borderWidth={1}
-              borderColor="$borderColor"
-              bg="$color1"
+              borderColor="border-color"
+              bg="color1"
               self="stretch"
-              p="$4"
-              gap="$3"
+              p="4"
+              gap="3"
             >
-              <XStack items="center" gap="$3">
-                <Avatar circular size="$4">
+              <XStack items="center" gap="3">
+                <Avatar circular size="4">
                   <Avatar.Image
                     aria-label={`${row.firstName} ${row.lastName}`}
                     src={row.avatar}
                   />
-                  <Avatar.Fallback bg="$color6" />
+                  <Avatar.Fallback bg="color6" />
                 </Avatar>
                 <YStack flex={1}>
-                  <Text fontWeight="700" color="$color12">
+                  <Text fontWeight="700" color="color11">
                     {row.firstName} {row.lastName}
                   </Text>
-                  <Text fontSize="$2" color="$color10">
+                  <Text fontSize="2" color="color9">
                     {row.age} yrs · {row.visits} visits
                   </Text>
                 </YStack>
@@ -173,14 +174,14 @@ export function BasicTable() {
       alignCells={{ x: 'center', y: 'center' }}
       alignHeaderCells={{ y: 'center', x: 'center' }}
       cellWidth={CELL_WIDTH}
-      cellHeight="$5"
+      cellHeight="5"
       borderWidth={0.5}
       maxW={TABLE_WIDTH}
-      my="$4"
+      my="4"
     >
       <Table.Head>
         {headerGroups.map((headerGroup) => (
-          <Table.Row bg="$color2" rowLocation="first" key={headerGroup.id}>
+          <Table.Row bg="color2" rowLocation="first" key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
               <Table.HeaderCell
                 width={COLUMN_WIDTHS[header.id]}
@@ -193,7 +194,7 @@ export function BasicTable() {
                 }
                 key={header.id}
               >
-                <Text fontSize="$3" fontWeight="600" color="$color12">
+                <Text fontSize="3" fontWeight="600" color="color11">
                   {header.isPlaceholder
                     ? null
                     : flexRender(header.column.columnDef.header, header.getContext())}
@@ -206,15 +207,14 @@ export function BasicTable() {
       <Table.Body>
         {tableRows.map((row, rowIndex) => (
           <Table.Row
-            hoverStyle={{ bg: '$color3' }}
-            bg={rowIndex % 2 === 1 ? '$color1' : 'transparent'}
+            bg={`${rowIndex % 2 === 1 ? 'color1' : 'transparent'} hover:color3`}
             rowLocation={rowIndex === tableRows.length - 1 ? 'last' : 'middle'}
             key={row.id}
           >
             {row.getVisibleCells().map((cell) => (
               <Table.Cell
                 width={COLUMN_WIDTHS[cell.column.id]}
-                px="$3"
+                px="3"
                 cellLocation={
                   cell.column.id === 'avatar'
                     ? 'first'
@@ -229,7 +229,7 @@ export function BasicTable() {
                 cell.column.id === 'progress' ? (
                   <>{flexRender(cell.column.columnDef.cell, cell.getContext())}</>
                 ) : (
-                  <Text fontSize="$4" color="$color11">
+                  <Text fontSize="4" color="color10">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </Text>
                 )}

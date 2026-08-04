@@ -1,5 +1,6 @@
+import { Avatar } from '../../BentoSkins'
 import { FlatList } from 'react-native'
-import { Avatar, Button, Image, Paragraph, Separator, Text, View, styled } from 'tamagui'
+import { Button, Image, Paragraph, Separator, Text, View, styled } from 'tamagui'
 import { useContainerDim } from '../../hooks/useContainerDim'
 
 const items = Array.from({ length: 100 }).map((_, index) => index)
@@ -9,13 +10,7 @@ const baseWidth = 300
 
 const List = styled(FlatList<number>, {})
 
-const renderItem = ({
-  item,
-  index,
-}: {
-  item: number
-  index: number
-}) => {
+const renderItem = ({ item, index }: { item: number; index: number }) => {
   return <Item data={{ index }} key={item} />
 }
 export function FlatGrid() {
@@ -30,10 +25,8 @@ export function FlatGrid() {
           gap: 22,
         },
       })}
-      $group-window-gtXs={{
-        p: padding,
-        height: 500,
-      }}
+      p={`@gtXs/window:${padding}px`}
+      height="@gtXs/window:500px"
       contentContainerStyle={{
         gap: 16,
       }}
@@ -54,56 +47,48 @@ function Item({ data }: { data: { index: number } }) {
   return (
     <View
       flexDirection="column"
-      bg="$background"
+      bg="background"
       overflow="hidden"
-      rounded="$9"
+      rounded="9"
       borderWidth={1}
-      borderColor="$borderColor"
+      borderColor="border-color"
       p={PADDING}
-      gap="$3"
+      gap="3"
       shrink={1}
       grow={1}
-      hoverStyle={{
-        shadowColor: '$shadowColor',
-        shadowOffset: {
-          width: 0,
-          height: 4,
-        },
-        shadowOpacity: 0.3,
-        shadowRadius: '$4',
-      }}
+      boxShadow="hover:(0 4px 18px shadow-color)"
     >
       {/* minus margin can cancel padding */}
-      <View height="$14" mx={-PADDING} mt={-PADDING}>
+      <View height="14" mx={-PADDING} mt={-PADDING}>
         <Image
           width="100%"
           height="100%"
-          bg="$backgroundPress"
+          bg="background-press"
           src={`https://picsum.photos/250/${150 + index}`}
         />
       </View>
-      <Paragraph size="$2" lineHeight="$1" theme="alt1">
+      <Paragraph size="2" lineHeight="1" theme="level2">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla nesciunt
         asperiores corrupti! Optio soluta excepturi aut sint nam vero, libero at
         repellendus
       </Paragraph>
       <Separator mx={-PADDING} />
-      <View flexDirection="row" items="center" gap="$4" p="$2">
-        <Button size="$3" circular chromeless>
+      <View flexDirection="row" items="center" gap="4" p="2">
+        <Button size="3" circular variant="quiet">
           <Avatar circular>
             <Avatar.Image
               aria-label="Post author avatar"
               src="https://images.unsplash.com/photo-1588798204072-e5f8e649d269?&w=100"
               objectFit="cover"
             />
-            <Avatar.Fallback bg="$blue10" />
+            <Avatar.Fallback bg="blue-600" />
           </Avatar>
         </Button>
-        <View gap="$1" flexDirection="column">
-          <Text fontSize="$3" fontWeight="$8">
+        <View gap="1" flexDirection="column">
+          <Text fontSize="3" fontWeight="8">
             Photo posted by
           </Text>
-          <Text color="$color9" fontSize="$3">
+          <Text color="color8" fontSize="3">
             someperson@something.com
           </Text>
         </View>

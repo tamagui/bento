@@ -13,44 +13,44 @@ export function CircularAvatarsWithCustomIcons() {
       justify="center"
       flexDirection="row"
       width="100%"
-      $group-window-gtXs={{ maxW: 400 }}
-      gap="$4"
+      maxW="@gtXs/window:400px"
+      gap="4"
     >
       <Item
         Icon={
           <Avatar.Icon>
-            <Ban color="$color11" size="$1" />
+            <Ban color="color10" size="1" />
           </Avatar.Icon>
         }
-        size="$4"
+        size="4"
       />
       <Item
         Icon={
           <Avatar.Icon>
-            <SunDim color="$color11" />
+            <SunDim color="color10" />
           </Avatar.Icon>
         }
-        size="$5"
+        size="5"
       />
       <Item
         Icon={
-          <Avatar.Icon bg="$red9">
-            <Avatar.Text color="#fff" size="$2">
+          <Avatar.Icon bg="red-500">
+            <Avatar.Text color="#fff" size="2">
               9
             </Avatar.Text>
           </Avatar.Icon>
         }
-        size="$7"
+        size="7"
       />
       <Item
         Icon={
-          <Avatar.Icon bg="$green8">
-            <Avatar.Text color="#fff" size="$3">
+          <Avatar.Icon bg="green-500">
+            <Avatar.Text color="#fff" size="3">
               3
             </Avatar.Text>
           </Avatar.Icon>
         }
-        size="$8"
+        size="8"
       />
     </View>
   )
@@ -64,7 +64,7 @@ function Item({ size, Icon }: { size: SizeTokens; Icon: ReactElement }) {
       {Icon}
       <Avatar.Content circular>
         <Avatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
-        <Avatar.Fallback bg="$background" />
+        <Avatar.Fallback bg="background" />
       </Avatar.Content>
     </Avatar>
   )

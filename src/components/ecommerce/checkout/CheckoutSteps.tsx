@@ -71,23 +71,23 @@ export function CheckoutSteps() {
         maxW={720}
         self="center"
         items="center"
-        gap="$3"
-        p="$7"
-        rounded="$8"
+        gap="3"
+        p="7"
+        rounded="8"
         borderWidth={1}
-        borderColor="$green7"
-        bg="$green2"
+        borderColor="green-400"
+        bg="green-50"
       >
-        <ShieldCheck size={40} color="$green10" aria-hidden />
-        <Text fontSize="$7" fontWeight="900" letterSpacing={0} aria-live="polite">
+        <ShieldCheck size={40} color="green-600" aria-hidden />
+        <Text fontSize="7" fontWeight="900" letterSpacing={0} aria-live="polite">
           Order {orderId} placed
         </Text>
-        <Text color="$color10" text="center">
+        <Text color="color9" text="center">
           {shippingMethods.find((m) => m.id === form.shipping)?.label} shipping to{' '}
           {form.address.trim()}, {form.city.trim()} {form.zip.trim()}
         </Text>
         <Button
-          mt="$2"
+          mt="2"
           variant="outlined"
           onPress={() => {
             setOrderId('')
@@ -104,7 +104,7 @@ export function CheckoutSteps() {
   const fieldProps = (key: 'address' | 'city' | 'zip') => ({
     'aria-invalid': !!errors[key],
     'aria-describedby': errors[key] ? `checkout-${key}-error` : undefined,
-    borderColor: errors[key] ? ('$red8' as const) : undefined,
+    borderColor: errors[key] ? ('red-500' as const) : undefined,
     ref: (el: any) => {
       fieldRefs.current[key] = el
     },
@@ -115,30 +115,30 @@ export function CheckoutSteps() {
       width="100%"
       maxW={720}
       self="center"
-      gap="$6"
-      p="$5"
-      rounded="$8"
+      gap="6"
+      p="5"
+      rounded="8"
       borderWidth={1}
-      borderColor="$borderColor"
-      bg="$background"
+      borderColor="border-color"
+      bg="background"
     >
       <StepperHorizontal currentStep={step} labels={['Address', 'Shipping', 'Payment']} />
-      <YStack gap="$4">
-        <XStack items="center" gap="$2">
+      <YStack gap="4">
+        <XStack items="center" gap="2">
           {step === 0 ? (
-            <MapPin size={22} color="$accentColor" aria-hidden />
+            <MapPin size={22} color="accent-color" aria-hidden />
           ) : step === 1 ? (
-            <Truck size={22} color="$accentColor" aria-hidden />
+            <Truck size={22} color="accent-color" aria-hidden />
           ) : (
-            <CreditCard size={22} color="$accentColor" aria-hidden />
+            <CreditCard size={22} color="accent-color" aria-hidden />
           )}
-          <Text fontSize="$7" fontWeight="900" letterSpacing={0}>
+          <Text fontSize="7" fontWeight="900" letterSpacing={0}>
             {titles[step]}
           </Text>
         </XStack>
         {step === 0 ? (
-          <YStack gap="$3">
-            <YStack gap="$1">
+          <YStack gap="3">
+            <YStack gap="1">
               <Input
                 value={form.address}
                 onChangeText={(value) => setField('address', value)}
@@ -147,13 +147,13 @@ export function CheckoutSteps() {
                 {...fieldProps('address')}
               />
               {errors.address && (
-                <Text id="checkout-address-error" fontSize="$2" color="$red10">
+                <Text id="checkout-address-error" fontSize="2" color="red-600">
                   {errors.address}
                 </Text>
               )}
             </YStack>
-            <XStack gap="$3">
-              <YStack flex={1} gap="$1">
+            <XStack gap="3">
+              <YStack flex={1} gap="1">
                 <Input
                   value={form.city}
                   onChangeText={(value) => setField('city', value)}
@@ -162,12 +162,12 @@ export function CheckoutSteps() {
                   {...fieldProps('city')}
                 />
                 {errors.city && (
-                  <Text id="checkout-city-error" fontSize="$2" color="$red10">
+                  <Text id="checkout-city-error" fontSize="2" color="red-600">
                     {errors.city}
                   </Text>
                 )}
               </YStack>
-              <YStack width={150} gap="$1">
+              <YStack width={150} gap="1">
                 <Input
                   value={form.zip}
                   onChangeText={(value) => setField('zip', value)}
@@ -177,7 +177,7 @@ export function CheckoutSteps() {
                   {...fieldProps('zip')}
                 />
                 {errors.zip && (
-                  <Text id="checkout-zip-error" fontSize="$2" color="$red10">
+                  <Text id="checkout-zip-error" fontSize="2" color="red-600">
                     {errors.zip}
                   </Text>
                 )}
@@ -185,27 +185,26 @@ export function CheckoutSteps() {
             </XStack>
           </YStack>
         ) : step === 1 ? (
-          <YStack gap="$2" role="radiogroup" aria-label="Shipping method">
+          <YStack gap="2" role="radiogroup" aria-label="Shipping method">
             {shippingMethods.map((method) => {
               const selected = form.shipping === method.id
               return (
                 <Button
                   key={method.id}
-                  // biome-ignore lint/a11y/useSemanticElements: React Native has no cross-platform radio input primitive.
                   role="radio"
                   aria-checked={selected}
                   justify="space-between"
                   minH={52}
-                  bg={selected ? '$color3' : '$background'}
+                  bg={`${selected ? 'color3' : 'background'}`}
                   borderWidth={1}
-                  borderColor={selected ? '$accentColor' : '$borderColor'}
+                  borderColor={`${selected ? 'accent-color' : 'border-color'}`}
                   onPress={() => setField('shipping', method.id)}
                 >
                   <Text fontWeight="600">
                     {method.label} ·{' '}
                     {method.priceCents === 0 ? 'Free' : money(method.priceCents)}
                   </Text>
-                  <Text color="$color9" fontSize="$2">
+                  <Text color="color8" fontSize="2">
                     {method.eta}
                   </Text>
                 </Button>
@@ -213,29 +212,29 @@ export function CheckoutSteps() {
             })}
           </YStack>
         ) : (
-          <YStack gap="$3">
+          <YStack gap="3">
             {/* card data never touches these components: a provider-hosted
                 secure element supplies a token. this block stands in for
                 that SDK element with a test card. */}
             <YStack
-              p="$4"
-              gap="$2"
-              rounded="$6"
+              p="4"
+              gap="2"
+              rounded="6"
               borderWidth={1}
-              borderColor="$color6"
-              bg="$color2"
+              borderColor="color6"
+              bg="color2"
             >
-              <XStack items="center" gap="$2">
-                <ShieldCheck size={16} color="$green10" aria-hidden />
-                <Text fontSize="$2" color="$color10">
+              <XStack items="center" gap="2">
+                <ShieldCheck size={16} color="green-600" aria-hidden />
+                <Text fontSize="2" color="color9">
                   Secure payment element (provider SDK)
                 </Text>
               </XStack>
-              <Text fontFamily="$mono" fontSize="$4" color="$color12">
+              <Text fontFamily="mono" fontSize="4" color="color11">
                 Visa test card · •••• 4242 · 04/28
               </Text>
             </YStack>
-            <Text fontSize="$2" color="$color9">
+            <Text fontSize="2" color="color8">
               Cards are tokenized by the payment provider — this demo never handles raw
               card numbers.
             </Text>
@@ -251,8 +250,8 @@ export function CheckoutSteps() {
           </Button>
         )}
         <Button
-          bg="$color12"
-          color="$color1"
+          bg="color11"
+          color="color1"
           disabled={placing}
           icon={placing ? <Spinner size="small" /> : undefined}
           onPress={step === 2 ? placeOrder : next}

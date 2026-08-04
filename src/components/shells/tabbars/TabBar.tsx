@@ -22,8 +22,9 @@ type CustomTabBarProps = {
   }
 }
 
-const CustomTabBar = createStyledHOC(View)<CustomTabBarProps>(
-  ({ state, descriptors, navigation, ...rest }, ref) => {
+const CustomTabBar = createStyledHOC(
+  View,
+  ({ state, descriptors, navigation, ...rest }: CustomTabBarProps, ref) => {
     const [tabWidth, setTabWidth] = useState(100)
     const [hoveredIndex, setHoveredIndex] = useState(state.index)
     // Note: you should remove the following line in your code
@@ -73,7 +74,7 @@ const CustomTabBar = createStyledHOC(View)<CustomTabBarProps>(
 
           return (
             <Button
-              unstyled
+              variant="quiet"
               flex={1}
               width={100}
               height={50}
@@ -92,7 +93,7 @@ const CustomTabBar = createStyledHOC(View)<CustomTabBarProps>(
                 },
               })}
             >
-              <Text color={isFocused ? '$color10' : '$color7'}>{label}</Text>
+              <Text color={`${isFocused ? 'color9' : 'color6'}`}>{label}</Text>
             </Button>
           )
         })}
@@ -101,20 +102,20 @@ const CustomTabBar = createStyledHOC(View)<CustomTabBarProps>(
           l={0}
           borderWidth={3}
           width={tabWidth}
-          borderColor="$color5"
+          borderColor="color5"
           x={hoveredIndex * tabWidth}
-          style={{ transition: 'transform 100ms ease, opacity 100ms ease' }}
           position="absolute"
+          style={{ transition: 'transform 100ms ease, opacity 100ms ease' }}
         />
         <View
           b={0}
           l={0}
           borderWidth={3}
           width={tabWidth}
-          borderColor="$color10"
+          borderColor="color9"
           x={state.index * tabWidth}
-          style={{ transition: 'transform 150ms ease' }}
           position="absolute"
+          style={{ transition: 'transform 150ms ease' }}
         />
       </View>
     )
@@ -151,7 +152,7 @@ export function Tabbar() {
   return (
     <View flexDirection="column" width="100%" minH={610} height="100%" maxH="100%">
       <View flexDirection="column" width="100%" flex={9} items="center" justify="center">
-        <Text fontSize="$8" fontWeight="$8" lineHeight="$8">
+        <Text fontSize="8" fontWeight="8" lineHeight="8">
           {state.routes[state.index].key}
         </Text>
       </View>

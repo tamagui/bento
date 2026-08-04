@@ -37,44 +37,43 @@ const features = [
 /** ------ EXAMPLE ------ */
 export function FeatureGrid() {
   return (
-    <YStack gap="$6" py="$8" px="$4" width="100%" maxW={980} items="center">
-      <YStack gap="$2" items="center" maxW={560}>
-        <Text fontSize="$3" fontWeight="700" color="$color10" letterSpacing={1}>
+    <YStack gap="6" py="8" px="4" width="100%" maxW={980} items="center">
+      <YStack gap="2" items="center" maxW={560}>
+        <Text fontSize="3" fontWeight="700" color="color9" letterSpacing={1}>
           WHY TAMAGUI
         </Text>
-        <H2 size="$9" text="center" color="$color12">
+        <H2 size="9" text="center" color="color11">
           Everything you need to ship
         </H2>
       </YStack>
-      <XStack flexWrap="wrap" gap="$4" justify="center">
+      <XStack flexWrap="wrap" gap="4" justify="center">
         {features.map((f) => (
           <YStack
             key={f.title}
-            width={290}
-            $group-window-sm={{ width: '100%' }}
-            p="$4"
-            gap="$3"
-            rounded="$6"
-            bg="$color1"
+            width="290px @sm/window:100%"
+            p="4"
+            gap="3"
+            rounded="6"
+            bg="color1"
             borderWidth={1}
-            borderColor="$color4"
-            hoverStyle={{ borderColor: '$color6', y: -2 }}
+            borderColor="color4 hover:color6"
+            y="hover:-2px"
             transition="200ms"
           >
             <View
               width={38}
               height={38}
-              rounded="$4"
-              bg="$color3"
+              rounded="4"
+              bg="color3"
               items="center"
               justify="center"
             >
-              <f.icon size={18} color="$color11" />
+              <f.icon size={18} color="color10" />
             </View>
-            <Text fontWeight="700" fontSize="$4" color="$color12">
+            <Text fontWeight="700" fontSize="4" color="color11">
               {f.title}
             </Text>
-            <Text fontSize="$3" lineHeight="$4" color="$color10">
+            <Text fontSize="3" lineHeight="4" color="color9">
               {f.body}
             </Text>
           </YStack>

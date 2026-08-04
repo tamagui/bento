@@ -19,7 +19,7 @@ export function ComponentScreen() {
 
   if (!componentGroup) {
     return (
-      <YStack flex={1} justify="center" items="center" p="$4" gap="$4">
+      <YStack flex={1} justify="center" items="center" p="4" gap="4">
         <H2>Component not found: {componentId}</H2>
         <Text>Available components:</Text>
         <Text>{Object.keys(componentMap).join(', ')}</Text>
@@ -36,7 +36,7 @@ export function ComponentScreen() {
 
   return (
     <ScrollView>
-      <YStack bg="$color2" p="$4" flex={1} gap="$4" group="window">
+      <YStack bg="color2" p="4" flex={1} gap="4" group="window">
         {componentKeys.map((key, index) => {
           const Component = componentGroup[key]
 
@@ -45,14 +45,14 @@ export function ComponentScreen() {
           }
 
           return (
-            <YStack key={key} gap="$2">
-              <H2 size="$6" color="$color12" textTransform="none">
+            <YStack key={key} gap="2">
+              <H2 size="6" color="color11" textTransform="none">
                 {prettyName(key)}
               </H2>
-              <YStack bg="$color1" p="$4" rounded="$4">
+              <YStack bg="color1" p="4" rounded="4">
                 <Component />
               </YStack>
-              {index < componentKeys.length - 1 && <Separator my="$2" />}
+              {index < componentKeys.length - 1 && <Separator my="2" />}
             </YStack>
           )
         })}

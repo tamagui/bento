@@ -1,8 +1,8 @@
 import { Square } from 'tamagui'
 
 // Simple placeholders
-const GroupDemo = () => <Square size={100} bg="$color" />
-const AccordionDemo = () => <Square size={100} bg="$colorPress" />
+const GroupDemo = () => <Square size={100} bg="color" />
+const AccordionDemo = () => <Square size={100} bg="color-press" />
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { type View as RNView, useWindowDimensions } from 'react-native'
 import {
@@ -70,7 +70,7 @@ function Tour({
       </View>
       {dim && (
         <PortalItem hostName="walkthrough">
-          <Popover stayInFrame allowFlip placement="bottom" size="$0.5" open={showTour}>
+          <Popover stayInFrame allowFlip placement="bottom" size="1" open={showTour}>
             <Popover.Trigger asChild>
               <View
                 key={stepNumber}
@@ -84,23 +84,15 @@ function Tour({
               </View>
             </Popover.Trigger>
             <Popover.Content
-              enterStyle={{ opacity: 0, scale: 0.9 }}
-              exitStyle={{ opacity: 0, scale: 0.9 }}
-              scale={1}
+              scale="1 enter:0.9 exit:0.9"
+              opacity="1 enter:0 exit:0"
               x={0}
               y={0}
-              opacity={1}
-              fullscreen
-              transition={[
-                'quick',
-                {
-                  opacity: {
-                    overshootClamping: true,
-                  },
-                },
-              ]}
+              transition={['quick', { opacity: { overshootClamping: true } }]}
+              position="absolute"
+              inset={0}
             >
-              <Popover.Arrow size="$4" borderColor="$borderColor" />
+              <Popover.Arrow size="4" borderColor="border-color" />
               {renderDialog({ nextStep, prevStep, numberOfSteps, activeStep })}
             </Popover.Content>
           </Popover>
@@ -141,15 +133,14 @@ function WalkThroughImpl({
         <AnimatePresence>
           {activeStep <= numberOfSteps && (
             <XStack
-              enterStyle={{ opacity: 0 }}
-              exitStyle={{ opacity: 0 }}
+              opacity="0.5 enter:0 exit:0"
               transition="bouncy"
               width="100%"
               minH="100%"
-              fullscreen
               borderColor="#000"
-              opacity={0.5}
               z={1000}
+              position="absolute"
+              inset={0}
             />
           )}
         </AnimatePresence>
@@ -182,13 +173,13 @@ function Dialog({
     <YStack
       borderWidth={2}
       bg="#fff"
-      gap="$4"
+      gap="4"
       flexDirection="column"
-      elevation="$4"
       borderColor="black"
+      elevation="4"
     >
       <Paragraph>{title}</Paragraph>
-      <XStack gap="$2">
+      <XStack gap="2">
         {!isFirstStep && (
           <Button onPress={prevStep}>
             <Button.Text>Previous</Button.Text>
@@ -209,7 +200,7 @@ function Dialog({
 export function WalkThroughDemo() {
   return (
     <WalkThrough numberOfSteps={2}>
-      <YStack gap="$4">
+      <YStack gap="4">
         <WalkThrough.Tour
           stepNumber={1}
           renderDialog={({ nextStep, prevStep, numberOfSteps }) => (

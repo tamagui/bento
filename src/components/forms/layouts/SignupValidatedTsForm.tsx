@@ -3,18 +3,10 @@ import { Eye, EyeOff, Info } from '@tamagui/lucide-icons-2'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import {
-  AnimatePresence,
-  Button,
-  Form,
-  H1,
-  H2,
-  isWeb,
-  Spinner,
-  View,
-} from 'tamagui'
+import { AnimatePresence, Button, Form, H1, H2, isWeb, Spinner, View } from 'tamagui'
 import { z } from 'zod'
 import { Input, InputContext } from '../inputs/components/inputsParts'
+import { useGroupMedia } from '../../hooks/useGroupMedia'
 import { FormCard } from './components/layoutParts'
 import { RadioGroup } from '../radiogroups/components/radioParts'
 
@@ -51,23 +43,15 @@ const TextInput = (props: TextInputProps) => {
       <AnimatePresence>
         {error && (
           <View
-            b="$-5"
+            b="-5"
             l={0}
             position="absolute"
-            gap="$2"
+            gap="2"
             flexDirection="row"
+            scaleY="1 enter:0.5 exit:0.5"
+            opacity="enter:0 exit:0"
+            y="enter:-10px exit:-10px"
             style={{ transition: 'transform 250ms ease' }}
-            scaleY={1}
-            enterStyle={{
-              opacity: 0,
-              y: -10,
-              scaleY: 0.5,
-            }}
-            exitStyle={{
-              opacity: 0,
-              y: -10,
-              scaleY: 0.5,
-            }}
           >
             <Input.Icon p={0}>
               <Info />
@@ -103,29 +87,21 @@ const PasswordInput = (props: PasswordInputProps) => {
           value={value}
         />
         <Input.Icon cursor="pointer" onPress={() => setShowPassword(!showPassword)}>
-          {showPassword ? <Eye color="$color11" /> : <EyeOff color="$color11" />}
+          {showPassword ? <Eye color="color10" /> : <EyeOff color="color10" />}
         </Input.Icon>
       </Input.Box>
       <AnimatePresence>
         {error && (
           <View
-            b="$-5"
+            b="-5"
             l={0}
             position="absolute"
-            gap="$2"
+            gap="2"
             flexDirection="row"
+            scaleY="1 enter:0.5 exit:0.5"
+            opacity="enter:0 exit:0"
+            y="enter:-10px exit:-10px"
             style={{ transition: 'transform 250ms ease' }}
-            scaleY={1}
-            enterStyle={{
-              opacity: 0,
-              y: -10,
-              scaleY: 0.5,
-            }}
-            exitStyle={{
-              opacity: 0,
-              y: -10,
-              scaleY: 0.5,
-            }}
           >
             <Input.Icon p={0}>
               <Info />
@@ -153,27 +129,21 @@ const MyRadio = (props: MyRadioProps) => {
   const { id, title, values, value, onChange } = props
   const { size } = InputContext.useStyledContext()
   return (
-    <View gap="$2">
-      <H2 size={size} fontFamily="$body">
+    <View gap="2">
+      <H2 size={size} fontFamily="body">
         {title}
       </H2>
       <RadioGroup
-        gap="$8"
+        gap="8"
         flexDirection="row"
         onValueChange={onChange}
         id={id}
         value={value}
       >
         {values.map(({ value, label, labelId }) => (
-          <View key={label} flexDirection="row" items="center" gap="$3">
+          <View key={label} flexDirection="row" items="center" gap="3">
             <RadioGroup.Item id={labelId} value={value}>
-              <RadioGroup.Indicator
-                unstyled
-                width="33%"
-                height="33%"
-                rounded={1000}
-                bg="$color"
-              />
+              <RadioGroup.Indicator width="33%" height="33%" rounded={1000} bg="color" />
             </RadioGroup.Item>
 
             <Input.Label htmlFor={labelId}>{label}</Input.Label>
@@ -225,17 +195,17 @@ const TwoInput = (props: TwoInputProps) => {
       flexWrap="wrap"
       flexDirection="row"
       justify="space-between"
-      columnGap="$4"
-      rowGap="$5"
+      columnGap="4"
+      rowGap="5"
     >
       <Input
         {...(error?.firstInput && {
           theme: 'red',
         })}
-        onBlur={onBlur}
         flex={1}
-        minW="100%"
-        $group-window-gtSm={{ flexBasis: 150, minW: 'inherit' }}
+        minW="100% @gtSm/window:inherit"
+        flexBasis="@gtSm/window:150px"
+        onBlur={onBlur}
         style={{ transition: 'border-color 100ms ease' }}
         size={size}
       >
@@ -258,23 +228,15 @@ const TwoInput = (props: TwoInputProps) => {
         <AnimatePresence>
           {error?.firstInput && (
             <View
-              b="$-5"
+              b="-5"
               l={0}
               position="absolute"
-              gap="$2"
+              gap="2"
               flexDirection="row"
+              scaleY="1 enter:0.5 exit:0.5"
+              opacity="enter:0 exit:0"
+              y="enter:-10px exit:-10px"
               style={{ transition: 'transform 250ms ease' }}
-              scaleY={1}
-              enterStyle={{
-                opacity: 0,
-                y: -10,
-                scaleY: 0.5,
-              }}
-              exitStyle={{
-                opacity: 0,
-                y: -10,
-                scaleY: 0.5,
-              }}
             >
               <Input.Icon p={0}>
                 <Info />
@@ -312,23 +274,15 @@ const TwoInput = (props: TwoInputProps) => {
         <AnimatePresence>
           {error?.secondInput && (
             <View
-              b="$-5"
+              b="-5"
               l={0}
               position="absolute"
-              gap="$2"
+              gap="2"
               flexDirection="row"
+              scaleY="1 enter:0.5 exit:0.5"
+              opacity="enter:0 exit:0"
+              y="enter:-10px exit:-10px"
               style={{ transition: 'transform 250ms ease' }}
-              scaleY={1}
-              enterStyle={{
-                opacity: 0,
-                y: -10,
-                scaleY: 0.5,
-              }}
-              exitStyle={{
-                opacity: 0,
-                y: -10,
-                scaleY: 0.5,
-              }}
             >
               <Input.Icon p={0}>
                 <Info />
@@ -373,6 +327,7 @@ const schema = z
 type FormValues = z.infer<typeof schema>
 
 export function SignupValidatedTsForm() {
+  const { xs } = useGroupMedia('window')
   const [loading, setLoading] = useState(false)
 
   const { control, handleSubmit } = useForm<FormValues>({
@@ -387,8 +342,7 @@ export function SignupValidatedTsForm() {
     },
   })
 
-  const onSubmit = (data: FormValues) => {
-    console.info('data is ', data)
+  const onSubmit = (_data: FormValues) => {
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
@@ -396,24 +350,16 @@ export function SignupValidatedTsForm() {
   }
 
   return (
-    <InputContext.Provider size="$4">
-      <Form asChild onSubmit={handleSubmit(onSubmit)}>
+    <InputContext.Provider size="4">
+      <Form asChild onSubmit={() => handleSubmit(onSubmit)()}>
         <FormCard
           flexDirection="column"
-          gap="$5"
+          gap="5"
+          px="@sm/window:4"
+          py="@sm/window:6"
           render="form"
-          $group-window-sm={{
-            px: '$4',
-            py: '$6',
-          }}
         >
-          <H1
-            self="center"
-            size="$8"
-            $group-window-xs={{
-              size: '$7',
-            }}
-          >
+          <H1 self="center" size={xs ? '7' : '8'}>
             Create an account
           </H1>
 
@@ -538,27 +484,21 @@ export function SignupValidatedTsForm() {
             cursor={loading ? 'progress' : 'pointer'}
             self="flex-end"
             width={'100%'}
-            my="$4"
+            my="4"
             iconAfter={
               <AnimatePresence>
                 {loading && (
                   <Spinner
                     size="small"
-                    color="$color"
-                    key="loading-spinner"
-                    opacity={1}
+                    color="color"
+                    opacity="1 enter:0 exit:0"
                     position="absolute"
-                    scale={0.5}
+                    scale="0.5 enter:0.5 exit:0.5"
                     l={0}
                     x={100}
-                    style={{ transition: 'transform 150ms ease, opacity 150ms ease' }}
-                    enterStyle={{
-                      opacity: 0,
-                      scale: 0.5,
-                    }}
-                    exitStyle={{
-                      opacity: 0,
-                      scale: 0.5,
+                    key="loading-spinner"
+                    style={{
+                      transition: 'transform 150ms ease, opacity 150ms ease',
                     }}
                   />
                 )}

@@ -16,16 +16,16 @@ export function QuantityInline() {
         self="center"
         justify="space-between"
         items="center"
-        p="$4"
-        rounded="$6"
+        p="4"
+        rounded="6"
         borderWidth={1}
-        borderColor="$borderColor"
-        bg="$color2"
+        borderColor="border-color"
+        bg="color2"
       >
-        <Text color="$color9" aria-live="polite">
+        <Text color="color8" aria-live="polite">
           Item removed from cart
         </Text>
-        <Button size="$3" onPress={() => setValue(1)}>
+        <Button size="3" onPress={() => setValue(1)}>
           Undo
         </Button>
       </XStack>
@@ -41,34 +41,34 @@ export function QuantityInline() {
       self="center"
       items="center"
       flexWrap="wrap"
-      gap="$3"
-      p="$4"
-      rounded="$6"
+      gap="3"
+      p="4"
+      rounded="6"
       borderWidth={1}
-      borderColor="$borderColor"
-      bg="$background"
+      borderColor="border-color"
+      bg="background"
     >
-      <XStack items="center" gap="$3" flex={1} minW={200}>
+      <XStack items="center" gap="3" flex={1} minW={200}>
         <View
           width={52}
           height={52}
-          rounded="$5"
-          bg="$blue5"
+          rounded="5"
+          bg="blue-300"
           items="center"
           justify="center"
         >
-          <Package size={22} color="$color11" aria-hidden />
+          <Package size={22} color="color10" aria-hidden />
         </View>
-        <YStack flex={1} minW={0} gap="$1">
+        <YStack flex={1} minW={0} gap="1">
           <Text fontWeight="800" letterSpacing={0} numberOfLines={1}>
             Contour desk lamp
           </Text>
-          <Text fontSize="$2" color="$color9">
+          <Text fontSize="2" color="color8">
             {formatMoney(UNIT_PRICE)} each
           </Text>
         </YStack>
       </XStack>
-      <XStack items="center" gap="$3" justify="space-between" grow={1} flexBasis={220}>
+      <XStack items="center" gap="3" justify="space-between" grow={1} flexBasis={220}>
         <SpinControl
           label="Contour desk lamp quantity"
           value={value}

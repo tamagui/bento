@@ -16,12 +16,12 @@ export function HList() {
         {...(isWeb && {
           items: 'center',
         })}
-        showsHorizontalScrollIndicator={false}
         pl="50%"
-        pr="$6"
+        pr="6"
+        showsHorizontalScrollIndicator={false}
         horizontal
       >
-        <View flexDirection="row" gap="$6" height="100%">
+        <View flexDirection="row" gap="6" height="100%">
           {data.map(({ uri, title }) => (
             <HListItem key={uri} uri={uri} title={title} />
           ))}
@@ -35,12 +35,7 @@ HList.fileName = 'HList'
 
 function HListItem({ uri, title }: { uri: string; title: string }) {
   return (
-    <HListFrame
-      style={{ transition: 'transform 150ms ease' }}
-      pressStyle={{
-        scale: 0.98,
-      }}
-    >
+    <HListFrame style={{ transition: 'transform 150ms ease' }} scale="press:0.98">
       <HListInner
         containerType="normal"
         group="item"
@@ -50,11 +45,8 @@ function HListItem({ uri, title }: { uri: string; title: string }) {
         <View
           flexDirection="column"
           flex={1}
-          scale={1.2}
+          scale="1.2 group-hover/item:1.2"
           style={{ transition: 'transform 250ms ease' }}
-          $group-item-hover={{
-            scale: 1.2,
-          }}
         >
           <Image
             width="100%"
@@ -66,33 +58,24 @@ function HListItem({ uri, title }: { uri: string; title: string }) {
         </View>
         <View
           position="absolute"
-          style={{ transition: 'background-color 250ms ease' }}
           b={0}
           l={0}
           r={0}
-          py="$4"
-          bg="rgba(0,0,0,0.25)"
-          $group-item-hover={{
-            bg: 'rgba(0,0,0,0.5)',
-          }}
+          py="4"
+          bg="rgba(0,0,0,0.25) group-hover/item:rgba(0,0,0,0.5)"
+          style={{ transition: 'background-color 250ms ease' }}
         >
           <Text
-            style={{ transition: 'transform 300ms ease, text-shadow 300ms ease' }}
+            style={{
+              transition: 'transform 300ms ease, text-shadow 300ms ease',
+            }}
             color="#fff"
             my="auto"
             self="center"
             fontWeight={600}
-            y={0}
-            textShadowColor="$shadowColor"
-            textShadowOffset={{ height: 1, width: 0 }}
-            textShadowRadius={0}
-            $group-item-hover={{
-              y: -4,
-              scale: 1.075,
-              textShadowColor: '$shadowColor',
-              textShadowOffset: { height: 2, width: 0 },
-              textShadowRadius: 10,
-            }}
+            y="0 group-hover/item:-4px"
+            scale="1 group-hover/item:1.075"
+            textShadow="(0 1px 0 shadow-color) group-hover/item:(0 2px 10px shadow-color)"
           >
             {title}
           </Text>
@@ -104,30 +87,19 @@ function HListItem({ uri, title }: { uri: string; title: string }) {
 
 const HListFrame = styled(View, {
   width: 200,
-  animateOnly: ['borderRadius', 'transform'],
   height: 200,
   borderWidth: 1,
-  borderColor: '$color3',
-  rounded: '$10',
-  bg: '$background',
-  shadowColor: '$shadowColor',
-  shadowRadius: 3,
-
-  hoverStyle: {
-    scale: 1.05,
-    rounded: '$11',
-    shadowColor: '$shadowColor',
-    shadowRadius: 20,
-  },
+  borderColor: 'color3',
+  rounded: '10 hover:11',
+  bg: 'background',
+  scale: '1 hover:1.05',
+  boxShadow: '(0 0 3px shadow-color) hover:(0 0 20px shadow-color)',
+  animateOnly: ['borderRadius', 'transform'],
 })
 
 const HListInner = styled(View, {
   width: 200,
   height: 200,
   overflow: 'hidden',
-  rounded: '$10',
-
-  hoverStyle: {
-    rounded: '$11',
-  },
+  rounded: '10 hover:11',
 })

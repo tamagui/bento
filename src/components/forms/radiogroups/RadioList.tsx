@@ -1,6 +1,7 @@
+import { Avatar } from '../../BentoSkins'
 import { useState } from 'react'
 import { Card, RadioGroup } from './components/radioParts'
-import { Avatar, H3, Label, Separator, Text, View } from 'tamagui'
+import { H3, Label, Separator, Text, View } from 'tamagui'
 import { useGroupMedia } from '../../hooks/useGroupMedia'
 
 const data = {
@@ -41,7 +42,13 @@ const data = {
   },
 }
 
-type Item = { checked: boolean; desc: string; title: string; key: string; avatar: string }
+type Item = {
+  checked: boolean
+  desc: string
+  title: string
+  key: string
+  avatar: string
+}
 
 /** ------ EXAMPLE ------ */
 export function RadioList() {
@@ -54,20 +61,20 @@ export function RadioList() {
   return (
     <View self="center" items="center" width="100%">
       <RadioGroup>
-        <View py="$3" items="center">
+        <View py="3" items="center">
           <H3>Drink</H3>
-          <Text self="center" color="$color9">
+          <Text self="center" color="color8">
             Select your favorite coffee
           </Text>
         </View>
 
         {sm && (
-          <View width="100%" px="$2">
-            <Separator width="100%" borderColor="$color5" />
+          <View width="100%" px="2">
+            <Separator width="100%" borderColor="color5" />
           </View>
         )}
 
-        <View width="100%" gap="$2" px="$2">
+        <View width="100%" gap="2" px="2">
           {items.map((item, i) => (
             <Item
               setSelected={(next) => setSelected(next)}
@@ -94,56 +101,48 @@ function Item({
   const { desc, title, key } = item
   return (
     <Card
-      rounded="$4"
-      p="$4"
+      rounded="4 @sm/window:0px"
+      p="4"
       flexDirection="row"
       width="100%"
-      gap="$3"
-      active={selected}
+      gap="3"
       items="stretch"
       justify="space-between"
+      borderTopWidth="1px @sm/window:0px"
+      borderRightWidth="1px @sm/window:0px"
+      borderLeftWidth="1px @sm/window:0px"
+      borderBottomWidth="1px @sm/window:1px"
+      borderColor="color5"
+      py="@sm/window:4"
+      active={selected}
       onPress={() => {
         setSelected(key)
       }}
-      borderWidth={1}
-      borderColor="$color5"
-      $group-window-sm={{
-        borderWidth: 0,
-        borderBottomWidth: 1,
-        rounded: 0,
-        py: '$4',
-      }}
     >
-      <Avatar circular size="$4">
+      <Avatar circular size="4">
         <Avatar.Image aria-label={`${title} thumbnail`} src={item.avatar} />
-        <Avatar.Fallback bg="$background" />
+        <Avatar.Fallback bg="background" />
       </Avatar>
 
-      <View flex={10} self="stretch" gap="$0.5">
+      <View flex={10} self="stretch" gap="px">
         <Label
           // visual offset of font to top
           mt={-2}
           mr="auto"
-          size="$5"
-          lineHeight="$4"
+          lineHeight="4"
+          size="5"
           htmlFor={key}
         >
           {title}
         </Label>
-        <Text fontSize="$3" width="100%" color="$color10">
+        <Text fontSize="3" width="100%" color="color9">
           {desc}
         </Text>
       </View>
 
       <View onPress={(e) => e.stopPropagation()}>
         <RadioGroup.Item id={key} value={key}>
-          <RadioGroup.Indicator
-            unstyled
-            width="33%"
-            height="33%"
-            rounded={1000}
-            bg="$color"
-          />
+          <RadioGroup.Indicator width="33%" height="33%" rounded={1000} bg="color" />
         </RadioGroup.Item>
       </View>
     </Card>
