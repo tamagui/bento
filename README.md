@@ -1,82 +1,58 @@
-# @tamagui/bento
+# Bento
 
-Premium Tamagui components library - now a standalone repo!
+Tamagui component examples for web, iOS, and Android. The source is available
+under the [MIT license](LICENSE). Copy the components you need from
+`src/components/`, including their local imports, into your app.
 
-## Quick Start
+This repository uses the existing Tamagui v2 component APIs. The Tamagui v3
+migration is on `v3-beta`; use that branch when working on the migration.
 
-```bash
-# Install dependencies
-yarn install
-
-# Development
-yarn dev           # Web dev server (webpack)
-yarn start         # Native dev server (Expo)
-yarn android       # Run on Android
-yarn ios           # Run on iOS
-```
-
-## Development
-
-### Web
-```bash
-yarn dev           # Start webpack dev server (localhost:8080)
-yarn dev:web:prod  # Production mode
-```
-
-### Native (iOS/Android)
-The bento repo includes a standalone native app showcasing components:
+## Run the examples
 
 ```bash
-yarn start         # Start Expo dev client
-yarn android       # Build & run on Android
-yarn ios           # Build & run on iOS (runs pod install first)
+bun install --frozen-lockfile
+bun run dev:web
 ```
 
-**First time setup:**
+The web demo runs at `http://localhost:9000`. The native demo requires an Expo
+development build:
+
 ```bash
-# iOS
-yarn pod           # Install CocoaPods dependencies
-yarn ios          # Opens in iOS Simulator
-
-# Android (requires Android Studio & emulator)
-yarn android      # Opens in Android emulator
+bun run ios
+# or
+bun run android
 ```
 
-The native app (`example/App.native.tsx`) displays bento components in isolation.
+After installing the development build, use `bun run start` for the native
+JavaScript server.
 
-### Build & Deploy
+## Use a component
+
+Find an example in `src/components/`, then copy its local components, hooks,
+and assets as well. Keep the Tamagui config, animation driver, and native
+libraries that the example imports. `tamagui.config.ts` and `config/` contain
+the demo configuration; `example/App.native.tsx` is the native entry point.
+
+Components retain their MIT license when copied. Include the license notice
+with redistributed source.
+
+## Build
+
 ```bash
-yarn build              # Build package for distribution
-yarn build:bento        # Build component bundle for Supabase
-yarn upload:bento       # Upload to Supabase storage
+bun run build
+bun run build:bento
+bun run typecheck
 ```
 
-## Usage in tamagui monorepo
+`build` produces the package files. `build:bento` prepares source bundles and
+an archive in `bento-output/`. CI checks that source bundle on pushes and pull
+requests. Download the generated archive from the workflow artifacts.
 
-Bento is automatically available via `@tamagui/bento-or-not`:
-- **Local dev with ~/bento**: Auto-detected via relative path
-- **CI/Production**: Installed from GitHub Packages
-- **Without bento**: Graceful stubs (components won't render)
+The `upload:bento` script supports the existing authenticated Supabase
+integration. Running the examples or copying source does not require it.
 
-## GitHub Actions
+## Tamagui site integration
 
-On every push to `main`:
-1. Builds component bundle
-2. Uploads to Supabase
-3. Publishes package to GitHub Packages
-
-## Project Structure
-
-```
-/src
-  /components     - Bento component library
-  /sections       - Component section groupings
-  /hoc            - Higher-order components
-  data.ts         - Component metadata
-  index.ts        - Package exports
-
-/example          - Standalone demo app
-  App.native.tsx  - Native app entry
-  App.tsx         - Web app entry
-  /components     - Demo app components
-```
+The Tamagui site consumes this repository through `@tamagui/bento-or-not`.
+Local development can resolve the sibling Bento checkout; the existing
+production integration uses GitHub Packages.
